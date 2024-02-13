@@ -1,0 +1,16 @@
+---
+source: src/main.rs
+expression: output_content
+---
+/*
+Returns FileMaker version as number to 1 decimal place.
+
+20130924 MrW Bug removed - I was apparently seriously tired when I wrote this first ;-)
+*/
+SetzeVar([
+vNr = WörterRechts( Hole ( ProgrammVersion ) ; 1 ) ;
+vNr = ZeichenLinks( vNr ; Position( vNr & "v" ; "v" ; 1 ; 1 ) - 1 ) ;
+vNr = LiesAlsZahl( Austauschen( vNr ; "." ; ZeichenLinks( 1/2 ; 1 ) ) )
+];
+vNr
+)

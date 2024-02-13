@@ -1,0 +1,51 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Enable Schedule
+#  HISTORY:&#13;   - Created:   2018-07-13 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-MM-DD by FName LName
+# JSON DOCUMENTATION:
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets &quot;[]&quot;.
+#  id
+
+#  JSON EXAMPLE:
+# JSONSetElement ( &quot;&quot; &#13; ; [ &quot;id&quot; ; $id ; JSONString ]&#13;)
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+#  Validate json parameter and load it into local variables
+Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen [ 5 // command is invalid ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/schedules/" & $_id ]
+Variable setzen [ $curloptions ; " --request DELETE" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --header \"Content-Length: 0\"" &
+				" --dump-header $$my.headers" ]
+
+Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Variable setzen [ $this.id ; FMS__fmserver::ID ]
+Fenster fixieren
+
+Script ausführen [ Aus Liste ; "List Schedules" ]
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

@@ -1,0 +1,46 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# After creating the release file, the developer account has to be changed
+
+# 20140423 MrW And no dialog
+# 20140425 MrW Change password - without storing passwords
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+Wenn [ NICHT _IsFullAccessUser ]
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Variable setzen [ $Account ; Hole ( Kontoname ) ]
+Feldwert setzen [ _Home::_gInputText1 ; "" ]
+Feldwert setzen [ _Home::_gInputText2 ; "" ]
+Feldwert setzen [ _Home::_gInputText3 ; "" ]
+
+Schleife (Anfang)
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Variable setzen [ $cancel ; Hole( LetzteMeldungswahl ) = 2 ODER
+					IstLeer( _Home::_gInputText1 & _Home::_gInputText2 & _Home::_gInputText3 ) ]
+	Verlasse Schleife wenn [ $cancel ]
+	Wenn [ Exakt( _Home::_gInputText2 ; _Home::_gInputText3 ) UND
+					Länge( _Home::_gInputText2 ) > 6 ]
+		Passwort ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "83" ] ⚠️⚠️⚠️
+	Ende (wenn)
+	Verlasse Schleife wenn [ NICHT Hole( LetzteFehlerNr ) ]
+Schleife (Ende)
+Feldwert setzen [ _Home::_gInputText1 ; "" ]
+Feldwert setzen [ _Home::_gInputText2 ; "" ]
+Feldwert setzen [ _Home::_gInputText3 ; "" ]
+Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+Wenn [ NICHT $cancel ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Ende (wenn)

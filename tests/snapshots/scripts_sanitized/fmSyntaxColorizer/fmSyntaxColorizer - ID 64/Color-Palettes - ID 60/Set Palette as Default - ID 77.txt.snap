@@ -1,0 +1,21 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121101 MrW 
+
+
+Wenn [ _Palette::__ID = 1 ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Variable setzen [ $ID ; _Palette::__ID ]
+
+Feldwert setzen [ _Syntax::_gID_ActivePalette ; _Palette::__ID ]
+Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+
+Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
+Alle Datensätze anzeigen
+Script ausführen [ Aus Liste ; "Change Palette" ]

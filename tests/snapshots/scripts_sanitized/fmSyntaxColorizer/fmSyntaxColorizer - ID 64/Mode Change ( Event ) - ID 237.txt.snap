@@ -1,0 +1,28 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# Param
+Variable setzen [ $Event ; _SP(1) ]
+
+# Const
+Variable setzen [ $C_BROWSE_MODE ; 0 ]
+Variable setzen [ $C_FIND_MODE ; 1 ]
+
+Wenn [ $Event = "OnExit" ]
+	# OnExit
+	
+	Variable setzen [ $$WindowModePrevious ; Hole ( Fenstermodus ) ]
+	
+Sonst
+	# OnEnter
+	
+	Wenn [ Hole ( LayoutTabellenname ) = "_Syntax" ]
+		
+		Wenn [ $$WindowModePrevious = $C_FIND_MODE UND Hole ( Fenstermodus ) = $C_BROWSE_MODE UND NICHT Hole ( LetzteFehlerNr ) UND Hole ( Sortierstatus ) <> 1 ]
+			# FIND -&gt; BROWSE
+			Script ausführen [ Aus Liste ; "Sort Syntax" ]
+		Ende (wenn)
+		
+	Ende (wenn)
+Ende (wenn)

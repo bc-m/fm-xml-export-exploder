@@ -1,0 +1,11 @@
+---
+source: src/main.rs
+expression: output_content
+---
+/*_IsFullAccessUser
+
+Returns 1 if the user has full access, otherwise returns 0
+
+20140423 MrW Version 1.0
+*/
+Hole ( KontoBerechtigungenName ) = "[Full Access]" ODER Hole ( KontoBerechtigungenName ) = "[Voller Zugriff]"

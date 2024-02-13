@@ -1,0 +1,35 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121025 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# App settings
+Variable setzen [ $$AppWindowWidth ; 1150 ]
+Variable setzen [ $$AppWindowHeight ; 800 ]
+
+
+Fenster fixieren
+Blätternmodus aktivieren
+
+Script ausführen [ Aus Liste ; "Install Menus" ]
+Script ausführen [ Aus Liste ; "StartSession" ]
+Script ausführen [ Aus Liste ; "Allow Formatting Bar ( 0/1 )" ]
+
+Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "Go to Home Layout" ]
+// Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "MBS Plugin check" ]
+Fenster aktualisieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "80" ] ⚠️⚠️⚠️
+
+# Set FileMaker Version and Syntax Collection
+Feldwert setzen [ _Syntax::_gFM_Version ; _FMVersionNr ( 2 ) ]
+Wenn [ IstLeer ( _Syntax::_gCollection ) ]
+	Feldwert setzen [ _Syntax::_gCollection ; "Core" ]
+Ende (wenn)
+Script ausführen [ Aus Liste ; "Switch active palette between Dark/Light mode automatically" ]
+
+Script ausführen [ Aus Liste ; "MBS_DeveloperTools Init" ]

@@ -1,0 +1,25 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20210916 MrW Removed lingering pesky German :D
+# 20121102 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ Hole( Fenstermodus ) = 1 ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Sonst
+	Schleife (Anfang)
+		Wenn [ NICHT IstLeer( _Syntax::Comment ) ]
+			# Read
+			Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			Verlasse Schleife wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
+		Ende (wenn)
+		# Edit
+		Variable setzen [ $Comment ; _Syntax::Comment ]
+		Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+		Verlasse Schleife wenn [ IstLeer( _Syntax::Comment ) ODER _Syntax::Comment = $Comment ]
+	Schleife (Ende)
+Ende (wenn)

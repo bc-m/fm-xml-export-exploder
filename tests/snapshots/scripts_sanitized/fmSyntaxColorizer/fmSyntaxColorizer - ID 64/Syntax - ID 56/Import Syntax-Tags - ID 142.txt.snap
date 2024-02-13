@@ -1,0 +1,50 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20131104 MrW Kleine Korrektur
+# 20121126 MrW Nice!
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Script settings
+Variable setzen [ $FolderPath ; Hole( DesktopPfad ) ]
+Variable setzen [ $FileName ; "fmSyntaxColorizer-Commands.fp7" ]
+
+# Var
+Variable setzen [ $FilePath ; $FolderPath & $FileName ]
+
+
+Blätternmodus aktivieren
+Fenster fixieren
+
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
+	# Cancel
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Alle Datensätze anzeigen
+
+
+# Import SyntaxTags(Match + add, with automatic)
+Datensätze importieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "35" ] ⚠️⚠️⚠️
+Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
+Wenn [ $error ]
+	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
+Wenn [ $n = 0 ]
+	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️

@@ -1,0 +1,76 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# # Perform Script by Name
+
+# normal = &quot;From list&quot;
+Script ausführen [ Aus Liste ; "Hello::World" ]
+
+# new = &quot;By Name&quot; in the format &quot;File::ScriptName&quot;
+Script ausführen [ Nach Name ; "How much of a script name can be seen in various places if it is a really long script name up to 100" ; Parameter: 123 ]
+Variable setzen [ $Name ; "How much of a script name can be seen in various places if it is a really long script name up to 100" ]
+Script ausführen [ Nach Name ; $Name ; Parameter: 123 ]
+
+# from file…
+Script ausführen [ Aus Liste ; "A typical script" ; Parameter: 123 ]
+Script ausführen [ Aus Liste ; "Hello::World" ; Parameter: 123 ]
+Script ausführen [ Aus Liste ; "Hello::World" ; Parameter: 123 ]
+
+Script ausführen [ Nach Name ; "Self::A typical script" ; Parameter: 123 ]
+Script ausführen [ Nach Name ; "::Hello::World" ; Parameter: 123 ]
+Script ausführen [ Nach Name ; "Self::Hello::World" ; Parameter: 123 ]
+
+
+
+# Create directories
+
+Datensätze exportieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "36" ] ⚠️⚠️⚠️
+Datensätze exportieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "36" ] ⚠️⚠️⚠️
+Datensätze exportieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "36" ] ⚠️⚠️⚠️
+
+Exportiere alle Feldwerte ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "132" ] ⚠️⚠️⚠️
+Exportiere alle Feldwerte ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "132" ] ⚠️⚠️⚠️
+Exportiere alle Feldwerte ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "132" ] ⚠️⚠️⚠️
+
+Variable setzen [ $path ; Hole( DesktopPfad ) & "Backups/" & FilterZeichen ( Hole( HostZeitstempel ) ; "1234567890 ") & "/" & Hole( DateiName ) & ".fmp12" ]
+Kopie speichern unter ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "37" ] ⚠️⚠️⚠️
+Kopie speichern unter ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "37" ] ⚠️⚠️⚠️
+Kopie speichern unter ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "37" ] ⚠️⚠️⚠️
+Kopie speichern unter ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "37" ] ⚠️⚠️⚠️
+Kopie speichern unter ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "37" ] ⚠️⚠️⚠️
+
+Datensätze als Excel speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "143" ] ⚠️⚠️⚠️
+Datensätze als PDF speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "144" ] ⚠️⚠️⚠️
+Datensätze als Snapshot-Link speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "152" ] ⚠️⚠️⚠️
+
+# Send multiple attachments
+# 1 Attachment
+E-Mail senden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "63" ] ⚠️⚠️⚠️
+# 2+ Attachments
+E-Mail senden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "63" ] ⚠️⚠️⚠️
+
+
+
+# Open
+
+# 118 = Formerly Open Remote
+Hosts öffnen
+
+# 183 = Formerly Open Launch Center
+Favoriten öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "183" ] ⚠️⚠️⚠️
+
+# Miscellaneous
+
+# Show Custom Dialog with target variables
+Variable setzen [ $Title ; "Test" ]
+Variable setzen [ $Message ; "Test" ]
+# @var $Input1,$Input2,$Input3
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+
+# External steps
+
+# MBS [ Select ; Destination: $TargetVar ; Function: $Function ; P1: $P1 ; P2: $P2 ; P3: $P3 ; P4: $P4 ] 
+MBS ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "186" ] ⚠️⚠️⚠️
+
+Lokale Benachrichtigung konfigurieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "187" ] ⚠️⚠️⚠️

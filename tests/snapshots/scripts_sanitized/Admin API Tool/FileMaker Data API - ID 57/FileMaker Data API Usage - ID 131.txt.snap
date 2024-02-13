@@ -1,0 +1,63 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: FileMaker Data API Usage
+#  HISTORY:&#13;   - Created:   2020-01-20 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2020-00-00
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/fmdapi/usage" ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# parse json response
+	
+	Wenn [ LiesAlsZahl ( ZeichenLinks ( FMS__fmserver::serverVersion ; 4 ) ) > "19.2" ]
+		Gehe zu Objekt [ "panel_dapiUsage_193" ]
+		Feldwert setzen [ FMS__fmserver::localDAPICallCount ; JSONGetElement ( $$my.result ; "response.localDAPICallCount" ) ]
+		Feldwert setzen [ FMS__fmserver::localDAPIBandwidthIn ; JSONGetElement ( $$my.result ; "response.localDAPIBandwidthIn" ) ]
+		Feldwert setzen [ FMS__fmserver::localDAPIBandwidthOut ; JSONGetElement ( $$my.result ; "response.localDAPIBandwidthOut" ) ]
+		Feldwert setzen [ FMS__fmserver::totalDAPIBandwidthOut ; JSONGetElement ( $$my.result ; "response.totalDAPIBandwidthOut" ) ]
+		
+	Sonst
+		Gehe zu Objekt [ "panel_dapiUsage_192" ]
+		Feldwert setzen [ FMS__fmserver::apiCallCount ; JSONGetElement ( $$my.result ; "response.apiCallCount" ) ]
+		Feldwert setzen [ FMS__fmserver::apiCallCountLimit ; JSONGetElement ( $$my.result ; "response.apiCallCountLimit" ) ]
+		Feldwert setzen [ FMS__fmserver::inBandwidth ; JSONGetElement ( $$my.result ; "response.inBandwidth" ) ]
+		Feldwert setzen [ FMS__fmserver::inBandwidthLimit ; JSONGetElement ( $$my.result ; "response.inBandwidthLimit" ) ]
+		Feldwert setzen [ FMS__fmserver::odataOut ; JSONGetElement ( $$my.result ; "response.odataOut" ) ]
+		Feldwert setzen [ FMS__fmserver::outBandwidth ; JSONGetElement ( $$my.result ; "response.outBandwidth" ) ]
+		Feldwert setzen [ FMS__fmserver::outBandwidthLimit ; JSONGetElement ( $$my.result ; "response.outBandwidthLimit" ) ]
+		Feldwert setzen [ FMS__fmserver::result ; JSONGetElement ( $$my.result ; "response.result" ) ]
+		Feldwert setzen [ FMS__fmserver::totalDataAPIOut ; JSONGetElement ( $$my.result ; "response.totalDataAPIOut" ) ]
+		Feldwert setzen [ FMS__fmserver::totalODataOut ; JSONGetElement ( $$my.result ; "response.totalODataOut" ) ]
+		Feldwert setzen [ FMS__fmserver::totalRestAPIOut ; JSONGetElement ( $$my.result ; "response.totalRestAPIOut" ) ]
+	Ende (wenn)
+	
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

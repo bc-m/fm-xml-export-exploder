@@ -1,0 +1,370 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="138" name="Find( Selector ; Wildcard )"></ScriptReference>
+	<ObjectList membercount="33">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121106 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Parameter"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP( 1 )]]></Text>
+								<ChunkList hash="0833C8A527A8E2C55E64700265CC2606">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">( 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Selector"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP( 2 )]]></Text>
+								<ChunkList hash="3E97A989451F3B2649006AB48154DC17">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">( 2 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Wildcard"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Input"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_IsKeyALT]]></Text>
+								<ChunkList hash="D3564FD1BB6794CD7CB442343A26EE95">
+									<Chunk type="CustomFunctionRef">_IsKeyALT</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Filter"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[ZeichenLinks( $Selector ; 2 ) = "<>" ODER ZeichenLinks( $Selector ; 1 ) = "≠"]]></Text>
+								<ChunkList hash="78E9F99660200E1BEBF9F91CB6A475DE">
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 2 ) = &quot;&lt;&gt;&quot; </Chunk>
+									<Chunk type="FunctionRef">ODER</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 1 ) = &quot;≠&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$ohne"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls(ZeichenLinks( $Selector ; 2 ) = "<>" ; ZeichenRechts( $Selector ; Länge( $Selector ) - 2 ) ;ZeichenLinks( $Selector ; 1 ) = "≠" ; ZeichenRechts( $Selector ; Länge( $Selector ) - 1 ) ;$Selector)]]></Text>
+								<ChunkList hash="4DD9EC25DCCB12AADADA78DD9CCD17E2">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">(&#13;</Chunk>
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 2 ) = &quot;&lt;&gt;&quot; ; </Chunk>
+									<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Länge</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ) - 2 ) ;&#13;</Chunk>
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 1 ) = &quot;≠&quot; ; </Chunk>
+									<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Länge</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ) - 1 ) ;&#13;</Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef">&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Selector"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="6" name="Syntax"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="22" name="Suchenmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="Selector">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$Selector]]></Text>
+							<ChunkList hash="3A11B6C860E9E0BE0B0C3D52BEB31345">
+								<Chunk type="VariableReference">$Selector</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="21" name="_kIsWildcard">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$Wildcard]]></Text>
+							<ChunkList hash="E9A4037795AFB795F208913196D8F490">
+								<Chunk type="VariableReference">$Wildcard</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$ohne]]></Text>
+							<ChunkList hash="3210F265468AD3664F2100D385C22DA8">
+								<Chunk type="VariableReference">$ohne</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="25" name="Aktuellen Datens. ausschließen" enable="True">
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$Filter]]></Text>
+							<ChunkList hash="8FB92A7B033EB04F466C4FE5C1C08FEC">
+								<Chunk type="VariableReference">$Filter</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="126" name="Ergebnismenge einschränken" enable="True">
+		</Step>
+		<Step id="69" name="Sonst" enable="True">
+		</Step>
+		<Step id="28" name="Ergebnismenge suchen" enable="True">
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="87" name="Sort Syntax"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

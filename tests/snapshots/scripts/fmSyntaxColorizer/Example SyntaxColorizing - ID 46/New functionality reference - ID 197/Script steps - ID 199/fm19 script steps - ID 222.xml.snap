@@ -1,0 +1,864 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="222" name="fm19 script steps"></ScriptReference>
+	<ObjectList membercount="51">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="NEW STEPS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Variable definitions"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="@var $webviewer, $function, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15, $p16, $p17, $timeout, $function, $param, $continuous, $json, $request, $foo"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="175"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="175" name="JavaScript in Web Viewer ausführen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Name">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$webviewer]]></Text>
+							<ChunkList hash="BD14CC4CDE30F49E42C25507423ABC12">
+								<Chunk type="VariableReference">$webviewer</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="FunctionRef">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$function]]></Text>
+							<ChunkList hash="490F9B09FEE71B5B34B8BA2DD9C0CE22">
+								<Chunk type="VariableReference">$function</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Calculation datatype="1" position="10">
+						<Calculation>
+							<Text><![CDATA[$p1]]></Text>
+							<ChunkList hash="9510890135A37BCA1D4934015868C453">
+								<Chunk type="VariableReference">$p1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="11">
+						<Calculation>
+							<Text><![CDATA[$p2]]></Text>
+							<ChunkList hash="0E0653C7662D6AC39FAB01EEC77E4AE2">
+								<Chunk type="VariableReference">$p2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="12">
+						<Calculation>
+							<Text><![CDATA[$p3]]></Text>
+							<ChunkList hash="45C5569A88392C1FEFFD0242F4FAB1E4">
+								<Chunk type="VariableReference">$p3</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="13">
+						<Calculation>
+							<Text><![CDATA[$p4]]></Text>
+							<ChunkList hash="0461B278034A6BE81263ADEB4F8D05E9">
+								<Chunk type="VariableReference">$p4</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="14">
+						<Calculation>
+							<Text><![CDATA[$p5]]></Text>
+							<ChunkList hash="1450036F83A47EE797523E8889E0929F">
+								<Chunk type="VariableReference">$p5</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="15">
+						<Calculation>
+							<Text><![CDATA[$p6]]></Text>
+							<ChunkList hash="7CD0186C4D859E6858EBC0648B78F6A0">
+								<Chunk type="VariableReference">$p6</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="16">
+						<Calculation>
+							<Text><![CDATA[$p7]]></Text>
+							<ChunkList hash="54A6031D199AD122A58508F4324EBCE4">
+								<Chunk type="VariableReference">$p7</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="17">
+						<Calculation>
+							<Text><![CDATA[$p8]]></Text>
+							<ChunkList hash="A17521298463D6AEE7D0322423030773">
+								<Chunk type="VariableReference">$p8</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="18">
+						<Calculation>
+							<Text><![CDATA[$p9]]></Text>
+							<ChunkList hash="69F9DA8902B5087F18CD487B1CFB6D39">
+								<Chunk type="VariableReference">$p9</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="19">
+						<Calculation>
+							<Text><![CDATA[$p10]]></Text>
+							<ChunkList hash="858B44F978BC8AB613C5F8708165C503">
+								<Chunk type="VariableReference">$p10</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="20">
+						<Calculation>
+							<Text><![CDATA[$p11]]></Text>
+							<ChunkList hash="F0C00FD85571AD3FF0EC55C31ED6FE42">
+								<Chunk type="VariableReference">$p11</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="21">
+						<Calculation>
+							<Text><![CDATA[$p12]]></Text>
+							<ChunkList hash="CA6F7ABDEA5ECC93D406F340AEDCD35F">
+								<Chunk type="VariableReference">$p12</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="22">
+						<Calculation>
+							<Text><![CDATA[$p13]]></Text>
+							<ChunkList hash="5E5C358E61FECB14DF0B72075AD559ED">
+								<Chunk type="VariableReference">$p13</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="23">
+						<Calculation>
+							<Text><![CDATA[$p14]]></Text>
+							<ChunkList hash="80DB31B1513004855005490F7E65AB52">
+								<Chunk type="VariableReference">$p14</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="24">
+						<Calculation>
+							<Text><![CDATA[$p15]]></Text>
+							<ChunkList hash="22B7DDAC0EC0748A77F69CCAFAAEFDF3">
+								<Chunk type="VariableReference">$p15</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="25">
+						<Calculation>
+							<Text><![CDATA[$p16]]></Text>
+							<ChunkList hash="BD3F66AE01B74D27CC69A272BADFF823">
+								<Chunk type="VariableReference">$p16</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+					<Calculation datatype="1" position="26">
+						<Calculation>
+							<Text><![CDATA[$p17]]></Text>
+							<ChunkList hash="2166348CB22140113A355D041BC9D06E">
+								<Chunk type="VariableReference">$p17</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="201"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<Options>16500</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="action">
+					<List name="Lesen" value="0"></List>
+				</Parameter>
+				<Parameter type="ScriptReference">
+					<DataSourceReference id="2" name="Self"></DataSourceReference>
+					<ScriptReference id="201" name="Hello::World">
+						<repetition>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$param]]></Text>
+									<ChunkList hash="A6842A90328A1B19463AAC0DBC431AAC">
+										<Chunk type="VariableReference">$param</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</repetition>
+					</ScriptReference>
+				</Parameter>
+				<Parameter type="Timeout">
+					<Calculation datatype="2" position="2">
+						<Calculation>
+							<Text><![CDATA[$timeout]]></Text>
+							<ChunkList hash="73031236EC3124D8271C9F7649E26DAE">
+								<Chunk type="VariableReference">$timeout</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="ReadMultiple">
+					<Calculation datatype="2" position="3">
+						<Calculation>
+							<Text><![CDATA[$continuous]]></Text>
+							<ChunkList hash="F8F98361522D29A5503134372F08B71A">
+								<Chunk type="VariableReference">$continuous</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<Options>16420</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="action">
+					<List name="Lesen" value="0"></List>
+				</Parameter>
+				<Parameter type="Timeout">
+					<Calculation datatype="2" position="2">
+						<Calculation>
+							<Text><![CDATA[$timeout]]></Text>
+							<ChunkList hash="73031236EC3124D8271C9F7649E26DAE">
+								<Chunk type="VariableReference">$timeout</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="ReadMultiple">
+					<Calculation datatype="2" position="3">
+						<Calculation>
+							<Text><![CDATA[$continuous]]></Text>
+							<ChunkList hash="F8F98361522D29A5503134372F08B71A">
+								<Chunk type="VariableReference">$continuous</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<Options>16416</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="action">
+					<List name="Lesen" value="0"></List>
+				</Parameter>
+				<Parameter type="ReadMultiple">
+					<Calculation datatype="2" position="3">
+						<Calculation>
+							<Text><![CDATA[$continuous]]></Text>
+							<ChunkList hash="F8F98361522D29A5503134372F08B71A">
+								<Chunk type="VariableReference">$continuous</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<Options>80</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="action">
+					<List name="Lesen" value="0"></List>
+				</Parameter>
+				<Parameter type="ScriptReference">
+					<DataSourceReference id="2" name="Self"></DataSourceReference>
+					<ScriptReference id="219" name="All script steps sorted in Italian">
+						<repetition></repetition>
+					</ScriptReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<Options>17508</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="action">
+					<List name="Lesen" value="0"></List>
+				</Parameter>
+				<Parameter type="ScriptReference">
+					<ScriptReference id="217" name="Undefined variables">
+						<repetition>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[123]]></Text>
+									<ChunkList hash="90213DC459B04C5A47C044B9460AEF7B">
+										<Chunk type="NoRef">123</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</repetition>
+					</ScriptReference>
+				</Parameter>
+				<Parameter type="Timeout">
+					<Calculation datatype="2" position="2">
+						<Calculation>
+							<Text><![CDATA[$timeout]]></Text>
+							<ChunkList hash="73031236EC3124D8271C9F7649E26DAE">
+								<Chunk type="VariableReference">$timeout</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="JSONOutput">
+					<Calculation datatype="2" position="4">
+						<Calculation>
+							<Text><![CDATA[1]]></Text>
+							<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+								<Chunk type="NoRef">1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="ReadMultiple">
+					<Calculation datatype="2" position="3">
+						<Calculation>
+							<Text><![CDATA[123]]></Text>
+							<ChunkList hash="90213DC459B04C5A47C044B9460AEF7B">
+								<Chunk type="NoRef">123</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="action">
+					<List name="Abbrechen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="201" name="NFC-Erkennung konfigurieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="action">
+					<List name="Lesen" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="202"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="202" name="Machine Learning-Modell konfigurieren" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="operation">general</Parameter>
+				<Parameter type="name">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["foo"]]></Text>
+							<ChunkList hash="56D7E5511AA7190292962A6E7BF694D3">
+								<Chunk type="NoRef">&quot;foo&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="zzz_UNUSED">
+						<repetition value="2"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="202" name="Machine Learning-Modell konfigurieren" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="operation">uninstall</Parameter>
+				<Parameter type="name">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["foo"]]></Text>
+							<ChunkList hash="56D7E5511AA7190292962A6E7BF694D3">
+								<Chunk type="NoRef">&quot;foo&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="202" name="Machine Learning-Modell konfigurieren" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="operation">vision</Parameter>
+				<Parameter type="name">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["foo"]]></Text>
+							<ChunkList hash="56D7E5511AA7190292962A6E7BF694D3">
+								<Chunk type="NoRef">&quot;foo&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="zzz_UNUSED">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="203"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>4096</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>20481</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="6" name="_gInputText1">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[1]]></Text>
+							<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+								<Chunk type="NoRef">1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>4101</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<Variable value="$json">
+						<repetition value="1"></repetition>
+					</Variable>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>5</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<Variable value="$json">
+						<repetition value="1"></repetition>
+					</Variable>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>20485</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<Variable value="$json">
+						<repetition value="1"></repetition>
+					</Variable>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["{\"a\":123,\"b\":\"d\"}"]]></Text>
+							<ChunkList hash="C2F6BB1952CB61435A947E857D42FD17">
+								<Chunk type="NoRef">&quot;{&#13;\&quot;a\&quot;:123,&#13;\&quot;b\&quot;:\&quot;d\&quot;&#13;}&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="&lt;fmxmlsnippet type=&quot;FMObjectList&quot;&gt;&lt;Step enable=&quot;True&quot; id=&quot;203&quot; name=&quot;Execute FileMaker Data API&quot;&gt;&lt;SelectAll state=&quot;True&quot;&gt;&lt;/SelectAll&gt;&lt;Calculation&gt;&lt;![CDATA[&quot;{&#10;\&quot;a\&quot;:123,&#10;\&quot;b\&quot;:\&quot;d\&quot;&#10;}&quot;]]&gt;&lt;/Calculation&gt;&lt;Text&gt;&lt;/Text&gt;&lt;Field&gt;$json&lt;/Field&gt;&lt;/Step&gt;&lt;/fmxmlsnippet&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>20481</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="6" name="_gInputText1">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$foo]]></Text>
+							<ChunkList hash="9D60F329C057483A1DE375D350B1DD03">
+								<Chunk type="VariableReference">$foo</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="203" name="FileMaker Data API ausführen" enable="True">
+			<Options>20480</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$request]]></Text>
+							<ChunkList hash="2FFB7D0769E7B28750E2856CF75AC0C9">
+								<Chunk type="VariableReference">$request</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="204 [OBSOLETE]"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="FM19.6.1"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="205"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="205" name="Transaktion öffnen" enable="True">
+			<Options>768</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="ESS-Sperrkonflikte überschreiben" id="512" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="207"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="207" name="Transaktion rückgängig" enable="True">
+			<Options>17152</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="Bedingung" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Condition">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( SonderTastenGedrückt ) = 2]]></Text>
+							<ChunkList hash="02080BB7CC76C29F4498A4E2CEE41380">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">SonderTastenGedrückt</Chunk>
+								<Chunk type="NoRef"> ) = 2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Fehlercode" id="512" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="ErrorCode">
+					<Calculation datatype="2" position="1">
+						<Calculation>
+							<Text><![CDATA[5001]]></Text>
+							<ChunkList hash="189C9D5B1557A307729B38C58E2F5123">
+								<Chunk type="NoRef">5001</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="ErrorMessage">
+					<Calculation datatype="1" position="2">
+						<Calculation>
+							<Text><![CDATA["Custom Error"]]></Text>
+							<ChunkList hash="EE3B5B2DB2B3BD893EDB31D64A93C630">
+								<Chunk type="NoRef">&quot;Custom Error&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="207" name="Transaktion rückgängig" enable="True">
+			<Options>16896</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="Bedingung" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Fehlercode" id="512" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="ErrorCode">
+					<Calculation datatype="2" position="1">
+						<Calculation>
+							<Text><![CDATA[5001]]></Text>
+							<ChunkList hash="189C9D5B1557A307729B38C58E2F5123">
+								<Chunk type="NoRef">5001</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="ErrorMessage">
+					<Calculation datatype="1" position="2">
+						<Calculation>
+							<Text><![CDATA["Custom Error"]]></Text>
+							<ChunkList hash="EE3B5B2DB2B3BD893EDB31D64A93C630">
+								<Chunk type="NoRef">&quot;Custom Error&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="206"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="206" name="Transaktion bestätigen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="208"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="208" name="Sitzungs-ID festlegen" enable="True">
+		</Step>
+		<Step id="208" name="Sitzungs-ID festlegen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["//" & Hole ( SystemIPAdresse ) & "/" & Hole ( DokumentenPfad ) & "/" & Hole( ProgrammBenutzername )]]></Text>
+							<ChunkList hash="8D9412B17E6E4EEBFB81A9748BCEA942">
+								<Chunk type="NoRef">&quot;//&quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">SystemIPAdresse</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot;/&quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">DokumentenPfad</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot;/&quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ProgrammBenutzername</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="208" name="Sitzungs-ID festlegen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[1]]></Text>
+							<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+								<Chunk type="NoRef">1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="209"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="209" name="Wörterbuch festlegen" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="US English (Medical)" value="8"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="209" name="Wörterbuch festlegen" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="UK English" value="13"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="209" name="Wörterbuch festlegen" enable="True">
+			<Options>34</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="UK English" value="13"></List>
+				</Parameter>
+				<Parameter type="UniversalPathList">
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$pathFM]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

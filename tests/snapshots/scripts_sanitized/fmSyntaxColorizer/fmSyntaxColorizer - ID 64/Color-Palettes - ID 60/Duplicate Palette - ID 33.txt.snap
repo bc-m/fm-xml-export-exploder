@@ -1,0 +1,57 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121106 MrW Blacken inactive colors if ALT is being held
+# 20121031 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ NICHT _Palette::__ID ]
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+# Inputs
+Variable setzen [ $blackenInactiveColors ; _IsKeyALT ]
+Variable setzen [ $NumberOfColors ; Anzahl( Palette.Color::__ID ) ]
+
+Feldwert setzen [ _Palette::_gDuplicatePaletteFrom ; _Palette::__ID ]
+
+# Duplicate with increased name
+Datensatz/Abfrage duplizieren
+Schleife (Anfang)
+	Feldwert setzen [ _Palette::PaletteName ; Falls( Ganzzahl( WörterRechts( _Palette::PaletteName ; 1 ) ) = WörterRechts( _Palette::PaletteName ; 1 ) ; FortlNrInTextÄndern ( _Palette::PaletteName ; 1 ) ; _Palette::PaletteName & " 2" ) ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+	Verlasse Schleife wenn [ Anzahl( Palette.Palette_SameName::__ID ) =1 ]
+Schleife (Ende)
+
+Gehe zu Layout [ Layout: "I_Duplicate_Palette" ; Animation: Ohne ]
+# FOR EACH Color
+Variable setzen [ $i ; 1 ]
+Variable setzen [ $n ; $NumberOfColors ]
+Schleife (Anfang)
+	Verlasse Schleife wenn [ $i > $n ]
+	
+	# Duplicate the color
+	Gehe zu Ausschnittreihe [ Auswahl: OFF ; Letzte(r) ]
+	Feldwert setzen [ Palette.Color::PaletteType ; HoleNtenDatensatz( Palette.Color_toDuplicate::PaletteType ; $i ) ]
+	Feldwert setzen [ Palette.Color::ColorName ; HoleNtenDatensatz( Palette.Color_toDuplicate::ColorName ; $i ) ]
+	Feldwert setzen [ Palette.Color::Comment ; HoleNtenDatensatz( Palette.Color_toDuplicate::Comment ; $i ) ]
+	Feldwert setzen [ Palette.Color::ColorInput ; Falls( 
+					$blackenInactiveColors UND NICHT HoleNtenDatensatz( Palette.Color_toDuplicate::_kCountActiveSyntaxUsage ; $i ) ; Palette.Color_toDuplicate::_kkFullBlock ; /* black */
+					HoleNtenDatensatz( Palette.Color_toDuplicate::ColorInput ; $i )
+					) ]
+	
+	# NEXT Color
+	Variable setzen [ $i ; $i + 1 ]
+Schleife (Ende)
+
+Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]
+
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+Gehe zu Feld [ Auswählen/Ausführen ; _Palette::PaletteName ]
+Datensätze zeigen als ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "30" ] ⚠️⚠️⚠️
+
+Script ausführen [ Aus Liste ; "Apply Palette" ]

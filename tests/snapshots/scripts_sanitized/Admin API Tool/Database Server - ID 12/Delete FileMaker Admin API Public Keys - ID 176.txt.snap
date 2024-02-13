@@ -1,0 +1,64 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Delete Admin API Key
+#  HISTORY:&#13;   - Created:   2020-01-19 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2020-00-00 
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
+		Aktuelles Script verlassen [ Wahr ]
+	Ende (wenn)
+	
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+	Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+	Script ausführen [ Aus Liste ; "Set Config" ]
+	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+	Variable setzen [ $endpoint ; "/server/config/pkipublickey" ]
+	Variable setzen [ $json ; JSONSetElement ( "" 
+					 ; [ "names"; "[\"" & PUB__publickeys::name & "\"]"; JSONArray ]
+					) ]
+	
+	Variable setzen [ $curloptions ; " --request DELETE" &
+					" --header \"Authorization: Bearer " & $$my.token & "\"" &
+					" --header \"Content-Type: application/json\"" &
+					" --data @$json" &
+					" --dump-header $$my.headers" ]
+	# set api update variable
+	Variable setzen [ $$API.UPDATE ; "1" ]
+	
+	# -------------------------------------------------------------
+	#  PROCESS
+	# -------------------------------------------------------------
+	Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+	Script ausführen [ Aus Liste ; "Handle response" ]
+	
+	Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+		# parse json response
+		Variable setzen [ $msg ; "Key deleted from server. " ]
+	Ende (wenn)
+Ende (wenn)
+
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
+	Datensatz/Abfrage löschen [ Mit Dialog: OFF ]
+Ende (wenn)
+Fenster schließen
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

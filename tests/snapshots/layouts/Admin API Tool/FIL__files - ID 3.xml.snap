@@ -1,0 +1,612 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Layout id="3" name="FIL__files" width="1024">
+	<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+	<LayoutThemeReference id="1" name="com.filemaker.theme.enlightened" Base="com.filemaker.theme.minimalist"></LayoutThemeReference>
+	<PartsList membercount="3">
+		<Part type="Kopfbereich" kind="1">
+			<Definition type="Kopfbereich" kind="1" size="50" absolute="0" Options="0"></Definition>
+		</Part>
+		<Part type="Datenbereich" kind="4">
+			<Definition type="Datenbereich" kind="4" size="482" absolute="50" Options="0"></Definition>
+			<ObjectList membercount="24">
+				<LayoutObject id="45" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="69" left="173" bottom="90" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="11" name="clients" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>46</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="46" type="Text" name="" kind="2">
+					<Bounds top="72" left="122" bottom="88" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[clients]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="47" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="92" left="173" bottom="113" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="12" name="decryptHint" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>48</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="48" type="Text" name="" kind="2">
+					<Bounds top="95" left="96" bottom="111" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[decryptHint]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="49" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="115" left="173" bottom="136" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="10" name="enabledExtPrivileges" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>50</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="50" type="Text" name="" kind="2">
+					<Bounds top="118" left="44" bottom="134" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[enabledExtPrivileges]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="51" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="138" left="173" bottom="159" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="3" name="filename" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>52</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="52" type="Text" name="" kind="2">
+					<Bounds top="141" left="111" bottom="157" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[filename]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="53" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="161" left="173" bottom="182" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="4" name="folder" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>54</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="54" type="Text" name="" kind="2">
+					<Bounds top="164" left="126" bottom="180" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[folder]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="55" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="184" left="173" bottom="205" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="5" name="hasSavedDecryptKey" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>56</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="56" type="Text" name="" kind="2">
+					<Bounds top="187" left="41" bottom="203" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[hasSavedDecryptKey]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="57" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="207" left="173" bottom="228" right="252"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="1" name="ID" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>58</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="58" type="Text" name="" kind="2">
+					<Bounds top="210" left="145" bottom="226" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[ID]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="59" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="230" left="173" bottom="251" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="6" name="id_files" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>60</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="60" type="Text" name="" kind="2">
+					<Bounds top="233" left="119" bottom="249" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[id_files]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="61" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="253" left="173" bottom="274" right="252"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="2" name="ID_Server" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>62</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="62" type="Text" name="" kind="2">
+					<Bounds top="256" left="102" bottom="272" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[ID_Server]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="63" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="276" left="173" bottom="297" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="7" name="isEncrypted" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>64</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="64" type="Text" name="" kind="2">
+					<Bounds top="279" left="94" bottom="295" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[isEncrypted]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="65" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="299" left="173" bottom="320" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="8" name="size" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>66</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="66" type="Text" name="" kind="2">
+					<Bounds top="302" left="135" bottom="318" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[size]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="67" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="322" left="173" bottom="343" right="426"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="9" name="status" repetition="1">
+							<TableOccurrenceReference id="1065091" name="FIL__files"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>68</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="68" type="Text" name="" kind="2">
+					<Bounds top="325" left="124" bottom="341" right="162"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[status]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Fußbereich" kind="7">
+			<Definition type="Fußbereich" kind="7" size="40" absolute="532" Options="0"></Definition>
+		</Part>
+	</PartsList>
+	<UUID modifications="4" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">A114D779-A434-469A-9CF6-58AC4B56AE06</UUID>
+	<ClientType>0</ClientType>
+	<Options hidden="True">15927297</Options>
+</Layout>

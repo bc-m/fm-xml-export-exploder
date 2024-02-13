@@ -1,0 +1,49 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="165" name="fm15 script steps"></ScriptReference>
+	<ObjectList membercount="4">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="These script steps were introduced in FileMaker 15"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="182" name="Tabelle leeren" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="&lt;Aktuelle Tabelle&gt;" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="182" name="Tabelle leeren" enable="True">
+			<Options>10</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="_Home" value="1">
+						<BaseTableReference id="136" name="_Home"></BaseTableReference>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Command 183 =&gt; see NEXT"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

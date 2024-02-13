@@ -1,0 +1,16 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20131216 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+
+# Set LineNumbers color
+Wenn [ _Home::_gSyntaxColoringEnabled = 1 ]
+	Variable setzen [ $LineNumberColor ;  _ExtractColorAsJavascriptRGB ( _Home::_gLineNumberColor ) ]
+	Variable setzen [ $void ; MBS( "SyntaxColoring.LineNumbers.SetColor"; $LineNumberColor ) ]
+Ende (wenn)

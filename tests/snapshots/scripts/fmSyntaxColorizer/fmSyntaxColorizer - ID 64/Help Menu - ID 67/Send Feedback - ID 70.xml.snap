@@ -1,0 +1,213 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="70" name="Send Feedback"></ScriptReference>
+	<ObjectList membercount="15">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121031 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( DateiName )]]></Text>
+								<ChunkList hash="0106E51A444695C46A88C5EC9D71B8AA">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">DateiName</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$AppName"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["russell@mrwatson.de"]]></Text>
+								<ChunkList hash="F848D0D7DC962E0789B7F685E0FC28B8">
+									<Chunk type="NoRef">&quot;russell@mrwatson.de&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$ToEmail"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$AppName & " Feedback"]]></Text>
+								<ChunkList hash="C5D96DC168D8D173C4A0C861EAA59FC7">
+									<Chunk type="VariableReference">$AppName</Chunk>
+									<Chunk type="NoRef"> &amp; &quot; Feedback&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Subject"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["Hello MrWatson!¶¶" & $AppName & " is ..."]]></Text>
+								<ChunkList hash="D1E4C9DCDEB7476EFF0A842D98550FFC">
+									<Chunk type="NoRef">&quot;Hello MrWatson!¶¶&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$AppName</Chunk>
+									<Chunk type="NoRef"> &amp; &quot; is ...&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Message"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="63" name="E-Mail senden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Email">
+					<Boolean type="Mit Dialog" position="156" value="True"></Boolean>
+					<Send OAuthAuthentication="False" SMTP="False">
+						<Multiple value="False"></Multiple>
+						<To>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$ToEmail]]></Text>
+									<ChunkList hash="AF235D4334DB3ED37BFC58041EFECD01">
+										<Chunk type="VariableReference">$ToEmail</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</To>
+						<CC>
+							<CollectAddresses value="False"></CollectAddresses>
+						</CC>
+						<BCC>
+							<CollectAddresses value="False"></CollectAddresses>
+						</BCC>
+						<Subject>
+							<Calculation datatype="1" position="3">
+								<Calculation>
+									<Text><![CDATA[$Subject]]></Text>
+									<ChunkList hash="353A1BCE5C914A0BEFEC3FB8511DF50A">
+										<Chunk type="VariableReference">$Subject</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Subject>
+						<Message>
+							<Calculation datatype="1" position="4">
+								<Calculation>
+									<Text><![CDATA[$Message]]></Text>
+									<ChunkList hash="2C009C346321EF6F03259BFD277B7929">
+										<Chunk type="VariableReference">$Message</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Message>
+					</Send>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

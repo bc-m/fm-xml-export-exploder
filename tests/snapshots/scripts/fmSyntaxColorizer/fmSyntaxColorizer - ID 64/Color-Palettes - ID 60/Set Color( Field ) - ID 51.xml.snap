@@ -1,0 +1,31 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="51" name="Set Color( Field )"></ScriptReference>
+	<ObjectList membercount="2">
+		<Step id="17" name="Gehe zu Feld" enable="True">
+			<Options>4097</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Auswählen/Ausführen" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="5" name="ColorInput">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065116" name="Syntax.Color"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="67" name="AppleScript ausführen" enable="True">
+			<Options>131076</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Text">	set theFormatMenuName to name of menu 6&#13;--display alert 	theFormatMenuName&#13;	set theColorMenuName to name of menu item 6 of menu theFormatMenuName&#13;--display alert 	theColorMenuName&#13;	set theOtherColorMenuItem to last menu item of menu theColorMenuName&#13;	set theNameOfTheOtherColorMenuItem to the name of theOtherColorMenuItem&#13;--display alert 	theNameOfTheOtherColorMenuItem&#13;--ERROR - but why?&#13;	do menu menu item theNameOfTheOtherColorMenuItem of menu theColorMenuName&#13;</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

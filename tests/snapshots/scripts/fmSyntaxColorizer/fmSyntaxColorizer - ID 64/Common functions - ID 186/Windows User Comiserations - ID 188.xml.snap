@@ -1,0 +1,32 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="188" name="Windows User Comiserations"></ScriptReference>
+	<ObjectList membercount="1">
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["fmSyntaxColorizer¶and the MBS¶developer extras¶¶ only work on the¶Macintosh platform.¶¶Sorry Windows users,¶it's just the way it is!¶¶"& TextGröße ( "😞" ; 32 )]]></Text>
+							<ChunkList hash="99EBA61D25A8C09D092B6500DA19454D">
+								<Chunk type="NoRef">&quot;fmSyntaxColorizer¶and the MBS¶developer extras¶&#13;¶&#13; only work on the¶Macintosh platform.¶&#13;¶&#13;Sorry Windows users,¶it&apos;s just the way it is!¶¶&quot;&#13;&amp; </Chunk>
+								<Chunk type="FunctionRef">TextGröße</Chunk>
+								<Chunk type="NoRef"> ( &quot;😞&quot; ; 32 )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

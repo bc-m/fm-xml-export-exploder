@@ -1,0 +1,83 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Update Admin Console Account
+#  HISTORY:&#13;   - Created:   2021-06-28 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2020-00-00
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  VALIDATION
+# -------------------------------------------------------------
+Wenn [ IstLeer ( FMS__fmserver::newUsername ) ODER IstLeer ( FMS__fmserver::newPassword ) ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Alle Scripts abbrechen
+Ende (wenn)
+
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Wenn [ Hole ( LetzteMeldungswahl ) ≠ 1 ]
+	Alle Scripts abbrechen
+Ende (wenn)
+
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Variable setzen [ $$server ; "https://" & FMS__fmserver::server_address & Falls ( FMS__fmserver::usePort = 1 ; ":16000" ) & "/fmi/admin/api/v2" ]
+Variable setzen [ $endpoint ; "/server/rootadmin" ]
+Variable setzen [ $json ; JSONSetElement ( "" 
+				
+				 ; [ "newUsername"; FMS__fmserver::newUsername ; JSONString ]
+				 ; [ "newPassword"; FMS__fmserver::newPassword ; JSONString ]
+				 ; [ "currentUsername"; FMS__fmserver::username ; JSONString ]
+				 ; [ "currentPassword"; FMS__fmserver::password ; JSONString ]
+				
+				) ]
+
+Variable setzen [ $curloptions ; " --request POST" &
+				" --header \"Authorization: Basic " & Base64EncodeRFC ( 4648 ; FMS__fmserver::username & ":" & FMS__fmserver::password ) & " \"" &
+				" --header \"Content-Type: application/json\"" &
+				" --data @$json" &
+				
+				" --dump-header $$my.headers" ]
+# set api update variable
+Variable setzen [ $$API.UPDATE ; "1" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	Wenn [ JSONGetElement ( $$my.result ; "messages[0].code" ) = "0" ]
+		# parse json response
+		Feldwert setzen [ FMS__fmserver::username ; JSONGetElement ( $$my.result ; "response.newUsername" ) ]
+		Feldwert setzen [ FMS__fmserver::password ; JSONGetElement ( $$my.result ; "response.newPassword" ) ]
+		# clear new user and pass fields
+		Feldwert setzen [ FMS__fmserver::newUsername ; "" ]
+		Feldwert setzen [ FMS__fmserver::newPassword ; "" ]
+		# clear token fields
+		Feldwert setzen [ FMS__fmserver::token_expires ; "" ]
+		Feldwert setzen [ FMS__fmserver::token ; "" ]
+		Schreibe Änderung Datens./Abfrage [ Mit Dialog: ON ]
+	Sonst
+		# invalid result
+		Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+		
+	Ende (wenn)
+Sonst
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Ende (wenn)
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

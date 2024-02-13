@@ -1,0 +1,1013 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="41" name="MBS_SyntaxColoring( Action )"></ScriptReference>
+	<ObjectList membercount="76">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20160923 MrW Reset + noDialog"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131204 MrW VariableChecking"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131021 MrW LineNumbers"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20081113 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Parameter"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP( 1 )]]></Text>
+								<ChunkList hash="0833C8A527A8E2C55E64700265CC2606">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">( 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$action"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP( 2 )]]></Text>
+								<ChunkList hash="3E97A989451F3B2649006AB48154DC17">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">( 2 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$noDialog"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[ZeichenLinks( $action ; Position( $action ; "." ; 1 ;1 ) - 1 )]]></Text>
+								<ChunkList hash="4B760B1F707B19102DCDE930070CBFCB">
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Position</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> ; &quot;.&quot; ; 1 ;1 ) - 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$object"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$action = "GetTags"]]></Text>
+							<ChunkList hash="7B8712BB48529AC83D346602748DBB2E">
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef"> = &quot;GetTags&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="9" name="Home"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_MBS_SyntaxColoringInfo ( "" )]]></Text>
+								<ChunkList hash="7435AF6BF18F9942DF0913E514EDE73E">
+									<Chunk type="CustomFunctionRef">_MBS_SyntaxColoringInfo</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$ColoringInfo"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Liste( _Home::_kSyntaxStats ;ElementeAnzahl( $ColoringInfo ) & " MBS-Plugin colors:" ; $ColoringInfo)]]></Text>
+							<ChunkList hash="D151F54870F3D8D42CDEEAA6E7D60F46">
+								<Chunk type="FunctionRef">Liste</Chunk>
+								<Chunk type="NoRef">( &#13;</Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="36" name="_kSyntaxStats" repetition="1">
+										<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ;&#13;</Chunk>
+								<Chunk type="FunctionRef">ElementeAnzahl</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$ColoringInfo</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; MBS-Plugin colors:&quot; ; &#13;</Chunk>
+								<Chunk type="VariableReference">$ColoringInfo</Chunk>
+								<Chunk type="NoRef">&#13;)</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$action = "Reset"]]></Text>
+							<ChunkList hash="5EF986B1E3ADB764D8893381CC899EBC">
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef"> = &quot;Reset&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Reset Dialog"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$noDialog]]></Text>
+							<ChunkList hash="0783414D45D770DA094BFC7DC7E9825E">
+								<Chunk type="VariableReference">$noDialog</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[2]]></Text>
+								<ChunkList hash="34108238C823509F293F7FC877DB5DF6">
+									<Chunk type="NoRef">2</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$btn"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="69" name="Sonst" enable="True">
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( DateiName )]]></Text>
+							<ChunkList hash="0106E51A444695C46A88C5EC9D71B8AA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Do you want to clear ALL colors, or reset to the MBS-Plugin factory defaults?"]]></Text>
+							<ChunkList hash="723A8BAA8096964C96CD6CF4B8C18E8B">
+								<Chunk type="NoRef">&quot;Do you want to clear ALL colors, or reset to the MBS-Plugin factory defaults?&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="Cancel">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Clear">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3" value="Defaults">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( LetzteMeldungswahl )]]></Text>
+								<ChunkList hash="B254A3B5CE78D50A2CCF5C6B49C2BC92">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$btn"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$btn = 1]]></Text>
+							<ChunkList hash="09172F28C5BB003B31F5E8D503EA0D7A">
+								<Chunk type="VariableReference">$btn</Chunk>
+								<Chunk type="NoRef"> = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Cancel"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( $btn = 2 ; "Clear" ; "FactoryDefaults" )]]></Text>
+								<ChunkList hash="C677FB0DBD0535169FAA4A1DB2A67F9B">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$btn</Chunk>
+									<Chunk type="NoRef"> = 2 ; &quot;Clear&quot; ; &quot;FactoryDefaults&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$action"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="125" name="Sonst, wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$action="Toggle"]]></Text>
+							<ChunkList hash="5BAA8129476777C4556BA6829333436D">
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef">=&quot;Toggle&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="20" name="_gSyntaxColoringEnabled">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[MBS( "SyntaxColoring.Enabled" )]]></Text>
+							<ChunkList hash="ECCF57340F5EBEE770454310985CA90A">
+								<Chunk type="FunctionRef">MBS</Chunk>
+								<Chunk type="NoRef">( &quot;SyntaxColoring.Enabled&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_Home::_gSyntaxColoringDisableAction]]></Text>
+								<ChunkList hash="518655462A5845036F8B2E1E20ABC342">
+									<Chunk type="FieldRef">
+										<FieldReference id="19" name="_gSyntaxColoringDisableAction" repetition="1">
+											<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$action"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="125" name="Sonst, wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$action="LineNumbers.Toggle"]]></Text>
+							<ChunkList hash="353FC121CC4D140D28D97B4B705C4A62">
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef">=&quot;LineNumbers.Toggle&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="23" name="_gLineNumberingEnabled">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[MBS( "SyntaxColoring.LineNumbers.Enabled" )]]></Text>
+							<ChunkList hash="C1437909F985521080EC771392FAB550">
+								<Chunk type="FunctionRef">MBS</Chunk>
+								<Chunk type="NoRef">( &quot;SyntaxColoring.LineNumbers.Enabled&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["LineNumbers." & _Home::_gLineNumberingDisableAction]]></Text>
+								<ChunkList hash="E5279AD78CB682C44E0E9D7B0ED11391">
+									<Chunk type="NoRef">&quot;LineNumbers.&quot; &amp; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="25" name="_gLineNumberingDisableAction" repetition="1">
+											<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$action"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="125" name="Sonst, wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$action="VariableChecking.Toggle"]]></Text>
+							<ChunkList hash="78A66BDA9BF3587263ECB075DFE91F7E">
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef">=&quot;VariableChecking.Toggle&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="27" name="_gVariableCheckingEnabled">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[MBS( "SyntaxColoring.CheckVariableDeclaration.Enabled" )]]></Text>
+							<ChunkList hash="DF546797D9D9E1D2018DB8C31A0C61E8">
+								<Chunk type="FunctionRef">MBS</Chunk>
+								<Chunk type="NoRef">( &quot;SyntaxColoring.CheckVariableDeclaration.Enabled&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["CheckVariableDeclaration." & _Home::_gVariableCheckingDisableAction]]></Text>
+								<ChunkList hash="82617B948BC180EAC47D1406AF38A6B2">
+									<Chunk type="NoRef">&quot;CheckVariableDeclaration.&quot; &amp; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="26" name="_gVariableCheckingDisableAction" repetition="1">
+											<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$action"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( $action = "Enable" ; "Enabled" ; $action = "Disable" ; "Disabled" ; $action = "LineNumbers.Enable" ; "Line Numbers Enabled" ; $action = "LineNumbers.Disable" ; "Line Numbers Disabled" ; $action = "VariableChecking.Enable" ; "Variable Checking Enabled" ; $action = "VariableChecking.Disable" ; "Variable Checking Disabled" ; $action = "Clear" ; "Cleared" ;$action = "FactoryDefaults" ; "FactoryDefaults reset" ;$action)]]></Text>
+								<ChunkList hash="2F58CCB06A7D024FAF38CE1995EF08BD">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;Enable&quot; ; &quot;Enabled&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;Disable&quot; ; &quot;Disabled&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;LineNumbers.Enable&quot; ; &quot;Line Numbers Enabled&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;LineNumbers.Disable&quot; ; &quot;Line Numbers Disabled&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;VariableChecking.Enable&quot; ; &quot;Variable Checking Enabled&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;VariableChecking.Disable&quot; ; &quot;Variable Checking Disabled&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;Clear&quot; ; &quot;Cleared&quot; ;&#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;FactoryDefaults&quot; ; &quot;FactoryDefaults reset&quot; ;&#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef">&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$actionPastTense"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( $action = "Enable" ; "enable syntax coloring" ; $action = "Disable" ; "disable syntax coloring" ; $action = "LineNumbers.Enable" ; "enable line numbers" ; $action = "LineNumbers.Disable" ; "disable line numbers" ; $action = "VariableChecking.Enable" ; "enable variable checking" ; $action = "VariableChecking.Disable" ; "disable variable checking" ; $action = "Clear" ; "clear all syntax coloring settings" ;$action = "FactoryDefaults" ; "clear all syntax coloring settings back to the factory defaults" ;$action)]]></Text>
+								<ChunkList hash="7C465F8041C3B515F296B82B9B9DDE69">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;Enable&quot; ; &quot;enable syntax coloring&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;Disable&quot; ; &quot;disable syntax coloring&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;LineNumbers.Enable&quot; ; &quot;enable line numbers&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;LineNumbers.Disable&quot; ; &quot;disable line numbers&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;VariableChecking.Enable&quot; ; &quot;enable variable checking&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;VariableChecking.Disable&quot; ; &quot;disable variable checking&quot; ; &#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;Clear&quot; ; &quot;clear all syntax coloring settings&quot; ;&#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> = &quot;FactoryDefaults&quot; ; &quot;clear all syntax coloring settings back to the factory defaults&quot; ;&#13;</Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef">&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$actionVerb"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[($action = "Clear" ODER$action = "FactoryDefaults")UND NICHT $noDialog]]></Text>
+							<ChunkList hash="60735DFCF40DF3BF2543FED728F09F47">
+								<Chunk type="NoRef">(</Chunk>
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef"> = &quot;Clear&quot; </Chunk>
+								<Chunk type="FunctionRef">ODER</Chunk>
+								<Chunk type="NoRef">&#13;</Chunk>
+								<Chunk type="VariableReference">$action</Chunk>
+								<Chunk type="NoRef"> = &quot;FactoryDefaults&quot;)&#13;</Chunk>
+								<Chunk type="FunctionRef">UND</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="VariableReference">$noDialog</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Reset"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( DateiName )]]></Text>
+							<ChunkList hash="0106E51A444695C46A88C5EC9D71B8AA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Do you really want to " & $actionVerb & "?"]]></Text>
+							<ChunkList hash="3ED5602E37AE1002621FF4987BF2F37A">
+								<Chunk type="NoRef">&quot;Do you really want to &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$actionVerb</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;?&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="No">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Sure">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( LetzteMeldungswahl ) <> 2]]></Text>
+							<ChunkList hash="EB7D78E3DB9F77AD420B352B6EEBC8C1">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) &lt;&gt; 2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Cancel"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[""]]></Text>
+							<ChunkList hash="26631CDF3EEB0CE74C7FC665903CAC32">
+								<Chunk type="NoRef">&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[MBS( "SyntaxColoring." & $action )]]></Text>
+								<ChunkList hash="C980661FB20F7CBAF8DDF53744DD6045">
+									<Chunk type="FunctionRef">MBS</Chunk>
+									<Chunk type="NoRef">( &quot;SyntaxColoring.&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$action</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_Result"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$actionPastTense & " " & $MBS_Result]]></Text>
+							<ChunkList hash="4073C7C5CD129A8D8CB51BAE727DB2D9">
+								<Chunk type="VariableReference">$actionPastTense</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$MBS_Result</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$object = "LineNumbers"]]></Text>
+							<ChunkList hash="F27994CC64F7453385F3E22223D62879">
+								<Chunk type="VariableReference">$object</Chunk>
+								<Chunk type="NoRef"> = &quot;LineNumbers&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Make sure color is correctly set"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="153" name="Set LineNumber Color"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="144" name="MBS_SetSyntaxColoringEnabledStatus"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

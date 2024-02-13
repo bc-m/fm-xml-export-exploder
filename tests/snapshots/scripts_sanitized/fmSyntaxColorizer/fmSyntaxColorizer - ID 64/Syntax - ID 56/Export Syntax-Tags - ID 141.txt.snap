@@ -1,0 +1,38 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121126 MrW fmp12-compatible
+# 20121126 MrW Nice!
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Script settings
+Variable setzen [ $FolderPath ; Hole( DesktopPfad ) ]
+Variable setzen [ $FileName ; "fmSyntaxColorizer-SyntaxTags." & _FileMakerExtension ]
+
+# Var
+Variable setzen [ $FilePath ; $FolderPath & $FileName ]
+
+
+Fenster fixieren
+Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
+
+# Export Syntax-Tags
+Datensätze exportieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "36" ] ⚠️⚠️⚠️
+Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
+Wenn [ $error ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen []
+	# --&gt;
+Ende (wenn)
+
+Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
+Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️

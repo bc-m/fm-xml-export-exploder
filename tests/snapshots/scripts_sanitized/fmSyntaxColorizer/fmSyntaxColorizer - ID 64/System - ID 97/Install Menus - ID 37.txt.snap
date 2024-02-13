@@ -1,0 +1,20 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20120202 MrW 0.9v2 Mit ADMIN, USER und RUNTIME Menusets
+# 20120106 MrW
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+Wenn [ Hole ( KontoBerechtigungenName ) = "[Full Access]" ]
+	# ADMIN Menus
+	Menüset installieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "142" ] ⚠️⚠️⚠️
+	
+Sonst
+	# STANDARD Menüs
+	Menüset installieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "142" ] ⚠️⚠️⚠️
+	Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
+	
+Ende (wenn)

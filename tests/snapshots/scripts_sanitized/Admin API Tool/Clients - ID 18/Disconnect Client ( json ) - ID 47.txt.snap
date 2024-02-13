@@ -1,0 +1,70 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: disconnect client
+#  HISTORY:&#13;   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-06-28 by FName LName
+# JSON DOCUMENTATION:
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets &quot;[]&quot;.
+#  param
+
+#  JSON EXAMPLE:
+# JSONSetElement ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;msg&quot; ; JSONString ]&#13;)
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+#  Validate json parameter and load it into local variables
+Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen [ 5 // command is invalid ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Wenn [ $_param = "msg" ]
+	Variable setzen [ $$this.id_client ; FMS_CLI__clients::id_client ]
+	Feldwert setzen [ FMS__fmserver::zz_msg_g ; "" ]
+	Feldwert setzen [ FMS__fmserver::zz_gracetime_g ; "90" // default gracetime ]
+	Gehe zu Objekt [ "panel_msg_client_disconnect" ]
+	Gehe zu Feld [ Auswählen/Ausführen ; FMS__fmserver::zz_msg_g ]
+	
+Sonst, wenn [ $_param = "selectMsg" ]
+	Variable setzen [ $$this.id_client ; FMS_GFI_CLI__clients::id_client ]
+	Feldwert setzen [ FMS__fmserver::zz_msg_g ; "" ]
+	Feldwert setzen [ FMS__fmserver::zz_gracetime_g ; "90" // default gracetime ]
+	Gehe zu Objekt [ "panel_msg_client_disconnect" ]
+	Gehe zu Feld [ Auswählen/Ausführen ; FMS__fmserver::zz_msg_g ]
+	
+Sonst, wenn [ $_param = "disconnect" ]
+	Script ausführen [ Aus Liste ; "Set Config" ]
+	Variable setzen [ $endpoint ; "/clients/" & $$this.id_client & "?messageText=" & LiesAlsURLVerschlüsselt ( FMS__fmserver::zz_msg_g ) & "&graceTime=" & FMS__fmserver::zz_gracetime_g ]
+	Variable setzen [ $curloptions ; " --request DELETE" &
+					" --header \"Authorization: Bearer " & $$my.token & "\"" &
+					" --header \"Content-Type: application/json\"" &
+					
+					" --dump-header $$my.headers" ]
+	# set api update variable
+	Variable setzen [ $$API.UPDATE ; "1" ]
+	
+	# -------------------------------------------------------------
+	#  PROCESS
+	# -------------------------------------------------------------
+	Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+	Script ausführen [ Aus Liste ; "Handle response" ]
+	# update database listing
+	Script ausführen [ Aus Liste ; "List Clients" ]
+	
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

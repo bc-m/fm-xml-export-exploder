@@ -1,0 +1,15 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20170518 MrW New
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+
+Feldwert setzen [ Home.MBS_DeveloperOptions::On ; Falls( NICHT Home.MBS_DeveloperOptions::On ; 1 ) ]
+// Berechneten Wert einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "77" ] ⚠️⚠️⚠️
+
+Feldwert setzen [ _Home::_gEmptyField ; "" ]
+// Objekt aktualisieren [ Name: "Preview" ]

@@ -1,0 +1,43 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Get Server Certificate Information
+#  HISTORY:&#13;   - Created:   2020-01-11 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/server/certificate/info" ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# parse json response
+	Feldwert setzen [ FMS__fmserver::certificate_issuerName ; JSONGetElement ( $$my.result ; "response.certificate.issuerName" ) ]
+	Feldwert setzen [ FMS__fmserver::certificate_subjectName ; JSONGetElement ( $$my.result ; "response.certificate.subjectName" ) ]
+	
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

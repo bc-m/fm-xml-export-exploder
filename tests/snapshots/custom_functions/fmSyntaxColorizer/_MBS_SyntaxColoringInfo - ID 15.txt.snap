@@ -1,0 +1,15 @@
+---
+source: src/main.rs
+expression: output_content
+---
+SetzeVar([
+vN = ElementeAnzahl( pTags ) ;
+vTag = Falls( vN>0 ;HoleWert( pTags ; 1 ) ) ;
+vRestTags = Falls( vN>1 ; ElementeRechts( pTags ; vN - 1 ) ) ;
+vTags = Falls( vN=0 ;MBS( "SyntaxColoring.GetTags" ) ) 
+];
+Falls( 
+vN = 0 ; Falls( ElementeAnzahl( vTags ) ; _MBS_SyntaxColoringInfo( vTags ) ) ;
+vTag  & "	" & MBS( "SyntaxColoring.GetTag" ; vTag ) & 
+Falls( vN > 1  UND vRestTags <> "¶" ; "¶" & _MBS_SyntaxColoringInfo( vRestTags ) )
+))

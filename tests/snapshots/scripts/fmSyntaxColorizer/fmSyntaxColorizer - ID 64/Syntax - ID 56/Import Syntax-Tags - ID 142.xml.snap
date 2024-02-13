@@ -1,0 +1,733 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="142" name="Import Syntax-Tags"></ScriptReference>
+	<ObjectList membercount="48">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131104 MrW Kleine Korrektur"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121126 MrW Nice!"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( DesktopPfad )]]></Text>
+								<ChunkList hash="AF56F6DD82F93BA8CAF61ABD29F9DEDB">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">DesktopPfad</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FolderPath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["fmSyntaxColorizer-Commands.fp7"]]></Text>
+								<ChunkList hash="CDA7678C509100087B6F1476AC930333">
+									<Chunk type="NoRef">&quot;fmSyntaxColorizer-Commands.fp7&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FileName"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Var"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$FolderPath & $FileName]]></Text>
+								<ChunkList hash="1386CD25493DBBA837F63C5173FEC010">
+									<Chunk type="VariableReference">$FolderPath</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="VariableReference">$FileName</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FilePath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="55" name="Blätternmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="79" name="Fenster fixieren" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Do you wish to import syntax-tags from file " & Zitat( $FileName ) & " on the desktop?¶" & "IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten."]]></Text>
+							<ChunkList hash="E9428BDEF9DD75737F1822DEACDA0E7B">
+								<Chunk type="NoRef">&quot;Do you wish to import syntax-tags from file &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$FileName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; on the desktop?¶&quot; &amp; &#13;&quot;IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="Cancel">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Import">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( LetzteMeldungswahl ) = 1]]></Text>
+							<ChunkList hash="E4D712690E8A3522DE4F176CDFCB904A">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Cancel"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="23" name="Alle Datensätze anzeigen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Import SyntaxTags(Match + add, with automatic)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="35" name="Datensätze importieren" enable="True">
+			<Options>33587360</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="DataSourceReference">
+					<DataSourceReference fileType="FMPR" isPredefined="False" delimiter="1" value="1">
+						<UniversalPathList fileType="FMPR" membercount="1">
+							<ObjectList>
+								<Location><![CDATA[file:$FilePath]]></Location>
+							</ObjectList>
+						</UniversalPathList>
+					</DataSourceReference>
+				</Parameter>
+				<Parameter type="ImportField">
+					<ImportField addasnew="True" isPredefined="False" delimiter="0" fieldNameRow="0">
+						<Options copyContainersAsIs="False" matchFieldNames="False" doAutoEntry="True" splitRepetitions="False"></Options>
+						<Target>
+							<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+						</Target>
+						<Field membercount="29">
+							<Map New="False" name="Quellfeld 1 abgleichen mit " id="15" kind="2" Options="0">
+								<FieldReference id="15" name="PaletteName">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 2 abgleichen mit " id="14" kind="2" Options="0">
+								<FieldReference id="14" name="PaletteType">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 3 abgleichen mit " id="2" kind="2" Options="0">
+								<FieldReference id="2" name="ColorName">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 4 importieren in " id="5" kind="0" Options="2">
+								<FieldReference id="5" name="ColorInput">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 5 importieren in " id="19" kind="0" Options="0">
+								<FieldReference id="19" name="Comment">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 6 importieren in " id="11" kind="0" Options="0">
+								<FieldReference id="11" name="_ID_Palette">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 7 nicht importiert in" id="7" kind="1" Options="0">
+								<FieldReference id="7" name="_kColorRed">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 8 nicht importiert in" id="8" kind="1" Options="0">
+								<FieldReference id="8" name="_kColorGreen">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 9 nicht importiert in" id="9" kind="1" Options="0">
+								<FieldReference id="9" name="_kColorBlue">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 10 nicht importiert in" id="10" kind="1" Options="0">
+								<FieldReference id="10" name="_kkFullBlock">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 11 nicht importiert in" id="4" kind="1" Options="0">
+								<FieldReference id="4" name="_kColorExample">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 12 nicht importiert in" id="12" kind="1" Options="0">
+								<FieldReference id="12" name="_kDS">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 13 nicht importiert in" id="13" kind="1" Options="0">
+								<FieldReference id="13" name="_kFormulaChars">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 14 nicht importiert in" id="6" kind="1" Options="0">
+								<FieldReference id="6" name="_kColorHex">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 15 nicht importiert in" id="1" kind="1" Options="2">
+								<FieldReference id="1" name="__ID">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 16 nicht importiert in" id="16" kind="1" Options="0">
+								<FieldReference id="16" name="_kCountSyntaxUsage">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 17 nicht importiert in" id="17" kind="1" Options="0">
+								<FieldReference id="17" name="_k1">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 18 nicht importiert in" id="18" kind="1" Options="0">
+								<FieldReference id="18" name="_kCountPaletteUsage">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 19 nicht importiert in" id="3" kind="1" Options="0">
+								<FieldReference id="3" name="_kColorR_G_B">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 20 nicht importiert in" id="20" kind="1" Options="0">
+								<FieldReference id="20" name="_kIsColor">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 21 nicht importiert in" id="21" kind="1" Options="0">
+								<FieldReference id="21" name="Selector">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 22 nicht importiert in" id="22" kind="1" Options="0">
+								<FieldReference id="22" name="_kCountActiveSyntaxUsage">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 23 nicht importiert in" id="23" kind="1" Options="0">
+								<FieldReference id="23" name="Temp">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 24 nicht importiert in" id="24" kind="1" Options="0">
+								<FieldReference id="24" name="_kGUI_PaletteImportMergeWarning">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 25 nicht importiert in" id="25" kind="1" Options="0">
+								<FieldReference id="25" name="_kColorRGB">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 26 nicht importiert in" id="26" kind="1" Options="0">
+								<FieldReference id="26" name="_kIsPaletteSpecificColor">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 27 nicht importiert in" id="27" kind="1" Options="0">
+								<FieldReference id="27" name="_kHasSpecificSyntax">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 28 nicht importiert in" id="28" kind="1" Options="0">
+								<FieldReference id="28" name="_kCommand_EN">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 29 nicht importiert in" id="29" kind="1" Options="0">
+								<FieldReference id="29" name="_kPaletteName">
+									<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+						</Field>
+						<CharacterSet name="Mac Roman" value="2"></CharacterSet>
+						<action name="Aktualisieren" value="2"></action>
+					</ImportField>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( LetzteFehlerNr )]]></Text>
+								<ChunkList hash="16999957E05D9809F9F88FA70C794553">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$error]]></Text>
+							<ChunkList hash="926F59D0E89012933FB1C2137ABF78F1">
+								<Chunk type="VariableReference">$error</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls($error = 100 ; "File missing! Please first place file " & Zitat( $FileName ) & " on the desktop!" ;"Error " & $error & " during the import.")]]></Text>
+							<ChunkList hash="ED0543B89FA15046ED35C44F106435BF">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef">(&#13;</Chunk>
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> = 100 ; &quot;File missing! Please first place file &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$FileName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; on the desktop!&quot; ;&#13;&quot;Error &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; during the import.&quot;&#13;)</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( AnzahlGefundeneDatensätze )]]></Text>
+								<ChunkList hash="13CC8C1C176B732BA9A23A2B6F64C48C">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$n"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$n = 0]]></Text>
+							<ChunkList hash="4B8C6EB74D3E76E993D67038723B7FA2">
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Nothing was imported! Better luck next time!"]]></Text>
+							<ChunkList hash="DC15F8351CAC79DEB474C66223AFFEBB">
+								<Chunk type="NoRef">&quot;Nothing was imported! Better luck next time!&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully imported."]]></Text>
+							<ChunkList hash="0118EC90454496C7A9FC623DBC4CCA56">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> = 1 ; &quot;One syntax-tag has been&quot; ; </Chunk>
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; syntax-tags have been&quot; ) &amp; &quot; successfully imported.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,0 +1,119 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Perform action on a Database
+#  HISTORY:&#13;   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-06-28 by FName LName
+# JSON DOCUMENTATION:
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets &quot;[]&quot;.
+#  id
+#  status
+
+#  JSON EXAMPLE:
+# JSONSetElement ( &quot;&quot; &#13; ; [ &quot;id&quot; ; $id ; JSONString ]&#13; ; [ &quot;status&quot; ; &quot;msg&quot; ; JSONString ]&#13;)
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+#  Validate json parameter and load it into local variables
+Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Aktuelles Script verlassen [ 5 // command is invalid ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Wenn [ $_status = "msg_close" ]
+	Variable setzen [ $$this.id_databases ; $_id ]
+	Feldwert setzen [ FMS__fmserver::zz_msg_g ; "" ]
+	Feldwert setzen [ FMS__fmserver::zz_force_g ; "" ]
+	Gehe zu Objekt [ "panel_msg" ]
+	Gehe zu Feld [ Auswählen/Ausführen ; FMS__fmserver::zz_msg_g ]
+	
+Sonst, wenn [ $_status = "msg_open" ]
+	# prompt for pass
+	Variable setzen [ $$this.id_databases ; $_id ]
+	Feldwert setzen [ FMS__fmserver::zz_msg_g ; "" ]
+	Gehe zu Objekt [ "panel_passwd" ]
+	Gehe zu Feld [ Auswählen/Ausführen ; FMS__fmserver::zz_msg_g ]
+	
+Sonst, wenn [ $_status = "select" ]
+	Feldwert setzen [ FMS__fmserver::filename_selected ; FMS_FIL__files::filename ]
+	
+Sonst
+	
+	Script ausführen [ Aus Liste ; "Set Config" ]
+	Variable setzen [ $endpoint ; "/databases/" & $_id & "" ]
+	Wenn [ $_status = "OPENED" ]
+		Wenn [ FMS_FIL__files::isEncrypted = "1" UND FMS_FIL__files::hasSavedDecryptKey = "0" UND NICHT IstLeer ( FMS__fmserver::zz_msg_g ) ]
+			Variable setzen [ $json ; JSONSetElement ( "" ; 
+							  [ "status"; $_status ; JSONString ];
+							  [ "key"; FMS__fmserver::zz_msg_g ; JSONString ]
+							 ) ]
+			Feldwert setzen [ FMS__fmserver::zz_msg_g ; "" ]
+		Sonst
+			Variable setzen [ $json ; JSONSetElement ( "" ; 
+							  [ "status"; $_status ; JSONString ]
+							 ) ]
+		Ende (wenn)
+	Sonst, wenn [ $_status = "PAUSED" ]
+		Variable setzen [ $json ; JSONSetElement ( "" ; 
+						  [ "status"; $_status ; JSONString ]
+						 ) ]
+	Sonst, wenn [ $_status = "RESUMED" ]
+		Variable setzen [ $json ; JSONSetElement ( "" ; 
+						  [ "status"; $_status ; JSONString ]
+						 ) ]
+	Sonst, wenn [ $_status = "CLOSED" ]
+		Variable setzen [ $json ; JSONSetElement ( $json ; "status"; $_status ; JSONString ) ]
+		Wenn [ NICHT IstLeer ( FMS__fmserver::zz_msg_g ) ]
+			Variable setzen [ $json ; JSONSetElement ( $json ; "messageText" ; FMS__fmserver::zz_msg_g ; JSONString ) ]
+		Ende (wenn)
+		Wenn [ FMS__fmserver::zz_force_g = 1 ]
+			Variable setzen [ $json ; JSONSetElement ( $json ; "force" ; "true" ; JSONBoolean ) ]
+		Ende (wenn)
+	Ende (wenn)
+	Variable setzen [ $curloptions ; " --request PATCH" &
+					" --header \"Authorization: Bearer " & $$my.token & "\"" &
+					" --header \"Content-Type: application/json\"" &
+					" --data @$json" &
+					" --dump-header $$my.headers" ]
+	
+	Wenn [ $_status = "DELETE" ]
+		# check the file status
+		Wenn [ $_current_status ≠ "CLOSED" ]
+			Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			Alle Scripts abbrechen
+		Ende (wenn)
+		# overwrite curl options for deletes
+		Variable setzen [ $curloptions ; " --request DELETE" &
+						" --header \"Authorization: Bearer " & $$my.token & "\"" &
+						" --header \"Content-Type: application/json\"" &
+						" --header \"Content-Length: 0\"" &
+						" --dump-header $$my.headers" ]
+	Ende (wenn)
+	
+	# set api update variable
+	Variable setzen [ $$API.UPDATE ; "1" ]
+	
+	# -------------------------------------------------------------
+	#  PROCESS
+	# -------------------------------------------------------------
+	Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+	Script ausführen [ Aus Liste ; "Handle response" ]
+	# update database listing
+	Script ausführen [ Aus Liste ; "List Databases" ]
+	
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

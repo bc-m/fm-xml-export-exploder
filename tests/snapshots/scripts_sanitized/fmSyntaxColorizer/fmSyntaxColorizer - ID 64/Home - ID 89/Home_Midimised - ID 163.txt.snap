@@ -1,0 +1,20 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20140429 MrW Neu
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Variable setzen [ $$Midimised ; Falls( NICHT $$Midimised ; 1 ) ]
+
+Wenn [ $$Midimised ]
+	Gehe zu Layout [ Layout: "Home_Minimised" ; Animation: Ohne ]
+	Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
+	Fenster anpassen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "31" ] ⚠️⚠️⚠️
+	Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+Sonst
+	Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+	Script ausführen [ Aus Liste ; "Go to Home Layout" ]
+Ende (wenn)

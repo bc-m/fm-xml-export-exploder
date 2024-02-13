@@ -1,0 +1,22 @@
+---
+source: src/main.rs
+expression: output_content
+---
+/* _TrimWS( pText )
+
+Removes all white space* from the ends of the string. 
+
+* Currently only white space with UTF <= U+00A0.
+
+20130924 MrW: Version 1.0 
+*/
+
+SetzeVar(
+  [
+    vText = Austauschen( pText; [ " "; "" ]; [ Char(9) /* TAB */; "" ]; [ Char(10) /* LF */; "" ]; [ Char(11) /* VT */; "" ]; [ Char(12) /* FF */; "" ]; [ "¶"; "" ]; [ Char( 133 ) /* NEL next-line */; "" ]; [ Char( 160 ) /* no-break-space */; "" ] );
+    vPosFirstChar = Position( pText ; ZeichenLinks( vText; 1 ) ; 1 ; 1 );
+    vPosLastChar = Position( pText ; ZeichenRechts( vText; 1 ) ; Länge( pText ) ; -1 )
+  ];
+  
+  Falls( vPosFirstChar > 0 ; ZeichenMitte( pText ; vPosFirstChar ; vPosLastChar - vPosFirstChar + 1 ) )
+)

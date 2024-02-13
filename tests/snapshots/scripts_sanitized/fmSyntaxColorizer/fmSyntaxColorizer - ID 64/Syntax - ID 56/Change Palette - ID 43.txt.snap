@@ -1,0 +1,62 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20210924 MrW Use internal palette layout to stop screen wiggle (due to ruler)
+# 20121101 MrW
+
+Fenster fixieren
+Blätternmodus aktivieren
+Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+
+# Inputvar
+Variable setzen [ $Palette_ID ; _Syntax::_gID_ActivePalette ]
+
+
+# Make sure the active palette is selected in the palettes list
+Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
+Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+
+# FIXME
+Wenn [ _Palette::DisableVariableChecking ]
+	# Disable VariableChecking for this palette
+	Variable setzen [ $MBS ; MBS( "SyntaxColoring.CheckVariableDeclaration.Disable" ) ]
+Sonst, wenn [ _Home::_gVariableCheckingEnabled ]
+	Script ausführen [ Aus Liste ; "MBS_SyntaxColoring( Action )" ; Parameter: "CheckVariableDeclaration.Enable" ]
+Ende (wenn)
+
+
+# If there are any missing palette-specific syntax entries, add them
+Variable setzen [ $CountSpecificColors ; Anzahl( Palette.Color_OnlyPaletteSpecificColors::_k1 ) ]
+Variable setzen [ $CountSpecificSyntax ; Anzahl( Palette.Color_OnlyPaletteSpecificColors::_kHasSpecificSyntax ) ]
+Variable setzen [ $CountOfSyntaxToCreate ; $CountSpecificColors - $CountSpecificSyntax ]
+Wenn [ $CountOfSyntaxToCreate > 0 ]
+	Variable setzen [ $PaletteName ; _Palette::PaletteName ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
+		Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+		# FOR EACH Color
+		Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
+		Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+		Schleife (Anfang)
+			Verlasse Schleife wenn [ Color.Syntax_byCommand::_k1 ]
+			# Add command
+			Feldwert setzen [ Color.Syntax_byCommand::On ; 1 ]
+			Feldwert setzen [ Color.Syntax_byCommand::Comment ; "This syntax was created for palette '" & $PaletteName & "'" ]
+			Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+			# NEXT Color
+			Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: ON ]
+		Schleife (Ende)
+	Ende (wenn)
+Ende (wenn)
+
+# Always set the palette for ALL commands
+Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
+Ersetze alle Feldwerte [ Home.Syntax_ALL::_ID_Palette ; Durch Berechnung ersetzen: $Palette_ID ]
+
+
+Script ausführen [ Aus Liste ; "Set Home Screen Info to content of ( Object )" ; Parameter: "switchingDarkLight" ]
+
+
+# Return to the original layout
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]

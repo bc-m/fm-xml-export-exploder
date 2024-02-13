@@ -1,0 +1,48 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Create SSL CSR
+#  HISTORY:&#13;   - Created:   2020-01-12 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/server/certificate/csr" ]
+Variable setzen [ $json ; JSONSetElement ( ""
+				 ; [ "subject"; Base64EncodeRFC ( "4648" ; FMS__fmserver::ssl_subject ) ; JSONString ]
+				 ; [ "password"; FMS__fmserver::ssl_password ; JSONString ]
+				) ]
+Variable setzen [ $curloptions ; " --request PATCH" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --data @$json" &
+				" --dump-header $$my.headers" ]
+# set api update variable
+Variable setzen [ $$API.UPDATE ; "1" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Variable setzen [ $my.certpath ; JSONGetElement ( $$my.result ; "response.csrFilePath" ) ]
+Wenn [ NICHT IstLeer ( $my.certpath ) UND ZeichenLinks ( $my.certpath ; 1 ) ≠ "?" ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

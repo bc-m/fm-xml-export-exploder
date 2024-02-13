@@ -1,0 +1,2312 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# /##
+Variable setzen [ $fmide_version ; "0.32" ]
+# @note Please do not move the lines above
+# @referencedByName &#13;- Do not rename this script!&#13;- This script is called externally by name by fmp/claris urls&#13;- Recommended: If you always call this script by name you can replace the entire script without breaking any calls to it!
+
+# # fmIDE
+# A FileMaker Integrated Development Environment
+
+# - fmIDE extends your FileMaker development environment and integrates it in your documentation and workflows
+# - fmIDE goes straight to the thing you name in the FileMaker IDE
+# - fmIDE runs actions or entire action scripts you pass it
+
+# - fmIDE comprises a single &quot;fmIDE&quot; script (to make using it and updating it simple)
+# - fmIDE uses lower_snake_case for (nearly) all parameter and variable names for simplicity
+# - fmIDE is developed and tested on Mac (and maybe works/can be made to work, at least partially, on windows)
+# - fmIDE builds on the MBS plugin for many of its best features
+
+# ## About
+# @author MrWatson
+# @license MIT
+# @version see the fmIDE_version variable at the top of this script&#13;- fmp://$/fmIDE?script=fmIDE&amp;$script_name=fmIDE&amp;$script_step_number=2
+# @changed see @script &quot;###…&quot;&#13;- fmp://$/fmIDE?script=fmIDE&amp;$script_name_stub=%23%23%23&amp;$script_step_number=11
+# @created 2022-06-23
+# @see Repo https://github.com/fmIDE/fmIDE
+
+# ## Read more in the Wiki
+# @see Wiki https://github.com/fmIDE/fmIDE/wiki
+# or read more about Continuations (used inthe  Pause/hiatus function) here
+# - About Continuations in Java: @see https://www.artima.com/articles/continuations-in-java
+# - About Continuations in general (Wikipedia): @see https://en.wikipedia.org/wiki/Continuation
+
+# ## Requirements
+# @needs Mac for some functions
+# @needs MBS Plugin for some functions
+# @needs FileMaker … version … 19? // needs testing
+
+# ## Installing fmIDE
+# @see Installing fmIDE https://github.com/fmIDE/fmIDE/wiki#installing-fmide
+
+# ## Setting up fmIDE
+# You may have to customise the two fmIDE Interface Scripts in order for fmIDE to be able to jump to the right Basetable
+# See @script &quot;fmIDE.GetBaseLayoutName&quot; - fmp://$/fmIDE?script=fmIDE&amp;$script_name=fmIDE.GetBaseLayoutName
+# See @script &quot;fmIDE.GetBaseTableName&quot; - fmp://$/fmIDE?script=fmIDE&amp;$script_name=fmIDE.GetBaseTableName
+
+# ## Download the latest fmIDE here:
+# @see Latest Release https://github.com/fmIDE/fmIDE/releases/latest
+
+# ## Update this script
+# To update the contents of this script&#13;&#13;1. First copy the steps of the new version onto the clipboard&#13;2. Make sure all scripts are saved (to avoid dialogs)&#13;3. Then click the MBS URL link in the following step&#13;   - If anything goes wrong use undo or revert script to return to the previous state
+# @action paste-update fmIDE&#13;- fmp://$/fmIDE?script=fmIDE&amp;$actions=%5B%7B%22Go%20to%20Script%22%3A%7B%22script_name%22%3A%22fmIDE%22%2C%22script_step_range%22%3A%221%E2%80%A6-1%22%7D%7D%2C%7B%22Press%22%3A%7B%22key%22%3A%22%5Cb%22%7D%7D%2C%7B%22Press%22%3A%7B%22key%22%3A%22%5Cb%22%7D%7D%2C%7B%22Paste%22%3Anull%7D%5D
+
+
+# # Using fmIDE
+
+# ## Parameters
+
+# Parameters can be passed…
+
+# - as a JSON object with an actions JSON array
+# - as a JSON array of actions
+# - as a JSON object with a single action JSON object
+# - as a JSON object with parameter names
+# - as a list of key=value pairs
+# - as direct variables when called directly via fmpurl
+
+# @param {object} $action - A single JSON action object
+# @param {string} $action_name - The name of a simple action
+
+# An action can be structured as an object having the name of the action and containing (multiple) action_parameters 
+# @param {…} action.«action_name».«action_parameter»
+
+# @example of a `Go to Layout` action using the *action object* syntax:
+# ` JSONSetElement( &quot;{}&quot; ; &quot;action.Go to Layout.layout_name&quot; ; &quot;fmIDE Actions&quot; ; JSONString )
+
+# or
+# An action can be passed as a simple list of action-parameters,&#13;in which the parameter `action_name` specifies the name of the action
+# @param {string} action.action_name - the name of the action
+# @param {…} action.«action_parameter» - an action parameter
+
+# @example of the same `Go to Layout` action using the *action_name* syntax:
+# ` JSONSetElement( &quot;{}&quot;&#13;  ;[ &quot;action.action_name&quot; ; &quot;Go to Layout&quot;; JSONString]&#13;  ;[ &quot;action.layout_name&quot; ; &quot;fmIDE Actions&quot; ; JSONString]&#13;  )
+
+# Note: Action names can be specified in any way you want - independently of how the action is passed:&#13;&#13;- `Go to Layout`&#09;(Original/natural case)&#13;- `go_to_layout`&#09;(lower_snake_case)&#13;- `GoToLayout`&#09;(UpperCamelCase)&#13;- `Go To Layout`&#09;(Title Case)&#13;- `GO TO LAYOUT`&#09;(UPPERCASE)&#13;&#13;The first two are to be preferred (one being like FileMaker step names, the other like fmIDE parameter names),&#13;but you can choose whatever suits you!
+
+# @example of a `Go to Layout` action using the *action object* syntax and lower_snake_case:
+# ` JSONSetElement( &quot;{}&quot; ; &quot;action.go_to_layout.layout_name&quot; ; &quot;Start Layout&quot; ; JSONString )
+
+# @param {array} $actions - A JSON array of action objects
+# ` JSONSetElement( &quot;[]&quot;&#13;  ;[ &quot;[0].Go to Layout.layout_name&quot; ; &quot;fmIDE Actions&quot; ; JSONString]&#13;  ;[ &quot;[1].Enter Find Mode&quot; ; &quot;&quot; ; JSONNull]&#13;  ;[ &quot;[2].Set Field.fmIDE_Action::ActionName.text&quot; ; &quot;Set&quot; ; JSONString]&#13;  ;[ &quot;[3].Perform Find&quot; ; &quot;&quot; ; JSONNull]&#13;  )
+# Here is that action script as an fmpurl targeted at this file:
+# @action Search for set actions in the fmIDE demo file&#13;- fmp://$/fmIDE?script=fmIDE&amp;$actions=%5B%7B%22Go%20to%20Layout%22%3A%7B%22layout_name%22%3A%22fmIDE%20Actions%22%7D%7D%2C%7B%22Enter%20Find%20Mode%22%3Anull%7D%2C%7B%22Set%20Field%22%3A%7B%22fmIDE_Action%3A%3AActionName%22%3A%7B%22text%22%3A%22Set%22%7D%7D%7D%2C%7B%22Perform%20Find%22%3Anull%7D%5D
+
+# actions array structure = [index].action.param:value
+
+# Alternartively in an fmpurl call parameters can be passed directly as variables
+
+# account&#13;base_table&#13;custom_function&#13;custom_menu&#13;custom_menu_item&#13;custom_menu_set&#13;extended_privilege&#13;external_data_source&#13;field&#13;file&#13;layout&#13;layout_field&#13;layout_part&#13;object&#13;privilege_set&#13;script&#13;script_step&#13;table&#13;theme&#13;t_o&#13;value_list&#13;
+
+# The following list documents all parameters that we support or // plan to support (commented out)
+# Supported parameters can also be passed as variables in an fmp/claris url
+# Note that this list is an active part of the script variable-checking semantics:&#13;- Since the MBS-Plugin recognises these as real variable definitions it does not flag up&#13;references to these variables later, even though the variables have not actually been previously&#13;defined in this script&#13;- This is, of course, what we want, because we know the variables may have been created by the url
+// # @vars $actions $action $disable $name $layout_name
+
+# @var $actions - An array of actions
+# @var $action - A single action object
+# @var $action_name - The name of a simple action
+
+# @param $account_name (string) - Name of the account
+# @param $account_number (number) - Number of the account
+# @param $account_id (number) - Internal ID of the account
+
+# @param $base_table_name (string) - Name of the base_table
+# @param $base_table_number (number) - Number of the base_table
+# @param $base_table_id (number) - Internal ID of the base_table
+
+# @param $custom_function_name (string) - Name of the custom_function
+# @param $custom_function_number (number) - Number of the custom_function
+# @param $custom_function_id (number) - Internal ID of the custom_function
+
+# @param $custom_menu_name (string) - Name of the custom_menu
+# @param $custom_menu_number (number) - Number of the custom_menu
+# @param $custom_menu_id (number) - Internal ID of the custom_menu
+
+# @param $custom_menu_item_name (string) - Name of the custom_menu_item
+# @param $custom_menu_item_number (number) - Number of the custom_menu_item
+# @param $custom_menu_item_id (number) - Internal ID of the custom_menu_item
+
+# @param $custom_menu_set_name (string) - Name of the custom_menu_set
+# @param $custom_menu_set_number (number) - Number of the custom_menu_set
+# @param $custom_menu_set_id (number) - Internal ID of the custom_menu_set
+
+# @param $external_data_source_name (string) - Name of the external_data_source
+# @param $external_data_source_number (number) - Number of the external_data_source
+# @param $external_data_source_id (number) - Internal ID of the external_data_source
+
+# @param $extended_privilege_name (string) - Name of the extended_privilege
+# @param $extended_privilege_number (number) - Number of the extended_privilege
+# @param $extended_privilege_id (number) - Internal ID of the extended_privilege
+
+# @param $field_name (string) - Name of the field
+# @param $field_number (number) - Number of the field
+# @param $field_id (number) - Internal ID of the field
+
+# @param $layout_name (string) - Name of the layout
+# @param $layout_number (number) - Number of the layout
+# @param $layout_id (number) - Internal ID of the layout
+
+# @param $layout_field_name (string) - Name of the layout field
+# @param $layout_field_number (number) - Number of the layout field
+# @param $layout_field_id (number) - Internal ID of the layout field
+
+# @param $layout_part_name (string) - Name of the layout part
+# @param $layout_part_number (number) - Number of the layout part
+# @param $layout_part_id (number) - Internal ID of the layout part
+
+# @param $object_name (string) - Name of the object
+# @param $object_number (number) - Number of the object
+# @param $object_id (number) - Internal ID of the object
+
+# @param $privilege_set_name (string) - Name of the privilege_set
+# @param $privilege_set_number (number) - Number of the privilege_set
+# @param $privilege_set_id (number) - Internal ID of the privilege_set
+
+# @param $script_name (string) - Name of the script
+# @param $script_name_stub (string) - Stub-name of the script
+# @param $script_number (number) - Number of the script
+# @param $script_id (number) - Internal ID of the script
+
+# @param $script_step_name (string) - Name of the script_step
+# @param $script_step_number (number) - Number of the script_step
+# @param $script_step_number_to (number) - Number of the script_step to select up to
+# @param $script_step_id (number) - Internal ID of the script_step
+
+# @param $table_name (string) - Name of the table
+# @param $table_number (number) - Number of the table
+# @param $table_id (number) - Internal ID of the table
+
+# @param $t_o_name (string) - Name of the TO (table occurence)
+# @param $t_o_number (number) - Number of the TO (table occurence)
+# @param $t_o_id (number) - Internal ID of the TO (table occurence)
+
+# @param $theme_name (string) - Name of the theme
+# @param $theme_number (number) - Number of the theme
+# @param $theme_id (number) - Internal ID of the theme
+
+# @param $value_list_name (string) - Name of the value_list
+# @param $value_list_number (number) - Number of the value_list
+# @param $value_list_id (number) - Internal ID of the value_list
+
+// # @param $account_uuid (number) - Internal ID of the account
+// # @param $base_table_uuid (number) - Internal ID of the base_table
+// # @param $custom_function_uuid (number) - Internal ID of the custom_function
+// # @param $custom_menu_uuid (number) - Internal ID of the custom_menu
+// # @param $custom_menu_item_uuid (number) - Internal ID of the custom_menu_item
+// # @param $custom_menu_set_uuid (number) - Internal ID of the custom_menu_set
+// # @param $extended_privilege_uuid (number) - Internal ID of the extended_privilege
+// # @param $external_data_source_uuid (number) - Internal ID of the external_data_source
+// # @param $field_uuid (number) - Internal ID of the field
+// # @param $layout_uuid (number) - Internal ID of the layout
+// # @param $layout_field_uuid (number) - Internal ID of the layout field
+// # @param $layout_part_uuid (number) - Internal ID of the layout part
+// # @param $object_uuid (number) - Internal ID of the object
+// # @param $privilege_set_uuid (number) - Internal ID of the privilege_set
+// # @param $script_uuid (number) - Internal ID of the script
+// # @param $script_step_uuid (number) - Internal ID of the script_step
+// # @param $table_uuid (number) - Internal ID of the table
+// # @param $t_o_uuid (number) - Internal ID of the TO (table occurence)
+// # @param $theme_uuid (number) - Internal ID of the theme
+// # @param $value_list_uuid (number) - Internal ID of the value_list
+
+# @param $window_name (string) - Name of the window
+
+# @param $fmide_debug (number) - true = pause / show debugging info
+
+
+# Private parameter
+# @param $continuation{} - A continuation object, to continue the action script, where fmIDE left off before HALTing to do some GUI-actions
+# When fmIDE must halt to undertake some GUI-actions, but wishes to continue with the script thereafter it uses a &apos;continuation&apos;
+# fmIDE re-schedules itself to restart after a moment and passes the continuation object back to itself to reestablish execution exactly where it left off
+# Neat!
+
+
+
+# #/
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+
+# # SECURITY - ACCESS ONLY TO DEVELOPERS
+Wenn [ Hole ( KontoBerechtigungenName ) ≠ "[Full Access]" ]
+	Aktuelles Script verlassen []
+Ende (wenn)
+
+
+# # Define ALL parameter names &amp; other Script Settings
+Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+Variable setzen [ $fmide_continuation_seconds ; 5 ]
+
+# # Vars
+Variable setzen [ $fmide_parameter_names_all ; Austauschen( $fmide_parameter_names_all ; "¶¶" ; "¶" ) ]
+Variable setzen [ $is_win ; Hole ( Gerät ) = 2 ]
+Variable setzen [ $is_mac ; Hole ( Gerät ) = 1 ]
+Variable setzen [ $is_mbs ; IstGültig( MBS ( "Version" ) ) ]
+Variable setzen [ $fmide_dialog_title ; Hole ( DateiName ) & "::fmIDE" ]
+Variable setzen [ $MBS_RemoteControl.PressCommandOrControlKey ; Auswahl ( Hole ( Gerät ) ; "" ;
+				"RemoteControl.PressCommandKey";
+				"RemoteControl.PressControlKey" 
+				) ]
+
+# # Parameters
+
+# ## Construct a JSON Script Parameter (_JSP) from the actual script parameter
+Variable setzen [ $_JSP_Type ; SetzeVar([
+				¢SP = Hole ( ScriptParameter ) ;
+				¢Char1 = ZeichenLinks ( ¢SP ; 1 ) ;
+				¢Char3 = ZeichenLinks ( ¢SP ; 3 ) ;
+				¢CharN = ZeichenRechts ( ¢SP ; 1 ) ;
+				¢Char1N = ¢Char1 & ¢CharN
+				
+				];
+				
+				Falls (
+				¢Char1N = "{}" ; JSONObject ;
+				¢Char1N = "[]" ; JSONArray ;
+				¢Char1N = "" ; JSONNull ;
+				¢Char3 = "[0]" ; "key=value" ;
+				¢Char3 = "---" ; "YAML" ;
+				"Text"
+				)
+				
+				) ]
+Variable setzen [ $_JSP ; Falls (
+				
+				/* A standard JSONObject was passed */
+				$_JSP_Type = JSONObject ;
+				  SetzeVar(
+				  [
+				
+				  ¢JSON = JSONFormatElements ( Hole ( ScriptParameter ) )
+				
+				  ];
+				
+				  Falls( ZeichenLinks ( ¢JSON ; 1 ) = "{" ; ¢JSON ; JSONSetElement ( "{}" ; "malformed_parameter" ; Hole ( ScriptParameter ) ; JSONString ) )
+				
+				  ) ;
+				
+				/* A naked actions array was passed -> standardise it as an actions-object */
+				$_JSP_Type = JSONArray ; JSONSetElement ( "{}" ; "actions" ; Hole ( ScriptParameter ) ; JSONArray ) ;
+				
+				/* nothing was passed */
+				$_JSP_Type = JSONNull ; "{}" ; 
+				
+				
+				
+				/* JSON array path properties were passed of the form path=expression */
+				$_JSP_Type = "key=value" ; Solange ( 
+				[
+				
+				¢lines = Hole ( ScriptParameter ) ;
+				
+				¢result = "[]" ;
+				
+				¢i = 1 ;
+				¢n = ElementeAnzahl ( ¢lines )
+				
+				]; ¢i <= ¢n ;[
+				
+				¢line = HoleWert ( ¢lines ; ¢i );
+				¢bits = Ersetzen( ¢line ; Position( ¢line & "=" ; "=" ; 1 ; 1 ) ; 1 ; "¶" );
+				¢path = HoleWert( ¢bits ; 1 );
+				¢expr = HoleWert( ¢bits ; 2 );
+				
+				¢result = JSONSetElement ( ¢result ; ¢path ; Berechne ( ¢expr ) ; JSONString ) ;
+				¢i = ¢i + 1
+				
+				];
+				
+				JSONSetElement ( "{}" ; "actions" ; ¢result ; JSONArray )
+				
+				);
+				
+				
+				
+				/* something else was passed - some kind of pseudocode? */
+				$_JSP_Type = "Text" ; Solange ( 
+				[
+				
+				¢lines = Hole ( ScriptParameter ) ;
+				
+				¢result = "{}" ;
+				
+				¢i = 1 ;
+				¢n = ElementeAnzahl ( ¢lines )
+				
+				]; ¢i <= ¢n ;[
+				
+				¢line = HoleWert ( ¢lines ; ¢i ) ;
+				¢index = "actions.[" & ¢i-1 & "]" ;
+				
+				¢result = JSONSetElement ( ¢result ; ¢index & ".action_name" ; ¢line ; JSONString ) ;
+				¢i = ¢i + 1
+				
+				];
+				
+				¢result
+				
+				)
+				
+				) ]
+Variable setzen [ $_JSP_Keys ; JSONListKeys( $_JSP ; "" ) ]
+
+Wenn [ $fmide_debug ODER NICHT IstLeer ( FilterElemente ( $_JSP_Keys ; "fmide_debug" ) ) ]
+	# ## Debug
+	# If the $fmide_debug variable has been set in the fmp url, then show what has arrived
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
+		Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+	Sonst, wenn [ Hole ( LetzteMeldungswahl ) = 3 ]
+		Alle Scripts abbrechen
+	Ende (wenn)
+Ende (wenn)
+
+Variable setzen [ $continuation ; JSONGetElement ( $_JSP ; "continuation" ) ]
+Wenn [ IstLeer ( $continuation ) ]
+	# # Normal start
+	
+	# ## Read action parameters from variables or the JSON Script Parameter
+	Variable setzen [ $actions ; Falls ( NICHT IstLeer ( $actions ) ; $actions ; JSONGetElement ( $_JSP ; "actions" )) ]
+	Wenn [ IstLeer ( $actions ) ]
+		# ## Extract action information from variables or from the JSON Script Parameter
+		Variable setzen [ $parameter_names_found ; Solange([
+						
+						¢fmide_parameter_names = $fmide_parameter_names_all ;
+						
+						¢result = "" ;
+						¢i = 1;
+						¢n = ElementeAnzahl( ¢fmide_parameter_names )
+						
+						] ; ¢i <= ¢n ; [
+						
+						¢fmide_parameter_name = HoleWert( ¢fmide_parameter_names ; ¢i ) ;
+						¢fmide_parameter_value = JSONGetElement ( $_JSP ; ¢fmide_parameter_name ) ;
+						¢fmide_scriptvar_name = "$" & ¢fmide_parameter_name ;
+						¢fmide_scriptvar_value = Berechne( ¢fmide_scriptvar_name );
+						
+						¢result = Liste( ¢result ; Falls(
+						NICHT IstLeer( ¢fmide_scriptvar_value ) ; ¢fmide_parameter_name ; /* Variable exists already */
+						NICHT IstLeer( ¢fmide_parameter_value ) ; SetzeVar(
+						  [
+						  ¢defineVarAndReturnParameterName = "Let([" & ¢fmide_scriptvar_name & "=JSONGetElement ( $_JSP ; " & Zitat( ¢fmide_parameter_name ) & ")];" & Zitat( ¢fmide_parameter_name ) & ")"
+						  ];
+						  Berechne ( ¢defineVarAndReturnParameterName )
+						  )
+						));
+						
+						¢i = ¢i + 1
+						
+						];
+						
+						¢result
+						
+						) ]
+		
+		# # fmIDE &apos;Name that Thing&apos; API default actions
+		
+		# Make actions array from action, if present, or construct default action(s) for the variables
+		Variable setzen [ $actions ; Falls ( 
+						
+						/* a single action object */
+						NICHT IstLeer ( $action ) UND ZeichenLinks( $action ; 1 ) = "{" ; JSONSetElement ( "[]" 
+						; ["[0]" ; $action ; JSONObject]
+						);
+						
+						
+						/* a single action, but incorrectly passed as a string -> treat as action_name */
+						NICHT IstLeer ( $action ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; $action ; JSONObject]
+						);
+						
+						
+						/* a single action_name */
+						NICHT IstLeer ( $action_name ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; $action_name ; JSONString]
+						);
+						
+						/* otherwise construct the default actions, if only a parameter is passed */
+						
+						NICHT IstLeer ( $account_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Account.account_name" ; $account_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $curl_options ) ; JSONSetElement ( "[]" 
+						; ["[0].Insert from URL.curl_options" ; $curl_options ; JSONString]
+						; ["[0].Insert from URL.url" ; $url ; JSONString]
+						; ["[0].Insert from URL.with_dialog" ; $with_dialog ; JSONString]
+						);
+						
+						NICHT IstLeer ( $custom_function_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Custom Function.custom_function_name" ; $custom_function_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $custom_menu_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Custom Menu.custom_menu_name" ; $custom_menu_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $custom_menu_item_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Custom Menu Item.custom_menu_item_name" ; $custom_menu_item_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $custom_menu_set_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Custom Menu Set.custom_menu_set_name" ; $custom_menu_set_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $custom_menu_item_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Custom Menu Item.custom_menu_item_name" ; $custom_menu_item_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $dapi_request ) ; JSONSetElement ( "[]" 
+						; ["[0].Execute FileMaker Data API.dapi_request" ; $dapi_request ; JSONObject]
+						);
+						
+						
+						
+						NICHT IstLeer ( $external_data_source_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To External Data Source.external_data_source_name" ; $external_data_source_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $extended_privilege_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Extended Privilege.extended_privilege_name" ; $extended_privilege_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $fmxmlsnippet ) ; JSONSetElement ( "[]" 
+						; ["[0].Set Clipboard Objects.fmxmlsnippet" ; $fmxmlsnippet ; JSONString]
+						);
+						
+						NICHT IstLeer ( $fmxmlsnippet_value ) ; JSONSetElement ( "[]" 
+						; ["[0].Set Clipboard Objects.fmxmlsnippet_value" ; $fmxmlsnippet_value ; JSONString]
+						);
+						
+						NICHT IstLeer ( $base_table_name ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Base Table" ; JSONString] 
+						; ["[0].base_table_name" ; $base_table_name ; JSONString] 
+						; ["[0].field_name" ; $field_name ; JSONString]
+						; ["[0].field_id" ; $field_id ; JSONString]
+						);
+						
+						NICHT IstLeer ( $table_name ) ODER Position( $field_name ; "::" ; 1 ; 1 ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Table" ; JSONString] 
+						; ["[0].table_name" ; $table_name ; JSONString] 
+						; ["[0].field_name" ; $field_name ; JSONString]
+						; ["[0].field_id" ; $field_id ; JSONString]
+						);
+						
+						NICHT IstLeer ( $field_id ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Field.field_id" ; $field_id ; JSONString]
+						);
+						
+						NICHT IstLeer ( $field_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Field.field_name" ; $field_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $field_number ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Field.field_number" ; $field_number ; JSONString]
+						);
+						
+						
+						NICHT IstLeer ( $layout_part_id ) ODER
+						NICHT IstLeer ( $layout_part_name ) ODER
+						NICHT IstLeer ( $layout_part_number ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Layout Part" ; JSONString] 
+						; ["[0].layout_id" ; $layout_id ; JSONString]
+						; ["[0].layout_name" ; $layout_name ; JSONString]
+						; ["[0].layout_number" ; $layout_number ; JSONString]
+						; ["[0].layout_part_id" ; $layout_part_id ; JSONString]
+						; ["[0].layout_part_name" ; $layout_part_name ; JSONString]
+						; ["[0].layout_part_number" ; $layout_part_number ; JSONString]
+						);
+						
+						NICHT IstLeer ( $layout_field_id ) ODER
+						NICHT IstLeer ( $layout_field_name ) ODER
+						NICHT IstLeer ( $layout_field_number ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Layout Field" ; JSONString] 
+						; ["[0].layout_id" ; $layout_id ; JSONString]
+						; ["[0].layout_name" ; $layout_name ; JSONString]
+						; ["[0].layout_number" ; $layout_number ; JSONString]
+						; ["[0].layout_field_id" ; $layout_field_id ; JSONString]
+						; ["[0].layout_field_name" ; $layout_field_name ; JSONString]
+						; ["[0].layout_field_number" ; $layout_field_number ; JSONString]
+						);
+						
+						NICHT IstLeer ( $object_id ) ODER
+						NICHT IstLeer ( $object_name ) ODER
+						NICHT IstLeer ( $object_number ); JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Object" ; JSONString] 
+						; ["[0].layout_id" ; $layout_id ; JSONString]
+						; ["[0].layout_name" ; $layout_name ; JSONString]
+						; ["[0].layout_number" ; $layout_number ; JSONString]
+						; ["[0].object_id" ; $object_id ; JSONString]
+						; ["[0].object_name" ; $object_name ; JSONString]
+						; ["[0].object_number" ; $object_number ; JSONString]
+						);
+						
+						
+						
+						NICHT IstLeer ( $layout_id ) ODER
+						NICHT IstLeer ( $layout_name ) ODER
+						NICHT IstLeer ( $layout_number ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Layout" ; JSONString] 
+						; ["[0].layout_id" ; $layout_id ; JSONString]
+						; ["[0].layout_name" ; $layout_name ; JSONString]
+						; ["[0].layout_number" ; $layout_number ; JSONString]
+						);
+						
+						NICHT IstLeer( $message ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Show Custom Dialog" ; JSONString]
+						; ["[0].message" ; $message ; JSONString]
+						; ["[0].buttons_list" ; $buttons_list ; JSONString]
+						);
+						
+						/* extended message (not via fmpurl) */
+						Position ( ¶ & $_JSP_Keys ; ¶ & "message" ; 1 ; 1 ) ; SetzeVar(
+						  [ ¢message_key = HoleWert( $_JSP_Keys ; ElementeAnzahl( ZeichenLinks( $_JSP_Keys ; Position ( ¶ & $_JSP_Keys ; ¶ & "message" ; 1 ; 1 ) ) ) )
+						  ; ¢message = JSONGetElement ( $_JSP ; ¢message_key )
+						  ] ; JSONSetElement ( "[]" 
+						    ; ["[0].action_name" ; "Show Custom Dialog" ; JSONString] 
+						    ; ["[0]." & ¢message_key ; ¢message ; JSONString]
+						  )
+						);
+						
+						
+						NICHT IstLeer ( $privilege_set_id ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Privilege Set.privilege_set_id" ; $privilege_set_id ; JSONString]
+						);
+						
+						NICHT IstLeer ( $privilege_set_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Privilege Set.privilege_set_name" ; $privilege_set_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $privilege_set_number ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Privilege Set.privilege_set_number" ; $privilege_set_number ; JSONString]
+						);
+						
+						
+						NICHT IstLeer ( $script_name ) ODER 
+						NICHT IstLeer ( $script_name_stub ) ODER 
+						NICHT IstLeer ( $script_id ) ODER 
+						NICHT IstLeer ( $script_number ); JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Script" ; JSONString] 
+						
+						; ["[0].script_id" ; $script_id ; JSONString] 
+						; ["[0].script_name" ; $script_name ; JSONString] 
+						; ["[0].script_name_stub" ; $script_name_stub ; JSONString] 
+						; ["[0].script_number" ; $script_number ; JSONString]
+						
+						; ["[0].script_step_number" ; $script_step_number ; JSONString]
+						; ["[0].script_step_number_to" ; $script_step_number_to ; JSONString]
+						; ["[0].script_step_range" ; $script_step_range ; JSONString]
+						
+						; ["[0].script_step_search" ; $script_step_search ; JSONString]
+						; ["[0].script_step_search_value" ; $script_step_search_value ; JSONString]
+						);
+						
+						NICHT IstLeer ( $script_step_number_to ) ODER
+						NICHT IstLeer ( $script_step_range ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Select Script Steps" ; JSONString] 
+						; ["[0].script_step_number" ; $script_step_number ; JSONString]
+						; ["[0].script_step_number_to" ; $script_step_number_to ; JSONString]
+						; ["[0].script_step_range" ; $script_step_range ; JSONString]
+						);
+						
+						NICHT IstLeer ( $script_step_number ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Script Step.script_step_number" ; $script_step_number ; JSONString]
+						);
+						
+						NICHT IstLeer ( $script_step_name ) ; JSONSetElement ( "[]" 
+						; ["[0].FindScriptStep.script_step_search" ; $script_step_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $script_step_search ) ; JSONSetElement ( "[]" 
+						; ["[0].FindScriptStep.script_step_search" ; $script_step_search ; JSONString]
+						);
+						
+						NICHT IstLeer ( $script_step_search_value ) ; JSONSetElement ( "[]" 
+						; ["[0].FindScriptStep.script_step_search_value" ; $script_step_search_value ; JSONString]
+						);
+						
+						NICHT IstLeer ( $t_o_name ) ; JSONSetElement ( "[]" 
+						; ["[0].action_name" ; "Go To Table Occurence" ; JSONString] 
+						; ["[0].t_o_name" ; $t_o_name ; JSONString] 
+						);
+						
+						NICHT IstLeer ( $theme_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Theme.theme_name" ; $theme_name ; JSONString]
+						);
+						
+						NICHT IstLeer ( $url ) ; JSONSetElement ( "[]" 
+						; ["[0].Open URL.url" ; $url ; JSONString]
+						; ["[0].Open URL.with_dialog" ; $with_dialog ; JSONString]
+						);
+						
+						NICHT IstLeer ( $value_list_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Go To Value List.value_list_name" ; $value_list_name ; JSONString]
+						);
+						
+						
+						NICHT IstLeer ( $window_name ) ; JSONSetElement ( "[]" 
+						; ["[0].Select Window.window_name" ; $window_name ; JSONString]
+						);
+						
+						ElementeAnzahl( $_JSP_Keys ) = 1 ; JSONSetElement ( "[]" 
+						; ["[0]" ; JSONGetElement ( $_JSP ; HoleWert( $_JSP_Keys ; 1 ) ) ; JSONObject] 
+						; ["[0].action_name" ; HoleWert( $_JSP_Keys ; 1 ) ; JSONString]
+						);
+						
+						
+						"[]"
+						) ]
+	Ende (wenn)
+	
+	
+	# # Build actions array
+	Wenn [ IstLeer ( $actions ) ]
+		# actions = empty
+		Wenn [ NICHT IstLeer ( $action ) ]
+			Variable setzen [ $actions ; JSONSetElement ( "[]" ; "[0]" ; $action ; JSONObject ) ]
+		Ende (wenn)
+	Sonst, wenn [ ZeichenLinks ( $actions ; 1 ) = "[" ]
+		# actions = JSONArray
+	Sonst
+		# actions = string =&gt; convert to JSONArray
+		Variable setzen [ $actions_string ; $actions ]
+		Variable setzen [ $actions ; "[]" ]
+		Variable setzen [ $i ; 1 ]
+		Variable setzen [ $n ; ElementeAnzahl( $actions_string ) ]
+		Schleife (Anfang)
+			Verlasse Schleife wenn [ $i > $n ]
+			Variable setzen [ $action_line ; HoleWert ( $actions_string ; $i ) ]
+			Variable setzen [ $actions ; JSONSetElement ( $actions ; $i ; $action ; JSONString ) ]
+			
+			Variable setzen [ $i ; $i + 1 ]
+		Schleife (Ende)
+	Ende (wenn)
+	
+	
+	# # Initialise the execution state
+	
+	# Initialise stack (for If and Loop)
+	Variable setzen [ $action_stack ; "[{}]" ]
+	Variable setzen [ $action_stack_top ; "[0]" ]
+	Variable setzen [ $action_block ; "" ]
+	Variable setzen [ $action_skip ; "" ]
+	
+	# Initialise programme counter
+	Variable setzen [ $action_index ; 0 ]
+	Variable setzen [ $action_index_max ; ElementeAnzahl( JSONListKeys ( $actions ; "" ) ) ]
+	
+	# Local Vars
+	Variable setzen [ $fmide_local_variables ; "" ]
+	
+	# Original context
+	Variable setzen [ $original_layout_number ; Hole( LayoutNummer ) ]
+	Variable setzen [ $original_window_name ; HoleWert ( Fensternamen ; 1 ) ]
+	
+Sonst
+	# # Continuation start: read the current execution state back from the continuation
+	// Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	// Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+	
+	# First, free up the MBS Schedule used to trigger the continuation call
+	Variable setzen [ $r ; SetzeVar(
+					[
+					vSchedleRef = $$fmide_continuation_mbs_schedule_ref;
+					$$fmide_continuation_mbs_schedule_ref = ""
+					];
+					MBS( "Schedule.Release"; vSchedleRef )
+					) ]
+	
+	# Actions
+	Variable setzen [ $actions ; JSONGetElement ( $continuation ; "actions" ) ]
+	
+	# Initialise stack (for If and Loop)
+	Variable setzen [ $action_stack ; JSONGetElement ( $continuation ; "action_stack" ) ]
+	Variable setzen [ $action_stack_top ; JSONGetElement ( $continuation ; "action_stack_top" ) ]
+	Variable setzen [ $action_block ; JSONGetElement ( $continuation ; "action_block" ) ]
+	Variable setzen [ $action_skip ; JSONGetElement ( $continuation ; "action_skip" ) ]
+	# Initialise programme counter
+	Variable setzen [ $action_index ; JSONGetElement ( $continuation ; "action_index" ) ]
+	Variable setzen [ $action_index_max ; JSONGetElement ( $continuation ; "action_index_max" ) ]
+	
+	# Redefine local variables
+	Variable setzen [ $fmide_local_variables ; JSONGetElement ( $continuation ; "fmide_local_variables" ) ]
+	Variable setzen [ $fmide_local_variables ; Solange(
+					[
+					
+					¢vars = $fmide_local_variables ;
+					¢i = 1;
+					¢n = ElementeAnzahl ( ¢vars )
+					
+					]; ¢i <= ¢n ;[
+					
+					¢var = Austauschen( HoleWert ( ¢vars ; ¢i ) ; "$" ; "" ) ;
+					
+					¢expression = "
+					  Let([
+					  $" & ¢var & "=$$fmide_local_variable_" & ¢var & " ;
+					  $$fmide_local_variable_" & ¢var & "=\"\" ;
+					  r=0];\"\”)" ;
+					$$expression = ¢expression ;
+					/* Redfine the variable as a local variablöe */
+					¢ignore_errors = Berechne ( ¢expression ) ;
+					
+					¢i = ¢i + 1
+					
+					];
+					
+					""
+					
+					) ]
+	
+	# Original context
+	Variable setzen [ $original_layout_number ; JSONGetElement ( $continuation ; "original_layout_number" ) ]
+	Variable setzen [ $original_window_name ; JSONGetElement ( $continuation ; "original_window_name" ) ]
+	
+	# Clear the continuation
+	Variable setzen [ $continuation ; "" ]
+Ende (wenn)
+
+# # Process actions array
+
+Schleife (Anfang)
+	Verlasse Schleife wenn [ $action_index >= $action_index_max ]
+	Variable setzen [ $action ; JSONGetElement ( $actions ; $action_index ) ]
+	
+	Wenn [ IstLeer ( $action ) ]
+		
+		# Skip null
+		
+	Sonst
+		# Read action_name and convert it to UpperCamelCase, so that all these formats are supported:
+		
+		# - Go to Layout (Natural)
+		# - go_to_layout (lower_snake_case)
+		# - gotolayout (onelowerwordcase)
+		# - GoToLayout (UpperCamelCase)
+		Variable setzen [ $action_name ; JSONGetElement ( $action ; "action_name" ) ]
+		Wenn [ IstLeer ( $action_name ) ]
+			Variable setzen [ $action_name ; JSONListKeys ( $action ; "" ) ]
+			Wenn [ ElementeAnzahl ( $action_name ) = 1 ]
+				Variable setzen [ $action ; SetzeVar( ¢action = JSONGetElement ( $action ; $action_name ) ; Falls( NICHT IstLeer( ¢action ) ; ¢action ; "{}" ) ) ]
+			Ende (wenn)
+			
+		Ende (wenn)
+		Variable setzen [ $action_name ; SetzeVar(
+						[
+						
+						¢action_name = $action_name
+						
+						];
+						
+						Austauschen ( GroßKleinbuchstaben( ¢action_name ) ;
+						[" " ; ""] ;
+						[Char(9) ; ""] ;
+						["_" ; ""] ;
+						["/" ; ""]
+						)
+						
+						) ]
+		
+		# An action is considered disabled if disable is true, or enable is (explicitly) false, or the action starts with //
+		Variable setzen [ $disable ; JSONGetElement ( $action ; "disable" ) ]
+		Variable setzen [ $enable ; JSONGetElement ( $action ; "enable" ) ]
+		Wenn [ 0 ]
+			
+			# # Process disabled/missing/garbled actions
+			
+			
+		Sonst, wenn [ $disable ODER Exakt( $enable ; 0 ) ODER ZeichenLinks ( $action_name ; 2 ) = "//" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#-/
+			#  Disabled action =&gt; skip
+			
+			
+		Sonst, wenn [ IstLeer ( $action_name ) ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#
+			# No action =&gt; skip
+			
+			
+		Sonst, wenn [ $action_name = "#" /* (comment) */ ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/##
+			# Comment =&gt; skip
+			
+			
+		Sonst, wenn [ ZeichenLinks ( $action_name ; 1 ) = "?" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#?
+			# Mangled action =&gt; skip
+			
+			
+			# # Process control actions and Stack Logic
+			
+			# - Manage skipping
+			# - Detect illegal block semantics
+			# - Push + Pop stack at start + end of blocks
+			
+			
+		Sonst, wenn [ $action_name = "If" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#if
+			# See https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#if
+			Wenn [ NICHT IstLeer( $action_skip ) ]
+				# Skip this entire block
+				Variable setzen [ $action_skip ; "{block}" ]
+			Sonst
+				# Perform this step
+				Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+				Variable setzen [ $action_test_success ; LiesAlsBoolean( Berechne ( $value ) ) ]
+				Variable setzen [ $action_skip ; Falls( NICHT $action_test_success ; "If" ) ]
+			Ende (wenn)
+			# Push action block onto stack
+			Variable setzen [ $action_block ; $action_name ]
+			Variable setzen [ $action_stack_top ; FortlNrInTextÄndern ( $action_stack_top ; 1 ) ]
+			Variable setzen [ $action_stack ; JSONSetElement ( $action_stack ; $action_stack_top ; 
+							JSONSetElement ( "{}" ; 
+							["block" ; $action_block ; JSONString];
+							["index" ; $action_index ; JSONNumber];
+							["skip" ; $action_skip ; JSONString]
+							) ; JSONObject ) ]
+			
+			
+		Sonst, wenn [ $action_name = "ElseIf" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#else-if
+			Wenn [ $action_block ≠ "If" ]
+				# Error / Bad Structure / Else If without If
+				# @todo
+				
+			Sonst, wenn [ $action_skip = "{block}" ]
+				# Skip this entire block
+			Sonst, wenn [ $action_skip = "EndIf" ]
+				# Skip to EndIf
+			Sonst
+				# Perform this step
+				Wenn [ IstLeer( $action_skip ) ]
+					# If-part is complete =&gt; skip to EndIf
+					Variable setzen [ $action_skip ; "EndIf" ]
+				Sonst, wenn [ $action_skip = "If" ]
+					# If-part was skipped =&gt; try this one
+					Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+					Variable setzen [ $action_test_success ; LiesAlsBoolean( Berechne ( $value ) ) ]
+					Wenn [ $action_test_success ]
+						Variable setzen [ $action_skip ; "" ]
+					Ende (wenn)
+				Ende (wenn)
+				# Modify top stack block
+				Variable setzen [ $action_stack ; JSONSetElement ( $action_stack ; $action_stack_top & ".skip" ; $action_skip ; JSONString ) ]
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "Else" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#else
+			Wenn [ $action_block ≠ "If" ]
+				# Error / Bad Structure / Else If without If
+				# @todo
+				
+			Sonst, wenn [ $action_skip = "{block}" ]
+				# Skip this entire block
+			Sonst, wenn [ $action_skip = "EndIf" ]
+				# Skip to EndIf
+			Sonst
+				# Perform this step
+				# If the If-part was skipped run the else part, otherwise skip to EndIf
+				Variable setzen [ $action_skip ; Falls( $action_skip = "If" ; "" ; "EndIf" ) ]
+				# Modify top stack block
+				Variable setzen [ $action_stack ; JSONSetElement ( $action_stack ; $action_stack_top & ".skip" ; $action_skip ; JSONString ) ]
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "EndIf" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#end-if
+			
+			Wenn [ $action_block ≠ "If" ]
+				# Error / Bad Structure / End If without If
+				# @todo
+				
+			Sonst
+				# Pop stack
+				Variable setzen [ $action_stack ; JSONDeleteElement ( $action_stack ; $action_stack_top ) ]
+				Variable setzen [ $action_stack_top ; FortlNrInTextÄndern ( $action_stack_top ; -1 ) ]
+				Variable setzen [ $action_block ; JSONGetElement ( $action_stack ; $action_stack_top & ".block" ) ]
+				# If ExitAfterLast is active, keep skipping, otherwise reinstate the previous skip-state outside of the if
+				Variable setzen [ $action_skip ; Falls ( $action_skip = "ExitAfterLast" ; $action_skip ; JSONGetElement ( $action_stack ; $action_stack_top & ".skip" ) ) ]
+				
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "Loop" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#loop
+			# Push action block onto stack
+			Variable setzen [ $action_skip ; Falls( NICHT IstLeer( $action_skip ) ; "{block}" ) ]
+			Variable setzen [ $action_block ; $action_name ]
+			Variable setzen [ $action_stack_top ; FortlNrInTextÄndern ( $action_stack_top ; 1 ) ]
+			Variable setzen [ $action_stack ; JSONSetElement ( $action_stack ; $action_stack_top ; 
+							JSONSetElement ( "{}" ; 
+							["block" ; $action_block ; JSONString];
+							["index" ; $action_index ; JSONNumber];
+							["skip" ; $action_skip ; JSONString]
+							) ; JSONObject ) ]
+			
+			
+		Sonst, wenn [ $action_name = "ExitLoopIf" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#exit-loop-if
+			Wenn [ $action_block ≠ "Loop" ]
+				# Error / Bad Structure / ExitLoopIf without Loop
+				# @todo
+				
+			Sonst, wenn [ $action_skip = "{block}" ]
+				# Skip this entire block
+			Sonst, wenn [ $action_skip = "EndLoop" ]
+				# Skip to EndLoop
+			Sonst
+				# Perform this step
+				Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+				Wenn [ LiesAlsBoolean( Berechne ( $value ) ) ]
+					# Exit loop!
+					Variable setzen [ $action_skip ; $action_name ]
+					# Modify top stack block
+					Variable setzen [ $action_stack ; JSONSetElement ( $action_stack ; $action_stack_top & ".skip" ; $action_skip ; JSONString ) ]
+				Ende (wenn)
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "EndLoop" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#end-loop
+			Wenn [ $action_block ≠ "Loop" ]
+				# Error / Bad Structure / ExitLoopIf without Loop
+				# @todo
+			Sonst, wenn [ IstLeer ( $action_skip ) ]
+				# Loop back to action after the corresponding Loop step
+				Variable setzen [ $action_index ; JSONGetElement ( $action_stack ; $action_stack_top & ".index" ) ]
+			Sonst
+				# Pop stack
+				Variable setzen [ $action_stack ; JSONDeleteElement ( $action_stack ; $action_stack_top ) ]
+				Variable setzen [ $action_stack_top ; FortlNrInTextÄndern ( $action_stack_top ; -1 ) ]
+				Variable setzen [ $action_block ; JSONGetElement ( $action_stack ; $action_stack_top & ".block" ) ]
+				Variable setzen [ $action_skip ; JSONGetElement ( $action_stack ; $action_stack_top & ".skip" ) ]
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "Try" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#try
+			# ToDo
+			
+			
+		Sonst, wenn [ NICHT IstLeer ( $action_skip ) ]
+			# Skip all other steps
+			
+			# # Process actions
+			
+			
+		Sonst, wenn [ $action_name = "Beep" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#beep
+			Variable setzen [ $times ; LiesAlsZahl( JSONGetElement ( $action ; "times" ) ) ]
+			Variable setzen [ $times ; Falls( NICHT IstLeer( $times ) ; $times ; 1 ) ]
+			
+			Variable setzen [ $i ; 1 ]
+			Schleife (Anfang)
+				Verlasse Schleife wenn [ $i > $times ]
+				Fehlerton
+				Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+				Variable setzen [ $i ; $i + 1 ]
+			Schleife (Ende)
+			
+			
+		Sonst, wenn [ $action_name = "ClosePopover" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#close--popover
+			Popover schließen
+			
+		Sonst, wenn [ $action_name = "ConvertClipboard" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#convert-clipboard
+			# Convert Clipboard - converts the clipboard between xml and FileMaker objects
+			# Convert Clipboard ( to ) - converts the clipboard to the specified type
+			
+			#   where
+			#     to can be one of the following values
+			
+			#       empty or null - convert automatically between xml and FileMaker objects
+			#       auto - convert automatically between xml and FileMaker objects
+			#       xml - convert to xml
+			#       CustomFunction
+			#       Field
+			#       Layout
+			#       Script
+			#       ScriptStep
+			#       Table
+			#       ValueList
+			
+			Variable setzen [ $to ; JSONGetElement ( $action ; "to" ) ]
+			Variable setzen [ $to ; Falls ( $to = "Layout"   ; "Layout12" ; $to ) ]
+			Variable setzen [ $r ; SetzeVar(
+							[
+							
+							¢ClipboardText = MBS( "Clipboard.GetText" ) ;
+							¢ClipboardXml = Falls( NICHT IstLeer ( ¢ClipboardText ) ; ¢ClipboardText ; MBS( "Clipboard.GetFileMakerData" ; "auto" ) )
+							
+							];
+							
+							Falls ( 
+							
+							/* Convert clipboard object to xml (or leave as xml) */
+							$to = "xml" ; MBS( "Clipboard.SetText" ; ¢ClipboardXml ) ;
+							
+							/* convert clipboard xml to specific object */
+							$to ≠ "" ;  MBS( "Clipboard.SetFileMakerData" ; ¢ClipboardXml ) ;
+							
+							/* automatic - text/xml -> object */
+							NICHT IstLeer ( ¢ClipboardText ) ; MBS( "Clipboard.SetFileMakerData" ; "auto" ; ¢ClipboardText ) ;
+							
+							/* automatic - object -> xml */
+							MBS( "Clipboard.SetText" ; MBS( "Clipboard.GetFileMakerData" ; "auto" ) )
+							
+							)
+							
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "SetClipboardText" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#set-clipboard-text
+			Variable setzen [ $text ; JSONGetElement ( $action ; "text" ) ]
+			Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+			
+			Variable setzen [ $r ; Falls ( 
+							
+							NICHT IstLeer ( $text ) ; MBS( "Clipboard.SetText" ; $text ) ;
+							
+							NICHT IstLeer ( $value ) ; MBS( "Clipboard.SetText" ; Berechne ( $value ) )
+							
+							) ]
+		Sonst, wenn [ $action_name = "SetClipboardObjects" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#set-clipboard-objects
+			Variable setzen [ $fmxmlsnippet ; JSONGetElement ( $action ; "fmxmlsnippet" ) ]
+			Variable setzen [ $fmxmlsnippet_value ; JSONGetElement ( $action ; "fmxmlsnippet_value" ) ]
+			Wenn [ NICHT IstLeer ( $fmxmlsnippet_value ) ]
+				Variable setzen [ $fmxmlsnippet ; Berechne ( $fmxmlsnippet_value ) ]
+			Ende (wenn)
+			Variable setzen [ $r ; MBS( "Clipboard.SetFileMakerData" ; "auto" ; $fmxmlsnippet ) ]
+			
+			
+		Sonst, wenn [ $action_name = "EnterBrowseMode" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-browse-mode
+			Variable setzen [ $pause ; JSONGetElement ( $action ; "pause" ) ]
+			Wenn [ $pause ]
+				Blätternmodus aktivieren
+			Sonst
+				Blätternmodus aktivieren
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "EnterFindMode" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-find-mode
+			Variable setzen [ $pause ; JSONGetElement ( $action ; "pause" ) ]
+			Wenn [ $pause ]
+				Suchenmodus aktivieren [ Pause: ON ]
+			Sonst
+				Suchenmodus aktivieren [ Pause: OFF ]
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "EnterLayoutMode" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-layout-mode
+			# Bring window to front and press CmdCtrl+L
+			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Variable setzen [ $r ; MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
+							MBS( "RemoteControl.PressKey" ; "l" ; "l" ) & 
+							MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
+							"" ]
+			// Alle Scripts abbrechen
+			
+			
+		Sonst, wenn [ $action_name = "EnterPreviewMode" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-preview-mode
+			Variable setzen [ $pause ; JSONGetElement ( $action ; "pause" ) ]
+			Wenn [ $pause ]
+				Seitenansichtsmodus aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "41" ] ⚠️⚠️⚠️
+			Sonst
+				Seitenansichtsmodus aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "41" ] ⚠️⚠️⚠️
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "ExecuteFilemakerDataApi" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#execute-filemaker-data-api
+			Variable setzen [ $dapi_request ; JSONGetElement ( $action ; "dapi_request" ) ]
+			Variable setzen [ $target ; JSONGetElement ( $action ; "target" ) ]
+			Variable setzen [ $select ; JSONGetElement ( $action ; "select" ) ]
+			Wenn [ NICHT IstLeer ( $dapi_request ) ]
+				Wenn [ NICHT IstLeer ( $target ) ]
+					# Target has to be indirect
+					# @var $fmIDE_dapi_response
+					Wenn [ $select ODER IstLeer ( $select ) ]
+						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+					Sonst
+						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+					Ende (wenn)
+					Wenn [ ZeichenLinks( $target ; 1 ) <> "$" ODER Berechne ( "Let( " & $target & "¶=$fmIDE_dapi_response;0)" ) ]
+						Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+					Ende (wenn)
+					Variable setzen [ $fmIDE_dapi_response ; "" ]
+				Sonst
+					# No target
+					Wenn [ $select ODER IstLeer ( $select ) ]
+						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+					Sonst
+						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+					Ende (wenn)
+				Ende (wenn)
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "ExitScript" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#exit-script
+			Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+			Variable setzen [ $json_type ; JSONGetElement ( $action ; "json_type" ) ]
+			Variable setzen [ $json_type ; Falls( NICHT IstLeer ( $json_type ) ; $json_type ; JSONString ) ]
+			
+			Variable setzen [ $result ; Berechne( $value ) ]
+			
+			Aktuelles Script verlassen [ JSONSetElement ( "{}" ; "result" ; $result ; $json_type ) ]
+			
+			
+		Sonst, wenn [ $action_name = "GetFieldNames" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#get-field-names
+			Variable setzen [ $table_name ; JSONGetElement ( $action ; "table_name" ) ]
+			
+			Variable setzen [ $result ; SQLAusführen ( "SELECT FieldName FROM FileMaker_Fields WHERE TableName=?" ; Char(9) ; "¶" ; $table_name  ) ]
+			
+			Aktuelles Script verlassen [ JSONSetElement ( "{}" ; "data.field_names" ; $result ; JSONString ) ]
+			
+		Sonst, wenn [ $action_name = "GetVersion" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions#get-version
+			Aktuelles Script verlassen [ JSONSetElement ( "{}" ; "data.version" ; $fmide_version ; JSONString ) ]
+			
+		Sonst, wenn [ $action_name = "GetResource" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#get-resource
+			Variable setzen [ $resource ; JSONGetElement ( $action ; "resource" ) ]
+			Variable setzen [ $o_s ; JSONGetElement ( $action ; "o_s" ) ]
+			Variable setzen [ $o_s_3 ; Falls(
+							NICHT IstLeer( $o_s ) ; ZeichenLinks( $o_s ; 3 ) ;
+							$is_mac ; "Mac" ;
+							$is_win ; "Win" ;
+							""
+							) ]
+			
+			Wenn [ $resource = "fmIDE_keyboard_buffer_retype_script" ]
+				Wenn [ $o_s_3 = "Mac" ]
+					Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+					Variable setzen [ $aok ; Wahr ]
+				Sonst, wenn [ $o_s_3 = "Win" ]
+					Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+					Variable setzen [ $aok ; Falsch ]
+				Sonst
+					Variable setzen [ $resource ; "" ]
+					Variable setzen [ $aok ; Falsch ]
+				Ende (wenn)
+				
+				# TODO - Discuss ... API for script result?
+				# @return aok (Boolean)
+				# @return data (Object)
+				# @return error (Object)
+				# @return error.code (Number/String) - error number or ERROR_CODE
+				# @return error.message (String) - error message for human consumption
+				# @return error.more (whatever) - more details for admins and developers
+				# @return error.next (Object) - further errors
+				Aktuelles Script verlassen [ JSONSetElement ( "{}" ; 
+								["aok" ; $aok ; JSONBoolean] ;
+								["data.resource" ; $resource ; JSONString]
+								) ]
+			Sonst
+				Aktuelles Script verlassen [ JSONSetElement ( "{}" ; 
+								["aok" ; Falsch ; JSONBoolean]
+								) ]
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "GoToAccount" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-account
+			Variable setzen [ $account_name ; JSONGetElement ( $action ; "account_name" ) ]
+			
+			# TODO - Discuss ... should we this convenience TAB character to the keyboard buffer?
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; Char(9) & $account_name ; JSONString]
+							; ["[1].Open Manage Security" ; "" ; JSONObject]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToBaseLayout" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-base-layout
+			Variable setzen [ $table_name ; JSONGetElement ( $action ; "table_name" ) ]
+			Variable setzen [ $base_table_name ; JSONGetElement ( $action ; "base_table_name" ) ]
+			Script ausführen [ Nach Name ; "fmIDE.GetBaseLayoutName" ; Parameter: JSONSetElement ( "{}" ; 
+							["base_table_name" ; $base_table_name ; JSONString] ;
+							["table_name" ; $table_name ; JSONString]
+							) ]
+			Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
+				Variable setzen [ $_JSR ; SetzeVar( vResult = Hole ( ScriptErgebnis ) ;
+								Falls ( NICHT IstLeer ( vResult ) ; vResult ; "{}" )
+								) ]
+				Variable setzen [ $layout_name ; JSONGetElement ( $_JSR ; "base_layout_name" ) ]
+			Sonst
+				Variable setzen [ $layout_name ; $table_name ]
+			Ende (wenn)
+			Gehe zu Layout [ Layoutname: $layout_name ; Animation: Ohne ]
+			
+		Sonst, wenn [ $action_name = "GoToBaseTable" ODER $action_name = "GoToTable" ODER $action_name = "GoToBaseField" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-base-table
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-table
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-base-field
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/Base-Tables,-Tables-and-Table-Occurrences-in-fmIDE
+			
+			Variable setzen [ $base_table_name ; JSONGetElement ( $action ; "base_table_name" ) ]
+			Variable setzen [ $table_name ; JSONGetElement ( $action ; "table_name" ) ]
+			Variable setzen [ $field_id ; JSONGetElement ( $action ; "field_id" ) ]
+			Wenn [ NICHT IstLeer ( $field_id ) ]
+				# Lookup field name from id
+				Variable setzen [ $field_name ; SetzeVar([
+								
+								¢sql = 
+								"SELECT FieldName" &
+								"  FROM FileMaker_Fields" &
+								" WHERE TableName=?" &
+								"   AND FieldID=?" &
+								""
+								
+								];
+								
+								SQLAusführen ( ¢sql ; "" ; "" ; $table_name ; $field_id )
+								
+								) ]
+			Ende (wenn)
+			Wenn [ IstLeer ( $table_name ) UND Position( $field_name ; "::" ; 1 ; 1 ) ]
+				Variable setzen [ $field_name_bits ; Austauschen( $field_name ; "::" ; ¶ ) ]
+				Variable setzen [ $table_name ; HoleWert ( $field_name_bits ; 1 ) ]
+				Variable setzen [ $field_name ; HoleWert ( $field_name_bits ; 2 ) ]
+			Ende (wenn)
+			Script ausführen [ Nach Name ; "fmIDE" ; Parameter: JSONSetElement ( "[]" ; 
+							["[0].Go To Base Layout.base_table_name" ; $base_table_name ; JSONString];
+							["[0].Go To Base Layout.table_name" ; $table_name ; JSONString];
+							["[1].Store Keyboard Buffer.text" ; $field_name ; JSONString];
+							["[2].Open Manage Database" ; "" ; JSONObject]
+							 ) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToTableOccurrence" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-table-occurrence
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/Base-Tables,-Tables-and-Table-Occurrences-in-fmIDE
+			
+			Variable setzen [ $t_o_name ; JSONGetElement ( $action ; "t_o_name" ) ]
+			Variable setzen [ $table_name ; JSONGetElement ( $action ; "table_name" ) ]
+			Wenn [ IstLeer ( $t_o_name ) UND NICHT IstLeer ( $table_name ) ]
+				Variable setzen [ $t_o_name ; $table_name ]
+			Ende (wenn)
+			Script ausführen [ Nach Name ; "fmIDE" ; Parameter: JSONSetElement ( "[]" ; 
+							["[0].Go To Base Layout.table_name" ; $t_o_name ; JSONString];
+							["[1].Store Keyboard Buffer.text" ; $t_o_name ; JSONString];
+							["[2].Open Manage Database" ; "" ; JSONObject]
+							 ) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToCustomFunction" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-custom-function
+			Variable setzen [ $custom_function_name ; JSONGetElement ( $action ; "custom_function_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; $custom_function_name&¶ ; JSONString]
+							; ["[1].Open Manage Custom Functions" ; "" ; JSONObject]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToCustomMenu" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-custom-menu
+			Variable setzen [ $custom_menu_name ; JSONGetElement ( $action ; "custom_menu_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; $custom_menu_name&¶ ; JSONString]
+							; ["[1].Open Manage Custom Menus" ; "" ; JSONObject]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToCustomMenuItem" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-custom-menu-item
+			Variable setzen [ $custom_menu_item_name ; JSONGetElement ( $action ; "custom_menu_item_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; $custom_menu_item_name ; JSONString]
+							; ["[1].Open Manage Custom Menus" ; "" ; JSONObject]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToCustomMenuSet" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-custom-menu-set
+			Variable setzen [ $custom_menu_set_name ; JSONGetElement ( $action ; "custom_menu_set_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; $custom_menu_set_name&¶ ; JSONString]
+							; ["[1].Open Manage Custom Menus" ; "" ; JSONObject]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToExternalDataSource" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-external-data-source
+			Variable setzen [ $external_data_source_name ; JSONGetElement ( $action ; "external_data_source_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( ""
+							; ["[0].Store Keyboard Buffer.text" ; $external_data_source_name&¶ ; JSONString]
+							; ["[1].Open Manage Data Sources" ; "" ; JSONNull]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToExtendedPrivilege" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-extended-privilege
+			Variable setzen [ $extended_privilege_name ; JSONGetElement ( $action ; "extended_privilege_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( ""
+							; ["[0].Store Keyboard Buffer.text" ; $extended_privilege_name&¶ ; JSONString]
+							; ["[1].Open Manage Security" ; "" ; JSONNull]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToLayoutPart" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-layout-part
+			Variable setzen [ $by ; JSONGetElement ( $action ; "by" ) ]
+			Variable setzen [ $layout_name ; JSONGetElement ( $action ; "layout_name" ) ]
+			Variable setzen [ $layout_number ; JSONGetElement ( $action ; "layout_number" ) ]
+			Variable setzen [ $layout_id ; JSONGetElement ( $action ; "layout_id" ) ]
+			
+			Variable setzen [ $layout_part_name ; JSONGetElement ( $action ; "layout_part_name" ) ]
+			Variable setzen [ $layout_part_number ; JSONGetElement ( $action ; "layout_part_number" ) ]
+			Variable setzen [ $layout_part_id ; JSONGetElement ( $action ; "layout_part_id" ) ]
+			
+			Wenn [ NICHT IstLeer ( $layout_name ) ODER NICHT IstLeer ( $layout_number ) ODER NICHT IstLeer ( $layout_id ) ]
+				Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "{}"
+								; ["Go to Layout.id" ; $layout_id ; JSONString ]
+								; ["Go to Layout.name" ; $layout_name ; JSONString ]
+								; ["Go to Layout.number" ; $layout_number ; JSONString ]
+								) ]
+			Ende (wenn)
+			Blätternmodus aktivieren
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: "Enter Layout Mode" ]
+			# Press Tab then SHIFT TAB (1 + $layout_part_count - $layout_part_number) times
+			
+			
+			
+		Sonst, wenn [ $action_name = "GoToLayout" ODER $action_name = "GoToLayoutField" ODER $action_name = "GoToObject" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-layout
+			Variable setzen [ $by ; JSONGetElement ( $action ; "by" ) ]
+			Variable setzen [ $layout_name ; JSONGetElement ( $action ; "layout_name" ) ]
+			Variable setzen [ $layout_number ; JSONGetElement ( $action ; "layout_number" ) ]
+			Variable setzen [ $layout_id ; JSONGetElement ( $action ; "layout_id" ) ]
+			Variable setzen [ $layout_field_name ; JSONGetElement ( $action ; "layout_field_name" ) ]
+			Variable setzen [ $object_name ; JSONGetElement ( $action ; "object_name" ) ]
+			
+			# Go to Layout
+			Wenn [ $by = "name" ODER $by = "" UND NICHT IstLeer ( $layout_name ) ]
+				# By name (explicit or implicit)
+				Gehe zu Layout [ Layoutname: $layout_name ; Animation: Ohne ]
+			Sonst
+				Wenn [ $by = "id" ODER $by = "" UND NICHT IstLeer ( $layout_id ) ]
+					# By id (explicit or implicit) -&gt; lookup layout_number
+					Variable setzen [ $layout_number ; SetzeVar( ¢LayoutIDs = ¶ & LayoutIDs ( "" ) & ¶ ;
+									ElementeAnzahl ( ZeichenLinks ( ¢LayoutIDs ; Position ( ¢LayoutIDs ; ¶ & $layout_id & ¶ ; 1 ; 1 ) ) )
+									) ]
+				Sonst
+					# By number (explicit or implicit) - or no params
+				Ende (wenn)
+				Wenn [ $layout_number ]
+					Gehe zu Layout [ Layoutnr.: $layout_number ; Animation: Ohne ]
+				Ende (wenn)
+			Ende (wenn)
+			
+			# Go to Layout Field
+			Wenn [ NICHT IstLeer ( $layout_field_name ) ODER $action_name = "GoToLayoutField" ]
+				# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-layout-field
+				
+				# FIXME
+				# AppleScript?
+				Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+				Variable setzen [ $AppleScript ; Austauschen ( $AppleScriptTemplate ; "{{'$layout_field_name'}}" ; Zitat( $layout_field_name ) ) ]
+				AppleScript ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "67" ] ⚠️⚠️⚠️
+				
+				
+				# Go to Object
+			Sonst, wenn [ NICHT IstLeer ( $object_name ) ODER $action_name = "GoToObject" ]
+				# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-object
+				
+				Gehe zu Objekt [ $object_name ]
+			Ende (wenn)
+			
+			
+			
+		Sonst, wenn [ $action_name = "GoToNextField" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-next-field
+			Gehe zu nächstem Feld
+			
+			
+		Sonst, wenn [ $action_name = "GoToPreviousField" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-previous-field
+			Gehe zu vorherigem Feld
+			
+		Sonst, wenn [ $action_name = "GoToOriginalLayout" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-original-layout
+			Gehe zu Layout [ Layoutnr.: $original_layout_number ; Animation: Ohne ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToOriginalWindow" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-original-window
+			Wenn [ $fmide_debug ]
+				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			Ende (wenn)
+			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "GoToPortalRow" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-portal-row
+			# @not_supported dialog:on
+			# FIXME docs
+			
+			Variable setzen [ $row ; JSONGetElement ( $action ; "row" ) ]
+			Variable setzen [ $exit_after_last ; JSONGetElement ( $action ; "exit_after_last" ) ]
+			# FIXME - value/number interaction?
+			Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+			Variable setzen [ $number ; Falls( NICHT IstLeer ( $value ) ; Berechne( $value ) ; JSONGetElement ( $action ; "number" ) ) ]
+			Variable setzen [ $select ; JSONGetElement ( $action ; "select" ) ]
+			
+			Wenn [ $row = "Next" ]
+				Wenn [ $select ]
+					Gehe zu Ausschnittreihe [ Nach letztem beenden: OFF ; Nächste(r) ]
+				Sonst
+					Gehe zu Ausschnittreihe [ Nach letztem beenden: OFF ; Nächste(r) ]
+				Ende (wenn)
+				Variable setzen [ $do_exit ; Hole( LetzteFehlerNr ) = 101 /* Record is missing */ ]
+				Wenn [ $exit_after_last UND $do_exit ]
+					Variable setzen [ $action_skip ; "ExitAfterLast" ]
+				Ende (wenn)
+			Sonst, wenn [ $row = "Previous" ]
+				Gehe zu Ausschnittreihe [ Nach letztem beenden: OFF ; Vorherige(r) ]
+				Variable setzen [ $do_exit ; Hole( LetzteFehlerNr ) = 101 /* Record is missing */ ]
+				Wenn [ $exit_after_last UND $do_exit ]
+					Variable setzen [ $action_skip ; "ExitAfterLast" ]
+				Ende (wenn)
+			Sonst, wenn [ $row = "First" ]
+				Wenn [ $select ]
+					Gehe zu Ausschnittreihe [ Auswahl: ON ; Erste(r) ]
+				Sonst
+					Gehe zu Ausschnittreihe [ Auswahl: OFF ; Erste(r) ]
+				Ende (wenn)
+			Sonst, wenn [ $row = "Last" ]
+				Wenn [ $select ]
+					Gehe zu Ausschnittreihe [ Auswahl: ON ; Letzte(r) ]
+				Sonst
+					Gehe zu Ausschnittreihe [ Auswahl: OFF ; Letzte(r) ]
+				Ende (wenn)
+			Sonst, wenn [ $number ]
+				Wenn [ $select ]
+					Gehe zu Ausschnittreihe [ Mit Dialog: OFF ; Nach Formel… ]
+				Sonst
+					Gehe zu Ausschnittreihe [ Mit Dialog: OFF ; Nach Formel… ]
+				Ende (wenn)
+			Sonst
+				Wenn [ $select ]
+					Gehe zu Ausschnittreihe [ Auswahl: ON ; Erste(r) ]
+				Sonst
+					Gehe zu Ausschnittreihe [ Auswahl: OFF ; Erste(r) ]
+				Ende (wenn)
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "GoToPrivilegeSet" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-privilege-set
+			Variable setzen [ $privilege_set_name ; JSONGetElement ( $action ; "privilege_set_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; $privilege_set_name&¶ ; JSONString]
+							; ["[1].Open Manage Security" ; "" ; JSONObject]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "GoToRecordRequestPage" ODER $action_name = "GoToRecord" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-record-request-page
+			Variable setzen [ $record ; JSONGetElement ( $action ; "record" ) ]
+			Variable setzen [ $exit_after_last ; JSONGetElement ( $action ; "exit_after_last" ) ]
+			Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+			Variable setzen [ $number ; Falls( NICHT IstLeer ( $value ) ; Berechne( $value ) ; JSONGetElement ( $action ; "number" ) ) ]
+			
+			Wenn [ $record = "Next" ]
+				Variable setzen [ $do_exit ; Hole ( DatensatzPositionInErgebnismenge ) ≥ Hole ( AnzahlGefundeneDatensätze ) ]
+				Wenn [ NICHT $do_exit ]
+					Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: ON ]
+				Ende (wenn)
+				Wenn [ $exit_after_last UND $do_exit ]
+					# FIXME
+					Variable setzen [ $action_skip ; "ExitAfterLast" ]
+				Ende (wenn)
+			Sonst, wenn [ $record = "Previous" ]
+				Variable setzen [ $do_exit ; Hole ( DatensatzPositionInErgebnismenge ) ≤ 1 ]
+				Wenn [ NICHT $do_exit ]
+					Gehe zu Datens./Abfrage/Seite [ Vorherige(r) ; Nach letztem beenden: ON ]
+				Ende (wenn)
+				Wenn [ $exit_after_last UND $do_exit ]
+					# FIXME
+					Variable setzen [ $action_skip ; "ExitAfterLast" ]
+				Ende (wenn)
+			Sonst, wenn [ $record = "First" ]
+				Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+			Sonst, wenn [ $record = "Last" ]
+				Gehe zu Datens./Abfrage/Seite [ Letzte(r) ]
+			Sonst, wenn [ $number ]
+				Gehe zu Datens./Abfrage/Seite [ Mit Dialog: OFF ; $number ]
+			Sonst
+				Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "GoToScript" ODER
+						$action_name = "OpenScriptWorkspace" ODER 
+						$action_name = "OpenScript" ODER
+						$action_name = "GoToScriptStep" ODER
+						$action_name = "SelectScriptSteps" ODER
+						$action_name = "OpenScriptWorkspace" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions#go-to-script
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions#select-script-steps
+			Variable setzen [ $script_name ; JSONGetElement ( $action ; "script_name" ) ]
+			Wenn [ IstLeer ( $script_name ) ]
+				Variable setzen [ $script_name_stub ; JSONGetElement ( $action ; "script_name_stub" ) ]
+				Wenn [ NICHT IstLeer ( $script_name_stub ) ]
+					# Lookup script_name from script_name_stub
+					Variable setzen [ $script_name ; SetzeVar( 
+									[
+									
+									vScriptNames = ScriptNamen ( "" ) ; 
+									vScriptNumber = ElementeAnzahl( ZeichenLinks( vScriptNames ; Position( ¶ & vScriptNames ; ¶ & $script_name_stub ; 1 ; 1 ) ) )
+									
+									];
+									
+									Falls( vScriptNumber ; HoleWert ( vScriptNames ; vScriptNumber ) )
+									
+									) ]
+				Sonst
+					Variable setzen [ $script_id ; JSONGetElement ( $action ; "script_id" ) ]
+					Wenn [ NICHT IstLeer ( $script_id ) ]
+						# Lookup script_name from script_id
+						Variable setzen [ $script_name ; SetzeVar( 
+										[
+										
+										vScriptIDs = ScriptIDs ( "" ) ; 
+										vScriptNames = ScriptNamen ( "" ) ; 
+										vScriptNumber = ElementeAnzahl( ZeichenLinks( vScriptIds ; Position( ¶ & vScriptIds ; ¶ & $script_id & ¶ ; 1 ; 1 ) ) )
+										
+										];
+										
+										Falls( vScriptNumber ; HoleWert ( vScriptNames ; vScriptNumber ) )
+										
+										) ]
+					Sonst
+						Variable setzen [ $script_number ; JSONGetElement ( $action ; "script_number" ) ]
+						Wenn [ NICHT IstLeer ( $script_number ) ]
+							Variable setzen [ $script_name ; HoleWert ( ScriptNamen ( "" )  ; $script_number ) ]
+						Ende (wenn)
+					Ende (wenn)
+				Ende (wenn)
+			Ende (wenn)
+			
+			# Open the script workspace
+			Scriptarbeitsbereich öffnen
+			Wenn [ $is_win ]
+				# Windows =&gt; stop here
+				Aktuelles Script verlassen []
+			Ende (wenn)
+			
+			# Mac-only
+			Wenn [ NICHT $is_mbs ]
+				# no MBS
+				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+				Aktuelles Script verlassen []
+			Ende (wenn)
+			# Make sure it is at the front
+			Variable setzen [ $r ; MBS("ScriptWorkspace.BringToFront") ]
+			Wenn [ MBS("IsError") ]
+				# Can&apos;t open ScriptWorkSpace
+				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+				Aktuelles Script verlassen []
+			Ende (wenn)
+			
+			
+			Wenn [ NICHT IstLeer ( $script_name ) ]
+				# Open the script - permanently
+				Variable setzen [ $r ; MBS("ScriptWorkspace.OpenScript" ; $script_name ) ]
+				Wenn [ MBS("IsError") ]
+					# Make sure the Script list is visible
+					# …not yet possible in MBS
+					# Make sure ALL scripts are being shown
+					Variable setzen [ $r ; MBS( "ScriptWorkspace.ExpandScriptFolders" ) ]
+					Wenn [ MBS("IsError") ]
+						# Maybe we need to open all script folders
+						Variable setzen [ $r ; MBS( "ScriptWorkspace.ExpandScriptFolders" ) ]
+					Ende (wenn)
+					
+					# Try again
+					Variable setzen [ $r ; MBS("ScriptWorkspace.OpenScript" ; $script_name ) ]
+					Wenn [ MBS("IsError") ]
+						Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+						Aktuelles Script verlassen []
+					Ende (wenn)
+				Ende (wenn)
+			Ende (wenn)
+			
+			Variable setzen [ $script_step_range ; JSONGetElement ( $action ; "script_step_range" ) ]
+			Wenn [ NICHT IstLeer ( $script_step_range ) ]
+				Variable setzen [ $script_step_range ; Austauschen( $script_step_range ; ["…" ; ¶] ; ["..." ; ¶] ; [".." ; ¶] ) ]
+				Variable setzen [ $script_step_number ; HoleWert( $script_step_range ; 1 ) ]
+				Variable setzen [ $script_step_number_to ; HoleWert( $script_step_range ; 2 ) ]
+			Sonst
+				Variable setzen [ $script_step_number ; JSONGetElement ( $action ; "script_step_number" ) ]
+				Variable setzen [ $script_step_number_to ; JSONGetElement ( $action ; "script_step_number_to" ) ]
+			Ende (wenn)
+			
+			# Process params
+			Variable setzen [ $script_step_number ; Falls( 
+							
+							IstLeer( $script_step_number ) ; 1 ;
+							
+							ZeichenRechts ( $script_step_number ; 1 ) ≠ "%" ; LiesAlsZahl( $script_step_number );
+							
+							SetzeVar(
+							[
+							
+							¢percent = LiesAlsZahl( $script_step_number ) ;
+							¢n = MBS("ScriptWorkspace.LineCount") ;
+							¢m = NächsteKleinereGanzzahl ( (¢n-1) * ¢percent / 100 )
+							
+							];
+							
+							Falls( ¢percent ≥ 0 ; 1 + ¢m ; ¢n - ¢m )
+							
+							)) ]
+			Variable setzen [ $script_step_number_to ; Falls( 
+							
+							IstLeer( $script_step_number_to ) ; "" ;
+							
+							ZeichenRechts ( $script_step_number_to ; 1 ) ≠ "%" ; LiesAlsZahl( $script_step_number_to );
+							
+							SetzeVar(
+							[
+							
+							¢percent = LiesAlsZahl( $script_step_number_to ) ;
+							¢n = MBS("ScriptWorkspace.LineCount") ;
+							¢m = NächsteKleinereGanzzahl ( (¢n-1) * ¢percent / 100 )
+							
+							];
+							
+							Falls( ¢percent ≥ 0 ; 1 + ¢m ; ¢n - ¢m )
+							
+							)) ]
+			Wenn [ $action_name = "SelectScriptSteps" ODER NICHT IstLeer ( $script_step_number_to ) ]
+				# Select range (from start to end, if start not specified otherwise)
+				Variable setzen [ $r ; MBS("ScriptWorkspace.SelectLines" ; $script_step_number ; $script_step_number_to ) ]
+				Variable setzen [ $r ; MBS("ScriptWorkspace.ScrollToSelection"  ) ]
+			Sonst, wenn [ $action_name = "GoToScriptStep" ODER NICHT IstLeer ( $script_step_number ) ]
+				# Go to line
+				Variable setzen [ $r ; MBS("ScriptWorkspace.SelectLine" ; $script_step_number ) ]
+				Variable setzen [ $r ; MBS("ScriptWorkspace.ScrollToSelection"  ) ]
+			Ende (wenn)
+			
+			Variable setzen [ $script_step_search ; JSONGetElement ( $action ; "script_step_search" ) ]
+			Variable setzen [ $script_step_search_value ; JSONGetElement ( $action ; "$script_step_search_value" ) ]
+			Wenn [ $action_name = "FindScriptStep" ODER NICHT IstLeer ( $script_step_search ) ODER NICHT IstLeer ( $script_step_search_value ) ]
+				# fmAutoMate-compatible search
+				Variable setzen [ $$fmAutoMate.Search ; Falls (
+								NICHT IstLeer ( $script_step_search )  ; $script_step_search ;
+								NICHT IstLeer ( $script_step_search_value ) ; Berechne( $script_step_search_value ) ;
+								$$fmAutoMate.Search
+								) ]
+				Wenn [ NICHT IstLeer ( $$fmAutoMate.Search ) ]
+					# Set MBS Search…
+					Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+					Variable setzen [ $r ; MBS( "SyntaxColoring.ScriptSearchBox.SetText"; $$fmAutoMate.Search ) ]
+					Variable setzen [ $r ; SetzeVar(
+									[
+									
+									/* Get text of entire script */
+									vScriptText     = MBS( "ScriptWorkspace.ScriptText" ; ""; "<\¶>" ) ;
+									vScriptLength   = ElementeAnzahl( vScriptText ) ;
+									vLineNr         = MBS( "ScriptWorkspace.SelectedLine" );
+									vRestScriptText = ElementeRechts( vScriptText ; vScriptLength - vLineNr ) ;
+									
+									/* Calculate how many lines further down the script, and select the line */
+									vDeltaLineNr    = ElementeAnzahl( ZeichenLinks( vRestScriptText ; Position( vRestScriptText ; $$fmAutoMate.Search ; 1 ; 1 ) ) ) ;
+									r               = Falls( vDeltaLineNr ; MBS("ScriptWorkspace.SelectLine"; vLineNr + vDeltaLineNr ; 1 /* Scroll */ ) )
+									
+									];
+									
+									""
+									
+									) ]
+				Ende (wenn)
+				
+			Ende (wenn)
+			
+			# @todo fixme
+			Variable setzen [ $script_step_replace_value ; JSONGetElement ( $action ; "replace_value" ) ]
+			Variable setzen [ $script_step_replace_text ; JSONGetElement ( $action ; "replace_text" ) ]
+			Variable setzen [ $script_step_replace_value ; Falls (
+							NICHT IstLeer ( $script_step_replace_value ) ; $script_step_replace_value ;
+							NICHT IstLeer ( $script_step_replace_text ) ; Zitat ( $script_step_replace_text )
+							) ]
+			
+			
+			
+			
+			
+		Sonst, wenn [ $action_name = "GoToTheme" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-theme
+			Variable setzen [ $theme_name ; JSONGetElement ( $action ; "theme_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( "[]"
+							; ["[0].Store Keyboard Buffer.text" ; $theme_name ; JSONString]
+							; ["[1].Open Manage Themes" ; "" ; JSONObject]
+							) ]
+			
+			
+			
+		Sonst, wenn [ $action_name = "GoToValueList" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-value-list
+			Variable setzen [ $value_list_name ; JSONGetElement ( $action ; "value_list_name" ) ]
+			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: JSONSetElement ( ""
+							; ["[0].Store Keyboard Buffer.text" ; $value_list_name&¶ ; JSONString]
+							; ["[1].Open Manage Value Lists" ; "" ; JSONString]
+							) ]
+			
+			
+		Sonst, wenn [ $action_name = "HaltScript" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#halt-script
+			Alle Scripts abbrechen
+			
+			
+		Sonst, wenn [ $action_name = "Hello" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#hello
+			Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "InsertFromUrl" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#insert-from-url
+			Variable setzen [ $select ; JSONGetElement ( $action ; "select" ) ]
+			Variable setzen [ $with_dialog ; JSONGetElement ( $action ; "with_dialog" ) ]
+			Variable setzen [ $target ; JSONGetElement ( $action ; "target" ) ]
+			Variable setzen [ $url ; JSONGetElement ( $action ; "url" ) ]
+			Variable setzen [ $curl_options ; JSONGetElement ( $action ; "curl_options" ) ]
+			Variable setzen [ $do_not_automatically_encode_url ; JSONGetElement ( $action ; "do_not_automatically_encode_url" ) ]
+			
+			Wenn [ NICHT IstLeer ( $target ) ]
+				# Select (=Set)
+				# @var $fmide_target_temp
+				Wenn [ $with_dialog ]
+					Wenn [ $do_not_automatically_encode_url ]
+						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+					Sonst
+						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+					Ende (wenn)
+				Sonst
+					Wenn [ $do_not_automatically_encode_url ]
+						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+					Sonst
+						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+					Ende (wenn)
+				Ende (wenn)
+				Wenn [ ZeichenLinks( $target ; 1 ) ≠ "$" ODER 
+								Berechne(
+								
+								"Let([" & 
+								
+								/* Define the var */
+								$target & "=Case( $select ; Evaluate( $target ) ) & $fmide_target_temp" & 
+								
+								/* Log the variable name */
+								"¶;$fmide_local_variables = List ( $fmide_local_variables ; Case( Position ( \¶ & $fmide_local_variables & \¶ ; \¶ & $target & \¶ ; 1 ; 1 ) = 0 ; $target ) ) " & 
+								
+								"¶];0)"
+								
+								) ]
+					# Set or Append content to target field
+					Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+				Ende (wenn)
+			Ende (wenn)
+			
+		Sonst, wenn [ $action_name = "Press" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#press
+			Variable setzen [ $key ; JSONGetElement ( $action ; "key" ) ]
+			Variable setzen [ $command_key ; JSONGetElement ( $action ; "command_key" ) ]
+			Variable setzen [ $times ; LiesAlsZahl( JSONGetElement ( $action ; "times" ) ) ]
+			Variable setzen [ $shift ; LiesAlsZahl( JSONGetElement ( $action ; "shift" ) ) ]
+			Variable setzen [ $option ; LiesAlsZahl( JSONGetElement ( $action ; "option" ) ) ]
+			
+			
+			Variable setzen [ $key ; Falls( NICHT IstLeer( $key ) ; $key ; $command_key ) ]
+			Variable setzen [ $command_down ; NICHT IstLeer( $command_key ) ]
+			Variable setzen [ $times ; Falls( NICHT IstLeer( $times ) ; $times ; 1 ) ]
+			
+			Wenn [ NICHT IstLeer ( $key ) ]
+				# One or more times
+				Variable setzen [ $i ; 1 ]
+				Variable setzen [ $n ; $times ]
+				Schleife (Anfang)
+					Verlasse Schleife wenn [ $i > $n ]
+					
+					# Loop over key_chars in keys
+					Variable setzen [ $j ; 1 ]
+					Variable setzen [ $m ; Länge( $key ) ]
+					Schleife (Anfang)
+						Verlasse Schleife wenn [ $j > $m ]
+						Variable setzen [ $key_char ; ZeichenMitte ( $key ; $j ; 1 ) ]
+						Variable setzen [ $shift_down_automatic ; 0//not Exact ( Lower( $key_char ) ; $key_char ) ]
+						Variable setzen [ $virtual_key ; Falls(
+										
+										$key_char = Char(8)   ; 51  ; /* BS - Backspace - Mac */
+										$key_char = Char(28)  ; 123 ; /* Arrow left - Mac */
+										$key_char = Char(29)  ; 126 ; /* Arrow up - Mac */
+										$key_char = Char(30)  ; 124 ; /* Arrow right - Mac */
+										$key_char = Char(31)  ; 125 ; /* Arrow down - Mac */
+										//$key_char = Char(32)  ; 49  ; /* Space - Mac */
+										$key_char = Char(127) ; 117 ; /* DEL - Delete - Mac */
+										
+										$key_char
+										
+										) ]
+						Variable setzen [ $scan_code ; $virtual_key ]
+						
+						Variable setzen [ $r ; Falls( $shift ; MBS( "RemoteControl.PressShiftKey" ; 1 ) )  & 
+										Falls( $option ; MBS( "RemoteControl.PressOptionKey" ; 1 ) )  & 
+										Falls( $command_down         ; MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) )  & 
+										MBS( "RemoteControl.PressKey" ; $virtual_key ; $scan_code ) & 
+										Falls( $command_down         ; MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) )  &
+										Falls( $option ; MBS( "RemoteControl.PressOptionKey" ; 0 ) )  &
+										Falls( $shift ; MBS( "RemoteControl.PressShiftKey" ; 0 ) )  &
+										"" ]
+						
+						# next key
+						Variable setzen [ $j ; $j + 1 ]
+					Schleife (Ende)
+					Variable setzen [ $i ; $i + 1 ]
+				Schleife (Ende)
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "OpenFileOptions" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-file-options
+			Dateioptionen
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageContainers" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-containers
+			Container verwalten ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "156" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageCustomFunctions" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-functions
+			# It&apos;s not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
+			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
+							"Let([" ;
+							"r=" & $idleCalcExpression ;
+							";r=MBS( \"Schedule.Release\"; $$MBS_ScheduleRef )" ;
+							";$$MBS_ScheduleRef=\"\"" ;
+							"];0)"
+							)
+							
+							) ]
+			
+			# Request to halt and continue
+			Variable setzen [ $fmide_continuation_halt_for_seconds ; $fmide_continuation_seconds ]
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageCustomMenus" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-menus
+			# It&apos;s not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
+			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
+							"Let([" ;
+							"r=" & $idleCalcExpression ;
+							";r=MBS( \"Schedule.Release\"; $$MBS_ScheduleRef )" ;
+							";$$MBS_ScheduleRef=\"\"" ;
+							"];0)"
+							)
+							
+							) ]
+			
+			# Request to halt and continue
+			Variable setzen [ $fmide_continuation_halt_for_seconds ; $fmide_continuation_seconds ]
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageExternalDataSources" ODER
+						$action_name = "OpenManageDataSources" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-external-data-sources
+			Datenquellen verwalten ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "140" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageDatabase" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-database
+			
+			# Refresh window before opening database dialog, so that the current layout in the background is showing correctly
+			Fenster aktualisieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "80" ] ⚠️⚠️⚠️
+			Datenbank verwalten
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageLayouts" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-layouts
+			Layouts verwalten ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "151" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageSecurity" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-security
+			# It&apos;s not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
+			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
+							"Let([" ;
+							"r=" & $idleCalcExpression ;
+							";r=MBS( \"Schedule.Release\"; $$MBS_ScheduleRef )" ;
+							";$$MBS_ScheduleRef=\"\"" ;
+							"];0)"
+							)
+							
+							) ]
+			
+			# Request to halt and continue
+			Variable setzen [ $fmide_continuation_halt_for_seconds ; $fmide_continuation_seconds ]
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageThemes" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-themes
+			Designs verwalten ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "165" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "OpenManageValueLists" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-value-lists
+			Wertelisten verwalten
+			
+			
+		Sonst, wenn [ $action_name = "OpenPreferences" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-preferences
+			Einstellungen
+			
+			
+		Sonst, wenn [ $action_name = "OpenScriptWorkspace" ODER
+						$action_name = "OpenManageScripts" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-script-workspace
+			Scriptarbeitsbereich öffnen
+			
+			
+		Sonst, wenn [ $action_name = "OpenUploadToHost" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-upload-to-host
+			Auf Host hochladen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "172" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "OpenUrl" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-url
+			# Default is without dialog
+			Variable setzen [ $url ; JSONGetElement ( $action ; "url" ) ]
+			Variable setzen [ $with_dialog ; JSONGetElement ( $action ; "with_dialog" ) ]
+			
+			Wenn [ NICHT IstLeer ( $url ) ]
+				Wenn [ $with_dialog ]
+					URL öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "111" ] ⚠️⚠️⚠️
+				Sonst
+					URL öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "111" ] ⚠️⚠️⚠️
+				Ende (wenn)
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "Paste" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#paste
+			# Press CmdCtrl+V
+			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Variable setzen [ $idleCalcExpression ; Austauschen( $idleCalcExpression ; "$MBS_RemoteControl.PressCommandOrControlKey" ; Zitat( $MBS_RemoteControl.PressCommandOrControlKey ) ) ]
+			
+			# Request to halt and continue
+			Variable setzen [ $fmide_continuation_halt_for_seconds ; $fmide_continuation_seconds ]
+			
+			
+		Sonst, wenn [ $action_name = "PasteInCurrentLayout" ODER $action_name = "PasteIntoCurrentLayout" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#paste-in-current-layout
+			# Bring window to front and press CmdCtrl+L, CmdCtrl+V
+			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Variable setzen [ $idleCalcExpression ; Austauschen( $idleCalcExpression ; "$MBS_RemoteControl.PressCommandOrControlKey" ; Zitat( $MBS_RemoteControl.PressCommandOrControlKey ) ) ]
+			
+			# Request to halt and continue
+			Variable setzen [ $fmide_continuation_halt_for_seconds ; $fmide_continuation_seconds ]
+			
+			
+		Sonst, wenn [ $action_name = "Pause" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#pause
+			Variable setzen [ $seconds ; JSONGetElement ( $action ; "seconds" ) ]
+			Variable setzen [ $indefinitely ; JSONGetElement ( $action ; "indefinitely" ) ]
+			Variable setzen [ $hiatus ; JSONGetElement ( $action ; "hiatus" ) ]
+			
+			Wenn [ $hiatus ]
+				# Hiatus - Halt script for a moment
+				Wenn [ NICHT IstLeer ( $seconds ) UND NICHT $indefinitely ]
+					# Request to halt and continue
+					Variable setzen [ $fmide_continuation_halt_for_seconds ; $seconds ]
+				Sonst
+					# ToDo - indefinite Hiatus needs a method for the user to exit the Hiatus and proceed with the continuation
+					# &lt;thinking&gt;
+					Alle Scripts abbrechen
+				Ende (wenn)
+			Sonst
+				# Pause
+				Wenn [ NICHT IstLeer ( $seconds ) UND NICHT $indefinitely ]
+					Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+				Sonst
+					Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+				Ende (wenn)
+			Ende (wenn)
+			
+			
+		Sonst, wenn [ $action_name = "PerformFind" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#perform-find
+			Ergebnismenge suchen
+			
+			
+		Sonst, wenn [ $action_name = "PerformScript" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#perform-script
+			Variable setzen [ $script_name ; JSONGetElement ( $action ; "script_name" ) ]
+			Variable setzen [ $script_file_name ; JSONGetElement ( $action ; "script_file_name" ) ]
+			Variable setzen [ $script_parameter ; JSONGetElement ( $action ; "script_parameter" ) ]
+			Script ausführen [ Nach Name ; Falls ( NICHT IstLeer ( $script_file_name ) ; $script_file_name & "::" ) & $script_name ; Parameter: $script_parameter ]
+			
+		Sonst, wenn [ $action_name = "RefreshWindow" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#refresh-window
+			Fenster aktualisieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "80" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "SaveACopyAsXml" ODER $action_name = "SaveAsXml" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#save-a-copy-as-xml
+			# Is this maybe TOO risky?
+			// Variable setzen [ $file_path ; JSONGetElement ( $action ; "file_path" ) ]
+			// Kopie als XML speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "3" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "SelectWindow" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#select-window
+			# FIXME docs
+			Variable setzen [ $window_name ; JSONGetElement ( $action ; "window_name" ) ]
+			Variable setzen [ $current_file ; JSONGetElement ( $action ; "current_file" ) ]
+			
+			Wenn [ IstLeer ( $window_name ) ]
+				Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Sonst, wenn [ $current_file ]
+				Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Sonst
+				Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Ende (wenn)
+			
+			// # POSTPONED - Does this need to work on the action level rather than on the script level?
+			// # Implementz first with proper eror handling
+			// Sonst, wenn [ $action_name = "SetErrorCapture" ]
+			// # @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#set-error-capture
+			// Variable setzen [ $on ; JSONGetElement ( $action ; "on" ) ]
+			// Variable setzen [ $off ; JSONGetElement ( $action ; "off" ) ]
+			// 
+			// Wenn [ $off ODER $on=0 ]
+			// Fehleraufzeichnung setzen [ OFF ]
+			// Sonst
+			// # Default = On
+			// Fehleraufzeichnung setzen [ ON ]
+			// Ende (wenn)
+			
+		Sonst, wenn [ $action_name = "Set" ODER $action_name = "SetVariable" ODER $action_name = "SetField" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#set
+			Variable setzen [ $target ; JSONGetElement ( $action ; "target" ) ]
+			Variable setzen [ $text ; JSONGetElement ( $action ; "text" ) ]
+			Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
+			
+			Wenn [ IstLeer ( $target ) ]
+				Variable setzen [ $keys ; JSONListKeys ( $action ; "" ) ]
+				Variable setzen [ $i ; 1 ]
+				Variable setzen [ $n ; ElementeAnzahl( $keys ) ]
+				Schleife (Anfang)
+					Verlasse Schleife wenn [ $i > $n ]
+					Variable setzen [ $key ; HoleWert( $keys ; $i ) ]
+					Wenn [ $key = "value" ODER $key = "text" ]
+						# skip
+					Sonst
+						# Use first unknown key as the variable or field name
+						Variable setzen [ $target ; $key ]
+						Variable setzen [ $text ; JSONGetElement ( $action ; $key & ".text" ) ]
+						Variable setzen [ $value ; JSONGetElement ( $action ; $key & ".value" ) ]
+						Verlasse Schleife wenn [ 1 ]
+					Ende (wenn)
+					
+					Variable setzen [ $i ; $i + 1 ]
+				Schleife (Ende)
+			Ende (wenn)
+			
+			# If no target is specified, we target the no-name global variable &quot;$$&quot;
+			# This makes it possible to just perform a Set in one line
+			Variable setzen [ $target ; Falls( NICHT IstLeer ( $target ) ; $target ; "$$" ) ]
+			Variable setzen [ $value ; Falls (
+							NICHT IstLeer ( $value ) ; $value ;
+							NICHT IstLeer ( $text ) ; Zitat ( $text )
+							) ]
+			
+			Wenn [ ZeichenLinks( $target ; 1 ) ≠ "$" ODER 
+							Berechne(
+							
+							"Let([" & 
+							
+							/* Define the var */
+							$target & "=" & $value & 
+							
+							/* Log the variable name */
+							"¶;$fmide_local_variables = List ( $fmide_local_variables ; Case( Position ( \¶ & $fmide_local_variables & \¶ ; \¶ & $target & \¶ ; 1 ; 1 ) = 0 ; $target ) ) " & 
+							
+							"¶];0)"
+							
+							) ]
+				Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+			Ende (wenn)
+			
+			
+			// Sonst, wenn [ $action_name = "SetPref" ]
+			// # @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#set-pref
+			// Variable setzen [ $pref_name ; JSONGetElement ( $action ; "pref_name" ) ]
+			// Variable setzen [ $pref_value ; JSONGetElement ( $action ; "pref_value" ) ]
+			
+		Sonst, wenn [ $action_name = "ShowAllRecords" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#show-all-records
+			Alle Datensätze anzeigen
+			
+		Sonst, wenn [ $action_name = "ShowCustomDialog" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#show-custom-dialog
+			Variable setzen [ $message ; JSONGetElement ( $action ; "message" ) ]
+			Variable setzen [ $message_value ; JSONGetElement ( $action ; "message_value" ) ]
+			Variable setzen [ $title ; JSONGetElement ( $action ; "title" ) ]
+			Variable setzen [ $buttons_list ; JSONGetElement ( $action ; "$buttons_list" ) ]
+			// Variable setzen [ $labels ; JSONGetElement ( $action ; "labels" ) ]
+			// Variable setzen [ $inputs ; JSONGetElement ( $action ; "inputs" ) ]
+			// Variable setzen [ $commits ; JSONGetElement ( $action ; "commits" ) ]
+			
+			Variable setzen [ $keys ; JSONListKeys ( $action ; "" ) ]
+			Variable setzen [ $key ; SetzeVar(
+							[
+							
+							¢key = HoleWert( $keys ; ElementeAnzahl( ZeichenLinks( $keys ; Position( ¶ & $keys ; "¶message_" ; 1 ; 1 ) ) ) )
+							
+							];
+							
+							Falls( Position( ¢key ; "__" ; 1 ; 1 ) ; ¢key )
+							
+							) ]
+			Wenn [ NICHT IstLeer ( $key ) ]
+				# Extended message parameter `message__button_name_list`
+				Variable setzen [ $message_key_bits ; Austauschen( $key ; "__" ; "¶" ) ]
+				Variable setzen [ $message_key ; HoleWert ( $message_key_bits ; 1 ) ]
+				Variable setzen [ $buttons_list ; Austauschen( HoleWert ( $message_key_bits ; 2 ); "_" ; "¶" ) ]
+				Wenn [ $message_key = "message" ]
+					Variable setzen [ $message ; JSONGetElement ( $action ; $key ) ]
+				Sonst, wenn [ $message_key = "message_value" ]
+					Variable setzen [ $message_value ; JSONGetElement ( $action ; $key ) ]
+				Ende (wenn)
+			Ende (wenn)
+			
+			
+			// Variable setzen [ $inputCount ; ElementeAnzahl ( $inputs ) ]
+			Variable setzen [ $buttons_list ; Falls( NICHT IstLeer ( $buttons_list ) ; $buttons_list ; "OK" ) ]
+			
+			Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			
+			
+		Sonst, wenn [ $action_name = "StoreKeyboardBuffer" ]
+			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#store-keyboard-buffer
+			Variable setzen [ $text ; JSONGetElement ( $action ; "text" ) ]
+			Variable setzen [ $append_line_feed ; JSONGetElement ( $action ; "append_line_feed" ) ]
+			
+			# Write the text (with optional line feed) to the fmIDE keyboard buffer file in the documents folder
+			
+			Variable setzen [ $fmide_folder_path ; Hole ( DokumentenPfad ) ]
+			Variable setzen [ $fmide_file_name ; "fmIDE_keyboard_buffer.txt" ]
+			Variable setzen [ $fmide_file_path ; $fmide_folder_path & $fmide_file_name ]
+			
+			# First delete the file if it exists
+			
+			# @var $fmide_file_exists
+			Dateiexistenz holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "188" ] ⚠️⚠️⚠️
+			Wenn [ $fmide_file_exists ]
+				Datei löschen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "197" ] ⚠️⚠️⚠️
+			Ende (wenn)
+			
+			# Then create the file with text and optional EOL
+			Datendatei erstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "190" ] ⚠️⚠️⚠️
+			
+			# @var $fmide_file_id
+			Datendatei öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "191" ] ⚠️⚠️⚠️
+			Wenn [ $append_line_feed ]
+				In Datendatei schreiben ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "192" ] ⚠️⚠️⚠️
+			Sonst
+				In Datendatei schreiben ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "192" ] ⚠️⚠️⚠️
+			Ende (wenn)
+			Datendatei schließen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "196" ] ⚠️⚠️⚠️
+			
+			
+		Sonst
+			# unknown action =&gt; skip
+			Variable setzen [ $$fmide_last_error ; -1 ]
+			Variable setzen [ $$fmide_last_error_detail ; "Unknown action '" & $action_name & "'" ]
+			
+		Ende (wenn)
+	Ende (wenn)
+	
+	# NEXT actions_index
+	Variable setzen [ $action_index ; $action_index + 1 ]
+	
+	# Continuations! (for Hiatus) This is where the magic *really* starts 🪄
+	Wenn [ $fmide_continuation_halt_for_seconds ]
+		# Only continue, if there is anything to continue with!
+		Wenn [ $action_index < $action_index_max ]
+			Variable setzen [ $continuation ; JSONSetElement ( "{}"
+							; ["actions" ; $actions ; JSONArray]
+							;["action_stack" ; $action_stack ; JSONArray]
+							;["action_stack_top" ; $action_stack_top ; JSONString]
+							;["action_block" ; $action_block ; JSONString]
+							;["action_skip"  ; $action_skip  ; JSONString]
+							;["action_index" ; $action_index ; JSONNumber]
+							;["action_index_max" ; $action_index_max ; JSONNumber]
+							;["fmide_local_variables" ; $fmide_local_variables ; JSONString]
+							;["original_layout_number" ; $original_layout_number ; JSONNumber]
+							;["original_window_name" ; $original_window_name ; JSONString]
+							) ]
+			Variable setzen [ $fmide_local_variables ; Solange(
+							[
+							
+							¢vars = $fmide_local_variables ;
+							¢i = 1;
+							¢n = ElementeAnzahl ( ¢vars )
+							
+							]; ¢i <= ¢n ;[
+							
+							¢var = Austauschen( HoleWert ( ¢vars ; ¢i ) ; "$" ; "" ) ;
+							
+							¢expression = "
+							  Let([
+							  $$fmide_local_variable_" & ¢var & "=$" & ¢var & "¶
+							  ];
+							  \"\”
+							  )" ;
+							$$expression = ¢expression;
+							/* Redfine the variable as a global variable */
+							¢ignore_errors = Berechne ( ¢expression ) ;
+							
+							¢i = ¢i + 1
+							
+							];
+							
+							""
+							
+							) ]
+			Variable setzen [ $$fmide_continuation_mbs_schedule_ref ; MBS( "Schedule.StartScriptAfterDelay"; $fmide_continuation_halt_for_seconds + Falls( Div ( Hole ( SystemUhrzeitUTCMillisekunden ) ; 1000 ) > 500 ; 1 ) ; /* +1 Workaround - the  MBS functon seems to be about 1  yecond too slow! */
+							Hole ( DateiName ) ;
+							Hole ( ScriptName ) ;
+							JSONSetElement ( "{}" ; "continuation" ; $continuation ; JSONObject )
+							) ]
+		Ende (wenn)
+		Wenn [ NICHT IstLeer ( $idleCalcExpression ) ]
+			# E.g. PasteIntoCurrentLayout
+			Variable setzen [ $r ; Berechne ( $idleCalcExpression ) ]
+		Ende (wenn)
+		Alle Scripts abbrechen
+	Ende (wenn)
+Schleife (Ende)
+# About the last line&#13;- It always pays to have an empty last comment line in a script,&#13;  so you can skip to the last line with the debugger, if you want

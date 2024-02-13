@@ -1,0 +1,35 @@
+---
+source: src/main.rs
+expression: output_content
+---
+/* _FullBlockDropColor( pSelf )
+
+Use this function in an suto-enter filter calculation to allow colors to be dropped onto the field.
+
+20140423 MrW Version 1.1 
+
+*/
+
+
+Auswahl( Min( Länge( pSelf ) ; 2 ) ; 
+/* 0 */
+Char( 9608 ) ; /* Default is a black block */
+
+/* 1 */
+Austauschen( pSelf ; pSelf ; _FullBlock ) ;/* Replace content with a fullblock */
+
+/* 2 */
+SetzeVar([ 
+vLen = Länge( pSelf ) ;
+vDragText = ZeichenMitte( Hole ( AktivesFeldInhalt ) ; Hole ( AktiveTextAuswahlStart ) ; Hole ( AktiveTextAuswahlGröße ) ) ;
+vDragTextCSS = LiesAlsCSS( vDragText ) ; 
+vSelfR = ZeichenRechts( pSelf ; 1 ) ;
+vSelfL = ZeichenLinks( pSelf ; 1 ) ;
+vSelf = Falls(
+LiesAlsCSS( vSelfL ) = vDragTextCSS ; vSelfL ; 
+LiesAlsCSS( vSelfR ) = vDragTextCSS ; vSelfR ;
+"?"
+)
+];
+Austauschen( vSelf ; vSelf ; Char( 9608 ) ) /* Replace content with a fullblock */
+))

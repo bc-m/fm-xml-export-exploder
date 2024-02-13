@@ -1,0 +1,30 @@
+---
+source: src/main.rs
+expression: output_content
+---
+/* _Hex( pNumber )
+
+returns the hex representation of the number.
+
+20120411 MrW Version 1.0v0
+*/
+Falls( NICHT IstLeer( LiesAlsZahl( pNumber ) ) ;
+SetzeVar([
+vN = Abs( Ganzzahl( pNumber ) ) ;
+
+vFormula = ";¶vM = Mod( vN ; 16 ) ; vN = Div( vN ; 16 ) ; vR = Case( vN or vM or isempty( vR ) ; Middle( \"0123456789ABCDEF\" ; vM + 1 ; 1 ) ) & vR" ;
+
+vFormula = Falls( NICHT IstLeer( vN ) ; "
+Let([¶
+vN=" & vN & ";¶
+vR=\"\"" & 
+Austauschen( vN; ["0";"A"];["1";"A"];["2";"A"];["3";"A"];["4";"A"];["5";"A"];["6";"A"];["7";"A"];["8";"A"];["9";"A"];["A";vFormula]) & "¶
+];¶
+vR¶
+)" )
+
+];
+
+Berechne( vFormula )
+)
+)

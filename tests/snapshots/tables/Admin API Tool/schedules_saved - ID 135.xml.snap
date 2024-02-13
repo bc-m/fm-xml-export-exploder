@@ -1,0 +1,76 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<UUID modifications="2" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:22:25">60C16C17-1428-46D8-AAD1-E0FC5ECA1269</UUID>
+	<BaseTableReference id="135" name="schedules_saved"></BaseTableReference>
+	<ObjectList membercount="7">
+		<Field DefaultStyle="" id="2" name="CreationTimestamp" fieldtype="Normal" datatype="Timestamp" comment="Date and time each record was created">
+			<UUID modifications="0" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:16:57">DC253D07-C6DA-4D7B-8A2C-13C007C16147</UUID>
+			<AutoEnter type="CreationTimestamp" prohibitModification="True"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="False" notEmpty="True" unique="False" existing="False">
+				<Strict>FourDigitYear</Strict>
+			</Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList>#_FMI_0 </TagList>
+		</Field>
+		<Field DefaultStyle="" id="3" name="CreatedBy" fieldtype="Normal" datatype="Text" comment="Account name of the user who created each record">
+			<UUID modifications="0" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:16:57">7AE7D2BD-347C-43F5-B9A0-6A607AD744B5</UUID>
+			<AutoEnter type="CreationAccountName" prohibitModification="True"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="False" notEmpty="True" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList>#_FMI_0 </TagList>
+		</Field>
+		<Field DefaultStyle="" id="4" name="ModificationTimestamp" fieldtype="Normal" datatype="Timestamp" comment="Date and time each record was last modified">
+			<UUID modifications="0" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:16:57">3F009E58-77F5-4676-8DAA-BEDDFB7527A2</UUID>
+			<AutoEnter type="ModificationTimestamp" prohibitModification="True"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="False" notEmpty="True" unique="False" existing="False">
+				<Strict>FourDigitYear</Strict>
+			</Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList>#_FMI_0 </TagList>
+		</Field>
+		<Field DefaultStyle="" id="5" name="ModifiedBy" fieldtype="Normal" datatype="Text" comment="Account name of the user who last modified each record">
+			<UUID modifications="0" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:16:57">06A3ADB6-EAF1-4E7B-80EC-07C1E71936B2</UUID>
+			<AutoEnter type="ModificationAccountName" prohibitModification="True"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="False" notEmpty="True" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList>#_FMI_0 </TagList>
+		</Field>
+		<Field DefaultStyle="" id="6" name="json" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="1" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:22:25">F7891A40-95A2-438B-B7F8-77E4C0F499C6</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="7" name="ID_Server" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="1" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:17:51">2C49DEE5-97F8-432D-8DDD-A17B8DA7360E</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="8" name="ID" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="2" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-05T13:18:23">B18D2DC9-1886-46E3-89FC-27BDF52FF436</UUID>
+			<AutoEnter type="SerialNumber" prohibitModification="True">
+				<SerialNumber increment="1" generate="OnCreation"></SerialNumber>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="True" existing="False"></Validation>
+			<Storage global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

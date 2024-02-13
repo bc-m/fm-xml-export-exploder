@@ -1,0 +1,29 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121025 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# App settings
+Variable setzen [ $WindowWidth ; 1150 ]
+Variable setzen [ $WindowHeight ; 800 ]
+
+
+Fenster fixieren
+Blätternmodus aktivieren
+Script ausführen [ Aus Liste ; "Install Menus" ]
+
+Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
+Wenn [ Hole( AnzahlDatensätzeGesamt ) = 0 ]
+	Neuer Datensatz/Abfrage
+Sonst
+	Alle Datensätze anzeigen
+Ende (wenn)
+
+Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
+Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+
+Script ausführen [ Aus Liste ; "Go to Home Layout" ]

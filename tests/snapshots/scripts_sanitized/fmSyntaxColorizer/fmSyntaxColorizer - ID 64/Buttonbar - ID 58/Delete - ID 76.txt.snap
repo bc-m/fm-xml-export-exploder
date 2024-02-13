@@ -1,0 +1,40 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121101 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ Hole( Fenstermodus ) = 0 ]
+	# Find mode
+	Datensatz/Abfrage löschen [ Mit Dialog: ON ]
+	
+Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
+	# Not browse mode
+	Aktuelles Script verlassen []
+	
+Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
+	# Delete color-palette
+	Wenn [ _Palette::__ID = 1 ]
+		Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+		Aktuelles Script verlassen []
+		# --&gt;
+	Ende (wenn)
+	
+	Variable setzen [ $_Palette__ID ; _Palette::__ID ]
+	Datensatz/Abfrage löschen [ Mit Dialog: ON ]
+	Variable setzen [ $error ; Hole ( LetzteFehlerNr ) ]
+	Wenn [ NICHT $error UND _Syntax::_gID_ActivePalette = $_Palette__ID ]
+		# Activate another palette
+	Ende (wenn)
+	
+Sonst, wenn [ _IsLayoutTableName ( _Home::__ID ) ]
+	Fehlerton
+	
+Sonst
+	# Delete record
+	Datensatz/Abfrage löschen [ Mit Dialog: ON ]
+	
+Ende (wenn)

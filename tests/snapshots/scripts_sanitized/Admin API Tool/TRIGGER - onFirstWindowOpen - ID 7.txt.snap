@@ -1,0 +1,44 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Steps to perform when the file is first opened
+#  HISTORY:&#13;   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# Script Triggers Disabled?
+Wenn [ $$SCRIPT_TRIGGERS_OFF = 1 ]
+	Aktuelles Script verlassen [ Wahr ]
+Ende (wenn)
+
+# Exit condition for Web applications
+Wenn [ MusterAnzahl ( Hole ( ProgrammVersion ) ; "web" ) > 0 ]
+	Aktuelles Script verlassen [ Wahr ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Gehe zu Layout [ Layout: "Admin API" ; Animation: Ohne ]
+Wenn [ MusterAnzahl ( Hole ( ProgrammVersion ) ; "server" ) = 0 ]
+	Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+	Fenster anpassen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "31" ] ⚠️⚠️⚠️
+Ende (wenn)
+
+Script ausführen [ Aus Liste ; "Navigation ( json )" ; Parameter: JSONSetElement ( "" 
+				 ; [ "param" ; "panel_auth" ; JSONString ]
+				) ]
+
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

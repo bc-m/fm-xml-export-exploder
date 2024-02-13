@@ -1,0 +1,30 @@
+---
+source: src/main.rs
+expression: output_content
+---
+/* _0x( pHexString )
+
+Converts the hexadecimal string to a decimal number. 
+ - Only positive integer values (min=0, max=biggest number that FileMaker can store.)
+ - Hexadecimal letters can be in any case - all extra characters are ignored.
+ - Three digit CSS colours are also correctly interpreted if preceded by a "#". ("#RGB" is first converted to a six digit hex string "RRGGBB".)
+ - No recursion!
+ => Very fast (3 times faster than equivalent recursive CF)
+ => Embeddable in other CFs
+
+E.g.:
+   _0x("2588") -> 9608
+   Code( _0x("U+2588") ) -> "█" - Unicode character 'full block'.
+
+20120411 MrW Version 1.0v0
+*/
+SetzeVar([
+vHex = FilterZeichen( Großbuchstaben( pHexString ) ; "#0123456789ABCDEF" ) ;
+vHex = Falls( ZeichenLinks( vHex ; 1 ) = "#" UND Länge( vHex ) = 4 ; ZeichenMitte( vHex ; 2 ; 1 ) & ZeichenMitte( vHex ; 2 ; 2 ) & ZeichenMitte( vHex ; 3 ; 2 ) & ZeichenRechts( vHex ; 1 ) ; vHex )
+];
+Berechne( 
+Austauschen( vHex; ["#" ; ""]; ["0" ; "("]; ["1" ; "("]; ["2" ; "("]; ["3" ; "("]; ["4" ; "("]; ["5" ; "("]; ["6" ; "("]; ["7" ; "("]; ["8" ; "("]; ["9" ; "("]; ["A" ; "("]; ["B" ; "("]; ["C" ; "("]; ["D" ; "("]; ["E" ; "("]; ["F" ; "("] ) & 
+"0" & 
+Austauschen( vHex; ["#" ; ""]; ["0" ; "G0"]; ["1" ; "G1"]; ["2" ; "G2"]; ["3" ; "G3"]; ["4" ; "G4"]; ["5" ; "G5"]; ["6" ; "G6"]; ["7" ; "G7"]; ["8" ; "G8"]; ["9" ; "G9"]; ["A" ; "G10"]; ["B" ; "G11"]; ["C" ; "G12"]; ["D" ; "G13"]; ["E" ; "G14"]; ["F" ; "G15"]; ["G" ; ")*16+"] )
+)
+)

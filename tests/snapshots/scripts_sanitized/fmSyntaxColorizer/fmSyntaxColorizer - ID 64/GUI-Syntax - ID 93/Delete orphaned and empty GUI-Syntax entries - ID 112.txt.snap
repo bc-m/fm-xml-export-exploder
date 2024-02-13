@@ -1,0 +1,21 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121101 MrW
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Gehe zu Layout [ Layout: "GUISyntax" ; Animation: Ohne ]
+
+# Delete orphaned and empty GUI-Syntax entries
+Suchenmodus aktivieren [ Pause: OFF ]
+Feldwert setzen [ GUISyntax.Syntax::__ID ; "*" ]
+Aktuellen Datens. ausschließen
+Neuer Datensatz/Abfrage
+Feldwert setzen [ _GUISyntax::Command ; "=" ]
+Ergebnismenge suchen
+Wenn [ Hole( AnzahlGefundeneDatensätze ) ]
+	Alle Datensätze löschen [ Mit Dialog: OFF ]
+Ende (wenn)
