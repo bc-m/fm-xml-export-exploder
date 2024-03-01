@@ -21,6 +21,9 @@ the directory structure from FileMaker scripts and layouts.
    the [releases page](https://github.com/BC-M/fm-xml-export-exploder/releases/latest).
 2. **Run the Tool**: Execute the tool by running `fm-xml-export-exploder [INPUT_DIRECTORY] [OUTPUT_DIRECTORY]`.
 
+__For macOS:__ To allow execution in Terminal, right-click on the executable and choose "Open" to bypass the security
+warning. After this, you can run the CLI in Terminal or Bash scripts.
+
 ## Usage
 
 1. **Input Directory**: Provide the path to the directory containing the new FileMaker XML report files.
