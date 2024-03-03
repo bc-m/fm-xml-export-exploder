@@ -1,10 +1,6 @@
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
-use crate::constants::{
-    CALCS_FOR_CUSTOM_FUNCTIONS, EXTERNAL_DATA_SOURCE_CATALOG, FIELDS_FOR_TABLES, FM_EXPORT_ROOT,
-    LAYOUT_CATALOG, SCRIPT_CATALOG, SCRIPT_STEPS_CATALOG, THEME_CATALOG, VALUE_LIST_CATALOG,
-};
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
 use crate::external_data_source_catalog::xml_extract_external_data_sources;
 use crate::layout_catalog::xml_explode_layout_catalog;
@@ -13,7 +9,6 @@ use crate::script_steps_catalog::xml_explode_script_catalog;
 use crate::table_catalog::xml_explode_table_catalog;
 use crate::theme_catalog::xml_explode_theme_catalog;
 use crate::utils::attributes::get_attribute;
-use crate::utils::xml_utils::local_name_to_string;
 use crate::value_list_catalog::xml_explode_value_list_catalog;
 use encoding_rs_io::DecodeReaderBytes;
 use rayon::prelude::*;
@@ -29,7 +24,6 @@ use std::{
 };
 
 mod calculations;
-mod constants;
 mod custom_function_catalog;
 mod external_data_source_catalog;
 mod layout_catalog;
@@ -105,7 +99,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
 
     // Initialize variables
     let mut fm_file_name = String::new();
-    let mut current_element_path: Vec<String> = Vec::new();
+    let mut depth = 0;
     let mut script_id_path_map: HashMap<String, Vec<String>> = HashMap::new();
 
     // Iterate over XML events
@@ -120,84 +114,92 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
             }
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
-                let element_name = local_name_to_string(e.name().as_ref());
-                let cloned_element_name = element_name.clone();
-                current_element_path.push(cloned_element_name);
-
-                match current_element_path.join("/").as_str() {
-                    FM_EXPORT_ROOT => {
-                        fm_file_name = get_attribute(&e, "File")
-                            .unwrap()
-                            .strip_suffix(".fmp12")
-                            .unwrap()
-                            .to_string()
+                match depth {
+                    0 => match e.name().as_ref() {
+                        b"FMDynamicTemplate" | b"FMSaveAsXML" => {
+                            fm_file_name = get_attribute(&e, "File")
+                                .unwrap()
+                                .strip_suffix(".fmp12")
+                                .unwrap()
+                                .to_string()
+                        }
+                        _ => {
+                            eprintln!("Unsupported XML-format in file {}", fm_export_file_name);
+                            return;
+                        }
+                    },
+                    2 => {
+                        if e.name().as_ref() == b"ModifyAction" {
+                            break;
+                        }
                     }
-                    LAYOUT_CATALOG => {
-                        xml_explode_layout_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
-                        current_element_path.pop();
-                        continue;
-                    }
-                    FIELDS_FOR_TABLES => {
-                        xml_explode_table_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
-                        current_element_path.pop();
-                        continue;
-                    }
-                    CALCS_FOR_CUSTOM_FUNCTIONS => {
-                        xml_explode_custom_function_catalog(
-                            &mut reader,
-                            &e,
-                            out_dir_path,
-                            &fm_file_name,
-                        );
-                        current_element_path.pop();
-                        continue;
-                    }
-                    SCRIPT_STEPS_CATALOG => {
-                        xml_explode_script_catalog(
-                            &mut reader,
-                            &e,
-                            out_dir_path,
-                            &fm_file_name,
-                            &script_id_path_map,
-                        );
-                        current_element_path.pop();
-                        continue;
-                    }
-                    SCRIPT_CATALOG => {
-                        script_id_path_map = parse_script_directories(&mut reader, &e);
-                        current_element_path.pop();
-                        continue;
-                    }
-                    EXTERNAL_DATA_SOURCE_CATALOG => {
-                        xml_extract_external_data_sources(
-                            &mut reader,
-                            &e,
-                            out_dir_path,
-                            &fm_file_name,
-                        );
-                        current_element_path.pop();
-                        continue;
-                    }
-                    VALUE_LIST_CATALOG => {
-                        xml_explode_value_list_catalog(
-                            &mut reader,
-                            &e,
-                            out_dir_path,
-                            &fm_file_name,
-                        );
-                        current_element_path.pop();
-                        continue;
-                    }
-                    THEME_CATALOG => {
-                        xml_explode_theme_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
-                        current_element_path.pop();
-                        continue;
-                    }
+                    3 => match e.name().as_ref() {
+                        b"LayoutCatalog" => {
+                            xml_explode_layout_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
+                        b"FieldsForTables" => {
+                            xml_explode_table_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
+                            continue;
+                        }
+                        b"CalcsForCustomFunctions" => {
+                            xml_explode_custom_function_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
+                        b"StepsForScripts" => {
+                            xml_explode_script_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                                &script_id_path_map,
+                            );
+                            continue;
+                        }
+                        b"ScriptCatalog" => {
+                            script_id_path_map = parse_script_directories(&mut reader, &e);
+                            continue;
+                        }
+                        b"ExternalDataSourceCatalog" => {
+                            xml_extract_external_data_sources(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
+                        b"ValueListCatalog" => {
+                            xml_explode_value_list_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
+                        b"ThemeCatalog" => {
+                            xml_explode_theme_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
+                            continue;
+                        }
+                        _ => {}
+                    },
                     _ => {}
                 }
+                depth += 1;
             }
             Ok(Event::End(_)) => {
-                current_element_path.pop();
+                depth -= 1;
             }
             _ => {}
         }
