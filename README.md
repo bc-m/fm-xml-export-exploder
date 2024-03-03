@@ -32,33 +32,35 @@ the directory structure from FileMaker scripts and layouts.
 
 The extracted content is organized into directories based on the context of the XML elements:
 
-- `custom_functions`
-  - `[FileMaker Database Name]`
-    - `[CF Name] - ID [CF ID].txt`
-- `external_data_sources`
-  - `[FileMaker Database Name].xml`
-- `layouts`
-  - `[FileMaker Database Name]`
-    - `[Directory name] - ID [Directory ID]`
-      - `[Layout name] - ID [Layout ID].xml`
-- `scripts`
-  - `[FileMaker Database Name]`
-    - `[Directory name] - ID [Directory ID]`
-      - `[Script name] - ID [Script ID].xml`
-- `scripts_sanitized`
-  - `[FileMaker Database Name]`
-    - `[Directory name] - ID [Directory ID]`
-      - `[Script name] - ID [Script ID].txt`
-- `tables`
-  - `[FileMaker Database Name]`
-    - `[Table name] - ID [Table ID].xml`
-- `themes`
-  - `[FileMaker Database Name]`
-    - `[Theme name] - ID [Theme ID].xml`
-- `value_lists`
-  - `[FileMaker Database Name]`
-    - `[Value list name] - ID [Value list ID].xml`
-
+```bash
+├── custom_functions
+│   └── [FileMaker Database Name]
+│       └── [CF Name] - ID [CF ID].txt
+├── external_data_sources
+│   └── [FileMaker Database Name].xml
+├── layouts
+│   └── [FileMaker Database Name]
+│       └── [Directory name] - ID [Directory ID]
+│           └── [Layout name] - ID [Layout ID].xml
+├── scripts
+│   └── [FileMaker Database Name]
+│       └── [Directory name] - ID [Directory ID]
+│           └── [Script name] - ID [Script ID].xml
+├── scripts_sanitized
+│   └── [FileMaker Database Name]
+│       └── [Directory name] - ID [Directory ID]
+│           └── [Script name] - ID [Script ID].txt
+├── tables
+│   └── [FileMaker Database Name]
+│       └── [Table name] - ID [Table ID].xml
+├── themes
+│   └── [FileMaker Database Name]
+│       └── [Theme name] - ID [Theme ID].xml
+└── value_lists
+    └── [FileMaker Database Name]
+        └── [Value list name] - ID [Value list ID].xml
+```
+        
 For multi-file solutions it can be helpful to create a separate Git repository for each of these
 directories (`custom_functions`, `external_data_sources`, `layouts`, `scripts`, `scripts_sanitized`, `tables`, `themes`, `value_lists`)
 to manage version control and collaboration effectively.
