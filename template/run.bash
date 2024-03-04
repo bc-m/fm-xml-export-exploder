@@ -26,14 +26,16 @@ set +e
 # Commit and push changes for each folder
 # Define an array of folders
 folders=(
-    "tables"
-    "scripts"
-    "scripts_sanitized"
-    "layouts"
     "custom_functions"
     "external_data_sources"
-    "value_lists"
+    "layouts"
+    "relationships"
+    "scripts"
+    "scripts_sanitized"
+    "table_occurrences"
+    "tables"
     "themes"
+    "value_lists"
 )
 
 # Function to commit and push changes
