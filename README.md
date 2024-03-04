@@ -34,33 +34,36 @@ The extracted content is organized into directories based on the context of the 
 
 ```bash
 ├── custom_functions
-│   └── [FileMaker Database Name]
-│       └── [CF Name] - ID [CF ID].txt
+│   └── [FileMaker database name]
+│       └── [CF name] - ID [CF ID].txt
 ├── external_data_sources
-│   └── [FileMaker Database Name].xml
+│   └── [FileMaker database name].xml
 ├── layouts
-│   └── [FileMaker Database Name]
+│   └── [FileMaker database name]
 │       └── [Directory name] - ID [Directory ID]
 │           └── [Layout name] - ID [Layout ID].xml
 ├── relationships
-│   └── [FileMaker Database Name]
+│   └── [FileMaker database name]
 │       └── [Left Table name] - [Right Table name] - ID [Relationship ID].xml
 ├── scripts
-│   └── [FileMaker Database Name]
+│   └── [FileMaker database name]
 │       └── [Directory name] - ID [Directory ID]
 │           └── [Script name] - ID [Script ID].xml
 ├── scripts_sanitized
-│   └── [FileMaker Database Name]
+│   └── [FileMaker database name]
 │       └── [Directory name] - ID [Directory ID]
 │           └── [Script name] - ID [Script ID].txt
 ├── tables
-│   └── [FileMaker Database Name]
+│   └── [FileMaker database name]
 │       └── [Table name] - ID [Table ID].xml
+├── table_occurrences
+│   └── [FileMaker database name]
+│       └── [TO name] - ID [TO ID].xml
 ├── themes
-│   └── [FileMaker Database Name]
+│   └── [FileMaker database name]
 │       └── [Theme name] - ID [Theme ID].xml
 └── value_lists
-    └── [FileMaker Database Name]
+    └── [FileMaker database name]
         └── [Value list name] - ID [Value list ID].xml
 ```
 
