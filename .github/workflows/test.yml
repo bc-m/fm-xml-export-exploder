@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run formatter
+        run: cargo fmt --all -- --check
+      - name: Run linter
+        run: cargo clippy -- -Dwarnings
+      - name: Run tests
+        run: cargo test --verbose
