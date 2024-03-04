@@ -1,10 +1,11 @@
 use crate::{escape_filename, join_scope_id_and_name};
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::reader::Reader;
+use std::collections::HashMap;
 use std::io::{BufRead, Read};
 use std::path::Path;
 
-use crate::utils::attributes::get_attributes;
+use crate::utils::attributes::{get_attribute, get_attributes};
 use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, local_name_to_string, start_element_to_string,
     text_element_to_string,
@@ -23,6 +24,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
     _: &BytesStart,
     out_dir_path: &Path,
     fm_file_name: &str,
+    table_name_id_map: &HashMap<String, String>,
 ) {
     let out_dir_path = out_dir_path.join("tables").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
@@ -47,13 +49,27 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
                     table_info.content.clear();
                 }
 
-                if depth == 3 && e.name().as_ref() == b"BaseTableReference" {
-                    for attr in get_attributes(&e).unwrap() {
-                        match attr.0.as_str() {
-                            "id" => table_info.id = attr.1.to_string(),
-                            "name" => table_info.name = attr.1.to_string(),
-                            _ => {}
+                if depth == 3 {
+                    match e.name().as_ref() {
+                        b"BaseTableReference" => {
+                            for attr in get_attributes(&e).unwrap() {
+                                match attr.0.as_str() {
+                                    "id" => table_info.id = attr.1.to_string(),
+                                    "name" => table_info.name = attr.1.to_string(),
+                                    _ => {}
+                                }
+                            }
                         }
+                        b"TableOccurrenceReference" => {
+                            table_info.name = get_attribute(&e, "name").unwrap();
+                            match table_name_id_map.get(&table_info.name) {
+                                None => {}
+                                Some(table_id) => {
+                                    table_info.id = table_id.clone();
+                                }
+                            };
+                        }
+                        _ => {}
                     }
                 }
 
