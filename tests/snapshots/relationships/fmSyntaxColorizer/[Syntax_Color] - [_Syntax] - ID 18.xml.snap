@@ -1,0 +1,53 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="18">
+	<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">28C113DA-8575-4C14-8A1D-897844AD88CD</UUID>
+	<LeftTable cascadeCreate="True" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065116" name="Syntax.Color"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="3">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_ID_Palette">
+					<TableOccurrenceReference id="1065116" name="Syntax.Color"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="10" name="_ID_Palette">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="14" name="PaletteType">
+					<TableOccurrenceReference id="1065116" name="Syntax.Color"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="22" name="_kPaletteType">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="ColorName">
+					<TableOccurrenceReference id="1065116" name="Syntax.Color"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="3" name="ColorName">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

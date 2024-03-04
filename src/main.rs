@@ -5,6 +5,7 @@ use crate::base_table_catalog::parse_base_table_catalog;
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
 use crate::external_data_source_catalog::xml_extract_external_data_sources;
 use crate::layout_catalog::xml_explode_layout_catalog;
+use crate::relationship_catalog::xml_explode_relationship_catalog;
 use crate::script_catalog::parse_script_directories;
 use crate::script_steps_catalog::xml_explode_script_catalog;
 use crate::table_catalog::xml_explode_table_catalog;
@@ -29,6 +30,7 @@ mod calculations;
 mod custom_function_catalog;
 mod external_data_source_catalog;
 mod layout_catalog;
+mod relationship_catalog;
 mod script_catalog;
 mod script_steps;
 mod script_steps_catalog;
@@ -194,6 +196,15 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
                         }
                         b"ValueListCatalog" => {
                             xml_explode_value_list_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
+                        b"RelationshipCatalog" => {
+                            xml_explode_relationship_catalog(
                                 &mut reader,
                                 &e,
                                 out_dir_path,

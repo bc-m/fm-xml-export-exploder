@@ -1,0 +1,41 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="43">
+	<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">BDC7DFA2-4A64-4082-8635-00A51A9AED6E</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065145" name="Palette.Color_OnlyPaletteSpecificColors"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="1" name="__ID">
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="_ID_Palette">
+					<TableOccurrenceReference id="1065145" name="Palette.Color_OnlyPaletteSpecificColors"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_k1">
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="26" name="_kIsPaletteSpecificColor">
+					<TableOccurrenceReference id="1065145" name="Palette.Color_OnlyPaletteSpecificColors"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

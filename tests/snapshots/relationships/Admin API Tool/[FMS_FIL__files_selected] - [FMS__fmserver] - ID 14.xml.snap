@@ -1,0 +1,41 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="14">
+	<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">C0F2ADA8-C385-46E6-965C-9BC4ADBAF510</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065103" name="FMS_FIL__files_selected"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="3" name="filename">
+					<TableOccurrenceReference id="1065103" name="FMS_FIL__files_selected"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="31" name="filename_selected">
+					<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="ID_Server">
+					<TableOccurrenceReference id="1065103" name="FMS_FIL__files_selected"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="1" name="ID">
+					<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>
