@@ -1,0 +1,58 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="26">
+	<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">FD469D67-F8AF-4489-B111-127EC364E046</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="True" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065127" name="Palette.Color_Formula"></TableOccurrenceReference>
+		<SortSpecification value="True" maintain="True">
+			<SortList membercount="2">
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="21" name="Selector">
+							<TableOccurrenceReference id="1065127" name="Palette.Color_Formula"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="2" name="ColorName">
+							<TableOccurrenceReference id="1065127" name="Palette.Color_Formula"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+			</SortList>
+		</SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="1" name="__ID">
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="_ID_Palette">
+					<TableOccurrenceReference id="1065127" name="Palette.Color_Formula"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="6" name="_kkFormula">
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="14" name="PaletteType">
+					<TableOccurrenceReference id="1065127" name="Palette.Color_Formula"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

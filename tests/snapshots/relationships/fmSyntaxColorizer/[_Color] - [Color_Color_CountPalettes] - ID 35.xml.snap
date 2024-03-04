@@ -1,0 +1,41 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="35">
+	<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8D0962BC-2E0E-4332-8E55-1DE319B97C99</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065137" name="Color.Color_CountPalettes"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="ColorName">
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="2" name="ColorName">
+					<TableOccurrenceReference id="1065137" name="Color.Color_CountPalettes"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="14" name="PaletteType">
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="14" name="PaletteType">
+					<TableOccurrenceReference id="1065137" name="Color.Color_CountPalettes"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

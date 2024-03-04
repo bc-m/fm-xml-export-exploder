@@ -34,33 +34,36 @@ The extracted content is organized into directories based on the context of the 
 
 ```bash
 ├── custom_functions
-│   └── [FileMaker Database Name]
-│       └── [CF Name] - ID [CF ID].txt
+│   └── [FileMaker Database Name]
+│       └── [CF Name] - ID [CF ID].txt
 ├── external_data_sources
-│   └── [FileMaker Database Name].xml
+│   └── [FileMaker Database Name].xml
 ├── layouts
-│   └── [FileMaker Database Name]
-│       └── [Directory name] - ID [Directory ID]
-│           └── [Layout name] - ID [Layout ID].xml
+│   └── [FileMaker Database Name]
+│       └── [Directory name] - ID [Directory ID]
+│           └── [Layout name] - ID [Layout ID].xml
+├── relationships
+│   └── [FileMaker Database Name]
+│       └── [Left Table name] - [Right Table name] - ID [Relationship ID].xml
 ├── scripts
-│   └── [FileMaker Database Name]
-│       └── [Directory name] - ID [Directory ID]
-│           └── [Script name] - ID [Script ID].xml
+│   └── [FileMaker Database Name]
+│       └── [Directory name] - ID [Directory ID]
+│           └── [Script name] - ID [Script ID].xml
 ├── scripts_sanitized
-│   └── [FileMaker Database Name]
-│       └── [Directory name] - ID [Directory ID]
-│           └── [Script name] - ID [Script ID].txt
+│   └── [FileMaker Database Name]
+│       └── [Directory name] - ID [Directory ID]
+│           └── [Script name] - ID [Script ID].txt
 ├── tables
-│   └── [FileMaker Database Name]
-│       └── [Table name] - ID [Table ID].xml
+│   └── [FileMaker Database Name]
+│       └── [Table name] - ID [Table ID].xml
 ├── themes
-│   └── [FileMaker Database Name]
-│       └── [Theme name] - ID [Theme ID].xml
+│   └── [FileMaker Database Name]
+│       └── [Theme name] - ID [Theme ID].xml
 └── value_lists
-    └── [FileMaker Database Name]
+   └── [FileMaker Database Name]
         └── [Value list name] - ID [Value list ID].xml
 ```
-        
+
 For multi-file solutions it can be helpful to create a separate Git repository for each of these
 directories (`custom_functions`, `external_data_sources`, `layouts`, `scripts`, `scripts_sanitized`, `tables`, `themes`, `value_lists`)
 to manage version control and collaboration effectively.
@@ -108,7 +111,7 @@ the [GitHub repository](https://github.com/BC-M/fm-xml-export-exploder).
     - [ ] CustomFunctionsCatalog
     - [x] FieldsForTables
     - [x] ValueListCatalog
-    - [ ] RelationshipCatalog
+    - [x] RelationshipCatalog
     - [x] CalcsForCustomFunctions
     - [x] ScriptCatalog
     - [x] ThemeCatalog

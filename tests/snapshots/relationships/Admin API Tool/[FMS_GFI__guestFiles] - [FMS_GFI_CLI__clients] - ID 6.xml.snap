@@ -1,0 +1,41 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="6">
+	<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">98981DFA-F66D-42BA-8A45-90AC6218CD8F</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065094" name="FMS_GFI__guestFiles"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065095" name="FMS_GFI_CLI__clients"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="7" name="ID_Server">
+					<TableOccurrenceReference id="1065094" name="FMS_GFI__guestFiles"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="18" name="ID_Server">
+					<TableOccurrenceReference id="1065095" name="FMS_GFI_CLI__clients"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="6" name="id_client">
+					<TableOccurrenceReference id="1065094" name="FMS_GFI__guestFiles"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="id_client">
+					<TableOccurrenceReference id="1065095" name="FMS_GFI_CLI__clients"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>
