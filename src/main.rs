@@ -1,6 +1,7 @@
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
+use crate::base_table_catalog::parse_base_table_catalog;
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
 use crate::external_data_source_catalog::xml_extract_external_data_sources;
 use crate::layout_catalog::xml_explode_layout_catalog;
@@ -23,6 +24,7 @@ use std::{
     time::Instant,
 };
 
+mod base_table_catalog;
 mod calculations;
 mod custom_function_catalog;
 mod external_data_source_catalog;
@@ -101,6 +103,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
     let mut fm_file_name = String::new();
     let mut depth = 0;
     let mut script_id_path_map: HashMap<String, Vec<String>> = HashMap::new();
+    let mut table_name_id_map: HashMap<String, String> = HashMap::new();
 
     // Iterate over XML events
     let decode_reader = BufReader::new(DecodeReaderBytes::new(file));
@@ -134,6 +137,10 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
                         }
                     }
                     3 => match e.name().as_ref() {
+                        b"BaseTableCatalog" => {
+                            table_name_id_map = parse_base_table_catalog(&mut reader, &e);
+                            continue;
+                        }
                         b"LayoutCatalog" => {
                             xml_explode_layout_catalog(
                                 &mut reader,
@@ -144,7 +151,13 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
                             continue;
                         }
                         b"FieldsForTables" => {
-                            xml_explode_table_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
+                            xml_explode_table_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                                &table_name_id_map,
+                            );
                             continue;
                         }
                         b"CalcsForCustomFunctions" => {
