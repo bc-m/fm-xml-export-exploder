@@ -230,11 +230,11 @@ fn write_script_to_file(dir_path: &Path, fm_file_name: &str, script: &ScriptInfo
 }
 
 fn write_script_to_xml_file(output_dir: &Path, script_filename: &str, content: &str) {
-    let output_file_path = output_dir.join(script_filename).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", script_filename));
     write_xml_file(&output_file_path, content, 4);
 }
 
 fn write_script_to_text_file(output_dir: &Path, script_filename: &str, content: &str) {
-    let output_file_path = output_dir.join(script_filename).with_extension("txt");
+    let output_file_path = output_dir.join(format!("{}.txt", script_filename));
     write_text_file(&output_file_path, content);
 }

@@ -63,6 +63,6 @@ pub fn xml_extract_external_data_sources<R: Read + BufRead>(
 }
 
 fn write_external_data_sources_to_file(output_dir: &Path, fm_file_name: &str, content: &str) {
-    let output_file_path = output_dir.join(fm_file_name).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", fm_file_name));
     write_xml_file(&output_file_path, content, 3);
 }

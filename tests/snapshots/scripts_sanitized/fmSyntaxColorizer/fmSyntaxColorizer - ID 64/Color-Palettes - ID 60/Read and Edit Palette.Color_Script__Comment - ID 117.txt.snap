@@ -1,0 +1,21 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20210916 MrW Removed lingering pesky German :D
+# 20121102 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Schleife (Anfang)
+	Wenn [ NICHT IstLeer( Palette.Color_Script::Comment ) ]
+		# Read
+		Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+		Verlasse Schleife wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
+	Ende (wenn)
+	# Edit
+	Variable setzen [ $Comment ; Palette.Color_Script::Comment ]
+	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Verlasse Schleife wenn [ IstLeer( Palette.Color_Script::Comment ) ODER Palette.Color_Script::Comment = $Comment ]
+Schleife (Ende)

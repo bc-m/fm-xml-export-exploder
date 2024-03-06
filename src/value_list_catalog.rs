@@ -107,6 +107,6 @@ fn write_value_list_to_file(output_dir: &Path, value_list: &ValueListInfo) {
         join_scope_id_and_name(value_list.id.as_str(), value_list.name.as_str());
     let value_list_filename = escape_filename(&value_list_filename);
 
-    let output_file_path = output_dir.join(value_list_filename).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", value_list_filename));
     write_xml_file(&output_file_path, &value_list.content, 4);
 }

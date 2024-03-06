@@ -119,6 +119,6 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
 fn write_table_to_file(output_dir: &Path, table: &TableInfo) {
     let table_filename = join_scope_id_and_name(table.id.as_str(), table.name.as_str());
     let table_filename = escape_filename(&table_filename);
-    let output_file_path = output_dir.join(table_filename).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", table_filename));
     write_xml_file(&output_file_path, &table.content, 4);
 }

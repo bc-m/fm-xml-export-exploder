@@ -87,6 +87,6 @@ fn write_custom_function_to_file(output_dir: &Path, cf: &CustomFunctionInfo) {
     let cf_filename = join_scope_id_and_name(cf.id.as_str(), cf.name.as_str());
     let cf_filename = escape_filename(&cf_filename);
 
-    let output_file_path = output_dir.join(cf_filename).with_extension("txt");
+    let output_file_path = output_dir.join(format!("{}.txt", cf_filename));
     write_text_file(&output_file_path, &cf.content);
 }

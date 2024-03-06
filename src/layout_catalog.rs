@@ -143,6 +143,6 @@ fn write_layout_to_file(dir_path: &Path, layout: &LayoutInfo) {
     fs::create_dir_all(&output_dir)
         .unwrap_or_else(|err| panic!("Error creating directory {}: {}", output_dir.display(), err));
 
-    let output_file_path = output_dir.join(layout_filename).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", layout_filename));
     write_xml_file(&output_file_path, &layout.content, 4);
 }
