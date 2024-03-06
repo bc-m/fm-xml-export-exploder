@@ -102,7 +102,7 @@ pub fn xml_explode_table_occurrence_catalog<R: Read + BufRead>(
 fn write_table_occurrence_to_file(output_dir: &Path, table_occurrence: &TableOccurrenceInfo) {
     let filename =
         join_scope_id_and_name(table_occurrence.id.as_str(), table_occurrence.name.as_str());
-    let filename = escape_filename(&filename).replace('.', "_");
-    let output_file_path = output_dir.join(filename).with_extension("xml");
+    let filename = escape_filename(&filename);
+    let output_file_path = output_dir.join(format!("{}.xml", filename));
     write_xml_file(&output_file_path, &table_occurrence.content, 4);
 }

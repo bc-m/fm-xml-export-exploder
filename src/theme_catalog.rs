@@ -106,6 +106,6 @@ fn write_theme_to_file(output_dir: &Path, theme: &ThemeInfo) {
     let theme_filename = join_scope_id_and_name(theme.id.as_str(), theme.name.as_str());
     let theme_filename = escape_filename(&theme_filename);
 
-    let output_file_path = output_dir.join(theme_filename).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", theme_filename));
     write_xml_file(&output_file_path, &theme.content, 4);
 }

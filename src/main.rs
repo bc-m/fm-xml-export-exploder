@@ -359,7 +359,7 @@ mod tests {
             .collect::<Vec<_>>();
         snapshot_file_paths.sort();
 
-        // assert_eq!(output_file_paths.join("\n"), snapshot_file_paths.join("\n"));
+        assert_eq!(snapshot_file_paths.join("\n"), output_file_paths.join("\n"));
 
         for output_file in &output_files {
             let output_content = String::from_utf8(read_file(output_file)).unwrap();

@@ -138,6 +138,6 @@ fn write_relationship_to_file(output_dir: &Path, relationship: &RelationshipInfo
         format!("[{}] - [{}]", relationship.left, relationship.right).as_str(),
     );
     let relationship_filename = escape_filename(&relationship_filename).replace('.', "_");
-    let output_file_path = output_dir.join(relationship_filename).with_extension("xml");
+    let output_file_path = output_dir.join(format!("{}.xml", relationship_filename));
     write_xml_file(&output_file_path, &relationship.content, 4);
 }
