@@ -13,18 +13,12 @@ use crate::table_occurrence_catalog::xml_explode_table_occurrence_catalog;
 use crate::theme_catalog::xml_explode_theme_catalog;
 use crate::utils::attributes::get_attribute;
 use crate::value_list_catalog::xml_explode_value_list_catalog;
+use clap::Parser;
 use encoding_rs_io::DecodeReaderBytes;
 use rayon::prelude::*;
 use std::collections::HashMap;
-use std::{
-    env,
-    error::Error,
-    fs,
-    fs::File,
-    io::BufReader,
-    path::{Path, PathBuf},
-    time::Instant,
-};
+use std::path::Path;
+use std::{error::Error, fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
 
 mod base_table_catalog;
 mod calculations;
@@ -41,20 +35,28 @@ mod theme_catalog;
 mod utils;
 mod value_list_catalog;
 
+/// Parse all as XML exported FileMaker solutions from source directory and explode them to target directory.
+#[derive(Parser)]
+struct Cli {
+    /// The source directory to read
+    source_directory: PathBuf,
+    /// The target directory to write
+    target_directory: PathBuf,
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
     let start = Instant::now();
 
-    let in_dir = env::args().nth(1).ok_or("Input directory not provided")?;
-    let out_dir = env::args().nth(2).ok_or("Output directory not provided")?;
+    let args = Cli::parse();
+    let in_dir = args.source_directory;
+    let out_dir = args.target_directory;
 
-    let in_dir = Path::new(&in_dir);
-    if !is_valid_directory(in_dir) {
+    if !is_valid_directory(&in_dir) {
         println!("'{}' is not a valid directory.", in_dir.display());
         return Ok(());
     }
 
-    let out_dir = Path::new(&out_dir);
-    if !is_valid_directory(out_dir) {
+    if !is_valid_directory(&out_dir) {
         println!("'{}' is not a valid directory.", out_dir.display());
         return Ok(());
     }
@@ -68,7 +70,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Start processing {} files...", paths.len());
 
     // Process XML files in parallel
-    paths.par_iter().for_each(|path| explode_xml(path, out_dir));
+    paths
+        .par_iter()
+        .for_each(|path| explode_xml(path, &out_dir));
 
     let duration = start.elapsed();
     if duration.as_secs() > 9 {
@@ -80,7 +84,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn is_valid_directory(dir_path: &Path) -> bool {
+fn is_valid_directory(dir_path: &PathBuf) -> bool {
     fs::metadata(dir_path)
         .map(|metadata| metadata.is_dir())
         .unwrap_or(false)
@@ -321,7 +325,7 @@ mod tests {
             .collect::<Vec<_>>();
 
         for path in paths {
-            explode_xml(&path, output_dir);
+            explode_xml(&path, &output_dir.to_path_buf());
         }
 
         let output_files: Vec<PathBuf> = WalkDir::new(output_dir)
