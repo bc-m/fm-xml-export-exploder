@@ -1,3 +1,4 @@
+use anyhow::{anyhow, bail, Context, Error, Result};
 use clap::Parser;
 use encoding_rs_io::DecodeReaderBytes;
 use quick_xml::events::Event;
@@ -5,7 +6,7 @@ use quick_xml::reader::Reader;
 use rayon::prelude::*;
 use std::collections::HashMap;
 use std::path::Path;
-use std::{error::Error, fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
+use std::{fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
 
 use crate::base_table_catalog::parse_base_table_catalog;
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
@@ -44,22 +45,15 @@ struct Cli {
     target_directory: PathBuf,
 }
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main() -> Result<()> {
     let start = Instant::now();
 
     let args = Cli::parse();
     let in_dir = args.source_directory;
     let out_dir = args.target_directory;
 
-    if !is_valid_directory(&in_dir) {
-        println!("'{}' is not a valid directory.", in_dir.display());
-        return Ok(());
-    }
-
-    if !is_valid_directory(&out_dir) {
-        println!("'{}' is not a valid directory.", out_dir.display());
-        return Ok(());
-    }
+    valid_dir_or_throw(&in_dir)?;
+    valid_dir_or_throw(&out_dir)?;
 
     // Read directory contents
     let paths = fs::read_dir(in_dir)?
@@ -70,9 +64,15 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Start processing {} files...", paths.len());
 
     // Process XML files in parallel
-    paths
-        .par_iter()
-        .for_each(|path| explode_xml(path, &out_dir));
+    paths.par_iter().for_each(|path| {
+        match explode_xml(path, &out_dir) {
+            Ok(_) => {}
+            Err(err) => {
+                let file_name = path.file_name().unwrap().to_str().unwrap();
+                eprintln!("Failed to process file '{}': {}", file_name, err)
+            }
+        };
+    });
 
     let duration = start.elapsed();
     if duration.as_secs() > 9 {
@@ -84,28 +84,23 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn is_valid_directory(dir_path: &PathBuf) -> bool {
-    fs::metadata(dir_path)
-        .map(|metadata| metadata.is_dir())
-        .unwrap_or(false)
+fn valid_dir_or_throw(dir_path: &PathBuf) -> Result<(), Error> {
+    let metadata = fs::metadata(dir_path)
+        .with_context(|| format!("Path '{}' not exists", dir_path.display()))?;
+
+    match metadata.is_dir() {
+        true => Ok(()),
+        false => Err(anyhow!("Path '{}' is not a directory", dir_path.display())),
+    }
 }
 
-fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
+fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(), Error> {
     let start = Instant::now();
     let fm_export_file_name = fm_export_file_path.file_name().unwrap().to_str().unwrap();
 
     // Open XML file
-    let file = match File::open(fm_export_file_path) {
-        Ok(file) => file,
-        Err(err) => {
-            eprintln!(
-                "Error opening file {}: {}",
-                fm_export_file_path.display(),
-                err
-            );
-            return;
-        }
-    };
+    let file = File::open(fm_export_file_path)
+        .with_context(|| format!("Error opening file {}", fm_export_file_path.display(),))?;
 
     // Initialize variables
     let mut fm_file_name = String::new();
@@ -135,8 +130,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
                                 .to_string()
                         }
                         _ => {
-                            eprintln!("Unsupported XML-format in file {}", fm_export_file_name);
-                            return;
+                            bail!("Unsupported XML-format");
                         }
                     },
                     2 => {
@@ -250,6 +244,8 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) {
         fm_export_file_name,
         start.elapsed().as_millis()
     );
+
+    Ok(())
 }
 
 fn join_scope_id_and_name(scope_id: &str, scope_name: &str) -> String {
@@ -325,7 +321,8 @@ mod tests {
             .collect::<Vec<_>>();
 
         for path in paths {
-            explode_xml(&path, &output_dir.to_path_buf());
+            explode_xml(&path, output_dir)
+                .unwrap_or_else(|_| panic!("Error processing file '{}'", path.display()));
         }
 
         let output_files: Vec<PathBuf> = WalkDir::new(output_dir)
