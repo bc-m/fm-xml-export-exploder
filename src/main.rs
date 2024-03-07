@@ -38,19 +38,21 @@ mod value_list_catalog;
 
 /// Parse all as XML exported FileMaker solutions from source directory and explode them to target directory.
 #[derive(Parser)]
-struct Cli {
-    /// The source directory to read
-    source_directory: PathBuf,
-    /// The target directory to write
-    target_directory: PathBuf,
+#[command(version, about, long_about = None)]
+struct Args {
+    /// The source directory to read input
+    source: PathBuf,
+
+    /// The target directory to write output
+    target: PathBuf,
 }
 
 fn main() -> Result<()> {
     let start = Instant::now();
 
-    let args = Cli::parse();
-    let in_dir = args.source_directory;
-    let out_dir = args.target_directory;
+    let args = Args::parse();
+    let in_dir = args.source;
+    let out_dir = args.target;
 
     valid_dir_or_throw(&in_dir)?;
     valid_dir_or_throw(&out_dir)?;
