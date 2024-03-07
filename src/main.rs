@@ -1,5 +1,11 @@
+use clap::Parser;
+use encoding_rs_io::DecodeReaderBytes;
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
+use rayon::prelude::*;
+use std::collections::HashMap;
+use std::path::Path;
+use std::{error::Error, fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
 
 use crate::base_table_catalog::parse_base_table_catalog;
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
@@ -13,12 +19,6 @@ use crate::table_occurrence_catalog::xml_explode_table_occurrence_catalog;
 use crate::theme_catalog::xml_explode_theme_catalog;
 use crate::utils::attributes::get_attribute;
 use crate::value_list_catalog::xml_explode_value_list_catalog;
-use clap::Parser;
-use encoding_rs_io::DecodeReaderBytes;
-use rayon::prelude::*;
-use std::collections::HashMap;
-use std::path::Path;
-use std::{error::Error, fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
 
 mod base_table_catalog;
 mod calculations;
