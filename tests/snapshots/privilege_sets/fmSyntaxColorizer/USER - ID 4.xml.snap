@@ -1,0 +1,773 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<PrivilegeSet id="4" name="USER">
+	<UUID modifications="25" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-25T22:25:52">E01A965E-6B12-444F-9004-5F71970B92D5</UUID>
+	<Description></Description>
+	<access>
+		<Records Custom="True">
+			<Custom>
+				<ObjectList membercount="9">
+					<Table type="existing">
+						<BaseTableReference id="132" name="_Color"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="134" name="_GUISyntax"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="Calculation">
+							<Calculation>
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+								<Text><![CDATA[Hole ( AnzahlDatensätzeGesamt ) > 1]]></Text>
+								<ChunkList hash="D9A11CD8CAE9F5FB48FF1E36320F723C">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+									<Chunk type="NoRef"> ) &gt; 1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="136" name="_Home"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="137" name="_Language"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="138" name="_SyntaxTemp"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="New" View="ReadWrite" Edit="ReadWrite" Create="ReadWrite" Delete="ReadWrite" Fields="ReadWrite"></Table>
+				</ObjectList>
+			</Custom>
+		</Records>
+		<Layouts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="24">
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="5" name="Colors"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="6" name="Syntax"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="7" name="GUISyntax"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="8" name="Palettes"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="9" name="Home"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="12" name="Languages"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="13" name="A About"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="14" name="-"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="15" name="-"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="16" name="I_Duplicate_Palette"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="17" name="-"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="20" name="I Home ADMIN"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="22" name="-"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="23" name="I_Syntax_ADMIN"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="24" name="-"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="25" name="Home_Info"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="30" name="Internal"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="31" name="--"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="32" name="A Import Palettes"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="34" name="I_SyntaxTemp ADMIN"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="35" name="Home_Minimised"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="36" name="MBS-DeveloperOptions"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="37" name="I_Palette"></LayoutReference>
+					</Layout>
+					<Layout type="New" access="ReadOnly" records="ReadWrite"></Layout>
+				</ObjectList>
+			</Custom>
+		</Layouts>
+		<ValueLists viewState="ReadOnly"></ValueLists>
+		<Scripts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="199">
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="9" name="All script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="11" name="All script steps and all options"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="19" name="Navi"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="20" name="Logo BTN"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="21" name="Logo open URL"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="22" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="23" name="OnFirstWindowOpen"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="27" name="### 20230303 @mrwatson-de v1.13 ###"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="28" name="Admin Menu"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="29" name="Toggle Toolbar"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="30" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="31" name="Prepare Release"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="32" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="33" name="Duplicate Palette"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="34" name="Home BTN"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="35" name="MBS Logo BTN"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="36" name="OnLastWindowClose"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="37" name="Install Menus"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="38" name="MBS Filemaker Plugin Documentation"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="39" name="View"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="40" name="All"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="41" name="MBS_SyntaxColoring( Action )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="42" name="MBS Plugin check"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="43" name="Change Palette"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="44" name="MBS"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="45" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="46" name="Example SyntaxColorizing"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="47" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="48" name="Close File"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="49" name="Open Script Editor"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="50" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="51" name="Set Color( Field )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="52" name="Custom script 1"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="53" name="Add all"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="54" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="55" name="Refresh all"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="56" name="Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="57" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="58" name="Buttonbar"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="59" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="60" name="Color-Palettes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="61" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="62" name="Remove all"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="63" name="OnObjectModify ColorName #T#"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="64" name="fmSyntaxColorizer"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="65" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="66" name="Prepare Home Screen"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="67" name="Help Menu"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="68" name="Application Help"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="69" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="70" name="Send Feedback"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="71" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="72" name="About this Application…"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="73" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="75" name="Apply Palette"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="76" name="Delete"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="77" name="Set Palette as Default"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="78" name="In Devel"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="79" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="80" name="New"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="81" name="Export Color-Palettes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="82" name="Import Color-Palettes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="83" name="OnObjectModify _gID_ActivePalette #T#"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="84" name="Duplicate"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="85" name="OnObjectModify _kIsActivePalette #T#"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="86" name="OnEnterObject PaletteName #T#"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="87" name="Sort Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="88" name="Colorize!"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="89" name="Home"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="90" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="91" name="Show All Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="92" name="Show All GUI-Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="93" name="GUI-Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="94" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="95" name="HALT on Windows"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="96" name="HALT if not browse mode"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="97" name="System"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="98" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="99" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="100" name="Prepare GUI-Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="101" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="102" name="Custom script 2"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="103" name="Custom script 3"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="104" name="Custom script 4"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="105" name="Custom script 5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="106" name="MBS Filemaker Plugin"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="107" name="WWW"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="108" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="109" name="MonkeyBreadSoftware"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="110" name="GRR Colors"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="111" name="GRR GUI-Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="112" name="Delete orphaned and empty GUI-Syntax entries"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="113" name="Show Default Palette"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="114" name="Duplicate Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="115" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="116" name="Read and Edit Syntax Comment"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="117" name="Read and Edit Palette.Color_Script::Comment"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="118" name="Colors"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="119" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="120" name="Prepare Colors"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="121" name="Comment Column i-Header"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="122" name="BTN Sort Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="123" name="Read and Edit Palette.Color_Formula::Comment"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="124" name="Prepare Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="125" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="126" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="127" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="128" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="129" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="130" name="StartSession"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="138" name="Find( Selector ; Wildcard )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="139" name="Allow Formatting Bar ( 0/1 )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="140" name="Go to Home Layout"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="141" name="Export Syntax-Tags"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="142" name="Import Syntax-Tags"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="143" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="144" name="MBS_SetSyntaxColoringEnabledStatus"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="145" name="A typical script"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="146" name="fm12 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="147" name="Halt Script"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="148" name="Set LastMessageChoice( Nr )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="149" name="Open Scripts"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="150" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="151" name="All script steps sorted by ID"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="152" name="fm13 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="153" name="Set LineNumber Color"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="154" name="Functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="155" name="Empty Script"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="156" name="Home Info BTN"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="157" name="Postpare Release"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="158" name="Hard sort Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="159" name="Renumber ALL Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="160" name="Tidy up _SyntaxTemp"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="161" name="SyntaxTemp"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="162" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="163" name="Home_Midimised"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="164" name="fm14 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="165" name="fm15 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="166" name="fm15 changed script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="167" name="fm14 functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="168" name="fm15 functions "></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="171" name="Omit RecordNav BTN"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="172" name="Filter FM-Version"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="173" name="Go to Syntax for given FM-Version"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="174" name="Custom scripts"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="175" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="176" name="fm16 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="178" name="MBS_DeveloperTools Init"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="179" name="MBS_DeveloperTools All"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="180" name="MBS_DeveloperTools One"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="183" name="Functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="184" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="185" name="Resort Syntax"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="186" name="Common functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="187" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="188" name="Windows User Comiserations"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="190" name="OnEnterTextField open URL #T#"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="191" name="Close Popover"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="192" name="fm17 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="193" name="fm18 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="194" name="fm16 functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="195" name="fm17 functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="196" name="fm18 functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="197" name="New functionality reference"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="198" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="199" name="Script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="200" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="201" name="Hello::World"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="202" name="Import Column 5 from en fmXRaySelf"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="203" name="Modules"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="204" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="217" name="Undefined variables"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="218" name="All script steps sorted in English"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="219" name="All script steps sorted in Italian"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="221" name="MBS-Developer-Options Renumber"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="222" name="fm19 script steps"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="223" name="Show Color Help"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="224" name="Show Current Palette"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="225" name="Open repo BTN"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="226" name="Collection Filter this collection"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="227" name="Syntax-Collections"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="228" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="229" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="230" name="MBS-Developer-Options"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="231" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="232" name="Scripts for Buttons"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="233" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="234" name="Clear Home Info"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="235" name="fm19 functions"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="236" name="Switch active palette between Dark/Light mode automatically"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="237" name="Mode Change ( Event )"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="238" name="fmIDE Module"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="239" name="fmIDE public api"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="240" name="fmIDE"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="241" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="242" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="243" name="Re-Login"></ScriptReference>
+					</Script>
+					<Script type="New" access="ReadOnly"></Script>
+				</ObjectList>
+			</Custom>
+		</Scripts>
+		<Other value="25344" Print="True" Export="True" manageAccounts="False" manageExtPrivs="False" allowOverride="False" disconnectIdle="True" commands="All">
+			<Password prohibitModification="True"></Password>
+		</Other>
+	</access>
+</PrivilegeSet>
