@@ -30,12 +30,24 @@ The extracted content is organized into directories based on the context of the 
 ├── custom_functions
 │   └── [FileMaker database name]
 │       └── [CF name] - ID [CF ID].txt
+├── custom_menu_sets
+│   └── [FileMaker database name]
+│       └── [Set name] - ID [Set ID].txt
+├── custom_menus
+│   └── [FileMaker database name]
+│       └── [Menu name] - ID [Menu ID].txt
+├── extended_privileges
+│   └── [FileMaker database name]
+│       └── [Privileges name] - ID [Privileges ID].txt
 ├── external_data_sources
 │   └── [FileMaker database name].xml
 ├── layouts
 │   └── [FileMaker database name]
 │       └── [Directory name] - ID [Directory ID]
 │           └── [Layout name] - ID [Layout ID].xml
+├── privilege_sets
+│   └── [FileMaker database name]
+│       └── [Set name] - ID [Set ID].txt
 ├── relationships
 │   └── [FileMaker database name]
 │       └── [Left Table name] - [Right Table name] - ID [Relationship ID].xml
@@ -61,7 +73,7 @@ The extracted content is organized into directories based on the context of the 
         └── [Value list name] - ID [Value list ID].xml
 ```
 
-For multi-file solutions it can be helpful to create a separate Git repository for each of these directories (`custom_functions`, `external_data_sources`, `layouts`, `scripts`, `scripts_sanitized`, `tables`, `themes`, `value_lists`) to manage version control and collaboration effectively.
+For multi-file solutions it can be helpful to create a separate Git repository for each of these directories (`custom_functions`, `layouts`, `scripts`, `tables` and so on) to manage version control and collaboration effectively.
 
 ## Why this structure?
 
@@ -114,9 +126,9 @@ Contributions are welcome! Feel free to open issues or pull requests on the [Git
     - [x] ScriptCatalog
     - [x] ThemeCatalog
     - [x] LayoutCatalog
-    - [ ] PrivilegeSetsCatalog
-    - [ ] ExtendedPrivilegesCatalog
+    - [x] PrivilegeSetsCatalog
+    - [x] ExtendedPrivilegesCatalog
     - [ ] AccountsCatalog
     - [x] StepsForScripts
-    - [ ] CustomMenuCatalog
-    - [ ] CustomMenuSetCatalog
+    - [x] CustomMenuCatalog
+    - [x] CustomMenuSetCatalog

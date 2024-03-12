@@ -2,8 +2,12 @@
 
 folders=(
     "custom_functions"
+    "custom_menu_sets"
+    "custom_menus"
+    "extended_privileges"
     "external_data_sources"
     "layouts"
+    "privileges_sets"
     "relationships"
     "scripts"
     "scripts_sanitized"
