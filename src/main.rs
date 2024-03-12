@@ -10,6 +10,7 @@ use std::{fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
 
 use crate::base_table_catalog::parse_base_table_catalog;
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
+use crate::custom_menu_catalog::xml_explode_custom_menu_catalog;
 use crate::custom_menu_set_catalog::xml_explode_custom_menu_set_catalog;
 use crate::extended_privileges_catalog::xml_explode_extended_privileges_catalog;
 use crate::external_data_source_catalog::xml_extract_external_data_sources;
@@ -27,6 +28,7 @@ use crate::value_list_catalog::xml_explode_value_list_catalog;
 mod base_table_catalog;
 mod calculations;
 mod custom_function_catalog;
+mod custom_menu_catalog;
 mod custom_menu_set_catalog;
 mod extended_privileges_catalog;
 mod external_data_source_catalog;
@@ -253,6 +255,15 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                         }
                         b"CustomMenuSetCatalog" => {
                             xml_explode_custom_menu_set_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
+                        b"CustomMenuCatalog" => {
+                            xml_explode_custom_menu_catalog(
                                 &mut reader,
                                 &e,
                                 out_dir_path,
