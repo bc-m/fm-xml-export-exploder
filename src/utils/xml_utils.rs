@@ -96,6 +96,39 @@ pub fn skip_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &BytesStart) {
     }
 }
 
+pub fn element_to_string<R: Read + BufRead>(reader: &mut Reader<R>, start: &BytesStart) -> String {
+    let mut content = start_element_to_string(start);
+    let mut depth = 1;
+    let mut buf: Vec<u8> = Vec::new();
+    loop {
+        match reader.read_event_into(&mut buf) {
+            Err(_) => continue,
+            Ok(Event::Eof) => break,
+            Ok(Event::Start(e)) => {
+                depth += 1;
+                content.push_str(&start_element_to_string(&e))
+            }
+            Ok(Event::CData(e)) => {
+                content.push_str(&cdata_element_to_string(&e));
+            }
+            Ok(Event::Text(e)) | Ok(Event::Comment(e)) => {
+                content.push_str(&text_element_to_string(&e, true));
+            }
+            Ok(Event::End(e)) => {
+                content.push_str(&end_element_to_string(&e));
+                depth -= 1;
+                if depth == 0 {
+                    break;
+                }
+            }
+            _ => {}
+        }
+        buf.clear();
+    }
+
+    content
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

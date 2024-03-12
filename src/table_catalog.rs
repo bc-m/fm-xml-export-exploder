@@ -10,14 +10,7 @@ use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, local_name_to_string, start_element_to_string,
     text_element_to_string,
 };
-use crate::utils::{initialize_out_dir, write_xml_file};
-
-#[derive(Debug, Default)]
-struct TableInfo {
-    id: String,
-    name: String,
-    content: String,
-}
+use crate::utils::{initialize_out_dir, write_xml_file, Entity};
 
 pub fn xml_explode_table_catalog<R: Read + BufRead>(
     reader: &mut Reader<R>,
@@ -29,7 +22,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
     let out_dir_path = out_dir_path.join("tables").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
 
-    let mut table_info = TableInfo::default();
+    let mut table_info = Entity::default();
 
     let mut depth = 1;
     let mut buf = Vec::new();
@@ -44,9 +37,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
                 depth += 1;
 
                 if depth == 2 {
-                    table_info.id.clear();
-                    table_info.name.clear();
-                    table_info.content.clear();
+                    table_info.clear();
                 }
 
                 if depth == 3 {
@@ -89,9 +80,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
 
                 if depth == 1 && local_name_to_string(e.name().as_ref()) == "FieldCatalog" {
                     write_table_to_file(&out_dir_path, &table_info);
-                    table_info.id.clear();
-                    table_info.name.clear();
-                    table_info.content.clear();
+                    table_info.clear();
                 }
             }
             Ok(Event::CData(e)) => {
@@ -116,7 +105,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
     }
 }
 
-fn write_table_to_file(output_dir: &Path, table: &TableInfo) {
+fn write_table_to_file(output_dir: &Path, table: &Entity) {
     let table_filename = join_scope_id_and_name(table.id.as_str(), table.name.as_str());
     let table_filename = escape_filename(&table_filename);
     let output_file_path = output_dir.join(format!("{}.xml", table_filename));

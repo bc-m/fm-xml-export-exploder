@@ -1,12 +1,67 @@
-use crate::should_skip_line;
+use crate::utils::attributes::get_attributes;
+use crate::utils::xml_utils::element_to_string;
+use crate::{escape_filename, join_scope_id_and_name, should_skip_line};
+use quick_xml::events::BytesStart;
+use quick_xml::Reader;
 use regex::Regex;
 use std::fs;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Write};
+use std::io::{BufRead, BufReader, Read, Write};
 use std::path::Path;
 
 pub(crate) mod attributes;
 pub(crate) mod xml_utils;
+
+#[derive(Debug, Default)]
+pub struct Entity {
+    pub id: String,
+    pub name: String,
+    pub content: String,
+}
+
+impl Entity {
+    pub fn clear(&mut self) {
+        self.id.clear();
+        self.name.clear();
+        self.content.clear();
+    }
+
+    pub fn read_xml_element<R: Read + BufRead>(&mut self, reader: &mut Reader<R>, e: &BytesStart) {
+        self.clear();
+        for attr in get_attributes(e).unwrap() {
+            match attr.0.as_str() {
+                "id" => self.id = attr.1.to_string(),
+                "name" => {
+                    if self.name.is_empty() {
+                        self.name = attr.1.to_string()
+                    }
+                }
+                "Display" => self.name = attr.1.to_string(),
+                _ => {}
+            }
+        }
+        self.content = element_to_string(reader, e);
+    }
+}
+
+pub fn write_xml_element_to_file<R: Read + BufRead>(
+    reader: &mut Reader<R>,
+    e: &BytesStart,
+    output_dir: &Path,
+    remove_indent_count: usize,
+) {
+    let mut entity = Entity::default();
+    entity.read_xml_element(reader, e);
+    write_entity_to_file(output_dir, &entity, remove_indent_count);
+}
+
+pub fn write_entity_to_file(output_dir: &Path, entity: &Entity, remove_indent_count: usize) {
+    let filename = join_scope_id_and_name(entity.id.as_str(), entity.name.as_str());
+    let filename = escape_filename(&filename);
+
+    let output_file_path = output_dir.join(format!("{}.xml", filename));
+    write_xml_file(&output_file_path, &entity.content, remove_indent_count);
+}
 
 pub fn initialize_out_dir(out_dir_path: &Path) {
     if out_dir_path.exists() {

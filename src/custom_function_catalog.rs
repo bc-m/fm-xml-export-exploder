@@ -6,14 +6,7 @@ use std::path::Path;
 
 use crate::utils::attributes::get_attributes;
 use crate::utils::xml_utils::{cdata_to_string, local_name_to_string};
-use crate::utils::{initialize_out_dir, write_text_file};
-
-#[derive(Debug, Default)]
-struct CustomFunctionInfo {
-    id: String,
-    name: String,
-    content: String,
-}
+use crate::utils::{initialize_out_dir, write_text_file, Entity};
 
 pub fn xml_explode_custom_function_catalog<R: Read + BufRead>(
     reader: &mut Reader<R>,
@@ -24,7 +17,7 @@ pub fn xml_explode_custom_function_catalog<R: Read + BufRead>(
     let out_dir_path = out_dir_path.join("custom_functions").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
 
-    let mut custom_function_info = CustomFunctionInfo::default();
+    let mut custom_function_info = Entity::default();
 
     let mut depth = 1;
     let mut buf = Vec::new();
@@ -39,9 +32,7 @@ pub fn xml_explode_custom_function_catalog<R: Read + BufRead>(
                 if depth < 3 {
                     continue;
                 } else if depth == 3 {
-                    custom_function_info.id.clear();
-                    custom_function_info.name.clear();
-                    custom_function_info.content.clear();
+                    custom_function_info.clear();
                 } else if depth == 4 && e.name().as_ref() == b"CustomFunctionReference" {
                     for attr in get_attributes(&e).unwrap() {
                         match attr.0.as_str() {
@@ -62,9 +53,7 @@ pub fn xml_explode_custom_function_catalog<R: Read + BufRead>(
                     && local_name_to_string(e.name().as_ref()) == "CustomFunctionCalc"
                 {
                     write_custom_function_to_file(&out_dir_path, &custom_function_info);
-                    custom_function_info.id.clear();
-                    custom_function_info.name.clear();
-                    custom_function_info.content.clear();
+                    custom_function_info.clear();
                 }
             }
             Ok(Event::CData(e)) => {
@@ -83,7 +72,7 @@ pub fn xml_explode_custom_function_catalog<R: Read + BufRead>(
     }
 }
 
-fn write_custom_function_to_file(output_dir: &Path, cf: &CustomFunctionInfo) {
+fn write_custom_function_to_file(output_dir: &Path, cf: &Entity) {
     let cf_filename = join_scope_id_and_name(cf.id.as_str(), cf.name.as_str());
     let cf_filename = escape_filename(&cf_filename);
 
