@@ -32,7 +32,7 @@ folders=(
     "extended_privileges"
     "external_data_sources"
     "layouts"
-    "privileges_sets"
+    "privilege_sets"
     "relationships"
     "scripts"
     "scripts_sanitized"
