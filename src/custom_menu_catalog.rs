@@ -12,7 +12,7 @@ pub fn xml_explode_custom_menu_catalog<R: Read + BufRead>(
     out_dir_path: &Path,
     fm_file_name: &str,
 ) {
-    let out_dir_path = out_dir_path.join("custom_menu").join(fm_file_name);
+    let out_dir_path = out_dir_path.join("custom_menus").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
 
     let mut depth = 1;
