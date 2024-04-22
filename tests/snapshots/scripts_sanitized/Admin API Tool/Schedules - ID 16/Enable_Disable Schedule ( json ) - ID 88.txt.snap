@@ -3,14 +3,19 @@ source: src/main.rs
 expression: output_content
 ---
 #  PURPOSE: Enable Schedule
-#  HISTORY:&#13;   - Created:   2018-07-13 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-MM-DD by FName LName
+#  HISTORY:
+				   - Created:   2018-07-13 by Mike Duncan (mduncan@soliantconsulting.com)
+				   - Modified:  2018-MM-DD by FName LName
 # JSON DOCUMENTATION:
-# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets &quot;[]&quot;.
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets "[]".
 #  id
 #  enabled
 
 #  JSON EXAMPLE:
-# JSONSetElement ( &quot;&quot; &#13; ; [ &quot;id&quot; ; $id ; JSONString ]&#13; ; [ &quot;enabled&quot; ; &quot;1&quot; ; JSONString ]&#13;)
+# JSONSetElement ( "" 
+				 ; [ "id" ; $id ; JSONString ]
+				 ; [ "enabled" ; "1" ; JSONString ]
+				)
 
 AnwenderAbbruchZulassen setzen [ ON ]
 Fehleraufzeichnung setzen [ ON ]

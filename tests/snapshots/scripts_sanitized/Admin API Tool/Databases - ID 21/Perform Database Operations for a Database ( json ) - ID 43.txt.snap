@@ -3,14 +3,19 @@ source: src/main.rs
 expression: output_content
 ---
 #  PURPOSE: Perform action on a Database
-#  HISTORY:&#13;   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-06-28 by FName LName
+#  HISTORY:
+				   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+				   - Modified:  2018-06-28 by FName LName
 # JSON DOCUMENTATION:
-# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets &quot;[]&quot;.
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets "[]".
 #  id
 #  status
 
 #  JSON EXAMPLE:
-# JSONSetElement ( &quot;&quot; &#13; ; [ &quot;id&quot; ; $id ; JSONString ]&#13; ; [ &quot;status&quot; ; &quot;msg&quot; ; JSONString ]&#13;)
+# JSONSetElement ( "" 
+				 ; [ "id" ; $id ; JSONString ]
+				 ; [ "status" ; "msg" ; JSONString ]
+				)
 
 AnwenderAbbruchZulassen setzen [ ON ]
 Fehleraufzeichnung setzen [ ON ]

@@ -5,7 +5,10 @@ expression: output_content
 # /##
 Variable setzen [ $fmide_version ; "0.32" ]
 # @note Please do not move the lines above
-# @referencedByName &#13;- Do not rename this script!&#13;- This script is called externally by name by fmp/claris urls&#13;- Recommended: If you always call this script by name you can replace the entire script without breaking any calls to it!
+# @referencedByName 
+				- Do not rename this script!
+				- This script is called externally by name by fmp/claris urls
+				- Recommended: If you always call this script by name you can replace the entire script without breaking any calls to it!
 
 # # fmIDE
 # A FileMaker Integrated Development Environment
@@ -14,7 +17,7 @@ Variable setzen [ $fmide_version ; "0.32" ]
 # - fmIDE goes straight to the thing you name in the FileMaker IDE
 # - fmIDE runs actions or entire action scripts you pass it
 
-# - fmIDE comprises a single &quot;fmIDE&quot; script (to make using it and updating it simple)
+# - fmIDE comprises a single "fmIDE" script (to make using it and updating it simple)
 # - fmIDE uses lower_snake_case for (nearly) all parameter and variable names for simplicity
 # - fmIDE is developed and tested on Mac (and maybe works/can be made to work, at least partially, on windows)
 # - fmIDE builds on the MBS plugin for many of its best features
@@ -22,8 +25,10 @@ Variable setzen [ $fmide_version ; "0.32" ]
 # ## About
 # @author MrWatson
 # @license MIT
-# @version see the fmIDE_version variable at the top of this script&#13;- fmp://$/fmIDE?script=fmIDE&amp;$script_name=fmIDE&amp;$script_step_number=2
-# @changed see @script &quot;###…&quot;&#13;- fmp://$/fmIDE?script=fmIDE&amp;$script_name_stub=%23%23%23&amp;$script_step_number=11
+# @version see the fmIDE_version variable at the top of this script
+				- fmp://$/fmIDE?script=fmIDE&$script_name=fmIDE&$script_step_number=2
+# @changed see @script "###…"
+				- fmp://$/fmIDE?script=fmIDE&$script_name_stub=%23%23%23&$script_step_number=11
 # @created 2022-06-23
 # @see Repo https://github.com/fmIDE/fmIDE
 
@@ -43,15 +48,21 @@ Variable setzen [ $fmide_version ; "0.32" ]
 
 # ## Setting up fmIDE
 # You may have to customise the two fmIDE Interface Scripts in order for fmIDE to be able to jump to the right Basetable
-# See @script &quot;fmIDE.GetBaseLayoutName&quot; - fmp://$/fmIDE?script=fmIDE&amp;$script_name=fmIDE.GetBaseLayoutName
-# See @script &quot;fmIDE.GetBaseTableName&quot; - fmp://$/fmIDE?script=fmIDE&amp;$script_name=fmIDE.GetBaseTableName
+# See @script "fmIDE.GetBaseLayoutName" - fmp://$/fmIDE?script=fmIDE&$script_name=fmIDE.GetBaseLayoutName
+# See @script "fmIDE.GetBaseTableName" - fmp://$/fmIDE?script=fmIDE&$script_name=fmIDE.GetBaseTableName
 
 # ## Download the latest fmIDE here:
 # @see Latest Release https://github.com/fmIDE/fmIDE/releases/latest
 
 # ## Update this script
-# To update the contents of this script&#13;&#13;1. First copy the steps of the new version onto the clipboard&#13;2. Make sure all scripts are saved (to avoid dialogs)&#13;3. Then click the MBS URL link in the following step&#13;   - If anything goes wrong use undo or revert script to return to the previous state
-# @action paste-update fmIDE&#13;- fmp://$/fmIDE?script=fmIDE&amp;$actions=%5B%7B%22Go%20to%20Script%22%3A%7B%22script_name%22%3A%22fmIDE%22%2C%22script_step_range%22%3A%221%E2%80%A6-1%22%7D%7D%2C%7B%22Press%22%3A%7B%22key%22%3A%22%5Cb%22%7D%7D%2C%7B%22Press%22%3A%7B%22key%22%3A%22%5Cb%22%7D%7D%2C%7B%22Paste%22%3Anull%7D%5D
+# To update the contents of this script
+				
+				1. First copy the steps of the new version onto the clipboard
+				2. Make sure all scripts are saved (to avoid dialogs)
+				3. Then click the MBS URL link in the following step
+				   - If anything goes wrong use undo or revert script to return to the previous state
+# @action paste-update fmIDE
+				- fmp://$/fmIDE?script=fmIDE&$actions=%5B%7B%22Go%20to%20Script%22%3A%7B%22script_name%22%3A%22fmIDE%22%2C%22script_step_range%22%3A%221%E2%80%A6-1%22%7D%7D%2C%7B%22Press%22%3A%7B%22key%22%3A%22%5Cb%22%7D%7D%2C%7B%22Press%22%3A%7B%22key%22%3A%22%5Cb%22%7D%7D%2C%7B%22Paste%22%3Anull%7D%5D
 
 
 # # Using fmIDE
@@ -74,35 +85,79 @@ Variable setzen [ $fmide_version ; "0.32" ]
 # @param {…} action.«action_name».«action_parameter»
 
 # @example of a `Go to Layout` action using the *action object* syntax:
-# ` JSONSetElement( &quot;{}&quot; ; &quot;action.Go to Layout.layout_name&quot; ; &quot;fmIDE Actions&quot; ; JSONString )
+# ` JSONSetElement( "{}" ; "action.Go to Layout.layout_name" ; "fmIDE Actions" ; JSONString )
 
 # or
-# An action can be passed as a simple list of action-parameters,&#13;in which the parameter `action_name` specifies the name of the action
+# An action can be passed as a simple list of action-parameters,
+				in which the parameter `action_name` specifies the name of the action
 # @param {string} action.action_name - the name of the action
 # @param {…} action.«action_parameter» - an action parameter
 
 # @example of the same `Go to Layout` action using the *action_name* syntax:
-# ` JSONSetElement( &quot;{}&quot;&#13;  ;[ &quot;action.action_name&quot; ; &quot;Go to Layout&quot;; JSONString]&#13;  ;[ &quot;action.layout_name&quot; ; &quot;fmIDE Actions&quot; ; JSONString]&#13;  )
+# ` JSONSetElement( "{}"
+				  ;[ "action.action_name" ; "Go to Layout"; JSONString]
+				  ;[ "action.layout_name" ; "fmIDE Actions" ; JSONString]
+				  )
 
-# Note: Action names can be specified in any way you want - independently of how the action is passed:&#13;&#13;- `Go to Layout`&#09;(Original/natural case)&#13;- `go_to_layout`&#09;(lower_snake_case)&#13;- `GoToLayout`&#09;(UpperCamelCase)&#13;- `Go To Layout`&#09;(Title Case)&#13;- `GO TO LAYOUT`&#09;(UPPERCASE)&#13;&#13;The first two are to be preferred (one being like FileMaker step names, the other like fmIDE parameter names),&#13;but you can choose whatever suits you!
+# Note: Action names can be specified in any way you want - independently of how the action is passed:
+				
+				- `Go to Layout`	(Original/natural case)
+				- `go_to_layout`	(lower_snake_case)
+				- `GoToLayout`	(UpperCamelCase)
+				- `Go To Layout`	(Title Case)
+				- `GO TO LAYOUT`	(UPPERCASE)
+				
+				The first two are to be preferred (one being like FileMaker step names, the other like fmIDE parameter names),
+				but you can choose whatever suits you!
 
 # @example of a `Go to Layout` action using the *action object* syntax and lower_snake_case:
-# ` JSONSetElement( &quot;{}&quot; ; &quot;action.go_to_layout.layout_name&quot; ; &quot;Start Layout&quot; ; JSONString )
+# ` JSONSetElement( "{}" ; "action.go_to_layout.layout_name" ; "Start Layout" ; JSONString )
 
 # @param {array} $actions - A JSON array of action objects
-# ` JSONSetElement( &quot;[]&quot;&#13;  ;[ &quot;[0].Go to Layout.layout_name&quot; ; &quot;fmIDE Actions&quot; ; JSONString]&#13;  ;[ &quot;[1].Enter Find Mode&quot; ; &quot;&quot; ; JSONNull]&#13;  ;[ &quot;[2].Set Field.fmIDE_Action::ActionName.text&quot; ; &quot;Set&quot; ; JSONString]&#13;  ;[ &quot;[3].Perform Find&quot; ; &quot;&quot; ; JSONNull]&#13;  )
+# ` JSONSetElement( "[]"
+				  ;[ "[0].Go to Layout.layout_name" ; "fmIDE Actions" ; JSONString]
+				  ;[ "[1].Enter Find Mode" ; "" ; JSONNull]
+				  ;[ "[2].Set Field.fmIDE_Action::ActionName.text" ; "Set" ; JSONString]
+				  ;[ "[3].Perform Find" ; "" ; JSONNull]
+				  )
 # Here is that action script as an fmpurl targeted at this file:
-# @action Search for set actions in the fmIDE demo file&#13;- fmp://$/fmIDE?script=fmIDE&amp;$actions=%5B%7B%22Go%20to%20Layout%22%3A%7B%22layout_name%22%3A%22fmIDE%20Actions%22%7D%7D%2C%7B%22Enter%20Find%20Mode%22%3Anull%7D%2C%7B%22Set%20Field%22%3A%7B%22fmIDE_Action%3A%3AActionName%22%3A%7B%22text%22%3A%22Set%22%7D%7D%7D%2C%7B%22Perform%20Find%22%3Anull%7D%5D
+# @action Search for set actions in the fmIDE demo file
+				- fmp://$/fmIDE?script=fmIDE&$actions=%5B%7B%22Go%20to%20Layout%22%3A%7B%22layout_name%22%3A%22fmIDE%20Actions%22%7D%7D%2C%7B%22Enter%20Find%20Mode%22%3Anull%7D%2C%7B%22Set%20Field%22%3A%7B%22fmIDE_Action%3A%3AActionName%22%3A%7B%22text%22%3A%22Set%22%7D%7D%7D%2C%7B%22Perform%20Find%22%3Anull%7D%5D
 
 # actions array structure = [index].action.param:value
 
 # Alternartively in an fmpurl call parameters can be passed directly as variables
 
-# account&#13;base_table&#13;custom_function&#13;custom_menu&#13;custom_menu_item&#13;custom_menu_set&#13;extended_privilege&#13;external_data_source&#13;field&#13;file&#13;layout&#13;layout_field&#13;layout_part&#13;object&#13;privilege_set&#13;script&#13;script_step&#13;table&#13;theme&#13;t_o&#13;value_list&#13;
+# account
+				base_table
+				custom_function
+				custom_menu
+				custom_menu_item
+				custom_menu_set
+				extended_privilege
+				external_data_source
+				field
+				file
+				layout
+				layout_field
+				layout_part
+				object
+				privilege_set
+				script
+				script_step
+				table
+				theme
+				t_o
+				value_list
+				
 
 # The following list documents all parameters that we support or // plan to support (commented out)
 # Supported parameters can also be passed as variables in an fmp/claris url
-# Note that this list is an active part of the script variable-checking semantics:&#13;- Since the MBS-Plugin recognises these as real variable definitions it does not flag up&#13;references to these variables later, even though the variables have not actually been previously&#13;defined in this script&#13;- This is, of course, what we want, because we know the variables may have been created by the url
+# Note that this list is an active part of the script variable-checking semantics:
+				- Since the MBS-Plugin recognises these as real variable definitions it does not flag up
+				references to these variables later, even though the variables have not actually been previously
+				defined in this script
+				- This is, of course, what we want, because we know the variables may have been created by the url
 // # @vars $actions $action $disable $name $layout_name
 
 # @var $actions - An array of actions
@@ -219,7 +274,7 @@ Variable setzen [ $fmide_version ; "0.32" ]
 
 # Private parameter
 # @param $continuation{} - A continuation object, to continue the action script, where fmIDE left off before HALTing to do some GUI-actions
-# When fmIDE must halt to undertake some GUI-actions, but wishes to continue with the script thereafter it uses a &apos;continuation&apos;
+# When fmIDE must halt to undertake some GUI-actions, but wishes to continue with the script thereafter it uses a 'continuation'
 # fmIDE re-schedules itself to restart after a moment and passes the continuation object back to itself to reestablish execution exactly where it left off
 # Neat!
 
@@ -237,7 +292,7 @@ Wenn [ Hole ( KontoBerechtigungenName ) ≠ "[Full Access]" ]
 Ende (wenn)
 
 
-# # Define ALL parameter names &amp; other Script Settings
+# # Define ALL parameter names & other Script Settings
 Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
 Variable setzen [ $fmide_continuation_seconds ; 5 ]
 
@@ -406,7 +461,7 @@ Wenn [ IstLeer ( $continuation ) ]
 						
 						) ]
 		
-		# # fmIDE &apos;Name that Thing&apos; API default actions
+		# # fmIDE 'Name that Thing' API default actions
 		
 		# Make actions array from action, if present, or construct default action(s) for the variables
 		Variable setzen [ $actions ; Falls ( 
@@ -672,7 +727,7 @@ Wenn [ IstLeer ( $continuation ) ]
 	Sonst, wenn [ ZeichenLinks ( $actions ; 1 ) = "[" ]
 		# actions = JSONArray
 	Sonst
-		# actions = string =&gt; convert to JSONArray
+		# actions = string => convert to JSONArray
 		Variable setzen [ $actions_string ; $actions ]
 		Variable setzen [ $actions ; "[]" ]
 		Variable setzen [ $i ; 1 ]
@@ -821,22 +876,22 @@ Schleife (Anfang)
 			
 		Sonst, wenn [ $disable ODER Exakt( $enable ; 0 ) ODER ZeichenLinks ( $action_name ; 2 ) = "//" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#-/
-			#  Disabled action =&gt; skip
+			#  Disabled action => skip
 			
 			
 		Sonst, wenn [ IstLeer ( $action_name ) ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#
-			# No action =&gt; skip
+			# No action => skip
 			
 			
 		Sonst, wenn [ $action_name = "#" /* (comment) */ ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/##
-			# Comment =&gt; skip
+			# Comment => skip
 			
 			
 		Sonst, wenn [ ZeichenLinks ( $action_name ; 1 ) = "?" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#?
-			# Mangled action =&gt; skip
+			# Mangled action => skip
 			
 			
 			# # Process control actions and Stack Logic
@@ -882,10 +937,10 @@ Schleife (Anfang)
 			Sonst
 				# Perform this step
 				Wenn [ IstLeer( $action_skip ) ]
-					# If-part is complete =&gt; skip to EndIf
+					# If-part is complete => skip to EndIf
 					Variable setzen [ $action_skip ; "EndIf" ]
 				Sonst, wenn [ $action_skip = "If" ]
-					# If-part was skipped =&gt; try this one
+					# If-part was skipped => try this one
 					Variable setzen [ $value ; JSONGetElement ( $action ; "value" ) ]
 					Variable setzen [ $action_test_success ; LiesAlsBoolean( Berechne ( $value ) ) ]
 					Wenn [ $action_test_success ]
@@ -1398,7 +1453,7 @@ Schleife (Anfang)
 				Gehe zu Layout [ Layoutname: $layout_name ; Animation: Ohne ]
 			Sonst
 				Wenn [ $by = "id" ODER $by = "" UND NICHT IstLeer ( $layout_id ) ]
-					# By id (explicit or implicit) -&gt; lookup layout_number
+					# By id (explicit or implicit) -> lookup layout_number
 					Variable setzen [ $layout_number ; SetzeVar( ¢LayoutIDs = ¶ & LayoutIDs ( "" ) & ¶ ;
 									ElementeAnzahl ( ZeichenLinks ( ¢LayoutIDs ; Position ( ¢LayoutIDs ; ¶ & $layout_id & ¶ ; 1 ; 1 ) ) )
 									) ]
@@ -1604,7 +1659,7 @@ Schleife (Anfang)
 			# Open the script workspace
 			Scriptarbeitsbereich öffnen
 			Wenn [ $is_win ]
-				# Windows =&gt; stop here
+				# Windows => stop here
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			
@@ -1617,7 +1672,7 @@ Schleife (Anfang)
 			# Make sure it is at the front
 			Variable setzen [ $r ; MBS("ScriptWorkspace.BringToFront") ]
 			Wenn [ MBS("IsError") ]
-				# Can&apos;t open ScriptWorkSpace
+				# Can't open ScriptWorkSpace
 				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
 				Aktuelles Script verlassen []
 			Ende (wenn)
@@ -1893,7 +1948,7 @@ Schleife (Anfang)
 			
 		Sonst, wenn [ $action_name = "OpenManageCustomFunctions" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-functions
-			# It&apos;s not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
+			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
@@ -1912,7 +1967,7 @@ Schleife (Anfang)
 			
 		Sonst, wenn [ $action_name = "OpenManageCustomMenus" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-menus
-			# It&apos;s not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
+			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
@@ -1950,7 +2005,7 @@ Schleife (Anfang)
 			
 		Sonst, wenn [ $action_name = "OpenManageSecurity" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-security
-			# It&apos;s not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
+			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
@@ -2042,7 +2097,7 @@ Schleife (Anfang)
 					Variable setzen [ $fmide_continuation_halt_for_seconds ; $seconds ]
 				Sonst
 					# ToDo - indefinite Hiatus needs a method for the user to exit the Hiatus and proceed with the continuation
-					# &lt;thinking&gt;
+					# <thinking>
 					Alle Scripts abbrechen
 				Ende (wenn)
 			Sonst
@@ -2134,7 +2189,7 @@ Schleife (Anfang)
 				Schleife (Ende)
 			Ende (wenn)
 			
-			# If no target is specified, we target the no-name global variable &quot;$$&quot;
+			# If no target is specified, we target the no-name global variable "$$"
 			# This makes it possible to just perform a Set in one line
 			Variable setzen [ $target ; Falls( NICHT IstLeer ( $target ) ; $target ; "$$" ) ]
 			Variable setzen [ $value ; Falls (
@@ -2242,7 +2297,7 @@ Schleife (Anfang)
 			
 			
 		Sonst
-			# unknown action =&gt; skip
+			# unknown action => skip
 			Variable setzen [ $$fmide_last_error ; -1 ]
 			Variable setzen [ $$fmide_last_error_detail ; "Unknown action '" & $action_name & "'" ]
 			
@@ -2309,4 +2364,6 @@ Schleife (Anfang)
 		Alle Scripts abbrechen
 	Ende (wenn)
 Schleife (Ende)
-# About the last line&#13;- It always pays to have an empty last comment line in a script,&#13;  so you can skip to the last line with the debugger, if you want
+# About the last line
+				- It always pays to have an empty last comment line in a script,
+				  so you can skip to the last line with the debugger, if you want
