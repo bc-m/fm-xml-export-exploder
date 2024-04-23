@@ -8,11 +8,10 @@ edition = "2021"
 [dependencies]
 encoding_rs_io = "0.1.7"
 rayon = "1.9.0"
-quick-xml = "0.31.0"
+quick-xml = { version = "0.31.0", features =["escape-html"] }
 regex = "1.10.3"
 clap = { version = "4.5.2", features = ["derive"] }
 anyhow = "1.0.81"
-html-escape = "0.2.13"
 
 [dev-dependencies]
 walkdir = "2.5.0"

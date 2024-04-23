@@ -293,7 +293,123 @@ Ende (wenn)
 
 
 # # Define ALL parameter names & other Script Settings
-Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+Text einfügen [ Select ; Target: $fmide_parameter_names_all ; “account_name
+				base_table_name
+				custom_function_name
+				custom_menu_item_name
+				custom_menu_name
+				custom_menu_set_name
+				extended_privilege_name
+				external_data_source_name
+				field_name
+				layout_field_name
+				layout_name
+				layout_part_name
+				object_name
+				privilege_set_name
+				script_name
+				script_name_stub
+				script_step_name
+				t_o_name
+				table_name
+				theme_name
+				value_list_name
+				
+				account_number
+				base_table_number
+				custom_function_number
+				custom_menu_item_number
+				custom_menu_number
+				custom_menu_set_number
+				extended_privilege_number
+				external_data_source_number
+				field_number
+				layout_field_number
+				layout_number
+				layout_part_number
+				object_number
+				privilege_set_number
+				script_number
+				script_step_number
+				script_step_number_to
+				t_o_number
+				table_number
+				theme_number
+				value_list_number
+				
+				account_id
+				base_table_id
+				custom_function_id
+				custom_menu_id
+				custom_menu_item_id
+				custom_menu_set_id
+				extended_privilege_id
+				external_data_source_id
+				field_id
+				layout_field_id
+				layout_id
+				layout_part_id
+				object_id
+				privilege_set_id
+				script_id
+				script_step_id
+				t_o_id
+				table_id
+				theme_id
+				value_list_id
+				
+				account_uuid
+				base_table_uuid
+				custom_function_uuid
+				custom_menu_uuid
+				custom_menu_item_uuid
+				custom_menu_set_uuid
+				extended_privilege_uuid
+				external_data_source_uuid
+				field_uuid
+				layout_field_uuid
+				layout_uuid
+				layout_part_uuid
+				object_uuid
+				privilege_set_uuid
+				script_uuid
+				script_step_uuid
+				t_o_uuid
+				table_uuid
+				theme_uuid
+				value_list_uuid
+				
+				actions
+				action
+				action_name
+				
+				curl_options
+				fmxmlsnippet
+				fmxmlsnippet_value
+				message
+				message__OK
+				message__OK_Cancel
+				message__Cancel_OK
+				message__Yes_No
+				message__No_Yes
+				
+				object_bounds_bottom
+				object_bounds_left
+				object_bounds_right
+				object_bounds_rotation
+				object_bounds_top
+				
+				script_step_range
+				script_step_search
+				script_step_search_value
+				select
+				target
+				text
+				url
+				value
+				window_name
+				with_dialog
+				xml” ]
 Variable setzen [ $fmide_continuation_seconds ; 5 ]
 
 # # Vars
@@ -1247,10 +1363,36 @@ Schleife (Anfang)
 			
 			Wenn [ $resource = "fmIDE_keyboard_buffer_retype_script" ]
 				Wenn [ $o_s_3 = "Mac" ]
-					Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+					Text einfügen [ Select ; Target: $resource ; “(* fmIDE_keyboard_buffer_retype.scpt
+									 *
+									 * Re-types the text saved in the fmIDE keyboard buffer file. It produces keystrokes as if the content of the text buffer is being retyped.
+									 *
+									 * Use the fmIDE Store Keyboard Buffer action to prepare the fmIDE_keyboard_buffer.txt file.
+									 * 
+									 * This script should be triggered from a key *using no modifier keys* - for example, function key F12 - otherwise the modifier keys modify the characters being typed!
+									 * 
+									 * This script (or, rather, the app that runs it) requires 
+									 *
+									 *  - permission to access the documents folder
+									 *  - permission to perform automation
+									 * 
+									 * © 2022 russell@MrWatson.de
+									 *
+									 *)
+									try
+										-- Get the text contents of the file
+										set thefile to ((path to documents folder as text) & "fmIDE_keyboard_buffer.txt")
+										set theText to (read file thefile as «class utf8»)
+										-- display dialog theText
+										
+										-- Use System Events to produce keystrokes as if the text is being retyped.
+										tell application "System Events"
+											keystroke theText
+										end tell
+									end try” ]
 					Variable setzen [ $aok ; Wahr ]
 				Sonst, wenn [ $o_s_3 = "Win" ]
-					Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+					Text einfügen [ Select ; Target: $resource ; “Windows Script not yet implemented” ]
 					Variable setzen [ $aok ; Falsch ]
 				Sonst
 					Variable setzen [ $resource ; "" ]
@@ -1471,7 +1613,7 @@ Schleife (Anfang)
 				
 				# FIXME
 				# AppleScript?
-				Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+				Text einfügen [ Select ; Target: $AppleScriptTemplate ; “go to field {{'$layout_field_name'}} of current record” ]
 				Variable setzen [ $AppleScript ; Austauschen ( $AppleScriptTemplate ; "{{'$layout_field_name'}}" ; Zitat( $layout_field_name ) ) ]
 				AppleScript ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "67" ] ⚠️⚠️⚠️
 				
@@ -1949,7 +2091,7 @@ Schleife (Anfang)
 		Sonst, wenn [ $action_name = "OpenManageCustomFunctions" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-functions
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
-			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Text einfügen [ Select ; Target: $idleCalcExpression ; “MBS( "Menubar.RunMenuCommand"; 51191 /*  File Manage Custom Functions... */ )” ]
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
@@ -1968,7 +2110,7 @@ Schleife (Anfang)
 		Sonst, wenn [ $action_name = "OpenManageCustomMenus" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-menus
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
-			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Text einfügen [ Select ; Target: $idleCalcExpression ; “MBS( "Menubar.RunMenuCommand"; 51222 /*  File Manage Custom Menus... */ )” ]
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
@@ -2006,7 +2148,7 @@ Schleife (Anfang)
 		Sonst, wenn [ $action_name = "OpenManageSecurity" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-security
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
-			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Text einfügen [ Select ; Target: $idleCalcExpression ; “MBS( "Menubar.RunMenuCommand"; 51155 /*  File Manage Security... */ )” ]
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
@@ -2066,7 +2208,10 @@ Schleife (Anfang)
 		Sonst, wenn [ $action_name = "Paste" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#paste
 			# Press CmdCtrl+V
-			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Text einfügen [ Select ; Target: $idleCalcExpression ; “MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
+MBS( "RemoteControl.PressKey" ; "v" ; "v" ) & 
+MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
+""” ]
 			Variable setzen [ $idleCalcExpression ; Austauschen( $idleCalcExpression ; "$MBS_RemoteControl.PressCommandOrControlKey" ; Zitat( $MBS_RemoteControl.PressCommandOrControlKey ) ) ]
 			
 			# Request to halt and continue
@@ -2077,7 +2222,11 @@ Schleife (Anfang)
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#paste-in-current-layout
 			# Bring window to front and press CmdCtrl+L, CmdCtrl+V
 			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
-			Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
+			Text einfügen [ Select ; Target: $idleCalcExpression ; “MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
+MBS( "RemoteControl.PressKey" ; "l" ; "l" ) & 
+MBS( "RemoteControl.PressKey" ; "v" ; "v" ) & 
+MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
+""” ]
 			Variable setzen [ $idleCalcExpression ; Austauschen( $idleCalcExpression ; "$MBS_RemoteControl.PressCommandOrControlKey" ; Zitat( $MBS_RemoteControl.PressCommandOrControlKey ) ) ]
 			
 			# Request to halt and continue

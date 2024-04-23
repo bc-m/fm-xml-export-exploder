@@ -74,6 +74,7 @@ pub enum ScriptStep {
     UploadToServer,
     OpenMyApps,
     Unknown,
+    InsertText,
 }
 
 pub fn id_to_script_step(id: &str) -> ScriptStep {
@@ -110,6 +111,7 @@ pub fn id_to_script_step(id: &str) -> ScriptStep {
         "54" => ScriptStep::Unknown,
         "55" => ScriptStep::EnterBrowseMode,
         "58" => ScriptStep::Unknown,
+        "61" => ScriptStep::InsertText,
         "68" => ScriptStep::IfStart,
         "69" => ScriptStep::Else,
         "70" => ScriptStep::IfEnd,
