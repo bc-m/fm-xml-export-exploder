@@ -1,9 +1,11 @@
 use strum_macros::FromRepr;
 
+// Although it has no effect on this application, we track unused script IDs in this constant.
 const UNKNOWN_SCRIPT_STEP: [u32; 16] = [
     2, 3, 15, 52, 53, 54, 58, 100, 110, 162, 163, 170, 171, 173, 198, 204,
 ];
 
+// https://help.claris.com/en/pro-help/content/script-steps-reference.html
 #[derive(Debug, FromRepr, PartialEq)]
 #[repr(u32)]
 pub enum ScriptStep {
@@ -40,11 +42,11 @@ pub enum ScriptStep {
     ExitLoopIf = 72,
     LoopEnd = 73,
     CommitRecordRequests = 75,
-    SetFieldData = 76,
-    FixWindow = 79,
+    SetField = 76,
+    FreezeWindow = 79,
     NewFile = 82,
     AllowUserAbort = 85,
-    SetErrorRecording = 86,
+    SetErrorCapture = 86,
     OpenScriptWorkspace = 88,
     Comment = 89,
     HaltScript = 90,
@@ -55,7 +57,7 @@ pub enum ScriptStep {
     CopyRecordRequest = 101,
     FlushCacheToDisk = 102,
     ExitScript = 103,
-    OpenSettings = 105,
+    OpenPreferences = 105,
     CorrectWord = 106,
     SpellingOptions = 107,
     SelectDictionaries = 108,
@@ -81,7 +83,7 @@ pub enum ScriptStep {
     RefreshObject = 167,
     ClosePopover = 169,
     UploadToServer = 172,
-    OpenMyApps = 183,
+    OpenFavorites = 183,
 }
 
 pub fn id_to_script_step(id: &str) -> ScriptStep {
