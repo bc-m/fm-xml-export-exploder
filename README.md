@@ -111,25 +111,3 @@ This tool is licensed under the MIT License. See the [LICENSE](LICENSE) file for
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or pull requests on the [GitHub repository](https://github.com/BC-M/fm-xml-export-exploder).
-
-## TODOs
-
-- [ ] Parse unknown script steps:
-    - [ ] TODO: List all script steps here
-- [ ] Parse content of FileMaker XML-Export contents:
-    - [x] ExternalDataSourceCatalog
-    - [x] BaseTableCatalog
-    - [x] TableOccurrenceCatalog
-    - [x] FieldsForTables
-    - [x] ValueListCatalog
-    - [x] RelationshipCatalog
-    - [x] CalcsForCustomFunctions
-    - [x] ScriptCatalog
-    - [x] ThemeCatalog
-    - [x] LayoutCatalog
-    - [x] PrivilegeSetsCatalog
-    - [x] ExtendedPrivilegesCatalog
-    - [ ] AccountsCatalog
-    - [x] StepsForScripts
-    - [x] CustomMenuCatalog
-    - [x] CustomMenuSetCatalog
