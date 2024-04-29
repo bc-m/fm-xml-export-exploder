@@ -102,6 +102,7 @@ The following open source FileMaker solutions were saved as XML and used for sna
 - [quick-xml](https://crates.io/crates/quick-xml): Rust crate for high-performance XML parsing.
 - [rayon](https://crates.io/crates/rayon): Rust crate for parallelism.
 - [regex](https://crates.io/crates/regex): Rust crate for regular expressions.
+- [strum](https://crates.io/crates/strum): Rust crate for easier management of enums and strings.
 
 ## License
 

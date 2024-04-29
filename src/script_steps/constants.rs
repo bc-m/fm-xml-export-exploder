@@ -1,173 +1,177 @@
+use std::str::FromStr;
+use strum_macros::EnumString;
+
+#[derive(Debug, EnumString)]
 pub enum ScriptStep {
-    PerformScript,
-    GoToPreviousField,
-    GoToNextField,
-    GoToLayout,
-    NewRecordRequest,
-    DuplicateRecordRequest,
-    DeleteRecordRequest,
-    DeleteAllRecords,
-    GoToRecordRequestPage,
-    GoToField,
-    CheckRecord,
-    CheckFoundSet,
-    UnsortRecords,
-    EnterFindMode,
-    ShowAllRecords,
-    ModifyLastFind,
-    OmitRecord,
-    OmitMultipleRecords,
-    ShowOmittedOnly,
-    PerformFind,
-    OpenHelp,
-    OpenManageDatabase,
-    ExitApplication,
-    SelectAll,
-    EnterBrowseMode,
-    IfStart,
-    Else,
-    IfEnd,
-    LoopStart,
-    ExitLoopIf,
-    LoopEnd,
-    CommitRecordRequests,
-    SetFieldData,
-    FixWindow,
-    NewFile,
-    AllowUserAbort,
-    SetErrorRecording,
-    OpenScriptWorkspace,
-    Comment,
-    HaltScript,
-    ReplaceFieldContents,
-    Beep,
-    SetUseSystemFormats,
-    GoToPortalRow,
-    CopyRecordRequest,
-    FlushCacheToDisk,
-    ExitScript,
-    OpenSettings,
-    CorrectWord,
-    SpellingOptions,
-    SelectDictionaries,
-    EditUserDictionary,
-    OpenManageValueLists,
-    OpenSharing,
-    OpenFileOptions,
-    AllowFormattingBar,
-    OpenHosts,
-    CloseWindow,
-    NewWindow,
-    IfElse,
-    ConstrainFoundSet,
-    ExtendFoundSet,
-    OpenFindReplace,
-    OpenManageDataSources,
-    SetVariable,
-    GoToObject,
-    OpenEditSavedFinds,
-    OpenManageLayouts,
-    OpenManageContainers,
-    OpenManageThemes,
-    RefreshObject,
-    ClosePopover,
-    UploadToServer,
-    OpenMyApps,
+    #[strum(
+        serialize = "2",
+        serialize = "3",
+        serialize = "15",
+        serialize = "52",
+        serialize = "53",
+        serialize = "54",
+        serialize = "58",
+        serialize = "100",
+        serialize = "110",
+        serialize = "162",
+        serialize = "163",
+        serialize = "170",
+        serialize = "171",
+        serialize = "173",
+        serialize = "198",
+        serialize = "204"
+    )]
     Unknown,
+    #[strum(serialize = "1")]
+    PerformScript,
+    #[strum(serialize = "4")]
+    GoToPreviousField,
+    #[strum(serialize = "5")]
+    GoToNextField,
+    #[strum(serialize = "6")]
+    GoToLayout,
+    #[strum(serialize = "7")]
+    NewRecordRequest,
+    #[strum(serialize = "8")]
+    DuplicateRecordRequest,
+    #[strum(serialize = "9")]
+    DeleteRecordRequest,
+    #[strum(serialize = "10")]
+    DeleteAllRecords,
+    #[strum(serialize = "16")]
+    GoToRecordRequestPage,
+    #[strum(serialize = "17")]
+    GoToField,
+    #[strum(serialize = "19")]
+    CheckRecord,
+    #[strum(serialize = "20")]
+    CheckFoundSet,
+    #[strum(serialize = "21")]
+    UnsortRecords,
+    #[strum(serialize = "22")]
+    EnterFindMode,
+    #[strum(serialize = "23")]
+    ShowAllRecords,
+    #[strum(serialize = "24")]
+    ModifyLastFind,
+    #[strum(serialize = "25")]
+    OmitRecord,
+    #[strum(serialize = "26")]
+    OmitMultipleRecords,
+    #[strum(serialize = "27")]
+    ShowOmittedOnly,
+    #[strum(serialize = "28")]
+    PerformFind,
+    #[strum(serialize = "32")]
+    OpenHelp,
+    #[strum(serialize = "38")]
+    OpenManageDatabase,
+    #[strum(serialize = "44")]
+    ExitApplication,
+    #[strum(serialize = "50")]
+    SelectAll,
+    #[strum(serialize = "55")]
+    EnterBrowseMode,
+    #[strum(serialize = "68")]
+    IfStart,
+    #[strum(serialize = "69")]
+    Else,
+    #[strum(serialize = "70")]
+    IfEnd,
+    #[strum(serialize = "71")]
+    LoopStart,
+    #[strum(serialize = "72")]
+    ExitLoopIf,
+    #[strum(serialize = "73")]
+    LoopEnd,
+    #[strum(serialize = "75")]
+    CommitRecordRequests,
+    #[strum(serialize = "76")]
+    SetFieldData,
+    #[strum(serialize = "79")]
+    FixWindow,
+    #[strum(serialize = "82")]
+    NewFile,
+    #[strum(serialize = "85")]
+    AllowUserAbort,
+    #[strum(serialize = "86")]
+    SetErrorRecording,
+    #[strum(serialize = "88")]
+    OpenScriptWorkspace,
+    #[strum(serialize = "89")]
+    Comment,
+    #[strum(serialize = "90")]
+    HaltScript,
+    #[strum(serialize = "91")]
+    ReplaceFieldContents,
+    #[strum(serialize = "93")]
+    Beep,
+    #[strum(serialize = "94")]
+    SetUseSystemFormats,
+    #[strum(serialize = "99")]
+    GoToPortalRow,
+    #[strum(serialize = "101")]
+    CopyRecordRequest,
+    #[strum(serialize = "102")]
+    FlushCacheToDisk,
+    #[strum(serialize = "103")]
+    ExitScript,
+    #[strum(serialize = "105")]
+    OpenSettings,
+    #[strum(serialize = "106")]
+    CorrectWord,
+    #[strum(serialize = "107")]
+    SpellingOptions,
+    #[strum(serialize = "108")]
+    SelectDictionaries,
+    #[strum(serialize = "109")]
+    EditUserDictionary,
+    #[strum(serialize = "112")]
+    OpenManageValueLists,
+    #[strum(serialize = "113")]
+    OpenSharing,
+    #[strum(serialize = "114")]
+    OpenFileOptions,
+    #[strum(serialize = "115")]
+    AllowFormattingBar,
+    #[strum(serialize = "118")]
+    OpenHosts,
+    #[strum(serialize = "121")]
+    CloseWindow,
+    #[strum(serialize = "122")]
+    NewWindow,
+    #[strum(serialize = "125")]
+    IfElse,
+    #[strum(serialize = "126")]
+    ConstrainFoundSet,
+    #[strum(serialize = "127")]
+    ExtendFoundSet,
+    #[strum(serialize = "129")]
+    OpenFindReplace,
+    #[strum(serialize = "140")]
+    OpenManageDataSources,
+    #[strum(serialize = "141")]
+    SetVariable,
+    #[strum(serialize = "145")]
+    GoToObject,
+    #[strum(serialize = "149")]
+    OpenEditSavedFinds,
+    #[strum(serialize = "151")]
+    OpenManageLayouts,
+    #[strum(serialize = "156")]
+    OpenManageContainers,
+    #[strum(serialize = "165")]
+    OpenManageThemes,
+    #[strum(serialize = "167")]
+    RefreshObject,
+    #[strum(serialize = "169")]
+    ClosePopover,
+    #[strum(serialize = "172")]
+    UploadToServer,
+    #[strum(serialize = "183")]
+    OpenMyApps,
 }
 
 pub fn id_to_script_step(id: &str) -> ScriptStep {
-    match id {
-        "1" => ScriptStep::PerformScript,
-        "2" => ScriptStep::Unknown,
-        "3" => ScriptStep::Unknown,
-        "4" => ScriptStep::GoToPreviousField,
-        "5" => ScriptStep::GoToNextField,
-        "6" => ScriptStep::GoToLayout,
-        "7" => ScriptStep::NewRecordRequest,
-        "8" => ScriptStep::DuplicateRecordRequest,
-        "9" => ScriptStep::DeleteRecordRequest,
-        "10" => ScriptStep::DeleteAllRecords,
-        "15" => ScriptStep::Unknown,
-        "16" => ScriptStep::GoToRecordRequestPage,
-        "17" => ScriptStep::GoToField,
-        "19" => ScriptStep::CheckRecord,
-        "20" => ScriptStep::CheckFoundSet,
-        "21" => ScriptStep::UnsortRecords,
-        "22" => ScriptStep::EnterFindMode,
-        "23" => ScriptStep::ShowAllRecords,
-        "24" => ScriptStep::ModifyLastFind,
-        "25" => ScriptStep::OmitRecord,
-        "26" => ScriptStep::OmitMultipleRecords,
-        "27" => ScriptStep::ShowOmittedOnly,
-        "28" => ScriptStep::PerformFind,
-        "32" => ScriptStep::OpenHelp,
-        "38" => ScriptStep::OpenManageDatabase,
-        "44" => ScriptStep::ExitApplication,
-        "50" => ScriptStep::SelectAll,
-        "52" => ScriptStep::Unknown,
-        "53" => ScriptStep::Unknown,
-        "54" => ScriptStep::Unknown,
-        "55" => ScriptStep::EnterBrowseMode,
-        "58" => ScriptStep::Unknown,
-        "68" => ScriptStep::IfStart,
-        "69" => ScriptStep::Else,
-        "70" => ScriptStep::IfEnd,
-        "71" => ScriptStep::LoopStart,
-        "72" => ScriptStep::ExitLoopIf,
-        "73" => ScriptStep::LoopEnd,
-        "75" => ScriptStep::CommitRecordRequests,
-        "76" => ScriptStep::SetFieldData,
-        "79" => ScriptStep::FixWindow,
-        "82" => ScriptStep::NewFile,
-        "85" => ScriptStep::AllowUserAbort,
-        "86" => ScriptStep::SetErrorRecording,
-        "88" => ScriptStep::OpenScriptWorkspace,
-        "89" => ScriptStep::Comment,
-        "90" => ScriptStep::HaltScript,
-        "91" => ScriptStep::ReplaceFieldContents,
-        "93" => ScriptStep::Beep,
-        "94" => ScriptStep::SetUseSystemFormats,
-        "99" => ScriptStep::GoToPortalRow,
-        "100" => ScriptStep::Unknown,
-        "101" => ScriptStep::CopyRecordRequest,
-        "102" => ScriptStep::FlushCacheToDisk,
-        "103" => ScriptStep::ExitScript,
-        "105" => ScriptStep::OpenSettings,
-        "106" => ScriptStep::CorrectWord,
-        "107" => ScriptStep::SpellingOptions,
-        "108" => ScriptStep::SelectDictionaries,
-        "109" => ScriptStep::EditUserDictionary,
-        "110" => ScriptStep::Unknown,
-        "112" => ScriptStep::OpenManageValueLists,
-        "113" => ScriptStep::OpenSharing,
-        "114" => ScriptStep::OpenFileOptions,
-        "115" => ScriptStep::AllowFormattingBar,
-        "118" => ScriptStep::OpenHosts,
-        "121" => ScriptStep::CloseWindow,
-        "122" => ScriptStep::NewWindow,
-        "125" => ScriptStep::IfElse,
-        "126" => ScriptStep::ConstrainFoundSet,
-        "127" => ScriptStep::ExtendFoundSet,
-        "129" => ScriptStep::OpenFindReplace,
-        "140" => ScriptStep::OpenManageDataSources,
-        "141" => ScriptStep::SetVariable,
-        "145" => ScriptStep::GoToObject,
-        "149" => ScriptStep::OpenEditSavedFinds,
-        "151" => ScriptStep::OpenManageLayouts,
-        "156" => ScriptStep::OpenManageContainers,
-        "162" => ScriptStep::Unknown,
-        "163" => ScriptStep::Unknown,
-        "165" => ScriptStep::OpenManageThemes,
-        "167" => ScriptStep::RefreshObject,
-        "169" => ScriptStep::ClosePopover,
-        "170" => ScriptStep::Unknown,
-        "171" => ScriptStep::Unknown,
-        "172" => ScriptStep::UploadToServer,
-        "173" => ScriptStep::Unknown,
-        "183" => ScriptStep::OpenMyApps,
-        "198" => ScriptStep::Unknown,
-        "204" => ScriptStep::Unknown,
-        _ => ScriptStep::Unknown,
-    }
+    ScriptStep::from_str(id).unwrap_or(ScriptStep::Unknown)
 }
