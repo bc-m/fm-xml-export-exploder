@@ -16,7 +16,7 @@ Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
 	Aktuelles Script verlassen []
 	
 Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
-	# New Palette =&gt; Duplicate Palette
+	# New Palette => Duplicate Palette
 	Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 		Suchenmodus aktivieren [ Pause: OFF ]
 		Feldwert setzen [ _Palette::__ID ; 1 ]

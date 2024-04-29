@@ -4,10 +4,10 @@ expression: output_content
 ---
 # # Perform Script by Name
 
-# normal = &quot;From list&quot;
+# normal = "From list"
 Script ausführen [ Aus Liste ; "Hello::World" ]
 
-# new = &quot;By Name&quot; in the format &quot;File::ScriptName&quot;
+# new = "By Name" in the format "File::ScriptName"
 Script ausführen [ Nach Name ; "How much of a script name can be seen in various places if it is a really long script name up to 100" ; Parameter: 123 ]
 Variable setzen [ $Name ; "How much of a script name can be seen in various places if it is a really long script name up to 100" ]
 Script ausführen [ Nach Name ; $Name ; Parameter: 123 ]

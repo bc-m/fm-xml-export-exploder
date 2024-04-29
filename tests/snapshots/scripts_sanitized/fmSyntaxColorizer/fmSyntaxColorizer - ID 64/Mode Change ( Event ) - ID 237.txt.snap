@@ -20,7 +20,7 @@ Sonst
 	Wenn [ Hole ( LayoutTabellenname ) = "_Syntax" ]
 		
 		Wenn [ $$WindowModePrevious = $C_FIND_MODE UND Hole ( Fenstermodus ) = $C_BROWSE_MODE UND NICHT Hole ( LetzteFehlerNr ) UND Hole ( Sortierstatus ) <> 1 ]
-			# FIND -&gt; BROWSE
+			# FIND -> BROWSE
 			Script ausführen [ Aus Liste ; "Sort Syntax" ]
 		Ende (wenn)
 		
