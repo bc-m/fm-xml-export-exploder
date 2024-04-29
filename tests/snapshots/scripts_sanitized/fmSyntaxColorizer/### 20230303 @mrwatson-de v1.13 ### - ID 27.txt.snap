@@ -6,56 +6,100 @@ expression: output_content
 
 # © 2012-2023 MrW russell@mrwatson.de
 
-# 20230303 @mrwatson-de v1.13&#13;- Added `and color`, `or color`, `xor color` and `not color`
-# 20230303 @mrwatson-de v1.12&#13;- Added Markers + tipps to GUI to help guide the user&#13;- Added `comment color`
-# 20230225 @mrwatson-de v1.11&#13;- Fixed #10 Duplicate Palette&#13;- Fixed #11 `field color` added - to same color as layout color&#13;- Fixed #12 Users can now read the Changes / Version Script
-# 20230125 @mrwatson-de v1.10&#13;- Added Missing MBS Extras (Export Tooltips, Autocomplete Fn+Params, …)
-# 20221228 @mrwatson-de v1.9.1&#10;- Corrected FM-Version field names
-# 20221208 @mrwatson-de v1.9&#10;- Added Re-Login button (for quick administration)
-# 20220927 MrW v1.8.4&#13;- Removed fmScriptWorkspace
-# 20220922 MrW v1.8.3&#13;- Removed all GBS syntax rules which tried and failed to find commented out calculations
-# 20220812 MrW v1.8.2&#13;- Fixed a false Syntax warning caused by an over-lax syntax rule which tried to find commented out calculations
-# 20220318 MrW v1.8.1&#13;- [improvement] Changed the color highlighting to ScriptResult rather than ScriptParam
-# 20220317 MrW v1.8 Improvements to Syntax-Colorizing:&#13;- [feature] Added *ScriptParam* syntax to help distinguish ScriptParameters from ScriptResults! (I&apos;ve just used ScriptParameter once too often where I should be using ScriptResult!)&#13;- [feature] Pimped Markdown Headings (#...######) to make the structure of the script more vivid
+# 20230303 @mrwatson-de v1.13
+  - Added `and color`, `or color`, `xor color` and `not color`
+# 20230303 @mrwatson-de v1.12
+  - Added Markers + tipps to GUI to help guide the user
+  - Added `comment color`
+# 20230225 @mrwatson-de v1.11
+  - Fixed #10 Duplicate Palette
+  - Fixed #11 `field color` added - to same color as layout color
+  - Fixed #12 Users can now read the Changes / Version Script
+# 20230125 @mrwatson-de v1.10
+  - Added Missing MBS Extras (Export Tooltips, Autocomplete Fn+Params, …)
+# 20221228 @mrwatson-de v1.9.1
+- Corrected FM-Version field names
+# 20221208 @mrwatson-de v1.9
+- Added Re-Login button (for quick administration)
+# 20220927 MrW v1.8.4
+  - Removed fmScriptWorkspace
+# 20220922 MrW v1.8.3
+  - Removed all GBS syntax rules which tried and failed to find commented out calculations
+# 20220812 MrW v1.8.2
+  - Fixed a false Syntax warning caused by an over-lax syntax rule which tried to find commented out calculations
+# 20220318 MrW v1.8.1
+  - [improvement] Changed the color highlighting to ScriptResult rather than ScriptParam
+# 20220317 MrW v1.8 Improvements to Syntax-Colorizing:
+  - [feature] Added *ScriptParam* syntax to help distinguish ScriptParameters from ScriptResults! (I've just used ScriptParameter once too often where I should be using ScriptResult!)
+  - [feature] Pimped Markdown Headings (#...######) to make the structure of the script more vivid
 # 20211209 MrW v1.7 Added MBS Variable autocomplete
-# 20211208 MrW v1.6.1 Moved &apos;#!&apos; and &apos;#/&apos; to the Core syntax, whilst &apos;#+Info+&apos; and &apos;#-Info-&apos; reamin in GBS syntax
-# 20211208 MrW v1.6 Added syntax and colors to mark comments as Important or unimportant&#13;- added colors &apos;Comment Important&apos; and &apos;Comment Unimportant&apos; and&#13;- added comment prefix &apos;!&apos; or &apos;+Info+&apos; to mark important comments&#13;- added comment prefix &apos;/&apos; or &apos;-Info-&apos; to mark unimportant comments
+# 20211208 MrW v1.6.1 Moved '#!' and '#/' to the Core syntax, whilst '#+Info+' and '#-Info-' reamin in GBS syntax
+# 20211208 MrW v1.6 Added syntax and colors to mark comments as Important or unimportant
+  - added colors 'Comment Important' and 'Comment Unimportant' and
+  - added comment prefix '!' or '+Info+' to mark important comments
+  - added comment prefix '/' or '-Info-' to mark unimportant comments
 # 20211208 MrW v1.5.2 Made searching for categories easier
-# 20211205 MrW v1.5.1 Improved &quot;typical script&quot; to show parameter definition in comments better
+# 20211205 MrW v1.5.1 Improved "typical script" to show parameter definition in comments better
 # 20211104 MrW v1.5 Added options to set line limits on MBS Variable Check script scanning
 # 20211015 MrW v1.4.1 Corrected MBS Version number required for new formula wildcards
-# 20211010 MrW v1.4 Added new colorizing functionality:&#13;- [feature] Added support for wildcard matches in calculation formulas, for example *zzz*()&#13;- [feature] Added zzz as warning to Core collection - I *think* this is probably general enough for the masses&#13;- [feature] Added MBS Blue color for MBS Script Step&#13;- [enhancement] Reduced the number of syntax definitions by deleting unnecessary entries&#13;- [enhancement] Also moved functions out of the Core to a new category, since they are all undefined in the default color palette anyhow
+# 20211010 MrW v1.4 Added new colorizing functionality:
+  - [feature] Added support for wildcard matches in calculation formulas, for example *zzz*()
+  - [feature] Added zzz as warning to Core collection - I *think* this is probably general enough for the masses
+  - [feature] Added MBS Blue color for MBS Script Step
+  - [enhancement] Reduced the number of syntax definitions by deleting unnecessary entries
+  - [enhancement] Also moved functions out of the Core to a new category, since they are all undefined in the default color palette anyhow
 # 20211008 MrW v1.3.1 Fixed [bug] where colors were visible in the middle of the Color-Palettes layout
-# 20210924 MrW v1.3 Improved support for Dark Mode (Issue [#6])&#13;- [feature] Added a new dark mode Palette from Kristian Olsen: KO-Colors (Dark)&#13;- [feature] Added radio button to identify Dark/Light-Mode Palettes&#13;- [feature] Improved dark mode display of colors and selected palette&#13;- [feature] Added a tip after switching or colorizing, explaining what to do when switching between light &amp; dark modes&#13;- [feature] Automatically switch between suggested light/(Dark) palettes
-# 20210916 MrW v1.2 You can simply change colors again with right-click &gt; Text Color !&#13;- [bug] fixed the Format menu, so that users can again set colors using right click &gt; Text Color - AT LAST! ([#1][i1])&#13;- [bug] removed some lingering pesky German  ([#3][i3])&#13;- [bug] fixed the release defaults to *not* turn on MBS calculation font size resizing to 30 px! ([#4][i4])&#13;&#13;[i1]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/1&#13;[i3]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/3&#13;[i4]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/4
+# 20210924 MrW v1.3 Improved support for Dark Mode (Issue [#6])
+  - [feature] Added a new dark mode Palette from Kristian Olsen: KO-Colors (Dark)
+  - [feature] Added radio button to identify Dark/Light-Mode Palettes
+  - [feature] Improved dark mode display of colors and selected palette
+  - [feature] Added a tip after switching or colorizing, explaining what to do when switching between light & dark modes
+  - [feature] Automatically switch between suggested light/(Dark) palettes
+# 20210916 MrW v1.2 You can simply change colors again with right-click > Text Color !
+  - [bug] fixed the Format menu, so that users can again set colors using right click > Text Color - AT LAST! ([#1][i1])
+  - [bug] removed some lingering pesky German  ([#3][i3])
+  - [bug] fixed the release defaults to *not* turn on MBS calculation font size resizing to 30 px! ([#4][i4])
+  
+  [i1]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/1
+  [i3]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/3
+  [i4]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/4
 # 20210803 MrW 1.1.2 Corrected latest MBS Extras
-# 20210803 MrW 1.1.1 Added latest MBS Extras inc. &apos;Debugger: Tooltips&apos;, &apos;Help Menu Entries&apos;, &apos;Schema - Don&apos;t Open in Relation Graph&apos;, &apos;Calculations: Calc. Tools&apos;, &apos;Calculations: Match Brackets&apos;
+# 20210803 MrW 1.1.1 Added latest MBS Extras inc. 'Debugger: Tooltips', 'Help Menu Entries', 'Schema - Don't Open in Relation Graph', 'Calculations: Calc. Tools', 'Calculations: Match Brackets'
 # 20210322 MrW 1.0.1 Fixed VersionNr function to work for FM19.2
-# 20210114 MrW 1.0 fmSyntaxColorizer goes open source :-) Let&apos;s call it Version 1.0 at last!
+# 20210114 MrW 1.0 fmSyntaxColorizer goes open source :-) Let's call it Version 1.0 at last!
 # 20201106 MrW 0.9v52 Highlighted the Colorize button - better UX
-# 20201104 MrW 0.9v51 Corrected User&apos;s script access privs
+# 20201104 MrW 0.9v51 Corrected User's script access privs
 # 20200708 MrW 0.9v50 Added recognition of targeted variables (Target: $)
 # 20200706 MrW 0.9v49 Added Collections and GitHub links
 # 20200528 MrW 0.9v48 Added support for DarkMode, a Default DarkMode theme (needs tweaking) and some further color names in the color palettte. Plus fixed the jump from the Syntax list to the current color palette
 # 20191123 MrW 0.9v47 Added support for latest MBS options including keep column widths and custom calulation font size, search box width, and the search, highlight, if and loop colors.
-# 20191008 MrW 0.9v46 Added support for global variable color and smaller bigger color (&lt;&gt;)
+# 20191008 MrW 0.9v46 Added support for global variable color and smaller bigger color (<>)
 # 20191003 MrW 0.9v45 Corrected editability of newer scripts
-# 20191003 MrW 0.9v44 Added sorted steps for translation EN &lt;-&gt; IT
+# 20191003 MrW 0.9v44 Added sorted steps for translation EN <-> IT
 # 20190524 MrW 0.9v43 Syntax for FileMaker 18
 # 20190524 MrW 0.9v42 Added FM-Version when duplicating a syntax
 # 20190204 MrW 0.9v41 Enabled fmWorkMate to be called from AppleScript (privilege + added public API scripts to Activate fmWorkMate and open some important modules)
 # 20190203 MrW 0.9v40 Integrated fmScriptWorkspace 
 # 20190103 MrW 0.9v39 Added Syntax + Colors for some (FileMakery) Markdown in comments and some attempts to catch commented out code
-# 20180509 MrW 0.9v38 Added fm17 syntax;&#13;plus a great new &quot;FileMaker Enhanced&quot; color palette as an extension of FileMaker&apos;s standard syntax colors&#13;plus removed some superceded stuff
+# 20180509 MrW 0.9v38 Added fm17 syntax;
+  plus a great new "FileMaker Enhanced" color palette as an extension of FileMaker's standard syntax colors
+  plus removed some superceded stuff
 # 20180506 MrW 0.9v37 Added fm17 script stuff
 # 20171006 MrW 0.9v36 Added some functions + steps from the last few fm releases that were missing
 # 20171004 MrW 0.9v35 Added more important FileMakerDoc @tags
 # 20171004 MrW 0.9v34 Added Warning color for Go to Record when Exit after last is Off
 # 20170927 MrW 0.9v33 Added many of the coming FileMakerDoc @tags
-# 20170524 MrW 0.9v32 Made starting fmSyntaxColorizer simpler, more powerful and more beautiful than ever.&#13;All MBS developer extras can now be turned on &amp; off from the start page.&#13;Visual graphic shows exactly which options are activated.&#13;Foregrounded fmSyntaxColorizers minimized mode, and extended it 4 (fantastic) dynamic syntax colors.&#13;Updated all Syntax for fm16.&#13;Added new color group &quot;21 Plugin Steps&quot;
+# 20170524 MrW 0.9v32 Made starting fmSyntaxColorizer simpler, more powerful and more beautiful than ever.
+  All MBS developer extras can now be turned on & off from the start page.
+  Visual graphic shows exactly which options are activated.
+  Foregrounded fmSyntaxColorizers minimized mode, and extended it 4 (fantastic) dynamic syntax colors.
+  Updated all Syntax for fm16.
+  Added new color group "21 Plugin Steps"
 # 20170519 MrW 0.9v31 Changed New Window, Select Window and Close Window to Layout colours for fm16.
 # 20170518 MrW 0.9v30 GUI overhaul ready for fm16 + MBS Plugins multiple new developer extras
-# 20160924 MrW 0.9v29 Preparing for FM15 compatability&#13;  - Added FM-Version Filter which automatically selects only the entries which are relevant for the current version&#13;  - Small view face-lift for the Syntax list view
+# 20160924 MrW 0.9v29 Preparing for FM15 compatability
+    - Added FM-Version Filter which automatically selects only the entries which are relevant for the current version
+    - Small view face-lift for the Syntax list view
 # 20150912 MrW 0.9v28 Upgraded to fm14 platform
 # 20140602 MrW 0.9v27 Help
 # 20140509 MrW 0.9v26 Clearer state buttons for SyntaxColorizing, LineNumbers and VariableChecking - now also available in midimised view, and a few other GUI improvements.
@@ -63,27 +107,57 @@ expression: output_content
 # 20140429 MrW 0.9v24 Click the Sort heading with [SHIFT]+[CTRL]+[ALT] to perform a hard sort
 # 20140429 MrW 0.9v23 Corrected bug, whereby more than 1-click start may have been necessary
 # 20140425 MrW 0.9v22 MBS-Plugin check extended to recognise a disabled plugin (fmp12 files)
-# 20140423 MrW 0.9v21 Major improvements in the GUI:&#13;- Major overhaul of the home page on the principle of less is more.&#13;- Editing of colors including drag &amp; drop corrected, with standardised help info on the cyclone headings&#13;- The (i) Web info page now uses the full height of the monitor
+# 20140423 MrW 0.9v21 Major improvements in the GUI:
+  - Major overhaul of the home page on the principle of less is more.
+  - Editing of colors including drag & drop corrected, with standardised help info on the cyclone headings
+  - The (i) Web info page now uses the full height of the monitor
 # 20140423 MrW 0.9v20 fmSyntaxColorizer now correctly removes syntax colorizing
-# 20140423 MrW 0.9v19 Improved SyntaxColorizing:&#13;- Added syntax to mark &quot;*CurrentPrivilegeSetName*&quot; as &quot;Undesirable&quot;&#13;- Changed color for &quot;Halt Script&quot; and &quot;Exit Application&quot; to &quot;User Interaction&quot;&#13;- Corrected color name for &quot;#@&quot;&#13;- Improved typical script to highlight more features
+# 20140423 MrW 0.9v19 Improved SyntaxColorizing:
+  - Added syntax to mark "*CurrentPrivilegeSetName*" as "Undesirable"
+  - Changed color for "Halt Script" and "Exit Application" to "User Interaction"
+  - Corrected color name for "#@"
+  - Improved typical script to highlight more features
 # 20140422 MrW 0.9v18 Support for MBS v4.2.0.04: Variable checking improved to ignore cut-off variable names [e.g.: $EndOfLin…]
 # 20131217 MrW 0.9v17 Close file instead of hiding - and open web
 # 20131216 MrW 0.9v16 New commands for fm13 (ScriptSteps) and new line number color function added
 # 20131204 MrW 0.9v15 Variable-Checking added
 # 20131119 MrW 0.9v14 Added new warning colour for seemingly commented out content
-# 20131023 MrW 0.9v13 New Example Script &quot;All script steps sorted by ID&quot;
-# 20131021 MrW 0.9v12 With separate enable/disable &amp; status for Line Numbers
+# 20131023 MrW 0.9v13 New Example Script "All script steps sorted by ID"
+# 20131021 MrW 0.9v12 With separate enable/disable & status for Line Numbers
 # 20131017 MrW 0.9v11 Support for MBS v3.5 and script line numbers :-) MBS-Plugin check greatly improved
 # 20130926 MrW 0.9v10 Bug removed: if no import file available returns to layout
-# 20130924 MrW 0.9v9 Hugely improved palette import &amp; export, where the user can choose which palettes to import
+# 20130924 MrW 0.9v9 Hugely improved palette import & export, where the user can choose which palettes to import
 # 20130923 MrW 0.9v8 Better introduction ; plus About *... Menu corrected and with Continue… menu item
 # 20121202 MrW 0.9v7 Added fmp12 Commands; added App-Version to home page ; improved Color-Palettes layout ; Script Menu added
 # 20121201 MrW 0.9v6 Programme and data improved for Windows, improved Script examples
 # 20121126 MrW 0.9v5 Added functioning application Help, tidied layouts
-# 20121109 MrW 0.9v4 it just goes on and on!&#13;- Enabled Status and toggle button on the Home Screen&#13;- Now with script-wildcards, variables and function highlighting
-# 20121102 MrW 0.9v3 Wow!&#13;- Table view for palette-colours&#13;- Color-names reordered to make a more logical rainbow&#13;- Palette Sharing with Export/Import&#13;- Better MBS-integration&#13;- Simplified start page with one-click start!&#13;- &lt;Error&gt; tags introduced&#13;- Value list meta-values ++New++ and --None-- (cleverly) removed from the palettes color portal!&#13;- Comment (i) button added to Commands
-# 20121031 MrW 0.9v2 Further developments:&#13;&#13;- Script and Calc types separated&#13;- Improved Help Menu with Send Feedback&#13;&#13;- Foreign commands corrected&#13;- Languages Table + WL&#13;
-# 20121030 MrW 0.9v1 Lots of changes:&#13;- More finely tuned palettes, incl. Errors, Warnings, User Interactions, Ifs and Loops &#13;- More finely tuned commands, incl. Errors, Warnings and User Interactions&#13;- Calculation colors, incl. seperate portal for calculation colors in the palette view&#13;- Palette-switching, (colors are now referenced by name)&#13;- Test-scripts vastly improved&#13;- GUI tidied up a bit.
+# 20121109 MrW 0.9v4 it just goes on and on!
+  - Enabled Status and toggle button on the Home Screen
+  - Now with script-wildcards, variables and function highlighting
+# 20121102 MrW 0.9v3 Wow!
+  - Table view for palette-colours
+  - Color-names reordered to make a more logical rainbow
+  - Palette Sharing with Export/Import
+  - Better MBS-integration
+  - Simplified start page with one-click start!
+  - <Error> tags introduced
+  - Value list meta-values ++New++ and --None-- (cleverly) removed from the palettes color portal!
+  - Comment (i) button added to Commands
+# 20121031 MrW 0.9v2 Further developments:
+  
+  - Script and Calc types separated
+  - Improved Help Menu with Send Feedback
+  
+  - Foreign commands corrected
+  - Languages Table + WL
+  
+# 20121030 MrW 0.9v1 Lots of changes:
+  - More finely tuned palettes, incl. Errors, Warnings, User Interactions, Ifs and Loops 
+  - More finely tuned commands, incl. Errors, Warnings and User Interactions
+  - Calculation colors, incl. seperate portal for calculation colors in the palette view
+  - Palette-switching, (colors are now referenced by name)
+  - Test-scripts vastly improved
+  - GUI tidied up a bit.
 # 20121025 MrW 0.9v0 Nice :-)
 
 

@@ -1,7 +1,7 @@
 use std::str::FromStr;
 use strum_macros::EnumString;
 
-#[derive(Debug, EnumString)]
+#[derive(Debug, EnumString, PartialEq)]
 pub enum ScriptStep {
     #[strum(
         serialize = "2",

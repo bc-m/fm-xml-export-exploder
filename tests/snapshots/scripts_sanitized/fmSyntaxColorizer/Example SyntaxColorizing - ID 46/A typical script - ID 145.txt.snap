@@ -9,10 +9,10 @@ expression: output_content
 
 # Use the @param tag to define (one or more comma-separated) parameters, specifying the variable name...
 
-# @param param1 (text) - Parameter 1 // ...WITHOUT a $ symbol if you don&apos;t want MBS plugin to consider this a definition 
+# @param param1 (text) - Parameter 1 // ...WITHOUT a $ symbol if you don't want MBS plugin to consider this a definition 
 # @param optParam1,optParam1, (text) - optional Parameters 2 and 3 // Use comma to specify multiple variables
 # @param $a, $b, $c // ...WITH a $ symbol to tell the MBS Plugin NOT to flag up this variable name
-# @returns length | &quot;&quot;
+# @returns length | ""
 # @throws all kinds of errors!
 # @referencedByName
 
@@ -22,7 +22,7 @@ expression: output_content
 # - either as a commented out Insert Text step
 // Text einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "61" ] ⚠️⚠️⚠️
 # - or as a comment using Markdown-ish code formatting:
-# ` Perform Script [ Specified: From list ; “All script steps and all options” ; Parameter: “$param1 &amp; ¶ &amp; $optParam2 &amp; ¶ &amp; $optParam3” ]
+# ` Perform Script [ Specified: From list ; “All script steps and all options” ; Parameter: “$param1 & ¶ & $optParam2 & ¶ & $optParam3” ]
 
 # # Markdown Heading 1
 # foo
@@ -67,7 +67,7 @@ Ende (wenn)
 Wenn [ NICHT _Palette::__ID ]
 	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 # FIXME: This broke after restructuring
@@ -158,7 +158,7 @@ Ende (wenn)
 
 Script ausführen [ Aus Liste ; "Apply Palette" ]
 Variable setzen [ $Error ; Hole ( ScriptParameter ) ]
-# Note the wrong get function here ^^^^ (denoted by the &apos;normal&apos; color)
+# Note the wrong get function here ^^^^ (denoted by the 'normal' color)
 
 Script ausführen [ Aus Liste ; "Apply Palette" ]
 Variable setzen [ $Error ; Hole ( ScriptErgebnis ) ]
@@ -652,5 +652,6 @@ Aktuelles Script verlassen []
 
 
 
-# This line is to test how far the MBS variable checking works&#13;... if the MBS plugin says &quot;$i not found!&quot; you might want to increase the MBS variable scan line option on the MBS Extras popover
+# This line is to test how far the MBS variable checking works
+  ... if the MBS plugin says "$i not found!" you might want to increase the MBS variable scan line option on the MBS Extras popover
 Variable setzen [ $i ; $i+1 ]

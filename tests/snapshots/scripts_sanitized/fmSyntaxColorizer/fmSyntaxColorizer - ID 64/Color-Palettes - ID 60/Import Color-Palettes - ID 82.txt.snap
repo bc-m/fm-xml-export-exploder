@@ -30,7 +30,7 @@ Wenn [ $error ]
 	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 # Remove duplicates and initialise the import check box
@@ -57,11 +57,11 @@ Schleife (Anfang)
 Schleife (Ende)
 Fenster fixieren
 Wenn [ $$LastMessageChoice = 2 ]
-	# Cancel -&gt; delete all temp records and go back
+	# Cancel -> delete all temp records and go back
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 # Remove the records which are not to be imported
@@ -82,7 +82,7 @@ Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	# Nothing to import
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 
@@ -121,14 +121,14 @@ Wenn [ $error ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 # Remove the records which are not to be imported
@@ -148,7 +148,7 @@ Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 

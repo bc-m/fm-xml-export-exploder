@@ -139,20 +139,25 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
                 }
 
                 if depth == 3 && local_name_to_string(e.name().as_ref()) == "Step" {
+                    let is_comment = id_to_script_step(&step_info.id) == ScriptStep::Comment;
                     match sanitize(&step_info.id, &step_info.content) {
                         None => {}
                         Some(text) => {
                             let mut first_line_done = false;
                             let mut add_indent = 0;
                             for line in text.split('\r') {
-                                script_info.text.push_str(&format!(
-                                    "{}{}\n",
-                                    "\t".repeat(step_info.indent_level_current + add_indent),
-                                    line
-                                ));
+                                let mut indent =
+                                    "\t".repeat(step_info.indent_level_current + add_indent);
+                                if is_comment && first_line_done {
+                                    indent.push_str(&" ".repeat(2));
+                                }
+
+                                script_info.text.push_str(&format!("{}{}\n", indent, line));
                                 if !first_line_done {
                                     first_line_done = true;
-                                    add_indent = 4;
+                                    if !is_comment {
+                                        add_indent = 4
+                                    };
                                 }
                             }
                         }

@@ -27,7 +27,7 @@ Wenn [ $action = "GetTags" ]
 					$ColoringInfo
 					) ]
 	Aktuelles Script verlassen []
-	# --&gt;
+	# -->
 Ende (wenn)
 
 Wenn [ $action = "Reset" ]
@@ -41,7 +41,7 @@ Wenn [ $action = "Reset" ]
 	Wenn [ $btn = 1 ]
 		# Cancel
 		Aktuelles Script verlassen []
-		# --&gt;
+		# -->
 	Ende (wenn)
 	Variable setzen [ $action ; Falls( $btn = 2 ; "Clear" ; "FactoryDefaults" ) ]
 Sonst, wenn [ $action="Toggle" ]
@@ -88,7 +88,7 @@ Wenn [ ($action = "Clear" ODER
 		# Cancel
 		Feldwert setzen [ _Home::_gHomeScreenInfo ; "" ]
 		Aktuelles Script verlassen []
-		# --&gt;
+		# -->
 	Ende (wenn)
 Ende (wenn)
 
