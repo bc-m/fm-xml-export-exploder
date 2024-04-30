@@ -5,14 +5,18 @@ use quick_xml::Reader;
 
 #[derive(Debug, Default)]
 pub struct FieldReference {
-    pub field_reference: String,
+    pub table_reference: Option<String>,
+    pub field_reference: Option<String>,
+    pub repetition: Option<i32>,
 }
 
 impl FieldReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Self, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<FieldReference, String> {
         let mut depth = 1;
         let mut item = FieldReference {
-            field_reference: get_attribute(e, "name").unwrap_or_default(),
+            table_reference: None,
+            field_reference: get_attribute(e, "name"),
+            repetition: None,
         };
 
         let mut buf: Vec<u8> = Vec::new();
@@ -22,29 +26,35 @@ impl FieldReference {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"TableOccurrenceReference" {
-                        for attr in get_attributes(&e).unwrap() {
-                            if attr.0 == "name" {
-                                match e.name().as_ref() {
-                                    b"TableOccurrenceReference" => {
-                                        item.field_reference = format!(
-                                            "{}::{}",
-                                            attr.1,
-                                            match item.field_reference.is_empty() {
-                                                true => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨",
-                                                false => item.field_reference.as_str(),
-                                            }
-                                        );
+                    match e.name().as_ref() {
+                        b"TableOccurrenceReference" => {
+                            for attr in get_attributes(&e).unwrap() {
+                                if attr.0 == "name" {
+                                    match e.name().as_ref() {
+                                        b"TableOccurrenceReference" => {
+                                            item.table_reference = Option::from(attr.1);
+                                        }
+                                        b"Calculation" => {
+                                            item.field_reference = Option::from(
+                                                Calculation::from_xml(reader, &e).unwrap(),
+                                            );
+                                        }
+                                        _ => {}
                                     }
-                                    b"Calculation" => {
-                                        item.field_reference =
-                                            Calculation::from_xml(reader, &e).unwrap();
-                                    }
-
-                                    _ => {}
                                 }
                             }
                         }
+                        b"repetition" => {
+                            match get_attribute(&e, "value") {
+                                None => {}
+                                Some(repetition) => {
+                                    if let Ok(repetition) = repetition.parse::<i32>() {
+                                        item.repetition = Some(repetition)
+                                    }
+                                }
+                            };
+                        }
+                        _ => {}
                     }
                 }
                 Ok(Event::End(_)) => {
@@ -58,15 +68,41 @@ impl FieldReference {
             buf.clear();
         }
 
-        if item.field_reference.is_empty() {
-            item.field_reference = "🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string();
-        }
-
         Ok(item)
     }
 
     pub fn display(&self) -> Option<String> {
-        Some(self.field_reference.to_string())
+        let table_reference: String = match &self.table_reference {
+            None => return Some("🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string()),
+            Some(reference) => reference.clone(),
+        };
+
+        let field_reference = match &self.field_reference {
+            None => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string(),
+            Some(reference) => {
+                if reference.is_empty() {
+                    "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string()
+                } else {
+                    reference.clone()
+                }
+            }
+        };
+
+        let repetition = self.repetition.unwrap_or(1);
+        if repetition != 1 {
+            Some(format!(
+                "{}::{}[{}]",
+                table_reference.as_str(),
+                field_reference.as_str(),
+                repetition
+            ))
+        } else {
+            Some(format!(
+                "{}::{}",
+                table_reference.as_str(),
+                field_reference.as_str()
+            ))
+        }
     }
 }
 
@@ -150,7 +186,30 @@ mod tests {
     }
 
     #[test]
-    fn test_field_referenc_parameter() {
+    fn test_field_reference_with_repetition() {
+        let xml_input = "<FieldReference id=\"4\" name=\"Bar\">
+						<repetition value=\"1337\"></repetition>
+						<TableOccurrenceReference id=\"1065090\" name=\"Foo\"></TableOccurrenceReference>
+					</FieldReference>";
+
+        let mut reader = Reader::from_str(xml_input);
+        let element = match reader.read_event() {
+            Ok(Event::Start(e)) => e,
+            _ => panic!("Wrong read event"),
+        };
+
+        let expected_output = "Foo::Bar[1337]".to_string();
+        assert_eq!(
+            FieldReference::from_xml(&mut reader, &element)
+                .unwrap()
+                .display()
+                .unwrap(),
+            expected_output
+        );
+    }
+
+    #[test]
+    fn test_field_reference_parameter() {
         let xml_input = "<Parameter type=\"FieldReference\">
             <FieldReference id=\"2\" name=\"Bar\">
                 <repetition value=\"1\"></repetition>
