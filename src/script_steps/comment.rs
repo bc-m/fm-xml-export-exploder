@@ -1,6 +1,6 @@
 use crate::utils::attributes::get_attribute;
 
-use html_escape::decode_html_entities;
+use quick_xml::escape::unescape;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 
@@ -37,7 +37,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     } else if comment.is_empty() {
         Some("".to_string())
     } else {
-        Some(format!("# {}", decode_html_entities(&comment)))
+        Some(format!("# {}", unescape(&comment).unwrap()))
     }
 }
 
