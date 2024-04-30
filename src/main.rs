@@ -26,7 +26,6 @@ use crate::utils::attributes::get_attribute;
 use crate::value_list_catalog::xml_explode_value_list_catalog;
 
 mod base_table_catalog;
-mod calculations;
 mod custom_function_catalog;
 mod custom_menu_catalog;
 mod custom_menu_set_catalog;

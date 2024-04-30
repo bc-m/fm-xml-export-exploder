@@ -12,6 +12,7 @@ mod if_start;
 mod is_enabled;
 mod new_window;
 mod omit_multiple_records;
+mod parameters;
 mod perform_find;
 mod perform_script;
 mod primitive;
