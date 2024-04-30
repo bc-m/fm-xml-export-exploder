@@ -42,8 +42,8 @@ pub fn sanitize(step: &str) -> Option<String> {
         Some(format!("{} [ {} ; {} ]", name, variable_name, value))
     } else {
         Some(format!(
-            "{} [ {} ; {} ; Repetition: {} ]",
-            name, variable_name, value, repetition
+            "{} [ {}[{}] ; {} ]",
+            name, variable_name, repetition, value
         ))
     }
 }
@@ -115,8 +115,7 @@ mod tests {
         </Step>
         ";
 
-        let expected_output =
-            Some("Variable setzen [ $Foo ; $Bar ; Repetition: $Rep ]".to_string());
+        let expected_output = Some("Variable setzen [ $Foo[$Rep] ; $Bar ]".to_string());
         assert_eq!(sanitize(xml_input.trim()), expected_output);
     }
 }
