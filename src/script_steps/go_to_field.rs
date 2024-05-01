@@ -1,4 +1,4 @@
-use crate::script_steps::parameters::field_reference::FieldReferenceParameter;
+use crate::script_steps::parameters::field_reference::FieldReference;
 use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
@@ -35,18 +35,13 @@ pub fn sanitize(step: &str) -> Option<String> {
                         _ => {}
                     }
                 }
-                b"Parameter" => {
-                    let parameter_name = get_attribute(&e, "type");
-                    if parameter_name? == "FieldReference" {
-                        field_reference.push_str(
-                            FieldReferenceParameter::from_xml(&mut reader, &e)
-                                .unwrap()
-                                .display()
-                                .unwrap()
-                                .as_str(),
-                        )
-                    }
-                }
+                b"FieldReference" => field_reference.push_str(
+                    FieldReference::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap()
+                        .as_str(),
+                ),
                 _ => {}
             },
             _ => {}

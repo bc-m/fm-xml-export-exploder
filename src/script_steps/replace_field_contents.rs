@@ -1,5 +1,5 @@
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::script_steps::parameters::field_reference::FieldReferenceParameter;
+use crate::script_steps::parameters::field_reference::FieldReference;
 use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
@@ -38,13 +38,12 @@ pub fn sanitize(step: &str) -> Option<String> {
                         },
                     ));
                 }
-                b"Parameter" => {
-                    if get_attribute(&e, "type").unwrap().as_str() == "FieldReference" {
-                        let field_reference = FieldReferenceParameter::from_xml(&mut reader, &e)
-                            .unwrap()
-                            .field_reference;
-                        params.push(("".to_string(), field_reference.to_string()))
-                    }
+                b"FieldReference" => {
+                    let field_reference = FieldReference::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap();
+                    params.push(("".to_string(), field_reference))
                 }
                 b"Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e).unwrap();
