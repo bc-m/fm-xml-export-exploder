@@ -35,6 +35,7 @@ pub enum ScriptStep {
     ExitApplication = 44,
     SelectAll = 50,
     EnterBrowseMode = 55,
+    InsertText = 61,
     IfStart = 68,
     Else = 69,
     IfEnd = 70,

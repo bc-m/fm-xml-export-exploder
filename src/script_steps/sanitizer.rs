@@ -30,6 +30,7 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
         ScriptStep::ExitApplication => script_steps::primitive::sanitize(step_xml),
         ScriptStep::SelectAll => script_steps::primitive::sanitize(step_xml),
         ScriptStep::EnterBrowseMode => script_steps::primitive::sanitize(step_xml),
+        ScriptStep::InsertText => script_steps::insert_text::sanitize(step_xml),
         ScriptStep::IfStart => script_steps::if_start::sanitize(step_xml),
         ScriptStep::Else => script_steps::primitive::sanitize(step_xml),
         ScriptStep::IfEnd => script_steps::primitive::sanitize(step_xml),
