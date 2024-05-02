@@ -9,7 +9,6 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut parameters: Vec<String> = Vec::new();
 
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
@@ -50,53 +49,53 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_sanitize_enabled() {
-        let xml_input = "
-		<Step id=\"86\" name=\"Fehleraufzeichnung setzen\" enable=\"True\">
-			<Options>196608</Options>
-			<ParameterValues membercount=\"1\">
-				<Parameter type=\"Boolean\">
-					<Boolean id=\"131072\" value=\"True\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test_enabled() {
+        let xml = r#"
+            <Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+                <Options>196608</Options>
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean id="131072" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_disabled() {
-        let xml_input = "
-		<Step id=\"86\" name=\"Fehleraufzeichnung setzen\" enable=\"True\">
-			<Options>196608</Options>
-			<ParameterValues membercount=\"1\">
-				<Parameter type=\"Boolean\">
-					<Boolean id=\"131072\" value=\"False\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test_disabled() {
+        let xml = r#"
+            <Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+                <Options>196608</Options>
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean id="131072" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_enter_find_mode() {
-        let xml_input = "
-        <Step id=\"22\" name=\"Suchenmodus aktivieren\" enable=\"True\">
-			<SourceUUID>3C5EBF9C-BAE0-460F-92AF-3FB73649951B</SourceUUID>
-			<ParameterValues membercount=\"1\">
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Pause\" id=\"16777216\" value=\"False\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test_enter_find_mode() {
+        let xml = r#"
+            <Step id="22" name="Suchenmodus aktivieren" enable="True">
+                <SourceUUID>3C5EBF9C-BAE0-460F-92AF-3FB73649951B</SourceUUID>
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean type="Pause" id="16777216" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

@@ -1,12 +1,12 @@
-use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
+
+use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> bool {
     let mut enabled = true;
 
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {

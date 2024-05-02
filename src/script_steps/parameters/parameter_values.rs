@@ -71,15 +71,15 @@ mod tests {
 
     #[test]
     fn test() {
-        let xml_input = r#"
-        <ParameterValues membercount="1">
-            <Parameter type="Boolean">
-                <Boolean type="Pause" id="16777216" value="False"></Boolean>
-            </Parameter>
-        </ParameterValues>
+        let xml = r#"
+            <ParameterValues membercount="1">
+                <Parameter type="Boolean">
+                    <Boolean type="Pause" id="16777216" value="False"></Boolean>
+                </Parameter>
+            </ParameterValues>
         "#;
 
-        let mut reader = Reader::from_str(xml_input.trim());
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),

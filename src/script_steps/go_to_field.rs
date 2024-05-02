@@ -1,7 +1,8 @@
-use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
+
+use crate::script_steps::parameters::field_reference::FieldReference;
+use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -10,7 +11,6 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut field_reference = String::new();
 
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
@@ -78,65 +78,65 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_sanitize() {
-        let xml_input = "
-        <Step index=\"22\" id=\"17\" name=\"Gehe zu Feld\" enable=\"True\">
-            <UUID>458FFEBF-72B6-4D92-BCFB-1B2D0D78D456</UUID>
-            <OwnerID></OwnerID>
-            <Options>0</Options>
-            <ParameterValues membercount=\"1\">
-                <Parameter type=\"Boolean\">
-                    <Boolean type=\"Auswählen/Ausführen\" id=\"4096\" value=\"False\"></Boolean>
-                </Parameter>
-            </ParameterValues>
-        </Step>
-        ";
+    fn test() {
+        let xml = r#"
+            <Step index="22" id="17" name="Gehe zu Feld" enable="True">
+                <UUID>458FFEBF-72B6-4D92-BCFB-1B2D0D78D456</UUID>
+                <OwnerID></OwnerID>
+                <Options>0</Options>
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean type="Auswählen/Ausführen" id="4096" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Gehe zu Feld []".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_select() {
-        let xml_input = "
-        <Step index=\"23\" id=\"17\" name=\"Gehe zu Feld\" enable=\"True\">
-            <UUID>C8E7D1E1-9C0C-458F-8835-A1686DEA003C</UUID>
-            <OwnerID></OwnerID>
-            <Options>4096</Options>
-            <ParameterValues membercount=\"1\">
-                <Parameter type=\"Boolean\">
-                    <Boolean type=\"Auswählen/Ausführen\" id=\"4096\" value=\"True\"></Boolean>
-                </Parameter>
-            </ParameterValues>
-        </Step>
-        ";
+    fn test_select() {
+        let xml = r#"
+            <Step index="23" id="17" name="Gehe zu Feld" enable="True">
+                <UUID>C8E7D1E1-9C0C-458F-8835-A1686DEA003C</UUID>
+                <OwnerID></OwnerID>
+                <Options>4096</Options>
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean type="Auswählen/Ausführen" id="4096" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Gehe zu Feld [ Auswählen/Ausführen ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_with_field_reference() {
-        let xml_input = "
-        <Step index=\"24\" id=\"17\" name=\"Gehe zu Feld\" enable=\"True\">
-            <UUID>226D2607-5BFF-4283-BD95-FBDACC64426D</UUID>
-            <OwnerID></OwnerID>
-            <Options>4097</Options>
-            <ParameterValues membercount=\"2\">
-                <Parameter type=\"Boolean\">
-                    <Boolean type=\"Auswählen/Ausführen\" id=\"4096\" value=\"True\"></Boolean>
-                </Parameter>
-                <Parameter type=\"FieldReference\">
-                    <FieldReference id=\"1\" name=\"Bar\" UUID=\"09C62F3A-8080-4C3D-A68B-156A166D438E\">
-                        <repetition value=\"1\"></repetition>
-                        <TableOccurrenceReference id=\"1065090\" name=\"Foo\" UUID=\"EA9E5069-FF8F-41E3-A59E-3530B900EE56\"></TableOccurrenceReference>
-                    </FieldReference>
-                </Parameter>
-            </ParameterValues>
-        </Step>
-        ";
+    fn test_with_field_reference() {
+        let xml = r#"
+            <Step index="24" id="17" name="Gehe zu Feld" enable="True">
+                <UUID>226D2607-5BFF-4283-BD95-FBDACC64426D</UUID>
+                <OwnerID></OwnerID>
+                <Options>4097</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="Boolean">
+                        <Boolean type="Auswählen/Ausführen" id="4096" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="FieldReference">
+                        <FieldReference id="1" name="Bar" UUID="09C62F3A-8080-4C3D-A68B-156A166D438E">
+                            <repetition value="1"></repetition>
+                            <TableOccurrenceReference id="1065090" name="Foo" UUID="EA9E5069-FF8F-41E3-A59E-3530B900EE56"></TableOccurrenceReference>
+                        </FieldReference>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Gehe zu Feld [ Auswählen/Ausführen ; Foo::Bar ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

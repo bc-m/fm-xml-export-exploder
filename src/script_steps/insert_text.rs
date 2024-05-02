@@ -1,9 +1,9 @@
+use quick_xml::events::Event;
+use quick_xml::Reader;
+
 use crate::script_steps::parameters::target::Target;
 use crate::script_steps::parameters::text::Text;
 use crate::utils::attributes::get_attribute;
-
-use quick_xml::events::Event;
-use quick_xml::Reader;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -12,7 +12,6 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut select = false;
 
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
@@ -252,7 +251,7 @@ mod tests {
     }
 
     #[test]
-    fn test_sanitize() {
+    fn test() {
         let xml = r#"
             <Step index="1337" id="61" name="Text einfügen" enable="True">
                 <UUID>FC69A314-34A9-4393-AC4C-B5E442996917</UUID>

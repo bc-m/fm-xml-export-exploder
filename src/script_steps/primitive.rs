@@ -1,10 +1,10 @@
-use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 
+use crate::utils::attributes::get_attribute;
+
 pub fn sanitize(step: &str) -> Option<String> {
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
@@ -32,10 +32,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_sanitize() {
-        let xml_input = "<Step id=\"79\" name=\"Fenster fixieren\" enable=\"True\">";
+    fn test() {
+        let xml = r#"<Step id="79" name="Fenster fixieren" enable="True">"#;
 
         let expected_output = Some("Fenster fixieren".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

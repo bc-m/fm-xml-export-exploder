@@ -1,6 +1,7 @@
-use crate::utils::attributes::get_attribute;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+
+use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]
 pub struct VariableReference {
@@ -64,19 +65,20 @@ impl VariableReference {
 
 #[cfg(test)]
 mod tests {
-    use crate::script_steps::parameters::variable_reference::VariableReference;
     use quick_xml::events::Event;
     use quick_xml::Reader;
 
+    use crate::script_steps::parameters::variable_reference::VariableReference;
+
     #[test]
     fn test() {
-        let xml_input = r#"
+        let xml = r#"
             <Variable value="$foo">
                 <repetition value="1"></repetition>
             </Variable>
         "#;
 
-        let mut reader = Reader::from_str(xml_input.trim());
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
@@ -94,13 +96,13 @@ mod tests {
 
     #[test]
     fn test_with_repetition() {
-        let xml_input = r#"
+        let xml = r#"
             <Variable value="$foo">
                 <repetition value="1337"></repetition>
             </Variable>
         "#;
 
-        let mut reader = Reader::from_str(xml_input.trim());
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),

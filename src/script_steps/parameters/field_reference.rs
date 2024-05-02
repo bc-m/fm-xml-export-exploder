@@ -1,7 +1,8 @@
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::{get_attribute, get_attributes};
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+
+use crate::script_steps::parameters::calculation::Calculation;
+use crate::utils::attributes::{get_attribute, get_attributes};
 
 #[derive(Debug, Default)]
 pub struct FieldReference {
@@ -108,18 +109,21 @@ impl FieldReference {
 
 #[cfg(test)]
 mod tests {
-    use crate::script_steps::parameters::field_reference::FieldReference;
     use quick_xml::events::Event;
     use quick_xml::Reader;
 
+    use crate::script_steps::parameters::field_reference::FieldReference;
+
     #[test]
     fn test_field_reference() {
-        let xml_input = "<FieldReference id=\"4\" name=\"Bar\">
-						<repetition value=\"1\"></repetition>
-						<TableOccurrenceReference id=\"1065090\" name=\"Foo\"></TableOccurrenceReference>
-					</FieldReference>";
+        let xml = r#"
+            <FieldReference id="4" name="Bar">
+                <repetition value="1"></repetition>
+                <TableOccurrenceReference id="1065090" name="Foo"></TableOccurrenceReference>
+            </FieldReference>
+        "#;
 
-        let mut reader = Reader::from_str(xml_input);
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
@@ -137,12 +141,14 @@ mod tests {
 
     #[test]
     fn test_field_reference_with_repetition() {
-        let xml_input = "<FieldReference id=\"4\" name=\"Bar\">
-						<repetition value=\"1337\"></repetition>
-						<TableOccurrenceReference id=\"1065090\" name=\"Foo\"></TableOccurrenceReference>
-					</FieldReference>";
+        let xml = r#"
+            <FieldReference id="4" name="Bar">
+                <repetition value="1337"></repetition>
+                <TableOccurrenceReference id="1065090" name="Foo"></TableOccurrenceReference>
+            </FieldReference>
+        "#;
 
-        let mut reader = Reader::from_str(xml_input);
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),

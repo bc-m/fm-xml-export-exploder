@@ -1,15 +1,14 @@
-use crate::utils::attributes::get_attribute;
-
 use quick_xml::escape::unescape;
 use quick_xml::events::Event;
 use quick_xml::Reader;
+
+use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
     let mut comment = String::new();
 
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
@@ -46,38 +45,38 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_sanitize() {
-        let xml_input = "
-            <Step id=\"89\" name=\"# (Kommentar)\" enable=\"True\">
-                <ParameterValues membercount=\"1\">
-                    <ParameterValues membercount=\"1\">
-                        <Parameter type=\"Comment\">
-                            <Comment value=\"Lorem Ipsum\"></Comment>
+    fn test() {
+        let xml = r##"
+            <Step id="89" name="# (Kommentar)" enable="True">
+                <ParameterValues membercount="1">
+                    <ParameterValues membercount="1">
+                        <Parameter type="Comment">
+                            <Comment value="Lorem Ipsum"></Comment>
                         </Parameter>
                     </ParameterValues>
                 </ParameterValues>
             </Step>
-        ";
+        "##;
 
         let expected_output = Some("# Lorem Ipsum".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_empty_comment() {
-        let xml_input = "
-            <Step id=\"89\" name=\"# (Kommentar)\" enable=\"True\">
-                <ParameterValues membercount=\"1\">
-                    <ParameterValues membercount=\"1\">
-                        <Parameter type=\"Comment\">
+    fn test_empty_comment() {
+        let xml = r##"
+            <Step id="89" name="# (Kommentar)" enable="True">
+                <ParameterValues membercount="1">
+                    <ParameterValues membercount="1">
+                        <Parameter type="Comment">
                             <Comment></Comment>
                         </Parameter>
                     </ParameterValues>
                 </ParameterValues>
             </Step>
-        ";
+        "##;
 
         let expected_output = Some("".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

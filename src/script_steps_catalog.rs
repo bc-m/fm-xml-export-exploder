@@ -1,19 +1,20 @@
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
-use crate::script_steps::sanitizer::sanitize;
-use crate::{escape_filename, join_scope_id_and_name};
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::collections::HashMap;
 use std::fs;
 use std::io::{BufRead, Read};
 use std::path::Path;
 
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
+
+use crate::script_steps::constants::{id_to_script_step, ScriptStep};
+use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::{get_attribute, get_attributes};
 use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, local_name_to_string, start_element_to_string,
     text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_text_file, write_xml_file};
+use crate::{escape_filename, join_scope_id_and_name};
 
 #[derive(Debug, Default)]
 struct ScriptInfo {
@@ -79,7 +80,7 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
                     match script_id_path_map.get(&script_info.id) {
                         None => {}
                         Some(path) => {
-                            script_info.path = path.clone();
+                            script_info.path.clone_from(path);
                         }
                     };
                 } else if depth == 4 && local_name_to_string(e.name().as_ref()) == "Step" {

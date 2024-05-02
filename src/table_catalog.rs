@@ -1,9 +1,9 @@
-use crate::{escape_filename, join_scope_id_and_name};
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::collections::HashMap;
 use std::io::{BufRead, Read};
 use std::path::Path;
+
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
 
 use crate::utils::attributes::{get_attribute, get_attributes};
 use crate::utils::xml_utils::{
@@ -11,6 +11,7 @@ use crate::utils::xml_utils::{
     text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_xml_file, Entity};
+use crate::{escape_filename, join_scope_id_and_name};
 
 pub fn xml_explode_table_catalog<R: Read + BufRead>(
     reader: &mut Reader<R>,
@@ -56,7 +57,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
                             match table_name_id_map.get(&table_info.name) {
                                 None => {}
                                 Some(table_id) => {
-                                    table_info.id = table_id.clone();
+                                    table_info.id.clone_from(table_id);
                                 }
                             };
                         }
