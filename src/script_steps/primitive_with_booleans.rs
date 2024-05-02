@@ -1,11 +1,12 @@
-use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 
+use crate::script_steps::parameters::parameter_values::ParameterValues;
+use crate::utils::attributes::get_attribute;
+
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
-    let mut option_name = String::new();
-    let mut state = false;
+    let mut parameters: Vec<String> = Vec::new();
 
     let mut reader = Reader::from_str(step);
     reader.trim_text(true);
@@ -24,22 +25,12 @@ pub fn sanitize(step: &str) -> Option<String> {
                     }
                     continue;
                 }
-                b"Boolean" => {
-                    if let Some(name) = get_attribute(&e, "type") {
-                        option_name = name.to_string();
-                    }
-
-                    match get_attribute(&e, "value").unwrap().as_str() {
-                        "True" => {
-                            state = true;
-                        }
-                        "False" => {
-                            state = false;
-                        }
-                        _ => {}
-                    }
-                    continue;
-                }
+                b"ParameterValues" => parameters.push(
+                    ParameterValues::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap(),
+                ),
                 _ => {}
             },
             _ => {}
@@ -47,16 +38,11 @@ pub fn sanitize(step: &str) -> Option<String> {
         buf.clear()
     }
 
-    let state_string = match state {
-        true => "ON",
-        false => "OFF",
+    if parameters.is_empty() {
+        return Some(format!("{} []", name));
     };
 
-    if option_name.is_empty() {
-        Some(format!("{} [ {} ]", name, state_string))
-    } else {
-        Some(format!("{} [ {}: {} ]", name, option_name, state_string))
-    }
+    Some(format!("{} [ {} ]", name, parameters.join(" ; ")))
 }
 
 #[cfg(test)]

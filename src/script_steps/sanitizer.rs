@@ -11,14 +11,16 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
         ScriptStep::GoToLayout => script_steps::go_to_layout::sanitize(step_xml),
         ScriptStep::NewRecordRequest => script_steps::primitive::sanitize(step_xml),
         ScriptStep::DuplicateRecordRequest => script_steps::primitive::sanitize(step_xml),
-        ScriptStep::DeleteRecordRequest => script_steps::primitive_with_boolean::sanitize(step_xml),
-        ScriptStep::DeleteAllRecords => script_steps::primitive_with_boolean::sanitize(step_xml),
+        ScriptStep::DeleteRecordRequest => {
+            script_steps::primitive_with_booleans::sanitize(step_xml)
+        }
+        ScriptStep::DeleteAllRecords => script_steps::primitive_with_booleans::sanitize(step_xml),
         ScriptStep::GoToRecordRequestPage => script_steps::go_to_record::sanitize(step_xml),
         ScriptStep::GoToField => script_steps::go_to_field::sanitize(step_xml),
         ScriptStep::CheckRecord => script_steps::primitive::sanitize(step_xml),
         ScriptStep::CheckFoundSet => script_steps::primitive::sanitize(step_xml),
         ScriptStep::UnsortRecords => script_steps::primitive::sanitize(step_xml),
-        ScriptStep::EnterFindMode => script_steps::primitive_with_boolean::sanitize(step_xml),
+        ScriptStep::EnterFindMode => script_steps::primitive_with_booleans::sanitize(step_xml),
         ScriptStep::ShowAllRecords => script_steps::primitive::sanitize(step_xml),
         ScriptStep::ModifyLastFind => script_steps::primitive::sanitize(step_xml),
         ScriptStep::OmitRecord => script_steps::primitive::sanitize(step_xml),
@@ -41,8 +43,8 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),
         ScriptStep::FreezeWindow => script_steps::primitive::sanitize(step_xml),
         ScriptStep::NewFile => script_steps::primitive::sanitize(step_xml),
-        ScriptStep::AllowUserAbort => script_steps::primitive_with_boolean::sanitize(step_xml),
-        ScriptStep::SetErrorCapture => script_steps::primitive_with_boolean::sanitize(step_xml),
+        ScriptStep::AllowUserAbort => script_steps::primitive_with_booleans::sanitize(step_xml),
+        ScriptStep::SetErrorCapture => script_steps::primitive_with_booleans::sanitize(step_xml),
         ScriptStep::OpenScriptWorkspace => script_steps::primitive::sanitize(step_xml),
         ScriptStep::Comment => script_steps::comment::sanitize(step_xml),
         ScriptStep::HaltScript => script_steps::primitive::sanitize(step_xml),
@@ -50,7 +52,9 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
             script_steps::replace_field_contents::sanitize(step_xml)
         }
         ScriptStep::Beep => script_steps::primitive::sanitize(step_xml),
-        ScriptStep::SetUseSystemFormats => script_steps::primitive_with_boolean::sanitize(step_xml),
+        ScriptStep::SetUseSystemFormats => {
+            script_steps::primitive_with_booleans::sanitize(step_xml)
+        }
         ScriptStep::GoToPortalRow => script_steps::go_to_portal_row::sanitize(step_xml),
         ScriptStep::CopyRecordRequest => script_steps::primitive::sanitize(step_xml),
         ScriptStep::FlushCacheToDisk => script_steps::primitive::sanitize(step_xml),
@@ -62,7 +66,7 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
         ScriptStep::OpenManageValueLists => script_steps::primitive::sanitize(step_xml),
         ScriptStep::OpenSharing => script_steps::primitive::sanitize(step_xml),
         ScriptStep::OpenFileOptions => script_steps::primitive::sanitize(step_xml),
-        ScriptStep::AllowFormattingBar => script_steps::primitive_with_boolean::sanitize(step_xml),
+        ScriptStep::AllowFormattingBar => script_steps::primitive_with_booleans::sanitize(step_xml),
         ScriptStep::OpenHosts => script_steps::primitive::sanitize(step_xml),
         ScriptStep::EditUserDictionary => script_steps::primitive::sanitize(step_xml),
         ScriptStep::CloseWindow => script_steps::close_window::sanitize(step_xml),

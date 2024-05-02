@@ -17,7 +17,7 @@ mod parameters;
 mod perform_find;
 mod perform_script;
 mod primitive;
-mod primitive_with_boolean;
+mod primitive_with_booleans;
 mod refresh_object;
 mod replace_field_contents;
 pub(crate) mod sanitizer;
