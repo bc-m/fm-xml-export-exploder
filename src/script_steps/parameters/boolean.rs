@@ -90,13 +90,13 @@ mod tests {
 
     #[test]
     fn test() {
-        let xml_input = r#"
+        let xml = r#"
             <Parameter type="Boolean">
                 <Boolean type="Pause" id="16777216" value="False"></Boolean>
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml_input.trim());
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
@@ -114,13 +114,13 @@ mod tests {
 
     #[test]
     fn test_without_name() {
-        let xml_input = r#"
+        let xml = r#"
             <Parameter type="Boolean">
                 <Boolean value="False"></Boolean>
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml_input.trim());
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),

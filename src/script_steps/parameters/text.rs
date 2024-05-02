@@ -1,7 +1,8 @@
-use crate::utils::attributes::get_attribute;
 use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+
+use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]
 pub struct Text {
@@ -44,15 +45,16 @@ impl Text {
 
 #[cfg(test)]
 mod tests {
-    use crate::script_steps::parameters::text::Text;
     use quick_xml::events::Event;
     use quick_xml::Reader;
 
+    use crate::script_steps::parameters::text::Text;
+
     #[test]
     fn test() {
-        let xml_input = r#"<Text value="a&#13;b&#13;c"></Text>"#;
+        let xml = r#"<Text value="a&#13;b&#13;c"></Text>"#;
 
-        let mut reader = Reader::from_str(xml_input.trim());
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),

@@ -1,6 +1,7 @@
+use std::borrow::Cow;
+
 use quick_xml::events::BytesStart;
 use quick_xml::name::QName;
-use std::borrow::Cow;
 
 pub fn key_to_string(key: QName) -> String {
     return String::from_utf8_lossy(key.as_ref()).to_string();
@@ -41,15 +42,15 @@ pub fn get_attribute(e: &BytesStart, name: &str) -> Option<String> {
 
 #[cfg(test)]
 mod tests {
-    use crate::utils;
     use quick_xml::events::Event;
     use quick_xml::Reader;
+
+    use crate::utils;
 
     #[test]
     fn test_get_name_attribute() {
         let xml_tag = "<Name value=\"$Serverscript\">";
         let mut reader = Reader::from_str(xml_tag);
-        reader.trim_text(true);
 
         if let Ok(Event::Start(ref e)) = reader.read_event() {
             assert_eq!(

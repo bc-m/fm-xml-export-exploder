@@ -1,6 +1,7 @@
-use crate::utils::attributes::get_attribute;
 use quick_xml::events::Event;
 use quick_xml::Reader;
+
+use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -12,7 +13,6 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut force_text = String::new();
 
     let mut reader = Reader::from_str(step);
-    reader.trim_text(true);
     let mut buf: Vec<u8> = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
@@ -96,98 +96,98 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_sanitize() {
-        let xml_input = "
-		<Step id=\"75\" name=\"Schreibe Änderung Datens./Abfrage\" enable=\"True\">
-			<Options>384</Options>
-			<ParameterValues membercount=\"3\">
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Dateneingabeüberprüfung unterdrücken\" id=\"256\" value=\"False\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Mit Dialog\" id=\"128\" value=\"False\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Schreiben erzwingen\" id=\"512\" value=\"False\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output =
             Some("Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_force() {
-        let xml_input = "
-		<Step id=\"75\" name=\"Schreibe Änderung Datens./Abfrage\" enable=\"True\">
-			<Options>384</Options>
-			<ParameterValues membercount=\"3\">
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Dateneingabeüberprüfung unterdrücken\" id=\"256\" value=\"False\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Mit Dialog\" id=\"128\" value=\"False\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Schreiben erzwingen\" id=\"512\" value=\"True\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test_force() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some(
             "Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ; Schreiben erzwingen ]"
                 .to_string(),
         );
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_suppress_validate() {
-        let xml_input = "
-		<Step id=\"75\" name=\"Schreibe Änderung Datens./Abfrage\" enable=\"True\">
-			<Options>384</Options>
-			<ParameterValues membercount=\"3\">
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Dateneingabeüberprüfung unterdrücken\" id=\"256\" value=\"True\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Mit Dialog\" id=\"128\" value=\"False\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Schreiben erzwingen\" id=\"512\" value=\"False\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test_suppress_validate() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
     #[test]
-    fn test_sanitize_all_options() {
-        let xml_input = "
-		<Step id=\"75\" name=\"Schreibe Änderung Datens./Abfrage\" enable=\"True\">
-			<Options>384</Options>
-			<ParameterValues membercount=\"3\">
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Dateneingabeüberprüfung unterdrücken\" id=\"256\" value=\"True\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Mit Dialog\" id=\"128\" value=\"True\"></Boolean>
-				</Parameter>
-				<Parameter type=\"Boolean\">
-					<Boolean type=\"Schreiben erzwingen\" id=\"512\" value=\"True\"></Boolean>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-        ";
+    fn test_all_options() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: ON ; Schreiben erzwingen ]".to_string());
-        assert_eq!(sanitize(xml_input.trim()), expected_output);
+        assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

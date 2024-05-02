@@ -1,8 +1,9 @@
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::Reader;
+
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::text_to_string;
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::Reader;
 
 #[derive(Debug, Default)]
 pub struct LayoutReferenceContainer {
@@ -102,9 +103,13 @@ mod tests {
 
     #[test]
     fn test() {
-        let xml_input = "<LayoutReferenceContainer value=\"1\"><Label>Originallayout</Label></LayoutReferenceContainer>";
+        let xml = r#"
+            <LayoutReferenceContainer value="1">
+                <Label>Originallayout</Label>
+            </LayoutReferenceContainer>
+        "#;
 
-        let mut reader = Reader::from_str(xml_input);
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
@@ -121,19 +126,19 @@ mod tests {
 
     #[test]
     fn test_layout() {
-        let xml_input = "\
-        <LayoutReferenceContainer value=\"5\">\
-            <LayoutReference id=\"2\" name=\"Aufgabenliste\" UUID=\"EBFC887D-CF13-4ABE-BB71-78EDC2B30FEE\"></LayoutReference>
-        </LayoutReferenceContainer>
-        ";
+        let xml = r#"
+            <LayoutReferenceContainer value="5">
+                <LayoutReference id="2" name="Aufgabenliste" UUID="EBFC887D-CF13-4ABE-BB71-78EDC2B30FEE"></LayoutReference>
+            </LayoutReferenceContainer>
+        "#;
 
-        let mut reader = Reader::from_str(xml_input);
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = Some("Layout: \"Aufgabenliste\"".to_string());
+        let expected_output = Some(r#"Layout: "Aufgabenliste""#.to_string());
         assert_eq!(
             LayoutReferenceContainer::from_xml(&mut reader, &element)
                 .unwrap()
@@ -144,27 +149,26 @@ mod tests {
 
     #[test]
     fn test_by_name() {
-        let xml_input = "
-        <LayoutReferenceContainer value=\"3\">
-            <Calculation datatype=\"1\" position=\"5\">
-                <Calculation>
-                    <Text><![CDATA[\"LAYOUT_NAME_CALCULATION\"]]></Text>
-                    <ChunkList hash=\"56E1B7D90047D6C6C4421314C701E408\">
-                        <Chunk type=\"NoRef\">&quot;LAYOUT_NAME_CALCULATION&quot;</Chunk>
-                    </ChunkList>
+        let xml = r#"
+            <LayoutReferenceContainer value="3">
+                <Calculation datatype="1" position="5">
+                    <Calculation>
+                        <Text><![CDATA["LAYOUT_NAME_CALCULATION"]]></Text>
+                        <ChunkList hash="56E1B7D90047D6C6C4421314C701E408">
+                            <Chunk type="NoRef">&quot;LAYOUT_NAME_CALCULATION&quot;</Chunk>
+                        </ChunkList>
+                    </Calculation>
                 </Calculation>
-            </Calculation>
-        </LayoutReferenceContainer>
-        ";
+            </LayoutReferenceContainer>
+        "#;
 
-        let mut reader = Reader::from_str(xml_input);
-        reader.trim_text(true);
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = Some("Layoutname: \"LAYOUT_NAME_CALCULATION\"".to_string());
+        let expected_output = Some(r#"Layoutname: "LAYOUT_NAME_CALCULATION""#.to_string());
         assert_eq!(
             LayoutReferenceContainer::from_xml(&mut reader, &element)
                 .unwrap()
@@ -175,28 +179,26 @@ mod tests {
 
     #[test]
     fn test_by_number() {
-        let xml_input = "
-        <LayoutReferenceContainer value=\"4\">
-            <Calculation datatype=\"1\" position=\"5\">
-                <Calculation>
-                    <Text><![CDATA[\"LAYOUT_NUMBER_CALCULATION\"]]></Text>
-                    <ChunkList hash=\"3C7B0A49FD772FDF6F8218753BDDDE7D\">
-                        <Chunk type=\"NoRef\">&quot;LAYOUT_NUMBER_CALCULATION&quot;</Chunk>
-                    </ChunkList>
+        let xml = r#"
+            <LayoutReferenceContainer value="4">
+                <Calculation datatype="1" position="5">
+                    <Calculation>
+                        <Text><![CDATA["LAYOUT_NUMBER_CALCULATION"]]></Text>
+                        <ChunkList hash="3C7B0A49FD772FDF6F8218753BDDDE7D">
+                            <Chunk type="NoRef">&quot;LAYOUT_NUMBER_CALCULATION&quot;</Chunk>
+                        </ChunkList>
+                    </Calculation>
                 </Calculation>
-            </Calculation>
-        </LayoutReferenceContainer>
-        ";
+            </LayoutReferenceContainer>
+        "#;
 
-        let mut reader = Reader::from_str(xml_input);
-        reader.trim_text(true);
-
+        let mut reader = Reader::from_str(xml.trim());
         let element = match reader.read_event() {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = Some("Layoutnr.: \"LAYOUT_NUMBER_CALCULATION\"".to_string());
+        let expected_output = Some(r#"Layoutnr.: "LAYOUT_NUMBER_CALCULATION""#.to_string());
         assert_eq!(
             LayoutReferenceContainer::from_xml(&mut reader, &element)
                 .unwrap()
