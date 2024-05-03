@@ -1,3 +1,4 @@
+use crate::script_steps::constants::id_to_script_step;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
@@ -47,7 +48,11 @@ impl ParameterValues {
                                 depth -= 1;
                             }
                             _ => {
-                                eprintln!("Unknown parameter type: {}", parameter_type)
+                                eprintln!(
+                                    "Unknown parameter \"{}\" in step \"{}\"",
+                                    parameter_type,
+                                    id_to_script_step(step_id)
+                                )
                             }
                         }
                     }
