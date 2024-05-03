@@ -90,6 +90,7 @@ pub enum ScriptStep {
     AvPlayerSetPlaybackState = 178,
     TruncateTable = 182,
     OpenFavorites = 183,
+    CommitTransaction = 206,
 }
 
 pub fn id_to_script_step(id: &str) -> ScriptStep {
