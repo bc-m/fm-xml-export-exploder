@@ -72,18 +72,18 @@ Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ 1=1 ]
 Schleife (Ende)
 Transaktion öffnen [ Dateneingabeüberprüfung unterdrücken: OFF ; ESS-Sperrkonflikte überschreiben: OFF ]
-Transaktion rückgängig ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "207" ] ⚠️⚠️⚠️
+Transaktion rückgängig [ Condition: 1=1 ; ErrorCode: 5000 ; ErrorMessage: "Broken" ]
 Transaktion bestätigen
 Transaktion öffnen [ Dateneingabeüberprüfung unterdrücken: ON ; ESS-Sperrkonflikte überschreiben: OFF ]
-Transaktion rückgängig ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "207" ] ⚠️⚠️⚠️
-Transaktion rückgängig ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "207" ] ⚠️⚠️⚠️
-Transaktion rückgängig ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "207" ] ⚠️⚠️⚠️
+Transaktion rückgängig [ Condition: 1=1 ; ErrorCode: 5000 ]
+Transaktion rückgängig [ Condition: 1=1 ; ErrorCode: 5000 ]
+Transaktion rückgängig [ Condition: 1=1 ]
 Transaktion bestätigen
 Transaktion öffnen [ Dateneingabeüberprüfung unterdrücken: OFF ; ESS-Sperrkonflikte überschreiben: ON ]
-Transaktion rückgängig ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "207" ] ⚠️⚠️⚠️
+Transaktion rückgängig [ ErrorCode: 5000 ; ErrorMessage: "Broken" ]
 Transaktion bestätigen
 Transaktion öffnen [ Dateneingabeüberprüfung unterdrücken: ON ; ESS-Sperrkonflikte überschreiben: ON ]
-Transaktion rückgängig ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "207" ] ⚠️⚠️⚠️
+Transaktion rückgängig [ Condition: 1=1 ; ErrorCode: 1 ; ErrorMessage: "Broken" ]
 Transaktion bestätigen
 
 Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️

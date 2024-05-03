@@ -1,12 +1,14 @@
-use crate::script_steps::constants::id_to_script_step;
+use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
 use crate::script_steps::parameters::boolean::Boolean;
+use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::list::List;
 use crate::utils::attributes::get_attribute;
 
 pub struct ParameterValues {
+    pub step_id: String,
     pub parameters: Vec<String>,
 }
 
@@ -18,6 +20,7 @@ impl ParameterValues {
     ) -> Result<ParameterValues, String> {
         let mut depth = 1;
         let mut item = ParameterValues {
+            step_id: step_id.to_string().clone(),
             parameters: Vec::new(),
         };
 
@@ -47,6 +50,17 @@ impl ParameterValues {
                                 }
                                 depth -= 1;
                             }
+                            "Condition" | "ErrorCode" | "ErrorMessage" => {
+                                if let Ok(param_value) = Calculation::from_xml(reader, &e) {
+                                    item.parameters.push(format!(
+                                        "{}: {}",
+                                        parameter_type.as_str(),
+                                        param_value
+                                    ));
+                                }
+                                depth -= 1;
+                            }
+
                             _ => {
                                 eprintln!(
                                     "Unknown parameter \"{}\" in step \"{}\"",
@@ -72,6 +86,25 @@ impl ParameterValues {
     }
 
     pub fn display(&self) -> Option<String> {
+        if id_to_script_step(&self.step_id) == ScriptStep::RevertTransaction {
+            let mut modified_parameters = self.parameters.clone();
+            modified_parameters
+                .retain(|param| !param.ends_with(": ON") && !param.ends_with(": OFF"));
+
+            let mut iter = modified_parameters.iter().rev();
+            if let Some(last) = iter.next() {
+                if last.starts_with("ErrorMessage") {
+                    if let Some(second_last) = iter.next() {
+                        if !second_last.starts_with("ErrorCode") {
+                            modified_parameters.pop();
+                        }
+                    }
+                }
+            }
+
+            return Some(modified_parameters.join(" ; "));
+        }
+
         Some(self.parameters.join(" ; "))
     }
 }

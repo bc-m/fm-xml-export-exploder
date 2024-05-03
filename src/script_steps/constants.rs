@@ -92,6 +92,7 @@ pub enum ScriptStep {
     OpenFavorites = 183,
     OpenTransaction = 205,
     CommitTransaction = 206,
+    RevertTransaction = 207,
 }
 
 pub fn id_to_script_step(id: &str) -> ScriptStep {
