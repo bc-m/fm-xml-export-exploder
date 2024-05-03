@@ -85,6 +85,7 @@ pub enum ScriptStep {
     RefreshObject = 167,
     ClosePopover = 169,
     UploadToServer = 172,
+    AvPlayerSetPlaybackState = 178,
     TruncateTable = 182,
     OpenFavorites = 183,
 }
