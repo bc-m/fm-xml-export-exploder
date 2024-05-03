@@ -48,6 +48,7 @@ pub enum ScriptStep {
     SetField = 76,
     FreezeWindow = 79,
     NewFile = 82,
+    SetMultiUser = 84,
     AllowUserAbort = 85,
     SetErrorCapture = 86,
     OpenScriptWorkspace = 88,
