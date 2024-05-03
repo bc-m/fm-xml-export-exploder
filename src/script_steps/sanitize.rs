@@ -37,11 +37,13 @@ pub fn from_xml(step_id: &str, step: &str) -> Option<String> {
         buf.clear()
     }
 
+    let parameters = parameters.join(" ; ");
+    let parameters = parameters.trim();
     if parameters.is_empty() {
         return Some(name.to_string());
     };
 
-    Some(format!("{} [ {} ]", name, parameters.join(" ; ")))
+    Some(format!("{} [ {} ]", name, parameters))
 }
 
 #[cfg(test)]
