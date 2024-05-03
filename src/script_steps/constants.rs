@@ -90,6 +90,7 @@ pub enum ScriptStep {
     AvPlayerSetPlaybackState = 178,
     TruncateTable = 182,
     OpenFavorites = 183,
+    SetErrorLogging = 200,
     OpenTransaction = 205,
     CommitTransaction = 206,
     RevertTransaction = 207,

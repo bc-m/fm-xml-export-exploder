@@ -50,7 +50,7 @@ impl ParameterValues {
                                 }
                                 depth -= 1;
                             }
-                            "Condition" | "ErrorCode" | "ErrorMessage" => {
+                            "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo" => {
                                 if let Ok(param_value) = Calculation::from_xml(reader, &e) {
                                     item.parameters.push(format!(
                                         "{}: {}",
@@ -86,26 +86,44 @@ impl ParameterValues {
     }
 
     pub fn display(&self) -> Option<String> {
-        if id_to_script_step(&self.step_id) == ScriptStep::RevertTransaction {
-            let mut modified_parameters = self.parameters.clone();
-            modified_parameters
-                .retain(|param| !param.ends_with(": ON") && !param.ends_with(": OFF"));
+        match id_to_script_step(&self.step_id) {
+            ScriptStep::RevertTransaction => {
+                let mut modified_parameters = self.parameters.clone();
+                modified_parameters
+                    .retain(|param| !param.ends_with(": ON") && !param.ends_with(": OFF"));
 
-            let mut iter = modified_parameters.iter().rev();
-            if let Some(last) = iter.next() {
-                if last.starts_with("ErrorMessage") {
-                    if let Some(second_last) = iter.next() {
-                        if !second_last.starts_with("ErrorCode") {
-                            modified_parameters.pop();
+                let mut iter = modified_parameters.iter().rev();
+                if let Some(last) = iter.next() {
+                    if last.starts_with("ErrorMessage") {
+                        if let Some(second_last) = iter.next() {
+                            if !second_last.starts_with("ErrorCode") {
+                                modified_parameters.pop();
+                            }
                         }
                     }
                 }
+
+                Some(modified_parameters.join(" ; "))
             }
+            ScriptStep::SetErrorLogging => {
+                let mut modified_parameters: Vec<String> = Vec::new();
 
-            return Some(modified_parameters.join(" ; "));
+                let mut iter = self.parameters.iter();
+                if let Some(first) = iter.next() {
+                    if first.ends_with(": ON") {
+                        modified_parameters.push(String::from("ON"))
+                    } else {
+                        modified_parameters.push(String::from("OFF"))
+                    }
+                }
+                if let Some(second) = iter.next() {
+                    modified_parameters.push(second.clone());
+                }
+
+                Some(modified_parameters.join(" ; "))
+            }
+            _ => Some(self.parameters.join(" ; ")),
         }
-
-        Some(self.parameters.join(" ; "))
     }
 }
 
