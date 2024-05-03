@@ -18,6 +18,8 @@ pub enum ScriptStep {
     DuplicateRecordRequest = 8,
     DeleteRecordRequest = 9,
     DeleteAllRecords = 10,
+    InsertCurrentDate = 13,
+    InsertCurrentTime = 14,
     GoToRecordRequestPage = 16,
     GoToField = 17,
     CheckRecord = 19,
