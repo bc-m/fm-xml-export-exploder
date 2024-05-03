@@ -6,7 +6,7 @@ expression: output_content
 # 20121101 MrW
 
 Fenster fixieren
-Blätternmodus aktivieren
+Blätternmodus aktivieren [ Pause: OFF ]
 Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
 
 # Inputvar
@@ -38,7 +38,7 @@ Wenn [ $CountOfSyntaxToCreate > 0 ]
 		# FOR EACH Color
 		Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
 		Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
-		Schleife (Anfang)
+		Schleife (Anfang) [ Flush: Immer ]
 			Verlasse Schleife wenn [ Color.Syntax_byCommand::_k1 ]
 			# Add command
 			Feldwert setzen [ Color.Syntax_byCommand::On ; 1 ]

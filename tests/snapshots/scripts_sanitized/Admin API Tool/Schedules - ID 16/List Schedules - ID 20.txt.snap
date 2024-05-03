@@ -111,7 +111,7 @@ Sonst
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 Ende (wenn)
 Variable setzen [ $this.loop ; 0 ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedules[" & $this.loop & "].id" ) ) ]
 		Neuer Datensatz/Abfrage
 		Feldwert setzen [ SCH__schedules::ID_Server ; $this.id ]

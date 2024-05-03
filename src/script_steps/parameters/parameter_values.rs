@@ -2,6 +2,7 @@ use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
 use crate::script_steps::parameters::boolean::Boolean;
+use crate::script_steps::parameters::list::List;
 use crate::utils::attributes::get_attribute;
 
 pub struct ParameterValues {
@@ -12,6 +13,7 @@ impl ParameterValues {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
         _e: &BytesStart,
+        step_id: &str,
     ) -> Result<ParameterValues, String> {
         let mut depth = 1;
         let mut item = ParameterValues {
@@ -29,18 +31,25 @@ impl ParameterValues {
                         let parameter_type = get_attribute(&e, "type").unwrap();
                         match parameter_type.as_str() {
                             "Boolean" => {
-                                if let Ok(boolean_param) = Boolean::from_xml(reader, &e) {
-                                    if let Some(display) = boolean_param.display() {
+                                if let Ok(param_value) = Boolean::from_xml(reader, &e, step_id) {
+                                    if let Some(display) = param_value.display() {
                                         item.parameters.push(display);
                                     }
                                 }
+                                depth -= 1;
+                            }
+                            "List" => {
+                                if let Ok(param_value) = List::from_xml(reader, &e, step_id) {
+                                    if let Some(display) = param_value.display() {
+                                        item.parameters.push(display);
+                                    }
+                                }
+                                depth -= 1;
                             }
                             _ => {
                                 eprintln!("Unknown parameter type: {}", parameter_type)
                             }
                         }
-
-                        depth -= 1;
                     }
                 }
                 Ok(Event::End(_)) => {
@@ -87,7 +96,7 @@ mod tests {
 
         let expected_output = "Pause: OFF".to_string();
         assert_eq!(
-            ParameterValues::from_xml(&mut reader, &element)
+            ParameterValues::from_xml(&mut reader, &element, "")
                 .unwrap()
                 .display()
                 .unwrap(),

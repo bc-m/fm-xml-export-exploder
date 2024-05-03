@@ -848,7 +848,7 @@ Wenn [ IstLeer ( $continuation ) ]
 		Variable setzen [ $actions ; "[]" ]
 		Variable setzen [ $i ; 1 ]
 		Variable setzen [ $n ; ElementeAnzahl( $actions_string ) ]
-		Schleife (Anfang)
+		Schleife (Anfang) [ Flush: Immer ]
 			Verlasse Schleife wenn [ $i > $n ]
 			Variable setzen [ $action_line ; HoleWert ( $actions_string ; $i ) ]
 			Variable setzen [ $actions ; JSONSetElement ( $actions ; $i ; $action ; JSONString ) ]
@@ -943,7 +943,7 @@ Ende (wenn)
 
 # # Process actions array
 
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ $action_index >= $action_index_max ]
 	Variable setzen [ $action ; JSONGetElement ( $actions ; $action_index ) ]
 	
@@ -1175,7 +1175,7 @@ Schleife (Anfang)
 			Variable setzen [ $times ; Falls( NICHT IstLeer( $times ) ; $times ; 1 ) ]
 			
 			Variable setzen [ $i ; 1 ]
-			Schleife (Anfang)
+			Schleife (Anfang) [ Flush: Immer ]
 				Verlasse Schleife wenn [ $i > $times ]
 				Fehlerton
 				Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
@@ -1261,9 +1261,9 @@ Schleife (Anfang)
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-browse-mode
 			Variable setzen [ $pause ; JSONGetElement ( $action ; "pause" ) ]
 			Wenn [ $pause ]
-				Blätternmodus aktivieren
+				Blätternmodus aktivieren [ Pause: ON ]
 			Sonst
-				Blätternmodus aktivieren
+				Blätternmodus aktivieren [ Pause: OFF ]
 			Ende (wenn)
 			
 			
@@ -1574,7 +1574,7 @@ Schleife (Anfang)
 								; ["Go to Layout.number" ; $layout_number ; JSONString ]
 								) ]
 			Ende (wenn)
-			Blätternmodus aktivieren
+			Blätternmodus aktivieren [ Pause: ON ]
 			Script ausführen [ Aus Liste ; "fmIDE" ; Parameter: "Enter Layout Mode" ]
 			# Press Tab then SHIFT TAB (1 + $layout_part_count - $layout_part_number) times
 			
@@ -2036,13 +2036,13 @@ Schleife (Anfang)
 				# One or more times
 				Variable setzen [ $i ; 1 ]
 				Variable setzen [ $n ; $times ]
-				Schleife (Anfang)
+				Schleife (Anfang) [ Flush: Immer ]
 					Verlasse Schleife wenn [ $i > $n ]
 					
 					# Loop over key_chars in keys
 					Variable setzen [ $j ; 1 ]
 					Variable setzen [ $m ; Länge( $key ) ]
-					Schleife (Anfang)
+					Schleife (Anfang) [ Flush: Immer ]
 						Verlasse Schleife wenn [ $j > $m ]
 						Variable setzen [ $key_char ; ZeichenMitte ( $key ; $j ; 1 ) ]
 						Variable setzen [ $shift_down_automatic ; 0//not Exact ( Lower( $key_char ) ; $key_char ) ]
@@ -2321,7 +2321,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 				Variable setzen [ $keys ; JSONListKeys ( $action ; "" ) ]
 				Variable setzen [ $i ; 1 ]
 				Variable setzen [ $n ; ElementeAnzahl( $keys ) ]
-				Schleife (Anfang)
+				Schleife (Anfang) [ Flush: Immer ]
 					Verlasse Schleife wenn [ $i > $n ]
 					Variable setzen [ $key ; HoleWert( $keys ; $i ) ]
 					Wenn [ $key = "value" ODER $key = "text" ]

@@ -32,7 +32,7 @@ Wenn [ $my.response = "200 OK" ]
 	Feldwert setzen [ FMS__fmserver::dapi_databases ; "" ]
 	Variable setzen [ $json ; $$my.result ]
 	Variable setzen [ $count ; 0 ]
-	Schleife (Anfang)
+	Schleife (Anfang) [ Flush: Immer ]
 		Feldwert setzen [ FMS__fmserver::dapi_databases ; Falls ( NICHT IstLeer ( FMS__fmserver::dapi_databases ); FMS__fmserver::dapi_databases & "¶"  )
 						&
 						JSONGetElement ( $json ; "response.databases[" & $count & "].name" ) ]

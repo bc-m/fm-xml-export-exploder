@@ -39,7 +39,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 		Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Ende (wenn)
 	Variable setzen [ $this.loop ; 0 ]
-	Schleife (Anfang)
+	Schleife (Anfang) [ Flush: Immer ]
 		Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response[" & $this.loop & "].id" ) ) ]
 			Neuer Datensatz/Abfrage
 			Feldwert setzen [ WPE__wpe::ID_Server ; $this.id ]

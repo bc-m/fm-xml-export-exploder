@@ -87,7 +87,7 @@ Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "
 
 # Duplicate with increased name
 Datensatz/Abfrage duplizieren
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Feldwert setzen [ _Palette::PaletteName ; Falls( Ganzzahl( WörterRechts( _Palette::PaletteName ; 1 ) ) = WörterRechts( _Palette::PaletteName ; 1 ) ; FortlNrInTextÄndern ( _Palette::PaletteName ; 1 ) ; _Palette::PaletteName & " 2" ) ]
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
 	Verlasse Schleife wenn [ Anzahl( Palette.Palette_SameName::__ID ) =$DefaulPaletteID ]
@@ -98,7 +98,7 @@ Gehe zu Layout [ Layout: "I_Duplicate_Palette" ; Animation: Ohne ]
 # FOR EACH Color
 Variable setzen [ $i ; 1 ]
 Variable setzen [ $n ; $NumberOfColours ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ $i > $n ]
 	
 	# Duplicate the color
@@ -118,7 +118,7 @@ Schleife (Anfang)
 Schleife (Ende)
 
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	# Oops, forgot to turn on the exit after last option:
 	Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: OFF ]
 Schleife (Ende)

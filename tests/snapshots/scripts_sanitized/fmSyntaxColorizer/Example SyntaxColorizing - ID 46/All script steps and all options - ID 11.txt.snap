@@ -68,7 +68,7 @@ BeiTimer-Script installieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN 
 BeiTimer-Script installieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "148" ] ⚠️⚠️⚠️
 BeiTimer-Script installieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "148" ] ⚠️⚠️⚠️
 
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ 1=1 ]
 Schleife (Ende)
 Transaktion öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "205" ] ⚠️⚠️⚠️
@@ -119,8 +119,8 @@ Variable setzen [ $var ; 1+Test( 1 ) & "string" & ( $$fjhsd.gfd.jhsgf.dshg.fshgf
 # NAVIGATION STEPS
 # ================
 
-Blätternmodus aktivieren
-Blätternmodus aktivieren
+Blätternmodus aktivieren [ Pause: ON ]
+Blätternmodus aktivieren [ Pause: OFF ]
 
 Suchenmodus aktivieren [ Pause: ON ]
 Suchenmodus aktivieren [ Pause: OFF ]
@@ -545,9 +545,9 @@ Datensätze als Snapshot-Link speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODE
 Datensätze als Snapshot-Link speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "152" ] ⚠️⚠️⚠️
 Datensätze als Snapshot-Link speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "152" ] ⚠️⚠️⚠️
 
-Tabelle leeren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "182" ] ⚠️⚠️⚠️
-Tabelle leeren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "182" ] ⚠️⚠️⚠️
-Tabelle leeren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "182" ] ⚠️⚠️⚠️
+Tabelle leeren [ Mit Dialog: ON ; <Aktuelle Tabelle> ]
+Tabelle leeren [ Mit Dialog: OFF ; _GUISyntax ]
+Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]
 
 # ===============
 # FOUND SET STEPS

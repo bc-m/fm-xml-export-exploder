@@ -4,7 +4,7 @@ use quick_xml::Reader;
 use crate::script_steps::parameters::parameter_values::ParameterValues;
 use crate::utils::attributes::get_attribute;
 
-pub fn sanitize(step: &str) -> Option<String> {
+pub fn from_xml(step_id: &str, step: &str) -> Option<String> {
     let mut name = String::new();
     let mut parameters: Vec<String> = Vec::new();
 
@@ -25,7 +25,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                     continue;
                 }
                 b"ParameterValues" => parameters.push(
-                    ParameterValues::from_xml(&mut reader, &e)
+                    ParameterValues::from_xml(&mut reader, &e, step_id)
                         .unwrap()
                         .display()
                         .unwrap(),
@@ -38,7 +38,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if parameters.is_empty() {
-        return Some(format!("{} []", name));
+        return Some(name.to_string());
     };
 
     Some(format!("{} [ {} ]", name, parameters.join(" ; ")))
@@ -47,6 +47,14 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test() {
+        let xml = r#"<Step id="79" name="Fenster fixieren" enable="True">"#;
+
+        let expected_output = Some("Fenster fixieren".to_string());
+        assert_eq!(from_xml("79", xml.trim()), expected_output);
+    }
 
     #[test]
     fn test_enabled() {
@@ -62,7 +70,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(from_xml("86", xml.trim()), expected_output);
     }
 
     #[test]
@@ -79,7 +87,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(from_xml("86", xml.trim()), expected_output);
     }
 
     #[test]
@@ -96,6 +104,29 @@ mod tests {
         "#;
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(from_xml("22", xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_truncate_table_broken_reference() {
+        let xml = r#"
+            <Step index="509" id="182" name="Tabelle leeren" enable="True">
+                <UUID>25ED2DB6-D1D0-402A-8B5A-6A06505C0A2A</UUID>
+                <OwnerID></OwnerID>
+                <Options>138</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="List">
+                        <List name="&lt;Tabelle nicht vorhanden&gt;" value="1"></List>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output =
+            Some("Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]".to_string());
+        assert_eq!(from_xml("182", xml.trim()), expected_output);
     }
 }

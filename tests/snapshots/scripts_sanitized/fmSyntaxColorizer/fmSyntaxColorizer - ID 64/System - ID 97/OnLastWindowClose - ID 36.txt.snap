@@ -14,7 +14,7 @@ Variable setzen [ $ToolsWindowName ; "fmWorkMate" ]
 Fenster fixieren
 Script ausführen [ Aus Liste ; "Delete orphaned and empty GUI-Syntax entries" ]
 
-Blätternmodus aktivieren
+Blätternmodus aktivieren [ Pause: OFF ]
 Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
 
 Wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $ToolsWindowName ) ) ]
