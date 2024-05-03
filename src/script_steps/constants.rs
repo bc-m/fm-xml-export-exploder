@@ -30,6 +30,7 @@ pub enum ScriptStep {
     OmitMultipleRecords = 26,
     ShowOmittedOnly = 27,
     PerformFind = 28,
+    AdjustWindow = 31,
     OpenHelp = 32,
     OpenManageDatabase = 38,
     ExitApplication = 44,
