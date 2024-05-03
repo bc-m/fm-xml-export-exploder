@@ -5,6 +5,7 @@ use quick_xml::Reader;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::list::List;
+use crate::script_steps::parameters::target::Target;
 use crate::utils::attributes::get_attribute;
 
 pub struct ParameterValues {
@@ -46,6 +47,18 @@ impl ParameterValues {
                                 if let Ok(param_value) = List::from_xml(reader, &e, step_id) {
                                     if let Some(display) = param_value.display() {
                                         item.parameters.push(display);
+                                    }
+                                }
+                                depth -= 1;
+                            }
+                            "Target" => {
+                                if let Ok(param_value) = Target::from_xml(reader, &e) {
+                                    if let Some(display) = param_value.display() {
+                                        item.parameters.push(format!(
+                                            "{}: {}",
+                                            parameter_type.as_str(),
+                                            display
+                                        ));
                                     }
                                 }
                                 depth -= 1;
