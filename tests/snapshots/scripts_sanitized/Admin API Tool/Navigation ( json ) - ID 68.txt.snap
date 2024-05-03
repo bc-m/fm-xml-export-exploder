@@ -101,7 +101,7 @@ Sonst, wenn [ $_param = "Data API" ]
 Sonst, wenn [ $_param = "create schedule" ]
 	Variable setzen [ $this.fmsid ; FMS__fmserver::ID ]
 	Neues Fenster [ Style: Karte ; Name: "Schedule Detail" ; Layout: "Card - Schedule" ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
-	Blätternmodus aktivieren
+	Blätternmodus aktivieren [ Pause: OFF ]
 	Neuer Datensatz/Abfrage
 	Feldwert setzen [ SCH__schedules::ID_Server ; $this.fmsid ]
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
@@ -162,7 +162,7 @@ Sonst, wenn [ $_param = "apikey" ]
 Sonst, wenn [ $_param = "create apikey" ]
 	Variable setzen [ $this.fmsid ; FMS__fmserver::ID ]
 	Neues Fenster [ Style: Karte ; Name: "API Key Detail" ; Layout: "Card - Public Keys" ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
-	Blätternmodus aktivieren
+	Blätternmodus aktivieren [ Pause: OFF ]
 	Neuer Datensatz/Abfrage
 	Feldwert setzen [ PUB__publickeys::ID_Server ; $this.fmsid ]
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]

@@ -10,7 +10,11 @@ pub struct Boolean {
 }
 
 impl Boolean {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Result<Boolean, String> {
+    pub fn from_xml(
+        reader: &mut Reader<&[u8]>,
+        _e: &BytesStart,
+        _step_id: &str,
+    ) -> Result<Boolean, String> {
         let mut depth = 1;
         let mut item = Boolean {
             name: None,
@@ -104,7 +108,7 @@ mod tests {
 
         let expected_output = "Pause: OFF".to_string();
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element)
+            Boolean::from_xml(&mut reader, &element, "")
                 .unwrap()
                 .display()
                 .unwrap(),
@@ -128,7 +132,7 @@ mod tests {
 
         let expected_output = "OFF".to_string();
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element)
+            Boolean::from_xml(&mut reader, &element, "")
                 .unwrap()
                 .display()
                 .unwrap(),

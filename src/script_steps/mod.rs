@@ -1,7 +1,9 @@
+pub(crate) mod constants;
+pub(crate) mod sanitizer;
+
 mod close_window;
 mod comment;
 mod commit;
-pub(crate) mod constants;
 mod exit_script;
 mod go_to_field;
 mod go_to_layout;
@@ -17,9 +19,8 @@ mod parameters;
 mod perform_find;
 mod perform_script;
 mod primitive;
-mod primitive_with_booleans;
 mod refresh_object;
 mod replace_field_contents;
-pub(crate) mod sanitizer;
+mod sanitize;
 mod set_field_data;
 mod set_variable;

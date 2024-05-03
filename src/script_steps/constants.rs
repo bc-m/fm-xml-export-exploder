@@ -84,10 +84,15 @@ pub enum ScriptStep {
     RefreshObject = 167,
     ClosePopover = 169,
     UploadToServer = 172,
+    TruncateTable = 182,
     OpenFavorites = 183,
 }
 
 pub fn id_to_script_step(id: &str) -> ScriptStep {
+    if id.is_empty() {
+        return ScriptStep::Unknown;
+    }
+
     let id = id.parse::<u32>().unwrap();
     if UNKNOWN_SCRIPT_STEP.contains(&id) {
         ScriptStep::Unknown

@@ -21,7 +21,7 @@ Feldwert setzen [ _Palette::_gDuplicatePaletteFrom ; _Palette::__ID ]
 
 # Duplicate with increased name
 Datensatz/Abfrage duplizieren
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Feldwert setzen [ _Palette::PaletteName ; Falls( Ganzzahl( WörterRechts( _Palette::PaletteName ; 1 ) ) = WörterRechts( _Palette::PaletteName ; 1 ) ; FortlNrInTextÄndern ( _Palette::PaletteName ; 1 ) ; _Palette::PaletteName & " 2" ) ]
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
 	Verlasse Schleife wenn [ Anzahl( Palette.Palette_SameName::__ID ) =1 ]
@@ -31,7 +31,7 @@ Gehe zu Layout [ Layout: "I_Duplicate_Palette" ; Animation: Ohne ]
 # FOR EACH Color
 Variable setzen [ $i ; 1 ]
 Variable setzen [ $n ; $NumberOfColors ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ $i > $n ]
 	
 	# Duplicate the color

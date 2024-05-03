@@ -46,7 +46,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	
 	
 	Variable setzen [ $this.loop ; 0 ]
-	Schleife (Anfang)
+	Schleife (Anfang) [ Flush: Immer ]
 		Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.pkiPublicKey[" & $this.loop & "].name" ) ) ]
 			# set global to create related records via idempotent relationship
 			Feldwert setzen [ FMS__fmserver::zz_PublicKeyName_g ; JSONGetElement ( $$my.result ; "response.pkiPublicKey[" & $this.loop & "].name" ) ]

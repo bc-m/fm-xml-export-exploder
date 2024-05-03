@@ -42,7 +42,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 		Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Ende (wenn)
 	Variable setzen [ $this.loop ; 0 ]
-	Schleife (Anfang)
+	Schleife (Anfang) [ Flush: Immer ]
 		Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.databases[" & $this.loop & "].id" ) ) ]
 			Neuer Datensatz/Abfrage
 			Feldwert setzen [ FIL__files::ID_Server ; $this.id ]

@@ -32,11 +32,11 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	# parse json response
 	Variable setzen [ $json ; FMS__fmserver::zz_result_g ]
 	Variable setzen [ $count ; 0 ]
-	Schleife (Anfang)
+	Schleife (Anfang) [ Flush: Immer ]
 		Variable setzen [ $this.isfolder ; JSONGetElement ( $json ; "response.layouts[" & $count & "].isFolder" ) ]
 		Wenn [ $this.isfolder = 1 ]
 			Variable setzen [ $i ; 0 ]
-			Schleife (Anfang)
+			Schleife (Anfang) [ Flush: Immer ]
 				Feldwert setzen [ FMS__fmserver::dapi_layouts ; Falls ( NICHT IstLeer ( FMS__fmserver::dapi_layouts ); FMS__fmserver::dapi_layouts & "¶"  )
 								&
 								JSONGetElement ( $json ; "response.layouts[" & $count & "].folderLayoutNames[" & $i & "].name" ) ]

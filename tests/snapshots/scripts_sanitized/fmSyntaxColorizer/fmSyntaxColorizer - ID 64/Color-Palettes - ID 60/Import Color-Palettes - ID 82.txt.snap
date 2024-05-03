@@ -18,7 +18,7 @@ Variable setzen [ $FileName ; "fmSyntaxColorizer-Palettes.txt" ]
 Variable setzen [ $FilePath ; $FolderPath & $FileName ]
 
 
-Blätternmodus aktivieren
+Blätternmodus aktivieren [ Pause: OFF ]
 Fenster fixieren
 
 # Import the palette names
@@ -36,7 +36,7 @@ Ende (wenn)
 # Remove duplicates and initialise the import check box
 Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Wenn [ Hole( DatensatzPositionInErgebnismenge ) =1 ODER
 					HoleNtenDatensatz( _Color::PaletteName ; Hole( DatensatzPositionInErgebnismenge ) -1 ) ≠ _Color::PaletteName ]
 		Feldwert setzen [ _Color::Temp ; Falls( Color.Palette_byName::_k1 = 1 ; "" ; 1 ) ]
@@ -50,8 +50,8 @@ Schleife (Ende)
 
 
 Variable setzen [ $$LastMessageChoice ; 1 /* default = import */ ]
-Schleife (Anfang)
-	Blätternmodus aktivieren
+Schleife (Anfang) [ Flush: Immer ]
+	Blätternmodus aktivieren [ Pause: ON ]
 	Verlasse Schleife wenn [ NICHT IstLeer( $$LastMessageChoice ) ]
 	# Return pressed
 Schleife (Ende)
@@ -67,7 +67,7 @@ Ende (wenn)
 # Remove the records which are not to be imported
 Variable setzen [ $PaletteNames ; "" ]
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Wenn [ _Color::Temp = 1 ]
 		Variable setzen [ $PaletteNames ; Liste( $PaletteNames ; _Color::PaletteName ) ]
 		Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: ON ]
@@ -133,7 +133,7 @@ Ende (wenn)
 
 # Remove the records which are not to be imported
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Wenn [ NICHT IstLeer( FilterElemente( _Color::PaletteName ; $PaletteNames ) ) ]
 		Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: ON ]
 	Sonst
@@ -155,7 +155,7 @@ Ende (wenn)
 # Create Palettes as necessary and use the LOCAL IDs to connect
 # FOR EACH Color
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
-Schleife (Anfang)
+Schleife (Anfang) [ Flush: Immer ]
 	Feldwert setzen [ _Color::ColorInput ; TextFarbe ( _Color::_kkFullBlock ; RGB ( WörterLinks( _Color::Temp ; 1 )  ; WörterMitte( _Color::Temp ; 2 ; 1 ) ; WörterMitte( _Color::Temp ; 3 ; 1 ) ) ) ]
 	Feldwert setzen [ _Color::Temp ; "" ]
 	# Create the Palette record, if necessary
