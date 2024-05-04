@@ -19,21 +19,17 @@ impl Target {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    match e.name().as_ref() {
-                        b"Variable" => {
-                            item.target =
-                                VariableReference::from_xml(reader, &e).unwrap().display();
-                            depth -= 1;
-                        }
-                        b"FieldReference" => {
-                            item.target = FieldReference::from_xml(reader, &e).unwrap().display();
-                            depth -= 1;
-                        }
-                        _ => {}
+                Ok(Event::Start(e)) => match e.name().as_ref() {
+                    b"Variable" => {
+                        item.target = VariableReference::from_xml(reader, &e).unwrap().display();
                     }
-                }
+                    b"FieldReference" => {
+                        item.target = FieldReference::from_xml(reader, &e).unwrap().display();
+                    }
+                    _ => {
+                        depth += 1;
+                    }
+                },
                 Ok(Event::End(_)) => {
                     depth -= 1;
                     if depth == 0 {

@@ -1,7 +1,7 @@
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
+use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::list::List;
@@ -9,7 +9,7 @@ use crate::script_steps::parameters::target::Target;
 use crate::utils::attributes::get_attribute;
 
 pub struct ParameterValues {
-    pub step_id: String,
+    pub step_id: u32,
     pub parameters: Vec<String>,
 }
 
@@ -17,11 +17,11 @@ impl ParameterValues {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
         _e: &BytesStart,
-        step_id: &str,
+        step_id: &u32,
     ) -> Result<ParameterValues, String> {
         let mut depth = 1;
         let mut item = ParameterValues {
-            step_id: step_id.to_string().clone(),
+            step_id: *step_id,
             parameters: Vec::new(),
         };
 
@@ -164,8 +164,9 @@ mod tests {
         };
 
         let expected_output = "Pause: OFF".to_string();
+        let script_id: u32 = 0;
         assert_eq!(
-            ParameterValues::from_xml(&mut reader, &element, "")
+            ParameterValues::from_xml(&mut reader, &element, &script_id)
                 .unwrap()
                 .display()
                 .unwrap(),

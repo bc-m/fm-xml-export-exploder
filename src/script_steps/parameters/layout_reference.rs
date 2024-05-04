@@ -45,9 +45,6 @@ impl LayoutReferenceContainer {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if item.reference_type.as_str() == "0" {
-                        continue;
-                    };
                     match e.name().as_ref() {
                         b"LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name").unwrap().to_string();
@@ -81,9 +78,7 @@ impl LayoutReferenceContainer {
     }
 
     pub fn display(&self) -> Option<String> {
-        if self.reference_type == "0" {
-            Some("".to_string())
-        } else if self.reference_type == "1" {
+        if self.reference_type == "1" {
             Some(format!("Layout: <{}>", self.layout_reference))
         } else if self.reference_type == "3" {
             Some(format!("{}: {}", "Layoutname", self.layout_reference))
