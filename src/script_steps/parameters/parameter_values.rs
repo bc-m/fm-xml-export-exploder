@@ -114,11 +114,6 @@ impl ParameterValues {
                                     r#"⚠️ PARAMETER "{}" NOT PARSED ⚠️"#,
                                     parameter_type
                                 ));
-                                eprintln!(
-                                    "Unknown parameter \"{}\" in step \"{}\"",
-                                    parameter_type,
-                                    id_to_script_step(step_id)
-                                )
                             }
                         }
                     }
