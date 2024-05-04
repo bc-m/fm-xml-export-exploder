@@ -5,7 +5,7 @@ expression: output_content
 #  PURPOSE: handle basic user interface navigation
 #  HISTORY:
      - Created:   2019-06-11 by Mike Duncan (mduncan@soliantconsulting.com)
-#  
+
 # JSON DOCUMENTATION:
 # Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets "[]".
 #  param
@@ -26,7 +26,7 @@ Ende (wenn)
 
 #  Validate json parameter and load it into local variables
 Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen [ 5 // command is invalid ]
 Ende (wenn)
 
@@ -152,11 +152,11 @@ Sonst, wenn [ $_param = "cancel schedule" ]
 	Script ausführen [ Aus Liste ; "List Schedules" ]
 	
 Sonst, wenn [ $_param = "schedule" ]
-	Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 	Variable setzen [ $$sched.RecordModificationCount ; Hole ( DatensatzÄnderungenAnzahl ) ]
 	
 Sonst, wenn [ $_param = "apikey" ]
-	Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 	Variable setzen [ $$sched.RecordModificationCount ; Hole ( DatensatzÄnderungenAnzahl ) ]
 	
 Sonst, wenn [ $_param = "create apikey" ]
@@ -168,7 +168,7 @@ Sonst, wenn [ $_param = "create apikey" ]
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
 	
 Sonst, wenn [ $_param = "scheduleType" ]
-	Layoutobjekt-Animation festlegen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "168" ] ⚠️⚠️⚠️
+	Layoutobjekt-Animation festlegen [ OFF ]
 	Wenn [ SCH__schedules::Type = "Backup" ]
 		Gehe zu Objekt [ "panel_backup" ]
 	Sonst, wenn [ SCH__schedules::Type = "FileMaker Script" ]

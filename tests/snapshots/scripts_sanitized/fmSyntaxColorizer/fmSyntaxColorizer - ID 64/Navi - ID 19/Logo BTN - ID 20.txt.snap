@@ -22,12 +22,12 @@ Variable setzen [ $$Midimised ; "" ]
 Wenn [ Hole( LayoutName ) <> $homeLayoutName ]
 	Script ausführen [ Aus Liste ; "Go to Home Layout" ]
 Sonst, wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $MasterDBWindowName ) ) ]
-	Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
-	Datei schließen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "34" ] ⚠️⚠️⚠️
+	Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+	Datei schließen [ ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ]
 Sonst, wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $ToolsWindowName ) ) ]
-	Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
-	Datei schließen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "34" ] ⚠️⚠️⚠️
+	Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+	Datei schließen [ ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ]
 Sonst
 	Script ausführen [ Aus Liste ; "Logo open URL" ]
-	Datei schließen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "34" ] ⚠️⚠️⚠️
+	Datei schließen [ ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ]
 Ende (wenn)

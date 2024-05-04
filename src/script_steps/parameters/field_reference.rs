@@ -28,6 +28,9 @@ impl FieldReference {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     match e.name().as_ref() {
+                        b"FieldReference" => {
+                            item.field_reference = get_attribute(&e, "name");
+                        }
                         b"TableOccurrenceReference" => {
                             for attr in get_attributes(&e).unwrap() {
                                 if attr.0 == "name" {

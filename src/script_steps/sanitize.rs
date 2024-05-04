@@ -1,3 +1,4 @@
+use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use quick_xml::events::Event;
 use quick_xml::Reader;
 
@@ -35,6 +36,15 @@ pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
     }
 
     let parameters = parameters.join(" ; ");
+
+    if id_to_script_step(step_id) == ScriptStep::Comment {
+        if parameters.trim().is_empty() {
+            return Some("".to_string());
+        } else {
+            return Some(format!("# {}", parameters));
+        }
+    }
+
     let parameters = parameters.trim();
     if parameters.is_empty() {
         return Some(name.to_string());

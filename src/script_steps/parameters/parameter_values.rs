@@ -4,6 +4,9 @@ use quick_xml::Reader;
 use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
+use crate::script_steps::parameters::comment::Comment;
+use crate::script_steps::parameters::field_reference::FieldReference;
+use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::script_steps::parameters::list::List;
 use crate::script_steps::parameters::target::Target;
 use crate::utils::attributes::get_attribute;
@@ -33,7 +36,12 @@ impl ParameterValues {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if let b"Parameter" = e.name().as_ref() {
-                        let parameter_type = get_attribute(&e, "type").unwrap();
+                        let parameter_type = get_attribute(&e, "type");
+                        if parameter_type.is_none() {
+                            continue;
+                        }
+
+                        let parameter_type = parameter_type.unwrap();
                         match parameter_type.as_str() {
                             "Boolean" => {
                                 if let Ok(param_value) = Boolean::from_xml(reader, &e, step_id) {
@@ -63,6 +71,12 @@ impl ParameterValues {
                                 }
                                 depth -= 1;
                             }
+                            "Calculation" => {
+                                if let Ok(param_value) = Calculation::from_xml(reader, &e) {
+                                    item.parameters.push(param_value);
+                                }
+                                depth -= 1;
+                            }
                             "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo" => {
                                 if let Ok(param_value) = Calculation::from_xml(reader, &e) {
                                     item.parameters.push(format!(
@@ -73,8 +87,33 @@ impl ParameterValues {
                                 }
                                 depth -= 1;
                             }
-
+                            "LayoutReferenceContainer" => {
+                                if let Ok(param_value) =
+                                    LayoutReferenceContainer::from_xml(reader, &e)
+                                {
+                                    if let Some(display) = param_value.display() {
+                                        item.parameters.push(display);
+                                    }
+                                }
+                            }
+                            "FieldReference" => {
+                                if let Ok(param_value) = FieldReference::from_xml(reader, &e) {
+                                    if let Some(display) = param_value.display() {
+                                        item.parameters.push(display);
+                                    }
+                                }
+                            }
+                            "Comment" => {
+                                if let Ok(param_value) = Comment::from_xml(reader, &e) {
+                                    item.parameters.push(param_value);
+                                }
+                                depth -= 1;
+                            }
                             _ => {
+                                item.parameters.push(format!(
+                                    r#"⚠️ PARAMETER "{}" NOT PARSED ⚠️"#,
+                                    parameter_type
+                                ));
                                 eprintln!(
                                     "Unknown parameter \"{}\" in step \"{}\"",
                                     parameter_type,

@@ -49,6 +49,7 @@ pub enum ScriptStep {
     CommitRecordRequests = 75,
     SetField = 76,
     FreezeWindow = 79,
+    RefreshWindow = 80,
     NewFile = 82,
     SetMultiUser = 84,
     AllowUserAbort = 85,

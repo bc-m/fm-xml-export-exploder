@@ -528,9 +528,9 @@ Variable setzen [ $_JSP_Keys ; JSONListKeys( $_JSP ; "" ) ]
 Wenn [ $fmide_debug ODER NICHT IstLeer ( FilterElemente ( $_JSP_Keys ; "fmide_debug" ) ) ]
 	# ## Debug
 	# If the $fmide_debug variable has been set in the fmp url, then show what has arrived
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
-		Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 	Sonst, wenn [ Hole ( LetzteMeldungswahl ) = 3 ]
 		Alle Scripts abbrechen
 	Ende (wenn)
@@ -879,8 +879,8 @@ Wenn [ IstLeer ( $continuation ) ]
 	
 Sonst
 	# # Continuation start: read the current execution state back from the continuation
-	// Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
-	// Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+	// Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	// Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 	
 	# First, free up the MBS Schedule used to trigger the continuation call
 	Variable setzen [ $r ; SetzeVar(
@@ -1178,7 +1178,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			Schleife (Anfang) [ Flush: Immer ]
 				Verlasse Schleife wenn [ $i > $times ]
 				Fehlerton
-				Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+				Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 				Variable setzen [ $i ; $i + 1 ]
 			Schleife (Ende)
 			
@@ -1280,7 +1280,7 @@ Schleife (Anfang) [ Flush: Immer ]
 		Sonst, wenn [ $action_name = "EnterLayoutMode" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-layout-mode
 			# Bring window to front and press CmdCtrl+L
-			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Variable setzen [ $r ; MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
 							MBS( "RemoteControl.PressKey" ; "l" ; "l" ) & 
 							MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
@@ -1292,9 +1292,9 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-preview-mode
 			Variable setzen [ $pause ; JSONGetElement ( $action ; "pause" ) ]
 			Wenn [ $pause ]
-				Seitenansichtsmodus aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "41" ] ⚠️⚠️⚠️
+				Seitenansichtsmodus aktivieren [ Pause: ON ]
 			Sonst
-				Seitenansichtsmodus aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "41" ] ⚠️⚠️⚠️
+				Seitenansichtsmodus aktivieren [ Pause: OFF ]
 			Ende (wenn)
 			
 			
@@ -1308,20 +1308,20 @@ Schleife (Anfang) [ Flush: Immer ]
 					# Target has to be indirect
 					# @var $fmIDE_dapi_response
 					Wenn [ $select ODER IstLeer ( $select ) ]
-						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+						FileMaker Data API ausführen [ Auswahl: ON ; Target: $fmIDE_dapi_response ; $dapi_request ]
 					Sonst
-						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+						FileMaker Data API ausführen [ Auswahl: OFF ; Target: $fmIDE_dapi_response ; $dapi_request ]
 					Ende (wenn)
 					Wenn [ ZeichenLinks( $target ; 1 ) <> "$" ODER Berechne ( "Let( " & $target & "¶=$fmIDE_dapi_response;0)" ) ]
-						Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+						Feld nach Namen einstellen [ Zielfeld angeben: ON ; $target ; $fmIDE_dapi_response ]
 					Ende (wenn)
 					Variable setzen [ $fmIDE_dapi_response ; "" ]
 				Sonst
 					# No target
 					Wenn [ $select ODER IstLeer ( $select ) ]
-						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+						FileMaker Data API ausführen [ Auswahl: ON ; $dapi_request ]
 					Sonst
-						FileMaker Data API ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "203" ] ⚠️⚠️⚠️
+						FileMaker Data API ausführen [ Auswahl: OFF ; $dapi_request ]
 					Ende (wenn)
 				Ende (wenn)
 			Ende (wenn)
@@ -1615,7 +1615,7 @@ Schleife (Anfang) [ Flush: Immer ]
 				# AppleScript?
 				Text einfügen [ Select ; Target: $AppleScriptTemplate ; "go to field {{'$layout_field_name'}} of current record" ]
 				Variable setzen [ $AppleScript ; Austauschen ( $AppleScriptTemplate ; "{{'$layout_field_name'}}" ; Zitat( $layout_field_name ) ) ]
-				AppleScript ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "67" ] ⚠️⚠️⚠️
+				AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 				
 				
 				# Go to Object
@@ -1644,9 +1644,9 @@ Schleife (Anfang) [ Flush: Immer ]
 		Sonst, wenn [ $action_name = "GoToOriginalWindow" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-original-window
 			Wenn [ $fmide_debug ]
-				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			Ende (wenn)
-			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			
 			
 		Sonst, wenn [ $action_name = "GoToPortalRow" ]
@@ -1808,14 +1808,14 @@ Schleife (Anfang) [ Flush: Immer ]
 			# Mac-only
 			Wenn [ NICHT $is_mbs ]
 				# no MBS
-				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			# Make sure it is at the front
 			Variable setzen [ $r ; MBS("ScriptWorkspace.BringToFront") ]
 			Wenn [ MBS("IsError") ]
 				# Can't open ScriptWorkSpace
-				Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			
@@ -1836,7 +1836,7 @@ Schleife (Anfang) [ Flush: Immer ]
 					# Try again
 					Variable setzen [ $r ; MBS("ScriptWorkspace.OpenScript" ; $script_name ) ]
 					Wenn [ MBS("IsError") ]
-						Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+						Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 						Aktuelles Script verlassen []
 					Ende (wenn)
 				Ende (wenn)
@@ -1910,7 +1910,7 @@ Schleife (Anfang) [ Flush: Immer ]
 								) ]
 				Wenn [ NICHT IstLeer ( $$fmAutoMate.Search ) ]
 					# Set MBS Search…
-					Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+					Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 					Variable setzen [ $r ; MBS( "SyntaxColoring.ScriptSearchBox.SetText"; $$fmAutoMate.Search ) ]
 					Variable setzen [ $r ; SetzeVar(
 									[
@@ -1972,7 +1972,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			
 		Sonst, wenn [ $action_name = "Hello" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#hello
-			Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			
 			
 		Sonst, wenn [ $action_name = "InsertFromUrl" ]
@@ -1989,15 +1989,15 @@ Schleife (Anfang) [ Flush: Immer ]
 				# @var $fmide_target_temp
 				Wenn [ $with_dialog ]
 					Wenn [ $do_not_automatically_encode_url ]
-						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
 					Sonst
-						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
 					Ende (wenn)
 				Sonst
 					Wenn [ $do_not_automatically_encode_url ]
-						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
 					Sonst
-						Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
 					Ende (wenn)
 				Ende (wenn)
 				Wenn [ ZeichenLinks( $target ; 1 ) ≠ "$" ODER 
@@ -2015,7 +2015,7 @@ Schleife (Anfang) [ Flush: Immer ]
 								
 								) ]
 					# Set or Append content to target field
-					Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+					Feld nach Namen einstellen [ Zielfeld angeben: ON ; $target ; Falls ( NICHT $select ; HoleFeldwert ( $target ) ) & $fmide_target_temp ]
 				Ende (wenn)
 			Ende (wenn)
 			
@@ -2092,7 +2092,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-functions
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( "Menubar.RunMenuCommand"; 51191 /*  File Manage Custom Functions... */ )" ]
-			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
 							"r=" & $idleCalcExpression ;
@@ -2111,7 +2111,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-menus
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( "Menubar.RunMenuCommand"; 51222 /*  File Manage Custom Menus... */ )" ]
-			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
 							"r=" & $idleCalcExpression ;
@@ -2136,7 +2136,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-database
 			
 			# Refresh window before opening database dialog, so that the current layout in the background is showing correctly
-			Fenster aktualisieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "80" ] ⚠️⚠️⚠️
+			Fenster aktualisieren
 			Datenbank verwalten
 			
 			
@@ -2149,7 +2149,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-security
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( "Menubar.RunMenuCommand"; 51155 /*  File Manage Security... */ )" ]
-			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
 							"r=" & $idleCalcExpression ;
@@ -2198,9 +2198,9 @@ Schleife (Anfang) [ Flush: Immer ]
 			
 			Wenn [ NICHT IstLeer ( $url ) ]
 				Wenn [ $with_dialog ]
-					URL öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "111" ] ⚠️⚠️⚠️
+					URL öffnen [ Mit Dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 				Sonst
-					URL öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "111" ] ⚠️⚠️⚠️
+					URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 				Ende (wenn)
 			Ende (wenn)
 			
@@ -2221,7 +2221,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 		Sonst, wenn [ $action_name = "PasteInCurrentLayout" ODER $action_name = "PasteIntoCurrentLayout" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#paste-in-current-layout
 			# Bring window to front and press CmdCtrl+L, CmdCtrl+V
-			Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
 MBS( "RemoteControl.PressKey" ; "l" ; "l" ) & 
 MBS( "RemoteControl.PressKey" ; "v" ; "v" ) & 
@@ -2252,9 +2252,9 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			Sonst
 				# Pause
 				Wenn [ NICHT IstLeer ( $seconds ) UND NICHT $indefinitely ]
-					Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+					Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 				Sonst
-					Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+					Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 				Ende (wenn)
 			Ende (wenn)
 			
@@ -2273,14 +2273,14 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			
 		Sonst, wenn [ $action_name = "RefreshWindow" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#refresh-window
-			Fenster aktualisieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "80" ] ⚠️⚠️⚠️
+			Fenster aktualisieren
 			
 			
 		Sonst, wenn [ $action_name = "SaveACopyAsXml" ODER $action_name = "SaveAsXml" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#save-a-copy-as-xml
 			# Is this maybe TOO risky?
 			// Variable setzen [ $file_path ; JSONGetElement ( $action ; "file_path" ) ]
-			// Kopie als XML speichern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "3" ] ⚠️⚠️⚠️
+			// Kopie als XML speichern [ "" ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
 			
 			
 		Sonst, wenn [ $action_name = "SelectWindow" ]
@@ -2290,11 +2290,11 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			Variable setzen [ $current_file ; JSONGetElement ( $action ; "current_file" ) ]
 			
 			Wenn [ IstLeer ( $window_name ) ]
-				Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+				Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Sonst, wenn [ $current_file ]
-				Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+				Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Sonst
-				Fenster aktivieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "123" ] ⚠️⚠️⚠️
+				Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 			Ende (wenn)
 			
 			// # POSTPONED - Does this need to work on the action level rather than on the script level?
@@ -2360,7 +2360,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 							"¶];0)"
 							
 							) ]
-				Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+				Feld nach Namen einstellen [ Zielfeld angeben: ON ; $target ; Berechne( $value ) ]
 			Ende (wenn)
 			
 			
@@ -2410,7 +2410,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			// Variable setzen [ $inputCount ; ElementeAnzahl ( $inputs ) ]
 			Variable setzen [ $buttons_list ; Falls( NICHT IstLeer ( $buttons_list ) ; $buttons_list ; "OK" ) ]
 			
-			Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+			Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			
 			
 		Sonst, wenn [ $action_name = "StoreKeyboardBuffer" ]
@@ -2427,22 +2427,22 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			# First delete the file if it exists
 			
 			# @var $fmide_file_exists
-			Dateiexistenz holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "188" ] ⚠️⚠️⚠️
+			Dateiexistenz holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $fmide_file_exists ]
 			Wenn [ $fmide_file_exists ]
-				Datei löschen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "197" ] ⚠️⚠️⚠️
+				Datei löschen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
 			Ende (wenn)
 			
 			# Then create the file with text and optional EOL
-			Datendatei erstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "190" ] ⚠️⚠️⚠️
+			Datendatei erstellen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Ordner erstellen: ON ]
 			
 			# @var $fmide_file_id
-			Datendatei öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "191" ] ⚠️⚠️⚠️
+			Datendatei öffnen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $fmide_file_id ]
 			Wenn [ $append_line_feed ]
-				In Datendatei schreiben ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "192" ] ⚠️⚠️⚠️
+				In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $text ; Zeilenumbruch anhängen: ON ]
 			Sonst
-				In Datendatei schreiben ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "192" ] ⚠️⚠️⚠️
+				In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $text ; Zeilenumbruch anhängen: OFF ]
 			Ende (wenn)
-			Datendatei schließen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "196" ] ⚠️⚠️⚠️
+			Datendatei schließen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
 			
 			
 		Sonst

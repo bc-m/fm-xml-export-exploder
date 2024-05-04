@@ -15,7 +15,7 @@ Wenn [ NICHT _IsFullAccessUser ]
 	# -->
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 	Aktuelles Script verlassen []
 	# -->
@@ -27,13 +27,13 @@ Feldwert setzen [ _Home::_gInputText2 ; "" ]
 Feldwert setzen [ _Home::_gInputText3 ; "" ]
 
 Schleife (Anfang) [ Flush: Immer ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; Target: _Home::_gInputText1 ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ; Target: _Home::_gInputText2 ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field3" NOT PARSED ⚠️ ; Target: _Home::_gInputText3 ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ]
 	Variable setzen [ $cancel ; Hole( LetzteMeldungswahl ) = 2 ODER
 					IstLeer( _Home::_gInputText1 & _Home::_gInputText2 & _Home::_gInputText3 ) ]
 	Verlasse Schleife wenn [ $cancel ]
 	Wenn [ Exakt( _Home::_gInputText2 ; _Home::_gInputText3 ) UND
 					Länge( _Home::_gInputText2 ) > 6 ]
-		Passwort ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "83" ] ⚠️⚠️⚠️
+		Passwort ändern [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; Mit Dialog: OFF ]
 	Ende (wenn)
 	Verlasse Schleife wenn [ NICHT Hole( LetzteFehlerNr ) ]
 Schleife (Ende)
@@ -42,5 +42,5 @@ Feldwert setzen [ _Home::_gInputText2 ; "" ]
 Feldwert setzen [ _Home::_gInputText3 ; "" ]
 Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
 Wenn [ NICHT $cancel ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)

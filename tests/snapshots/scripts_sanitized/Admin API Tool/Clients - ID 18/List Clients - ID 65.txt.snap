@@ -24,7 +24,7 @@ Variable setzen [ $curloptions ; " --request GET" &
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
 Script ausführen [ Aus Liste ; "Handle response" ]
 
 Wenn [ Hole ( ScriptErgebnis ) = "1" ]
@@ -42,7 +42,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Wenn [ IstLeer ( FMS_CLI__clients::ID ) ]
 		Gehe zu Layout [ Layout: "CLI__clients" ; Animation: Ohne ]
 	Sonst
-		Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+		Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 		Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Ende (wenn)
 	Variable setzen [ $this.loop ; 0 ]

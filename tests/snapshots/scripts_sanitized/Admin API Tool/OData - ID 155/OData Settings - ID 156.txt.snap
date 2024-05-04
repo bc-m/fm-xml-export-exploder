@@ -24,7 +24,7 @@ Variable setzen [ $curloptions ; " --request GET" &
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
 Script ausführen [ Aus Liste ; "Handle response" ]
 
 Wenn [ Hole ( ScriptErgebnis ) = "1" ]
@@ -32,7 +32,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Feldwert setzen [ FMS__fmserver::fmodataEnabled ; JSONGetElement ( $$my.result ; "response.enabled" ) ]
 	Feldwert setzen [ FMS__fmserver::fmodataBandwidthOut ; JSONGetElement ( $$my.result ; "response.fmodataBandwidthOut" ) ]
 Sonst
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)
 
 # -------------------------------------------------------------

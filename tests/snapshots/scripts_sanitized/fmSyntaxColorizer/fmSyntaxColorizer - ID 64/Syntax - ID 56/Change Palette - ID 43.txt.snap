@@ -15,7 +15,7 @@ Variable setzen [ $Palette_ID ; _Syntax::_gID_ActivePalette ]
 
 # Make sure the active palette is selected in the palettes list
 Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
-Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 
 # FIXME
 Wenn [ _Palette::DisableVariableChecking ]
@@ -32,11 +32,11 @@ Variable setzen [ $CountSpecificSyntax ; Anzahl( Palette.Color_OnlyPaletteSpecif
 Variable setzen [ $CountOfSyntaxToCreate ; $CountSpecificColors - $CountSpecificSyntax ]
 Wenn [ $CountOfSyntaxToCreate > 0 ]
 	Variable setzen [ $PaletteName ; _Palette::PaletteName ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
-		Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+		Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 		# FOR EACH Color
-		Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
+		Sortieren [ Mit Dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
 		Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
 		Schleife (Anfang) [ Flush: Immer ]
 			Verlasse Schleife wenn [ Color.Syntax_byCommand::_k1 ]
