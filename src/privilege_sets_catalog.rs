@@ -1,7 +1,8 @@
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::io::{BufRead, Read};
 use std::path::Path;
+
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
 
 use crate::utils::xml_utils::skip_element;
 use crate::utils::{initialize_out_dir, write_xml_element_to_file};

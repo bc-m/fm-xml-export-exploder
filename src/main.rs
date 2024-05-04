@@ -1,12 +1,13 @@
+use std::collections::HashMap;
+use std::path::Path;
+use std::{fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
+
 use anyhow::{anyhow, bail, Context, Error, Result};
 use clap::Parser;
 use encoding_rs_io::DecodeReaderBytes;
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 use rayon::prelude::*;
-use std::collections::HashMap;
-use std::path::Path;
-use std::{fs, fs::File, io::BufReader, path::PathBuf, time::Instant};
 
 use crate::base_table_catalog::parse_base_table_catalog;
 use crate::custom_function_catalog::xml_explode_custom_function_catalog;
@@ -333,12 +334,14 @@ fn should_skip_line(line: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use fs::remove_dir_all;
+    use std::io::Read;
+
     use insta::assert_snapshot;
     use similar_asserts::assert_eq;
-    use std::io::Read;
     use walkdir::WalkDir;
+
+    use super::*;
 
     #[test]
     fn test_escape_filename() {

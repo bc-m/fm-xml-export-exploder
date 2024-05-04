@@ -1,9 +1,10 @@
-use crate::join_scope_id_and_name;
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::collections::HashMap;
 use std::io::{BufRead, Read};
 
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
+
+use crate::join_scope_id_and_name;
 use crate::utils::attributes::get_attributes;
 
 pub fn parse_script_directories<R: Read + BufRead>(

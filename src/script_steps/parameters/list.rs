@@ -1,8 +1,8 @@
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
+use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]

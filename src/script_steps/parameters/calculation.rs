@@ -1,6 +1,7 @@
-use crate::utils;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+
+use crate::utils;
 
 #[derive(Debug, Default)]
 pub struct Calculation {}

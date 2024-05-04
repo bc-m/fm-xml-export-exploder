@@ -1,13 +1,15 @@
-use crate::utils::attributes::get_attributes;
-use crate::utils::xml_utils::element_to_string;
-use crate::{escape_filename, join_scope_id_and_name, should_skip_line};
-use quick_xml::events::BytesStart;
-use quick_xml::Reader;
-use regex::Regex;
 use std::fs;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::path::Path;
+
+use quick_xml::events::BytesStart;
+use quick_xml::Reader;
+use regex::Regex;
+
+use crate::utils::attributes::get_attributes;
+use crate::utils::xml_utils::element_to_string;
+use crate::{escape_filename, join_scope_id_and_name, should_skip_line};
 
 pub(crate) mod attributes;
 pub(crate) mod xml_utils;

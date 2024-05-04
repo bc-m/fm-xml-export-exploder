@@ -1,7 +1,8 @@
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::collections::HashMap;
 use std::io::{BufRead, Read};
+
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
 
 use crate::utils::attributes::get_attributes;
 

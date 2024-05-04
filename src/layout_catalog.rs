@@ -1,9 +1,9 @@
-use crate::{escape_filename, join_scope_id_and_name};
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::fs;
 use std::io::{BufRead, Read};
 use std::path::Path;
+
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
 
 use crate::utils::attributes::get_attributes;
 use crate::utils::xml_utils::{
@@ -11,6 +11,7 @@ use crate::utils::xml_utils::{
     start_element_to_string, text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_xml_file};
+use crate::{escape_filename, join_scope_id_and_name};
 
 #[derive(Debug, Default)]
 struct LayoutInfo {

@@ -1,7 +1,9 @@
-use crate::utils::attributes::get_attributes;
+use std::io::{BufRead, Read};
+
 use quick_xml::events::{BytesCData, BytesEnd, BytesStart, BytesText, Event};
 use quick_xml::Reader;
-use std::io::{BufRead, Read};
+
+use crate::utils::attributes::get_attributes;
 
 pub fn start_element_to_string(e: &BytesStart) -> String {
     let mut complete_tag = format!("<{}", local_name_to_string(e.name().as_ref()));

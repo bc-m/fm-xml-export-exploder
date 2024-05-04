@@ -1,7 +1,8 @@
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::io::{BufRead, Read};
 use std::path::Path;
+
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
 
 use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, start_element_to_string, text_element_to_string,

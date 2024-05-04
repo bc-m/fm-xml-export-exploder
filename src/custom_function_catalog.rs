@@ -1,12 +1,13 @@
-use crate::{escape_filename, join_scope_id_and_name};
-use quick_xml::events::{BytesStart, Event};
-use quick_xml::reader::Reader;
 use std::io::{BufRead, Read};
 use std::path::Path;
+
+use quick_xml::events::{BytesStart, Event};
+use quick_xml::reader::Reader;
 
 use crate::utils::attributes::get_attributes;
 use crate::utils::xml_utils::{cdata_to_string, local_name_to_string};
 use crate::utils::{initialize_out_dir, write_text_file, Entity};
+use crate::{escape_filename, join_scope_id_and_name};
 
 pub fn xml_explode_custom_function_catalog<R: Read + BufRead>(
     reader: &mut Reader<R>,
