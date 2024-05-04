@@ -2,12 +2,17 @@
 
 FileMaker XML-Export File Exploder is a fast Rust tool designed to parse XML files exported from FileMaker databases and extract relevant content into separate files. It efficiently processes a directory of new FileMaker XML report files, splitting the content by its purpose (such as scripts, layouts, custom functions, and table definitions), and applies the directory structure from FileMaker scripts and layouts.
 
+## TL;DR:
+
+Do you want to extract your FileMaker solution into text files (including scripts in a human-readable format like the FileMaker Script Workspace)? This tool does it for you!
+
+Example: From [these](./tests/xml) as XML exported FileMaker solutions you will get [this](./tests/snapshots). Scripts can easily be read like [here](./tests/snapshots/scripts_sanitized/fmSyntaxColorizer/Example%20SyntaxColorizing%20-%20ID%2046/All%20script%20steps%20and%20all%20options%20-%20ID%2011.txt.snap).
+
 ## Features
 
 - **Fast Processing:** Built in Rust for high performance and efficiency.
 - **Parallel Processing:** Utilizes parallel processing for efficient extraction, thanks to the Rayon crate.
-- **Content Extraction:** Parses XML files and extracts relevant content into separate files.
-- **Directory Structure:** Organizes extracted content into directories mirroring the structure in FileMaker databases.
+- **Content Extraction:** Parses XML files and extracts relevant content into separate files and organizes them into directories mirroring the structure in FileMaker databases.
 - **Noise Reduction:** Removes unnecessary noise from XML to support efficient Git versioning and prevent unnecessary changes.
 - **Human-Readable Format:** Parses scripts and custom functions into a human-readable format for easy comprehension.
 
