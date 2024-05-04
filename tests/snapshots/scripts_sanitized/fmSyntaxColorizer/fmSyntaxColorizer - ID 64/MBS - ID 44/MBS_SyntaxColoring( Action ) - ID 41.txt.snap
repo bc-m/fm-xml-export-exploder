@@ -35,7 +35,7 @@ Wenn [ $action = "Reset" ]
 	Wenn [ $noDialog ]
 		Variable setzen [ $btn ; 2 ]
 	Sonst
-		Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+		Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 		Variable setzen [ $btn ; Hole( LetzteMeldungswahl ) ]
 	Ende (wenn)
 	Wenn [ $btn = 1 ]
@@ -83,7 +83,7 @@ Wenn [ ($action = "Clear" ODER
 				$action = "FactoryDefaults")
 				UND NICHT $noDialog ]
 	# Reset
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole( LetzteMeldungswahl ) <> 2 ]
 		# Cancel
 		Feldwert setzen [ _Home::_gHomeScreenInfo ; "" ]

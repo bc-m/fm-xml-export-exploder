@@ -15,7 +15,6 @@ pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
         ScriptStep::IfStart => script_steps::if_start::sanitize(step_xml),
         ScriptStep::ExitLoopIf => script_steps::if_start::sanitize(step_xml),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),
-        ScriptStep::Comment => script_steps::comment::sanitize(step_xml),
         ScriptStep::ReplaceFieldContents => {
             script_steps::replace_field_contents::sanitize(step_xml)
         }
@@ -29,11 +28,6 @@ pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
         ScriptStep::SetVariable => script_steps::set_variable::sanitize(step_xml),
         ScriptStep::GoToObject => script_steps::go_to_object::sanitize(step_xml),
         ScriptStep::RefreshObject => script_steps::refresh_object::sanitize(step_xml),
-        ScriptStep::Unknown => Option::from(format!(
-            "{} ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: \"{}\" ] ⚠️⚠️⚠️",
-            script_steps::primitive::sanitize(step_xml).unwrap(),
-            step_id
-        )),
         _ => script_steps::sanitize::from_xml(step_id, step_xml),
     };
 

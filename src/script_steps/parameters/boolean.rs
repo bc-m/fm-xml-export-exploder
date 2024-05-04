@@ -2,7 +2,9 @@ use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
 use crate::script_steps::constants::{id_to_script_step, ScriptStep};
-use crate::script_steps::parameters::constants::CommitRecordRequestsOptions;
+use crate::script_steps::parameters::constants::{
+    CommitRecordRequestsOptions, RefreshWindowOptions,
+};
 use crate::utils::attributes::get_attributes;
 
 #[derive(Debug, Default)]
@@ -67,40 +69,24 @@ impl Boolean {
         Ok(item)
     }
 
-    pub fn should_drop(&self) -> bool {
-        let step_id = id_to_script_step(&self.step_id);
-        let param_id = self.id.unwrap_or(0);
-        let value = self.value.unwrap_or(false);
-
-        matches!(
-            (step_id, param_id, value),
-            (
-                ScriptStep::CommitRecordRequests,
-                CommitRecordRequestsOptions::SKIP_DATA_ENTRY_VALIDATION,
-                false,
-            ) | (
-                ScriptStep::CommitRecordRequests,
-                CommitRecordRequestsOptions::OVERRIDE_ESS_LOCKING_CONFLICTS,
-                false,
-            )
-        )
-    }
-
     pub fn should_hide_bool(&self) -> bool {
         let step_id = id_to_script_step(&self.step_id);
         let param_id = self.id.unwrap_or(0);
-        let value = self.value.unwrap_or(false);
 
         matches!(
-            (step_id, param_id, value),
+            (step_id, param_id),
             (
                 ScriptStep::CommitRecordRequests,
                 CommitRecordRequestsOptions::SKIP_DATA_ENTRY_VALIDATION,
-                true,
             ) | (
                 ScriptStep::CommitRecordRequests,
                 CommitRecordRequestsOptions::OVERRIDE_ESS_LOCKING_CONFLICTS,
-                true,
+            ) | (
+                ScriptStep::RefreshWindow,
+                RefreshWindowOptions::FLUSH_CACHED_JOIN_RESULTS,
+            ) | (
+                ScriptStep::RefreshWindow,
+                RefreshWindowOptions::FLUSH_CACHED_EXTERNAL_DATA,
             )
         )
     }
@@ -113,12 +99,12 @@ impl Boolean {
     }
 
     pub fn display(&self) -> Option<String> {
-        if Self::should_drop(self) {
-            return None;
-        }
-
         if Self::should_hide_bool(self) {
-            return self.name.clone();
+            if !self.value.unwrap_or(false) {
+                return None;
+            } else {
+                return self.name.clone();
+            }
         }
 
         match &self.name {

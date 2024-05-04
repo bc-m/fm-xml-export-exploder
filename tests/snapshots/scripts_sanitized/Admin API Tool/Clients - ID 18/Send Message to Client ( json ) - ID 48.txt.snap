@@ -21,7 +21,7 @@ Variable setzen [ $error ; 0 ]
 
 #  Validate json parameter and load it into local variables
 Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen [ 5 // command is invalid ]
 Ende (wenn)
 
@@ -64,7 +64,7 @@ Sonst, wenn [ $_param = "send" ]
 		# -------------------------------------------------------------
 		#  PROCESS
 		# -------------------------------------------------------------
-		Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
 		Script ausführen [ Aus Liste ; "Handle response" ]
 	Ende (wenn)
 	

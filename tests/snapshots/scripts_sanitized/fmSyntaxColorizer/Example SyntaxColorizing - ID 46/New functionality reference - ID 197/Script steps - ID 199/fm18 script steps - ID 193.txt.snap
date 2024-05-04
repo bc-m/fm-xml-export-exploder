@@ -5,7 +5,7 @@ expression: output_content
 # Renamed
 Auf Host hochladen
 Favoriten öffnen
-Ordnerpfad holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "181" ] ⚠️⚠️⚠️
+Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
 
 Variable setzen [ $FileID ; "" ]
 Variable setzen [ $FileExists ; "" ]
@@ -23,33 +23,33 @@ Fehlerprotokollierung setzen [ ON ; CustomDebugInfo: Hole ( ProgrammBenutzername
 
 
 # FileSteps
-Dateiexistenz holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "188" ] ⚠️⚠️⚠️
-Dateiexistenz holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "188" ] ⚠️⚠️⚠️
+Dateiexistenz holen
+Dateiexistenz holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileExists ]
 
-Dateigröße holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "189" ] ⚠️⚠️⚠️
-Dateigröße holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "189" ] ⚠️⚠️⚠️
+Dateigröße holen
+Dateigröße holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileSize ]
 
-Datendatei erstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "190" ] ⚠️⚠️⚠️
-Datendatei erstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "190" ] ⚠️⚠️⚠️
-Datendatei erstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "190" ] ⚠️⚠️⚠️
+Datendatei erstellen [ Ordner erstellen: OFF ]
+Datendatei erstellen [ Ordner erstellen: OFF ]
+Datendatei erstellen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
 
-Datendatei öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "191" ] ⚠️⚠️⚠️
+Datendatei öffnen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: _Home::_gInputText1 ]
 
-In Datendatei schreiben ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "192" ] ⚠️⚠️⚠️
-In Datendatei schreiben ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "192" ] ⚠️⚠️⚠️
+In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: _Home::_gInputText2 ; Zeilenumbruch anhängen: OFF ]
+In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $data ; Zeilenumbruch anhängen: ON ]
 
-Von Datendatei lesen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "193" ] ⚠️⚠️⚠️
-Von Datendatei lesen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "193" ] ⚠️⚠️⚠️
-Von Datendatei lesen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "193" ] ⚠️⚠️⚠️
+Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: _Home::_gInputText3 ]
+Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
+Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
 
-Datendateiposition holen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "194" ] ⚠️⚠️⚠️
+Datendateiposition holen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $Pos ]
 
-Datendateiposition setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "195" ] ⚠️⚠️⚠️
-Datendateiposition setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "195" ] ⚠️⚠️⚠️
-Datendateiposition setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "195" ] ⚠️⚠️⚠️
-Datendateiposition setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "195" ] ⚠️⚠️⚠️
-Datendateiposition setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "195" ] ⚠️⚠️⚠️
+Datendateiposition setzen
+Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
 
-Datendatei schließen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "196" ] ⚠️⚠️⚠️
-Datei löschen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "197" ] ⚠️⚠️⚠️
-Datei umbenennen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "199" ] ⚠️⚠️⚠️
+Datendatei schließen
+Datei löschen
+Datei umbenennen

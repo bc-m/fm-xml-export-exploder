@@ -11,6 +11,6 @@ Ende (wenn)
 Wenn [ NICHT IstLeer ( Home.Syntax.Palette_Active::_kSwitchDarkLightPaletteID ) ]
 	# Switch to equivalent Dark / Light mode palette
 	Feldwert setzen [ _Syntax::_gID_ActivePalette ; Home.Syntax.Palette_Active::_kSwitchDarkLightPaletteID ]
-	Berechneten Wert einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "77" ] ⚠️⚠️⚠️
+	Berechneten Wert einfügen [ Auswahl: ON ; Target: Home.Syntax_ALL::_gID_ActivePalette ; Home.Syntax.Palette_Active::_kSwitchDarkLightPaletteID ]
 	// Script ausführen [ Aus Liste ; "Set Home Screen Info to content of ( Object )" ; Parameter: "switchingDarkLight" ]
 Ende (wenn)

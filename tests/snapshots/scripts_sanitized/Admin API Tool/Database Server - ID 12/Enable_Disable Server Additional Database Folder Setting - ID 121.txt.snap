@@ -35,7 +35,7 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
 Script ausführen [ Aus Liste ; "Handle response" ]
 
 Wenn [ Hole ( ScriptErgebnis ) = "1" ]

@@ -15,13 +15,13 @@ Variable setzen [ $error ; 0 ]
 #  SET-UP
 # -------------------------------------------------------------
 Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 		Aktuelles Script verlassen [ Wahr ]
 	Ende (wenn)
 	
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
-	Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 	Script ausführen [ Aus Liste ; "Set Config" ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Variable setzen [ $endpoint ; "/server/config/pkipublickey" ]
@@ -40,7 +40,7 @@ Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
 	# -------------------------------------------------------------
 	#  PROCESS
 	# -------------------------------------------------------------
-	Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+	Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
 	Script ausführen [ Aus Liste ; "Handle response" ]
 	
 	Wenn [ Hole ( ScriptErgebnis ) = "1" ]
@@ -49,7 +49,7 @@ Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
 	Ende (wenn)
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
 	Datensatz/Abfrage löschen [ Mit Dialog: OFF ]
 Ende (wenn)

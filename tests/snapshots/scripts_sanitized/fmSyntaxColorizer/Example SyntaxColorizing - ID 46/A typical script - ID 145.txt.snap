@@ -54,21 +54,21 @@ Variable setzen [ $deprecated ; _Home::zzz_UNUSED ]
 
 # # Preconditions
 Wenn [ NICHT $IsFullAccess ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Alle Scripts abbrechen
 	# --X
 Ende (wenn)
 
 Wenn [ $User Name = "MrWatson" ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; Target: $My Name ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
 		# DEBUG
-		Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 	Ende (wenn)
 Ende (wenn)
 
 Wenn [ NICHT _Palette::__ID ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -80,9 +80,9 @@ Script ausführen [ Aus Liste ; "" ]
 
 Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
 Suchenmodus aktivieren [ Pause: OFF ]
-Berechneten Wert einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "77" ] ⚠️⚠️⚠️
+Berechneten Wert einfügen [ Auswahl: ON ; Target: _Palette::_gDuplicatePaletteFrom ; _Palette::__ID ]
 Ergebnismenge suchen [ ⚠️ RESTORE ⚠️ ]
-Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
+Sortieren [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
 
 
 # Duplicate with increased name
@@ -167,14 +167,14 @@ Script ausführen [ Aus Liste ; "Apply Palette" ]
 Variable setzen [ $Error ; Hole ( ScriptErgebnis ) ]
 # You should see an affirmative color ^^^^, when getting the Script Result
 
-URL öffnen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "111" ] ⚠️⚠️⚠️
+URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 # @var $a - this comment defines the variable a
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
-E-Mail senden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "63" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $a ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
 
-AppleScript ausführen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "67" ] ⚠️⚠️⚠️
+AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 
-MBS ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "186" ] ⚠️⚠️⚠️
+MBS
 
 Aktuelles Script verlassen []
 

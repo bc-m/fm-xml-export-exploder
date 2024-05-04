@@ -24,7 +24,7 @@ Variable setzen [ $curloptions ; " --request GET" &
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
 Script ausführen [ Aus Liste ; "Handle response" ]
 
 Wenn [ Hole ( ScriptErgebnis ) = "1" ]
@@ -39,7 +39,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Fenster fixieren
 	Wenn [ IstLeer ( FMS_PUB__publickeys::ID ) ]
 	Sonst
-		Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+		Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 		Ersetze alle Feldwerte [ PUB__publickeys::zz_sync ; Durch Berechnung ersetzen: "missing" ]
 		Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Ende (wenn)

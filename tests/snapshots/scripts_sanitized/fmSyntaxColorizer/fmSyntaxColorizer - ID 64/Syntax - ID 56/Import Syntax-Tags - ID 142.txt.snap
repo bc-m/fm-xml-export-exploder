@@ -19,7 +19,7 @@ Variable setzen [ $FilePath ; $FolderPath & $FileName ]
 Blätternmodus aktivieren [ Pause: OFF ]
 Fenster fixieren
 
-Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 	# Cancel
 	Aktuelles Script verlassen []
@@ -30,11 +30,11 @@ Alle Datensätze anzeigen
 
 
 # Import SyntaxTags(Match + add, with automatic)
-Datensätze importieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "35" ] ⚠️⚠️⚠️
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -42,9 +42,9 @@ Ende (wenn)
 Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
 Wenn [ $n = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]

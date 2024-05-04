@@ -34,7 +34,9 @@ impl LayoutReferenceContainer {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Self, String> {
         let mut depth = 1;
         let mut item = LayoutReferenceContainer {
-            reference_type: get_attribute(e, "value").unwrap().to_string(),
+            reference_type: get_attribute(e, "value")
+                .unwrap_or("".to_string())
+                .to_string(),
             ..Default::default()
         };
 
@@ -46,6 +48,12 @@ impl LayoutReferenceContainer {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     match e.name().as_ref() {
+                        b"LayoutReferenceContainer" => {
+                            item.reference_type = get_attribute(&e, "value")
+                                .unwrap_or("".to_string())
+                                .to_string();
+                            break;
+                        }
                         b"LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name").unwrap().to_string();
                             break;

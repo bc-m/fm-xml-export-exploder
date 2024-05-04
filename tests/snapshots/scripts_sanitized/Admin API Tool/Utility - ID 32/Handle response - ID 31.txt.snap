@@ -23,18 +23,18 @@ Wenn [ $my.response = "200 OK" ]
 		# check json result
 		Wenn [ JSONGetElement ( $$my.result ; "messages[0].code" ) = "0" ]
 			Variable setzen [ $$UI.MESSAGE ; "Config Saved." ]
-			Layoutobjekt-Animation festlegen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "168" ] ⚠️⚠️⚠️
+			Layoutobjekt-Animation festlegen [ OFF ]
 			// Gehe zu Objekt [ "stage_left" ]
 			Gehe zu Objekt [ "stage_center" ]
-			Layoutobjekt-Animation festlegen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "168" ] ⚠️⚠️⚠️
-			Scriptpause setzen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "62" ] ⚠️⚠️⚠️
+			Layoutobjekt-Animation festlegen [ ON ]
+			Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 			Popover schließen
 		Ende (wenn)
 	Ende (wenn)
 	
 Sonst, wenn [ $my.response = "401 Unauthorized" ]
 	# try to log in
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Variable setzen [ $error ; "401" ]
 	
 Sonst
@@ -42,10 +42,10 @@ Sonst
 	Wenn [ ZeichenLinks ( JSONFormatElements ( $$my.result ) ; 1 ) = "?" ]
 		# clear api update variable
 		Variable setzen [ $$API.UPDATE ; "" ]
-		Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+		Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 		Alle Scripts abbrechen
 	Ende (wenn)
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Variable setzen [ $error ; $my.response ]
 	
 Ende (wenn)

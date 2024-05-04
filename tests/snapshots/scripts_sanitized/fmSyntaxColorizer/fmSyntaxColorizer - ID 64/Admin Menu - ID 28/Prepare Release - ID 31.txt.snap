@@ -16,8 +16,8 @@ Variable setzen [ $WindowWidth ; 1150 ]
 Variable setzen [ $WindowHeight ; 800 ]
 
 # Default Einstellungen setzen
-Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
-Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+Werkzeugleisten ein-/ausblenden [ Fixieren: ON ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
+Fensterposition/-größe ändern [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 Fenster fixieren
 Blätternmodus aktivieren [ Pause: OFF ]
 
@@ -41,7 +41,7 @@ Script ausführen [ Aus Liste ; "Apply Palette" ]
 Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
 Wenn [ Hole( AnzahlDatensätzeGesamt ) = 0 ]
 	Neuer Datensatz/Abfrage
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Sonst, wenn [ Hole( AnzahlDatensätzeGesamt ) = 1 ]
 	Alle Datensätze anzeigen
 Sonst
@@ -50,7 +50,7 @@ Sonst
 	Aktuellen Datens. ausschließen
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Alle Datensätze anzeigen
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)
 
 # Clear globals
@@ -98,9 +98,9 @@ Feldwert setzen [ Home.Syntax_Dynamic2::ColorName ; "15 Warning" ]
 Feldwert setzen [ Home.Syntax_Dynamic3::ColorName ; "20 OK" ]
 Feldwert setzen [ Home.Syntax_Dynamic4::ColorName ; "19 Highlight" ]
 
-Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
+Werkzeugleisten ein-/ausblenden [ Fixieren: OFF ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
 
-Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 	# 2: HALT
 	Alle Scripts abbrechen

@@ -11,10 +11,10 @@ Variable setzen [ $$Midimised ; Falls( NICHT $$Midimised ; 1 ) ]
 
 Wenn [ $$Midimised ]
 	Gehe zu Layout [ Layout: "Home_Minimised" ; Animation: Ohne ]
-	Werkzeugleisten ein-/ausblenden ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "29" ] ⚠️⚠️⚠️
+	Werkzeugleisten ein-/ausblenden [ Fixieren: OFF ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
 	Fenster anpassen [ Alles anzeigen ]
-	Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+	Fensterposition/-größe ändern [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 Sonst
-	Fensterposition/-größe ändern ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "119" ] ⚠️⚠️⚠️
+	Fensterposition/-größe ändern [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
 	Script ausführen [ Aus Liste ; "Go to Home Layout" ]
 Ende (wenn)

@@ -9,7 +9,7 @@ expression: output_content
 
 Variable setzen [ $i ; $i + 1 ]
 Feldwert setzen [ _Home::_gEmptyField ; $ThisIsAVar ]
-Feld nach Namen einstellen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "147" ] ⚠️⚠️⚠️
+Feld nach Namen einstellen [ Zielfeld angeben: ON ;  $ThisIsAVar ; $ThisIsAnotherVar ]
 
 
 
@@ -42,15 +42,15 @@ Variable setzen [ $b ; $A_CONSTANT ]
 
 # The target variable of an Insert Calculated Results step is correctly ignored:
 # SUCCESS:
-Berechneten Wert einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "77" ] ⚠️⚠️⚠️
+Berechneten Wert einfügen [ Auswahl: ON ; Target: $TargetVar ; "whatever" ]
 
 # variable-read correctly recognised:
 # SUCCESS:
-Berechneten Wert einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "77" ] ⚠️⚠️⚠️
+Berechneten Wert einfügen [ Auswahl: ON ; Target: _Home::_gEmptyField ; $ThisIsAVar ]
 
 # However, this script text is however dubious (when you insert a variable into the current field - with NO target) MBS currently incorrectly assumes it's a target and doesn't flag the error:
 # FAIL:
-Berechneten Wert einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "77" ] ⚠️⚠️⚠️
+Berechneten Wert einfügen [ Auswahl: ON ; $whatever2 ]
 
 # SUCCESS: MBS correctly ignores variable names in strings
 Text einfügen [ Select ; Target: $TargetVar ; "$ThisIsNotAVariable" ]
@@ -60,28 +60,28 @@ Systemdatum einfügen [ Auswahl: ON ; Target: $TargetVar ]
 # SUCCESS:
 Systemuhrzeit einfügen [ Auswahl: ON ; Target: $TargetVar ]
 # SUCCESS:
-Benutzernamen einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "60" ] ⚠️⚠️⚠️
+Benutzernamen einfügen [ Auswahl: ON ; Target: $TargetVar ]
 
 # SUCCESS:
-Von Gerät einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "161" ] ⚠️⚠️⚠️
+Von Gerät einfügen [ Vollbild ]
 
 # SUCCESS:
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: _Home::_gEmptyField ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 
 # SUCCESS:
-Aus URL einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "160" ] ⚠️⚠️⚠️
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $TargetVar ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 
 # SUCCESS:
-Datei einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "131" ] ⚠️⚠️⚠️
+Datei einfügen [ Target: $TargetVar ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-Audio/Video einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "159" ] ⚠️⚠️⚠️
+Audio/Video einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-Datei einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "131" ] ⚠️⚠️⚠️
+Datei einfügen [ Target: $TargetVar ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-PDF einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "158" ] ⚠️⚠️⚠️
+PDF einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-Bild einfügen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "56" ] ⚠️⚠️⚠️
+Bild einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]

@@ -23,18 +23,18 @@ Fenster fixieren
 
 # Import the palette names
 Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
-Datensätze importieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "35" ] ⚠️⚠️⚠️
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	# Error
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
 
 # Remove duplicates and initialise the import check box
-Sortieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "39" ] ⚠️⚠️⚠️
+Sortieren [ Mit Dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
 Schleife (Anfang) [ Flush: Immer ]
 	Wenn [ Hole( DatensatzPositionInErgebnismenge ) =1 ODER
@@ -87,7 +87,7 @@ Ende (wenn)
 
 
 # Select palette-colors to be merged (whilst removing the temp-records)
-Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 Wenn [ Hole( LayoutTabellenname ) ≠ "_Palette" ]
 	# No common palettes
 	Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
@@ -99,7 +99,7 @@ Sonst
 	Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
-	Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 	Wenn [ Hole( LayoutTabellenname ) ≠ "_Color" ]
 		# …but no common colors
 		Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
@@ -114,19 +114,19 @@ Ersetze alle Feldwerte [ _Color::PaletteName ; Durch Berechnung ersetzen: Color.
 
 
 # Import Colors(Match + add, with automatic)
-// Datensätze importieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "35" ] ⚠️⚠️⚠️
-Datensätze importieren ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "35" ] ⚠️⚠️⚠️
+// Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "DataSourceReference" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
 
 Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -146,7 +146,7 @@ Schleife (Ende)
 
 Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -173,7 +173,7 @@ Schleife (Anfang) [ Flush: Immer ]
 Schleife (Ende)
 
 # Show the imported palettes
-Gehe zu Bezugsdatensatz ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "74" ] ⚠️⚠️⚠️
+Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
 
 Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
@@ -183,4 +183,4 @@ Wenn [ $n = 1 ]
 Sonst
 	Datensätze zeigen als [ Als Tabelle anzeigen ]
 Ende (wenn)
-Eigenes Dialogfeld anzeigen ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: "87" ] ⚠️⚠️⚠️
+Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
