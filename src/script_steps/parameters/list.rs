@@ -14,7 +14,7 @@ impl List {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
         _: &BytesStart,
-        step_id: &str,
+        step_id: &u32,
     ) -> Result<List, String> {
         let mut depth = 1;
         let mut item = List { name: None };
@@ -78,8 +78,9 @@ mod tests {
         };
 
         let expected_output = "_Home".to_string();
+        let script_id: u32 = 136;
         assert_eq!(
-            List::from_xml(&mut reader, &element, "136")
+            List::from_xml(&mut reader, &element, &script_id)
                 .unwrap()
                 .display()
                 .unwrap(),

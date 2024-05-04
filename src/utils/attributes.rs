@@ -28,15 +28,12 @@ pub fn get_attributes(e: &BytesStart) -> Option<Vec<(String, String)>> {
     Some(attributes)
 }
 
-pub fn get_attribute(e: &BytesStart, name: &str) -> Option<String> {
-    for attr in get_attributes(e).unwrap() {
-        if attr.0 != name {
-            continue;
+pub fn get_attribute(element: &BytesStart, attribute_name: &str) -> Option<String> {
+    for attr in get_attributes(element).unwrap() {
+        if attr.0 == attribute_name {
+            return Some(attr.1);
         }
-
-        return Some(attr.1);
     }
-
     None
 }
 

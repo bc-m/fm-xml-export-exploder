@@ -98,15 +98,10 @@ pub enum ScriptStep {
     RevertTransaction = 207,
 }
 
-pub fn id_to_script_step(id: &str) -> ScriptStep {
-    if id.is_empty() {
-        return ScriptStep::Unknown;
-    }
-
-    let id = id.parse::<u32>().unwrap();
-    if UNKNOWN_SCRIPT_STEP.contains(&id) {
+pub fn id_to_script_step(id: &u32) -> ScriptStep {
+    if UNKNOWN_SCRIPT_STEP.contains(id) {
         ScriptStep::Unknown
     } else {
-        ScriptStep::from_repr(id).unwrap_or(ScriptStep::Unknown)
+        ScriptStep::from_repr(*id).unwrap_or(ScriptStep::Unknown)
     }
 }

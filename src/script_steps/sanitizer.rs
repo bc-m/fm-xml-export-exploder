@@ -1,7 +1,7 @@
 use crate::script_steps;
 use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 
-pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
+pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
     let is_enabled = script_steps::is_enabled::sanitize(step_xml);
 
     let step_sanitized = match id_to_script_step(step_id) {
@@ -14,7 +14,6 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
         ScriptStep::InsertText => script_steps::insert_text::sanitize(step_xml),
         ScriptStep::IfStart => script_steps::if_start::sanitize(step_xml),
         ScriptStep::ExitLoopIf => script_steps::if_start::sanitize(step_xml),
-        ScriptStep::CommitRecordRequests => script_steps::commit::sanitize(step_xml),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),
         ScriptStep::Comment => script_steps::comment::sanitize(step_xml),
         ScriptStep::ReplaceFieldContents => {
@@ -31,7 +30,7 @@ pub fn sanitize(step_id: &str, step_xml: &str) -> Option<String> {
         ScriptStep::GoToObject => script_steps::go_to_object::sanitize(step_xml),
         ScriptStep::RefreshObject => script_steps::refresh_object::sanitize(step_xml),
         ScriptStep::Unknown => Option::from(format!(
-            "{} ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: {:?} ] ⚠️⚠️⚠️",
+            "{} ⚠️⚠️⚠️ FM-XML-EXPORT-EXPLODER: UNKNOWN SCRIPT-STEP [ ID: \"{}\" ] ⚠️⚠️⚠️",
             script_steps::primitive::sanitize(step_xml).unwrap(),
             step_id
         )),

@@ -1,10 +1,14 @@
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
+use crate::script_steps::constants::{id_to_script_step, ScriptStep};
+use crate::script_steps::parameters::constants::CommitRecordRequestsOptions;
 use crate::utils::attributes::get_attributes;
 
 #[derive(Debug, Default)]
 pub struct Boolean {
+    pub step_id: u32,
+    pub id: Option<u32>,
     pub name: Option<String>,
     pub value: Option<bool>,
 }
@@ -13,10 +17,12 @@ impl Boolean {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
         _e: &BytesStart,
-        _step_id: &str,
+        _step_id: &u32,
     ) -> Result<Boolean, String> {
         let mut depth = 1;
         let mut item = Boolean {
+            step_id: *_step_id,
+            id: None,
             name: None,
             value: None,
         };
@@ -31,6 +37,11 @@ impl Boolean {
                     if let b"Boolean" = e.name().as_ref() {
                         for attr in get_attributes(&e).unwrap() {
                             match attr.0.as_str() {
+                                "id" => {
+                                    if let Ok(id) = attr.1.parse::<u32>() {
+                                        item.id = Some(id);
+                                    }
+                                }
                                 "type" => item.name = Some(attr.1),
                                 "value" => match attr.1.as_str() {
                                     "True" => item.value = Some(true),
@@ -56,32 +67,67 @@ impl Boolean {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        let name = match &self.name {
-            Some(name) => name,
-            None => {
-                return match self.value {
-                    None => None,
-                    Some(bool) => {
-                        return Some(match bool {
-                            true => "ON".to_string(),
-                            false => "OFF".to_string(),
-                        });
-                    }
-                };
-            }
-        };
+    pub fn should_drop(&self) -> bool {
+        let step_id = id_to_script_step(&self.step_id);
+        let param_id = self.id.unwrap_or(0);
+        let value = self.value.unwrap_or(false);
 
-        self.value.map(|bool| {
-            format!(
-                "{}: {}",
-                name,
-                match bool {
-                    true => "ON",
-                    false => "OFF",
-                }
+        matches!(
+            (step_id, param_id, value),
+            (
+                ScriptStep::CommitRecordRequests,
+                CommitRecordRequestsOptions::SKIP_DATA_ENTRY_VALIDATION,
+                false,
+            ) | (
+                ScriptStep::CommitRecordRequests,
+                CommitRecordRequestsOptions::OVERRIDE_ESS_LOCKING_CONFLICTS,
+                false,
             )
-        })
+        )
+    }
+
+    pub fn should_hide_bool(&self) -> bool {
+        let step_id = id_to_script_step(&self.step_id);
+        let param_id = self.id.unwrap_or(0);
+        let value = self.value.unwrap_or(false);
+
+        matches!(
+            (step_id, param_id, value),
+            (
+                ScriptStep::CommitRecordRequests,
+                CommitRecordRequestsOptions::SKIP_DATA_ENTRY_VALIDATION,
+                true,
+            ) | (
+                ScriptStep::CommitRecordRequests,
+                CommitRecordRequestsOptions::OVERRIDE_ESS_LOCKING_CONFLICTS,
+                true,
+            )
+        )
+    }
+
+    pub fn bool_to_string(bool: bool) -> String {
+        match bool {
+            true => "ON".to_string(),
+            false => "OFF".to_string(),
+        }
+    }
+
+    pub fn display(&self) -> Option<String> {
+        if Self::should_drop(self) {
+            return None;
+        }
+
+        if Self::should_hide_bool(self) {
+            return self.name.clone();
+        }
+
+        match &self.name {
+            Some(name) => self.value.map(|bool_value| {
+                let formatted_string = format!("{}: {}", name, Self::bool_to_string(bool_value));
+                formatted_string
+            }),
+            None => self.value.map(Self::bool_to_string),
+        }
     }
 }
 
@@ -107,8 +153,10 @@ mod tests {
         };
 
         let expected_output = "Pause: OFF".to_string();
+        let script_id: u32 = 0;
+
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, "")
+            Boolean::from_xml(&mut reader, &element, &script_id)
                 .unwrap()
                 .display()
                 .unwrap(),
@@ -131,8 +179,9 @@ mod tests {
         };
 
         let expected_output = "OFF".to_string();
+        let script_id: u32 = 0;
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, "")
+            Boolean::from_xml(&mut reader, &element, &script_id)
                 .unwrap()
                 .display()
                 .unwrap(),

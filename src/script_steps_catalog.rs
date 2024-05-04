@@ -27,7 +27,7 @@ struct ScriptInfo {
 
 #[derive(Debug, Default)]
 struct ScriptStepInfo {
-    id: String,
+    id: u32,
     content: String,
     indent_level_current: usize,
     indent_level_next: usize,
@@ -86,7 +86,7 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
                 } else if depth == 4 && local_name_to_string(e.name().as_ref()) == "Step" {
                     in_step = true;
                     step_info.indent_level_current = step_info.indent_level_next;
-                    step_info.id = get_attribute(&e, "id").unwrap().to_string();
+                    step_info.id = get_attribute(&e, "id").unwrap().parse::<u32>().unwrap();
 
                     if get_attribute(&e, "enable").unwrap_or("True".to_string()) == "True" {
                         match id_to_script_step(&step_info.id) {

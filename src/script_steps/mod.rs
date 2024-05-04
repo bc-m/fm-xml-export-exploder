@@ -3,7 +3,6 @@ pub(crate) mod sanitizer;
 
 mod close_window;
 mod comment;
-mod commit;
 mod exit_script;
 mod go_to_field;
 mod go_to_layout;

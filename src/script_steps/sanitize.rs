@@ -4,7 +4,7 @@ use quick_xml::Reader;
 use crate::script_steps::parameters::parameter_values::ParameterValues;
 use crate::utils::attributes::get_attribute;
 
-pub fn from_xml(step_id: &str, step: &str) -> Option<String> {
+pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
     let mut name = String::new();
     let mut parameters: Vec<String> = Vec::new();
 
@@ -16,11 +16,8 @@ pub fn from_xml(step_id: &str, step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    match get_attribute(&e, "name") {
-                        None => {}
-                        Some(value) => {
-                            name = value.to_string();
-                        }
+                    if let Some(value) = get_attribute(&e, "name") {
+                        name = value.to_string();
                     }
                     continue;
                 }
@@ -55,7 +52,8 @@ mod tests {
         let xml = r#"<Step id="79" name="Fenster fixieren" enable="True">"#;
 
         let expected_output = Some("Fenster fixieren".to_string());
-        assert_eq!(from_xml("79", xml.trim()), expected_output);
+        let script_id: u32 = 79;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -72,7 +70,8 @@ mod tests {
         "#;
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
-        assert_eq!(from_xml("86", xml.trim()), expected_output);
+        let script_id: u32 = 86;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -89,7 +88,8 @@ mod tests {
         "#;
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
-        assert_eq!(from_xml("86", xml.trim()), expected_output);
+        let script_id: u32 = 86;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -106,7 +106,8 @@ mod tests {
         "#;
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
-        assert_eq!(from_xml("22", xml.trim()), expected_output);
+        let script_id: u32 = 22;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -129,6 +130,112 @@ mod tests {
 
         let expected_output =
             Some("Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]".to_string());
-        assert_eq!(from_xml("182", xml.trim()), expected_output);
+        let script_id: u32 = 182;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+    }
+}
+
+#[cfg(test)]
+mod commit_tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output =
+            Some("Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]".to_string());
+        let script_id: u32 = 75;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_force() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some(
+            "Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ; Schreiben erzwingen ]"
+                .to_string(),
+        );
+        let script_id: u32 = 75;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_suppress_validate() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]".to_string());
+        let script_id: u32 = 75;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_all_options() {
+        let xml = r#"
+            <Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+                <Options>384</Options>
+                <ParameterValues membercount="3">
+                    <Parameter type="Boolean">
+                        <Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+                    </Parameter>
+                    <Parameter type="Boolean">
+                        <Boolean type="Schreiben erzwingen" id="512" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: ON ; Schreiben erzwingen ]".to_string());
+        let script_id: u32 = 75;
+        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
     }
 }
