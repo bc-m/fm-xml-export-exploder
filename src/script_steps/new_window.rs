@@ -80,7 +80,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                             LayoutReferenceContainer::from_xml(&mut reader, &e)
                                 .unwrap()
                                 .display()
-                                .unwrap()
+                                .unwrap_or("".to_string())
                     }
                     b"Options" => xml_pos.in_options = true,
                     b"Close" => xml_pos.in_close_option = true,
