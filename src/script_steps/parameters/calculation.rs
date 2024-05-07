@@ -4,13 +4,15 @@ use quick_xml::Reader;
 use crate::utils;
 
 #[derive(Debug, Default)]
-pub struct Calculation {}
+pub struct Calculation {
+    pub calculation: Option<String>,
+}
 
 impl Calculation {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<String, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Calculation, String> {
         let mut depth = 1;
         let mut in_text = false;
-        let mut calculation = String::new();
+        let mut item = Calculation { calculation: None };
         let mut buf: Vec<u8> = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
@@ -26,7 +28,7 @@ impl Calculation {
                     if !in_text {
                         continue;
                     }
-                    calculation = utils::xml_utils::cdata_to_string(&e);
+                    item.calculation = Some(utils::xml_utils::cdata_to_string(&e));
                 }
                 Ok(Event::End(e)) => {
                     depth -= 1;
@@ -43,6 +45,19 @@ impl Calculation {
             buf.clear();
         }
 
-        Ok(calculation)
+        Ok(item)
+    }
+
+    pub fn display(&self) -> Option<String> {
+        match &self.calculation {
+            Some(item) => {
+                if item.is_empty() {
+                    None
+                } else {
+                    Some(item.clone())
+                }
+            }
+            None => None,
+        }
     }
 }

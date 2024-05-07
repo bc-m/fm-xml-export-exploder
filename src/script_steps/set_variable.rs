@@ -24,10 +24,16 @@ pub fn sanitize(step: &str) -> Option<String> {
                     variable_name = get_attribute(&e, "value").unwrap().to_string();
                 }
                 b"value" => {
-                    value = Calculation::from_xml(&mut reader, &e).unwrap();
+                    value = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap_or_default();
                 }
                 b"repetition" => {
-                    repetition = Calculation::from_xml(&mut reader, &e).unwrap();
+                    repetition = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap_or_default();
                 }
                 _ => {}
             },

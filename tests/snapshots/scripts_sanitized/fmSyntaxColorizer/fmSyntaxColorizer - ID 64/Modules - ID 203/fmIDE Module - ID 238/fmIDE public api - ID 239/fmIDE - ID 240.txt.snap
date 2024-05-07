@@ -1280,7 +1280,7 @@ Schleife (Anfang) [ Flush: Immer ]
 		Sonst, wenn [ $action_name = "EnterLayoutMode" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#enter-layout-mode
 			# Bring window to front and press CmdCtrl+L
-			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+			Fenster aktivieren
 			Variable setzen [ $r ; MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
 							MBS( "RemoteControl.PressKey" ; "l" ; "l" ) & 
 							MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
@@ -1646,7 +1646,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			Wenn [ $fmide_debug ]
 				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			Ende (wenn)
-			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+			Fenster aktivieren [ Name: $original_window_name ]
 			
 			
 		Sonst, wenn [ $action_name = "GoToPortalRow" ]
@@ -2092,7 +2092,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-functions
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( "Menubar.RunMenuCommand"; 51191 /*  File Manage Custom Functions... */ )" ]
-			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+			Fenster aktivieren
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
 							"r=" & $idleCalcExpression ;
@@ -2111,7 +2111,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-custom-menus
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( "Menubar.RunMenuCommand"; 51222 /*  File Manage Custom Menus... */ )" ]
-			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+			Fenster aktivieren
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
 							"r=" & $idleCalcExpression ;
@@ -2149,7 +2149,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#open-manage-security
 			# It's not possible to open this menu while a script is running, so click the menu once after halting with the MBS plugin
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( "Menubar.RunMenuCommand"; 51155 /*  File Manage Security... */ )" ]
-			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+			Fenster aktivieren
 			Variable setzen [ $$MBS_ScheduleRef ; MBS( "Schedule.EvaluateAfterDelay"; 1/10; Liste(
 							"Let([" ;
 							"r=" & $idleCalcExpression ;
@@ -2221,7 +2221,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 		Sonst, wenn [ $action_name = "PasteInCurrentLayout" ODER $action_name = "PasteIntoCurrentLayout" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#paste-in-current-layout
 			# Bring window to front and press CmdCtrl+L, CmdCtrl+V
-			Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+			Fenster aktivieren
 			Text einfügen [ Select ; Target: $idleCalcExpression ; "MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 1 ) & 
 MBS( "RemoteControl.PressKey" ; "l" ; "l" ) & 
 MBS( "RemoteControl.PressKey" ; "v" ; "v" ) & 
@@ -2290,11 +2290,11 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			Variable setzen [ $current_file ; JSONGetElement ( $action ; "current_file" ) ]
 			
 			Wenn [ IstLeer ( $window_name ) ]
-				Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+				Fenster aktivieren
 			Sonst, wenn [ $current_file ]
-				Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+				Fenster aktivieren [ Name: $window_name ]
 			Sonst
-				Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+				Fenster aktivieren [ Name: $window_name ]
 			Ende (wenn)
 			
 			// # POSTPONED - Does this need to work on the action level rather than on the script level?

@@ -29,7 +29,12 @@ pub fn sanitize(step: &str) -> Option<String> {
                     boolean_option_type = get_attribute(&e, "type").unwrap().to_string();
                     boolean_option_value = get_attribute(&e, "value").unwrap() == "True";
                 }
-                b"Calculation" => calculation = Calculation::from_xml(&mut reader, &e).unwrap(),
+                b"Calculation" => {
+                    calculation = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap()
+                }
                 _ => {}
             },
             _ => {}

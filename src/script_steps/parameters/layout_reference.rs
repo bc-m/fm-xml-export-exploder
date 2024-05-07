@@ -52,11 +52,9 @@ impl LayoutReferenceContainer {
                             item.reference_type = get_attribute(&e, "value")
                                 .unwrap_or("".to_string())
                                 .to_string();
-                            break;
                         }
                         b"LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name").unwrap().to_string();
-                            break;
                         }
                         b"Label" => {
                             item.layout_reference =
@@ -64,8 +62,10 @@ impl LayoutReferenceContainer {
                             depth -= 1;
                         }
                         b"Calculation" => {
-                            item.layout_reference =
-                                Calculation::from_xml(reader, &e).unwrap_or_default();
+                            item.layout_reference = Calculation::from_xml(reader, &e)
+                                .unwrap()
+                                .display()
+                                .unwrap();
                             depth -= 1;
                         }
                         _ => {}
@@ -181,18 +181,13 @@ mod tests {
     }
 
     #[test]
-    fn test_by_number() {
+    fn test_parameter_value_item() {
         let xml = r#"
-            <LayoutReferenceContainer value="4">
-                <Calculation datatype="1" position="5">
-                    <Calculation>
-                        <Text><![CDATA["LAYOUT_NUMBER_CALCULATION"]]></Text>
-                        <ChunkList hash="3C7B0A49FD772FDF6F8218753BDDDE7D">
-                            <Chunk type="NoRef">&quot;LAYOUT_NUMBER_CALCULATION&quot;</Chunk>
-                        </ChunkList>
-                    </Calculation>
-                </Calculation>
-            </LayoutReferenceContainer>
+            <Parameter type="LayoutReferenceContainer">
+                <LayoutReferenceContainer value="5">
+                    <LayoutReference id="8" name="Palettes"></LayoutReference>
+                </LayoutReferenceContainer>
+            </Parameter>
         "#;
 
         let mut reader = Reader::from_str(xml.trim());
@@ -201,7 +196,7 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = Some(r#"Layoutnr.: "LAYOUT_NUMBER_CALCULATION""#.to_string());
+        let expected_output = Some(r#"Layout: "Palettes""#.to_string());
         assert_eq!(
             LayoutReferenceContainer::from_xml(&mut reader, &element)
                 .unwrap()

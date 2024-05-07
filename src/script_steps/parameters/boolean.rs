@@ -3,7 +3,7 @@ use quick_xml::Reader;
 
 use crate::script_steps::constants::{id_to_script_step, ScriptStep};
 use crate::script_steps::parameters::constants::{
-    CommitRecordRequestsOptions, RefreshWindowOptions,
+    CommitRecordRequestsOptions, GoToFieldOptions, RefreshWindowOptions,
 };
 use crate::utils::attributes::get_attributes;
 
@@ -87,7 +87,7 @@ impl Boolean {
             ) | (
                 ScriptStep::RefreshWindow,
                 RefreshWindowOptions::FLUSH_CACHED_EXTERNAL_DATA,
-            )
+            ) | (ScriptStep::GoToField, GoToFieldOptions::SELECT_PERFORM,)
         )
     }
 

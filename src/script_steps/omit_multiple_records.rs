@@ -42,7 +42,12 @@ pub fn sanitize(step: &str) -> Option<String> {
                     }
                     continue;
                 }
-                b"Calculation" => calculation = Calculation::from_xml(&mut reader, &e).unwrap(),
+                b"Calculation" => {
+                    calculation = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap()
+                }
                 _ => {}
             },
             _ => {}

@@ -12,3 +12,8 @@ impl RefreshWindowOptions {
     pub const FLUSH_CACHED_JOIN_RESULTS: u32 = 256;
     pub const FLUSH_CACHED_EXTERNAL_DATA: u32 = 512;
 }
+
+pub struct GoToFieldOptions;
+impl GoToFieldOptions {
+    pub const SELECT_PERFORM: u32 = 4096;
+}

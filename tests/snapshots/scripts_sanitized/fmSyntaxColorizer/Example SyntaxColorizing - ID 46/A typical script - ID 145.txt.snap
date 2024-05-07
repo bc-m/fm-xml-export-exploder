@@ -60,7 +60,7 @@ Wenn [ NICHT $IsFullAccess ]
 Ende (wenn)
 
 Wenn [ $User Name = "MrWatson" ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; Target: $My Name ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
 		# DEBUG
 		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
@@ -114,7 +114,7 @@ Schleife (Anfang) [ Flush: Immer ]
 	
 	# NEXT Color
 	Variable setzen [ $i ; $i + 1 ]
-	Verlasse Schleife wenn [  ]
+	Verlasse Schleife wenn []
 Schleife (Ende)
 
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
