@@ -9,7 +9,7 @@ AnwenderAbbruchZulassen setzen [ OFF ]
 Fehleraufzeichnung setzen [ ON ]
 
 Wenn [ Hole( Fenstermodus ) = 1 ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; Target: _Syntax::Comment ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
 Sonst
 	Schleife (Anfang) [ Flush: Immer ]
 		Wenn [ NICHT IstLeer( _Syntax::Comment ) ]
@@ -19,7 +19,7 @@ Sonst
 		Ende (wenn)
 		# Edit
 		Variable setzen [ $Comment ; _Syntax::Comment ]
-		Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; Target: _Syntax::Comment ; ⚠️ PARAMETER "Label" NOT PARSED ⚠️ ]
+		Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
 		Verlasse Schleife wenn [ IstLeer( _Syntax::Comment ) ODER _Syntax::Comment = $Comment ]
 	Schleife (Ende)
 Ende (wenn)

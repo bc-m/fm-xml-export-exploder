@@ -40,8 +40,12 @@ impl FieldReference {
                                         }
                                         b"Calculation" => {
                                             item.field_reference = Option::from(
-                                                Calculation::from_xml(reader, &e).unwrap(),
+                                                Calculation::from_xml(reader, &e)
+                                                    .unwrap()
+                                                    .display()
+                                                    .unwrap(),
                                             );
+                                            depth -= 1;
                                         }
                                         _ => {}
                                     }

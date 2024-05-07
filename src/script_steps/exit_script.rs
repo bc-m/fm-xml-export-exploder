@@ -16,7 +16,12 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
-                b"Calculation" => calculation = Calculation::from_xml(&mut reader, &e).unwrap(),
+                b"Calculation" => {
+                    calculation = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap()
+                }
                 _ => {}
             },
             _ => {}

@@ -69,11 +69,11 @@ DDE Execute senden
 Telefonnummer wählen [ Mit Dialog: ON ]
 Sprechen [ ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
 AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
-Wenn [  ]
+Wenn []
 Sonst
 Ende (wenn)
 Schleife (Anfang) [ Flush: Immer ]
-	Verlasse Schleife wenn [  ]
+	Verlasse Schleife wenn []
 Schleife (Ende)
 Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
 Schreibe Änderung Datens./Abfrage [ Mit Dialog: ON ]
@@ -120,13 +120,13 @@ Wenn [ /* Command ID 110 <unknown> - but command 125, else if, has to be inside 
 	Nächste fortlaufende Nummer setzen
 	SQL ausführen [ Mit Dialog: ON ; Ordner erstellen: OFF ]
 	Hosts öffnen
-	Fensterposition/-größe ändern [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
+	Fensterposition/-größe ändern
 	Alle Fenster anordnen [ Horizontal nebeneinander ]
 	Fenster schließen
 	Neues Fenster [ Style: Dokument ; Layout: <Originallayout> ]
-	Fenster aktivieren [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
-	Fenstertitel setzen [ ⚠️ PARAMETER "WindowReference" NOT PARSED ⚠️ ]
-Sonst, wenn [  ]
+	Fenster aktivieren
+	Fenstertitel setzen
+Sonst, wenn []
 	Ergebnismenge einschränken
 	Ergebnismenge erweitern
 	Suchen/Ersetzen ausführen [ Mit Dialog: ON ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]

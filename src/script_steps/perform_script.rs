@@ -25,7 +25,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                     script_reference_type_id = get_attribute(&e, "value").unwrap().to_string();
                     script_reference_type = get_attribute(&e, "name").unwrap().to_string();
                     if script_reference_type_id.as_str() == "2" {
-                        script_reference = Calculation::from_xml(&mut reader, &e).unwrap();
+                        script_reference = Calculation::from_xml(&mut reader, &e)
+                            .unwrap()
+                            .display()
+                            .unwrap();
                     }
                 }
                 b"ScriptReference" => {
@@ -33,7 +36,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Parameter" => {
                     if get_attribute(&e, "type").unwrap_or("".to_string()).as_str() == "Parameter" {
-                        calculation = Calculation::from_xml(&mut reader, &e).unwrap();
+                        calculation = Calculation::from_xml(&mut reader, &e)
+                            .unwrap()
+                            .display()
+                            .unwrap_or_default();
                     }
                 }
                 _ => {}

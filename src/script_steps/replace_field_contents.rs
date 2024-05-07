@@ -46,7 +46,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                     params.push(("".to_string(), field_reference))
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e).unwrap();
+                    calculation = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap_or_default();
                 }
                 b"List" => {
                     if list_name_to_input_dialog_label {

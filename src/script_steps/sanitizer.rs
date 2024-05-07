@@ -6,14 +6,10 @@ pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
 
     let step_sanitized = match id_to_script_step(step_id) {
         ScriptStep::PerformScript => script_steps::perform_script::sanitize(step_xml),
-        ScriptStep::GoToLayout => script_steps::go_to_layout::sanitize(step_xml),
         ScriptStep::GoToRecordRequestPage => script_steps::go_to_record::sanitize(step_xml),
-        ScriptStep::GoToField => script_steps::go_to_field::sanitize(step_xml),
         ScriptStep::OmitMultipleRecords => script_steps::omit_multiple_records::sanitize(step_xml),
         ScriptStep::PerformFind => script_steps::perform_find::sanitize(step_xml),
         ScriptStep::InsertText => script_steps::insert_text::sanitize(step_xml),
-        ScriptStep::IfStart => script_steps::if_start::sanitize(step_xml),
-        ScriptStep::ExitLoopIf => script_steps::if_start::sanitize(step_xml),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),
         ScriptStep::ReplaceFieldContents => {
             script_steps::replace_field_contents::sanitize(step_xml)
@@ -21,8 +17,6 @@ pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
         ScriptStep::GoToPortalRow => script_steps::go_to_portal_row::sanitize(step_xml),
         ScriptStep::ExitScript => script_steps::exit_script::sanitize(step_xml),
         ScriptStep::CloseWindow => script_steps::close_window::sanitize(step_xml),
-        ScriptStep::NewWindow => script_steps::new_window::sanitize(step_xml),
-        ScriptStep::IfElse => script_steps::if_start::sanitize(step_xml),
         ScriptStep::ConstrainFoundSet => script_steps::perform_find::sanitize(step_xml),
         ScriptStep::ExtendFoundSet => script_steps::perform_find::sanitize(step_xml),
         ScriptStep::SetVariable => script_steps::set_variable::sanitize(step_xml),

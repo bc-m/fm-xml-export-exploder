@@ -25,7 +25,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                         .unwrap()
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e).unwrap();
+                    calculation = Calculation::from_xml(&mut reader, &e)
+                        .unwrap()
+                        .display()
+                        .unwrap_or_default();
                 }
                 _ => {}
             },

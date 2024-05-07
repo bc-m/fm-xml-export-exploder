@@ -19,8 +19,18 @@ pub fn sanitize(step: &str) -> Option<String> {
                 b"Step" => {
                     name = get_attribute(e, "name").unwrap().to_string();
                 }
-                b"Name" => calculation = Calculation::from_xml(&mut reader, e).unwrap(),
-                b"repetition" => repetition = Calculation::from_xml(&mut reader, e).unwrap(),
+                b"Name" => {
+                    calculation = Calculation::from_xml(&mut reader, e)
+                        .unwrap()
+                        .display()
+                        .unwrap_or_default()
+                }
+                b"repetition" => {
+                    repetition = Calculation::from_xml(&mut reader, e)
+                        .unwrap()
+                        .display()
+                        .unwrap_or_default()
+                }
                 _ => {}
             },
             _ => {}
