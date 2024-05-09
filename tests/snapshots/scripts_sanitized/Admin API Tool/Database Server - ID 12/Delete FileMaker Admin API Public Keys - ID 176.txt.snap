@@ -21,7 +21,7 @@ Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
 	Ende (wenn)
 	
 	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
-	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+	Gehe zu Bezugsdatensatz [ Table: PUB_FMS__fmserver ; Layout: "Admin API" ; Show related ]
 	Script ausführen [ Aus Liste ; "Set Config" ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Variable setzen [ $endpoint ; "/server/config/pkipublickey" ]

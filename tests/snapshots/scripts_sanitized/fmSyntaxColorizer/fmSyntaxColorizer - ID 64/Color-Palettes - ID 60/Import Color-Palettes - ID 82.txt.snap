@@ -87,7 +87,7 @@ Ende (wenn)
 
 
 # Select palette-colors to be merged (whilst removing the temp-records)
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+Gehe zu Bezugsdatensatz [ Table: Color.Palette_byName ; Layout: "Palettes" ; Show related ; Match found set ]
 Wenn [ Hole( LayoutTabellenname ) ≠ "_Palette" ]
 	# No common palettes
 	Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
@@ -99,7 +99,7 @@ Sonst
 	Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
-	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+	Gehe zu Bezugsdatensatz [ Table: Palette.Color ; Layout: "A Import Palettes" ; Show related ; Match found set ]
 	Wenn [ Hole( LayoutTabellenname ) ≠ "_Color" ]
 		# …but no common colors
 		Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
@@ -173,7 +173,7 @@ Schleife (Anfang) [ Flush: Immer ]
 Schleife (Ende)
 
 # Show the imported palettes
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+Gehe zu Bezugsdatensatz [ Table: Color.Palette_byID ; Layout: "Palettes" ; Show related ; Match found set ]
 Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
 
 Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]

@@ -15,7 +15,7 @@ Variable setzen [ $Palette_ID ; _Syntax::_gID_ActivePalette ]
 
 # Make sure the active palette is selected in the palettes list
 Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: "I_Palette" ]
 
 # FIXME
 Wenn [ _Palette::DisableVariableChecking ]
@@ -34,7 +34,7 @@ Wenn [ $CountOfSyntaxToCreate > 0 ]
 	Variable setzen [ $PaletteName ; _Palette::PaletteName ]
 	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
-		Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+		Gehe zu Bezugsdatensatz [ Table: Palette.Color_OnlyPaletteSpecificColors ; Layout: "Colors" ; Show related ]
 		# FOR EACH Color
 		Sortieren [ Mit Dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
 		Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
