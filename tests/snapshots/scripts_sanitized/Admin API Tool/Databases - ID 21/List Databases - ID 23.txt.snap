@@ -38,7 +38,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Wenn [ IstLeer ( FMS_FIL__files::ID ) ]
 		Gehe zu Layout [ Layout: "FIL__files" ; Animation: Ohne ]
 	Sonst
-		Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+		Gehe zu Bezugsdatensatz [ Table: FMS_FIL__files ; Layout: "FIL__files" ; Show related ]
 		Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Ende (wenn)
 	Variable setzen [ $this.loop ; 0 ]

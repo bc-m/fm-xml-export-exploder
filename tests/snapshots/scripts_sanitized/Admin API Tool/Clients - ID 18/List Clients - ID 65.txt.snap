@@ -42,7 +42,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Wenn [ IstLeer ( FMS_CLI__clients::ID ) ]
 		Gehe zu Layout [ Layout: "CLI__clients" ; Animation: Ohne ]
 	Sonst
-		Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+		Gehe zu Bezugsdatensatz [ Table: FMS_CLI__clients ; Layout: "CLI__clients" ; Show related ]
 		Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Ende (wenn)
 	Variable setzen [ $this.loop ; 0 ]

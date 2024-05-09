@@ -151,7 +151,7 @@ Gehe zu Layout [ Layout: "Colors" ; Animation: Verkleinern ]
 Gehe zu Layout [ Layout: "Colors" ; Animation: Überblendung ]
 
 # Some error cases for fmSyntaxColorizer
-Gehe zu Layout [ Layout: "" ; Animation: Ohne ]
+Gehe zu Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Ohne ]
 Gehe zu Layout [ Layoutname: <Funktion NICHT vorhanden> ; Animation: Ohne ]
 Gehe zu Layout [ Layoutname: /*cf_LayoutName*/ ; Animation: Ohne ]
 # and undefined variables
@@ -190,12 +190,12 @@ Gehe zu Datens./Abfrage/Seite [ Mit Dialog: ON ; $Nr ]
 Gehe zu Datens./Abfrage/Seite [ Mit Dialog: ON ; <Funktion NICHT vorhanden> + 1 ]
 Gehe zu Datens./Abfrage/Seite [ Mit Dialog: ON ; /*cf_LayoutNumber + 1*/ ]
 
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
-Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: <Originallayout> ; Show related ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: <Originallayout> ; Show related ]
+Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Show related ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.GUISyntax ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Gehe zu Bezugsdatensatz [ Table: _Home ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
 
 # =============
 # EDITING STEPS

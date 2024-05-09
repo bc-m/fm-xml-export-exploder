@@ -8,7 +8,7 @@ use crate::utils::xml_utils::text_to_string;
 #[derive(Debug, Default)]
 pub struct LayoutReferenceContainer {
     pub reference_type: String,
-    pub layout_reference: String,
+    pub layout_reference: Option<String>,
 }
 
 impl LayoutReferenceContainer {
@@ -54,18 +54,16 @@ impl LayoutReferenceContainer {
                                 .to_string();
                         }
                         b"LayoutReference" => {
-                            item.layout_reference = get_attribute(&e, "name").unwrap().to_string();
+                            item.layout_reference = get_attribute(&e, "name");
                         }
                         b"Label" => {
                             item.layout_reference =
-                                LayoutReferenceContainer::parse_label(reader, &e).unwrap();
+                                Some(LayoutReferenceContainer::parse_label(reader, &e).unwrap());
                             depth -= 1;
                         }
                         b"Calculation" => {
-                            item.layout_reference = Calculation::from_xml(reader, &e)
-                                .unwrap()
-                                .display()
-                                .unwrap();
+                            item.layout_reference =
+                                Calculation::from_xml(reader, &e).unwrap().display();
                             depth -= 1;
                         }
                         _ => {}
@@ -86,14 +84,19 @@ impl LayoutReferenceContainer {
     }
 
     pub fn display(&self) -> Option<String> {
+        let layout_reference = self
+            .layout_reference
+            .clone()
+            .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
+
         if self.reference_type == "1" {
-            Some(format!("Layout: <{}>", self.layout_reference))
+            Some(format!("Layout: <{}>", layout_reference))
         } else if self.reference_type == "3" {
-            Some(format!("{}: {}", "Layoutname", self.layout_reference))
+            Some(format!("{}: {}", "Layoutname", layout_reference))
         } else if self.reference_type == "4" {
-            Some(format!("{}: {}", "Layoutnr.", self.layout_reference))
+            Some(format!("{}: {}", "Layoutnr.", layout_reference))
         } else if self.reference_type == "5" {
-            Some(format!("{}: \"{}\"", "Layout", self.layout_reference))
+            Some(format!("{}: \"{}\"", "Layout", layout_reference))
         } else {
             None
         }

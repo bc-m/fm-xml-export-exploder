@@ -107,7 +107,7 @@ Fenster fixieren
 Wenn [ IstLeer ( FMS_SCH__schedules::ID ) ]
 	Gehe zu Layout [ Layout: "SCH__schedules" ; Animation: Ohne ]
 Sonst
-	Gehe zu Bezugsdatensatz [ ⚠️ PARAMETER "Related" NOT PARSED ⚠️ ]
+	Gehe zu Bezugsdatensatz [ Table: FMS_SCH__schedules ; Layout: "SCH__schedules" ; Show related ]
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 Ende (wenn)
 Variable setzen [ $this.loop ; 0 ]
