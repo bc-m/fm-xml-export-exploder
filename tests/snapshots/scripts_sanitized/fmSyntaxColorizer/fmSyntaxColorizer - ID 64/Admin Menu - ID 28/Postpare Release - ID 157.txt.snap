@@ -15,7 +15,7 @@ Wenn [ NICHT _IsFullAccessUser ]
 	# -->
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Message: "Is this the RELEASED file?¶" & Hole( DateiPfad ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 	Aktuelles Script verlassen []
 	# -->
@@ -27,7 +27,7 @@ Feldwert setzen [ _Home::_gInputText2 ; "" ]
 Feldwert setzen [ _Home::_gInputText3 ; "" ]
 
 Schleife (Anfang) [ Flush: Immer ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Message: "Please input the new password for account " & $Account ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field3" NOT PARSED ⚠️ ]
 	Variable setzen [ $cancel ; Hole( LetzteMeldungswahl ) = 2 ODER
 					IstLeer( _Home::_gInputText1 & _Home::_gInputText2 & _Home::_gInputText3 ) ]
 	Verlasse Schleife wenn [ $cancel ]
@@ -42,5 +42,5 @@ Feldwert setzen [ _Home::_gInputText2 ; "" ]
 Feldwert setzen [ _Home::_gInputText3 ; "" ]
 Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
 Wenn [ NICHT $cancel ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Message: "Don't forget it!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)

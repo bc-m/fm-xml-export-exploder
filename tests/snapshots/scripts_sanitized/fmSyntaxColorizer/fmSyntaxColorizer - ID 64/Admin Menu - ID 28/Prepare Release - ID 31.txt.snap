@@ -41,7 +41,7 @@ Script ausführen [ Aus Liste ; "Apply Palette" ]
 Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
 Wenn [ Hole( AnzahlDatensätzeGesamt ) = 0 ]
 	Neuer Datensatz/Abfrage
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, home record was missing, please check!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Sonst, wenn [ Hole( AnzahlDatensätzeGesamt ) = 1 ]
 	Alle Datensätze anzeigen
 Sonst
@@ -50,7 +50,7 @@ Sonst
 	Aktuellen Datens. ausschließen
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Alle Datensätze anzeigen
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, too many home records!¶Extra records deleted, please check." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)
 
 # Clear globals
@@ -100,7 +100,9 @@ Feldwert setzen [ Home.Syntax_Dynamic4::ColorName ; "19 Highlight" ]
 
 Werkzeugleisten ein-/ausblenden [ Fixieren: OFF ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
 
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please remember to:¶" &
+				" 1. remove any private syntax coloring, and¶" &
+				" 2. tidy the scripts-folders away" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 	# 2: HALT
 	Alle Scripts abbrechen

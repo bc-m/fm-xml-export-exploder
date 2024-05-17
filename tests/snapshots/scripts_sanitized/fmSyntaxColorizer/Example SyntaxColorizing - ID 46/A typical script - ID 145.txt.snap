@@ -54,13 +54,13 @@ Variable setzen [ $deprecated ; _Home::zzz_UNUSED ]
 
 # # Preconditions
 Wenn [ NICHT $IsFullAccess ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Sorry, you do not have permission to run this script." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Alle Scripts abbrechen
 	# --X
 Ende (wenn)
 
 Wenn [ $User Name = "MrWatson" ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Debug?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
 		# DEBUG
 		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
@@ -68,7 +68,7 @@ Wenn [ $User Name = "MrWatson" ]
 Ende (wenn)
 
 Wenn [ NICHT _Palette::__ID ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please first choose a palette" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)

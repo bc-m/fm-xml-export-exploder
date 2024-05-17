@@ -935,7 +935,7 @@ Cache auf Platte ablegen
 Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
 Ordnerpfad holen [ Ordnererstellung zulassen: ON ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
 Ordnerpfad holen [ Ordnererstellung zulassen: ON ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Location" NOT PARSED ⚠️ ]
-Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Location" NOT PARSED ⚠️ ]
+Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ; Title: $Title ; ⚠️ PARAMETER "Location" NOT PARSED ⚠️ ]
 
 Menüset installieren [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
 Menüset installieren [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
@@ -978,9 +978,10 @@ Web Viewer festlegen [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
 Web Viewer festlegen [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
 Web Viewer festlegen [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
 
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field3" NOT PARSED ⚠️ ]
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ]
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: $DlgTitle ; Message: $DlgMessage ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: $DlgTitle ; Message: "Only Button 1 and 3¶" & 
+				"and input 2" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: $DlgTitle ; Message: $DlgMessage ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 
 Sprechen [ "Standard voice" ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
 Sprechen [ "Agnes says.." ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
