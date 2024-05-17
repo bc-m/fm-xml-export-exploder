@@ -528,7 +528,29 @@ Variable setzen [ $_JSP_Keys ; JSONListKeys( $_JSP ; "" ) ]
 Wenn [ $fmide_debug ODER NICHT IstLeer ( FilterElemente ( $_JSP_Keys ; "fmide_debug" ) ) ]
 	# ## Debug
 	# If the $fmide_debug variable has been set in the fmp url, then show what has arrived
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title & " DEBUG" ; Message: Solange([
+					
+					¢fmide_parameter_names = $fmide_parameter_names_all ;
+					
+					¢result = "" ;
+					¢i = 1;
+					¢n = ElementeAnzahl( ¢fmide_parameter_names )
+					
+					] ; ¢i <= ¢n ; [
+					
+					¢fmide_parameter_name = HoleWert( ¢fmide_parameter_names ; ¢i ) ;
+					¢fmide_scriptvar_name = "$" & ¢fmide_parameter_name ;
+					¢fmide_scriptvar_value = Berechne( ¢fmide_scriptvar_name );
+					
+					¢result = ¢result & Falls( NICHT IstLeer( ¢fmide_scriptvar_value ) ; ¢fmide_parameter_name & ": " & ¢fmide_scriptvar_value ) & "¶" ;
+					
+					¢i = ¢i + 1
+					
+					];
+					
+					¢result
+					
+					) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 	Sonst, wenn [ Hole ( LetzteMeldungswahl ) = 3 ]
@@ -1644,7 +1666,7 @@ Schleife (Anfang) [ Flush: Immer ]
 		Sonst, wenn [ $action_name = "GoToOriginalWindow" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-original-window
 			Wenn [ $fmide_debug ]
-				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title & " DEBUG" ; Message: "original_window_name: " & $original_window_name ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			Ende (wenn)
 			Fenster aktivieren [ Name: $original_window_name ]
 			
@@ -1808,14 +1830,14 @@ Schleife (Anfang) [ Flush: Immer ]
 			# Mac-only
 			Wenn [ NICHT $is_mbs ]
 				# no MBS
-				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "ScriptWorkSpace GUI interaction needs MBS plugin." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			# Make sure it is at the front
 			Variable setzen [ $r ; MBS("ScriptWorkspace.BringToFront") ]
 			Wenn [ MBS("IsError") ]
 				# Can't open ScriptWorkSpace
-				Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Can't open ScriptWorkSpace.." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			
@@ -1836,7 +1858,7 @@ Schleife (Anfang) [ Flush: Immer ]
 					# Try again
 					Variable setzen [ $r ; MBS("ScriptWorkspace.OpenScript" ; $script_name ) ]
 					Wenn [ MBS("IsError") ]
-						Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+						Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Error " & $r & " - Couldn't find script \"" & $script_name & "\"" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 						Aktuelles Script verlassen []
 					Ende (wenn)
 				Ende (wenn)
@@ -1972,7 +1994,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			
 		Sonst, wenn [ $action_name = "Hello" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#hello
-			Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Hello" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			
 			
 		Sonst, wenn [ $action_name = "InsertFromUrl" ]
@@ -2410,7 +2432,18 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			// Variable setzen [ $inputCount ; ElementeAnzahl ( $inputs ) ]
 			Variable setzen [ $buttons_list ; Falls( NICHT IstLeer ( $buttons_list ) ; $buttons_list ; "OK" ) ]
 			
-			Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Eigenes Dialogfeld anzeigen [ Title: SetzeVar([
+							
+							¢title = Berechne( $title )
+							
+							];
+							
+							Falls ( NICHT IstLeer ( ¢title ) ; ¢title ; $fmide_dialog_title )
+							
+							) ; Message: Falls(
+							NICHT IstLeer ( $message ) ; $message ;
+							NICHT IstLeer ( $message_value ) ; Berechne( $message_value )
+							) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			
 			
 		Sonst, wenn [ $action_name = "StoreKeyboardBuffer" ]

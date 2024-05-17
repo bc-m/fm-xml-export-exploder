@@ -32,7 +32,7 @@ Variable setzen [ $CountSpecificSyntax ; Anzahl( Palette.Color_OnlyPaletteSpecif
 Variable setzen [ $CountOfSyntaxToCreate ; $CountSpecificColors - $CountSpecificSyntax ]
 Wenn [ $CountOfSyntaxToCreate > 0 ]
 	Variable setzen [ $PaletteName ; _Palette::PaletteName ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Message: "Palette '" & $PaletteName & "' needs " & $CountOfSyntaxToCreate & " syntax " & Falls( $CountOfSyntaxToCreate = 1 ; "entry" ; "entries" ) & "!¶Should they be created?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 		Gehe zu Bezugsdatensatz [ Table: Palette.Color_OnlyPaletteSpecificColors ; Layout: "Colors" ; Show related ]
 		# FOR EACH Color

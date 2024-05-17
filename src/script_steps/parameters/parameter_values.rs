@@ -97,7 +97,8 @@ impl ParameterValues {
                             }
                             depth -= 1;
                         }
-                        "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo" => {
+                        "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo"
+                        | "Title" | "Message" => {
                             if let Ok(param_value) = Calculation::from_xml(reader, &e) {
                                 if let Some(display) = param_value.display() {
                                     item.parameters.push(format!(

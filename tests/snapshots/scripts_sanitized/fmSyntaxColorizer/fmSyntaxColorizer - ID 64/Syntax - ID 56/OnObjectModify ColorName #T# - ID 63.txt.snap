@@ -13,7 +13,7 @@ Ende (wenn)
 
 Wenn [ _Syntax::ColorName = "++New++" ]
 	Feldwert setzen [ _Syntax::ColorName ; _Syntax::Command_EN ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Define New Color" ; Message: "What name should the new color have?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
 	Wenn [ Hole( LetzteMeldungswahl ) = 2 ]
 		# Cancel
 		Verwerfe Änderung Datens./Abfrage [ Mit Dialog: OFF ]

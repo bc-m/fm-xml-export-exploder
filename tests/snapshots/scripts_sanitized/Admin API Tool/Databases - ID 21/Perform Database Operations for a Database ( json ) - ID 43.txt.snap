@@ -23,7 +23,7 @@ Variable setzen [ $error ; 0 ]
 
 #  Validate json parameter and load it into local variables
 Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "There was an error evaluating variables: " & JSONGetElement ( $json_debug ; "json" ) & " - " & GetErrorDesc_en ( JSONGetElement ( $json_debug ; "json" ) ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Aktuelles Script verlassen [ 5 // command is invalid ]
 Ende (wenn)
 
@@ -89,7 +89,7 @@ Sonst
 	Wenn [ $_status = "DELETE" ]
 		# check the file status
 		Wenn [ $_current_status ≠ "CLOSED" ]
-			Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Eigenes Dialogfeld anzeigen [ Title: "Alert" ; Message: "The file must be closed before removing from the server." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 			Alle Scripts abbrechen
 		Ende (wenn)
 		# overwrite curl options for deletes

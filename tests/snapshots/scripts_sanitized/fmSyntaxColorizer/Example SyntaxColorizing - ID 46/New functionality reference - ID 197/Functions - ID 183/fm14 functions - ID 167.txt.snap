@@ -3,6 +3,13 @@ source: src/main.rs
 expression: output_content
 ---
 # Design function - FieldStyle
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Message: Liste(
+				SetzeVar( vFieldname = HoleFeldname( _Home::_gHomeScreenInfo ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;
+				SetzeVar( vFieldname = HoleFeldname( _Syntax::Command_EN ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;
+				SetzeVar( vFieldname = HoleFeldname( _Syntax::ColorName ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;
+				SetzeVar( vFieldname = HoleFeldname( _Syntax::On ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;
+				SetzeVar( vFieldname = HoleFeldname( _Syntax::_gID_ActivePalette ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;
+				SetzeVar( vFieldname = HoleFeldname( _Syntax::Sort ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;
+				) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 
 # TODO

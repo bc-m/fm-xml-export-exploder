@@ -32,7 +32,7 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Feldwert setzen [ FMS__fmserver::fmodataEnabled ; JSONGetElement ( $$my.result ; "response.enabled" ) ]
 	Feldwert setzen [ FMS__fmserver::fmodataBandwidthOut ; JSONGetElement ( $$my.result ; "response.fmodataBandwidthOut" ) ]
 Sonst
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "An error occurred. OData may not be supported on this platform." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)
 
 # -------------------------------------------------------------

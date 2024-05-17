@@ -15,7 +15,7 @@ Variable setzen [ $error ; 0 ]
 #  SET-UP
 # -------------------------------------------------------------
 Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Confirm" ; Message: $msg & "Delete this API Key from the server?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 		Aktuelles Script verlassen [ Wahr ]
 	Ende (wenn)
@@ -49,7 +49,7 @@ Wenn [ NICHT IstLeer ( PUB__publickeys::dateAdded ) ]
 	Ende (wenn)
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: "Confirm" ; Message: $msg & "Delete the record in this database?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
 	Datensatz/Abfrage löschen [ Mit Dialog: OFF ]
 Ende (wenn)

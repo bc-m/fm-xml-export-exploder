@@ -15,11 +15,11 @@ Variable setzen [ $error ; 0 ]
 #  VALIDATION
 # -------------------------------------------------------------
 Wenn [ IstLeer ( FMS__fmserver::newUsername ) ODER IstLeer ( FMS__fmserver::newPassword ) ]
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Alert" ; Message: "You must provide values for both a new username and password when using this function." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 	Alle Scripts abbrechen
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: "Confirm Action" ; Message: "This will reset the root admin username and password. Are you sure you want to continue?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Wenn [ Hole ( LetzteMeldungswahl ) ≠ 1 ]
 	Alle Scripts abbrechen
 Ende (wenn)
@@ -68,11 +68,11 @@ Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 		Schreibe Änderung Datens./Abfrage [ Mit Dialog: ON ]
 	Sonst
 		# invalid result
-		Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Eigenes Dialogfeld anzeigen [ Title: "Login Failure" ; Message: "Login Failed, server responded: " & JSONGetElement ( $$my.result ; "messages[0].code" ) & ": " & JSONGetElement ( $$my.result ; "messages[0].text" ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 		
 	Ende (wenn)
 Sonst
-	Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Title" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Message" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "An error occurred. You may need to be logged in with the root admin account, and not an externally authenticated access account." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Ende (wenn)
 # -------------------------------------------------------------
 #  CLEAN UP
