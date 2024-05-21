@@ -1,3 +1,4 @@
+use quick_xml::escape::unescape;
 use std::fs;
 use std::io::{BufRead, Read};
 use std::path::Path;
@@ -59,7 +60,9 @@ pub fn xml_explode_layout_catalog<R: Read + BufRead>(
                     for attr in get_attributes(&e).unwrap() {
                         match attr.0.as_str() {
                             "id" => layout_info.id = attr.1.to_string(),
-                            "name" => layout_info.name = attr.1.to_string(),
+                            "name" => {
+                                layout_info.name = unescape(attr.1.as_str()).unwrap().to_string()
+                            }
                             "isFolder" => match attr.1.as_str() {
                                 "True" => {
                                     layout_info.path.push(join_scope_id_and_name(

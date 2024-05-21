@@ -3,6 +3,7 @@ use std::fs;
 use std::io::{BufRead, Read};
 use std::path::Path;
 
+use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::reader::Reader;
 
@@ -72,7 +73,9 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
                     for attr in get_attributes(&e).unwrap() {
                         match attr.0.as_str() {
                             "id" => script_info.id = attr.1.to_string(),
-                            "name" => script_info.name = attr.1.to_string(),
+                            "name" => {
+                                script_info.name = unescape(attr.1.as_str()).unwrap().to_string()
+                            }
                             _ => {}
                         }
                     }
