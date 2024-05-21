@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::io::{BufRead, Read};
 
+use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::reader::Reader;
 
@@ -36,7 +37,7 @@ pub fn parse_script_directories<R: Read + BufRead>(
                     for attr in get_attributes(&e).unwrap() {
                         match attr.0.as_str() {
                             "id" => id = attr.1.to_string(),
-                            "name" => name = attr.1.to_string(),
+                            "name" => name = unescape(attr.1.as_str()).unwrap().to_string(),
                             "isFolder" => match attr.1.as_str() {
                                 "True" => {
                                     is_folder = true;
