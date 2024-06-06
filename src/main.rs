@@ -24,6 +24,7 @@ use crate::table_catalog::xml_explode_table_catalog;
 use crate::table_occurrence_catalog::xml_explode_table_occurrence_catalog;
 use crate::theme_catalog::xml_explode_theme_catalog;
 use crate::utils::attributes::get_attribute;
+use crate::utils::xml_utils::skip_element;
 use crate::value_list_catalog::xml_explode_value_list_catalog;
 
 mod base_table_catalog;
@@ -113,6 +114,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
         .with_context(|| format!("Error opening file {}", fm_export_file_path.display(),))?;
 
     // Initialize variables
+    let mut fm_version = String::new();
     let mut fm_file_name = String::new();
     let mut depth = 0;
     let mut script_id_path_map: HashMap<String, Vec<String>> = HashMap::new();
@@ -137,7 +139,8 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 .unwrap()
                                 .strip_suffix(".fmp12")
                                 .unwrap()
-                                .to_string()
+                                .to_string();
+                            fm_version = get_attribute(&e, "Source").unwrap().to_string();
                         }
                         _ => {
                             bail!("Unsupported XML-format");
@@ -204,7 +207,24 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                             );
                             continue;
                         }
+                        b"OptionsForValueLists" => {
+                            xml_explode_value_list_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                            );
+                            continue;
+                        }
                         b"ValueListCatalog" => {
+                            // From FM21 "ValueListCatalog" no longer contains value/options.
+                            // Parse them from "OptionsForValueLists" if FM21 or later.
+                            let prefix = ["18.", "19.", "20."];
+                            if !does_start_with_versions(&fm_version, &prefix) {
+                                skip_element(&mut reader, &e);
+                                continue;
+                            }
+
                             xml_explode_value_list_catalog(
                                 &mut reader,
                                 &e,
@@ -292,6 +312,10 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
     );
 
     Ok(())
+}
+
+fn does_start_with_versions(version: &str, prefixes: &[&str]) -> bool {
+    prefixes.iter().any(|&prefix| version.starts_with(prefix))
 }
 
 fn join_scope_id_and_name(scope_id: &str, scope_name: &str) -> String {
