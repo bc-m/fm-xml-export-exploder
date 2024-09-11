@@ -6,6 +6,7 @@ use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
+    let mut data_source_reference: Option<String> = None;
     let mut script_reference_type = String::new();
     let mut script_reference_type_id = String::new();
     let mut script_reference = String::new();
@@ -31,6 +32,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                             .unwrap();
                     }
                 }
+                b"DataSourceReference" => {
+                    data_source_reference = get_attribute(&e, "name")
+                        .map(|text| quick_xml::escape::unescape(&text).unwrap().to_string());
+                }
                 b"ScriptReference" => {
                     script_reference = get_attribute(&e, "name").unwrap().to_string();
                 }
@@ -49,23 +54,27 @@ pub fn sanitize(step: &str) -> Option<String> {
         buf.clear()
     }
 
+    let mut parameters = vec![script_reference_type.to_string()];
+
     if script_reference_type_id.as_str() != "2" {
-        script_reference = format!("\"{}\"", script_reference);
+        parameters.push(format!("\"{}\"", script_reference));
+    } else {
+        parameters.push(format!("{}", script_reference));
+    }
+
+    if let Some(ref data_source_value) = data_source_reference {
+        parameters.push(format!("File: \"{}\"", data_source_value));
+    }
+
+    if !calculation.is_empty() {
+        parameters.push(format!("Parameter: {}", calculation));
     }
 
     if name.is_empty() {
         println!("empty primitive");
         None
-    } else if calculation.is_empty() {
-        Some(format!(
-            "{} [ {} ; {} ]",
-            name, script_reference_type, script_reference
-        ))
     } else {
-        Some(format!(
-            "{} [ {} ; {} ; Parameter: {} ]",
-            name, script_reference_type, script_reference, calculation
-        ))
+        Some(format!("{} [ {} ]", name, parameters.join(" ; ")))
     }
 }
 
@@ -168,6 +177,41 @@ mod tests {
 
         let expected_output =
             Some(r#"Script ausführen [ Nach Name ; "Do something" ; Parameter: 123 ]"#.to_string());
+        assert_eq!(sanitize(xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_run_external_script() {
+        let xml = r#"
+            <Step id="1" name="Script ausführen" enable="True">
+                <Options>80</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="List">
+                        <List name="Aus Liste" value="1">
+                            <DataSourceReference id="1" name="App_Utils"></DataSourceReference>
+                            <ScriptReference id="724" name="Do something"></ScriptReference>
+                        </List>
+                    </Parameter>
+                    <Parameter type="Parameter">
+                        <Parameter>
+                            <Calculation datatype="1" position="0">
+                                <Calculation>
+                                    <Text><![CDATA[123]]></Text>
+                                    <ChunkList hash="90213DC459B04C5A47C044B9460AEF7B">
+                                        <Chunk type="NoRef">123</Chunk>
+                                    </ChunkList>
+                                </Calculation>
+                            </Calculation>
+                        </Parameter>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some(
+            r#"Script ausführen [ Aus Liste ; "Do something" ; File: "App_Utils" ; Parameter: 123 ]"#
+                .to_string(),
+        );
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }
