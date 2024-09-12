@@ -6,6 +6,7 @@ use crate::script_steps::parameters::animation::Animation;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::comment::Comment;
+use crate::script_steps::parameters::data_source_reference::DataSourceReference;
 use crate::script_steps::parameters::field_reference::FieldReference;
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::script_steps::parameters::list::List;
@@ -152,6 +153,14 @@ impl ParameterValues {
                         }
                         "ScriptReference" => {
                             if let Some(param_value) = ScriptReference::from_xml(reader, &e) {
+                                if let Some(display) = param_value.display() {
+                                    item.parameters.push(display);
+                                }
+                            }
+                            depth -= 1;
+                        }
+                        "DataSourceReference" => {
+                            if let Some(param_value) = DataSourceReference::from_xml(reader, &e) {
                                 if let Some(display) = param_value.display() {
                                     item.parameters.push(display);
                                 }

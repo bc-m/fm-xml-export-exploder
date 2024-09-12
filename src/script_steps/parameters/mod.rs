@@ -4,6 +4,7 @@ pub(crate) mod boolean_container;
 pub(crate) mod calculation;
 pub(crate) mod comment;
 pub(crate) mod constants;
+pub(crate) mod data_source_reference;
 pub(crate) mod field_reference;
 pub(crate) mod layout_reference;
 pub(crate) mod list;
