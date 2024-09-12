@@ -10,6 +10,7 @@ use crate::script_steps::parameters::field_reference::FieldReference;
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::script_steps::parameters::list::List;
 use crate::script_steps::parameters::related::Related;
+use crate::script_steps::parameters::script_reference::ScriptReference;
 use crate::script_steps::parameters::target::Target;
 use crate::script_steps::parameters::window_reference::WindowReference;
 use crate::utils::attributes::get_attribute;
@@ -143,6 +144,14 @@ impl ParameterValues {
                         }
                         "Related" => {
                             if let Some(param_value) = Related::from_xml(reader, &e) {
+                                if let Some(display) = param_value.display() {
+                                    item.parameters.push(display);
+                                }
+                            }
+                            depth -= 1;
+                        }
+                        "ScriptReference" => {
+                            if let Some(param_value) = ScriptReference::from_xml(reader, &e) {
                                 if let Some(display) = param_value.display() {
                                     item.parameters.push(display);
                                 }

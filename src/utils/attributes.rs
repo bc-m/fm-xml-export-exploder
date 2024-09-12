@@ -3,6 +3,10 @@ use std::borrow::Cow;
 use quick_xml::events::BytesStart;
 use quick_xml::name::QName;
 
+pub fn parse_unescaped_attribute(e: &BytesStart, attribute: &str) -> Option<String> {
+    get_attribute(e, attribute).map(|text| quick_xml::escape::unescape(&text).unwrap().to_string())
+}
+
 pub fn key_to_string(key: QName) -> String {
     return String::from_utf8_lossy(key.as_ref()).to_string();
 }
