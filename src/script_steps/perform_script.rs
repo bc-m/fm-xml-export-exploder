@@ -2,10 +2,11 @@ use quick_xml::events::Event;
 use quick_xml::Reader;
 
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::{get_attribute, parse_unescaped_attribute};
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
+    let mut data_source_reference: Option<String> = None;
     let mut script_reference_type = String::new();
     let mut script_reference_type_id = String::new();
     let mut script_reference = String::new();
@@ -31,9 +32,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                             .unwrap();
                     }
                 }
-                b"ScriptReference" => {
-                    script_reference = get_attribute(&e, "name").unwrap().to_string();
+                b"DataSourceReference" => {
+                    data_source_reference = parse_unescaped_attribute(&e, "name")
                 }
+                b"ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
                 b"Parameter" => {
                     if get_attribute(&e, "type").unwrap_or("".to_string()).as_str() == "Parameter" {
                         calculation = Calculation::from_xml(&mut reader, &e)
@@ -49,23 +51,27 @@ pub fn sanitize(step: &str) -> Option<String> {
         buf.clear()
     }
 
+    let mut parameters = vec![script_reference_type.to_string()];
+
     if script_reference_type_id.as_str() != "2" {
-        script_reference = format!("\"{}\"", script_reference);
+        parameters.push(format!("\"{}\"", script_reference));
+    } else {
+        parameters.push(script_reference.to_string());
+    }
+
+    if let Some(ref data_source_value) = data_source_reference {
+        parameters.push(format!("File: \"{}\"", data_source_value));
+    }
+
+    if !calculation.is_empty() {
+        parameters.push(format!("Parameter: {}", calculation));
     }
 
     if name.is_empty() {
         println!("empty primitive");
         None
-    } else if calculation.is_empty() {
-        Some(format!(
-            "{} [ {} ; {} ]",
-            name, script_reference_type, script_reference
-        ))
     } else {
-        Some(format!(
-            "{} [ {} ; {} ; Parameter: {} ]",
-            name, script_reference_type, script_reference, calculation
-        ))
+        Some(format!("{} [ {} ]", name, parameters.join(" ; ")))
     }
 }
 
@@ -168,6 +174,41 @@ mod tests {
 
         let expected_output =
             Some(r#"Script ausführen [ Nach Name ; "Do something" ; Parameter: 123 ]"#.to_string());
+        assert_eq!(sanitize(xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_run_external_script() {
+        let xml = r#"
+            <Step id="1" name="Script ausführen" enable="True">
+                <Options>80</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="List">
+                        <List name="Aus Liste" value="1">
+                            <DataSourceReference id="1" name="App_Utils"></DataSourceReference>
+                            <ScriptReference id="724" name="Do something"></ScriptReference>
+                        </List>
+                    </Parameter>
+                    <Parameter type="Parameter">
+                        <Parameter>
+                            <Calculation datatype="1" position="0">
+                                <Calculation>
+                                    <Text><![CDATA[123]]></Text>
+                                    <ChunkList hash="90213DC459B04C5A47C044B9460AEF7B">
+                                        <Chunk type="NoRef">123</Chunk>
+                                    </ChunkList>
+                                </Calculation>
+                            </Calculation>
+                        </Parameter>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some(
+            r#"Script ausführen [ Aus Liste ; "Do something" ; File: "App_Utils" ; Parameter: 123 ]"#
+                .to_string(),
+        );
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

@@ -13,9 +13,9 @@ Variable setzen [ $Name ; "How much of a script name can be seen in various plac
 Script ausführen [ Nach Name ; $Name ; Parameter: 123 ]
 
 # from file…
-Script ausführen [ Aus Liste ; "A typical script" ; Parameter: 123 ]
+Script ausführen [ Aus Liste ; "A typical script" ; File: "Self" ; Parameter: 123 ]
 Script ausführen [ Aus Liste ; "Hello::World" ; Parameter: 123 ]
-Script ausführen [ Aus Liste ; "Hello::World" ; Parameter: 123 ]
+Script ausführen [ Aus Liste ; "Hello::World" ; File: "Self" ; Parameter: 123 ]
 
 Script ausführen [ Nach Name ; "Self::A typical script" ; Parameter: 123 ]
 Script ausführen [ Nach Name ; "::Hello::World" ; Parameter: 123 ]
