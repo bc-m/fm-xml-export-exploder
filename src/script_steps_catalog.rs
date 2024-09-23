@@ -15,6 +15,7 @@ use crate::utils::xml_utils::{
     text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_text_file, write_xml_file};
+use crate::Flags;
 use crate::{escape_filename, join_scope_id_and_name};
 
 #[derive(Debug, Default)]
@@ -40,6 +41,7 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
     out_dir_path: &Path,
     fm_file_name: &str,
     script_id_path_map: &HashMap<String, Vec<String>>,
+    flags: &Flags,
 ) {
     let scripts_xml_out_dir_path = out_dir_path.join("scripts").join(fm_file_name);
     let scripts_text_out_dir_path = out_dir_path.join("scripts_sanitized").join(fm_file_name);
@@ -127,7 +129,7 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
                 script_info.xml.push_str(end_element_to_string(&e).as_str());
 
                 if depth == 1 && e.name().as_ref() == b"Script" {
-                    write_script_to_file(out_dir_path, fm_file_name, &script_info);
+                    write_script_to_file(out_dir_path, fm_file_name, &script_info, flags);
                     script_info.id.clear();
                     script_info.name.clear();
                     script_info.text.clear();
@@ -199,7 +201,7 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
     }
 }
 
-fn write_script_to_file(dir_path: &Path, fm_file_name: &str, script: &ScriptInfo) {
+fn write_script_to_file(dir_path: &Path, fm_file_name: &str, script: &ScriptInfo, flags: &Flags) {
     let script_filename = join_scope_id_and_name(script.id.as_str(), script.name.as_str());
     let script_filename = escape_filename(&script_filename);
 
@@ -222,7 +224,7 @@ fn write_script_to_file(dir_path: &Path, fm_file_name: &str, script: &ScriptInfo
             err
         )
     });
-    write_script_to_xml_file(&xml_output_dir, &script_filename, &script.xml);
+    write_script_to_xml_file(&xml_output_dir, &script_filename, &script.xml, flags);
 
     let txt_output_dir = dir_path
         .join("scripts_sanitized")
@@ -238,9 +240,14 @@ fn write_script_to_file(dir_path: &Path, fm_file_name: &str, script: &ScriptInfo
     write_script_to_text_file(&txt_output_dir, &script_filename, &script.text);
 }
 
-fn write_script_to_xml_file(output_dir: &Path, script_filename: &str, content: &str) {
+fn write_script_to_xml_file(
+    output_dir: &Path,
+    script_filename: &str,
+    content: &str,
+    flags: &Flags,
+) {
     let output_file_path = output_dir.join(format!("{}.xml", script_filename));
-    write_xml_file(&output_file_path, content, 4);
+    write_xml_file(&output_file_path, content, 4, flags);
 }
 
 fn write_script_to_text_file(output_dir: &Path, script_filename: &str, content: &str) {

@@ -11,6 +11,7 @@ use crate::utils::xml_utils::{
     text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_xml_file, Entity};
+use crate::Flags;
 use crate::{escape_filename, join_scope_id_and_name};
 
 pub fn xml_explode_table_catalog<R: Read + BufRead>(
@@ -19,6 +20,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
     out_dir_path: &Path,
     fm_file_name: &str,
     table_name_id_map: &HashMap<String, String>,
+    flags: &Flags,
 ) {
     let out_dir_path = out_dir_path.join("tables").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
@@ -80,7 +82,7 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
                     .push_str(end_element_to_string(&e).as_str());
 
                 if depth == 1 && local_name_to_string(e.name().as_ref()) == "FieldCatalog" {
-                    write_table_to_file(&out_dir_path, &table_info);
+                    write_table_to_file(&out_dir_path, &table_info, flags);
                     table_info.clear();
                 }
             }
@@ -106,9 +108,9 @@ pub fn xml_explode_table_catalog<R: Read + BufRead>(
     }
 }
 
-fn write_table_to_file(output_dir: &Path, table: &Entity) {
+fn write_table_to_file(output_dir: &Path, table: &Entity, flags: &Flags) {
     let table_filename = join_scope_id_and_name(table.id.as_str(), table.name.as_str());
     let table_filename = escape_filename(&table_filename);
     let output_file_path = output_dir.join(format!("{}.xml", table_filename));
-    write_xml_file(&output_file_path, &table.content, 4);
+    write_xml_file(&output_file_path, &table.content, 4, flags);
 }

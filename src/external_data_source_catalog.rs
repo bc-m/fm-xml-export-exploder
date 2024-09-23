@@ -8,12 +8,14 @@ use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, start_element_to_string, text_element_to_string,
 };
 use crate::utils::{create_dir, write_xml_file};
+use crate::Flags;
 
 pub fn xml_extract_external_data_sources<R: Read + BufRead>(
     reader: &mut Reader<R>,
     start: &BytesStart,
     out_dir_path: &Path,
     fm_file_name: &str,
+    flags: &Flags,
 ) {
     let out_dir_path = out_dir_path.join("external_data_sources");
     create_dir(&out_dir_path);
@@ -43,6 +45,7 @@ pub fn xml_extract_external_data_sources<R: Read + BufRead>(
                         &out_dir_path,
                         fm_file_name,
                         &external_data_source_info,
+                        flags,
                     );
                     break;
                 }
@@ -63,7 +66,12 @@ pub fn xml_extract_external_data_sources<R: Read + BufRead>(
     }
 }
 
-fn write_external_data_sources_to_file(output_dir: &Path, fm_file_name: &str, content: &str) {
+fn write_external_data_sources_to_file(
+    output_dir: &Path,
+    fm_file_name: &str,
+    content: &str,
+    flags: &Flags,
+) {
     let output_file_path = output_dir.join(format!("{}.xml", fm_file_name));
-    write_xml_file(&output_file_path, content, 3);
+    write_xml_file(&output_file_path, content, 3, flags);
 }

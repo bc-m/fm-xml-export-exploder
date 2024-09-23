@@ -6,12 +6,14 @@ use quick_xml::reader::Reader;
 
 use crate::utils::xml_utils::skip_element;
 use crate::utils::{initialize_out_dir, write_xml_element_to_file};
+use crate::Flags;
 
 pub fn xml_explode_value_list_catalog<R: Read + BufRead>(
     reader: &mut Reader<R>,
     _: &BytesStart,
     out_dir_path: &Path,
     fm_file_name: &str,
+    flags: &Flags,
 ) {
     let out_dir_path = out_dir_path.join("value_lists").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
@@ -29,7 +31,7 @@ pub fn xml_explode_value_list_catalog<R: Read + BufRead>(
                 depth += 1;
                 if depth == 2 {
                     if e.name().as_ref() == b"ValueList" {
-                        write_xml_element_to_file(reader, &e, &out_dir_path, 4);
+                        write_xml_element_to_file(reader, &e, &out_dir_path, 4, flags);
                         depth -= 1;
                     } else {
                         skip_element(reader, &e);
