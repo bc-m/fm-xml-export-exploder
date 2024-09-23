@@ -10,6 +10,7 @@ use crate::utils::xml_utils::{
     start_element_to_string, text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_xml_file};
+use crate::Flags;
 use crate::{escape_filename, join_scope_id_and_name};
 
 #[derive(Debug, Default)]
@@ -25,6 +26,7 @@ pub fn xml_explode_relationship_catalog<R: Read + BufRead>(
     _: &BytesStart,
     out_dir_path: &Path,
     fm_file_name: &str,
+    flags: &Flags,
 ) {
     let out_dir_path = out_dir_path.join("relationships").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
@@ -95,7 +97,7 @@ pub fn xml_explode_relationship_catalog<R: Read + BufRead>(
                     .push_str(end_element_to_string(&e).as_str());
 
                 if depth == 1 && local_name_to_string(e.name().as_ref()) == "Relationship" {
-                    write_relationship_to_file(&out_dir_path, &relationship_info);
+                    write_relationship_to_file(&out_dir_path, &relationship_info, flags);
                     relationship_info.id.clear();
                     relationship_info.left.clear();
                     relationship_info.right.clear();
@@ -133,12 +135,12 @@ pub fn xml_explode_relationship_catalog<R: Read + BufRead>(
     }
 }
 
-fn write_relationship_to_file(output_dir: &Path, relationship: &RelationshipInfo) {
+fn write_relationship_to_file(output_dir: &Path, relationship: &RelationshipInfo, flags: &Flags) {
     let relationship_filename = join_scope_id_and_name(
         relationship.id.as_str(),
         format!("[{}] - [{}]", relationship.left, relationship.right).as_str(),
     );
     let relationship_filename = escape_filename(&relationship_filename).replace('.', "_");
     let output_file_path = output_dir.join(format!("{}.xml", relationship_filename));
-    write_xml_file(&output_file_path, &relationship.content, 4);
+    write_xml_file(&output_file_path, &relationship.content, 4, flags);
 }

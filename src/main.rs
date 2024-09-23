@@ -54,6 +54,14 @@ struct Args {
 
     /// The target directory to write output
     target: PathBuf,
+
+    /// Should all lines be parsed, or is it ok to skip less important ones?
+    #[arg(short, long)]
+    all_lines: bool,
+}
+
+struct Flags {
+    parse_all_lines: bool,
 }
 
 fn main() -> Result<()> {
@@ -62,6 +70,9 @@ fn main() -> Result<()> {
     let args = Args::parse();
     let in_dir = args.source;
     let out_dir = args.target;
+    let flags = Flags {
+        parse_all_lines: args.all_lines,
+    };
 
     valid_dir_or_throw(&in_dir)?;
     valid_dir_or_throw(&out_dir)?;
@@ -76,7 +87,7 @@ fn main() -> Result<()> {
 
     // Process XML files in parallel
     paths.par_iter().for_each(|path| {
-        match explode_xml(path, &out_dir) {
+        match explode_xml(path, &out_dir, &flags) {
             Ok(_) => {}
             Err(err) => {
                 let file_name = path.file_name().unwrap().to_str().unwrap();
@@ -105,7 +116,11 @@ fn valid_dir_or_throw(dir_path: &PathBuf) -> Result<(), Error> {
     }
 }
 
-fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(), Error> {
+fn explode_xml(
+    fm_export_file_path: &PathBuf,
+    out_dir_path: &Path,
+    flags: &Flags,
+) -> Result<(), Error> {
     let start = Instant::now();
     let fm_export_file_name = fm_export_file_path.file_name().unwrap().to_str().unwrap();
 
@@ -162,6 +177,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -172,6 +188,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 out_dir_path,
                                 &fm_file_name,
                                 &table_name_id_map,
+                                flags,
                             );
                             continue;
                         }
@@ -191,6 +208,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 out_dir_path,
                                 &fm_file_name,
                                 &script_id_path_map,
+                                flags,
                             );
                             continue;
                         }
@@ -204,6 +222,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -213,6 +232,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -230,6 +250,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -239,6 +260,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -248,11 +270,18 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
                         b"ThemeCatalog" => {
-                            xml_explode_theme_catalog(&mut reader, &e, out_dir_path, &fm_file_name);
+                            xml_explode_theme_catalog(
+                                &mut reader,
+                                &e,
+                                out_dir_path,
+                                &fm_file_name,
+                                flags,
+                            );
                             continue;
                         }
                         b"PrivilegeSetsCatalog" => {
@@ -261,6 +290,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -270,6 +300,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -279,6 +310,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -288,6 +320,7 @@ fn explode_xml(fm_export_file_path: &PathBuf, out_dir_path: &Path) -> Result<(),
                                 &e,
                                 out_dir_path,
                                 &fm_file_name,
+                                flags,
                             );
                             continue;
                         }
@@ -336,7 +369,6 @@ fn escape_filename(filename: &str) -> String {
 }
 
 fn should_skip_line(line: &str) -> bool {
-    // de-noise TODO: make optional
     if line.contains("<TagList></TagList>") {
         return true;
     };
@@ -379,6 +411,9 @@ mod tests {
         let snapshot_dir = Path::new("./tests/snapshots");
         let input_dir = Path::new("./tests/xml");
         let output_dir = Path::new("./out");
+        let flags = Flags {
+            parse_all_lines: false,
+        };
         let _ = remove_dir_all(output_dir);
 
         let mut settings = insta::Settings::clone_current();
@@ -393,7 +428,7 @@ mod tests {
             .collect::<Vec<_>>();
 
         for path in paths {
-            explode_xml(&path, output_dir)
+            explode_xml(&path, output_dir, &flags)
                 .unwrap_or_else(|_| panic!("Error processing file '{}'", path.display()));
         }
 

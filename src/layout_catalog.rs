@@ -12,6 +12,7 @@ use crate::utils::xml_utils::{
     start_element_to_string, text_element_to_string,
 };
 use crate::utils::{initialize_out_dir, write_xml_file};
+use crate::Flags;
 use crate::{escape_filename, join_scope_id_and_name};
 
 #[derive(Debug, Default)]
@@ -27,6 +28,7 @@ pub fn xml_explode_layout_catalog<R: Read + BufRead>(
     _: &BytesStart,
     out_dir_path: &Path,
     fm_file_name: &str,
+    flags: &Flags,
 ) {
     let out_dir_path = out_dir_path.join("layouts").join(fm_file_name);
     initialize_out_dir(&out_dir_path);
@@ -106,7 +108,7 @@ pub fn xml_explode_layout_catalog<R: Read + BufRead>(
                     .push_str(end_element_to_string(&e).as_str());
 
                 if depth == 1 && local_name_to_string(e.name().as_ref()) == "Layout" {
-                    write_layout_to_file(&out_dir_path, &layout_info)
+                    write_layout_to_file(&out_dir_path, &layout_info, flags)
                 }
             }
             Ok(Event::CData(e)) => {
@@ -131,7 +133,7 @@ pub fn xml_explode_layout_catalog<R: Read + BufRead>(
     }
 }
 
-fn write_layout_to_file(dir_path: &Path, layout: &LayoutInfo) {
+fn write_layout_to_file(dir_path: &Path, layout: &LayoutInfo, flags: &Flags) {
     let layout_filename = join_scope_id_and_name(layout.id.as_str(), layout.name.as_str());
     let layout_filename = escape_filename(&layout_filename);
 
@@ -148,5 +150,5 @@ fn write_layout_to_file(dir_path: &Path, layout: &LayoutInfo) {
         .unwrap_or_else(|err| panic!("Error creating directory {}: {}", output_dir.display(), err));
 
     let output_file_path = output_dir.join(format!("{}.xml", layout_filename));
-    write_xml_file(&output_file_path, &layout.content, 4);
+    write_xml_file(&output_file_path, &layout.content, 4, flags);
 }
