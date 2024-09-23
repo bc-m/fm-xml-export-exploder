@@ -55,7 +55,7 @@ struct Args {
     /// The target directory to write output
     target: PathBuf,
 
-    /// Should all lines be parsed, or is it ok to skip less important ones?
+    /// Parse all lines (or skip less important ones to reduce noise)
     #[arg(short, long)]
     all_lines: bool,
 }
