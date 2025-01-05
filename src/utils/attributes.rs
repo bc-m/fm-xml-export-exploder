@@ -8,11 +8,11 @@ pub fn parse_unescaped_attribute(e: &BytesStart, attribute: &str) -> Option<Stri
 }
 
 pub fn key_to_string(key: QName) -> String {
-    return String::from_utf8_lossy(key.as_ref()).to_string();
+    String::from_utf8_lossy(key.as_ref()).to_string()
 }
 
 pub fn value_to_string(value: Cow<[u8]>) -> String {
-    return String::from_utf8_lossy(value.as_ref()).to_string();
+    String::from_utf8_lossy(value.as_ref()).to_string()
 }
 
 pub fn get_attributes(e: &BytesStart) -> Option<Vec<(String, String)>> {

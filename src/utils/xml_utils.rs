@@ -46,24 +46,24 @@ pub fn end_element_to_string(e: &BytesEnd) -> String {
 }
 
 pub fn local_name_to_string(local_name: &[u8]) -> String {
-    return match std::str::from_utf8(local_name) {
+    match std::str::from_utf8(local_name) {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
-    };
+    }
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
-    return match e.unescape() {
+    match e.unescape() {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
-    };
+    }
 }
 
 pub fn cdata_to_string(e: &BytesCData) -> String {
-    return match std::str::from_utf8(e) {
+    match std::str::from_utf8(e) {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
-    };
+    }
 }
 
 fn decode_xml_special_characters(input: String) -> String {
