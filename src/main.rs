@@ -58,10 +58,15 @@ struct Args {
     /// Parse all lines (or skip less important ones to reduce noise)
     #[arg(short, long)]
     all_lines: bool,
+
+    /// Retain all information from the main xml (or skip less important catalogs and attributes)
+    #[arg(short, long)]
+    lossless: bool,
 }
 
 struct Flags {
     parse_all_lines: bool,
+    lossless: bool,
 }
 
 fn main() -> Result<()> {
@@ -72,6 +77,7 @@ fn main() -> Result<()> {
     let out_dir = args.target;
     let flags = Flags {
         parse_all_lines: args.all_lines,
+        lossless: args.lossless,
     };
 
     valid_dir_or_throw(&in_dir)?;
@@ -413,6 +419,7 @@ mod tests {
         let output_dir = Path::new("./out");
         let flags = Flags {
             parse_all_lines: false,
+            lossless: false,
         };
         let _ = remove_dir_all(output_dir);
 
