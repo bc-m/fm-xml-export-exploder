@@ -21,7 +21,7 @@ pub fn xml_extract_external_data_sources<R: Read + BufRead>(
     create_dir(&out_dir_path);
 
     let mut external_data_source_info = String::new();
-    external_data_source_info.push_str(start_element_to_string(start).as_str());
+    external_data_source_info.push_str(start_element_to_string(start, flags).as_str());
 
     let mut depth = 1;
     let mut buf = Vec::new();
@@ -34,7 +34,7 @@ pub fn xml_extract_external_data_sources<R: Read + BufRead>(
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
                 depth += 1;
-                external_data_source_info.push_str(start_element_to_string(&e).as_str());
+                external_data_source_info.push_str(start_element_to_string(&e, flags).as_str());
             }
             Ok(Event::End(e)) => {
                 depth -= 1;

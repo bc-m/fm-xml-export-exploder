@@ -112,12 +112,12 @@ pub fn xml_explode_script_catalog<R: Read + BufRead>(
 
                 script_info
                     .xml
-                    .push_str(start_element_to_string(&e).as_str());
+                    .push_str(start_element_to_string(&e, flags).as_str());
 
                 if in_step {
                     step_info
                         .content
-                        .push_str(start_element_to_string(&e).as_str());
+                        .push_str(start_element_to_string(&e, flags).as_str());
                 }
             }
             Ok(Event::End(e)) => {

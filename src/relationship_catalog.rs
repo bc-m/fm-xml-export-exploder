@@ -84,7 +84,7 @@ pub fn xml_explode_relationship_catalog<R: Read + BufRead>(
 
                 relationship_info
                     .content
-                    .push_str(start_element_to_string(&e).as_str());
+                    .push_str(start_element_to_string(&e, flags).as_str());
             }
             Ok(Event::End(e)) => {
                 depth -= 1;
