@@ -49,24 +49,24 @@ pub fn end_element_to_string(e: &BytesEnd) -> String {
 }
 
 pub fn local_name_to_string(local_name: &[u8]) -> String {
-    return match std::str::from_utf8(local_name) {
+    match std::str::from_utf8(local_name) {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
-    };
+    }
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
-    return match e.unescape() {
+    match e.unescape() {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
-    };
+    }
 }
 
 pub fn cdata_to_string(e: &BytesCData) -> String {
-    return match std::str::from_utf8(e) {
+    match std::str::from_utf8(e) {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
-    };
+    }
 }
 
 fn decode_xml_special_characters(input: String) -> String {
@@ -101,7 +101,11 @@ pub fn skip_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &BytesStart) {
     }
 }
 
-pub fn element_to_string<R: Read + BufRead>(reader: &mut Reader<R>, start: &BytesStart, flags: &Flags) -> String {
+pub fn element_to_string<R: Read + BufRead>(
+    reader: &mut Reader<R>,
+    start: &BytesStart,
+    flags: &Flags,
+) -> String {
     let mut content = start_element_to_string(start, flags);
     let mut depth = 1;
     let mut buf: Vec<u8> = Vec::new();

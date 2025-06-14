@@ -45,7 +45,12 @@ impl Entity {
         }
     }
 
-    pub fn read_xml_element<R: Read + BufRead>(&mut self, reader: &mut Reader<R>, e: &BytesStart, flags: &Flags) {
+    pub fn read_xml_element<R: Read + BufRead>(
+        &mut self,
+        reader: &mut Reader<R>,
+        e: &BytesStart,
+        flags: &Flags,
+    ) {
         // self.clear();
         self.parse_xml_attributes(e);
 
