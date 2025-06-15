@@ -4,16 +4,19 @@ use quick_xml::events::{BytesCData, BytesEnd, BytesStart, BytesText, Event};
 use quick_xml::Reader;
 
 use crate::utils::attributes::get_attributes;
+use crate::Flags;
 
-pub fn start_element_to_string(e: &BytesStart) -> String {
+pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     let mut complete_tag = format!("<{}", local_name_to_string(e.name().as_ref()));
     for attr in get_attributes(e).unwrap() {
-        // de-noise TODO: make optional
-        match attr.0.as_str() {
-            "nextvalue" | "UUID" | "index" => {
-                continue;
+        // de-noise
+        if !flags.lossless {
+            match attr.0.as_str() {
+                "nextvalue" | "UUID" | "index" => {
+                    continue;
+                }
+                _ => {}
             }
-            _ => {}
         }
 
         complete_tag.push_str(&format!(" {}=\"{}\"", attr.0, attr.1));
@@ -98,8 +101,12 @@ pub fn skip_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &BytesStart) {
     }
 }
 
-pub fn element_to_string<R: Read + BufRead>(reader: &mut Reader<R>, start: &BytesStart) -> String {
-    let mut content = start_element_to_string(start);
+pub fn element_to_string<R: Read + BufRead>(
+    reader: &mut Reader<R>,
+    start: &BytesStart,
+    flags: &Flags,
+) -> String {
+    let mut content = start_element_to_string(start, flags);
     let mut depth = 1;
     let mut buf: Vec<u8> = Vec::new();
     loop {
@@ -108,7 +115,7 @@ pub fn element_to_string<R: Read + BufRead>(reader: &mut Reader<R>, start: &Byte
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
                 depth += 1;
-                content.push_str(&start_element_to_string(&e))
+                content.push_str(&start_element_to_string(&e, flags))
             }
             Ok(Event::CData(e)) => {
                 content.push_str(&cdata_element_to_string(&e));

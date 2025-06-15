@@ -45,17 +45,22 @@ impl Entity {
         }
     }
 
-    pub fn read_xml_element<R: Read + BufRead>(&mut self, reader: &mut Reader<R>, e: &BytesStart) {
+    pub fn read_xml_element<R: Read + BufRead>(
+        &mut self,
+        reader: &mut Reader<R>,
+        e: &BytesStart,
+        flags: &Flags,
+    ) {
         // self.clear();
         self.parse_xml_attributes(e);
 
         if self.id.is_empty() {
-            self.content = start_element_to_string(e);
+            self.content = start_element_to_string(e, flags);
             let mut buf = Vec::new();
             loop {
                 match reader.read_event_into(&mut buf) {
                     Ok(Event::Start(e)) => {
-                        self.read_xml_element(reader, &e);
+                        self.read_xml_element(reader, &e, flags);
                     }
                     Ok(Event::Text(e)) => {
                         self.content += text_element_to_string(&e, false).as_str();
@@ -72,7 +77,7 @@ impl Entity {
                 buf.clear();
             }
         } else {
-            self.content += element_to_string(reader, e).as_str();
+            self.content += element_to_string(reader, e, flags).as_str();
         }
     }
 }
@@ -85,7 +90,7 @@ pub fn write_xml_element_to_file<R: Read + BufRead>(
     flags: &Flags,
 ) {
     let mut entity = Entity::default();
-    entity.read_xml_element(reader, e);
+    entity.read_xml_element(reader, e, flags);
     write_entity_to_file(output_dir, &entity, remove_indent_count, flags);
 }
 
@@ -141,7 +146,7 @@ pub fn write_xml_file(
     let reader = BufReader::new(content.as_bytes());
     for line in reader.lines() {
         let line = line.expect("Failed to read line");
-        if !flags.parse_all_lines && should_skip_line(&line) {
+        if !(flags.parse_all_lines || flags.lossless) && should_skip_line(&line) {
             continue;
         }
         file_content.push_str(
