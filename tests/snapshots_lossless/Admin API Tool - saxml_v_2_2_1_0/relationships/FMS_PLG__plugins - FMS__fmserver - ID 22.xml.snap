@@ -1,0 +1,30 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="22">
+	<UUID modifications="1" userName="Mike Duncan" accountName="Admin" timestamp="2021-01-12T13:39:32">648D6EDF-AA56-4BA4-8F60-65395A017A9D</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="True" type="Local">
+		<TableOccurrenceReference id="1065114" name="FMS_PLG__plugins" UUID="F26200AC-6D13-4360-A7E5-0C73C689E0A8"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="7" name="ID_Server" UUID="959F8DA9-8CF9-4504-8E8E-5843C9C4662A">
+					<TableOccurrenceReference id="1065114" name="FMS_PLG__plugins" UUID="F26200AC-6D13-4360-A7E5-0C73C689E0A8"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="1" name="ID" UUID="BE901CA5-F105-4016-8BB8-18B12A876B83">
+					<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

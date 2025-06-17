@@ -1,0 +1,46 @@
+---
+source: src/main.rs
+expression: output_content
+---
+Wenn [ Hole( AktiveTextAuswahlGröße ) > 0 ]
+	Aktuelles Script verlassen []
+Ende (wenn)
+
+Variable setzen [ $contents ; Hole( AktivesFeldInhalt ) ]
+Variable setzen [ $clickPos ; Hole( AktiveTextAuswahlStart ) ]
+
+Variable setzen [ $contentsModified ; Austauschen( $contents ; [".";"X"] ; [":";"X"] ; ["/";"X"] ; ["-";"X"] ) ]
+
+Variable setzen [ $leftText ; ZeichenLinks( $contentsModified ; $clickPos ) ]
+Variable setzen [ $rightText ; ZeichenRechts( $contentsModified ; Länge( $contentsModified ) - $clickPos ) ]
+
+Variable setzen [ $leftWord ; SetzeVar(
+				[
+				
+				vText = $leftText ;
+				vWord = WörterRechts( vText ; 1 )
+				
+				];
+				
+				Falls( _EndsWith ( vText ; vWord ) ; vWord )
+				
+				) ]
+Variable setzen [ $rightWord ; SetzeVar(
+				[
+				
+				vText = $rightText ;
+				vWord = WörterLinks( vText ; 1 )
+				
+				];
+				
+				Falls( _BeginsWith ( vText ; vWord ) ; vWord )
+				
+				) ]
+
+Variable setzen [ $clickedWord ; ZeichenMitte( $contents ; 1+$clickPos - Länge( $leftWord ) ; Länge( $leftWord ) + Länge( $rightWord ) ) ]
+
+Wenn [ _BeginsWith ( $clickedWord ; "www" ) ODER 
+				_BeginsWith ( $clickedWord ; "http" ) ]
+	Gehe zu Feld []
+	URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Ende (wenn)

@@ -1,0 +1,85 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomMenu name="Windows" id="43">
+	<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2023-02-03T07:58:22">8A5F2377-688F-46CD-B530-22904D346864</UUID>
+	<TagList></TagList>
+	<MenuItemList membercount="3">
+		<CustomMenuItem index="0" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>E0B7A237-5ED7-4AA9-B326-3D2914FEED60</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["Minimise"]]></Calculation>
+				<ChunkList hash="EA6FA890AA7E5FE2CD3B95593CEDED3D">
+					<Chunk type="NoRef">&quot;Minimise&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Shortcut key="48" modifier="4"></Shortcut>
+			<Command id="0"></Command>
+			<Override name="True" action="True" Shortcut="True"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “Home_Midimised” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="163" name="Home_Midimised" UUID="6BA6BB57-41A0-4C2A-BBAB-DC9F93C5B42A"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+		<CustomMenuItem index="1" isSubMenuItem="False" isSeparatorItem="True">
+			<UUID>AFECBBB1-470F-4235-A8E5-85553C3C8BA0</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Override name="False" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+		<CustomMenuItem index="2" isSubMenuItem="True" isSeparatorItem="False">
+			<UUID>3E348C75-4784-4DD7-A02F-C5EE3E7B8CDA</UUID>
+			<CustomMenuReference id="10" name="[Fenster]"></CustomMenuReference>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["Windows…"]]></Calculation>
+				<ChunkList hash="1F6DECE57A92569DF9DA665EE3CEA5E8">
+					<Chunk type="NoRef">&quot;Windows…&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Override name="True" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+	</MenuItemList>
+	<Conditions>
+		<Install>
+			<Calculation><![CDATA[1]]></Calculation>
+			<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+				<Chunk type="NoRef">1</Chunk>
+			</ChunkList>
+		</Install>
+	</Conditions>
+	<Comment></Comment>
+	<Options browseMode="True" findMode="True" previewMode="True">
+		<Override>
+			<name>
+				<Calculation><![CDATA["Windows"]]></Calculation>
+				<ChunkList hash="F2F1D7F0F3F1B9CB909969526E46E0BA">
+					<Chunk type="NoRef">&quot;Windows&quot;</Chunk>
+				</ChunkList>
+			</name>
+		</Override>
+	</Options>
+</CustomMenu>

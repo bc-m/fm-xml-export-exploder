@@ -1,0 +1,12 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121101 MrW From Script trigger
+
+Wenn [ Hole ( LayoutAnzeigeAlsStatus ) = 2 ]
+	Variable setzen [ $Start ; Hole ( AktiveTextAuswahlStart ) ]
+	Variable setzen [ $Len ; Hole ( AktiveTextAuswahlGröße ) ]
+	Datensätze zeigen als [ Als Formular anzeigen ]
+	Auswahl festlegen [ _Palette::PaletteName ; ⚠️ PARAMETER "Select" NOT PARSED ⚠️ ]
+Ende (wenn)

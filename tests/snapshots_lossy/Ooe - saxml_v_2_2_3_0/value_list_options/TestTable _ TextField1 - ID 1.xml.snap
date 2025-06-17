@@ -1,0 +1,16 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<ValueList>
+	<ValueListReference id="1" name="TestTable | TextField1"></ValueListReference>
+	<Source value="FromField"></Source>
+	<Field>
+		<PrimaryField show="True" sort="True">
+			<FieldReference id="6" name="TextField1">
+				<TableOccurrenceReference id="1065089" name="TestTable"></TableOccurrenceReference>
+			</FieldReference>
+		</PrimaryField>
+		<ShowRelated value="False"></ShowRelated>
+	</Field>
+</ValueList>

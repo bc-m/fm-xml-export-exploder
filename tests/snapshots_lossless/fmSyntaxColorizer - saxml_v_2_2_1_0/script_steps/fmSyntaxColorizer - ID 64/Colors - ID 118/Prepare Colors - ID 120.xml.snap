@@ -1,0 +1,429 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="120" name="Prepare Colors" UUID="EE9A2649-2D55-47D4-B389-2CB033D00C56"></ScriptReference>
+	<ObjectList membercount="32">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E8A2D9F6-6E0F-4727-A3A1-D0B28AE710F7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>22C72385-238A-4DFD-A088-3B68BECCE8FD</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9ED8AD8A-0888-4A16-A324-8DFA44EACDD4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>D176F3CB-2554-4E2C-96E2-F4FC7E1BE5A9</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>743C8FD3-3F5C-48CA-9743-EA0558070EC8</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D4C9A6FC-8E3D-4D99-BA90-C741F67CB9EC</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>16110083-6CE8-43F6-AD4C-F67C597063C2</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Create hidden value liste entries ++New++ and --None--"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>A5A08B10-444C-49A5-AD95-057C7F183CA1</UUID>
+			<OwnerID></OwnerID>
+			<Options>10</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="5" name="Colors" UUID="701BC13E-5F1F-4056-BE7E-A01905612589"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="22" name="Suchenmodus aktivieren" enable="True">
+			<UUID>1BE46EBC-44A1-44AF-8EF2-9E0A32CE45D1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="76" name="Feldwert setzen" enable="True">
+			<UUID>A7DF3944-E429-4F8F-99E6-FB05550B25B4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="20" name="_kIsColor" UUID="B653B8CE-EF6B-4FBC-817F-14700F5954C2">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[0]]></Text>
+							<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+								<Chunk type="NoRef">0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="28" name="Ergebnismenge suchen" enable="True">
+			<UUID>507C23FD-1789-43A5-8AAC-8B2B1A7824A3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="11" id="68" name="Wenn" enable="True">
+			<UUID>573F204A-AE38-4803-AFF2-9CC65EF6A0D2</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( AnzahlGefundeneDatensätze ) ≠ 4]]></Text>
+							<ChunkList hash="403A7F1482F713096110DA87879AFBAA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+								<Chunk type="NoRef"> ) ≠ 4</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CF58CD7F-330B-4BC1-B0CD-1895A78A8B5B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Create hidden value liste entries ++New++ / --None-- * Script / Formula"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="10" name="Alle Datensätze löschen" enable="True">
+			<UUID>18C41EB2-2F51-4677-9FEB-50AD114EEB3C</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="7" name="Neuer Datensatz/Abfrage" enable="True">
+			<UUID>4ACFDB84-E04E-4CEB-99C6-1B4A100A5D0E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="15" id="76" name="Feldwert setzen" enable="True">
+			<UUID>FE1925E1-0AC6-45BD-B015-A628BE60EA96</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[0]]></Text>
+							<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+								<Chunk type="NoRef">0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="76" name="Feldwert setzen" enable="True">
+			<UUID>349C8A21-31E3-459B-BDEA-35977677F345</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["++New++"]]></Text>
+							<ChunkList hash="A0FD4DF7C96EEBC1C0FB3FCFB8843FF7">
+								<Chunk type="NoRef">&quot;++New++&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="76" name="Feldwert setzen" enable="True">
+			<UUID>BE9F3DE0-86F5-4F66-BA88-1001C54F5BC4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Script"]]></Text>
+							<ChunkList hash="937CAD07F0F436E1F81FEB3823D2C189">
+								<Chunk type="NoRef">&quot;Script&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="8" name="Datensatz/Abfrage duplizieren" enable="True">
+			<UUID>774CBF14-F46B-4344-978A-0EDBD0281DD7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="19" id="76" name="Feldwert setzen" enable="True">
+			<UUID>584DAA5B-C686-47DB-93CF-09F73877E439</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["--None--"]]></Text>
+							<ChunkList hash="569517459EFF6394FAD2C35130043203">
+								<Chunk type="NoRef">&quot;--None--&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="8" name="Datensatz/Abfrage duplizieren" enable="True">
+			<UUID>BEE01DB9-62DA-4A46-9D15-925CDECB89B6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="21" id="76" name="Feldwert setzen" enable="True">
+			<UUID>DF4A347D-C5F3-4D3E-8FAE-D89A48532FE5</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Formula"]]></Text>
+							<ChunkList hash="7BFDE82F59DDADC96578F67AF555538C">
+								<Chunk type="NoRef">&quot;Formula&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="76" name="Feldwert setzen" enable="True">
+			<UUID>C1279200-C843-4C19-A086-5C995BA965B9</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["++New++"]]></Text>
+							<ChunkList hash="A0FD4DF7C96EEBC1C0FB3FCFB8843FF7">
+								<Chunk type="NoRef">&quot;++New++&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="8" name="Datensatz/Abfrage duplizieren" enable="True">
+			<UUID>C7603859-BFB8-48B6-9ABE-58C3820CC350</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="24" id="76" name="Feldwert setzen" enable="True">
+			<UUID>3782161C-C2E5-489F-B5E2-5167AC55271D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["--None--"]]></Text>
+							<ChunkList hash="569517459EFF6394FAD2C35130043203">
+								<Chunk type="NoRef">&quot;--None--&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<UUID>81469DEB-5B10-4486-BC5C-99F7FE8457E1</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2F9E6979-5B19-4830-A9F6-B6AD212E5F94</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="70" name="Ende (wenn)" enable="True">
+			<UUID>39FDD81A-7B74-4999-B38D-4C4EF70C1763</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="28" id="89" name="# (Kommentar)" enable="True">
+			<UUID>71BD7DFE-992A-41BA-B3D2-B785225CAC09</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="1" name="Script ausführen" enable="True">
+			<UUID>4D2C8A81-AEC7-462B-8278-B10384BCD83A</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="40" name="All" UUID="F220C1F1-8D42-47FD-9F43-C509AD996DE1"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="16" name="Gehe zu Datens./Abfrage/Seite" enable="True">
+			<UUID>CBF17899-5A4E-44D7-B1E6-C81DCD178CC2</UUID>
+			<OwnerID></OwnerID>
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Records">
+					<List name="Erste(r)" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B07DE348-592E-4C90-A5EC-12D473A87EDF</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

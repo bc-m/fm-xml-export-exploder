@@ -1,0 +1,91 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomMenu name="FileMaker Pro Menu" id="1">
+	<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2020-11-06T10:20:11">A95A2F1E-6B8D-49F9-8AEC-BDCD3511CA7D</UUID>
+	<TagList></TagList>
+	<MenuItemList membercount="3">
+		<CustomMenuItem index="0" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>02AA0C44-DAAC-44D2-9B83-147C4BD09D3E</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[Wenn( Abs(Hole( SystemPlattform )) <> 2; 1; 0 )]]></Calculation>
+					<ChunkList hash="01C6781B42D4754C2062258B9306BDF5">
+						<Chunk type="FunctionRef">Wenn</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Abs</Chunk>
+						<Chunk type="NoRef">(</Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">SystemPlattform</Chunk>
+						<Chunk type="NoRef"> )) &lt;&gt; 2; 1; 0 )</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["About fmSyntaxColorizer..."]]></Calculation>
+				<ChunkList hash="19248D17347D054BF5B52565B7DF271C">
+					<Chunk type="NoRef">&quot;About fmSyntaxColorizer...&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Command id="0"></Command>
+			<Override name="True" action="True" Shortcut="False"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “About this Application…” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="72" name="About this Application…" UUID="8053770E-ACF7-488B-8FD4-8F34CEB21498"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+		<CustomMenuItem index="1" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>FCF99823-8476-48D0-8130-0139B15C2426</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Command name="Über FileMaker Pro..." id="57664"></Command>
+			<Override name="False" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+		<CustomMenuItem index="2" isSubMenuItem="False" isSeparatorItem="True">
+			<UUID>1D2833B3-45E6-4C59-9904-B9163A3B684F</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[Wenn( Abs(Hole( SystemPlattform )) <> 2; 1; 0 )]]></Calculation>
+					<ChunkList hash="01C6781B42D4754C2062258B9306BDF5">
+						<Chunk type="FunctionRef">Wenn</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Abs</Chunk>
+						<Chunk type="NoRef">(</Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">SystemPlattform</Chunk>
+						<Chunk type="NoRef"> )) &lt;&gt; 2; 1; 0 )</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Override name="False" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+	</MenuItemList>
+	<Conditions>
+		<Install>
+			<Calculation><![CDATA[Wenn( Abs(Hole( SystemPlattform )) <> 2; 1; 0 )]]></Calculation>
+			<ChunkList hash="01C6781B42D4754C2062258B9306BDF5">
+				<Chunk type="FunctionRef">Wenn</Chunk>
+				<Chunk type="NoRef">( </Chunk>
+				<Chunk type="FunctionRef">Abs</Chunk>
+				<Chunk type="NoRef">(</Chunk>
+				<Chunk type="FunctionRef">Hole</Chunk>
+				<Chunk type="NoRef">( </Chunk>
+				<Chunk type="FunctionRef">SystemPlattform</Chunk>
+				<Chunk type="NoRef"> )) &lt;&gt; 2; 1; 0 )</Chunk>
+			</ChunkList>
+		</Install>
+	</Conditions>
+	<Comment></Comment>
+	<Base name="FileMaker Pro" value="1"></Base>
+	<Options browseMode="True" findMode="True" previewMode="True"></Options>
+</CustomMenu>

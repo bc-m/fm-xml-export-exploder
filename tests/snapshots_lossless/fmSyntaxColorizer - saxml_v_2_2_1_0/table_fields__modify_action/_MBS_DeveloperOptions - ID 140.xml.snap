@@ -1,0 +1,24 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="13" name="_mFoundCount" repetition="1" UUID="8C097C47-73FD-4789-9A59-A5C3E6155889">
+				<Calculation>
+					<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+					<Text><![CDATA[Hole( AnzahlGefundeneDatensätze )]]></Text>
+					<ChunkList hash="13CC8C1C176B732BA9A23A2B6F64C48C">
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

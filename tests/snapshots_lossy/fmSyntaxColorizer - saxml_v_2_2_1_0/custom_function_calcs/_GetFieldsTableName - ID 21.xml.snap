@@ -1,0 +1,18 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="21" name="_GetFieldsTableName"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[_GetTableName ( HoleFeldname( pField ) )]]></Text>
+		<ChunkList hash="6653CF2AB1410443CD450B75CEA2DBED">
+			<Chunk type="CustomFunctionRef">_GetTableName</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">HoleFeldname</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pField</Chunk>
+			<Chunk type="NoRef"> ) )</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

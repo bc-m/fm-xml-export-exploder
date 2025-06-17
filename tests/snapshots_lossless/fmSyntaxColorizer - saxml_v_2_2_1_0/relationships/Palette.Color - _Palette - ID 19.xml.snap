@@ -1,0 +1,48 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="19">
+	<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">9E6DBB00-FB9E-439A-A348-5857B9A47D72</UUID>
+	<LeftTable cascadeCreate="True" cascadeDelete="True" type="Local">
+		<TableOccurrenceReference id="1065118" name="Palette.Color" UUID="781D1490-29CF-42BD-819E-FFF112A3CEDC"></TableOccurrenceReference>
+		<SortSpecification value="True" maintain="True">
+			<SortList membercount="2">
+				<Sort type="Custom">
+					<PrimaryField>
+						<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+							<TableOccurrenceReference id="1065118" name="Palette.Color" UUID="781D1490-29CF-42BD-819E-FFF112A3CEDC"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+					<ValueListReference id="8" name="Selector" UUID="3CFED8C2-777E-4506-90A7-52E035A6139B"></ValueListReference>
+				</Sort>
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+							<TableOccurrenceReference id="1065118" name="Palette.Color" UUID="781D1490-29CF-42BD-819E-FFF112A3CEDC"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+			</SortList>
+		</SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+					<TableOccurrenceReference id="1065118" name="Palette.Color" UUID="781D1490-29CF-42BD-819E-FFF112A3CEDC"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="1" name="__ID" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

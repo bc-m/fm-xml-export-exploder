@@ -1,0 +1,47 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Get Server Status
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2019-04-23 by Mike Duncan, update to v2 admin api
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config FMDAPI" ]
+Variable setzen [ $endpoint ; "/databases/" & FMS__fmserver::dapi_filename & "/layouts/" & FMS__fmserver::dapi_layout & "/records?"
+				
+				& Falls ( NICHT IstLeer ( FMS__fmserver::dapi_limit ); "&_limit=" & FMS__fmserver::dapi_limit )
+				& Falls ( NICHT IstLeer ( FMS__fmserver::dapi_offset ); "&_offset=" & FMS__fmserver::dapi_offset ) ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response DAPI" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# show json response
+	Feldwert setzen [ FMS__fmserver::dapi_records ; JSONFormatElements ( JSONGetElement ( FMS__fmserver::zz_result_g ; "response" ) ) ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

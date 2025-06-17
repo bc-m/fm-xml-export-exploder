@@ -1,0 +1,220 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="112" name="Delete orphaned and empty GUI-Syntax entries" UUID="0D09280E-CCD9-4BCF-AB0C-293DC705F96E"></ScriptReference>
+	<ObjectList membercount="19">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AFFFC691-B285-4E4C-8F03-D97A587170EE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C5A5CB23-F72F-4989-838A-4BE78CFB6578</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F0E0B8C6-1D62-46CC-9DE3-5BD8FF938520</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>9C80B439-5E75-48A9-85A6-A668026963B3</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>8AC79E19-9B14-4938-B151-465557E7103B</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>341C60A3-ECD8-4DCF-8A8E-1D5455B78834</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>B4116C18-7DA7-4ABD-AB6A-62EF8053653A</UUID>
+			<OwnerID></OwnerID>
+			<Options>10</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="7" name="GUISyntax" UUID="D97A3B10-3C57-4331-9431-DE85B90B314F"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>32962517-0037-4A96-ADD0-F86F5E6F23E4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>126EE658-9268-49AA-8801-876EA0B659D8</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Delete orphaned and empty GUI-Syntax entries"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="22" name="Suchenmodus aktivieren" enable="True">
+			<UUID>FE1F8982-B83A-47CD-9859-658D50DFA53D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="76" name="Feldwert setzen" enable="True">
+			<UUID>099011A2-3F8E-4E30-A668-D99F6759333A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="12" name="__ID" UUID="658441A8-04DB-4055-BA92-C4AC8CEF6A5A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065122" name="GUISyntax.Syntax" UUID="089251D8-03E5-4D58-8027-134E08D1237C"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["*"]]></Text>
+							<ChunkList hash="18C0B9337E39C25D429D58D116434296">
+								<Chunk type="NoRef">&quot;*&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="25" name="Aktuellen Datens. ausschließen" enable="True">
+			<UUID>76E962A5-9E10-4816-A017-64A82F5CE4CD</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="12" id="7" name="Neuer Datensatz/Abfrage" enable="True">
+			<UUID>0645BB29-4E2F-4DB1-AEF8-8787E4A1D0AA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="13" id="76" name="Feldwert setzen" enable="True">
+			<UUID>C4FF9DCC-056A-441A-81A0-868113382D59</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="Command" UUID="B373644E-0DD0-47E5-BDD6-18162D8AA773">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["="]]></Text>
+							<ChunkList hash="5CAD76978525D54299C20D9D3FEE4318">
+								<Chunk type="NoRef">&quot;=&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="28" name="Ergebnismenge suchen" enable="True">
+			<UUID>8370A0F8-78CD-4BF1-963F-78597BA44DD7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="15" id="68" name="Wenn" enable="True">
+			<UUID>46A4907E-472C-45C1-912E-F86BE996F403</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( AnzahlGefundeneDatensätze )]]></Text>
+							<ChunkList hash="13CC8C1C176B732BA9A23A2B6F64C48C">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="10" name="Alle Datensätze löschen" enable="True">
+			<UUID>D9CC9B99-C369-49D0-A9AF-1A9D356844B2</UUID>
+			<OwnerID></OwnerID>
+			<Options>1048704</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="70" name="Ende (wenn)" enable="True">
+			<UUID>D3BD10CE-D793-4C64-8D56-A4B378E4AD2E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="18" id="89" name="# (Kommentar)" enable="True">
+			<UUID>21E2BC85-43BE-4624-9E83-F7266BC5DDAE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,0 +1,36 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="43" name="_gID_ActivePaletteSwapID" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					<Text><![CDATA[Falls ( /* wrong pallette type */Syntax.Palette_Active::_kIsDarkModePalette ≠ _IsDarkMode ;/* Return an alternative palette, if one exists */Syntax.Palette_Active::_kSwitchDarkLightPaletteID)]]></Text>
+					<ChunkList hash="D956DE2BCA405D07A5D975E6CA3DD84E">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef"> ( &#13;/* wrong pallette type */&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="16" name="_kIsDarkModePalette" repetition="1">
+								<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ </Chunk>
+						<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
+						<Chunk type="NoRef"> ;&#13;&#13;/* Return an alternative palette, if one exists */&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="18" name="_kSwitchDarkLightPaletteID" repetition="1">
+								<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef">&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

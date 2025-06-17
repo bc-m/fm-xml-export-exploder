@@ -1,0 +1,167 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="86" name="OnEnterObject PaletteName #T#" UUID="2BC1B9AB-456F-47FB-BCE8-85F33D77E882"></ScriptReference>
+	<ObjectList membercount="10">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E8B8D34C-149F-4237-A874-5F6FDC090D81</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>34D46FBA-0994-42FD-B82B-9D24455B9328</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW From Script trigger"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1684C62C-A6E5-4B64-87DB-3ED8CCBC9540</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="68" name="Wenn" enable="True">
+			<UUID>C4C2112A-7398-4B7F-93C7-BDA1EF9AF915</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LayoutAnzeigeAlsStatus ) = 2]]></Text>
+							<ChunkList hash="44DCED1D58DE6FA675304FCBE90FF800">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LayoutAnzeigeAlsStatus</Chunk>
+								<Chunk type="NoRef"> ) = 2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="141" name="Variable setzen" enable="True">
+			<UUID>5B015C2E-4E07-40AE-B108-63BE44125400</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole ( AktiveTextAuswahlStart )]]></Text>
+								<ChunkList hash="450755F490532A26BC9C2342DBEE80D3">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">AktiveTextAuswahlStart</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Start"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="141" name="Variable setzen" enable="True">
+			<UUID>E7E329C8-515E-492C-BB6B-3DCDE0E15A4F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole ( AktiveTextAuswahlGröße )]]></Text>
+								<ChunkList hash="2714F735DB8137C58C954E8C5FFF2EDF">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">AktiveTextAuswahlGröße</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Len"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="30" name="Datensätze zeigen als" enable="True">
+			<UUID>FBE01C6B-4354-4E92-817F-CAB73A5A7411</UUID>
+			<OwnerID></OwnerID>
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Als Formular anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="130" name="Auswahl festlegen" enable="True">
+			<UUID>D64810B8-CAB2-4A73-8363-3AD1775CA9CE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="PaletteName" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Select">
+					<Start>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$Start]]></Text>
+								<ChunkList hash="D7F65FEE61609FF86F17F39FE222CC43">
+									<Chunk type="VariableReference">$Start</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Start>
+					<End>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$Len]]></Text>
+								<ChunkList hash="FDD7C8567173D80DCB4087D6837E52D2">
+									<Chunk type="VariableReference">$Len</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</End>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="70" name="Ende (wenn)" enable="True">
+			<UUID>877AEF60-6E45-4B1A-AD08-7F402C49B22D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F47357C5-C73D-4C25-902A-C2F892537691</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

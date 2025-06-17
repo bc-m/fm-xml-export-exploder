@@ -1,0 +1,21 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="42" name="_EndsWith"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[ZeichenRechts( pText ; Länge( pEndsWith ) ) = pEndsWith]]></Text>
+		<ChunkList hash="1DF720CA72FC77022923707BA110B370">
+			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pEndsWith</Chunk>
+			<Chunk type="NoRef"> ) ) = </Chunk>
+			<Chunk type="VariableReference">pEndsWith</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

@@ -1,0 +1,18 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20140429 MrW Corrected bug, whereby more than 1-click start may have been necessary
+# 20121101 MrW
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ IstLeer ( _Syntax::_gFM_Version ) ODER _IsKeyALT ]
+	Feldwert setzen [ _Syntax::_gFM_Version ; _FMVersionNr ( 2 ) ]
+Ende (wenn)
+
+Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.Filter_FmVersion ; Layout: "Syntax" ; Show related ]
+
+Script ausführen [ Aus Liste ; "Sort Syntax" ]

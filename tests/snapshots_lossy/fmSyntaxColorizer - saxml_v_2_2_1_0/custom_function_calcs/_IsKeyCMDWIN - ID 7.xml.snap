@@ -1,0 +1,18 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="7" name="_IsKeyCMDWIN"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[Mod( Hole( SonderTastenGedrückt) ; 16*2 )  >= 16]]></Text>
+		<ChunkList hash="2279180EDD22F142B535E566145E87C4">
+			<Chunk type="FunctionRef">Mod</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">SonderTastenGedrückt</Chunk>
+			<Chunk type="NoRef">) ; 16*2 )  &gt;= 16</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

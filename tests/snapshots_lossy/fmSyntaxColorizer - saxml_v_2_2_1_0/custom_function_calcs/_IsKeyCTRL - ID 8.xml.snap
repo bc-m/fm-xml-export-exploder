@@ -1,0 +1,18 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="8" name="_IsKeyCTRL"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[Mod( Hole( SonderTastenGedrückt) ; 4*2 )  >= 4]]></Text>
+		<ChunkList hash="172E85FE07E212E7C68576498923DBE8">
+			<Chunk type="FunctionRef">Mod</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">SonderTastenGedrückt</Chunk>
+			<Chunk type="NoRef">) ; 4*2 )  &gt;= 4</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

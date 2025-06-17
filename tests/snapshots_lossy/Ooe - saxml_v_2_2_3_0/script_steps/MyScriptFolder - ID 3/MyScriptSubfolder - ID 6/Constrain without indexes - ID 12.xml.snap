@@ -1,0 +1,124 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="12" name="Constrain without indexes"></ScriptReference>
+	<ObjectList membercount="10">
+		<Step hash="F1A4D37ADC8A84BC66EBAC706B7BA30F" id="89" name="# (comment)" enable="True">
+			<DDRREF kind="StepText" hash="F2528CB0863A60B45C3C91693604B187">_F8AF1430-37CA-430A-9232-BEFB0D7D922D</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F0E34DA97A34AFCEDB676D490224B918" id="86" name="Set Error Capture" enable="True">
+			<Options>196608</Options>
+			<DDRREF kind="StepText" hash="1F7990FBAA691E5F1ED64A10E1BECE45">_F0FCDC5D-EC79-40E9-9BF3-E5B4B515D798</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B65B404E285E6A57C71D85B21B3B1FD8" id="6" name="Go to Layout" enable="True">
+			<Options>8</Options>
+			<DDRREF kind="StepText" hash="7642D19586E4170DBC2F1A6D5C57B694">_5A3AB5F0-45BC-4E38-9ECC-BCE2D5E747F6</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="1" name="My Layout for TestTable"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="None" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="47CCBD9EADFFBD4AC9F66219DD1EDB2A" id="23" name="Show All Records" enable="True">
+			<DDRREF kind="StepText" hash="BBAA5B83A37CA5D6A20EDD4946D2714B">_35AA3722-10B6-4A93-9560-68137CF92FA9</DDRREF>
+		</Step>
+		<Step hash="F40635F8EBFF330FDAB1AA8899551366" id="22" name="Enter Find Mode" enable="True">
+			<DDRREF kind="StepText" hash="B11F4B3F7394D8A2150B61E9D1E2A8B7">_C459164D-5452-4D57-8EDF-BF8579B24A5B</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C64957CAE4E385A8D103134F419D3503" id="76" name="Set Field" enable="True">
+			<Options>16385</Options>
+			<DDRREF kind="StepText" hash="AF22E6BDBE90579C60E8B3F981B35261">_4831ABB4-8144-4CC9-AAE8-0D4CDD3CFA8E</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="6" name="TextField1">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_4831ABB4-8144-4CC9-AAE8-0D4CDD3CFA8E_10</DDRREF>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065089" name="TestTable"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<DDRREF kind="ChunkList" hash="F945B9EED7D885EDC0A6C9C2FBCCBA4B">_4831ABB4-8144-4CC9-AAE8-0D4CDD3CFA8E_0</DDRREF>
+							<Text><![CDATA["test"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1B3C6A2BC5FE1CB3AE26EAD8C053DF7D" id="126" name="Constrain Found Set" enable="True">
+			<Options>256</Options>
+			<DDRREF kind="StepText" hash="1B59DC5F3A95FE3BA69F42384996A209">_A17B4434-5B96-42E8-AAD6-D4B8D88BC502</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Find without indexes" id="256" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="512597F950385D3F539EB22558FF8A93" id="89" name="# (comment)" enable="True">
+			<DDRREF kind="StepText" hash="ACF35FE5087E82D52371D6A68EA29F9E">_80C07CA0-323D-40E4-AA55-C34E37ACD85E</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3E18669278780550731F450A116EC28F" id="1" name="Perform Script" enable="True">
+			<Options>16448</Options>
+			<DDRREF kind="StepText" hash="A6300F76BD456C55C7E0EB15A0461CFC">_7216B40E-A549-4DA5-8127-A99DF14D38D7</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="From list" value="1">
+						<ScriptReference id="2" name="noop"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<DDRREF kind="ChunkList" hash="950A86C4F039F7E50DF8CC2A84046EAF">_7216B40E-A549-4DA5-8127-A99DF14D38D7_0</DDRREF>
+								<Text><![CDATA["These aren't the droids you're looking for"]]></Text>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="62DF4ECB54230475F6CD339EFF000E04" id="89" name="# (comment)" enable="True">
+			<DDRREF kind="StepText" hash="58B5E46AF63FB35969B8AC9B47B49B5B">_E2EEADA1-387E-4FE9-98D2-186DD61A1DB1</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

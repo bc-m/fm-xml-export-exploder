@@ -1,0 +1,30 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="35" name="IP"></ScriptReference>
+	<ObjectList membercount="1">
+		<Step hash="AD8261AC8EFF78AE11DC725EAB8701FF" id="186" name="IP_Variable" enable="True">
+			<Options>21248</Options>
+			<DDRREF kind="StepText" hash="5F6DA884CF7703780AC3C8B6BCD21C6B">_856FC000-3079-4102-B236-4E76C026E5BB</DDRREF>
+			<External Source="IpIn" selectAll="True">
+				<PluginStep>
+					<Parameter ShowInline="true" Label="Destination" Type="target"></Parameter>
+					<Parameter ID="0" Label="Variable Name" ShowInline="true" DataType="string" Type="calc"></Parameter>
+					<Parameter ID="1" Default="0" Label="Action" ShowInline="true" Type="list">
+						<Value ID="0">Set</Value>
+						<Value ID="1">Append</Value>
+						<Value ID="2">Get</Value>
+						<Value ID="3">Clear</Value>
+						<Value ID="4">Destroy</Value>
+					</Parameter>
+					<Parameter ID="2" Label="String" ShowInline="true" DataType="string" Type="calc"></Parameter>
+				</PluginStep>
+			</External>
+			<ParameterValues membercount="1">
+				<Parameter></Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

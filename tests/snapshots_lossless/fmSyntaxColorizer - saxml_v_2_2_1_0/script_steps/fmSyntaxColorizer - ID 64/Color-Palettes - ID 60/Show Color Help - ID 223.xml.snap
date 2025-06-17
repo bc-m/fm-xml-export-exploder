@@ -1,0 +1,48 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="223" name="Show Color Help" UUID="88B05C87-E7F7-4ADC-8284-D29EBBDEC9D9"></ScriptReference>
+	<ObjectList membercount="1">
+		<Step index="0" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>5FA626CB-2FA2-4DE1-A14F-649B9AB6C932</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( DateiName ) & " - Line Numbering"]]></Text>
+							<ChunkList hash="2D48DF066A162950953D1EFEAB815E88">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; - Line Numbering&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["You can change colors by¶" &" - right clicking in the color field and selecting a text color, or¶" & " - clicking in the color field and selecting a text color from the Format > Text Color menu, or¶" & " - using copy & paste, or¶" & " - using drag & drop."]]></Text>
+							<ChunkList hash="ABB431E0A776EF2A3EC3251B4B086EB7">
+								<Chunk type="NoRef">&quot;You can change colors by¶&quot; &amp;&#13;&quot; - right clicking in the color field and selecting a text color, or¶&quot; &amp; &#13;&quot; - clicking in the color field and selecting a text color from the Format &gt; Text Color menu, or¶&quot; &amp; &#13;&quot; - using copy &amp; paste, or¶&quot; &amp; &#13;&quot; - using drag &amp; drop.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

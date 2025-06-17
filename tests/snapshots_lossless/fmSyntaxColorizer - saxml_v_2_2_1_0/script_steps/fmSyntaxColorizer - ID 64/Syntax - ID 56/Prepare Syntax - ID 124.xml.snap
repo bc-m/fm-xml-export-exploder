@@ -1,0 +1,182 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="124" name="Prepare Syntax" UUID="C75AA2BB-08B5-403B-82F9-86F6F83BC909"></ScriptReference>
+	<ObjectList membercount="14">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>87BBCA97-1DFC-4C4E-8FE9-4769782C9F4F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>56B58BA9-C92B-46EB-9B69-122EE2C79E16</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW Corrected bug, whereby more than 1-click start may have been necessary"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D62177CE-8080-4081-A1ED-9D619A5446E6</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>40CB4AE3-6E2E-467F-8BF6-D3D6612B3CFF</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>B7342028-9A6A-4C32-B8B4-5FCFAE1500CE</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>00ACEC5E-9473-4DC9-92BD-70A152DAB3E7</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4FD59DA9-BEE2-47DC-A5BA-7D02E28298C5</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>AFA5931D-1AF8-44A1-A9AE-A30E3840353B</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="6" name="Syntax" UUID="F17CAF44-B606-4254-AED4-C7F2A12D3521"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="1" name="Script ausführen" enable="True">
+			<UUID>6E35C4CD-E97B-463F-9EB4-A12337A983A1</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="40" name="All" UUID="F220C1F1-8D42-47FD-9F43-C509AD996DE1"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="1" name="Script ausführen" enable="True">
+			<UUID>69B95163-10E0-40E0-978D-2C922A97EB98</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="53" name="Add all" UUID="032111A6-4EA2-403D-8329-A7576FC11ACD"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="91" name="Ersetze alle Feldwerte" enable="True">
+			<UUID>160BD05B-D056-405E-8331-9DE4BA4EB107</UUID>
+			<OwnerID></OwnerID>
+			<Options>16517</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="4" name="MBS_Command_Results" UUID="80900487-9056-4A9A-BF47-05077D4C6FF7">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch Berechnung ersetzen: " value="3">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+								<ChunkList hash="26631CDF3EEB0CE74C7FC665903CAC32">
+									<Chunk type="NoRef">&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D898997C-82C0-4D65-B983-B1A461A1FF12</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="16" name="Gehe zu Datens./Abfrage/Seite" enable="True">
+			<UUID>1FA584AA-2D54-471F-A14A-598DFA4EB0CA</UUID>
+			<OwnerID></OwnerID>
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Records">
+					<List name="Erste(r)" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8AF95398-1FE4-4ED2-8A4F-C8AA74C283BE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

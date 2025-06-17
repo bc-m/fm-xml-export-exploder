@@ -1,0 +1,204 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="236" name="Switch active palette between Dark/Light mode automatically" UUID="D7EAEC6D-E198-47BD-9D89-49A017B55CB6"></ScriptReference>
+	<ObjectList membercount="13">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7F5B40A5-A039-4208-84A5-E5C94FBB987D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BA5D3619-5B3B-43D7-A64E-DBA478CEECAC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121025 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F6EEDBB5-71A4-4275-AC81-BAD4F42B8F7F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="68" name="Wenn" enable="True">
+			<UUID>2040846E-CB14-41E0-AF26-4C71E7972DFE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Home.Syntax.Palette_Active::_kIsDarkModePalette = _IsDarkMode]]></Text>
+							<ChunkList hash="CEEB0948B84BA9712B31FCA2FA94C55A">
+								<Chunk type="FieldRef">
+									<FieldReference id="16" name="_kIsDarkModePalette" repetition="1" UUID="BF865AEC-E517-41AB-A492-C1C243407CCF">
+										<TableOccurrenceReference id="1065146" name="Home.Syntax.Palette_Active" UUID="1EBEBF52-CF98-4FEC-A209-4BE86FB241FF"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>56D377D4-1573-45BF-907B-AB9E5CBEC5B6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="5" id="70" name="Ende (wenn)" enable="True">
+			<UUID>6BDDF102-E9BA-4DFA-B3CB-7E9E3BD8B2A2</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6E142270-359D-4744-97F6-7A852B7D818D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="68" name="Wenn" enable="True">
+			<UUID>34BAE3EC-AFE5-4252-8076-8C9CD75AE62E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( Home.Syntax.Palette_Active::_kSwitchDarkLightPaletteID )]]></Text>
+							<ChunkList hash="68A56504005F235DC5223F8BB8D35BBE">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="18" name="_kSwitchDarkLightPaletteID" repetition="1" UUID="AF867338-9873-4350-804C-5F79C30ABD15">
+										<TableOccurrenceReference id="1065146" name="Home.Syntax.Palette_Active" UUID="1EBEBF52-CF98-4FEC-A209-4BE86FB241FF"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4A136A51-729A-468C-9EF2-8F9663320730</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Switch to equivalent Dark / Light mode palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="76" name="Feldwert setzen" enable="True">
+			<UUID>AF71304E-50B2-4EB0-907A-6D932D0EBBEC</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="11" name="_gID_ActivePalette" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Home.Syntax.Palette_Active::_kSwitchDarkLightPaletteID]]></Text>
+							<ChunkList hash="C9A883EDFA46C89D45ECC71E7B5629F6">
+								<Chunk type="FieldRef">
+									<FieldReference id="18" name="_kSwitchDarkLightPaletteID" repetition="1" UUID="AF867338-9873-4350-804C-5F79C30ABD15">
+										<TableOccurrenceReference id="1065146" name="Home.Syntax.Palette_Active" UUID="1EBEBF52-CF98-4FEC-A209-4BE86FB241FF"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="77" name="Berechneten Wert einfügen" enable="True">
+			<UUID>650A0CEB-CFB5-4254-A8B8-6B81F96EA3FD</UUID>
+			<OwnerID></OwnerID>
+			<Options>20481</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="11" name="_gID_ActivePalette" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Home.Syntax.Palette_Active::_kSwitchDarkLightPaletteID]]></Text>
+							<ChunkList hash="C9A883EDFA46C89D45ECC71E7B5629F6">
+								<Chunk type="FieldRef">
+									<FieldReference id="18" name="_kSwitchDarkLightPaletteID" repetition="1" UUID="AF867338-9873-4350-804C-5F79C30ABD15">
+										<TableOccurrenceReference id="1065146" name="Home.Syntax.Palette_Active" UUID="1EBEBF52-CF98-4FEC-A209-4BE86FB241FF"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="1" name="Script ausführen" enable="False">
+			<UUID>1A4D140B-EA35-4FBC-9EEA-8DC326B7D706</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )" UUID="8C8A6C72-D947-4D77-BB88-D12C62B698C8"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["switchingDarkLight"]]></Text>
+								<ChunkList hash="087BE8894C5F72A32BD388DA37B11654">
+									<Chunk type="NoRef">&quot;switchingDarkLight&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="70" name="Ende (wenn)" enable="True">
+			<UUID>19E4D897-7F2B-4241-8AE0-71710C851454</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,0 +1,122 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="95" name="HALT on Windows" UUID="379039F3-4422-4668-A3E5-97C1F4D7EA20"></ScriptReference>
+	<ObjectList membercount="9">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6E15236A-378E-4849-84DD-9AFF013720EC</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F1B77084-56A6-4A12-A72D-E8A2898EB5FF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121031 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E3E8E1B2-3543-4E20-A5EF-4A901D92BF66</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="68" name="Wenn" enable="True">
+			<UUID>36E3DE6F-E29C-4A3F-BF87-3B7CD12D4574</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_IsWIN]]></Text>
+							<ChunkList hash="9E9E3839FF19A78E7F8DE5DCB2F37079">
+								<Chunk type="CustomFunctionRef">_IsWIN</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>BDDF2378-03B2-4EEC-8659-86DEDB04A7AB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Error"]]></Text>
+							<ChunkList hash="F44200DB64CC5E44F7B9D3970A81E5A0">
+								<Chunk type="NoRef">&quot;Error&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Sorry, Winguys, the road stops here!"]]></Text>
+							<ChunkList hash="26A65F2BE7EAFF20C79EC7579BCD85AC">
+								<Chunk type="NoRef">&quot;Sorry, Winguys, the road stops here!&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="90" name="Alle Scripts abbrechen" enable="True">
+			<UUID>486BD61E-C573-40D0-8960-F2ACFA7F6544</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4DB57033-5FBD-4F10-BF2E-6134F259BD49</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="HALT"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="70" name="Ende (wenn)" enable="True">
+			<UUID>699CC630-D7BF-43FA-B973-ADF465A3AF6F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3189B879-A2A4-44BC-A114-24D7A4A553A3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

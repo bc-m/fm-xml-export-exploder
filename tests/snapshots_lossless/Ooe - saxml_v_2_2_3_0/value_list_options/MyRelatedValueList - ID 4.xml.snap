@@ -1,0 +1,23 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<ValueList>
+	<ValueListReference id="4" name="MyRelatedValueList" UUID="98560D52-1A3F-4B59-9D1D-8AB7ADFF20CE"></ValueListReference>
+	<Source value="FromField"></Source>
+	<Field>
+		<PrimaryField show="False" sort="False">
+			<FieldReference id="7" name="ID_TestTable" UUID="3BD38330-322C-4394-8A48-237811B70F90">
+				<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
+			</FieldReference>
+		</PrimaryField>
+		<SecondaryField show="True" sort="True">
+			<FieldReference id="6" name="TextField1" UUID="0EC666FE-F018-4229-A068-104C00599D7F">
+				<TableOccurrenceReference id="1065093" name="Contacts_TestTable" UUID="82E7BFF7-DBDE-4FB4-BCD4-401A07C5AFF7"></TableOccurrenceReference>
+			</FieldReference>
+		</SecondaryField>
+		<ShowRelated value="True">
+			<TableOccurrenceReference id="1065093" name="Contacts_TestTable" UUID="82E7BFF7-DBDE-4FB4-BCD4-401A07C5AFF7"></TableOccurrenceReference>
+		</ShowRelated>
+	</Field>
+</ValueList>

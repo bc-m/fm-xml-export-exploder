@@ -1,0 +1,428 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<UUID modifications="68" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">5869B3B4-310F-4809-8C65-11F628BEE8D5</UUID>
+	<TagList></TagList>
+	<BaseTableReference id="130" name="schedules" UUID="3EBF3110-E75E-47C0-B1EF-7B248965E9D9"></BaseTableReference>
+	<ObjectList membercount="45">
+		<Field DefaultStyle="" id="1" name="ID" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="4" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">3E873676-77FB-4194-9050-3E41E8203B5B</UUID>
+			<AutoEnter type="SerialNumber" prohibitModification="True">
+				<SerialNumber increment="1" nextvalue="7449" generate="OnCreation"></SerialNumber>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="True" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="2" name="dailyDays" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">09165AF2-280E-479C-B31A-48564A084676</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="3" name="daysOfTheWeek" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">E416B5A6-2366-46BB-9C90-BEE64E3C201B</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="4" name="daysOfTheWeekDetails" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">C0532B7B-620C-4176-A84F-5BC1DCE1BAF3</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="6" name="enableEndDate" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">F5F6B891-DA98-43A6-84B8-3CC067935014</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="7" name="enabled" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">ED5747D7-A6A9-4D13-87B1-08C4AE85443B</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="8" name="freqType" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">3F6E8723-D825-4AAA-9318-C93313F0670E</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="10" name="id_schedule" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">5EA7FE69-5D49-49E2-B38B-7BEA19AD4456</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="11" name="lastError" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">12C3F439-29FA-4CFE-84B2-C789F7D750EF</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="12" name="name" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">E5CFDE02-AF21-4335-B493-F95D321B5C89</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="13" name="repeatFrequency" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">2CC0CF41-F4F1-4E2E-96B9-BD0812926227</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="14" name="repeatInterval" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">38BD37E7-24EA-4ED3-AC5F-A0B4114F0120</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="15" name="Repeat" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">169D1D45-B86F-48AB-8590-0CBC540C857C</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="16" name="sendEmail" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">ED6F6B63-89EF-4429-9480-B761CCB215DD</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="17" name="startTimeStamp" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">FF0EF7C2-48B3-40AA-9497-3BD509A135D3</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="18" name="status" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">2DB71FE3-AAE9-469E-895D-FC1E0AF971E9</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="19" name="taskType" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">82F79C6F-4027-4139-B720-7D4810F9726D</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="20" name="backupTarget" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">AC8545DE-C281-44B7-825E-35FFEEBE7120</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="False" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+						<Text><![CDATA["filewin:/C:/Program Files/FileMaker/FileMaker Server/Data/Backups/"]]></Text>
+						<ChunkList hash="990561853CC11E2F993C4FD722DFE759">
+							<Chunk type="NoRef">&quot;filewin:/C:/Program Files/FileMaker/FileMaker Server/Data/Backups/&quot;</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="21" name="clone" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">CCB1FC1F-EA5C-477D-8578-3113F113B101</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="22" name="fromTarget" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">8E784FBD-246A-49BE-A8C3-1A3E7E73346E</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="23" name="maxBackups" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">C8715174-0B0A-4C9A-A815-EA9F4D73EB0A</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="24" name="target" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">FB00C164-56AE-4B04-8500-B166C3505AB7</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="25" name="verify" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">55A7DE9C-4066-432D-92A8-DE4813164EE4</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="26" name="ID_Server" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">EF2C9F76-64C2-464B-BCD2-ED79C0A2A91A</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="27" name="lastRun" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">4B076BC5-490E-4766-9CA7-C208BBB7DEC5</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="28" name="endDate" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">5456BED7-54A7-42BB-8576-43E358AA1A52</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="29" name="resourceType" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">B36AE9EE-03D4-46B5-BB1E-DCFC734E828E</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="30" name="resource" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">4DA1D634-A8A0-447C-B85C-947A365A6F55</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="31" name="endTime" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">C9E2273B-EB96-45D3-A536-ABAB3522DF5C</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="32" name="messageText" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">02D26702-C91C-4980-A0DF-7EF11701C954</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="33" name="fmScriptName" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">D078A297-10DD-477D-A5C9-7395FAC5C686</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="34" name="fmScriptParam" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">4C997465-3DA7-475C-8B2A-46119E5F9CE7</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="35" name="fmScriptAccount" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">FCDF9099-2C88-486C-8E07-DBD70B898F89</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="36" name="fmScriptPassword" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">E7A1C487-B67D-4EFA-A7C5-08CE2E553AEA</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="37" name="timeout" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">02DC1D25-E45D-44C0-9EF4-31E026E8BE0D</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="38" name="osScript" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">81BE487C-0937-4B52-B90E-AD661EC813B3</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="39" name="osScriptParam" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">7A5D8CAA-C78D-4D56-9B3B-2B81773CB306</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="40" name="osScript2" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">717ED8A0-B5B1-441C-8B63-12E39BE2FCFF</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="41" name="osScriptParam2" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">9334874E-167C-4CC6-8BF1-8DAD0FB63DB2</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="42" name="Type" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">5A3425C1-DF1F-4EEC-9694-A5DD6540993D</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="43" name="autoAbort" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">224FE8CD-39E8-4D57-842B-4EC16092226A</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="45" name="timeDelay" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">5DBC6EA3-5172-4160-B15C-2625B0D69A38</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="46" name="osScriptAccount" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">9C31E4D4-0643-4F28-AA8A-513CC9D6A370</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="47" name="osScriptPassword" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">D19E1BE9-B139-4B5D-B3B7-8570CF84DF5D</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="48" name="cloneOnly" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="1" userName="Mike Duncan" accountName="Admin" timestamp="2023-01-25T09:27:52">9948AD8B-7748-476D-B99E-8D17E69FB928</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,109 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="243" name="Re-Login" UUID="7065C50D-C86B-43BC-B499-E02B67E05DAB"></ScriptReference>
+	<ObjectList membercount="6">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C293078A-F379-41CA-8AF1-31FF513273C0</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>799E19CD-6280-42C2-AA49-3A70347E9339</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="138" name="Erneut anmelden" enable="True">
+			<UUID>57705C66-0DA7-48C0-BB05-51328641C596</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Name">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Falls ( Hole ( Kontoname ) = "admin" ; "user" ; "admin" )]]></Text>
+							<ChunkList hash="FADAA57369027AF7594D1DDD01A0A5C7">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Kontoname</Chunk>
+								<Chunk type="NoRef"> ) = &quot;admin&quot; ; &quot;user&quot; ; &quot;admin&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Password">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls ( Hole ( Kontoname ) = "admin" ; "user" )]]></Text>
+							<ChunkList hash="25D3C4655323F54F63BBAA05159324BB">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Kontoname</Chunk>
+								<Chunk type="NoRef"> ) = &quot;admin&quot; ; &quot;user&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="68" name="Wenn" enable="True">
+			<UUID>749DEE29-246C-482A-8560-7B9AE4B70658</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteFehlerNr ) = 0]]></Text>
+							<ChunkList hash="54FC8B91DE327952E1E920710D4432A7">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="1" name="Script ausführen" enable="True">
+			<UUID>297600F1-8188-421B-BB6B-21F45A5DC758</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="37" name="Install Menus" UUID="6D0EF852-72EF-410C-9F3E-706468231EF2"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="70" name="Ende (wenn)" enable="True">
+			<UUID>CEA74059-705F-4DDC-B7D9-3DBBF9DC75D1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+	</ObjectList>
+</Script>

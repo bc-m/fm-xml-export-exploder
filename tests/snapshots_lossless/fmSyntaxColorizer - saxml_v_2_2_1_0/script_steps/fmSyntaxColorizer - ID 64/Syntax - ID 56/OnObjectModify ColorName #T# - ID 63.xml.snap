@@ -1,0 +1,398 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="63" name="OnObjectModify ColorName #T#" UUID="2A958C33-5754-44B1-8120-9FC883CF2945"></ScriptReference>
+	<ObjectList membercount="27">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CF9A2798-7A27-410E-9635-58EA046F74D9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E24C3371-08BC-4490-A480-471AAB6C5049</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210916 MrW Removed lingering pesky German :D"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D28FB987-5D4F-421F-9D11-77E7BBD66393</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121030 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9BF4D93A-B3A2-4B87-91FD-86694BD213A9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="68" name="Wenn" enable="True">
+			<UUID>A5BF08BE-242E-48EB-BF24-BC0D4AA898B6</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer( _Syntax::_kColorNameWithoutNone )]]></Text>
+							<ChunkList hash="9EE5F1D278CA63FF289991F82722F890">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="26" name="_kColorNameWithoutNone" repetition="1" UUID="41C9ABDB-EDF6-4F0A-809E-DD02B1529E8B">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<UUID>345BB03C-BD38-450E-8DBE-10BD2790417C</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>2055EABA-1583-43E2-A12C-D9B6A2909A80</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3189AD5E-69C9-4BF8-9F58-4647422E3349</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="70" name="Ende (wenn)" enable="True">
+			<UUID>F30DD01D-27A1-43C8-9910-B27D13970BB8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4C39B74C-148A-442B-80FF-755185361453</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="68" name="Wenn" enable="True">
+			<UUID>2EED1B7B-679C-4B23-A606-2CCB96842B5C</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_Syntax::ColorName = "++New++"]]></Text>
+							<ChunkList hash="84CD8A0671BB663AD64D219CBB16A43F">
+								<Chunk type="FieldRef">
+									<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = &quot;++New++&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="76" name="Feldwert setzen" enable="True">
+			<UUID>51093E30-E8E5-4C67-A4DA-A8C029398CDA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="3" name="ColorName" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[_Syntax::Command_EN]]></Text>
+							<ChunkList hash="952AB481816112169E5C64BCB47BACD0">
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>520BB841-3DDC-4F7C-BD96-AE4F62C38AA0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="6">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Define New Color"]]></Text>
+							<ChunkList hash="1FCEF860C73D238273067AD3CA7D79B9">
+								<Chunk type="NoRef">&quot;Define New Color&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["What name should the new color have?"]]></Text>
+							<ChunkList hash="7DB1A66898A0F61C3CAF0EDB9975EB73">
+								<Chunk type="NoRef">&quot;What name should the new color have?&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Field1">
+					<Parameter type="Target">
+						<FieldReference id="3" name="ColorName" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+							<repetition value="1"></repetition>
+							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+						</FieldReference>
+					</Parameter>
+					<Boolean type="Passwort" value="False"></Boolean>
+					<Parameter type="Label">
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA["Color name"]]></Text>
+								<ChunkList hash="DB2C9B58E375EF1BFDB0AFBF636B5E93">
+									<Chunk type="NoRef">&quot;Color name&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="68" name="Wenn" enable="True">
+			<UUID>50D97BF7-6353-4B11-881D-D7EDC7D9A150</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( LetzteMeldungswahl ) = 2]]></Text>
+							<ChunkList hash="795842615E580D823AEF2B40CB06A69D">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D8D40964-4ACB-4E71-B145-37DB229B0B23</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Cancel"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="51" name="Verwerfe Änderung Datens./Abfrage" enable="True">
+			<UUID>098EA2A0-3C05-4C4C-A2FB-EDDE198F996A</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="89" name="# (Kommentar)" enable="True">
+			<UUID>285D2527-05D3-4B3E-A87F-DEEA10D2311B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="70" name="Ende (wenn)" enable="True">
+			<UUID>4370D59E-FF5A-45CD-8F12-3E7A64363B1F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="18" id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<UUID>E5BD922F-C64F-4A84-A070-FBF73D585F22</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="19" id="70" name="Ende (wenn)" enable="True">
+			<UUID>6362BCDD-168F-4263-B219-C632BCC12760</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="20" id="89" name="# (Kommentar)" enable="True">
+			<UUID>92FF4146-F093-4770-8F3E-C4F729BAB5B5</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="68" name="Wenn" enable="True">
+			<UUID>15DAACB0-210C-4AB5-AA8B-848CC912E6B3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer( Syntax.Color::ColorInput )]]></Text>
+							<ChunkList hash="FCF09506720273141B4D2E67F07AF707">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="5" name="ColorInput" repetition="1" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
+										<TableOccurrenceReference id="1065116" name="Syntax.Color" UUID="43397922-1FCE-4519-9BCF-ED388DD51F7D"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5133A282-BF43-4B34-A828-C4D3FF365BF3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Create missing color"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="76" name="Feldwert setzen" enable="True">
+			<UUID>C9E1055F-2E54-4971-86AD-24C396BD9BED</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="5" name="ColorInput" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065116" name="Syntax.Color" UUID="43397922-1FCE-4519-9BCF-ED388DD51F7D"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Char( 9608 ) /* Full block */]]></Text>
+							<ChunkList hash="B001AA6D8EA35BEF2FAA16FD5C1B7111">
+								<Chunk type="FunctionRef">Char</Chunk>
+								<Chunk type="NoRef">( 9608 ) /* Full block */</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<UUID>717E3E9C-32A0-411E-B1E9-3FD6ECD3C3B0</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="70" name="Ende (wenn)" enable="True">
+			<UUID>21EE96EB-0F6B-44F3-BAB6-EA0590913C8B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>150FE3A2-2449-484D-8765-75B679E1F5D9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

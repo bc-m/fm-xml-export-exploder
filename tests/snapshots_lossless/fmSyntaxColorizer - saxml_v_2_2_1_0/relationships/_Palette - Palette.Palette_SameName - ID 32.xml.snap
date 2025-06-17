@@ -1,0 +1,30 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="32">
+	<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">4A4991E3-CD51-4A3C-9191-5AB178C41436</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065136" name="Palette.Palette_SameName" UUID="2B50300B-BC51-4095-AA32-881D4CFE90CF"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="PaletteName" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="2" name="PaletteName" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+					<TableOccurrenceReference id="1065136" name="Palette.Palette_SameName" UUID="2B50300B-BC51-4095-AA32-881D4CFE90CF"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

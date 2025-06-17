@@ -1,0 +1,142 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="38" name="MBS Filemaker Plugin Documentation" UUID="F905943B-CC86-4602-B084-4F860EF28CB5"></ScriptReference>
+	<ObjectList membercount="11">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3EB1E6A3-5495-4E19-A4C3-45ED26D92818</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>34A6041E-4D3B-46A3-A594-312B57EE988D</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121025 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>80DF148B-8989-4975-B1F8-38249213010B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>6EFDF23E-5DE7-464C-A3BC-758DF794E893</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>B9A9D144-890B-4E58-BE21-8456BDC88AC8</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F6A2146E-4FF5-4BA1-BE21-916A02BC5549</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DFD6A64D-4C54-477F-BF28-EC3CAFF497C3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="141" name="Variable setzen" enable="True">
+			<UUID>1549F21A-8A9C-4F8E-815A-1A1FA0258332</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["http://www.mbsplugins.eu"]]></Text>
+								<ChunkList hash="E6FA7296520EF400F9C0A2319B43F8A5">
+									<Chunk type="NoRef">&quot;http://www.mbsplugins.eu&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$URL"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>90A26019-C4A0-4AB2-A390-3073A9BFF79C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="111" name="URL öffnen" enable="True">
+			<UUID>575BE8E8-73E1-4A0B-AEB0-034C404C84BD</UUID>
+			<OwnerID></OwnerID>
+			<Options>16512</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$URL]]></Text>
+								<ChunkList hash="52F796AC3074FB9DCCBCD23CA7EBD7F3">
+									<Chunk type="VariableReference">$URL</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B01EB994-FA08-4669-A525-357573BCA3B6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

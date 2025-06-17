@@ -1,0 +1,110 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20211104 MrW Reset MBS VarCheck Options
+# 20210916 MrW Reset MBS Extra Options - including Calculation font size! No more massive calculation fonts!
+# 20200706 MrW Added Collections
+# 20140424 MrW Reset MBS Check and VariableChecking, and reminder improved
+# 20131021 MrW Enable SyntaxColoring and Line Numbers
+# 20121101 MrW
+# 20121025 MrW 0.9v1 
+# 201 foo
+
+# App settings
+Variable setzen [ $WindowWidth ; 1150 ]
+Variable setzen [ $WindowHeight ; 800 ]
+
+# Default Einstellungen setzen
+Werkzeugleisten ein-/ausblenden [ Fixieren: ON ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
+Fensterposition/-größe ändern [ Height: $WindowHeight ; Width: $WindowWidth ; Top: 0 ; Left: 0 ]
+Fenster fixieren
+Blätternmodus aktivieren [ Pause: OFF ]
+
+# Syntax
+Script ausführen [ Aus Liste ; "Show All Syntax" ]
+
+# SyntaxTemp
+Script ausführen [ Aus Liste ; "Tidy up _SyntaxTemp" ]
+
+# GUISyntax
+Script ausführen [ Aus Liste ; "Prepare GUI-Syntax" ]
+
+# Colors
+Script ausführen [ Aus Liste ; "Prepare Colors" ]
+
+# Color-Palettes
+Script ausführen [ Aus Liste ; "Show Default Palette" ]
+Script ausführen [ Aus Liste ; "Apply Palette" ]
+
+# Prepare Home Screen
+Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
+Wenn [ Hole( AnzahlDatensätzeGesamt ) = 0 ]
+	Neuer Datensatz/Abfrage
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, home record was missing, please check!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Sonst, wenn [ Hole( AnzahlDatensätzeGesamt ) = 1 ]
+	Alle Datensätze anzeigen
+Sonst
+	Alle Datensätze anzeigen
+	Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+	Aktuellen Datens. ausschließen
+	Alle Datensätze löschen [ Mit Dialog: OFF ]
+	Alle Datensätze anzeigen
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, too many home records!¶Extra records deleted, please check." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Ende (wenn)
+
+# Clear globals
+Feldwert setzen [ _Home::_gEmptyField ; "" ]
+Feldwert setzen [ _Home::_gHomeScreenInfo ; "" ]
+Feldwert setzen [ _Home::_gInputText1 ; "" ]
+Feldwert setzen [ _Home::_gInputText2 ; "" ]
+Feldwert setzen [ _Home::_gInputText3 ; "" ]
+Feldwert setzen [ _Home::_gInputText3 ; "" ]
+
+Feldwert setzen [ _Syntax::_gFM_Version ; "" ]
+Feldwert setzen [ _Syntax::_gCollection ; "Core" ]
+
+Feldwert setzen [ _Palette::_gColorBuffer ; "" ]
+Feldwert setzen [ _Palette::_gDuplicatePaletteFrom ; "" ]
+
+# Enable SyntaxColoring and Line Numbers
+Feldwert setzen [ _Home::_gMBSPluginCheck ; "" ]
+Feldwert setzen [ _Home::_gLineNumberingEnabled ; 1 ]
+Feldwert setzen [ _Home::_gSyntaxColoringEnabled ; 1 ]
+Feldwert setzen [ _Home::_gVariableCheckingEnabled ; 0 ]
+Feldwert setzen [ _Home::_gLineNumberColor ; TextFarbe ( _FullBlock ; RGB ( 136 ; 136 ; 136 ) ) ]
+
+# Reset defaults
+Feldwert setzen [ _Home::_gMBSOpt_MinCalcFontSize ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_MinCalcFontSizeEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_RelationGraphSearchBoxPreferredSize ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_RelationGraphSearchBoxPreferredSizeEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptSearchColor ; TextFarbe ( _FullBlock ; RGB ( 194 ; 229 ; 166 ) ) ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptSearchColorEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptHighlightColor ; TextFarbe ( _FullBlock ; RGB ( 207 ; 187 ; 254 ) ) ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptHighlightColorEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptIfColor ; TextFarbe ( _FullBlock ; RGB ( 225 ; 257 ; 254 ) ) ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptIfColorEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptLoopColor ; TextFarbe ( _FullBlock ; RGB ( 0 ; 186 ; 251 ) ) ]
+Feldwert setzen [ _Home::_gMBSOpt_ScriptLoopColorEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_VarCheckLimitEnable ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_VarCheckLimitLines ; "" ]
+Feldwert setzen [ _Home::_gMBSOpt_VarCheckLimitScanLines ; "" ]
+Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+
+# Prepare Minimized view
+Feldwert setzen [ Home.Syntax_Dynamic1::ColorName ; "16 Error" ]
+Feldwert setzen [ Home.Syntax_Dynamic2::ColorName ; "15 Warning" ]
+Feldwert setzen [ Home.Syntax_Dynamic3::ColorName ; "20 OK" ]
+Feldwert setzen [ Home.Syntax_Dynamic4::ColorName ; "19 Highlight" ]
+
+Werkzeugleisten ein-/ausblenden [ Fixieren: OFF ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
+
+Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please remember to:¶" &
+				" 1. remove any private syntax coloring, and¶" &
+				" 2. tidy the scripts-folders away" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
+	# 2: HALT
+	Alle Scripts abbrechen
+	# --X
+Ende (wenn)

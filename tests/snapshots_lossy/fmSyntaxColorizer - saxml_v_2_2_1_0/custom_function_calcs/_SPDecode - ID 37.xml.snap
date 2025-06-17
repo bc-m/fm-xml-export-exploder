@@ -1,0 +1,31 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="37" name="_SPDecode"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/* _SPDecode ( pText )Decodes CR and LF characters passed in parameters20160103 MrW Version 2 Decode CR as Division Pilcrow Division and LF as Division Lozenge Division20151222 MrW Version 1*/Austauschen( pText ;[ Char( 8725 ) & Char( 182 ) & Char( 8725 ) ; "¶" ]; /* ¶ <- ∕ ¶ ∕ = Division Pilcrow Division */[ Char( 8725 ) & Char( 9674 ) & Char( 8725 ) ; Char(10) ] /* LF <- ∕ ◊ ∕ = Division Lozenge Division */)]]></Text>
+		<ChunkList hash="345FDD5679D1C94D64FB0A9D5309BA8C">
+			<Chunk type="NoRef">/* _SPDecode ( pText )&#13;Decodes CR and LF characters passed in parameters&#13;&#13;20160103 MrW Version 2 Decode CR as Division Pilcrow Division and LF as Division Lozenge Division&#13;20151222 MrW Version 1&#13;*/&#13;</Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ;&#13;[ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 8725 ) &amp; </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 182 ) &amp; </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 8725 ) ; &quot;¶&quot; ]; /* ¶ &lt;- ∕ ¶ ∕ = Division Pilcrow Division */&#13;[ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 8725 ) &amp; </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 9674 ) &amp; </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 8725 ) ; </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">(10) ] /* LF &lt;- ∕ ◊ ∕ = Division Lozenge Division */&#13;)</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

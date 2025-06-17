@@ -1,0 +1,39 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121106 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Parameter
+Variable setzen [ $Selector ; _SP( 1 ) ]
+Variable setzen [ $Wildcard ; _SP( 2 ) ]
+
+# Input
+Variable setzen [ $Filter ; _IsKeyALT ]
+
+# Vars
+Variable setzen [ $ohne ; ZeichenLinks( $Selector ; 2 ) = "<>" ODER ZeichenLinks( $Selector ; 1 ) = "≠" ]
+Variable setzen [ $Selector ; Falls(
+				ZeichenLinks( $Selector ; 2 ) = "<>" ; ZeichenRechts( $Selector ; Länge( $Selector ) - 2 ) ;
+				ZeichenLinks( $Selector ; 1 ) = "≠" ; ZeichenRechts( $Selector ; Länge( $Selector ) - 1 ) ;
+				$Selector
+				) ]
+
+Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
+Suchenmodus aktivieren [ Pause: OFF ]
+Feldwert setzen [ _Syntax::Selector ; $Selector ]
+Feldwert setzen [ _Syntax::_kIsWildcard ; $Wildcard ]
+
+Wenn [ $ohne ]
+	Aktuellen Datens. ausschließen
+Ende (wenn)
+
+Wenn [ $Filter ]
+	Ergebnismenge einschränken
+Sonst
+	Ergebnismenge suchen
+Ende (wenn)
+Script ausführen [ Aus Liste ; "Sort Syntax" ]

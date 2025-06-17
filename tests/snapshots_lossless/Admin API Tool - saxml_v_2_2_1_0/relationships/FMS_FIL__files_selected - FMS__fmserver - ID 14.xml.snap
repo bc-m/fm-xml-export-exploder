@@ -1,0 +1,42 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="14">
+	<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">C0F2ADA8-C385-46E6-965C-9BC4ADBAF510</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065103" name="FMS_FIL__files_selected" UUID="CC7205E1-BD88-4707-99D1-A9CD712CCC4F"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="3" name="filename" UUID="F545E4A5-A186-4F08-8A7B-8A0AB014E387">
+					<TableOccurrenceReference id="1065103" name="FMS_FIL__files_selected" UUID="CC7205E1-BD88-4707-99D1-A9CD712CCC4F"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="31" name="filename_selected" UUID="6D9CF102-6BCF-4BFF-AC6E-7E6EDA0E14A3">
+					<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="ID_Server" UUID="30F0A0B5-D206-4F86-A3AB-B208D43DB4AD">
+					<TableOccurrenceReference id="1065103" name="FMS_FIL__files_selected" UUID="CC7205E1-BD88-4707-99D1-A9CD712CCC4F"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="1" name="ID" UUID="BE901CA5-F105-4016-8BB8-18B12A876B83">
+					<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

@@ -1,0 +1,369 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="88" name="Colorize!" UUID="8D7AC5F9-C99A-4893-856C-802B33210DA8"></ScriptReference>
+	<ObjectList membercount="29">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>591E2CDD-D896-44B5-A5A3-B98FEF0D3450</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>68D03A86-BF2C-4CC3-977D-7CB733B537EC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20160923 MrW SyntaxColorizing for specific FM-Versions"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E99112C8-6AE2-4DB4-9450-FD50AE5D38D7</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6AFF2F03-5EEB-4D5A-B7E0-59166213ACF9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>9D69A771-838A-4F5D-9965-061C73388F0E</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>4A07C24B-F596-4903-A7E6-60A50D3C4F3D</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6ACECC34-B5C5-4689-ADEE-F7C48ADFCE71</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F031F559-681D-45E9-96DB-2DB50D49D73E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Check MBS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="1" name="Script ausführen" enable="True">
+			<UUID>A71C1BF8-0F2B-4A95-873F-34CB4B01B109</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="42" name="MBS Plugin check" UUID="5BBDAAD0-7AB8-4A77-895B-57130030A4F9"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2B426B6F-DF2B-4228-8BE7-25558A36D451</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A13B9659-B598-464E-B1DA-0353722198EA</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Clean up, Reset colors"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="1" name="Script ausführen" enable="True">
+			<UUID>C0FBBB80-D43A-4061-80C0-BB95F968A412</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="41" name="MBS_SyntaxColoring( Action )" UUID="94800040-8D8C-4FC7-98B2-48ABD1792476"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["Clear" & "¶" & 1]]></Text>
+								<ChunkList hash="3D1D4B2C6509065DC956CF9735836316">
+									<Chunk type="NoRef">&quot;Clear&quot; &amp; &quot;¶&quot; &amp; 1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="1" name="Script ausführen" enable="True">
+			<UUID>C65CCCBB-78D1-450D-B96B-DDFB6D728383</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="153" name="Set LineNumber Color" UUID="DE3EAB18-C424-4944-A9B3-8AB2916E5A35"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="1" name="Script ausführen" enable="True">
+			<UUID>91136ED8-7EC9-499C-B47C-93071A6C1ABE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="41" name="MBS_SyntaxColoring( Action )" UUID="94800040-8D8C-4FC7-98B2-48ABD1792476"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["Enable"]]></Text>
+								<ChunkList hash="1AE890ED6E5754C5F71F106F559D0E9B">
+									<Chunk type="NoRef">&quot;Enable&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7889F16A-2C7F-481B-AEAF-FE3F8ED0DBD2</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8DDCBF68-D4AE-4ACA-B2EE-25036FD67E10</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Select the necessary entries"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="1" name="Script ausführen" enable="False">
+			<UUID>47E70E22-7ED1-4734-AF39-1A099647E5F3</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="91" name="Show All Syntax" UUID="70295774-FF91-4196-AEF7-EEE9B5DF14AF"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="1" name="Script ausführen" enable="True">
+			<UUID>EFEFF96B-6D75-477F-A362-3A48D0447600</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="173" name="Go to Syntax for given FM-Version" UUID="31AC34A4-19EA-4549-8512-0AEE794056A3"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F0D38A1A-19B9-4500-A1A9-5308D0986539</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="19" id="89" name="# (Kommentar)" enable="True">
+			<UUID>504FC743-9974-4F39-BA31-C5E0EE4812CD</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Apply colors from the current palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="68" name="Wenn" enable="True">
+			<UUID>28AAB976-7272-494F-BE60-9CD4C9D6C94A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Syntax.Palette_Active::_k1 = 1]]></Text>
+							<ChunkList hash="FEEE9F823D3C638D05F6E3710CBD60C9">
+								<Chunk type="FieldRef">
+									<FieldReference id="11" name="_k1" repetition="1" UUID="2E431D93-9D8F-40FB-8019-25961F597C37">
+										<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active" UUID="1D9B0FEF-D801-4964-A4D4-64CA2123BCEE"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="1" name="Script ausführen" enable="True">
+			<UUID>B91EECD6-FBA1-41E4-A225-F0D89246C8EB</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="43" name="Change Palette" UUID="BBF813E4-1F38-4818-B916-1F6745804F25"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="69" name="Sonst" enable="True">
+			<UUID>B93A5C87-EE50-4A23-86EF-43FB5BBF370D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="23" id="1" name="Script ausführen" enable="True">
+			<UUID>49BACE32-2D70-446F-B7A0-E1D04186482E</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="113" name="Show Default Palette" UUID="AA60AB8F-9719-487F-85A3-0B5FED0CE71E"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="1" name="Script ausführen" enable="True">
+			<UUID>8741144C-982C-44B3-83CE-C6923CA1F0D2</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="75" name="Apply Palette" UUID="C4ADA835-B284-4A95-9DA2-CF368EA87868"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="70" name="Ende (wenn)" enable="True">
+			<UUID>37AFA83F-8C6B-491F-8ECB-E3C42620F1D3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>179EEC4E-8F03-4BEC-B030-0190257E0A49</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>C63EAE76-426A-46CF-8112-DA1262B6C9F6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A0B6B2AB-6EB0-4D0E-9973-BA962C4C350D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,0 +1,147 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="178" name="MBS_DeveloperTools Init" UUID="BDA99442-00F7-461E-AA90-889B3658605E"></ScriptReference>
+	<ObjectList membercount="11">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>467FB7E5-FC97-4D40-AB1D-FB6330047CA6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>40AC90DB-D69A-45B6-9796-3851091D164D</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20170518 MrW New"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>51BCE4BE-2CA5-4279-96B2-C0DCD46D30C1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>5F3A615F-C47C-425C-B17A-4697160DEFEC</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>36610B70-99AC-4276-BD56-20E7642ABB51</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C7411573-B3B4-46B2-9830-0E11B165850B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="68" name="Wenn" enable="True">
+			<UUID>F4C1E499-1D88-4B71-B54D-8C421BCB7226</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[MBS( "Version" ) > 0]]></Text>
+							<ChunkList hash="56D12F16E65E03420F118A1D71C748E6">
+								<Chunk type="FunctionRef">MBS</Chunk>
+								<Chunk type="NoRef">( &quot;Version&quot; ) &gt; 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C83CD239-DD3D-4452-B6AC-2F08DE01987E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="91" name="Ersetze alle Feldwerte" enable="True">
+			<UUID>3F5E5E6B-62B6-4361-B9AB-9A6ED48DC49F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16517</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="6" name="On" UUID="EC392C8C-0133-42A9-B50F-E288F1A534C7">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions" UUID="D534749E-0046-488A-B348-834F70D376C4"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch Berechnung ersetzen: " value="3">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[Falls( Home.MBS_DeveloperOptions::OptionState ; 1 )]]></Text>
+								<ChunkList hash="5EBD30D1BDE6DDBC6E601018926B9C2B">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="5" name="OptionState" repetition="1" UUID="AF1A4AE4-03A8-46A6-8854-3C1E23BFEBF5">
+											<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions" UUID="D534749E-0046-488A-B348-834F70D376C4"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ; 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0BF01CB2-7B52-4270-B1A0-1E0FBC933D39</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="70" name="Ende (wenn)" enable="True">
+			<UUID>2F5D0BA4-7EF1-41A4-8F72-5E28458E762F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+	</ObjectList>
+</Script>

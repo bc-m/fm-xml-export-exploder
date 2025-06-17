@@ -1,0 +1,167 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<PrivilegeSet id="4" name="MyRestrictedPrivilegeSet">
+	<UUID modifications="0" userName="Mislav" accountName="Admin" timestamp="2025-05-04T09:23:45">0C57BEEB-9CDD-4995-8F4C-9146819D6806</UUID>
+	<Description>MyRestrictedPrivilegeSetDescription</Description>
+	<access>
+		<Records Custom="True">
+			<Custom>
+				<ObjectList membercount="4">
+					<Table type="existing">
+						<BaseTableReference id="129" name="TestTable" UUID="471CCAC6-9046-4B2E-BD66-03EEAE88170B"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="ReadWrite"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+						<View access="Calculation">
+							<Calculation>
+								<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
+								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_1</DDRREF>
+								<Text><![CDATA[True]]></Text>
+							</Calculation>
+						</View>
+						<Edit access="Calculation">
+							<Calculation>
+								<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
+								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_2</DDRREF>
+								<Text><![CDATA[True]]></Text>
+							</Calculation>
+						</Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="Calculation">
+							<Calculation>
+								<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
+								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_3</DDRREF>
+								<Text><![CDATA[True]]></Text>
+							</Calculation>
+						</Delete>
+						<Fields access="Custom">
+							<Field type="existing" access="ReadWrite">
+								<FieldReference id="1" name="ID" UUID="F8D48752-4CDF-44B8-865D-92FF45A1C9E0">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="NoAccess">
+								<FieldReference id="2" name="CreationTimestamp" UUID="FC8FADB7-1564-446A-A0FE-95F47DBADDC8">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="ReadWrite">
+								<FieldReference id="3" name="CreatedBy" UUID="1BF264AB-AF53-47EF-BA6B-8381FDA9D48F">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="ReadOnly">
+								<FieldReference id="4" name="ModificationTimestamp" UUID="263FCE23-F3DF-4FD0-9175-BED44136CFC4">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="NoAccess">
+								<FieldReference id="5" name="ModifiedBy" UUID="26C9FA76-D53E-46E3-9E8A-5700074F5C6C">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="ReadWrite">
+								<FieldReference id="6" name="Name" UUID="CDA37349-D2D9-4ACA-B58C-9F8272B51F9D">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="ReadWrite">
+								<FieldReference id="7" name="ID_TestTable" UUID="3BD38330-322C-4394-8A48-237811B70F90">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="existing" access="NoAccess">
+								<FieldReference id="8" name="OrderOfOperationsTest_u" UUID="BAD8B032-4CD5-420D-80A1-86A3AC338852">
+									<BaseTableReference id="131" name="Contacts" UUID="48C3E49A-617B-45C4-98F9-E901BD4E69BE"></BaseTableReference>
+								</FieldReference>
+							</Field>
+							<Field type="New" access="NoAccess"></Field>
+						</Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="132" name="blank" UUID="D47F32E3-EBB9-4E0D-AD93-AC6851AC0F26"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="ReadWrite"></Fields>
+					</Table>
+					<Table type="New">
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="ReadWrite"></Fields>
+					</Table>
+				</ObjectList>
+			</Custom>
+		</Records>
+		<Layouts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="11">
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="1" name="My Layout for TestTable" UUID="7F4B6F16-A82A-4570-A5D5-CCA1FD293498"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="NoAccess">
+						<LayoutReference id="2" name="Contacts" UUID="106933CF-DEC7-43FD-AB82-68A6CB8D219E"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="3" name="MyLayoutFolder" UUID="E3F1C2B1-17C6-4425-8AF2-03B08305BB87"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="4" name="--" UUID="AE3BCD7A-9B1D-49AE-95DC-41B6ABB27083"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="5" name="MyLayoutSubfolder" UUID="45E2335F-8B22-4EAA-88E2-78B96BA580D2"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="6" name="--" UUID="044A4309-6804-4977-A51A-8FB724227131"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="7" name="-" UUID="3EEFFF4F-6AA2-4CD1-B008-AD937ADBE9F8"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="8" name="EmptyLayoutFolder" UUID="C2B40284-9EC6-4E76-BDC4-1DC5CF0A86CF"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="9" name="--" UUID="0163FB5E-49F3-420B-8545-BD1D108C63C9"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="11" name="File Open" UUID="227FE5E4-D9F1-474B-A744-4E5715FE5DDB"></LayoutReference>
+					</Layout>
+					<Layout type="New" access="ReadWrite" records="ReadWrite"></Layout>
+				</ObjectList>
+			</Custom>
+		</Layouts>
+		<ValueLists Custom="True">
+			<Custom Create="True">
+				<ObjectList membercount="5">
+					<ValueList type="existing" access="ReadWrite">
+						<ValueListReference id="1" name="TestTable | TextField1" UUID="EC091195-2FED-41F9-924A-1F281251A0A8"></ValueListReference>
+					</ValueList>
+					<ValueList type="existing" access="ReadWrite">
+						<ValueListReference id="2" name="YN" UUID="5BB3A7E0-1BCE-4C59-8AF2-7DB4CB0368E6"></ValueListReference>
+					</ValueList>
+					<ValueList type="existing" access="NoAccess">
+						<ValueListReference id="3" name="1" UUID="669084CB-1FDD-4DEF-A44B-EC1957866307"></ValueListReference>
+					</ValueList>
+					<ValueList type="existing" access="ReadOnly">
+						<ValueListReference id="4" name="MyRelatedValueList" UUID="98560D52-1A3F-4B59-9D1D-8AB7ADFF20CE"></ValueListReference>
+					</ValueList>
+					<ValueList type="New" access="ReadWrite"></ValueList>
+				</ObjectList>
+			</Custom>
+		</ValueLists>
+		<Scripts Create="True" Edit="True" Delete="True"></Scripts>
+		<Other value="61213" Print="True" Export="True" manageAccounts="True" manageExtPrivs="True" allowOverride="True" allowOpenQuickly="True" disconnectIdle="True" commands="All">
+			<Password prohibitModification="False" interval="30" Minimum="5"></Password>
+		</Other>
+	</access>
+</PrivilegeSet>

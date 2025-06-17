@@ -1,0 +1,23 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<ValueList>
+	<ValueListReference id="4" name="MyRelatedValueList"></ValueListReference>
+	<Source value="FromField"></Source>
+	<Field>
+		<PrimaryField show="False" sort="False">
+			<FieldReference id="7" name="ID_TestTable">
+				<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
+			</FieldReference>
+		</PrimaryField>
+		<SecondaryField show="True" sort="True">
+			<FieldReference id="6" name="TextField1">
+				<TableOccurrenceReference id="1065093" name="Contacts_TestTable"></TableOccurrenceReference>
+			</FieldReference>
+		</SecondaryField>
+		<ShowRelated value="True">
+			<TableOccurrenceReference id="1065093" name="Contacts_TestTable"></TableOccurrenceReference>
+		</ShowRelated>
+	</Field>
+</ValueList>

@@ -1,0 +1,174 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="31" name="Artificial Intelligence"></ScriptReference>
+	<ObjectList membercount="14">
+		<Step hash="03D0DED1F71519146F51D5ACD56C5589" id="212" name="Configure AI Account" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="E2DFD1A1CA3F66B930D3F19159974A2D">_3816C0B3-86B0-40A6-89CD-4CDBEB01CC58</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Verify SSL Certificates" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="OpenAI" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8C14B434D6F855522FEE7B3DA0A24166" id="202" name="Configure Machine Learning Model" enable="True">
+			<DDRREF kind="StepText" hash="E9A3CAFFD821A0BFAF5C3D5BECB33D57">_7A8C712E-DD07-4E41-8089-248E10FA773D</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="operation">uninstall</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B012D78ADC703668D97C23F2E5D2DB5D" id="226" name="Configure Prompt Template" enable="True">
+			<Options>16384</Options>
+			<DDRREF kind="StepText" hash="64977543467A294257EF442307057AEE">_79AE56CC-FAA3-4509-9A30-29604D9BBAC3</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="TemplateType">
+					<List name="SQL Query" value="1"></List>
+				</Parameter>
+				<Parameter type="ModelProvider">
+					<List name="OpenAI" value="0"></List>
+				</Parameter>
+				<Parameter type="List">
+					<List name="" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F37653CABE4BF805FAFAD3C784EACD18" id="227" name="Configure RAG Account " enable="True">
+			<DDRREF kind="StepText" hash="11FCFD7E745F0B1BCFA647DF4EB5F6B9">_CFA29F41-F412-453C-9E77-E0484C2614D4</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Verify SSL Certificates" id="268435456" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="694B275E3660A5D5133DC3345004FA66" id="222" name="Configure Regression Model" enable="True">
+			<DDRREF kind="StepText" hash="1226E7B44B587593FD794419DC442FB0">_F2816E18-19C2-4DF8-A436-9E0F43EAD5F0</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Skip empty or invalid records" id="4096" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="LLMTrainAlgorithm">
+					<List name="Random Forest" value="0"></List>
+				</Parameter>
+				<Parameter type="LLMTrainActions">
+					<List name="Train Model" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8D8781978B4A8B3507D5C28F7541B95E" id="213" name="Fine-Tune Model" enable="True">
+			<DDRREF kind="StepText" hash="4D86E4A4FBDFD3B8CEE4DA92A2377724">_16C02A88-1833-40EC-BAF1-197A06DA95D2</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="FineTuneDataSource">
+					<List name="Table" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="62C80CF0648E8C024FC7A2759370AC6E" id="220" name="Generate Response from Model" enable="True">
+			<Options>131072</Options>
+			<DDRREF kind="StepText" hash="A34F074D94E5D6D4E30AB615008352ED">_BF99E4FE-D120-4153-8A5C-E71BDFDC946E</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Agentic mode" id="131072" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Stream" id="32768" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="LLMAction">
+					<List name="" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="31C0EC447E7B95AF298432C722B63C32" id="215" name="Insert Embedding" enable="True">
+			<DDRREF kind="StepText" hash="76D4CA9892C9CD0D206D3642C2F87D65">_60EE93AD-CFEC-46A6-ACC9-A585623778C0</DDRREF>
+		</Step>
+		<Step hash="1D8C661618FD157CBA5228FB66B6C5CC" id="216" name="Insert Embedding in Found Set" enable="True">
+			<Options>24</Options>
+			<DDRREF kind="StepText" hash="1FCF9E39590A4323ED3E42AF99C781BC">_04A203B7-8495-411F-BA5A-AFDED413B31C</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean id="8192" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean id="4096" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean id="1024" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8EFB65245EEAFD9AC92B63C0CDFFDDAF" id="221" name="Perform Find by Natural Language" enable="True">
+			<Options>4096</Options>
+			<DDRREF kind="StepText" hash="B63CC072591FB9F9E7D69E8CE373ED9B">_A11491CA-B7C4-4208-BF05-FAE08B08E438</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="LLMAction">
+					<List name="Found Set" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="854E8DF8663F2D0935F1FED9D66F4EF4" id="219" name="Perform RAG Action" enable="True">
+			<DDRREF kind="StepText" hash="AC6E55B1910C1F6CE997304140F2866F">_F1A94A51-7215-437B-989B-159F67902948</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="RAGDataSource">
+					<List name="From Text" value="1"></List>
+				</Parameter>
+				<Parameter type="RAGAction">
+					<List name="Add Data" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="69CE249ACCA2E4D8094721D45D1F32E4" id="218" name="Perform Semantic Find" enable="True">
+			<Options>24</Options>
+			<DDRREF kind="StepText" hash="B2CF12E5878FD2C0C204AC7F7AE23D84">_414741AF-B3A3-46F9-A2D9-3703D6D60F81</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Query">
+					<List name="Text" value="1"></List>
+				</Parameter>
+				<Parameter type="Records">
+					<List name="All records" value="1"></List>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Return count" id="256" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9BACA3BE7870FAF0CE622B3414DBBB51" id="214" name="Perform SQL Query by Natural Language" enable="True">
+			<Options>512</Options>
+			<DDRREF kind="StepText" hash="A2D16BCDAEEEEE53F720761ED71F1CC7">_F4561677-96C2-41FE-A945-089DA02D88F5</DDRREF>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="Stream" id="4096" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="TableOccurrences"></Parameter>
+				<Parameter type="LLMTablesSelection">
+					<List name="From list" value="0"></List>
+				</Parameter>
+				<Parameter type="LLMAction">
+					<List name="Query" value="1"></List>
+				</Parameter>
+				<Parameter type="LLMOptionsSelection">
+					<List name="From list" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EBEC9FCA9CB264A809B7471DC1460C99" id="217" name="Set AI Call Logging" enable="True">
+			<Options>65536</Options>
+			<DDRREF kind="StepText" hash="A311D38E5CBFCD2F424B0D8F6859AFFB">_9BF68C53-BFB4-4753-ACF7-2CB41D1AF8C1</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="enabled" id="131072" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Verbose" id="512" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Truncate Messages" id="1024" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

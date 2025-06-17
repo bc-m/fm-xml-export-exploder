@@ -1,0 +1,187 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="28" name="Windows"></ScriptReference>
+	<ObjectList membercount="15">
+		<Step hash="C2FE49665FB87EF1663A8009DB72589F" id="31" name="Adjust Window" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="71E8CC9BD4C3DD58442A8EEF51349E2A">_79E4876E-FE6D-4E00-8A63-65273F27A126</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Resize to Fit" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2EDEAE18BFF692B7B988FE968CE378F5" id="120" name="Arrange All Windows" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="E02F0ABEC15EE35D9967553F8A391B46">_56F3010B-B643-48A2-9573-00D9315EFB67</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Tile Horizontally" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E585F78E4D4F04650A3BCF50EA1D1F36" id="121" name="Close Window" enable="True">
+			<Options>-2147483648</Options>
+			<DDRREF kind="StepText" hash="2C047AF3CB4E253B7C50080897ABEA6C">_F199B41B-4E74-4383-8C4D-A36BB2D21995</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="25804E0E7AE986A14A86F90F550082A7" id="79" name="Freeze Window" enable="True">
+			<DDRREF kind="StepText" hash="686F7F9AFBFC591F273C365FE919C314">_77E2BBFE-BBAF-484B-B6E4-A041669FF05E</DDRREF>
+		</Step>
+		<Step hash="4CC0F1D2CD638161E5CADEEF67D01520" id="119" name="Move/Resize Window" enable="True">
+			<Options>-2147483648</Options>
+			<DDRREF kind="StepText" hash="54931FCBB2C9B3E9CBC6939433DF4F1D">_7F9DAB71-95A9-493F-9527-58D4450AF0F7</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top></top>
+							<left></left>
+						</Bounds>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="75606FBAD7499E8564E66C27AC51B6C9" id="122" name="New Window" enable="True">
+			<DDRREF kind="StepText" hash="67E421DAFB025562B87EB8B9830A7F11">_441C5DF4-A714-4E9D-B76E-6F73DF23D7CC</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Style name="Document" value="3606018"></Style>
+						<Name></Name>
+						<LayoutReferenceContainer value="1">
+							<Label>original layout</Label>
+						</LayoutReferenceContainer>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top></top>
+							<left></left>
+						</Bounds>
+						<Options value="3606018">
+							<Close>True</Close>
+							<Minimize>True</Minimize>
+							<Maximize>True</Maximize>
+							<Resize>True</Resize>
+							<MenuBar>True</MenuBar>
+							<Toolbar>True</Toolbar>
+							<DimParentWindow>True</DimParentWindow>
+						</Options>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A261D0A651FCE536DE327C0B389718E7" id="80" name="Refresh Window" enable="True">
+			<DDRREF kind="StepText" hash="EBDC1FCF6973584DC55A48522509BDC0">_65A12B9C-767B-40EB-9B91-C62692E1F7A3</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Flush cached join results" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Flush cached external data" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FBAC26DC1C8BA1B45D2580E8DEC2F97C" id="81" name="Scroll Window" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="0C0DF34BFC92F25B8FB1F3231B66055F">_DBD30361-B015-4B6C-8722-CC5480C9FDF3</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Home" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C0ABDCCDCB06C55461F1AE55E54C4CE5" id="123" name="Select Window" enable="True">
+			<Options>-2147483648</Options>
+			<DDRREF kind="StepText" hash="23E4329B8B715A4AAF9E401B520D00D9">_55380AC5-07B3-4540-B2A0-B3BDA03A05B1</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DD2C573AA90F1B18B6873FFCA2DF02BC" id="124" name="Set Window Title" enable="True">
+			<Options>-2147483648</Options>
+			<DDRREF kind="StepText" hash="0A78AB4801020F2F168DBCBEE069B5A6">_DEBC2126-B2CA-4A49-972E-EB67BF6C8D1C</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Rename></Rename>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B362F203B22255B0B417D49C87A8E7C7" id="97" name="Set Zoom Level" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="902033027FFCDFD6FE10A78B5B49A242">_E3C59E5F-2E24-4D04-8561-763FF94474D2</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Lock" id="524288" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="100%" value="4"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FACD0FE994BD6C311F05B872422F7C44" id="166" name="Show/Hide Menubar" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="5222FF59ECB70D788874A62C3E964782">_9C170731-6B45-4968-B7F1-9A41B8F2145C</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Hide" value="2"></List>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Lock" id="524288" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DD1710FC7E605364321543DA5B3034A9" id="92" name="Show/Hide Text Ruler" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="54BC28E83C6A88A8E8752693B271F374">_AD17A8B8-536F-4DAE-B510-6A41A5826385</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Show" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D5F476E6BA3D028E68D148E42578C336" id="29" name="Show/Hide Toolbars" enable="True">
+			<Options>258</Options>
+			<DDRREF kind="StepText" hash="EB234732B9AF5795ED036063B73F90E3">_E9C8CC33-8331-4877-98ED-F4331C1AB578</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Lock" id="524288" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Include Edit Record Toolbar" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="Hide" value="2"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="59C6DFE2156227F4609E8F31D8BBCE47" id="30" name="View As" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="270C5B05C3A37F8B133E0266B10A1C51">_55EAD502-B7BF-44EB-835A-02F5E117184A</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Cycle" value="4"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

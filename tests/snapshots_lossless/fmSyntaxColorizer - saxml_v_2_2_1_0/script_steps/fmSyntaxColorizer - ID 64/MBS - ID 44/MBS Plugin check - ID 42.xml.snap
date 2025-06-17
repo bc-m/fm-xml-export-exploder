@@ -1,0 +1,715 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="42" name="MBS Plugin check" UUID="5BBDAAD0-7AB8-4A77-895B-57130030A4F9"></ScriptReference>
+	<ObjectList membercount="40">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C003E30B-B7D3-4096-A27F-B79EBD36E680</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A48477CF-5D2C-4849-B3B9-6AD2BAE8D85A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140425 MrW Added recognition of disabled plugin"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BECC5099-0884-461A-BD5B-CB6FEEFD84C8</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140422 MrW MBS-Plugin check extended to support $CutOffVariableNam…"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A28B43A7-DCC2-4965-ABBA-47FC015924EB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131204 MrW MBS-Plugin check improved for VarChecking"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5C3478A6-FAF2-4C87-B268-093553EF3842</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131017 MrW MBS-Plugin check improved for LineNumbers"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>64195A5D-2695-4C70-9F92-2943DE88104E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121102 MrW Improved"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2722B6F0-8EF3-4438-BB4C-5745E8876371</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="169" name="Popover schließen" enable="True">
+			<UUID>1D807356-A814-428D-8790-DC6012FB85EE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1D0090D8-94A9-4C7D-8C75-9FEA9428378D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>52CDDB47-2DE8-4F5D-B372-A27898AB4E48</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="141" name="Variable setzen" enable="True">
+			<UUID>BC1195F8-0CD5-4F8E-B4F8-DF60B2BA4603</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["MBS Plugin Check"]]></Text>
+								<ChunkList hash="15C11CD6190D0A974896B0EED010217B">
+									<Chunk type="NoRef">&quot;MBS Plugin Check&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Dlg_Title"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="141" name="Variable setzen" enable="True">
+			<UUID>3CDD96DD-D262-49CA-BEF3-F745C1CDCF85</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[TextFarbe ( TextGröße ( "www.mbsplugins.eu" ; 18 ) ; _ColorHex ( "0000DD" ) )]]></Text>
+								<ChunkList hash="A5EB84A02204808A469D7024359F0D89">
+									<Chunk type="FunctionRef">TextFarbe</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">TextGröße</Chunk>
+									<Chunk type="NoRef"> ( &quot;www.mbsplugins.eu&quot; ; 18 ) ; </Chunk>
+									<Chunk type="CustomFunctionRef">_ColorHex</Chunk>
+									<Chunk type="NoRef"> ( &quot;0000DD&quot; ) )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBSLink"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="141" name="Variable setzen" enable="True">
+			<UUID>7E18DCE7-B3B8-425A-BFBE-AF0201C1F824</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["3.0.0.5"]]></Text>
+								<ChunkList hash="D9867C099A3D02BF7AB3571C9AF84904">
+									<Chunk type="NoRef">&quot;3.0.0.5&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_VersionMin"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="141" name="Variable setzen" enable="True">
+			<UUID>673B8227-E73D-4B34-9AF1-9B0C30FA7C51</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["03000005"]]></Text>
+								<ChunkList hash="634C39FA171E659F9F8774B181486814">
+									<Chunk type="NoRef">&quot;03000005&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_VersionAutoUpdateMin"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>60C0AC7C-B599-4679-AE3F-714CD2F79A00</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="68" name="Wenn" enable="True">
+			<UUID>59AF75DB-DAC0-4D4E-A2FA-E16C269257B3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_IsWIN]]></Text>
+							<ChunkList hash="9E9E3839FF19A78E7F8DE5DCB2F37079">
+								<Chunk type="CustomFunctionRef">_IsWIN</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="1" name="Script ausführen" enable="True">
+			<UUID>58CED380-2287-4EF3-B3F3-20FB6AAC20A6</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )" UUID="8C8A6C72-D947-4D77-BB88-D12C62B698C8"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["MacOnly"]]></Text>
+								<ChunkList hash="BE1D4F4E4690250C5FC07034A54692A6">
+									<Chunk type="NoRef">&quot;MacOnly&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>93F67AEC-E8F5-4941-ABE9-DC1313C70D86</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="18" id="70" name="Ende (wenn)" enable="True">
+			<UUID>AE43697E-9DD2-41FD-8FCA-A1331A91D58B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="19" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7355A1D6-D845-4B16-908F-0338D28675AA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C672831F-2A22-4423-BAAE-F2CD20C13894</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Check Version"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="141" name="Variable setzen" enable="True">
+			<UUID>33FEFCF3-9119-4EB3-92C6-EF5DF3FBF469</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[MBS( "Version" )]]></Text>
+								<ChunkList hash="520F43275759CBB7937FD5B6D2A85E9C">
+									<Chunk type="FunctionRef">MBS</Chunk>
+									<Chunk type="NoRef">( &quot;Version&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_Version"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="141" name="Variable setzen" enable="True">
+			<UUID>8086AA9C-26DF-4B7A-8ECD-D76AF813408B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[MBS( "VersionAutoUpdate" )]]></Text>
+								<ChunkList hash="7D71CCD68DFBEE2EEF532CFF12357824">
+									<Chunk type="FunctionRef">MBS</Chunk>
+									<Chunk type="NoRef">( &quot;VersionAutoUpdate&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_VersionAutoUpdate"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="141" name="Variable setzen" enable="True">
+			<UUID>9F0CDC65-D72B-4B42-AC70-1D9915731DCA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_Plugin( "MBS" ; "IsPresent" )]]></Text>
+								<ChunkList hash="39C07EEF3B56E1FE644D887C145DE2F4">
+									<Chunk type="CustomFunctionRef">_Plugin</Chunk>
+									<Chunk type="NoRef">( &quot;MBS&quot; ; &quot;IsPresent&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_IsPresent"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="141" name="Variable setzen" enable="True">
+			<UUID>912C40E8-0F04-4EA9-93CC-2DD973A63F8E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_Plugin( "MBS" ; "IsDisabled" )]]></Text>
+								<ChunkList hash="5C9E6582A7A666ECDEDE0CDDA841670E">
+									<Chunk type="CustomFunctionRef">_Plugin</Chunk>
+									<Chunk type="NoRef">( &quot;MBS&quot; ; &quot;IsDisabled&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_IsDisabled"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5E8A5C03-1599-412D-A1D2-AF3B2AF54781</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Check Registration"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="141" name="Variable setzen" enable="True">
+			<UUID>72098EDD-CFAD-4720-84C2-5D58B07C4F61</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[MBS("Registration")]]></Text>
+								<ChunkList hash="409946AD1868D86BE951C007EE9A90B8">
+									<Chunk type="FunctionRef">MBS</Chunk>
+									<Chunk type="NoRef">(&quot;Registration&quot;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_Registration"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="141" name="Variable setzen" enable="True">
+			<UUID>D28FF7B7-66EA-45F1-82D8-2B31A8DAF270</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( $MBS_Registration <> "Registered." ; 1 )]]></Text>
+								<ChunkList hash="DBA84C3D4AD556BFD21C8BB0F91239E6">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$MBS_Registration</Chunk>
+									<Chunk type="NoRef"> &lt;&gt; &quot;Registered.&quot; ; 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_IsNotRegistered"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C4BECFB3-CEA4-4A85-97F4-6C3507A314C2</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="141" name="Variable setzen" enable="True">
+			<UUID>5F634BC1-26A5-4E5D-90B9-670597D6C619</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( $MBS_Version = "" ODER $MBS_Version = "?" ; 0 ;$MBS_IsDisabled ; 1 ;$MBS_VersionAutoUpdate < $MBS_VersionAutoUpdateMin ; 2 ;6)]]></Text>
+								<ChunkList hash="38E1D191FB3E7251E12DAFBBF75F6893">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( &#13;</Chunk>
+									<Chunk type="VariableReference">$MBS_Version</Chunk>
+									<Chunk type="NoRef"> = &quot;&quot; </Chunk>
+									<Chunk type="FunctionRef">ODER</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="VariableReference">$MBS_Version</Chunk>
+									<Chunk type="NoRef"> = &quot;?&quot; ; 0 ;&#13;</Chunk>
+									<Chunk type="VariableReference">$MBS_IsDisabled</Chunk>
+									<Chunk type="NoRef"> ; 1 ;&#13;</Chunk>
+									<Chunk type="VariableReference">$MBS_VersionAutoUpdate</Chunk>
+									<Chunk type="NoRef"> &lt; </Chunk>
+									<Chunk type="VariableReference">$MBS_VersionAutoUpdateMin</Chunk>
+									<Chunk type="NoRef"> ; 2 ;&#13;6)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_VersionLevel"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="141" name="Variable setzen" enable="True">
+			<UUID>75551EF8-280D-415F-9C6F-CD4EAB72FA5F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( _IsWIN ; -1 ; $MBS_VersionLevel )]]></Text>
+								<ChunkList hash="6966644A4842808A7CBDEBD317020921">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="CustomFunctionRef">_IsWIN</Chunk>
+									<Chunk type="NoRef"> ; -1 ; </Chunk>
+									<Chunk type="VariableReference">$MBS_VersionLevel</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_SyntaxColorizingLevel"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="76" name="Feldwert setzen" enable="True">
+			<UUID>26E74A54-BCB9-41C7-BEC3-0F78673D26CA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="34" name="_gMBSPluginCheck" UUID="A7081AD3-9B33-49E0-B7A7-DF4CFD223D4A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$MBS_SyntaxColorizingLevel]]></Text>
+							<ChunkList hash="E83D7A4A1CB63D1C1A37971F33CF17BC">
+								<Chunk type="VariableReference">$MBS_SyntaxColorizingLevel</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="1" name="Script ausführen" enable="True">
+			<UUID>B6F8FB06-A445-4FDE-B494-EE91E41F0F87</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="144" name="MBS_SetSyntaxColoringEnabledStatus" UUID="D299CE28-B478-4C60-BBAC-82515F75465D"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="33" id="89" name="# (Kommentar)" enable="True">
+			<UUID>49F9C5B5-A09A-47E1-8711-E14EE7ED52D8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="141" name="Variable setzen" enable="True">
+			<UUID>21B3FF73-C099-466F-84A2-433EFBD96FD4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls($MBS_Version = "?" ODER $MBS_Version = "" ; "You do not have the MBS plugin!";$MBS_IsPresent UND $MBS_IsDisabled       ; "The MBS plugin is currently disabled in the FileMaker Preferences!¶Please open the prefs and reenable it, or download the latest version!" ;$MBS_VersionAutoUpdate < $MBS_VersionAutoUpdateMin ; "Your have an extremely old version of the MBS plugin and need to download a new version!" ;Liste(Falls( $MBS_VersionLevel ≥ 2 UND $MBS_IsNotRegistration <> "¶Registered." ; "(*) Developer extras work in demo mode,¶but other MBS functions require a licence." ) ;Falls( Anzahl( Home.MBS_DeveloperOptions::_kUnavailable ) ; "¶Your version of the MBS plugin does not support everything - download the newest version!" );))]]></Text>
+								<ChunkList hash="B1DAF2384C60A815E4BCD6E5A1B8E30C">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">(&#13;&#13;</Chunk>
+									<Chunk type="VariableReference">$MBS_Version</Chunk>
+									<Chunk type="NoRef"> = &quot;?&quot; </Chunk>
+									<Chunk type="FunctionRef">ODER</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="VariableReference">$MBS_Version</Chunk>
+									<Chunk type="NoRef"> = &quot;&quot; ; &quot;You do not have the MBS plugin!&quot;;&#13;</Chunk>
+									<Chunk type="VariableReference">$MBS_IsPresent</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="FunctionRef">UND</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="VariableReference">$MBS_IsDisabled</Chunk>
+									<Chunk type="NoRef">       ; &quot;The MBS plugin is currently disabled in the FileMaker Preferences!¶Please open the prefs and reenable it, or download the latest version!&quot; ;&#13;</Chunk>
+									<Chunk type="VariableReference">$MBS_VersionAutoUpdate</Chunk>
+									<Chunk type="NoRef"> &lt; </Chunk>
+									<Chunk type="VariableReference">$MBS_VersionAutoUpdateMin</Chunk>
+									<Chunk type="NoRef"> ; &quot;Your have an extremely old version of the MBS plugin and need to download a new version!&quot; ;&#13;&#13;</Chunk>
+									<Chunk type="FunctionRef">Liste</Chunk>
+									<Chunk type="NoRef">(&#13;</Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$MBS_VersionLevel</Chunk>
+									<Chunk type="NoRef"> ≥ 2 </Chunk>
+									<Chunk type="FunctionRef">UND</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="VariableReference">$MBS_IsNotRegistration</Chunk>
+									<Chunk type="NoRef"> &lt;&gt; &quot;¶Registered.&quot; ; &quot;(*) Developer extras work in demo mode,¶but other MBS functions require a licence.&quot; ) ;&#13;</Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">Anzahl</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="10" name="_kUnavailable" repetition="1" UUID="B74B80C6-7AB1-47C2-A559-BBF982460866">
+											<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions" UUID="D534749E-0046-488A-B348-834F70D376C4"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ) ; &quot;¶Your version of the MBS plugin does not support everything - download the newest version!&quot; );&#13;)&#13;&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Problem"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="35" id="141" name="Variable setzen" enable="True">
+			<UUID>CE92A750-7859-44E6-8C2B-05822BBF970E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Liste(LiesLayoutobjektAttribut ( "MBS Plugin Version" ; "content" ) ;Falls( $MBS_VersionLevel ≥ 2 ; "Registration Status: " & $MBS_Registration & Falls( $MBS_Registration <> "Registered." ; " (*)" )) ;Falls( NICHT IstLeer( $Problem ) ; "¶" & $Problem & "¶¶" & $MBSLink );Falls( $MBS_VersionLevel ≥ 3 ; TextStilZufügen ( "¶1. Choose the MBS extras you want…   ▷¶¶ 2. ◁ Select the syntax options you want¶¶ 3. ◁ Click " & TextFarbe ( TextStilZufügen ( "[Colorize!]" ; Fett ) ; RGB ( 0 ; 136 ; 0 ) ) & " to beautify your code" ; Fett ) );)]]></Text>
+								<ChunkList hash="58802F6A013508C97B9DD3BF788E8562">
+									<Chunk type="FunctionRef">Liste</Chunk>
+									<Chunk type="NoRef">(&#13;</Chunk>
+									<Chunk type="FunctionRef">LiesLayoutobjektAttribut</Chunk>
+									<Chunk type="NoRef"> ( &quot;MBS Plugin Version&quot; ; &quot;content&quot; ) ;&#13;</Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$MBS_VersionLevel</Chunk>
+									<Chunk type="NoRef"> ≥ 2 ; &quot;Registration Status: &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$MBS_Registration</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$MBS_Registration</Chunk>
+									<Chunk type="NoRef"> &lt;&gt; &quot;Registered.&quot; ; &quot; (*)&quot; )) ;&#13;</Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Problem</Chunk>
+									<Chunk type="NoRef"> ) ; &quot;¶&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$Problem</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;¶¶&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$MBSLink</Chunk>
+									<Chunk type="NoRef"> );&#13;</Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$MBS_VersionLevel</Chunk>
+									<Chunk type="NoRef"> ≥ 3 ; </Chunk>
+									<Chunk type="FunctionRef">TextStilZufügen</Chunk>
+									<Chunk type="NoRef"> ( &quot;¶1. Choose the MBS extras you want…   ▷¶¶ 2. ◁ Select the syntax options you want¶¶ 3. ◁ Click &quot; &amp; </Chunk>
+									<Chunk type="FunctionRef">TextFarbe</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">TextStilZufügen</Chunk>
+									<Chunk type="NoRef"> ( &quot;[Colorize!]&quot; ; </Chunk>
+									<Chunk type="FunctionRef">Fett</Chunk>
+									<Chunk type="NoRef"> ) ; </Chunk>
+									<Chunk type="FunctionRef">RGB</Chunk>
+									<Chunk type="NoRef"> ( 0 ; 136 ; 0 ) ) &amp; &quot; to beautify your code&quot; ; </Chunk>
+									<Chunk type="FunctionRef">Fett</Chunk>
+									<Chunk type="NoRef"> ) );&#13;&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS_Plugin_Status"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="36" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0746AAE3-8666-4259-8018-EE6C60DE94E9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="37" id="76" name="Feldwert setzen" enable="True">
+			<UUID>1E2719B1-B121-40C9-8483-D139F5072882</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo" UUID="F71E392E-CE5F-41DD-B193-6FE3420A2109">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$MBS_Plugin_Status]]></Text>
+							<ChunkList hash="1CE5EE3FFD774449A1F80F7556FF1E0E">
+								<Chunk type="VariableReference">$MBS_Plugin_Status</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="38" id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<UUID>C663FF85-CE8F-41EC-B4A6-D0646A77074B</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="39" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2BB7A697-CC2C-4FA9-A2C7-7C6B57B9E345</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>
