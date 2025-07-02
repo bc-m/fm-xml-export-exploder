@@ -56,27 +56,25 @@ fn process_directory_recursively(
     flags: &Flags,
 ) {
     if let Ok(entries) = fs::read_dir(current_dir) {
-        for entry in entries {
-            if let Ok(entry) = entry {
-                let path = entry.path();
-                if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
-                    // println!("                  ✅ Processing xml file: {}", path.display());
-                    process_script_xml_file(
-                        &path,
-                        scripts_xml_out_dir_path,
-                        scripts_text_out_dir_path,
-                        flags,
-                    );
-                } else if path.is_dir() {
-                    // println!("                  ‼️ Recursively processing subdirectory: {}", path.display());
-                    // Recursively process subdirectories
-                    process_directory_recursively(
-                        &path,
-                        scripts_xml_out_dir_path,
-                        scripts_text_out_dir_path,
-                        flags,
-                    );
-                }
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
+                // println!("                  ✅ Processing xml file: {}", path.display());
+                process_script_xml_file(
+                    &path,
+                    scripts_xml_out_dir_path,
+                    scripts_text_out_dir_path,
+                    flags,
+                );
+            } else if path.is_dir() {
+                // println!("                  ‼️ Recursively processing subdirectory: {}", path.display());
+                // Recursively process subdirectories
+                process_directory_recursively(
+                    &path,
+                    scripts_xml_out_dir_path,
+                    scripts_text_out_dir_path,
+                    flags,
+                );
             }
         }
     }
