@@ -68,9 +68,7 @@ impl WindowReference {
                                 if let Some(calc) = param_value.display() {
                                     let name = local_name_to_string(element_name.as_ref());
                                     let name = first_char_uppercase(name.as_str());
-                                    window_reference
-                                        .parameters
-                                        .push(format!("{}: {}", name, calc));
+                                    window_reference.parameters.push(format!("{name}: {calc}"));
                                 }
                             }
                             depth -= 1;

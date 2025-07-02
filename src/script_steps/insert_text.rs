@@ -52,18 +52,18 @@ pub fn sanitize(step: &str) -> Option<String> {
             v.push("Select".to_string());
         }
         if let Some(target) = target {
-            v.push(format!("Target: {}", target));
+            v.push(format!("Target: {target}"));
         }
 
         if let Some(text) = text {
-            v.push(format!("\"{}\"", &text));
+            v.push(format!("\"{text}\""));
         }
 
         let params = v.join(" ; ");
         if params.is_empty() {
-            Some(format!("{} []", name))
+            Some(format!("{name} []"))
         } else {
-            Some(format!("{} [ {} ]", name, params))
+            Some(format!("{name} [ {params} ]"))
         }
     }
 }

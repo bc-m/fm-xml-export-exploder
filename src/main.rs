@@ -62,7 +62,7 @@ fn main() -> Result<()> {
     };
 
     match &flags.verbose {
-        Some(Some(filter)) => println!("🔍 Verbose mode (filtered on {})", filter),
+        Some(Some(filter)) => println!("🔍 Verbose mode (filtered on {filter})"),
         Some(None) => println!("🔊 Verbose mode (all)"),
         None => (), // silent
     };
@@ -83,7 +83,7 @@ fn main() -> Result<()> {
             Ok(_) => {}
             Err(err) => {
                 let file_name = path.file_name().unwrap().to_str().unwrap();
-                eprintln!("Failed to process file '{}': {}", file_name, err)
+                eprintln!("Failed to process file '{file_name}': {err}")
             }
         };
     });

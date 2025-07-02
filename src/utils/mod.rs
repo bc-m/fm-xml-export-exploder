@@ -28,7 +28,7 @@ pub fn rename_file(file_path: &Path, new_name: &str) -> Result<PathBuf, String> 
 
     let new_path = parent_dir.join(new_name);
 
-    fs::rename(file_path, &new_path).map_err(|e| format!("Failed to rename file: {}", e))?;
+    fs::rename(file_path, &new_path).map_err(|e| format!("Failed to rename file: {e}"))?;
 
     Ok(new_path)
 }
@@ -44,7 +44,7 @@ pub struct Entity {
 
 pub fn debug(is_debug: bool, debug_str: &str) {
     if is_debug {
-        println!("{}", debug_str);
+        println!("{debug_str}");
     }
 }
 
@@ -131,7 +131,7 @@ impl Entity {
                 }
                 Ok(Event::Eof) => break,
                 unknown_event => {
-                    panic!("Wrong read event: {:?}", unknown_event);
+                    panic!("Wrong read event: {unknown_event:?}");
                 }
             };
             buf.clear();
@@ -196,7 +196,7 @@ pub fn write_entity_to_file(
     let filename = join_scope_id_and_name(entity.id.as_str(), entity.name.as_str());
     let filename = escape_filename(&filename);
 
-    let output_file_path = output_dir.join(format!("{}.xml", filename));
+    let output_file_path = output_dir.join(format!("{filename}.xml"));
     write_xml_file(
         &output_file_path,
         &entity.content,
@@ -244,7 +244,7 @@ pub fn build_out_dir_path<R: Read + BufRead>(
         .unwrap_or("");
 
     if !entity.is_empty() && !action.is_empty() {
-        full_path.push(format!("{}__{}", entity, action));
+        full_path.push(format!("{entity}__{action}"));
     } else if !entity.is_empty() {
         full_path.push(entity);
     } else if !action.is_empty() {
@@ -322,7 +322,7 @@ pub fn write_text_file(output_file_path: &Path, content: &str) {
 fn write_file(output_file_path: &Path, file_content: &String) {
     match File::create(output_file_path) {
         Ok(ref mut output_file) => {
-            write!(output_file, "{}", file_content).expect("Failed to write to file");
+            write!(output_file, "{file_content}").expect("Failed to write to file");
             output_file.flush().expect("Failed to flush output file");
         }
         Err(err) => {
@@ -351,7 +351,7 @@ pub fn push_line_to_skeleton(
 
     let indent =
         "\t".repeat(base_depth + relative_depth - 1 - if is_child_start_tag { 1 } else { 0 });
-    let line = format!("{}{}", indent, str_to_push);
+    let line = format!("{indent}{str_to_push}");
 
     if current_event_type == XmlEventType::Start || current_event_type == XmlEventType::Other {
         if skeleton.previous_event_type == XmlEventType::Start {
@@ -631,7 +631,7 @@ pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_na
                 )
             };
 
-            let new_name = format!("{}ID {}.xml", name_part, id);
+            let new_name = format!("{name_part}ID {id}.xml");
             let _ = rename_file(file_path, &new_name);
         }
     }
@@ -649,7 +649,7 @@ pub fn move_to_subfolder_if_necessary(
 
     // Create the subfolder directory if it doesn't exist
     fs::create_dir_all(subfolder_dir_path)
-        .map_err(|e| format!("Failed to create subfolder directory: {}", e))?;
+        .map_err(|e| format!("Failed to create subfolder directory: {e}"))?;
 
     // Get the filename from the original path
     let filename = file_path
@@ -661,7 +661,7 @@ pub fn move_to_subfolder_if_necessary(
 
     // Move the file to the new location
     fs::rename(file_path, &new_path)
-        .map_err(|e| format!("Failed to move file to subfolder: {}", e))?;
+        .map_err(|e| format!("Failed to move file to subfolder: {e}"))?;
 
     Ok(new_path)
 }

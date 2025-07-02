@@ -133,7 +133,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
     loop {
         match reader.read_event_into(&mut buf) {
             Err(e) => {
-                println!("Error parsing XML: {}", e);
+                println!("Error parsing XML: {e}");
                 break;
             }
             Ok(Event::Eof) => break,
@@ -210,7 +210,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                                     indent.push_str(&" ".repeat(2));
                                 }
 
-                                script_info.text.push_str(&format!("{}{}\n", indent, line));
+                                script_info.text.push_str(&format!("{indent}{line}\n"));
                                 if !first_line_done {
                                     first_line_done = true;
                                     if !is_comment {

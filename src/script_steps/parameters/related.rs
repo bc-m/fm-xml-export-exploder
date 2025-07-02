@@ -29,7 +29,7 @@ impl Related {
                         b"TableOccurrenceReference" => {
                             let table_occurrence = get_attribute(&e, "name")
                                 .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
-                            item.parameters.push(format!("Table: {}", table_occurrence));
+                            item.parameters.push(format!("Table: {table_occurrence}"));
                         }
                         b"LayoutReferenceContainer" => {
                             item.parameters.push(

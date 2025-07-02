@@ -30,7 +30,7 @@ impl List {
                         if let Some(name) = get_attribute(&e, "name") {
                             if let Ok(name) = unescape(name.as_str()) {
                                 item.name = match id_to_script_step(step_id) {
-                                    ScriptStep::LoopStart => Some(format!("Flush: {}", name)),
+                                    ScriptStep::LoopStart => Some(format!("Flush: {name}")),
                                     _ => Some(name.to_string()),
                                 }
                             }

@@ -69,13 +69,13 @@ pub fn text_element_to_string(e: &BytesText, escape: bool) -> String {
 
 pub fn end_element_to_string(e: &BytesEnd) -> String {
     let element_name = local_name_to_string(e.name().as_ref());
-    format!("</{}>", element_name)
+    format!("</{element_name}>")
 }
 
 /// Derive end tag from start tag
 pub fn end_element_to_string_from_start_element(e: &BytesStart) -> String {
     let element_name = local_name_to_string(e.name().as_ref());
-    format!("</{}>", element_name)
+    format!("</{element_name}>")
 }
 
 pub fn local_name_to_string(local_name: &[u8]) -> String {
@@ -286,7 +286,7 @@ pub fn extract_values_from_xml_paths(
     file_path: &Path,
     target_paths: &[&str],
 ) -> Result<Vec<Option<String>>, String> {
-    let file = File::open(file_path).map_err(|e| format!("Failed to open file: {}", e))?;
+    let file = File::open(file_path).map_err(|e| format!("Failed to open file: {e}"))?;
     let reader = BufReader::new(file);
     let mut reader = Reader::from_reader(reader);
     reader.config_mut().trim_text(true);
@@ -328,7 +328,7 @@ pub fn extract_values_from_xml_paths(
                                 {
                                     let value = attr
                                         .unescape_value()
-                                        .map_err(|e| format!("Unescape error: {}", e))?;
+                                        .map_err(|e| format!("Unescape error: {e}"))?;
                                     results[i] = Some(value.to_string());
                                     resolved_indices.insert(i);
                                 }
@@ -359,7 +359,7 @@ pub fn extract_values_from_xml_paths(
                                     resolved_indices.insert(i);
                                 }
                                 Err(err) => {
-                                    return Err(format!("Failed to unescape text: {}", err));
+                                    return Err(format!("Failed to unescape text: {err}"));
                                 }
                             }
                         }
@@ -387,7 +387,7 @@ pub fn extract_values_from_xml_paths(
             }
 
             Ok(Event::Eof) => break,
-            Err(e) => return Err(format!("Error parsing XML: {}", e)),
+            Err(e) => return Err(format!("Error parsing XML: {e}")),
             _ => {}
         }
 

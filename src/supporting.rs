@@ -17,9 +17,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
     start_tag: &BytesStart,
     out_file_name: &str,
 ) {
-    let out_file_path = context
-        .current_out_dir
-        .join(format!("{}.xml", out_file_name));
+    let out_file_path = context.current_out_dir.join(format!("{out_file_name}.xml"));
 
     let mut ddr_info = String::new();
     ddr_info.push_str(start_element_to_string(start_tag, context.flags).as_str());
@@ -31,7 +29,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
     loop {
         match context.reader.read_event_into(&mut buf) {
             Err(e) => {
-                println!("Error {}", e);
+                println!("Error {e}");
                 break;
             }
             Ok(Event::Eof) => break,

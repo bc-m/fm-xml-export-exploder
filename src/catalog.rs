@@ -64,7 +64,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
     loop {
         match context.reader.read_event_into(&mut buf) {
             Err(e) => {
-                println!("Error {}", e);
+                println!("Error {e}");
                 break;
             }
             Ok(Event::Eof) => break,

@@ -23,7 +23,7 @@ impl Select {
                     if e.name().as_ref() == b"Calculation" {
                         if let Ok(param_value) = Calculation::from_xml(reader, &e) {
                             if let Some(display) = param_value.display() {
-                                item.text = Some(format!("Name: {}", display));
+                                item.text = Some(format!("Name: {display}"));
                             }
                         }
                         depth -= 1;

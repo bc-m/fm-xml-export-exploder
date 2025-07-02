@@ -46,9 +46,9 @@ pub fn sanitize(step: &str) -> Option<String> {
     } else if calculation.is_empty() {
         Some(name.to_string())
     } else if only_current_file {
-        Some(format!("{} [ Name: {} ; Current file ]", name, calculation))
+        Some(format!("{name} [ Name: {calculation} ; Current file ]"))
     } else {
-        Some(format!("{} [ Name: {} ]", name, calculation))
+        Some(format!("{name} [ Name: {calculation} ]"))
     }
 }
 

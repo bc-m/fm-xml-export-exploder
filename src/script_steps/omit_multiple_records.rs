@@ -56,7 +56,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if option_name.is_empty() && calculation.is_empty() {
-        Some(format!("{} []", name))
+        Some(format!("{name} []"))
     } else if !calculation.is_empty() {
         Some(format!(
             "{} [ {}: {} ; {} ]",

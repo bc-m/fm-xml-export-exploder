@@ -14,7 +14,7 @@ pub fn valid_dir_or_throw(dir_path: &PathBuf) -> Result<(), Error> {
 
 /// Join scope ID and name into a formatted string
 pub fn join_scope_id_and_name(scope_id: &str, scope_name: &str) -> String {
-    format!("{} - ID {}", scope_name, scope_id)
+    format!("{scope_name} - ID {scope_id}")
 }
 
 /// Escape filename by replacing special characters with underscores
