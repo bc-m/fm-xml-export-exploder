@@ -1,0 +1,113 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="12" name="JsonToVars" UUID="B7853AE0-EBF6-4F7A-96F0-46079BA23EB2"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/* * @SIGNATURE: * #JsonToVars *  * @PARAMETERS: * json * namespace *  * @HISTORY: * Created: 2020-04-13 by Mike Duncan *  * @PURPOSE: * Handle setting variables from JSON automatically *  * @RESULT: * Zero if no error, or an error code if there was an error setting a variable *  * @NOTES: * This function requires JSON functions available in FileMaker 16+ * And also the WHILE function available in FileMaker 18+ * Usage example: * JsonToVars ( Get ( ScriptParameter ) ; "_" ) *  * then test for errors and show dialog in FM script. * If [ JsonToVars ( Get ( ScriptParameter ) ; "_" ) ] *   Show Custom Dialog [ "Error" ; "There was an error evaluating variables: " & JSONGetElement ( $json_debug ; "json" ) & " - " & GetErrorDesc_en ( JSONGetElement ( $json_debug ; "json" ) )] *   Exit Script [ Text Result: 5 //invalid command ] * End If *   * Example of setting a script parameter: * JSONSetElement ( ""  *  *  ; [ "var1" ; "hello" ; JSONString ] *  ; [ "var2" ; "world" ; JSONString ] *  ; [ "var3" ; "ping" ; JSONString ] *  * ) *  */  Falls (IstLeer ( json ); // required value missing, return an error SetzeVar ( $json_debug = JSONSetElement ( "" ; "json" ; "10" ; JSONString ) ; "" ) & $json_debug ;   Solange (    [    namespace = namespace;    json_keys = JSONListKeys ( json ; "" );    count = ElementeAnzahl ( json_keys );    json_err = "";    this_err = 0   ];     ( count > 0 ) UND ( this_err = 0 );     [    this_key = HoleWert ( json_keys ; count );    this_value = JSONGetElement ( json ; this_key );    this_evaluate = "Let ( $" & namespace & this_key & " = " & Zitat ( this_value ) & " ; \"\")";    this_err = BerechnungsFehler ( Berechne ( this_evaluate ) );    $json_debug = JSONSetElement ( json_err ; [ this_key ; this_err ; JSONString ] ; [ "json" ; this_err ; JSONString ] );    count = count - 1   ];  this_err ))]]></Text>
+		<ChunkList hash="38A06BCC3BA858F52EE493062F87606A">
+			<Chunk type="NoRef">/*&#13; * @SIGNATURE:&#13; * #JsonToVars&#13; * &#13; * @PARAMETERS:&#13; * json&#13; * namespace&#13; * &#13; * @HISTORY:&#13; * Created: 2020-04-13 by Mike Duncan&#13; * &#13; * @PURPOSE:&#13; * Handle setting variables from JSON automatically&#13; * &#13; * @RESULT:&#13; * Zero if no error, or an error code if there was an error setting a variable&#13; * &#13; * @NOTES:&#13; * This function requires JSON functions available in FileMaker 16+&#13; * And also the WHILE function available in FileMaker 18+&#13; * Usage example:&#13; * JsonToVars ( Get ( ScriptParameter ) ; &quot;_&quot; )&#13; * &#13; * then test for errors and show dialog in FM script.&#13; * If [ JsonToVars ( Get ( ScriptParameter ) ; &quot;_&quot; ) ]&#13; *   Show Custom Dialog [ &quot;Error&quot; ; &quot;There was an error evaluating variables: &quot; &amp; JSONGetElement ( $json_debug ; &quot;json&quot; ) &amp; &quot; - &quot; &amp; GetErrorDesc_en ( JSONGetElement ( $json_debug ; &quot;json&quot; ) )]&#13; *   Exit Script [ Text Result: 5 //invalid command ]&#13; * End If&#13; *  &#13; * Example of setting a script parameter:&#13; * JSONSetElement ( &quot;&quot; &#13; * &#13; *  ; [ &quot;var1&quot; ; &quot;hello&quot; ; JSONString ]&#13; *  ; [ &quot;var2&quot; ; &quot;world&quot; ; JSONString ]&#13; *  ; [ &quot;var3&quot; ; &quot;ping&quot; ; JSONString ]&#13; * &#13; * )&#13; * &#13; */&#13; &#13; </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef"> (</Chunk>
+			<Chunk type="FunctionRef">IstLeer</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">json</Chunk>
+			<Chunk type="NoRef"> );&#13; // required value missing, return an error&#13; </Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">$json_debug</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">JSONSetElement</Chunk>
+			<Chunk type="NoRef"> ( &quot;&quot; ; &quot;json&quot; ; &quot;10&quot; ; </Chunk>
+			<Chunk type="FunctionRef">JSONString</Chunk>
+			<Chunk type="NoRef"> ) ; &quot;&quot; )&#13; &amp; </Chunk>
+			<Chunk type="VariableReference">$json_debug</Chunk>
+			<Chunk type="NoRef">&#13; ;&#13; &#13;  </Chunk>
+			<Chunk type="FunctionRef">Solange</Chunk>
+			<Chunk type="NoRef"> ( &#13;   [&#13;    </Chunk>
+			<Chunk type="VariableReference">namespace</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="VariableReference">namespace</Chunk>
+			<Chunk type="NoRef">;&#13;    </Chunk>
+			<Chunk type="VariableReference">json_keys</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">JSONListKeys</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">json</Chunk>
+			<Chunk type="NoRef"> ; &quot;&quot; );&#13;    </Chunk>
+			<Chunk type="VariableReference">count</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">ElementeAnzahl</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">json_keys</Chunk>
+			<Chunk type="NoRef"> );&#13;    </Chunk>
+			<Chunk type="VariableReference">json_err</Chunk>
+			<Chunk type="NoRef"> = &quot;&quot;;&#13;    </Chunk>
+			<Chunk type="VariableReference">this_err</Chunk>
+			<Chunk type="NoRef"> = 0&#13;   ];&#13;  &#13;   ( </Chunk>
+			<Chunk type="VariableReference">count</Chunk>
+			<Chunk type="NoRef"> &gt; 0 ) </Chunk>
+			<Chunk type="FunctionRef">UND</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">this_err</Chunk>
+			<Chunk type="NoRef"> = 0 );&#13;  &#13;   [&#13;    </Chunk>
+			<Chunk type="VariableReference">this_key</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">json_keys</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">count</Chunk>
+			<Chunk type="NoRef"> );&#13;    </Chunk>
+			<Chunk type="VariableReference">this_value</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">JSONGetElement</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">json</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">this_key</Chunk>
+			<Chunk type="NoRef"> );&#13;    </Chunk>
+			<Chunk type="VariableReference">this_evaluate</Chunk>
+			<Chunk type="NoRef"> = &quot;Let ( $&quot; &amp; </Chunk>
+			<Chunk type="VariableReference">namespace</Chunk>
+			<Chunk type="NoRef"> &amp; </Chunk>
+			<Chunk type="VariableReference">this_key</Chunk>
+			<Chunk type="NoRef"> &amp; &quot; = &quot; &amp; </Chunk>
+			<Chunk type="FunctionRef">Zitat</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">this_value</Chunk>
+			<Chunk type="NoRef"> ) &amp; &quot; ; \&quot;\&quot;)&quot;;&#13;    </Chunk>
+			<Chunk type="VariableReference">this_err</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">BerechnungsFehler</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">Berechne</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">this_evaluate</Chunk>
+			<Chunk type="NoRef"> ) );&#13;    </Chunk>
+			<Chunk type="VariableReference">$json_debug</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">JSONSetElement</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="VariableReference">json_err</Chunk>
+			<Chunk type="NoRef"> ; [ </Chunk>
+			<Chunk type="VariableReference">this_key</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">this_err</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">JSONString</Chunk>
+			<Chunk type="NoRef"> ] ; [ &quot;json&quot; ; </Chunk>
+			<Chunk type="VariableReference">this_err</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">JSONString</Chunk>
+			<Chunk type="NoRef"> ] );&#13;    </Chunk>
+			<Chunk type="VariableReference">count</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="VariableReference">count</Chunk>
+			<Chunk type="NoRef"> - 1&#13;   ];&#13;&#13;  </Chunk>
+			<Chunk type="VariableReference">this_err</Chunk>
+			<Chunk type="NoRef">&#13;&#13; )&#13;&#13;)</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

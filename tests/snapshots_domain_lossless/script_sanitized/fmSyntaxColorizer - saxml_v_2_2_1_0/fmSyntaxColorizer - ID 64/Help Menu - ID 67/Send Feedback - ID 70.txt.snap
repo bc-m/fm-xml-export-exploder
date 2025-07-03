@@ -1,0 +1,17 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121031 MrW
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+# Script settings
+Variable setzen [ $AppName ; Hole( DateiName ) ]
+
+Variable setzen [ $ToEmail ; "russell@mrwatson.de" ]
+Variable setzen [ $Subject ; $AppName & " Feedback" ]
+Variable setzen [ $Message ; "Hello MrWatson!¶¶" & $AppName & " is ..." ]
+
+E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]

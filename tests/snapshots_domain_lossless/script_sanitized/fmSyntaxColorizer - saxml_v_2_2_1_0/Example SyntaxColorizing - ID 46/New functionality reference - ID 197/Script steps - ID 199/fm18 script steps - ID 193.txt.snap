@@ -1,0 +1,55 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# Renamed
+Auf Host hochladen
+Favoriten öffnen
+Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
+
+Variable setzen [ $FileID ; "" ]
+Variable setzen [ $FileExists ; "" ]
+Variable setzen [ $FileSize ; "" ]
+Variable setzen [ $target ; "" ]
+Variable setzen [ $data ; "" ]
+Variable setzen [ $pos ; "" ]
+
+# NEW STEPS
+
+# Error Logging
+Fehlerprotokollierung setzen [ ON ]
+Fehlerprotokollierung setzen [ OFF ]
+Fehlerprotokollierung setzen [ ON ; CustomDebugInfo: Hole ( ProgrammBenutzername ) ]
+
+
+# FileSteps
+Dateiexistenz holen
+Dateiexistenz holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileExists ]
+
+Dateigröße holen
+Dateigröße holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileSize ]
+
+Datendatei erstellen [ Ordner erstellen: OFF ]
+Datendatei erstellen [ Ordner erstellen: OFF ]
+Datendatei erstellen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
+
+Datendatei öffnen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: _Home::_gInputText1 ]
+
+In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: _Home::_gInputText2 ; Zeilenumbruch anhängen: OFF ]
+In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $data ; Zeilenumbruch anhängen: ON ]
+
+Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: _Home::_gInputText3 ]
+Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
+Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
+
+Datendateiposition holen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $Pos ]
+
+Datendateiposition setzen
+Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+
+Datendatei schließen
+Datei löschen
+Datei umbenennen

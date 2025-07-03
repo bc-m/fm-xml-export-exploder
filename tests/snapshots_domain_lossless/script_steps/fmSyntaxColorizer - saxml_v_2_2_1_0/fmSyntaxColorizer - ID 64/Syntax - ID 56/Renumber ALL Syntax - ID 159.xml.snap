@@ -1,0 +1,114 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="159" name="Renumber ALL Syntax" UUID="E94F7123-8247-400F-8BCB-D79FC43C0692"></ScriptReference>
+	<ObjectList membercount="8">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5AB9F9D8-F4D2-4055-AE28-786BD068EDA2</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9DC147F2-E8B2-405A-A4D8-FF089367A175</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121102 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7C756199-CE8C-4BC8-BE73-59052E088D43</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8E5E3960-5343-4BE4-817C-73B013E17137</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>4B845B33-FFD3-4787-A8DC-528A7F7A0D54</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="9" name="Home" UUID="66D75489-E581-415A-A054-FD9C03DEAF52"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="91" name="Ersetze alle Feldwerte" enable="True">
+			<UUID>C281F0AF-178B-4A9C-95DC-7CB79A411FB0</UUID>
+			<OwnerID></OwnerID>
+			<Options>133</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="1" name="Sort" UUID="335B603A-68A6-44A6-B5F1-D3BC0F18A5F0">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch fortlaufende Nummern ersetzen: " value="2">
+						<List name="Werte der Eingabeoptionen" value="False">
+							<Initial value="1"></Initial>
+							<increment value="1"></increment>
+						</List>
+						<Boolean type="Eingabeoptionen aktualisieren" value="True"></Boolean>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>61A028F3-EB98-403E-9D53-B10B497FD239</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0EF34837-D3FC-4CC8-BD94-298EA90C2218</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

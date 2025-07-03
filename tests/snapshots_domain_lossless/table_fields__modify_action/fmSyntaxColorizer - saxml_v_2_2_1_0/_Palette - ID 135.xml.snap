@@ -1,0 +1,27 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="19" name="_kSwitchDarkLight" repetition="1" UUID="01682CDE-878F-4B7F-B77A-D18F9A942E02">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+					<Text><![CDATA[DarkModePaletteBool ≠ _IsDarkMode]]></Text>
+					<ChunkList hash="24421F1730D4CEC7BB3C14A8B9E2363B">
+						<Chunk type="FieldRef">
+							<FieldReference id="15" name="DarkModePaletteBool" repetition="1" UUID="34AADE32-0AFB-473C-88B4-A05CF0501682">
+								<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ </Chunk>
+						<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

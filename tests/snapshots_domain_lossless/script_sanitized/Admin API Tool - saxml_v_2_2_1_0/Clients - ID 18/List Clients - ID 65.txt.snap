@@ -1,0 +1,109 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: List Databases
+#  HISTORY:
+     - Created:   2019-06-10 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2018-MM-DD by FName LName
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/clients" ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# parse json response
+	Feldwert setzen [ FMS__fmserver::fmproCount ; JSONGetElement ( $$my.result ; "response.fmproCount" ) ]
+	Feldwert setzen [ FMS__fmserver::fmgoCount ; JSONGetElement ( $$my.result ; "response.fmgoCount" ) ]
+	Feldwert setzen [ FMS__fmserver::fmwebdCount ; JSONGetElement ( $$my.result ; "response.fmwebdCount" ) ]
+	Feldwert setzen [ FMS__fmserver::fmsaseCount ; JSONGetElement ( $$my.result ; "response.fmsaseCount" ) ]
+	Feldwert setzen [ FMS__fmserver::fmmiscCount ; JSONGetElement ( $$my.result ; "response.fmmiscCount" ) ]
+	Feldwert setzen [ FMS__fmserver::client_time ; Hole ( SystemZeitstempel ) ]
+	
+	Variable setzen [ $this.id ; FMS__fmserver::ID ]
+	# get clients
+	Fenster fixieren
+	Wenn [ IstLeer ( FMS_CLI__clients::ID ) ]
+		Gehe zu Layout [ Layout: "CLI__clients" ; Animation: Ohne ]
+	Sonst
+		Gehe zu Bezugsdatensatz [ Table: FMS_CLI__clients ; Layout: "CLI__clients" ; Show related ]
+		Alle Datensätze löschen [ Mit Dialog: OFF ]
+	Ende (wenn)
+	Variable setzen [ $this.loop ; 0 ]
+	Schleife (Anfang) [ Flush: Immer ]
+		Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].id" ) ) ]
+			Neuer Datensatz/Abfrage
+			Feldwert setzen [ CLI__clients::ID_Server ; $this.id ]
+			Feldwert setzen [ CLI__clients::appLanguage ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].appLanguage" ) ]
+			Feldwert setzen [ CLI__clients::appType ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].appType" ) ]
+			Feldwert setzen [ CLI__clients::appVersion ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].appVersion" ) ]
+			Feldwert setzen [ CLI__clients::id_client ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].id" ) ]
+			Feldwert setzen [ CLI__clients::computerName ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].computerName" ) ]
+			Feldwert setzen [ CLI__clients::concurrent ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].concurrent" ) ]
+			Feldwert setzen [ CLI__clients::connectDuration ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].connectDuration" ) ]
+			Feldwert setzen [ CLI__clients::connectTime ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].connectTime" ) ]
+			Feldwert setzen [ CLI__clients::extpriv ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].extpriv" ) ]
+			Feldwert setzen [ CLI__clients::guestFiles ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].guestFiles" ) ]
+			Feldwert setzen [ CLI__clients::ipaddress ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].ipaddress" ) ]
+			Feldwert setzen [ CLI__clients::macaddress ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].macaddress" ) ]
+			Feldwert setzen [ CLI__clients::operatingSystem ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].operatingSystem" ) ]
+			Feldwert setzen [ CLI__clients::status ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].status" ) ]
+			Feldwert setzen [ CLI__clients::teamLicensed ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].teamLicensed" ) ]
+			Feldwert setzen [ CLI__clients::userName ; JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].userName" ) ]
+			# create getFiles records
+			Variable setzen [ $this.id_client ; CLI__clients::id_client ]
+			Variable setzen [ $this.guestFiles ; CLI__clients::guestFiles ]
+			# clients connected to files
+			Gehe zu Layout [ Layout: "GFI__guestFiles" ; Animation: Ohne ]
+			Variable setzen [ $this.loop_get ; 0 ]
+			Schleife (Anfang) [ Flush: Immer ]
+				Neuer Datensatz/Abfrage
+				Feldwert setzen [ GFI__guestFiles::id_client ; $this.id_client ]
+				Feldwert setzen [ GFI__guestFiles::ID_Server ; $this.id ]
+				Feldwert setzen [ GFI__guestFiles::accountName ; JSONGetElement ( $this.guestFiles ; "[" & $this.loop_get & "].accountName" ) ]
+				Feldwert setzen [ GFI__guestFiles::filename ; JSONGetElement ( $this.guestFiles ; "[" & $this.loop_get & "].filename" ) ]
+				Feldwert setzen [ GFI__guestFiles::id_guestFiles ; JSONGetElement ( $this.guestFiles ; "[" & $this.loop_get & "].id" ) ]
+				Feldwert setzen [ GFI__guestFiles::privsetName ; JSONGetElement ( $this.guestFiles ; "[" & $this.loop_get & "].privsetName" ) ]
+				Variable setzen [ $this.loop_get ; $this.loop_get + 1 ]
+				Verlasse Schleife wenn [ IstLeer ( JSONGetElement ( $this.guestFiles ; "[" & $this.loop_get & "].id" ) ) ]
+			Schleife (Ende)
+			# go back to client records and continue
+			Gehe zu Layout [ Layout: "CLI__clients" ; Animation: Ohne ]
+			
+		Ende (wenn)
+		
+		Variable setzen [ $this.loop ; $this.loop + 1 ]
+		Verlasse Schleife wenn [ IstLeer ( JSONGetElement ( $$my.result ; "response.clients[" & $this.loop & "].id" ) ) ]
+		
+	Schleife (Ende)
+	
+	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+	Gehe zu Objekt [ "panel_clients" ]
+	
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

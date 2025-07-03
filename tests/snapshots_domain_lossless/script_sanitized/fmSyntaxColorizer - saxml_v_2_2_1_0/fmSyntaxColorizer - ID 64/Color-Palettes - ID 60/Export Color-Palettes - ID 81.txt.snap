@@ -1,0 +1,47 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20130924 MrW Data format changed to tab, so that palettes can be transferred between fp7 and fmp12 formats
+# 20121126 MrW fmp12-compatible
+# 20121101 MrW Nice!
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Script settings
+Variable setzen [ $FolderPath ; Hole( DesktopPfad ) ]
+Variable setzen [ $FileName ; "fmSyntaxColorizer-Palettes.txt" ]
+
+# Var
+Variable setzen [ $FilePath ; $FolderPath & $FileName ]
+
+
+Fenster fixieren
+Gehe zu Bezugsdatensatz [ Table: Palette.Color ; Layout: "Colors" ; Show related ; Match found set ]
+
+Wenn [ Hole( LayoutTabellenname ) <> "_Color" ]
+	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "No color palettes to export!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen []
+	# -->
+Ende (wenn)
+
+# Set palette names
+Ersetze alle Feldwerte [ _Color::PaletteName ; Durch Berechnung ersetzen: Color.Palette_byID::PaletteName ]
+Sortieren [ Mit Dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+
+# Export Colors
+// Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
+Wenn [ $error ]
+	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Error " & $error & " during the export." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen []
+	# -->
+Ende (wenn)
+
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
+Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One color-palette has been" ; $n & " color-palettes have been" ) & " successfully exported to file " & Zitat( $FileName ) & " on the desktop." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]

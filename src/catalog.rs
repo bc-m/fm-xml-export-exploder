@@ -1,10 +1,10 @@
 use std::io::{BufRead, Read};
 use std::path::{Path, PathBuf};
 
+use anyhow::Error;
 use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::config::CatalogConfig;
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::join_scope_id_and_name;
 use crate::utils::xml_utils::{
@@ -12,7 +12,8 @@ use crate::utils::xml_utils::{
     push_rest_of_element_to_skeleton, skip_rest_of_element, start_element_to_string, XmlEventType,
 };
 use crate::utils::{
-    debug, move_to_subfolder_if_necessary, write_rest_of_element_to_file, FolderStructure,
+    build_out_dir_path, create_dir, debug, move_to_subfolder, write_rest_of_element_to_file,
+    FolderStructure,
 };
 use crate::utils::{push_line_to_skeleton, rename_file_if_necessary};
 use crate::xml_processor::ProcessingContext;
@@ -22,12 +23,20 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
     folder_structure: Option<&FolderStructure>,
-    catalog_config: &CatalogConfig,
-) -> Option<FolderStructure> {
+    // catalog_config: &CatalogConfig,
+) -> Result<Option<FolderStructure>, Error> {
+    let catalog_type = match context.catalog_type {
+        Some(catalog_type) => catalog_type,
+        None => return Err(anyhow::anyhow!("❌ Catalog type not specified")),
+    };
+    let catalog_config = catalog_type.get_config();
     let catalog_item_name = catalog_config.catalog_item_name.clone();
     let wrapped_in_object_list = catalog_config.wrapped_in_object_list;
     let uses_folders = catalog_config.uses_folders;
     let id_path = &catalog_config.id_path;
+
+    let out_dir_path_base = build_out_dir_path(context, None)?;
+    create_dir(&out_dir_path_base);
 
     let mut buf = Vec::new(); // buffer for reading xml events
 
@@ -74,7 +83,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
 
                 if is_debug {
                     let emoji = if e.name().as_ref() == catalog_item_name {
-                        "😡"
+                        "🚩"
                     } else {
                         "  "
                     };
@@ -132,7 +141,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                                 "{}: {}{}{}",
                                 rel_depth,
                                 "  ".repeat(rel_depth - 1),
-                                "📟".repeat(current_path.len()),
+                                "• ".repeat(current_path.len()),
                                 &current_path.join("/")
                             );
                         };
@@ -158,18 +167,21 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 );
                 rename_file_if_necessary(&file_path, context.path_stack, &catalog_item_name);
 
-                // Determine the subfolder path
-                let subfolder_path = determine_subfolder_path(
-                    context,
+                // Move to subfolder if necessary
+                let subfolder_dir_path = determine_subfolder_path(
+                    &out_dir_path_base,
                     folder_structure,
                     &file_path,
                     id_path,
                     uses_folders,
                     &current_path,
                 );
-
-                if subfolder_path != context.current_out_dir {
-                    let _ = move_to_subfolder_if_necessary(&file_path, &subfolder_path);
+                if let Some(subfolder_dir_path) = subfolder_dir_path {
+                    if subfolder_dir_path != out_dir_path_base
+                        && !subfolder_dir_path.to_string_lossy().is_empty()
+                    {
+                        let _ = move_to_subfolder(&file_path, &subfolder_dir_path);
+                    }
                 }
 
                 update_folder_structure(&mut folder_structure_result, &current_id, &current_path);
@@ -221,7 +233,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
         buf.clear()
     }
 
-    folder_structure_result
+    Ok(folder_structure_result)
 }
 
 /// Add start tag to skeleton if conditions are met
@@ -279,43 +291,48 @@ fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool) {
 }
 
 /// Determine the subfolder path for a catalog item
-fn determine_subfolder_path<R: Read + BufRead>(
-    context: &ProcessingContext<'_, R>,
+fn determine_subfolder_path(
+    out_dir_path_base: &Path,
     folder_structure: Option<&FolderStructure>,
     file_path: &Path,
     id_path: &str,
     uses_folders: bool,
     current_path: &[String],
-) -> PathBuf {
+) -> Option<PathBuf> {
+    let folder_structure = match folder_structure {
+        Some(folder_structure) => folder_structure,
+        None => {
+            return if uses_folders && !current_path.is_empty() {
+                // Track folders using current catalog item
+                Some(out_dir_path_base.join(current_path.join("/")))
+            } else {
+                None
+            };
+        }
+    };
+
     // If a folder structure was provided, use that
-    if let Some(folder_structure) = folder_structure {
-        if id_path.is_empty() {
-            return context.current_out_dir.to_path_buf();
-        }
-
-        let paths = vec![id_path];
-        let results = match extract_values_from_xml_paths(file_path, &paths) {
-            Ok(results) => results,
-            Err(_) => return context.current_out_dir.to_path_buf(),
-        };
-
-        let id = match results.first() {
-            Some(Some(id)) => id,
-            _ => return context.current_out_dir.to_path_buf(),
-        };
-
-        let function_path = folder_structure.get_path_for_id(id);
-        if function_path.is_empty() {
-            context.current_out_dir.to_path_buf()
-        } else {
-            context.current_out_dir.join(function_path.join("/"))
-        }
-    } else if uses_folders && !current_path.is_empty() {
-        // Track folders using current catalog item
-        context.current_out_dir.join(current_path.join("/"))
-    } else {
-        context.current_out_dir.to_path_buf()
+    if id_path.is_empty() {
+        return None;
     }
+
+    let paths = vec![id_path];
+    let results = match extract_values_from_xml_paths(file_path, &paths) {
+        Ok(results) => results,
+        Err(_) => return None,
+    };
+
+    let id = match results.first() {
+        Some(Some(id)) => id,
+        _ => return None,
+    };
+
+    let function_path = folder_structure.get_path_for_id(id);
+    if function_path.is_empty() {
+        return None;
+    }
+
+    Some(out_dir_path_base.join(function_path.join("/")))
 }
 
 /// Handle ancillary elements like <UUID> and <TagList>

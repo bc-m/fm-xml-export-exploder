@@ -1,0 +1,68 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Description of what the function is designed to achieve.
+#  PARAMETERS: Document any parameters whose name or purpose is not clear from the script signature.
+#  DEPENDENCIES: (examples: layout name for context, plug-in requirements, etc.)
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2018-MM-DD by FName LName
+#  RESULT: Description of the value returned when have a successful result.
+#  ERRORS: List any errors that may be returned in place of a successful result.
+#  NOTES: Provided any additional information that would be useful knowledge for future developers and reference.
+
+# JSON DOCUMENTATION:
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets "[]".
+#  msg, pk_id
+
+#  JSON EXAMPLE:
+# JSONSetElement ( "" 
+   ; [ "param" ; "create" ; JSONString ]
+   ; [ "pk_id" ; $pk_id ; JSONString ]
+  )
+#  *** ADD OR REMOVE STEPS AS NEEDED FOR THE SCRIPT YOU ARE WRITING ***
+
+AnwenderAbbruchZulassen setzen [ ON ]
+
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+// #  Exit if in find mode, if needed
+// Wenn [ Hole ( Fenstermodus ) = 1 // find mode ]
+// Variable setzen [ $error ; 1 // exit true ]
+// Aktuelles Script verlassen [ $error ]
+// Ende (wenn)
+
+// # Script Triggers Disabled?
+// Wenn [ $$SCRIPT_TRIGGERS_OFF = 1 ]
+// Aktuelles Script verlassen [ Wahr ]
+// Ende (wenn)
+
+#  Validate json parameter and load it into local variables
+Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "There was an error evaluating variables: " & JSONGetElement ( $json_debug ; "json" ) & " - " & GetErrorDesc_en ( JSONGetElement ( $json_debug ; "json" ) ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen [ 5 // command is invalid ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  VALIDATION
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

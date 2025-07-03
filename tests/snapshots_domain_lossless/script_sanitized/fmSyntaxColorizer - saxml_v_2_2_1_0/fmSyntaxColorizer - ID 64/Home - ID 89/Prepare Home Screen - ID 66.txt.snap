@@ -1,0 +1,29 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121025 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# App settings
+Variable setzen [ $WindowWidth ; 1150 ]
+Variable setzen [ $WindowHeight ; 800 ]
+
+
+Fenster fixieren
+Blätternmodus aktivieren [ Pause: OFF ]
+Script ausführen [ Aus Liste ; "Install Menus" ]
+
+Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
+Wenn [ Hole( AnzahlDatensätzeGesamt ) = 0 ]
+	Neuer Datensatz/Abfrage
+Sonst
+	Alle Datensätze anzeigen
+Ende (wenn)
+
+Werkzeugleisten ein-/ausblenden [ Fixieren: ON ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
+Fensterposition/-größe ändern [ Height: $WindowHeight ; Width: $WindowWidth ; Top: 0 ; Left: 0 ]
+
+Script ausführen [ Aus Liste ; "Go to Home Layout" ]

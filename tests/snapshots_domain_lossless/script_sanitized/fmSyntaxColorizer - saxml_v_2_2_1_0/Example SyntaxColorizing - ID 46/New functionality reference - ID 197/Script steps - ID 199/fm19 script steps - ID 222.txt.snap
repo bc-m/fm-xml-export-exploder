@@ -1,0 +1,57 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# NEW STEPS
+
+# Variable definitions
+# @var $webviewer, $function, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15, $p16, $p17, $timeout, $function, $param, $continuous, $json, $request, $foo
+
+# 175
+JavaScript in Web Viewer ausführen [ Name: $webviewer ; ⚠️ PARAMETER "FunctionRef" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ]
+# 201
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ; "Hello::World" from file "Self" ; ⚠️ PARAMETER "Timeout" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ReadMultiple" NOT PARSED ⚠️ ]
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Timeout" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ReadMultiple" NOT PARSED ⚠️ ]
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ReadMultiple" NOT PARSED ⚠️ ]
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ; "All script steps sorted in Italian" from file "Self" ]
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ; "Undefined variables" ; ⚠️ PARAMETER "Timeout" NOT PARSED ⚠️ ; ⚠️ PARAMETER "JSONOutput" NOT PARSED ⚠️ ; ⚠️ PARAMETER "ReadMultiple" NOT PARSED ⚠️ ]
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+# 202
+Machine Learning-Modell konfigurieren [ ⚠️ PARAMETER "operation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "name" NOT PARSED ⚠️ ; _Home::zzz_UNUSED[2] ]
+Machine Learning-Modell konfigurieren [ ⚠️ PARAMETER "operation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "name" NOT PARSED ⚠️ ]
+Machine Learning-Modell konfigurieren [ ⚠️ PARAMETER "operation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "name" NOT PARSED ⚠️ ; _Home::zzz_UNUSED ]
+# 203
+FileMaker Data API ausführen [ Auswahl: ON ]
+FileMaker Data API ausführen [ Auswahl: ON ; Target: _Home::_gInputText1 ; 1 ]
+FileMaker Data API ausführen [ Auswahl: ON ; Target: $json ]
+FileMaker Data API ausführen [ Auswahl: OFF ; Target: $json ]
+FileMaker Data API ausführen [ Auswahl: ON ; Target: $json ; "{
+				\"a\":123,
+				\"b\":\"d\"
+				}" ]
+# <fmxmlsnippet type="FMObjectList"><Step enable="True" id="203" name="Execute FileMaker Data API"><SelectAll state="True"></SelectAll><Calculation><![CDATA["{
+\"a\":123,
+\"b\":\"d\"
+}"]]></Calculation><Text></Text><Field>$json</Field></Step></fmxmlsnippet>
+FileMaker Data API ausführen [ Auswahl: ON ; Target: _Home::_gInputText1 ; $foo ]
+FileMaker Data API ausführen [ Auswahl: ON ; $request ]
+
+# 204 [OBSOLETE]
+
+# FM19.6.1
+# 205
+Transaktion öffnen [ Dateneingabeüberprüfung unterdrücken: ON ; ESS-Sperrkonflikte überschreiben: ON ]
+# 207
+Transaktion rückgängig [ Condition: Hole ( SonderTastenGedrückt ) = 2 ; ErrorCode: 5001 ; ErrorMessage: "Custom Error" ]
+Transaktion rückgängig [ ErrorCode: 5001 ; ErrorMessage: "Custom Error" ]
+# 206
+Transaktion bestätigen
+# 208
+Sitzungs-ID festlegen
+Sitzungs-ID festlegen [ "//" & Hole ( SystemIPAdresse ) & "/" & Hole ( DokumentenPfad ) & "/" & Hole( ProgrammBenutzername ) ]
+Sitzungs-ID festlegen [ 1 ]
+# 209
+Wörterbuch festlegen [ US English (Medical) ]
+Wörterbuch festlegen [ UK English ]
+Wörterbuch festlegen [ UK English ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]

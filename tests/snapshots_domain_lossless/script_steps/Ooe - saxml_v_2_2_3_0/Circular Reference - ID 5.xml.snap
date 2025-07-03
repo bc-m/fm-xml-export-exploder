@@ -1,0 +1,80 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="5" name="Circular Reference" UUID="FCE13863-A635-4F4C-A0B8-AB7FC05ABC78"></ScriptReference>
+	<ObjectList membercount="6">
+		<Step hash="1EACB511A6F615B029E854EE1E76A53F" index="0" id="89" name="# (comment)" enable="True">
+			<UUID>54BB4E4E-3504-4CF7-B918-1B3C74B8A761</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<DDRREF kind="StepText" hash="2CDF5FD6D8D062B8A3551ED864EEAA9B">_54BB4E4E-3504-4CF7-B918-1B3C74B8A761</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="This script is called from a layout that is also referenced in this script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B812DDC2D9D9B5C3580A5745D0E1A4FF" index="1" id="89" name="# (comment)" enable="True">
+			<UUID>1D46BE60-ECDD-44B1-97DA-BA205D7A9422</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<DDRREF kind="StepText" hash="391E84D6BC8DB42B9D58BC4C98B9C1A3">_1D46BE60-ECDD-44B1-97DA-BA205D7A9422</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="It&apos;s set up this way, so that we can see how SaXML handles this situation"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D9E51D6AA4894FE2E6990F6AA09A3726" index="2" id="6" name="Go to Layout" enable="True">
+			<UUID>7605D105-500B-4515-85FE-0B77F82EA042</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<DDRREF kind="StepText" hash="36FC7BCFF91C7C06B0617E0EE3EE265A">_7605D105-500B-4515-85FE-0B77F82EA042</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="2" name="Contacts" UUID="106933CF-DEC7-43FD-AB82-68A6CB8D219E"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="None" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A9D6DFCE267002EBFA5C9F1E0E509448" index="3" id="89" name="# (comment)" enable="True">
+			<UUID>30E6D89C-CF00-4068-BBE8-7330D682C725</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<DDRREF kind="StepText" hash="DE7C6E7C8FD9A2ACB29CD8DEB24C1B4E">_30E6D89C-CF00-4068-BBE8-7330D682C725</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="27818A8D0BF20578C0F13DBE35F9981B" index="4" id="126" name="Constrain Found Set" enable="True">
+			<UUID>EB9C20CA-D7AB-4CDC-8874-48BDA577079B</UUID>
+			<OwnerID></OwnerID>
+			<Options>256</Options>
+			<DDRREF kind="StepText" hash="87AEE1CDD7E48A7458C0371E3B947DD5">_EB9C20CA-D7AB-4CDC-8874-48BDA577079B</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Find without indexes" id="256" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1BCDA4CB91FFAC4C669E3799BE88FA2D" index="5" id="89" name="# (comment)" enable="True">
+			<UUID>3A1E05D8-D8A5-4408-BCB0-498EAFE6B575</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<DDRREF kind="StepText" hash="2198926BC487DB5BDD8346362F988C00">_3A1E05D8-D8A5-4408-BCB0-498EAFE6B575</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

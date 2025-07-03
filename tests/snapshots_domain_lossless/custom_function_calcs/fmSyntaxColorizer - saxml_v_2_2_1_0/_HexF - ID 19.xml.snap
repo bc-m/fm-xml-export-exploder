@@ -1,0 +1,49 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="19" name="_HexF" UUID="BEEA2058-6F77-49A5-B5EC-8F097C7C22F9"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/* _HexF( pFormat ; pNumber )returns the formatted hex representation of the number.20120511 MrW Version 1.0v0*/SetzeVar([vHex = _Hex( pNumber ); vMin = Min( Länge( pFormat ) ; Länge( vHex ) ) ];ZeichenLinks( pFormat ; Länge( pFormat ) - vMin ) & ZeichenRechts( vHex ; vMin ) )]]></Text>
+		<ChunkList hash="AC4DE3265DCAFC18A9EC4EBE621D7277">
+			<Chunk type="NoRef">/* _HexF( pFormat ; pNumber )&#13;&#13;returns the formatted hex representation of the number.&#13;&#13;20120511 MrW Version 1.0v0&#13;*/&#13;&#13;</Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">([&#13;</Chunk>
+			<Chunk type="VariableReference">vHex</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="CustomFunctionRef">_Hex</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pNumber</Chunk>
+			<Chunk type="NoRef"> ); &#13;</Chunk>
+			<Chunk type="VariableReference">vMin</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Min</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pFormat</Chunk>
+			<Chunk type="NoRef"> ) ; </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vHex</Chunk>
+			<Chunk type="NoRef"> ) ) &#13;];&#13;</Chunk>
+			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pFormat</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pFormat</Chunk>
+			<Chunk type="NoRef"> ) - </Chunk>
+			<Chunk type="VariableReference">vMin</Chunk>
+			<Chunk type="NoRef"> ) &amp; </Chunk>
+			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vHex</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vMin</Chunk>
+			<Chunk type="NoRef"> ) &#13;)</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

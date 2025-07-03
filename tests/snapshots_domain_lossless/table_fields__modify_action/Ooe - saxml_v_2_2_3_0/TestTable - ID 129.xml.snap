@@ -1,0 +1,19 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="129" name="TestTable" UUID="471CCAC6-9046-4B2E-BD66-03EEAE88170B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="16" name="ContactNameList_u" repetition="1" UUID="8CECBA1F-83C0-4CBB-9777-F904D132CEDC">
+				<Calculation>
+					<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+					<DDRREF kind="ChunkList" hash="">_8CECBA1F-83C0-4CBB-9777-F904D132CEDC_0</DDRREF>
+					<Text><![CDATA[List ( TestTable_Contacts::Name )]]></Text>
+				</Calculation>
+				<BaseTableReference id="129" name="TestTable" UUID="471CCAC6-9046-4B2E-BD66-03EEAE88170B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

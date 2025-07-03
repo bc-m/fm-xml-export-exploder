@@ -1,0 +1,773 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<PrivilegeSet id="4" name="USER">
+	<UUID modifications="25" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-25T22:25:52">E01A965E-6B12-444F-9004-5F71970B92D5</UUID>
+	<Description></Description>
+	<access>
+		<Records Custom="True">
+			<Custom>
+				<ObjectList membercount="9">
+					<Table type="existing">
+						<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="Calculation">
+							<Calculation>
+								<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+								<Text><![CDATA[Hole ( AnzahlDatensätzeGesamt ) > 1]]></Text>
+								<ChunkList hash="D9A11CD8CAE9F5FB48FF1E36320F723C">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+									<Chunk type="NoRef"> ) &gt; 1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="137" name="_Language" UUID="DDFCA42A-3F9C-4F7D-914E-A1010F573F8F"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="138" name="_SyntaxTemp" UUID="F7B2B383-0654-4F30-9C5D-E66CF3A480DA"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="All"></Fields>
+					</Table>
+					<Table type="New" View="ReadWrite" Edit="ReadWrite" Create="ReadWrite" Delete="ReadWrite" Fields="ReadWrite"></Table>
+				</ObjectList>
+			</Custom>
+		</Records>
+		<Layouts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="24">
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="5" name="Colors" UUID="701BC13E-5F1F-4056-BE7E-A01905612589"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="6" name="Syntax" UUID="F17CAF44-B606-4254-AED4-C7F2A12D3521"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="7" name="GUISyntax" UUID="D97A3B10-3C57-4331-9431-DE85B90B314F"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="8" name="Palettes" UUID="DE00159D-DE61-4B8A-A157-E5CD62E0A892"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="9" name="Home" UUID="66D75489-E581-415A-A054-FD9C03DEAF52"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="12" name="Languages" UUID="C46A2F32-DF74-4C8D-8E98-5E61F7CC7E24"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="13" name="A About" UUID="59A39183-1633-4028-BEAD-84104CCD2D0F"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="14" name="-" UUID="F2AB0B1C-78D1-4641-9041-1CF75B6DE546"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="15" name="-" UUID="5E27230B-731C-4DF2-AA02-2539F3993496"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="16" name="I_Duplicate_Palette" UUID="013E1B3D-7B31-42C7-B1C8-15736F1A38EA"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="17" name="-" UUID="AB75E016-9BEF-4D17-905B-F1B050B6C468"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="20" name="I Home ADMIN" UUID="1D154D27-B1D7-47D3-8FAC-E46D7F4097D0"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="22" name="-" UUID="58CC1DD7-223F-401B-9B18-CE528A7C127E"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="23" name="I_Syntax_ADMIN" UUID="09DC5560-0E9E-4AD0-91AD-1AC3A4556719"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="24" name="-" UUID="8CF9C63A-99D8-4F72-B52F-E6263A779E83"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="25" name="Home_Info" UUID="EC853A6E-024A-4096-BFAA-0B2B7E63CF45"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="30" name="Internal" UUID="9B69DFE1-465E-4E48-BA64-F5BF277D85AB"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="31" name="--" UUID="7B41D5F6-C3A4-4D0B-B95A-516E5F5D77B6"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="32" name="A Import Palettes" UUID="A4BC8F65-7467-42AE-8845-FD7F67E671C5"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="34" name="I_SyntaxTemp ADMIN" UUID="43B6FBCD-008B-44BE-8EA0-DE3339F94E6A"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="35" name="Home_Minimised" UUID="35F443D8-4A3C-4A01-9E4A-0DF8AB197ABA"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="36" name="MBS-DeveloperOptions" UUID="BC3E26C3-4CF6-4F0F-845E-C86903751C4D"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="37" name="I_Palette" UUID="074C1059-45A4-469A-9379-8A65D2A1A019"></LayoutReference>
+					</Layout>
+					<Layout type="New" access="ReadOnly" records="ReadWrite"></Layout>
+				</ObjectList>
+			</Custom>
+		</Layouts>
+		<ValueLists viewState="ReadOnly"></ValueLists>
+		<Scripts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="199">
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="9" name="All script steps" UUID="CF0BB63B-BC01-4B04-99A9-AA128E2ED183"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="11" name="All script steps and all options" UUID="8F7D7EB6-7A93-47B5-B5AF-F1C595901AAD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="19" name="Navi" UUID="963773EA-1FD5-408A-8D6D-181E2F596AC0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="20" name="Logo BTN" UUID="BC054144-E685-4864-8B23-53D2D536BA3A"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="21" name="Logo open URL" UUID="613998D3-232B-4D29-A4B5-981CA23147E8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="22" name="--" UUID="2C8B90BF-D40A-460E-A9FF-DDC1DAB755AB"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="23" name="OnFirstWindowOpen" UUID="429651CB-3634-4F3A-A380-97D07AB3A5A0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="27" name="### 20230303 @mrwatson-de v1.13 ###" UUID="23C51521-1E7C-4CD7-A87D-B6661C79128F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="28" name="Admin Menu" UUID="58040C34-3F59-465A-BC21-3CB8503BD5B8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="29" name="Toggle Toolbar" UUID="2194DA9E-5CA2-41D7-BC96-4BB43A9334BC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="30" name="-" UUID="B958C2CE-6896-44B2-A59F-6757D6F1BF4D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="31" name="Prepare Release" UUID="E6144105-B3BE-411A-A2A6-8C03357BFFBD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="32" name="--" UUID="488BE299-87BB-47CB-B290-191B01C47469"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="33" name="Duplicate Palette" UUID="E402A948-995C-4A66-AD31-BDB134E3E1F6"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="34" name="Home BTN" UUID="919D7747-F34B-4671-9E31-F88ADC220515"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="35" name="MBS Logo BTN" UUID="72739632-B17D-46B8-804D-C373747B4696"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="36" name="OnLastWindowClose" UUID="C66E770B-FCED-4F51-9C81-3B0579A03238"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="37" name="Install Menus" UUID="6D0EF852-72EF-410C-9F3E-706468231EF2"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="38" name="MBS Filemaker Plugin Documentation" UUID="F905943B-CC86-4602-B084-4F860EF28CB5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="39" name="View" UUID="AB986925-E774-40D9-A85E-14F49DC533D8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="40" name="All" UUID="F220C1F1-8D42-47FD-9F43-C509AD996DE1"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="41" name="MBS_SyntaxColoring( Action )" UUID="94800040-8D8C-4FC7-98B2-48ABD1792476"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="42" name="MBS Plugin check" UUID="5BBDAAD0-7AB8-4A77-895B-57130030A4F9"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="43" name="Change Palette" UUID="BBF813E4-1F38-4818-B916-1F6745804F25"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="44" name="MBS" UUID="3AC4D790-0343-436A-992A-DBA3FC46AAAF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="45" name="--" UUID="0AE0A622-8253-4AA1-8D0E-5142DDBCFE21"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="46" name="Example SyntaxColorizing" UUID="BCD2C5CE-E0BC-47EF-9603-84CF77CD08D7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="47" name="--" UUID="85253BD6-AD46-468E-86C6-9B9D06E5AEFB"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="48" name="Close File" UUID="5336AC2A-666F-45F5-9FBF-4C7F85A2414E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="49" name="Open Script Editor" UUID="4EECD707-8678-4DA6-97A6-C76D6F25F33C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="50" name="-" UUID="DB8A66F7-3E32-45C3-997A-639380E85B1C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="51" name="Set Color( Field )" UUID="3D068B4D-0331-4F98-B2D5-3E21072DC4A3"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="52" name="Custom script 1" UUID="1A8B04B1-6A45-4E22-BACA-6B6BE9A55FF0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="53" name="Add all" UUID="032111A6-4EA2-403D-8329-A7576FC11ACD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="54" name="-" UUID="6167D7C2-ED10-478D-9D16-A8AE5F49C9FC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="55" name="Refresh all" UUID="8FB4F080-AA9A-4595-BADA-DA289E995E78"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="56" name="Syntax" UUID="26DC76C4-D86F-48A9-BF83-B92D633D09BB"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="57" name="--" UUID="3FD582DF-36A5-42E1-ADA6-08DB6EE689FF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="58" name="Buttonbar" UUID="8118127E-A48C-456B-BAAD-FA46A3E3E28E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="59" name="--" UUID="7615087A-BB2F-4EEA-BCDA-CFCB12ECB404"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="60" name="Color-Palettes" UUID="70080C29-AEA3-4028-882E-B8CD2A593FB7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="61" name="--" UUID="B6F26814-F29B-4E29-B650-52E29D478FA7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="62" name="Remove all" UUID="20A6A587-5EC6-4A07-9D9D-E45623FCE6D7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="63" name="OnObjectModify ColorName #T#" UUID="2A958C33-5754-44B1-8120-9FC883CF2945"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="64" name="fmSyntaxColorizer" UUID="C7591599-1882-43B9-AA54-414F336A7EAD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="65" name="--" UUID="49A6D378-4613-4019-8A29-00B7FD31A1A5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="66" name="Prepare Home Screen" UUID="9DB7D005-421B-4129-BAD6-6E9942A70910"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="67" name="Help Menu" UUID="64DF94FA-F479-4FE0-9DD5-13494E7CC05A"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="68" name="Application Help" UUID="E976F9C0-642B-4281-89C6-CE6B9D9A0DF5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="69" name="-" UUID="A636255D-D03F-4636-9BF4-1585150D44EF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="70" name="Send Feedback" UUID="30A19DBA-7539-438A-8B21-DCE746A2A597"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="71" name="-" UUID="B7B91377-6DE2-46C0-BE23-B3C52B1153F0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="72" name="About this Application…" UUID="8053770E-ACF7-488B-8FD4-8F34CEB21498"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="73" name="--" UUID="44DD7912-A78F-4BB3-95AF-BCF67F93DA4C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="75" name="Apply Palette" UUID="C4ADA835-B284-4A95-9DA2-CF368EA87868"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="76" name="Delete" UUID="07E7008B-8DDE-4B49-9C44-179967005D3E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="77" name="Set Palette as Default" UUID="336817AD-C48F-4E6F-88DB-6372CAC0AC67"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="78" name="In Devel" UUID="344E878F-A245-4C78-8D7E-325A3107842C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="79" name="--" UUID="75B3927E-EC8D-4893-B3BA-C6C91B9AC579"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="80" name="New" UUID="624646A2-AE84-49F5-A4E0-ACC2F62B295E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="81" name="Export Color-Palettes" UUID="9D330AE8-F2D9-4B44-BE17-8F27BB138761"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="82" name="Import Color-Palettes" UUID="A494478F-C5C6-45F4-9FA9-861EF8C8B071"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="83" name="OnObjectModify _gID_ActivePalette #T#" UUID="87B0BDDA-CDE7-41FA-8AAB-FE3D5B41D231"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="84" name="Duplicate" UUID="EFC98815-825A-4DAC-AAAA-FA6AB90F9EAF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="85" name="OnObjectModify _kIsActivePalette #T#" UUID="018AC2F2-CCFE-4B35-8662-1C7A277306DD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="86" name="OnEnterObject PaletteName #T#" UUID="2BC1B9AB-456F-47FB-BCE8-85F33D77E882"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="87" name="Sort Syntax" UUID="A86CEDE0-8EFC-4932-936F-3B364048DD43"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="88" name="Colorize!" UUID="8D7AC5F9-C99A-4893-856C-802B33210DA8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="89" name="Home" UUID="C049DE04-83C6-4E67-A73C-D1D0A6D41253"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="90" name="--" UUID="C204739A-54B6-4E78-92EB-B5E6936F9524"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="91" name="Show All Syntax" UUID="70295774-FF91-4196-AEF7-EEE9B5DF14AF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="92" name="Show All GUI-Syntax" UUID="126051B4-02E6-41A3-A7F3-4362C9BA4958"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="93" name="GUI-Syntax" UUID="2CB9DFCB-71B4-4EEE-9CD0-0207E98C4E78"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="94" name="--" UUID="F031504F-7047-4D3E-84B8-5556047FADAA"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="95" name="HALT on Windows" UUID="379039F3-4422-4668-A3E5-97C1F4D7EA20"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="96" name="HALT if not browse mode" UUID="6E9C5D55-B299-49BC-ADB6-D0614DA8999C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="97" name="System" UUID="132CF342-3A3E-43D4-874C-2AD23CCB82C0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="98" name="--" UUID="038D4786-FE38-4F81-A6E3-BB899BEB0536"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="99" name="-" UUID="FEF39D0D-6068-4523-A30D-826FA716D9E2"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="100" name="Prepare GUI-Syntax" UUID="6AB9906E-20D1-4970-8109-0CEF2CC30DA7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="101" name="-" UUID="0A06ED5D-F26A-4A4A-8069-30EC4302547B"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="102" name="Custom script 2" UUID="EFFDEACC-6ADD-40BE-9EC6-481494852C3B"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="103" name="Custom script 3" UUID="656FDA56-511E-4AA9-BF7E-C2F825419BEC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="104" name="Custom script 4" UUID="CC46D82E-F682-4979-ADCC-5AB99ABE3779"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="105" name="Custom script 5" UUID="075A75B2-E3D0-4B86-9E08-2C543C8DD4D8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="106" name="MBS Filemaker Plugin" UUID="042E057E-0B56-4475-B816-3592BB5011BD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="107" name="WWW" UUID="B13FD8D1-5459-4391-BDA8-EE3D9B9F4155"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="108" name="--" UUID="78ECA897-D61D-4420-A650-ECCCA19DF86F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="109" name="MonkeyBreadSoftware" UUID="35A290A6-0A96-4E67-B0E2-0ADEDD25CB10"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="110" name="GRR Colors" UUID="ED2B2A19-1845-4B93-91E3-5FAD4B70E3A8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="111" name="GRR GUI-Syntax" UUID="53F39164-529F-4529-8ABC-5EC1E79AB9C0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="112" name="Delete orphaned and empty GUI-Syntax entries" UUID="0D09280E-CCD9-4BCF-AB0C-293DC705F96E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="113" name="Show Default Palette" UUID="AA60AB8F-9719-487F-85A3-0B5FED0CE71E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="114" name="Duplicate Syntax" UUID="FE2F614F-7EA0-478B-A543-317C9FAD7850"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="115" name="-" UUID="36EE6A09-7692-4C55-94A2-B33611DBE79D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="116" name="Read and Edit Syntax Comment" UUID="BB54673E-C13E-4607-9A88-3FF7CC651E2D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="117" name="Read and Edit Palette.Color_Script::Comment" UUID="4844F813-9B45-4449-B841-74243371C011"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="118" name="Colors" UUID="70335585-4626-4C21-857C-3BBDF72510DD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="119" name="--" UUID="184AE1CF-6E58-48ED-B09B-1F21BECF0B08"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="120" name="Prepare Colors" UUID="EE9A2649-2D55-47D4-B389-2CB033D00C56"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="121" name="Comment Column i-Header" UUID="62AF5660-2AE2-4398-AE58-464BB7CEB808"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="122" name="BTN Sort Syntax" UUID="4B982850-F638-4004-B420-07E4928810E5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="123" name="Read and Edit Palette.Color_Formula::Comment" UUID="E1775495-D5B7-4750-BB74-AB6CAB4BB482"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="124" name="Prepare Syntax" UUID="C75AA2BB-08B5-403B-82F9-86F6F83BC909"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="125" name="-" UUID="F7AB71E2-855A-433A-9AC2-95BBE927F350"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="126" name="-" UUID="39AD94D6-6B09-45A8-8E29-C7B4155DE44C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="127" name="-" UUID="B9C8A801-871F-4476-A979-69F2DED8BFA7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="128" name="-" UUID="39ED821F-C24E-495E-9785-ED7BDAC6F6CF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="129" name="-" UUID="7284BAA0-0312-4A2F-9C63-6B359E0730AC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="130" name="StartSession" UUID="5C377A0C-3F69-4A1F-903F-DD45788CBFE4"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="138" name="Find( Selector ; Wildcard )" UUID="4AF26F45-DF1A-475B-A6BF-A57695E21089"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="139" name="Allow Formatting Bar ( 0/1 )" UUID="411C91D2-0BF0-4E43-85EB-EEE66CCEF8C6"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="140" name="Go to Home Layout" UUID="6018F238-AE2D-49FF-9959-F0FE8E0C429E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="141" name="Export Syntax-Tags" UUID="9F3B7A48-ECAC-47BE-ABA3-26510A5BEF42"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="142" name="Import Syntax-Tags" UUID="144342C9-2F46-47D7-8EF3-5114859F3EBD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="143" name="-" UUID="18271090-4099-4DBA-8AF9-CFE0221793BE"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="144" name="MBS_SetSyntaxColoringEnabledStatus" UUID="D299CE28-B478-4C60-BBAC-82515F75465D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="145" name="A typical script" UUID="768AD907-DA09-413B-A837-0AD8B4775746"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="146" name="fm12 script steps" UUID="2961DC1D-9D50-4427-857B-83AA76DB5929"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="147" name="Halt Script" UUID="FDDDC8F7-A383-4B83-BB0B-2A4474D6BF50"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="148" name="Set LastMessageChoice( Nr )" UUID="D96DA0FA-10A8-4B38-B954-31E6B49B927D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="149" name="Open Scripts" UUID="24EA5A6C-510D-469B-A21B-F7D574E629FE"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="150" name="-" UUID="4DD82A6F-8BB6-4F1F-8A79-E2DFF6274772"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="151" name="All script steps sorted by ID" UUID="37C789DE-CFBA-4B3D-BCE7-02A08DBB59CB"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="152" name="fm13 script steps" UUID="4116BC39-8EC9-4800-B13A-2E65B446C948"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="153" name="Set LineNumber Color" UUID="DE3EAB18-C424-4944-A9B3-8AB2916E5A35"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="154" name="Functions" UUID="9458303A-B35D-4E1C-BF74-BA256C5A7C4C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="155" name="Empty Script" UUID="B08FB944-50FF-4E36-BA7B-9E006FBC939C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="156" name="Home Info BTN" UUID="810E5701-C06D-4C85-AE61-BCA97DDEE521"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="157" name="Postpare Release" UUID="2959CF12-A10A-4A6B-913B-22CC40E21834"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="158" name="Hard sort Syntax" UUID="92F07D45-236B-4019-8020-94755488AFDA"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="159" name="Renumber ALL Syntax" UUID="E94F7123-8247-400F-8BCB-D79FC43C0692"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="160" name="Tidy up _SyntaxTemp" UUID="89054EFF-387A-49C9-A857-8FA76AAE5A1B"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="161" name="SyntaxTemp" UUID="906CC84D-CEA9-42C9-9EF4-B56A43951AAC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="162" name="--" UUID="FB55A995-363B-4DBA-B1C6-A8CCD7D5B643"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="163" name="Home_Midimised" UUID="6BA6BB57-41A0-4C2A-BBAB-DC9F93C5B42A"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="164" name="fm14 script steps" UUID="9AE120D8-D29C-4542-A8CE-DF0B266151C0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="165" name="fm15 script steps" UUID="B5C33012-60B3-4B78-A3D6-8958E37E84B5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="166" name="fm15 changed script steps" UUID="7B18826D-4B77-4246-9BBA-83224B7406EF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="167" name="fm14 functions" UUID="D4E307B1-21DB-4D8C-9E56-764A2310ADF8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="168" name="fm15 functions " UUID="709F6EEE-DA81-4218-853D-61E4760D3B11"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="171" name="Omit RecordNav BTN" UUID="B2DD6C34-C94C-4395-BC8B-120D974A9F36"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="172" name="Filter FM-Version" UUID="E2E57B95-4287-4AC7-B1FF-B0D2F38BB692"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="173" name="Go to Syntax for given FM-Version" UUID="31AC34A4-19EA-4549-8512-0AEE794056A3"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="174" name="Custom scripts" UUID="5356913D-7700-4C1E-AA68-8BDD3AF8B730"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="175" name="--" UUID="26D0A299-6786-4C56-98DD-9463F6C85DE7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="176" name="fm16 script steps" UUID="25016C4D-8930-48B8-B178-5437B741CCE6"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="178" name="MBS_DeveloperTools Init" UUID="BDA99442-00F7-461E-AA90-889B3658605E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="179" name="MBS_DeveloperTools All" UUID="6C0F3022-B71E-48CD-B5A0-FD9539C7FD2B"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="180" name="MBS_DeveloperTools One" UUID="B749060A-4E6C-4601-8795-2F85E8F627D9"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="183" name="Functions" UUID="3659FD41-1A66-4B60-8F11-FE4A6911024D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="184" name="--" UUID="E250C48F-9DE9-4D0A-9DCC-EBE56E6BF68D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="185" name="Resort Syntax" UUID="0763CB93-D3BF-44A9-8204-9D7B278B1211"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="186" name="Common functions" UUID="7881D2D1-49BF-4BBC-BA76-A6DB52171E4D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="187" name="--" UUID="5D78DF83-1B72-4525-B96E-ECAD39E7EA19"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="188" name="Windows User Comiserations" UUID="74046E16-5A9D-4E53-AFE7-382B762E2655"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )" UUID="8C8A6C72-D947-4D77-BB88-D12C62B698C8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="190" name="OnEnterTextField open URL #T#" UUID="A2DE4B4D-EA24-4071-9E77-2EED1F0C890F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="191" name="Close Popover" UUID="0F966F29-1E85-43DC-ABB3-B8C39555F381"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="192" name="fm17 script steps" UUID="C65E81AE-6411-4A77-8F64-AD4AE62FD728"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="193" name="fm18 script steps" UUID="487C85E7-B4A9-44D1-8F44-16C3B79E04CB"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="194" name="fm16 functions" UUID="9386050C-EEBE-43CE-A0E1-EEEFB3DBDEEF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="195" name="fm17 functions" UUID="E2D5C35D-DCEB-46BC-9527-948318279C21"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="196" name="fm18 functions" UUID="C8A08DEC-6613-4C29-8E67-EADFCAEA2531"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="197" name="New functionality reference" UUID="142E94F9-38ED-4198-819A-FE39082E8139"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="198" name="--" UUID="EE6B0BC2-28FB-4BE9-877B-5A9C7DB7C87B"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="199" name="Script steps" UUID="8B6D0042-3765-45AA-B74E-46A76C1CD90F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="200" name="--" UUID="E18E0351-FA3A-4EAD-9D16-6C0FEE356C35"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="201" name="Hello::World" UUID="57251882-59CD-455B-8A2F-3DE70C6F6CE5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="202" name="Import Column 5 from en fmXRaySelf" UUID="9E68046F-9001-4110-936F-BC596DAFC0B2"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="203" name="Modules" UUID="CE548706-D9CA-4125-B76E-9E00D9A38410"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="204" name="--" UUID="1BD45884-D317-40D7-86A7-744CD3B4F2F7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="217" name="Undefined variables" UUID="E9A609B2-A5DC-4FD4-A369-C3BA6C09D076"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="218" name="All script steps sorted in English" UUID="12EA12D2-9E33-45B0-A05E-7B2D1C1ACD6E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="219" name="All script steps sorted in Italian" UUID="11E752E9-B567-4197-B95C-FFC32FD361F4"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="221" name="MBS-Developer-Options Renumber" UUID="873A5EF0-130E-4F47-96EB-1EFE657815B9"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="222" name="fm19 script steps" UUID="B20760A1-0A4C-447F-B3A0-6017226CC5AD"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="223" name="Show Color Help" UUID="88B05C87-E7F7-4ADC-8284-D29EBBDEC9D9"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="224" name="Show Current Palette" UUID="C3178B97-5DC7-4E88-A8C2-60EC4FD01248"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="225" name="Open repo BTN" UUID="6207B574-4F00-4530-A3BA-65690E12835D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="226" name="Collection Filter this collection" UUID="9F606E6C-62F7-4C70-A1E4-A60C82F7A003"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="227" name="Syntax-Collections" UUID="D5F3F427-817A-4601-BE42-41E28A71DBBF"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="228" name="--" UUID="8122A7D5-3937-47B9-899D-F76E43891C20"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="229" name="-" UUID="A55BE5A4-F8C3-4F68-BEC1-94ACD559A268"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="230" name="MBS-Developer-Options" UUID="D900AED1-4ADB-4B37-9A07-B9F857C7AFC1"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="231" name="--" UUID="A31754AC-32BC-4716-8295-CA168B5B71C3"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="232" name="Scripts for Buttons" UUID="6483518D-9341-405F-B76B-2E1EE17F8769"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="233" name="--" UUID="8687CA54-47E2-4982-9EC6-9310EAEE2088"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="234" name="Clear Home Info" UUID="C822B52C-E582-4C34-99AC-48A1839B2586"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="235" name="fm19 functions" UUID="9C43E74D-9F4E-4DA9-9554-A164EE99CF2E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="236" name="Switch active palette between Dark/Light mode automatically" UUID="D7EAEC6D-E198-47BD-9D89-49A017B55CB6"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="237" name="Mode Change ( Event )" UUID="D9C183F2-CCCD-41A7-B775-F10DD2A17FCC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="238" name="fmIDE Module" UUID="4A8810E9-C857-4F1E-83E6-AF1BFBD4C4DA"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="239" name="fmIDE public api" UUID="DF8FAD87-8B6A-4FDB-A5A9-D1A81801424C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="240" name="fmIDE" UUID="1AAC274C-8C92-432E-99B8-4A33E6E51570"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="241" name="--" UUID="76C5AF31-8FA0-4404-A153-25B5EB464B11"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="242" name="--" UUID="EA932C97-6D90-45AC-BA8F-173437A924C6"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="243" name="Re-Login" UUID="7065C50D-C86B-43BC-B499-E02B67E05DAB"></ScriptReference>
+					</Script>
+					<Script type="New" access="ReadOnly"></Script>
+				</ObjectList>
+			</Custom>
+		</Scripts>
+		<Other value="25344" Print="True" Export="True" manageAccounts="False" manageExtPrivs="False" allowOverride="False" disconnectIdle="True" commands="All">
+			<Password prohibitModification="True"></Password>
+		</Other>
+	</access>
+</PrivilegeSet>

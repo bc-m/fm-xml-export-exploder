@@ -1,0 +1,294 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="163" name="Home_Midimised" UUID="6BA6BB57-41A0-4C2A-BBAB-DC9F93C5B42A"></ScriptReference>
+	<ObjectList membercount="19">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7B478088-291A-40F0-A8B1-7CBE5E19597E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E988027A-0CAC-4E3E-B965-5D8A21722328</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW Neu"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CE42AD74-F007-4FAD-8D3D-0EFC28104EF1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>4DCBA34B-6BA0-486A-9AC9-8D1D8E67B060</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>2F1D073E-1CCB-41FA-A16D-C82ED3273076</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>65B73470-27DE-46C5-8D6D-CBA7C1791070</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="141" name="Variable setzen" enable="True">
+			<UUID>12CE9D91-E949-45A5-8E37-D8AC569DB1D3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( NICHT $$Midimised ; 1 )]]></Text>
+								<ChunkList hash="047A8DC3745CF5B0B2DF42D6542DD610">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="VariableReference">$$Midimised</Chunk>
+									<Chunk type="NoRef"> ; 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$$Midimised"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BD2C0F67-148B-48D7-B3FB-70A3E6C1005C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="68" name="Wenn" enable="True">
+			<UUID>6E611D67-7E36-437B-BB8A-FC42C9F4FC96</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$$Midimised]]></Text>
+							<ChunkList hash="03129E8DAC2879812A868B63D6C1776E">
+								<Chunk type="VariableReference">$$Midimised</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>3A91EA94-9176-4B43-A315-36A245FD5849</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="35" name="Home_Minimised" UUID="35F443D8-4A3C-4A01-9E4A-0DF8AB197ABA"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="29" name="Werkzeugleisten ein-/ausblenden" enable="True">
+			<UUID>0B0AE373-180D-4B86-860B-1DC29CE1CB30</UUID>
+			<OwnerID></OwnerID>
+			<Options>2</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Fixieren" id="524288" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Datensatz-bearbeiten-Werkzeugleiste " id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="Ausblenden" value="2"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="31" name="Fenster anpassen" enable="True">
+			<UUID>E40564BB-B30B-4B67-8F97-2A74B2E88D73</UUID>
+			<OwnerID></OwnerID>
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Alles anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="119" name="Fensterposition/-größe ändern" enable="True">
+			<UUID>C2B4A810-35E3-4FC6-985B-8A6F9DD2F5ED</UUID>
+			<OwnerID></OwnerID>
+			<Options>-2147467262</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top>
+								<Calculation datatype="1" position="3">
+									<Calculation>
+										<Text><![CDATA[Hole ( FensterSchreibtischHöhe ) - Hole ( Fensterhöhe ) - 60]]></Text>
+										<ChunkList hash="AFC2402D7B6576E2F5D07A202F936D65">
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">FensterSchreibtischHöhe</Chunk>
+											<Chunk type="NoRef"> ) - </Chunk>
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">Fensterhöhe</Chunk>
+											<Chunk type="NoRef"> ) - 60</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</top>
+							<left>
+								<Calculation datatype="1" position="4">
+									<Calculation>
+										<Text><![CDATA[Hole ( FensterSchreibtischBreite ) - Hole ( Fensterbreite ) - 20]]></Text>
+										<ChunkList hash="9C339E8361B95376CDE15A7FCAFFDA80">
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">FensterSchreibtischBreite</Chunk>
+											<Chunk type="NoRef"> ) - </Chunk>
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">Fensterbreite</Chunk>
+											<Chunk type="NoRef"> ) - 20</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</left>
+						</Bounds>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="69" name="Sonst" enable="True">
+			<UUID>2F6B8DDC-0634-4667-99E1-B50F2B6B2222</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="14" id="119" name="Fensterposition/-größe ändern" enable="True">
+			<UUID>31A42078-90CA-46A2-A542-53C047C7C506</UUID>
+			<OwnerID></OwnerID>
+			<Options>-2147467262</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top>
+								<Calculation datatype="1" position="3">
+									<Calculation>
+										<Text><![CDATA[0]]></Text>
+										<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+											<Chunk type="NoRef">0</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</top>
+							<left>
+								<Calculation datatype="1" position="4">
+									<Calculation>
+										<Text><![CDATA[0]]></Text>
+										<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+											<Chunk type="NoRef">0</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</left>
+						</Bounds>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="1" name="Script ausführen" enable="True">
+			<UUID>630F728B-0473-4755-8961-B5633BB06075</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="140" name="Go to Home Layout" UUID="6018F238-AE2D-49FF-9959-F0FE8E0C429E"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="70" name="Ende (wenn)" enable="True">
+			<UUID>F17B2217-D3AA-411F-A335-F86F2FD47257</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="17" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7DACD135-AB04-4301-AC11-D7607536ACDE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B8010D0E-5337-4DFE-9F09-10BC8133AB3C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

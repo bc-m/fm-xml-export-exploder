@@ -1,0 +1,421 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FieldCatalog>
+	<UUID modifications="47" userName="R.Watson" accountName="admin" timestamp="2021-09-24T10:14:41">944B8196-92C2-475D-B17D-A61AF1E9B746</UUID>
+	<TagList></TagList>
+	<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+	<ObjectList membercount="19">
+		<Field DefaultStyle="" id="1" name="__ID" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="13" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">EE515269-07CC-4FDD-A7F4-E75DE2E0AD09</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						<Text><![CDATA[_UUID( "4h" )]]></Text>
+						<ChunkList hash="CE94A1CE67ECCAE8A87467254A927680">
+							<Chunk type="CustomFunctionRef">_UUID</Chunk>
+							<Chunk type="NoRef">( &quot;4h&quot; )</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="2" name="PaletteName" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">F40EF81B-1897-474F-84CC-56818E6D3F6A</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="False" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						<Text><![CDATA[Falls( Hole ( AnzahlDatensätzeGesamt ) = 1 ; "Default Colors" ; "New Palette" )]]></Text>
+						<ChunkList hash="348B0DDE92D82F5D056699C990A349B0">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FunctionRef">Hole</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+							<Chunk type="NoRef"> ) = 1 ; &quot;Default Colors&quot; ; &quot;New Palette&quot; )</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="3" name="_gDuplicatePaletteFrom" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">E50F5204-3088-455B-A91D-F95B1C0D5C39</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="4" name="_kDS" fieldtype="Calculated" datatype="Text" comment="k_DS (T)//Standard Datensatznummer anzeige">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">F497E4BB-3A81-4C78-B0E7-9D7968A0FA0A</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[_BookmarkStandard]]></Text>
+				<ChunkList hash="48A71BC49C3A25519F5D1CDFCBCB4257">
+					<Chunk type="CustomFunctionRef">_BookmarkStandard</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="5" name="_kkScript" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">715D0AF0-7A60-4F73-9F76-EFCA78F1C52A</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA["Script"]]></Text>
+				<ChunkList hash="937CAD07F0F436E1F81FEB3823D2C189">
+					<Chunk type="NoRef">&quot;Script&quot;</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="6" name="_kkFormula" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">EE532B49-2022-4515-B6CA-B5C9B2A407BF</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA["Formula"]]></Text>
+				<ChunkList hash="7BFDE82F59DDADC96578F67AF555538C">
+					<Chunk type="NoRef">&quot;Formula&quot;</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="7" name="_kListScriptColors" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8B6ACE27-2B42-4806-8AC1-B45CF1C4309B</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[Austauschen( Liste( Palette.Color_Script::ColorInput ) ; "¶" ; " " )]]></Text>
+				<ChunkList hash="1E9A1269A90E639C1952EE6133B75753">
+					<Chunk type="FunctionRef">Austauschen</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">Liste</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="5" name="ColorInput" repetition="1" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
+							<TableOccurrenceReference id="1065126" name="Palette.Color_Script" UUID="A58E69FB-714B-4862-995A-C8AE925C1B75"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ; &quot;¶&quot; ; &quot; &quot; )</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="8" name="_kListFormulaColors" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">D74E5557-38D3-42BC-9C84-EF0A1E4DB23E</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[Austauschen( Liste( Palette.Color_Formula::ColorInput ) ; "¶" ; " " )]]></Text>
+				<ChunkList hash="5EBF13417BE460EF94DBE7A967ACB210">
+					<Chunk type="FunctionRef">Austauschen</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">Liste</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="5" name="ColorInput" repetition="1" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
+							<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ; &quot;¶&quot; ; &quot; &quot; )</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="9" name="_gColorBuffer" fieldtype="Normal" datatype="Text" comment="For transfering colors">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2EA9D5D2-D0F9-4399-8EC7-90C6062E8994</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						<Text><![CDATA[_FullBlockDropColor ( Selbst )]]></Text>
+						<ChunkList hash="F7E9240565028C01C953120E1F40A9D0">
+							<Chunk type="CustomFunctionRef">_FullBlockDropColor</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> )</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="10" name="_kIsActivePalette" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">586E3116-A880-4FA7-98B8-0D2FCAAAB699</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[NICHT IstLeer( __ID ) UND NICHT IstLeer( _Syntax::_gID_ActivePalette ) UND __ID = _Syntax::_gID_ActivePalette]]></Text>
+				<ChunkList hash="B86F1F4F9C62CB6AA9A570DA0198A4EF">
+					<Chunk type="FunctionRef">NICHT</Chunk>
+					<Chunk type="NoRef"> </Chunk>
+					<Chunk type="FunctionRef">IstLeer</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) </Chunk>
+					<Chunk type="FunctionRef">UND</Chunk>
+					<Chunk type="NoRef"> </Chunk>
+					<Chunk type="FunctionRef">NICHT</Chunk>
+					<Chunk type="NoRef"> </Chunk>
+					<Chunk type="FunctionRef">IstLeer</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) </Chunk>
+					<Chunk type="FunctionRef">UND</Chunk>
+					<Chunk type="NoRef"> </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="11" name="_k1" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2E431D93-9D8F-40FB-8019-25961F597C37</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[1]]></Text>
+				<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+					<Chunk type="NoRef">1</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="12" name="Comment" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="1" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">FB069A7B-3A85-4475-8886-DE0A7607E2D1</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="13" name="_kListScriptColorNames" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="10" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">16D1686C-B5C4-47F2-BD33-5B962B3073A1</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[Liste( Palette.Color_Script::ColorName )]]></Text>
+				<ChunkList hash="94040BF13D8410CDDB363658F6F1186D">
+					<Chunk type="FunctionRef">Liste</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+							<TableOccurrenceReference id="1065126" name="Palette.Color_Script" UUID="A58E69FB-714B-4862-995A-C8AE925C1B75"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> )</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="14" name="DisableVariableChecking" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">717D3032-DF61-4FE6-9614-1B7B267EC3A6</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="15" name="DarkModePaletteBool" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2021-09-23T22:19:02">34AADE32-0AFB-473C-88B4-A05CF0501682</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						<Text><![CDATA[Selbst=1]]></Text>
+						<ChunkList hash="7732B5DE09E3ADA8546ED6E513648AD3">
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef">=1</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="16" name="_kIsDarkModePalette" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2021-09-23T21:51:41">BF865AEC-E517-41AB-A492-C1C243407CCF</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[DarkModePaletteBool=1]]></Text>
+				<ChunkList hash="7E9E40B86F5ED13863B23CB571D7AD85">
+					<Chunk type="FieldRef">
+						<FieldReference id="15" name="DarkModePaletteBool" repetition="1" UUID="34AADE32-0AFB-473C-88B4-A05CF0501682">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef">=1</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="17" name="_kSwitchDarkLightPaletteName" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2021-09-24T09:38:26">05D51167-1D3E-4453-85A5-F6C9231BCCEB</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[SetzeVar([vSuffix = " (Dark)"];Falls( _EndsWith ( PaletteName ; vSuffix ) ;ZeichenLinks ( PaletteName ; Länge ( PaletteName ) - Länge ( vSuffix ) ) ;PaletteName & vSuffix))]]></Text>
+				<ChunkList hash="ACD6347A9B887E580F82DB264962FC99">
+					<Chunk type="FunctionRef">SetzeVar</Chunk>
+					<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+					<Chunk type="VariableReference">vSuffix</Chunk>
+					<Chunk type="NoRef"> = &quot; (Dark)&quot;&#13;&#13;];&#13;&#13;</Chunk>
+					<Chunk type="FunctionRef">Falls</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="CustomFunctionRef">_EndsWith</Chunk>
+					<Chunk type="NoRef"> ( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="2" name="PaletteName" repetition="1" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ; </Chunk>
+					<Chunk type="VariableReference">vSuffix</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;</Chunk>
+					<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+					<Chunk type="NoRef"> ( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="2" name="PaletteName" repetition="1" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ; </Chunk>
+					<Chunk type="FunctionRef">Länge</Chunk>
+					<Chunk type="NoRef"> ( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="2" name="PaletteName" repetition="1" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) - </Chunk>
+					<Chunk type="FunctionRef">Länge</Chunk>
+					<Chunk type="NoRef"> ( </Chunk>
+					<Chunk type="VariableReference">vSuffix</Chunk>
+					<Chunk type="NoRef"> ) ) ;&#13;&#13;</Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="2" name="PaletteName" repetition="1" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> &amp; </Chunk>
+					<Chunk type="VariableReference">vSuffix</Chunk>
+					<Chunk type="NoRef">&#13;&#13;)&#13;&#13;)</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="18" name="_kSwitchDarkLightPaletteID" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2021-09-24T09:38:22">AF867338-9873-4350-804C-5F79C30ABD15</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[Palette.Palette_SwitchDarkLight::__ID]]></Text>
+				<ChunkList hash="24ED1164ACE0DA5033E4B9536BA409F9">
+					<Chunk type="FieldRef">
+						<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+							<TableOccurrenceReference id="1065166" name="Palette.Palette_SwitchDarkLight" UUID="1B1E73B8-B04D-4C58-8ACD-5B23FCD97679"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+		<Field DefaultStyle="" id="19" name="_kSwitchDarkLight" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2021-09-24T10:14:38">01682CDE-878F-4B7F-B77A-D18F9A942E02</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				<Text><![CDATA[DarkModePaletteBool ≠ _IsDarkMode]]></Text>
+				<ChunkList hash="24421F1730D4CEC7BB3C14A8B9E2363B">
+					<Chunk type="FieldRef">
+						<FieldReference id="15" name="DarkModePaletteBool" repetition="1" UUID="34AADE32-0AFB-473C-88B4-A05CF0501682">
+							<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ≠ </Chunk>
+					<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
+				</ChunkList>
+			</Calculation>
+			<TagList></TagList>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

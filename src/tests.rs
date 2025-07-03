@@ -11,6 +11,7 @@ mod tests {
     use crate::config::Flags;
     use crate::utils::file_utils::escape_filename;
     use crate::xml_processor::explode_xml;
+    use crate::OutputTree;
 
     #[test]
     fn test_escape_filename() {
@@ -32,32 +33,43 @@ mod tests {
     ///    cargo insta review
     #[test]
     fn snapshot_test_lossy() {
-        snapshot_test_with_mode(false, "snapshots_lossy");
+        snapshot_test_with_mode(false, OutputTree::Db, "snapshots_db_lossy");
     }
 
     #[test]
     fn snapshot_test_lossless() {
-        snapshot_test_with_mode(true, "snapshots_lossless");
+        snapshot_test_with_mode(true, OutputTree::Db, "snapshots_db_lossless");
     }
 
-    fn snapshot_test_with_mode(is_lossless: bool, snapshot_folder_name: &str) {
+    #[test]
+    fn snapshot_test_lossless_domain() {
+        snapshot_test_with_mode(true, OutputTree::Domain, "snapshots_domain_lossless");
+    }
+
+    fn snapshot_test_with_mode(
+        is_lossless: bool,
+        output_tree: OutputTree,
+        snapshot_folder_name: &str,
+    ) {
         let path_str = format!("./tests/{}", snapshot_folder_name);
         let snapshot_dir = Path::new(&path_str);
         let input_dir = Path::new("./tests/xml");
         // Make output_dir mode-specific to avoid interference from prior or parallel test runs
-        let path_str = format!(
-            "./tests/{}",
-            if is_lossless {
-                "out_lossless"
-            } else {
-                "out_lossy"
-            }
-        );
+        let output_tree_str = match output_tree {
+            OutputTree::Db => "db",
+            OutputTree::Domain => "domain",
+        };
+        let path_str = if is_lossless {
+            format!("./tests/out_{output_tree_str}_lossless")
+        } else {
+            format!("./tests/out_{output_tree_str}_lossy")
+        };
         let output_dir = Path::new(&path_str);
         let flags = Flags {
             parse_all_lines: false,
             lossless: is_lossless,
             verbose: None,
+            output_tree,
         };
         let _ = fs::remove_dir_all(output_dir);
 

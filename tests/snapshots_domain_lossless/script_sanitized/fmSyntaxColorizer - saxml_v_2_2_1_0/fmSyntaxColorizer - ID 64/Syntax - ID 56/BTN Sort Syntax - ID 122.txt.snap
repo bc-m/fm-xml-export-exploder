@@ -1,0 +1,21 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20140429 MrW With [SHIFT]+[CTRL]+[ALT] Renumber and hard sort
+# 20121102 MrW 
+
+
+Variable setzen [ $HardSort ; _IsKeyALT UND _IsKeySHIFT UND _IsKeyCTRL ]
+
+Wenn [ _IsKeyALT ]
+	Script ausführen [ Aus Liste ; "Renumber ALL Syntax" ]
+	
+	Wenn [ $HardSort ]
+		Script ausführen [ Aus Liste ; "Hard sort Syntax" ]
+	Ende (wenn)
+	
+Sonst
+	Script ausführen [ Aus Liste ; "Sort Syntax" ]
+	
+Ende (wenn)

@@ -1,0 +1,30 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Relationship id="21">
+	<UUID modifications="1" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">C97AE8BD-7813-4005-A4B8-9CA3AEF89EFF</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065120" name="Palette.Color_toDuplicate" UUID="CBA4FE65-7CBC-4655-8F8E-49CF1DCE1717"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+					<TableOccurrenceReference id="1065120" name="Palette.Color_toDuplicate" UUID="CBA4FE65-7CBC-4655-8F8E-49CF1DCE1717"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="3" name="_gDuplicatePaletteFrom" UUID="E50F5204-3088-455B-A91D-F95B1C0D5C39">
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

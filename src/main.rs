@@ -1,7 +1,7 @@
 use std::{fs, path::PathBuf, time::Instant};
 
 use anyhow::Result;
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use rayon::prelude::*;
 
 use crate::config::Flags;
@@ -17,6 +17,18 @@ mod supporting;
 mod tests;
 mod utils;
 mod xml_processor;
+
+#[derive(Debug, Clone, ValueEnum)]
+enum OutputTree {
+    #[value(
+        name = "domain",
+        help = "Use domain (e.g. catalog name) as the root folder"
+    )]
+    Domain,
+
+    #[value(name = "db", help = "Use database name as the root folder (default)")]
+    Db,
+}
 
 /// Parse all as XML exported FileMaker solutions from source directory and explode them to target directory.
 #[derive(Parser)]
@@ -40,6 +52,10 @@ struct Args {
     /// Example: --verbose "CustomFunctionsCatalog"
     #[arg(short, long, value_name = "FILTER", num_args(0..=1))]
     verbose: Option<Option<String>>,
+
+    /// Specify the output tree root folder: domain or db (default)
+    #[arg(short = 't', long = "output_tree", value_enum, default_value_t = OutputTree::Db)]
+    output_tree: OutputTree,
 }
 
 #[derive(Debug, Default)]
@@ -59,6 +75,7 @@ fn main() -> Result<()> {
         parse_all_lines: args.all_lines,
         lossless: args.lossless,
         verbose: args.verbose,
+        output_tree: args.output_tree,
     };
 
     match &flags.verbose {

@@ -1,0 +1,28 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20140429 MrW Export / import _Syntax via _SyntaxTemp and back into itself (sorted)
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Syntax
+Script ausführen [ Aus Liste ; "Show All Syntax" ]
+
+# Import sorted into _SyntaxTemp
+Gehe zu Layout [ Layout: "I_SyntaxTemp ADMIN" ; Animation: Ohne ]
+Alle Datensätze anzeigen
+Alle Datensätze löschen [ Mit Dialog: OFF ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+
+# Reimport sorted OVER existing _Syntax
+Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
+Sortierung aufheben
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+
+# Tidy up _SyntaxTemp
+Script ausführen [ Aus Liste ; "Tidy up _SyntaxTemp" ]
+
+# and reshow
+Script ausführen [ Aus Liste ; "Show All Syntax" ]

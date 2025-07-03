@@ -1,0 +1,994 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# Note: This script is used to check the output of fmCheckMates Print function
+
+# 20170516 MrW Script sorted alphabetically within categories for fm16
+
+# Calculation
+Set Variable [ $MBS_Command_Results[1] ; /*Let([ 
+				$Command_EN =_Syntax::Command_EN ;
+				$Command_Foreign = Syntax.GUISyntax::Command ;
+				$CommandColoringOn = _Syntax::On = 1;
+				$ColorExists = Syntax.Color::__ID > 0 and Syntax.Color::ColorName ≠ "--None--";
+				$ColorHex = Syntax.Color::_kColorHex ;
+				vStamp = Get( CurrentTime )
+				];
+				Case( 
+				
+				_Syntax::_kIsGroupTitle ; "" ;
+				
+				not $CommandColoringOn or not $ColorExists ;
+				vStamp & " Removed: English " & MBS( "SyntaxColoring.RemoveTag" ; $Command_EN ) & 
+				Case( _Syntax::_gLanguage <> "English" and not IsEmpty( $Command_Foreign ) ;
+				  ", " & _Syntax::_gLanguage & " " & MBS( "SyntaxColoring.RemoveTag" ; $Command_Foreign )
+				) ;
+				
+				$CommandColoringOn and $ColorExists ;
+				vStamp & " Added: English " & MBS( "SyntaxColoring.AddTag" ; $Command_EN ; $ColorHex ) & 
+				Case( _Syntax::_gLanguage ≠ "English" and not IsEmpty( $Command_Foreign ) ;
+				  ", " & _Syntax::_gLanguage & " " & MBS( "SyntaxColoring.AddTag" ; $Command_Foreign ; $ColorHex )
+				) ;
+				
+				"-"
+				
+				))*/ ]
+
+# =============
+# CONTROL STEPS
+# =============
+
+Allow User Abort [ OFF ]
+Allow User Abort [ ON ]
+
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: "foobar" ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: "foobar" ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Major" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Minor" NOT PARSED ⚠️ ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: 123 ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ]
+Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; ⚠️ PARAMETER "Latitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Longitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Radius" NOT PARSED ⚠️ ]
+
+If [ Collapsed: OFF ; 1=0 ]
+Else If [ Collapsed: OFF ; 1=1 ]
+	If [ Collapsed: OFF ]
+	Else If [ Collapsed: OFF ]
+	End If
+Else [ Collapsed: OFF ; Collapsed: OFF ]
+End If
+
+Exit Script []
+Exit Script [ $ScriptResult ]
+
+Halt Script
+
+Install OnTimer Script
+Install OnTimer Script [ 123 ]
+Install OnTimer Script [ 1+2 ]
+
+Loop [ Collapsed: OFF ; Flush: Always ]
+	Exit Loop If [ 1=1 ]
+End Loop
+Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: OFF ]
+Revert Transaction [ Condition: 1=1 ; ErrorCode: 5000 ; ErrorMessage: "Broken" ]
+Commit Transaction
+Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: ON ; Override ESS locking conflicts: OFF ]
+Revert Transaction [ Condition: 1=1 ; ErrorCode: 5000 ]
+Revert Transaction [ Condition: 1=1 ; ErrorCode: 5000 ]
+Revert Transaction [ Condition: 1=1 ]
+Commit Transaction
+Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: ON ]
+Revert Transaction [ ErrorCode: 5000 ; ErrorMessage: "Broken" ]
+Commit Transaction
+Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: ON ; Override ESS locking conflicts: ON ]
+Revert Transaction [ Condition: 1=1 ; ErrorCode: 1 ; ErrorMessage: "Broken" ]
+Commit Transaction
+
+Pause/Resume Script [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+Pause/Resume Script [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+
+Perform Script [ From list ; "" ]
+Perform Script [ From list ; "" ]
+Perform Script [ From list ; "" ; Parameter: $ScriptParameter ]
+Perform Script [ From list ; "" ; File: "<unknown>" ]
+# Two error cases for fmSyntaxColorizer:
+Perform Script [ From list ; "" ; Parameter: /* commented out */ ]
+Perform Script [ From list ; "" ; Parameter: "/* not only commented out, but also stringified! */" ]
+
+Perform Script on Server [ From list ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Wait for completion: ON ]
+Perform Script on Server [ From list ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Wait for completion: OFF ]
+
+Set Error Capture [ ON ]
+Set Error Capture [ OFF ]
+
+Set Error Logging [ ON ]
+Set Error Logging [ OFF ]
+Set Error Logging [ ON ; CustomDebugInfo: Get ( CurrentHostTimeStamp ) ]
+
+Set Layout Object Animation [ ON ]
+Set Layout Object Animation [ OFF ]
+
+Set Variable [  ;  ]
+Set Variable [ $var[1] ;  ]
+Set Variable [ $var[1] ; /*<Function Missing>( 2 ) + 4*/ ]
+Set Variable [ $var[1] ; /*1+Test( 1 ) & "string" & ( $$fjhsd.gfd.jhsgf.dshg.fshgf )*/ ]
+
+# ================
+# NAVIGATION STEPS
+# ================
+
+Enter Browse Mode [ Pause: ON ]
+Enter Browse Mode [ Pause: OFF ]
+
+Enter Find Mode [ Pause: ON ]
+Enter Find Mode [ Pause: OFF ]
+Enter Find Mode [ Pause: ON ; ⚠️ PARAMETER "FindRequest" NOT PARSED ⚠️ ]
+
+Enter Preview Mode [ Pause: ON ]
+Enter Preview Mode [ Pause: OFF ]
+
+Go to Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Go to Field [ Select/perform ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Go to Field [ Select/perform ]
+Go to Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Go to Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Go to Layout [ Layout: <original layout> ; Animation: None ]
+Go to Layout [ Layoutname: "Test" ; Animation: None ]
+Go to Layout [ Layoutnr.: "Test" ; Animation: None ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Slide in from Left ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Slide in from Right ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Slide in from Bottom ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Slide out to Left ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Slide out to Right ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Slide out to Bottom ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Flip from Left ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Flip from Right ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Zoom In ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Zoom Out ]
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: Cross Dissolve ]
+
+# Some error cases for fmSyntaxColorizer
+Go to Layout [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Animation: None ]
+Go to Layout [ Layoutname: /*<Function Missing>*/ ; Animation: None ]
+Go to Layout [ Layoutname: /*cf_LayoutName*/ ; Animation: None ]
+# and undefined variables
+Go to Layout [ Layoutname: $LayoutName ; Animation: None ]
+Go to Layout [ Layoutnr.: $LayoutNr ; Animation: None ]
+
+Go to Next Field
+
+Go to Object [ ; Repetition: 1 ]
+Go to Object [ "RepField" ; Repetition: $Rep ]
+Go to Object [ $Objektname ; Repetition: 1 ]
+
+Go to Portal Row [ Select: ON ; First ]
+Go to Portal Row [ Select: OFF ; Last ]
+Go to Portal Row [ Exit after last: ON ; Previous ]
+Go to Portal Row [ Exit after last: OFF ; Previous ]
+Go to Portal Row [ Exit after last: ON ; Next ]
+Go to Portal Row [ Exit after last: OFF ; Next ]
+Go to Portal Row [ With dialog: ON ; By Calculation… ]
+Go to Portal Row [ With dialog: ON ; By Calculation… ]
+Go to Portal Row [ With dialog: OFF ; By Calculation… ]
+
+Go to Previous Field
+
+Go to Record/Request/Page [ First ]
+Go to Record/Request/Page [ Last ]
+Go to Record/Request/Page [ Previous ; Exit after last: ON ]
+Go to Record/Request/Page [ Previous ; Exit after last: OFF ]
+Go to Record/Request/Page [ Next ; Exit after last: ON ]
+Go to Record/Request/Page [ Next ; Exit after last: OFF ]
+Go to Record/Request/Page [ With dialog: OFF ; 1+1 ]
+Go to Record/Request/Page [ With dialog: OFF ; Get( LayoutNumber ) + 1 ]
+Go to Record/Request/Page [ With dialog: ON ; $Nr ]
+
+# Some error cases for fmSyntaxColorizer
+Go to Record/Request/Page [ With dialog: ON ; /*<Function Missing> + 1*/ ]
+Go to Record/Request/Page [ With dialog: ON ; /*cf_LayoutNumber + 1*/ ]
+
+Go to Related Record [ Layout: <original layout> ; Show related ]
+Go to Related Record [ Layout: <original layout> ; Show related ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Show related ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+
+# =============
+# EDITING STEPS
+# =============
+
+Clear [ Select: ON ]
+Clear [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Clear [ Select: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Clear [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Copy [ Select: ON ]
+Copy [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Cut [ Select: ON ]
+Cut [ Select: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Paste [ Select: ON ; No style: OFF ]
+Paste [ Select: ON ; No style: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Paste [ Select: ON ; No style: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Paste [ Select: OFF ; No style: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Paste [ Select: OFF ; No style: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Perform Find/Replace [ With dialog: ON ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+Perform Find/Replace [ With dialog: OFF ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+Perform Find/Replace [ With dialog: ON ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+Perform Find/Replace [ With dialog: OFF ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+Perform Find/Replace [ With dialog: OFF ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+Perform Find/Replace [ With dialog: OFF ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+
+Select All
+
+Set Selection [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "Select" NOT PARSED ⚠️ ]
+
+Undo/Redo [ Collapsed: OFF ; Toggle ]
+Undo/Redo [ Collapsed: OFF ; Undo ]
+Undo/Redo [ Collapsed: OFF ; Redo ]
+
+# ===========
+# FIELD STEPS
+# ===========
+
+Export Field Contents [ Create folders: OFF ]
+Export Field Contents [ Create folders: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Export Field Contents [ Create folders: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Export Field Contents [ Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+# Extended in fm16: TARGET = VARIABLE
+
+
+Insert Calculated Result [ Select: OFF ]
+Insert Calculated Result [ Select: OFF ; Target: $TargetVar ]
+Insert Calculated Result [ Select: OFF ; $SourceVar ]
+Insert Calculated Result [ Select: OFF ; Target: $TargetVar ; $SourceVar ]
+Insert Calculated Result [ Select: ON ; Target: $TargetVar ]
+Insert Calculated Result [ Select: ON ; $SourceVar ]
+Insert Calculated Result [ Select: ON ; Target: $TargetVar ; $SourceVar ]
+Insert Calculated Result [ Select: ON ; Target: $TargetVar ; "Value" ]
+Insert Calculated Result [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; /*_Syntax::_kCalculationChar*/ ]
+
+
+
+Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; Target: $WebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+Insert Current Date [ Select: OFF ]
+Insert Current Date [ Select: ON ]
+Insert Current Date [ Select: OFF ; Target: $UseSetVariable ]
+Insert Current Date [ Select: ON ; Target: $UseSetVariable ]
+
+Insert Current Time [ Select: OFF ]
+Insert Current Time [ Select: ON ]
+Insert Current Time [ Select: OFF ; Target: $UseSetVariable ]
+Insert Current Time [ Select: ON ; Target: $UseSetVariable ]
+
+Insert Current User Name [ Select: ON ; Target: $UseSetVariable ]
+
+
+Insert Audio/Video [ Store only a reference: OFF ]
+Insert Audio/Video [ Store only a reference: ON ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Insert Calculated Result [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; "hello" ]
+Insert Calculated Result [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1+2 ]
+Insert Calculated Result [ Select: ON ; Target: $Target ]
+Insert Calculated Result [ Select: ON ; Target: $UseSetVariable ; "Value" ]
+
+Insert Current Date [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Insert Current Date [ Select: ON ; Target: $UseSetVariable ]
+
+Insert Current Time [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Insert Current Time [ Select: ON ; Target: $UseSetVariable ]
+
+Insert Current User Name [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Insert Current User Name [ Select: ON ; Target: $UseSetVariable ]
+
+Insert Text []
+Insert Text [ "A
+				B
+				C" ]
+Insert Text [ Target: $Code ; "A
+				B
+				C" ]
+Insert Text [ Select ; Target: $Code ; "A
+				B
+				C" ]
+Insert Text [ "$KeineSourceVar - sondern nur  text" ]
+Insert Text [ Target: $TargetVar ; "$KeineSourceVar - sondern nur  text" ]
+
+Insert File
+Insert File [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $Target ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $TargetFileContents ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $TargetFileContents ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert File [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $FileContents ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Insert from Device [ Music Library ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Photo Library ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Full ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Full ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Large ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Medium ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Small ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Full ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Small ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Microphone ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Full ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Barcode ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Photo Library ]
+
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Full Screen ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Overlay ]
+Insert from Device [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Embedded ]
+
+Insert from Index [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Insert from Last Visited [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+Insert from URL [ Verify SSL Certificates: ON ; Select: ON ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Verify SSL Certificates: ON ; Select: OFF ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "-X PUT" ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+# ONLY ONE Param => Assume Source Var
+# The following INFREQUENT form has no target -> NEEDS a currently selected layout field
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+# TODO: MBS must interpret first var as Target when 2 Vars between 'With dialog' and 'cURL options': Target Variable + URL Variable
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: ON ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $cURL_Options ]
+# EGIT - in cURL options ist es GEMISCHT: MANCHE Vars sind  Target Vars, manche QUELL Vars
+Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "
+				--trace $TargetDump
+				--uploadOrWhatever $SourceFile
+				" ]
+
+Insert PDF [ Store only a reference: OFF ]
+Insert PDF [ Store only a reference: ON ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Insert Picture [ Store only a reference: OFF ]
+Insert Picture [ Store only a reference: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Insert Picture [ Store only a reference: ON ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Insert Text [ Select ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; "1+2" ]
+Insert Text [ Select ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; "foo bar baz" ]
+Insert Text [ Select ; Target: $Code ; "A
+				B
+				C" ]
+Insert Text [ Target: $Code ; "A
+				B
+				C" ]
+Insert Text [ Target: $Code ; "$price" ]
+Insert Text [ Target: $Code ; """ ]
+Insert Text [ Target: $Code ; "”" ]
+Insert Text [ Target: $Code ]
+
+Relookup Field Contents [ With dialog: ON ]
+Relookup Field Contents [ With dialog: OFF ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Replace Field Contents [ With dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Current contents ]
+Replace Field Contents [ With dialog: ON ; Replace with calculation: 123456 ]
+Replace Field Contents [ With dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Current contents ]
+Replace Field Contents [ With dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Replace with serial numbers: Entry option values ]
+Replace Field Contents [ With dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Replace with serial numbers ; Initial: 1 ; Interval: 1 ]
+Replace Field Contents [ With dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Replace with serial numbers ; Update Entry Options: ON ; Initial: 100 ; Interval: 10 ]
+Replace Field Contents [ With dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Replace with calculation: "Calc" ]
+
+Set Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1+2 ]
+Set Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1+2 ]
+Set Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1+2 ]
+Set Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1+2 ]
+Set Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; "Tabelle nicht vorhanden" ]
+Set Field [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; "<Tabelle nicht vorhanden>" ]
+
+Set Field By Name [ Specify target field: ON ; "Test::Egal" ; 1+2 ]
+Set Field By Name [ Specify target field: ON ; $FieldName ; "Value" ]
+# Note: The option to specify the target result or not is NOT part of the clipboard, rather is implied by the existence of a calculation -> copying and pasting the following step ADDS a target calculation
+Set Field By Name [ Specify target field: ON ; $FieldName ; "Value" ]
+Set Field By Name [ Specify target field: ON ; $FieldName ]
+# <fmxmlsnippet type="FMObjectList"><Step enable="True" id="147" name="Set Field By Name"><Result><Calculation><![CDATA["Value"]]></Calculation></Result><TargetName><Calculation><![CDATA[$FieldName]]></Calculation></TargetName></Step><Step enable="True" id="147" name="Set Field By Name"><TargetName><Calculation><![CDATA[$FieldName]]></Calculation></TargetName></Step></fmxmlsnippet>
+
+Set Next Serial Value [ 1 ]
+Set Next Serial Value [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1 ]
+Set Next Serial Value [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1 ]
+
+# OBSOLETE STEPS
+Insert Object
+Insert QuickTime
+Save a Copy as Add-on Package
+Save a Copy as Add-on Package
+
+# ============
+# RECORD STEPS
+# ============
+
+Commit Records/Requests [ With dialog: ON ]
+Commit Records/Requests [ With dialog: OFF ]
+Commit Records/Requests [ Skip data entry validation ; With dialog: ON ]
+Commit Records/Requests [ Skip data entry validation ; With dialog: OFF ]
+Commit Records/Requests [ Skip data entry validation ; With dialog: OFF ; Force Commit ]
+
+Copy All Records/Requests
+
+Copy Record/Request
+
+Delete All Records [ With dialog: ON ]
+Delete All Records [ With dialog: OFF ]
+
+Delete Portal Row [ With dialog: ON ]
+Delete Portal Row [ With dialog: OFF ]
+
+Delete Record/Request [ With dialog: ON ]
+Delete Record/Request [ With dialog: OFF ]
+
+Duplicate Record/Request
+
+Export Records [ With dialog: ON ; Create folders: OFF ]
+Export Records [ With dialog: ON ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Export Records [ With dialog: ON ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Export Records [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: ON ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+
+New Record/Request
+
+Open Record/Request
+
+Revert Record/Request [ With dialog: ON ]
+Revert Record/Request [ With dialog: OFF ]
+
+Save Records as Excel [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as Excel [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: OFF ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as Excel [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as Excel [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: OFF ; With dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: OFF ; With dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: OFF ; With dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: OFF ; With dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+Save Records as PDF [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Append to existing PDF: ON ; With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Create folders: OFF ]
+
+Save Records as Snapshot Link [ Records being browsed ; Create folders: OFF ]
+Save Records as Snapshot Link [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Records being browsed ; Create folders: OFF ]
+Save Records as Snapshot Link [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Current record ; Create folders: OFF ]
+
+Truncate Table [ With dialog: ON ; <Current Table> ]
+Truncate Table [ With dialog: OFF ; <Table Missing> ]
+Truncate Table [ With dialog: OFF ; <Table Missing> ]
+
+# ===============
+# FOUND SET STEPS
+# ===============
+
+Constrain Found Set [ ⚠️ RESTORE ⚠️ ]
+Constrain Found Set [ ⚠️ RESTORE ⚠️ ]
+
+Extend Found Set
+Extend Found Set [ ⚠️ RESTORE ⚠️ ]
+
+Find Matching Records [ Replace ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Find Matching Records [ Constrain ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Find Matching Records [ Extend ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Modify Last Find
+
+Omit Multiple Records [ With dialog: ON ]
+Omit Multiple Records [ With dialog: OFF ; 123 ]
+
+Omit Record
+
+Perform Find
+Perform Find [ ⚠️ RESTORE ⚠️ ]
+
+Perform Quick Find
+Perform Quick Find [ "Hello" ]
+
+Show All Records
+
+Show Omitted Only
+
+Sort Records [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ]
+Sort Records [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ]
+Sort Records [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ]
+# Don't keep sorted
+Sort Records [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+# Keep sorted
+Sort Records [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+# Descending
+Sort Records [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+# Everything
+Sort Records [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+
+Sort Records by Field [ Ascending ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Sort Records by Field [ Descending ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Sort Records by Field [ Associated value list ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Unsort Records
+
+# =============
+# WINDOWS STEPS
+# =============
+
+Adjust Window [ Resize to Fit ]
+Adjust Window [ Maximize ]
+Adjust Window [ Minimize ]
+Adjust Window [ Restore ]
+Adjust Window [ Hide ]
+
+Arrange All Windows [ Tile Horizontally ]
+Arrange All Windows [ Tile Vertically ]
+Arrange All Windows [ Cascade Window ]
+Arrange All Windows [ Bring All To Front ]
+
+Close Window
+Close Window [ Name: $FensterName ; Current file ]
+
+Freeze Window
+
+Move/Resize Window
+Move/Resize Window [ Name: $FensterName ; Height: $FensterHoehe ; Width: $FensterBreite ; Top: $FensterOben ; Left: $FensterLinks ]
+
+New Window [ Style: Document ; Name: "Window" ; Layout: <original layout> ]
+New Window [ Style: Document ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Height: 1 ; Width: 2 ; Top: 3 ; Left: 4 ]
+New Window [ Style: Document ; Name: $FensterName ; Layout: <original layout> ; Height: $FensterHoehe ; Width: $FensterBreite ; Top: $FensterOben ; Left: $FensterLinks ]
+New Window [ Style: Floating Document ; Name: $FensterName ; Layout: <original layout> ; Height: $FensterHoehe ; Width: $FensterBreite ; Top: $FensterOben ; Left: $FensterLinks ; Menu: OFF ; Toolbar: OFF ]
+New Window [ Style: Dialog ; Name: $FensterName ; Layout: <original layout> ; Height: $FensterHoehe ; Width: $FensterBreite ; Top: $FensterOben ; Left: $FensterLinks ; Close: OFF ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+
+Refresh Window
+Refresh Window [ Flush cached join results ; Flush cached external data ]
+
+Scroll Window [ Home ]
+Scroll Window [ End ]
+Scroll Window [ Page Up ]
+Scroll Window [ Page Down ]
+Scroll Window [ To Selection ]
+
+Select Window
+Select Window [ Name: $FensterName ]
+
+Set Allowed Orientations
+Set Allowed Orientations
+Set Allowed Orientations
+
+Set Window Title
+Set Window Title [ Name: $FensterNameAlt ]
+
+Set Zoom Level [ Lock: ON ; 25% ]
+Set Zoom Level [ Lock: ON ; 50% ]
+Set Zoom Level [ Lock: ON ; 75% ]
+Set Zoom Level [ Lock: ON ; 100% ]
+Set Zoom Level [ Lock: ON ; 150% ]
+Set Zoom Level [ Lock: ON ; 200% ]
+Set Zoom Level [ Lock: ON ; 300% ]
+Set Zoom Level [ Lock: ON ; 400% ]
+Set Zoom Level [ Lock: ON ; Zoom In ]
+Set Zoom Level [ Lock: ON ; Zoom Out ]
+
+Show/Hide Menubar [ Toggle ; Lock: ON ]
+Show/Hide Menubar [ Hide ; Lock: ON ]
+Show/Hide Menubar [ Show ; Lock: ON ]
+
+Show/Hide Text Ruler [ Toggle ]
+Show/Hide Text Ruler [ Show ]
+Show/Hide Text Ruler [ Hide ]
+
+Show/Hide Toolbars [ Lock: OFF ; Include Edit Record Toolbar: OFF ; Toggle ]
+Show/Hide Toolbars [ Lock: ON ; Include Edit Record Toolbar: OFF ; Show ]
+Show/Hide Toolbars [ Lock: ON ; Include Edit Record Toolbar: ON ; Hide ]
+Show/Hide Toolbars [ Lock: ON ; Include Edit Record Toolbar: ON ; Toggle ]
+
+View As [ Cycle ]
+View As [ View as Form ]
+View As [ View as List ]
+View As [ View as Table ]
+
+# ==========
+# FILE STEPS
+# ==========
+
+Close File [ Current File ]
+Close File [ "<unknown>" ]
+
+Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: OFF ; With dialog: ON ]
+Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: ON ; With dialog: OFF ]
+Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: OFF ; With dialog: ON ]
+Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: ON ; With dialog: OFF ]
+
+New File
+
+Open File [ Open hidden: ON ; <unknown> ]
+Open File [ Open hidden: ON ; "<unknown>" ]
+Open File [ Open hidden: ON ; "<unknown>" ]
+
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+
+# FM Print options
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+
+# Layout Print options
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print [ With dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+
+Print Setup [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: ON ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print Setup [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: ON ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print Setup [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: OFF ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Print Setup [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; With dialog: ON ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+
+Recover File [ With dialog: ON ]
+Recover File [ With dialog: OFF ]
+Recover File [ With dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+Save a Copy as [ copy of current file ; Create folders: OFF ]
+Save a Copy as [ clone (no records) ; Create folders: OFF ]
+Save a Copy as [ compacted copy (smaller) ; Create folders: OFF ]
+Save a Copy as [ self-contained copy (single file) ; Create folders: OFF ]
+Save a Copy as [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; copy of current file ; Create folders: OFF ]
+Save a Copy as [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; clone (no records) ; Create folders: OFF ]
+
+Set Multi-User [ On ]
+Set Multi-User [ On (Hidden) ]
+Set Multi-User [ Off ]
+
+Set Use System Formats [ ON ]
+Set Use System Formats [ OFF ]
+
+# --------
+
+Set Variable [ $FileID[1] ; "" ]
+Set Variable [ $FileExists[1] ; "" ]
+Set Variable [ $FileSize[1] ; "" ]
+Set Variable [ $target[1] ; "" ]
+Set Variable [ $data[1] ; "" ]
+Set Variable [ $pos[1] ; "" ]
+
+# FileSteps
+Get File Exists
+Get File Exists [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileExists ]
+
+Get File Size
+Get File Size [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileSize ]
+
+Create Data File [ Create folders: OFF ]
+Create Data File [ Create folders: OFF ]
+Create Data File [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Create folders: OFF ]
+
+Open Data File
+Open Data File [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Write to Data File [ Append line feed: ON ]
+Write to Data File [ Append line feed: ON ]
+Write to Data File [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Append line feed: OFF ]
+Write to Data File [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $data ; Append line feed: ON ]
+
+Read from Data File
+Read from Data File [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Read from Data File [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
+Read from Data File [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
+
+Get Data File Position
+Get Data File Position [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $Pos ]
+
+Set Data File Position
+Set Data File Position [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+Set Data File Position [ ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+Set Data File Position [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+Set Data File Position [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+
+Close Data File
+Delete File
+Rename File
+
+
+# =============
+# ACCOUNT STEPS
+# =============
+
+Add Account [ ⚠️ PARAMETER "AccountType" NOT PARSED ⚠️ ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Expire password: ON ]
+Add Account [ ⚠️ PARAMETER "AccountType" NOT PARSED ⚠️ ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Expire password: ON ]
+Add Account [ ⚠️ PARAMETER "AccountType" NOT PARSED ⚠️ ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Expire password: ON ]
+
+Change Password [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; With dialog: ON ]
+Change Password [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; With dialog: OFF ]
+
+Delete Account [ $Kontoname ]
+
+Enable Account [ $Kontoname ; enable: ON ]
+Enable Account [ $Kontoname ; enable: OFF ]
+
+Re-Login [ With dialog: OFF ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
+
+Reset Account Password [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; Password: ON ]
+
+# ==============
+# SPELLING STEPS
+# ==============
+
+Check Found Set
+
+Check Record
+
+Check Selection [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+Check Selection [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Correct Word
+
+Edit User Dictionary
+
+Select Dictionaries
+
+Spelling Options
+
+# ====================
+# OPEN MENU ITEM STEPS
+# ====================
+
+Open Edit Saved Finds
+Open File Options
+Open Find/Replace
+Open Help
+Open Favorites
+Open Manage Containers
+Open Manage Data Sources
+Open Manage Database
+Open Manage Layouts
+Open Manage Themes
+Open Manage Value Lists
+Open Settings
+Open Hosts
+Open Script Workspace
+Open Sharing
+Open Upload to Host
+
+
+# ===================
+# MISCELLANEOUS STEPS
+# ===================
+
+# BUG 1047 Applescript Prob. fixed
+# FIXME please
+# TODO next friday
+# TEST this!
+# NOTE there must be a space after the @ symbol:
+# @ Christian: THANK YOU for the cool SyntaxColoring function in the MBS Plugin!
+
+Allow Formatting Bar [ ON ]
+Allow Formatting Bar [ OFF ]
+
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Play [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ]
+
+
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+
+AVPlayer Set Options [ ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+
+AVPlayer Set Options [ ⚠️ PARAMETER "Volume" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ]
+AVPlayer Set Options [ ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ]
+
+AVPlayer Set Options [ ⚠️ PARAMETER "Presentation" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableInteraction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Hide" NOT PARSED ⚠️ ; ⚠️ PARAMETER "DisableExternalControls" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PauseInBackground" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Start" NOT PARSED ⚠️ ; ⚠️ PARAMETER "End" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Volume" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Zoom" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Sequence" NOT PARSED ⚠️ ]
+
+AVPlayer Set Playback State [ Stopped ]
+AVPlayer Set Playback State [ Paused ]
+AVPlayer Set Playback State [ Playing ]
+
+Beep
+
+Dial Phone [ With dialog: ON ; 12345678 ]
+Dial Phone [ With dialog: OFF ; 12345678 ]
+
+Enable Touch Keyboard [ Off ]
+Enable Touch Keyboard [ Toggle ]
+Enable Touch Keyboard [ On ]
+
+Execute SQL [ With dialog: OFF ; Create folders: OFF ; ⚠️ PARAMETER "SQL" NOT PARSED ⚠️ ]
+Execute SQL [ With dialog: ON ; Create folders: OFF ; ⚠️ PARAMETER "SQL" NOT PARSED ⚠️ ]
+
+Exit Application
+
+Flush Cache to Disk
+
+Get Folder Path [ Allow Folder Creation: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
+Get Folder Path [ Allow Folder Creation: ON ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
+Get Folder Path [ Allow Folder Creation: ON ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Location" NOT PARSED ⚠️ ]
+Get Folder Path [ Allow Folder Creation: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ; Title: $Title ; ⚠️ PARAMETER "Location" NOT PARSED ⚠️ ]
+
+Install Menu Set [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
+Install Menu Set [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
+Install Menu Set [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
+Install Menu Set [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
+
+Install Plug-In File [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
+
+Open URL [ In external browser: OFF ; With dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Open URL [ In external browser: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Open URL [ In external browser: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+Perform AppleScript [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+Perform AppleScript [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+
+Perform JavaScript in Web Viewer
+Perform JavaScript in Web Viewer [ Name: "abc" ; ⚠️ PARAMETER "FunctionRef" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ]
+# <fmxmlsnippet type="FMObjectList"><Step enable="True" id="175" name="Perform JavaScript in Web Viewer"></Step><Step enable="True" id="175" name="Perform JavaScript in Web Viewer"><ObjectName><Calculation><![CDATA["abc"]]></Calculation></ObjectName><FunctionName><Calculation><![CDATA["def"]]></Calculation></FunctionName><Parameters Count="2"><P><Calculation><![CDATA[$p1]]></Calculation></P><P><Calculation><![CDATA[$p2]]></Calculation></P></Parameters></Step></fmxmlsnippet>
+
+Refresh Object [ Name: "Obj" ; 2 ]
+
+Refresh Portal [ ⚠️ PARAMETER "Object" NOT PARSED ⚠️ ]
+Refresh Portal [ ⚠️ PARAMETER "Object" NOT PARSED ⚠️ ]
+
+Send DDE Execute
+
+Send Event
+Send Event
+Send Event
+Send Event
+Send Event
+
+Send Mail [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+Send Mail [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+Send Mail [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+
+Set Web Viewer [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+// Set Web Viewer [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+// Set Web Viewer [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+Set Web Viewer [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+Set Web Viewer [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+
+Show Custom Dialog [ Title: $DlgTitle ; Message: $DlgMessage ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Show Custom Dialog [ Title: $DlgTitle ; Message: "Only Button 1 and 3¶" & 
+				"and input 2" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Show Custom Dialog [ Title: $DlgTitle ; Message: $DlgMessage ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+
+Speak [ "Standard voice" ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
+Speak [ "Agnes says.." ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
+Speak [ "Albert" ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
+
+# =====================
+# EXTERNAL SCRIPT STEPS
+# =====================
+
+MBS [ $Command ; $P1 ; $P2 ; $P3 ; $P4 ; $P5 ; $P6 ; $P7 ; $P8 ; $P9 ]

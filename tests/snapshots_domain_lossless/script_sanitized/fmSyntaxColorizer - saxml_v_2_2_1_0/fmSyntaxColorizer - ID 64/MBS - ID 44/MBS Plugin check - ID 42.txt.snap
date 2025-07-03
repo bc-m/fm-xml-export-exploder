@@ -1,0 +1,63 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20140425 MrW Added recognition of disabled plugin
+# 20140422 MrW MBS-Plugin check extended to support $CutOffVariableNam…
+# 20131204 MrW MBS-Plugin check improved for VarChecking
+# 20131017 MrW MBS-Plugin check improved for LineNumbers
+# 20121102 MrW Improved
+
+Popover schließen
+
+# Script settings
+Variable setzen [ $Dlg_Title ; "MBS Plugin Check" ]
+Variable setzen [ $MBSLink ; TextFarbe ( TextGröße ( "www.mbsplugins.eu" ; 18 ) ; _ColorHex ( "0000DD" ) ) ]
+Variable setzen [ $MBS_VersionMin ; "3.0.0.5" ]
+Variable setzen [ $MBS_VersionAutoUpdateMin ; "03000005" ]
+
+Wenn [ _IsWIN ]
+	Script ausführen [ Aus Liste ; "Set Home Screen Info to content of ( Object )" ; Parameter: "MacOnly" ]
+	Aktuelles Script verlassen []
+Ende (wenn)
+
+# Check Version
+Variable setzen [ $MBS_Version ; MBS( "Version" ) ]
+Variable setzen [ $MBS_VersionAutoUpdate ; MBS( "VersionAutoUpdate" ) ]
+Variable setzen [ $MBS_IsPresent ; _Plugin( "MBS" ; "IsPresent" ) ]
+Variable setzen [ $MBS_IsDisabled ; _Plugin( "MBS" ; "IsDisabled" ) ]
+# Check Registration
+Variable setzen [ $MBS_Registration ; MBS("Registration") ]
+Variable setzen [ $MBS_IsNotRegistered ; Falls( $MBS_Registration <> "Registered." ; 1 ) ]
+
+Variable setzen [ $MBS_VersionLevel ; Falls( 
+				$MBS_Version = "" ODER $MBS_Version = "?" ; 0 ;
+				$MBS_IsDisabled ; 1 ;
+				$MBS_VersionAutoUpdate < $MBS_VersionAutoUpdateMin ; 2 ;
+				6) ]
+Variable setzen [ $MBS_SyntaxColorizingLevel ; Falls( _IsWIN ; -1 ; $MBS_VersionLevel ) ]
+Feldwert setzen [ _Home::_gMBSPluginCheck ; $MBS_SyntaxColorizingLevel ]
+Script ausführen [ Aus Liste ; "MBS_SetSyntaxColoringEnabledStatus" ]
+
+Variable setzen [ $Problem ; Falls(
+				
+				$MBS_Version = "?" ODER $MBS_Version = "" ; "You do not have the MBS plugin!";
+				$MBS_IsPresent UND $MBS_IsDisabled       ; "The MBS plugin is currently disabled in the FileMaker Preferences!¶Please open the prefs and reenable it, or download the latest version!" ;
+				$MBS_VersionAutoUpdate < $MBS_VersionAutoUpdateMin ; "Your have an extremely old version of the MBS plugin and need to download a new version!" ;
+				
+				Liste(
+				Falls( $MBS_VersionLevel ≥ 2 UND $MBS_IsNotRegistration <> "¶Registered." ; "(*) Developer extras work in demo mode,¶but other MBS functions require a licence." ) ;
+				Falls( Anzahl( Home.MBS_DeveloperOptions::_kUnavailable ) ; "¶Your version of the MBS plugin does not support everything - download the newest version!" );
+				)
+				
+				) ]
+Variable setzen [ $MBS_Plugin_Status ; Liste(
+				LiesLayoutobjektAttribut ( "MBS Plugin Version" ; "content" ) ;
+				Falls( $MBS_VersionLevel ≥ 2 ; "Registration Status: " & $MBS_Registration & Falls( $MBS_Registration <> "Registered." ; " (*)" )) ;
+				Falls( NICHT IstLeer( $Problem ) ; "¶" & $Problem & "¶¶" & $MBSLink );
+				Falls( $MBS_VersionLevel ≥ 3 ; TextStilZufügen ( "¶1. Choose the MBS extras you want…   ▷¶¶ 2. ◁ Select the syntax options you want¶¶ 3. ◁ Click " & TextFarbe ( TextStilZufügen ( "[Colorize!]" ; Fett ) ; RGB ( 0 ; 136 ; 0 ) ) & " to beautify your code" ; Fett ) );
+				
+				) ]
+
+Feldwert setzen [ _Home::_gHomeScreenInfo ; $MBS_Plugin_Status ]
+Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]

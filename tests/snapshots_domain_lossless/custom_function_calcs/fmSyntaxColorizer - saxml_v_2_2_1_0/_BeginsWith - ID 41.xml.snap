@@ -1,0 +1,21 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="41" name="_BeginsWith" UUID="68BCF67C-D2F7-450F-9322-32F79E5325F2"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[ZeichenLinks( pText ; Länge( pBeginsWith ) ) = pBeginsWith]]></Text>
+		<ChunkList hash="CBEE2FACA81F97B32134B3A22616EBED">
+			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pBeginsWith</Chunk>
+			<Chunk type="NoRef"> ) ) = </Chunk>
+			<Chunk type="VariableReference">pBeginsWith</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

@@ -1,3 +1,5 @@
+use crate::OutputTree;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum CatalogType {
     Accounts,
@@ -217,4 +219,5 @@ pub struct Flags {
     pub parse_all_lines: bool,
     pub lossless: bool,
     pub verbose: Option<Option<String>>,
+    pub output_tree: OutputTree,
 }

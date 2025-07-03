@@ -3,19 +3,19 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::path::{Path, PathBuf};
 
-use anyhow::Result;
+use anyhow::{Error, Result};
 use quick_xml::events::{BytesStart, Event};
 use regex::Regex;
 
-use crate::config::Flags;
+use crate::config::{CatalogType, Flags};
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
     element_to_string, end_element_to_string, extract_values_from_xml_paths,
     start_element_to_string, text_element_to_string, XmlEventType,
 };
-use crate::xml_processor::ProcessingContext;
-use crate::Skeleton;
+use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
+use crate::{OutputTree, Skeleton};
 
 pub(crate) mod attributes;
 pub(crate) mod file_utils;
@@ -206,62 +206,66 @@ pub fn write_entity_to_file(
     output_file_path
 }
 
-pub fn add_fm_name_to_base_path(
-    base_path: &Path,
-    fm_file_name: &str,
-    saxml_version: &str,
-) -> PathBuf {
-    let mut full_path = PathBuf::from(base_path);
-    full_path.push(format!(
-        "{fm_file_name} - saxml_v_{}",
-        saxml_version.replace('.', "_")
-    ));
-    full_path
-}
-
-/// Build output directory path for a given fm file, entity and action (derived from path stack)
-/// Directory will be created if it doesn't exist
-/// If do_delete_first is true, the directory will be deleted if it exists and then created again
 pub fn build_out_dir_path<R: Read + BufRead>(
-    context: &mut ProcessingContext<'_, R>,
-    // out_dir_path: &Path,
-    entity: &str,
-    // path_stack: &[Vec<u8>],
-    do_delete_first: bool,
-) -> PathBuf {
-    let mut full_path = context.current_out_dir.clone();
+    context: &ProcessingContext<'_, R>,
+    qualifier: Option<Qualifier>,
+) -> Result<PathBuf, Error> {
+    let db_name = match &context.db_name {
+        Some(db_name) => db_name,
+        None => return Err(anyhow::anyhow!("Missing db name")),
+    };
+    let saxml_version = match &context.saxml_version {
+        Some(saxml_version) => saxml_version,
+        None => return Err(anyhow::anyhow!("Missing saxml version")),
+    };
+    let db_name_with_saxml_version =
+        format!("{db_name} - saxml_v_{}", saxml_version.replace('.', "_"));
 
-    let action = context
-        .path_stack
-        .iter()
-        .rev()
-        .nth(1)
-        .map(|last| match std::str::from_utf8(last).unwrap() {
-            "DeleteAction" => "delete_action",
-            "ModifyAction" => "modify_action",
-            _ => "",
-        })
-        .unwrap_or("");
+    let domain = match qualifier {
+        Some(Qualifier::SanitizedScripts) => "script_sanitized".to_string(),
+        _ => {
+            match context.top_level_section {
+                Some(TopLevelSection::Structure) => {
+                    let mut domain_base = if let Some(catalog_type) = &context.catalog_type {
+                        if catalog_type == &CatalogType::ValueList
+                            && version_string_to_number(saxml_version)
+                                < version_string_to_number("2.2.2.0")
+                        {
+                            "value_list_options".to_string() // Handle ValueList version-specific behavior
+                        } else {
+                            catalog_type.get_config().out_folder_name.clone()
+                        }
+                    } else {
+                        "unknown_catalog".to_string()
+                    };
+                    // Add action suffix
+                    if let Some(action) = &context.action {
+                        domain_base.push_str(match action {
+                            Action::Add => "",
+                            Action::Modify => "__modify_action",
+                            Action::Replace => "__replace_action",
+                            Action::Delete => "__delete_action",
+                        });
+                    }
+                    domain_base
+                }
+                _ => "_".to_string(),
+            }
+        }
+    };
 
-    if !entity.is_empty() && !action.is_empty() {
-        full_path.push(format!("{entity}__{action}"));
-    } else if !entity.is_empty() {
-        full_path.push(entity);
-    } else if !action.is_empty() {
-        full_path.push(action);
-    }
-
-    if do_delete_first {
-        delete_then_create_dir(&full_path);
-    } else {
-        create_dir(&full_path);
-    }
-
-    full_path
+    let full_path = context
+        .root_out_dir
+        .clone()
+        .join(match context.flags.output_tree {
+            OutputTree::Db => PathBuf::from(db_name_with_saxml_version).join(domain),
+            OutputTree::Domain => PathBuf::from(domain).join(db_name_with_saxml_version),
+        });
+    Ok(full_path)
 }
 
 /// Initialize (delete if exists, then create) output directory
-pub fn delete_then_create_dir(out_dir_path: &Path) {
+pub fn _delete_then_create_dir(out_dir_path: &Path) {
     if out_dir_path.exists() {
         fs::remove_dir_all(out_dir_path).unwrap_or_else(|err| {
             panic!(
@@ -510,7 +514,7 @@ mod tests {
     }
 
     #[test]
-    fn test_move_to_subfolder_if_necessary() {
+    fn test_move_to_subfolder() {
         // Create a temporary file
         let temp_file = PathBuf::from("test_move_source.txt");
         let content = "test content";
@@ -524,7 +528,7 @@ mod tests {
         fs::create_dir(&subfolder).unwrap();
 
         // Move the file to subfolder
-        let result = move_to_subfolder_if_necessary(&temp_file, &subfolder);
+        let result = move_to_subfolder(&temp_file, &subfolder);
         assert!(result.is_ok());
 
         let new_path = result.unwrap();
@@ -545,7 +549,7 @@ mod tests {
     }
 
     #[test]
-    fn test_move_to_subfolder_if_necessary_empty_path() {
+    fn test_move_to_subfolder_empty_path() {
         // Create a temporary file
         let temp_file = PathBuf::from("test_move_empty_source.txt");
         let content = "test content";
@@ -556,7 +560,7 @@ mod tests {
 
         // Try to move to empty path (should return original path)
         let empty_path = PathBuf::from("");
-        let result = move_to_subfolder_if_necessary(&temp_file, &empty_path);
+        let result = move_to_subfolder(&temp_file, &empty_path);
         assert!(result.is_ok());
 
         let returned_path = result.unwrap();
@@ -638,12 +642,8 @@ pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_na
 }
 
 /// Move a file to a subfolder if the subfolder path is not empty
-pub fn move_to_subfolder_if_necessary(
-    file_path: &Path,
-    subfolder_dir_path: &Path,
-) -> Result<PathBuf, String> {
+pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<PathBuf, String> {
     if subfolder_dir_path.to_string_lossy().is_empty() {
-        // If subfolder path is empty, return the original file path
         return Ok(file_path.to_path_buf());
     }
 

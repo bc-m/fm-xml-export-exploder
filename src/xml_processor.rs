@@ -13,14 +13,37 @@ use crate::script_sanitizer::create_sanitized_scripts;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::{end_element_to_string, start_element_to_string, XmlEventType};
-use crate::utils::{add_fm_name_to_base_path, build_out_dir_path, write_xml_file, FolderStructure};
-use crate::utils::{push_line_to_skeleton, version_string_to_number};
+use crate::utils::{build_out_dir_path, write_xml_file, FolderStructure};
+use crate::utils::{create_dir, push_line_to_skeleton};
 use crate::Skeleton;
+
+pub enum TopLevelSection {
+    Structure,
+    Metadata,
+    DdrInfo,
+}
+
+pub enum Action {
+    Add,
+    Modify,
+    Replace,
+    Delete,
+}
+
+pub enum Qualifier {
+    SanitizedScripts,
+}
 
 /// Context for XML catalog processing
 pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub reader: &'a mut Reader<R>,
     pub path_stack: &'a mut Vec<Vec<u8>>,
+    pub root_out_dir: PathBuf,
+    pub saxml_version: Option<String>,
+    pub db_name: Option<String>,
+    pub top_level_section: Option<TopLevelSection>,
+    pub action: Option<Action>,
+    pub catalog_type: Option<CatalogType>,
     pub current_out_dir: PathBuf,
     pub skeleton: &'a mut Skeleton,
     pub flags: &'a Flags,
@@ -40,8 +63,6 @@ pub fn explode_xml(
         .with_context(|| format!("Error opening file {}", fm_export_file_path.display(),))?;
 
     // Initialize variables
-    let mut fm_file_name = String::new();
-    let mut saxml_version = String::new();
     let mut depth = 0;
     let mut cf_folder_structure: Option<FolderStructure> = None;
     let mut script_folder_structure: Option<FolderStructure> = None;
@@ -51,6 +72,12 @@ pub fn explode_xml(
     let mut context = ProcessingContext {
         reader: &mut Reader::from_reader(BufReader::new(DecodeReaderBytes::new(file))),
         path_stack: &mut Vec::new(),
+        root_out_dir: root_out_dir.to_path_buf(),
+        saxml_version: None,
+        db_name: None,
+        top_level_section: None,
+        action: None,
+        catalog_type: None,
         current_out_dir: PathBuf::new(),
         skeleton: &mut Skeleton::default(),
         flags,
@@ -65,10 +92,6 @@ pub fn explode_xml(
             }
             Ok(Event::Eof) => break,
             Ok(Event::Start(start_tag)) => {
-                // context.start_tag = Some(&e);
-                // if depth <= 4 {
-                //     println!("📟 {}:{} {}", depth, "  ".repeat(depth), start_element_to_string(&e, flags));
-                // }
                 context.path_stack.push(start_tag.name().as_ref().to_vec());
                 push_start_to_skeleton(
                     &start_tag,
@@ -78,22 +101,29 @@ pub fn explode_xml(
                 );
                 match depth {
                     0 => {
-                        process_root_element(&start_tag, &mut fm_file_name, &mut saxml_version)?;
-                        context.current_out_dir =
-                            add_fm_name_to_base_path(root_out_dir, &fm_file_name, &saxml_version);
-                        build_out_dir_path(&mut context, "", true);
+                        process_root_element(&mut context, &start_tag)?;
+                        create_dir(&context.root_out_dir);
                     }
                     1 => {
-                        let do_continue = process_supporting_elements(&mut context, &start_tag);
-                        if do_continue {
+                        let was_xml_element_consumed =
+                            process_top_level_section(&mut context, &start_tag)?;
+                        if was_xml_element_consumed {
                             continue;
                         }
+                    }
+                    2 => {
+                        context.action = match start_tag.name().as_ref() {
+                            b"AddAction" => Some(Action::Add),
+                            b"ModifyAction" => Some(Action::Modify),
+                            b"ReplaceAction" => Some(Action::Replace),
+                            b"DeleteAction" => Some(Action::Delete),
+                            _ => None,
+                        };
                     }
                     3 => {
                         let is_supported_catalog = process_catalog_elements(
                             &mut context,
                             &start_tag,
-                            &saxml_version,
                             &mut cf_folder_structure,
                             &mut script_folder_structure,
                         )?;
@@ -120,7 +150,7 @@ pub fn explode_xml(
 
     // Write skeleton file if in lossless mode
     if flags.lossless {
-        write_skeleton_file(&context.current_out_dir, context.skeleton, context.flags)?;
+        write_skeleton_file(&context)?;
     }
 
     println!(
@@ -132,19 +162,20 @@ pub fn explode_xml(
     Ok(())
 }
 
-fn process_root_element(
+fn process_root_element<R: Read + BufRead>(
+    context: &mut ProcessingContext<'_, R>,
     e: &BytesStart,
-    fm_file_name: &mut String,
-    saxml_version: &mut String,
 ) -> Result<(), Error> {
     match e.name().as_ref() {
         b"FMDynamicTemplate" | b"FMSaveAsXML" => {
-            *fm_file_name = get_attribute(e, "File")
-                .unwrap()
-                .strip_suffix(".fmp12")
-                .unwrap()
-                .to_string();
-            *saxml_version = get_attribute(e, "version").unwrap().to_string();
+            context.db_name = Some(
+                get_attribute(e, "File")
+                    .unwrap()
+                    .strip_suffix(".fmp12")
+                    .unwrap()
+                    .to_string(),
+            );
+            context.saxml_version = Some(get_attribute(e, "version").unwrap().to_string());
         }
         _ => {
             bail!("Unsupported XML-format");
@@ -154,32 +185,37 @@ fn process_root_element(
 }
 
 /// Process supporting elements (Metadata, DDR_INFO) that are not part of the main structure
-fn process_supporting_elements<R: Read + BufRead>(
+fn process_top_level_section<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
-) -> bool {
-    let mut do_continue = false;
+) -> Result<bool, Error> {
+    let mut was_xml_element_consumed = false;
     match start_tag.name().as_ref() {
+        b"Structure" => {
+            context.top_level_section = Some(TopLevelSection::Structure);
+        }
         b"Metadata" => {
-            process_supporting_element(context, start_tag, "metadata");
-            do_continue = true;
+            context.top_level_section = Some(TopLevelSection::Metadata);
+            process_supporting_element(context, start_tag, "metadata")?;
+            was_xml_element_consumed = true;
         }
         b"DDR_INFO" => {
-            process_supporting_element(context, start_tag, "ddr_info");
-            do_continue = true;
+            context.top_level_section = Some(TopLevelSection::DdrInfo);
+            process_supporting_element(context, start_tag, "ddr_info")?;
+            was_xml_element_consumed = true;
         }
-        _ => {}
+        _ => context.top_level_section = None,
     }
-    do_continue
+    Ok(was_xml_element_consumed)
 }
 
 fn process_catalog_elements<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
-    saxml_version: &str,
     cf_folder_structure: &mut Option<FolderStructure>,
     script_folder_structure: &mut Option<FolderStructure>,
 ) -> Result<bool, Error> {
+    // Detect catalog type
     let catalog_type = match CatalogType::from_bytes(start_tag.name().as_ref()) {
         Some(catalog_type) => catalog_type,
         None => {
@@ -187,12 +223,10 @@ fn process_catalog_elements<R: Read + BufRead>(
                 "⚠️ Skipping unsupported catalog: {}",
                 std::str::from_utf8(start_tag.name().as_ref()).unwrap()
             );
-            return Ok(false);
+            return Ok(false); // is_supported_catalog
         }
     };
-
-    // Detect catalog type
-    let mut catalog_config = catalog_type.get_config();
+    context.catalog_type = Some(catalog_type);
     // println!("             ✅ Processing catalog: {}, {}", start_element_to_string(e, flags), catalog_config.out_folder_name);
 
     // Handle special cases that need folder structures
@@ -202,19 +236,11 @@ fn process_catalog_elements<R: Read + BufRead>(
         _ => None,
     };
 
-    // Handle ValueList version-specific behavior
-    if catalog_type == CatalogType::ValueList
-        && version_string_to_number(saxml_version) < version_string_to_number("2.2.2.0")
-    {
-        catalog_config.out_folder_name = "value_list_options".to_string();
-    }
-
-    let xml_out_dir_path = build_out_dir_path(context, &catalog_config.out_folder_name, false);
+    let xml_out_dir_path = build_out_dir_path(context, None)?;
     let base_dir_path = context.current_out_dir.clone();
     context.current_out_dir = xml_out_dir_path.clone();
 
-    let folder_structure_result =
-        xml_explode_catalog(context, start_tag, folder_structure, &catalog_config);
+    let folder_structure_result = xml_explode_catalog(context, start_tag, folder_structure)?;
 
     context.current_out_dir = base_dir_path; // Restore to its original value
 
@@ -229,7 +255,8 @@ fn process_catalog_elements<R: Read + BufRead>(
 
     // Handle post-processing for StepsForScripts
     if catalog_type == CatalogType::StepsForScripts {
-        let sanitized_scripts_dir_path = build_out_dir_path(context, "script_sanitized", false);
+        let sanitized_scripts_dir_path =
+            build_out_dir_path(context, Some(Qualifier::SanitizedScripts))?;
         create_sanitized_scripts(
             &xml_out_dir_path,
             &sanitized_scripts_dir_path,
@@ -237,16 +264,18 @@ fn process_catalog_elements<R: Read + BufRead>(
             context.flags,
         );
     }
-    Ok(true)
+    Ok(true) // is_supported_catalog
 }
 
-fn write_skeleton_file(
-    skeleton_dir_path: &Path,
-    skeleton: &Skeleton,
-    flags: &Flags,
-) -> Result<(), Error> {
+fn write_skeleton_file<R: Read + BufRead>(context: &ProcessingContext<'_, R>) -> Result<(), Error> {
+    let skeleton_dir_path = build_out_dir_path(context, None)?;
     let skeleton_file_path = skeleton_dir_path.join("skeleton.xml");
-    write_xml_file(&skeleton_file_path, &skeleton.content, 0, flags);
+    write_xml_file(
+        &skeleton_file_path,
+        &context.skeleton.content,
+        0,
+        context.flags,
+    );
     Ok(())
 }
 

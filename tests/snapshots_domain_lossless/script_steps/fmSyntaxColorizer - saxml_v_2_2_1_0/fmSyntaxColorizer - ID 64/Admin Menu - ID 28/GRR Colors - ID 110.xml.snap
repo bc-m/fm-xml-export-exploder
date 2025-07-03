@@ -1,0 +1,114 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="110" name="GRR Colors" UUID="ED2B2A19-1845-4B93-91E3-5FAD4B70E3A8"></ScriptReference>
+	<ObjectList membercount="10">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>750AE9C6-3708-4847-8F3E-1538DD1F725C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4176CF5A-19D6-4035-A550-9E9A30D000D1</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20120706 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FD6B8BEA-03D4-4DFD-B69E-C5F0445C820F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="74" name="Gehe zu Bezugsdatensatz" enable="True">
+			<UUID>2F87FD3B-347D-4E9C-8346-C79C83920A7E</UUID>
+			<OwnerID></OwnerID>
+			<Options>33554440</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Related">
+					<TableOccurrenceReference id="1065118" name="Palette.Color" UUID="781D1490-29CF-42BD-819E-FFF112A3CEDC"></TableOccurrenceReference>
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="5" name="Colors" UUID="701BC13E-5F1F-4056-BE7E-A01905612589"></LayoutReference>
+					</LayoutReferenceContainer>
+					<Animation name="Ohne" value="0"></Animation>
+					<Options ShowRelated="True"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="68" name="Wenn" enable="True">
+			<UUID>EA4C4828-49A5-4728-9D15-5A8559888639</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LayoutTabellenname ) <> "_Color"]]></Text>
+							<ChunkList hash="E3E8EC6ABF2706D44DE922C3523BDA76">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LayoutTabellenname</Chunk>
+								<Chunk type="NoRef"> ) &lt;&gt; &quot;_Color&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>D49C73F9-A09C-4CFD-A800-927808CD10DC</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="5" name="Colors" UUID="701BC13E-5F1F-4056-BE7E-A01905612589"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="23" name="Alle Datensätze anzeigen" enable="True">
+			<UUID>707F1764-3534-44DB-BF31-BBEA2749AD39</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="7" id="27" name="Nur Ausgeschlossene anzeigen" enable="True">
+			<UUID>528CCBD7-2D06-476E-BFE0-9BB641B59270</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="8" id="70" name="Ende (wenn)" enable="True">
+			<UUID>BD712FA2-7479-4699-A632-17E9F75FD59B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5D130900-3957-4673-8735-0AE45D4B2556</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

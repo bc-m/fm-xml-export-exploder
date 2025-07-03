@@ -1,0 +1,101 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="31" name="_FullBlockDropColor" UUID="92D565AA-3954-4E84-90ED-F6674F22AF44"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/* _FullBlockDropColor( pSelf )Use this function in an suto-enter filter calculation to allow colors to be dropped onto the field.20140423 MrW Version 1.1 */Auswahl( Min( Länge( pSelf ) ; 2 ) ; /* 0 */Char( 9608 ) ; /* Default is a black block *//* 1 */Austauschen( pSelf ; pSelf ; _FullBlock ) ;/* Replace content with a fullblock *//* 2 */SetzeVar([ vLen = Länge( pSelf ) ;vDragText = ZeichenMitte( Hole ( AktivesFeldInhalt ) ; Hole ( AktiveTextAuswahlStart ) ; Hole ( AktiveTextAuswahlGröße ) ) ;vDragTextCSS = LiesAlsCSS( vDragText ) ; vSelfR = ZeichenRechts( pSelf ; 1 ) ;vSelfL = ZeichenLinks( pSelf ; 1 ) ;vSelf = Falls(LiesAlsCSS( vSelfL ) = vDragTextCSS ; vSelfL ; LiesAlsCSS( vSelfR ) = vDragTextCSS ; vSelfR ;"?")];Austauschen( vSelf ; vSelf ; Char( 9608 ) ) /* Replace content with a fullblock */))]]></Text>
+		<ChunkList hash="B501A9865AD37790902EDC7AB1A201E3">
+			<Chunk type="NoRef">/* _FullBlockDropColor( pSelf )&#13;&#13;Use this function in an suto-enter filter calculation to allow colors to be dropped onto the field.&#13;&#13;20140423 MrW Version 1.1 &#13;&#13;*/&#13;&#13;&#13;</Chunk>
+			<Chunk type="FunctionRef">Auswahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Min</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pSelf</Chunk>
+			<Chunk type="NoRef"> ) ; 2 ) ; &#13;/* 0 */&#13;</Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 9608 ) ; /* Default is a black block */&#13;&#13;/* 1 */&#13;</Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pSelf</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">pSelf</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="CustomFunctionRef">_FullBlock</Chunk>
+			<Chunk type="NoRef"> ) ;/* Replace content with a fullblock */&#13;&#13;/* 2 */&#13;</Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">([ &#13;</Chunk>
+			<Chunk type="VariableReference">vLen</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pSelf</Chunk>
+			<Chunk type="NoRef"> ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vDragText</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">AktivesFeldInhalt</Chunk>
+			<Chunk type="NoRef"> ) ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">AktiveTextAuswahlStart</Chunk>
+			<Chunk type="NoRef"> ) ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">AktiveTextAuswahlGröße</Chunk>
+			<Chunk type="NoRef"> ) ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vDragTextCSS</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">LiesAlsCSS</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vDragText</Chunk>
+			<Chunk type="NoRef"> ) ; &#13;</Chunk>
+			<Chunk type="VariableReference">vSelfR</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pSelf</Chunk>
+			<Chunk type="NoRef"> ; 1 ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vSelfL</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pSelf</Chunk>
+			<Chunk type="NoRef"> ; 1 ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vSelf</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">(&#13;</Chunk>
+			<Chunk type="FunctionRef">LiesAlsCSS</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vSelfL</Chunk>
+			<Chunk type="NoRef"> ) = </Chunk>
+			<Chunk type="VariableReference">vDragTextCSS</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vSelfL</Chunk>
+			<Chunk type="NoRef"> ; &#13;</Chunk>
+			<Chunk type="FunctionRef">LiesAlsCSS</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vSelfR</Chunk>
+			<Chunk type="NoRef"> ) = </Chunk>
+			<Chunk type="VariableReference">vDragTextCSS</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vSelfR</Chunk>
+			<Chunk type="NoRef"> ;&#13;&quot;?&quot;&#13;)&#13;];&#13;</Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vSelf</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vSelf</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 9608 ) ) /* Replace content with a fullblock */&#13;))</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

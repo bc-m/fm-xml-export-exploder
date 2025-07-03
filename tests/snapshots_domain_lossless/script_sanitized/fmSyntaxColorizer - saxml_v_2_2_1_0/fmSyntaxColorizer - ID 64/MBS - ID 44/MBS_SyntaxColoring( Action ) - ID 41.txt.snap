@@ -1,0 +1,104 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20160923 MrW Reset + noDialog
+# 20131204 MrW VariableChecking
+# 20131021 MrW LineNumbers
+# 20081113 MrW 
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+# Parameter
+Variable setzen [ $action ; _SP( 1 ) ]
+Variable setzen [ $noDialog ; _SP( 2 ) ]
+
+# Vars
+Variable setzen [ $object ; ZeichenLinks( $action ; Position( $action ; "." ; 1 ;1 ) - 1 ) ]
+
+
+Wenn [ $action = "GetTags" ]
+	Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
+	Variable setzen [ $ColoringInfo ; _MBS_SyntaxColoringInfo ( "" ) ]
+	Feldwert setzen [ _Home::_gHomeScreenInfo ; Liste( 
+					_Home::_kSyntaxStats ;
+					ElementeAnzahl( $ColoringInfo ) & " MBS-Plugin colors:" ; 
+					$ColoringInfo
+					) ]
+	Aktuelles Script verlassen []
+	# -->
+Ende (wenn)
+
+Wenn [ $action = "Reset" ]
+	# Reset Dialog
+	Wenn [ $noDialog ]
+		Variable setzen [ $btn ; 2 ]
+	Sonst
+		Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Do you want to clear ALL colors, or reset to the MBS-Plugin factory defaults?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Variable setzen [ $btn ; Hole( LetzteMeldungswahl ) ]
+	Ende (wenn)
+	Wenn [ $btn = 1 ]
+		# Cancel
+		Aktuelles Script verlassen []
+		# -->
+	Ende (wenn)
+	Variable setzen [ $action ; Falls( $btn = 2 ; "Clear" ; "FactoryDefaults" ) ]
+Sonst, wenn [ $action="Toggle" ]
+	Feldwert setzen [ _Home::_gSyntaxColoringEnabled ; MBS( "SyntaxColoring.Enabled" ) ]
+	Variable setzen [ $action ; _Home::_gSyntaxColoringDisableAction ]
+Sonst, wenn [ $action="LineNumbers.Toggle" ]
+	Feldwert setzen [ _Home::_gLineNumberingEnabled ; MBS( "SyntaxColoring.LineNumbers.Enabled" ) ]
+	Variable setzen [ $action ; "LineNumbers." & _Home::_gLineNumberingDisableAction ]
+Sonst, wenn [ $action="VariableChecking.Toggle" ]
+	Feldwert setzen [ _Home::_gVariableCheckingEnabled ; MBS( "SyntaxColoring.CheckVariableDeclaration.Enabled" ) ]
+	Variable setzen [ $action ; "CheckVariableDeclaration." & _Home::_gVariableCheckingDisableAction ]
+Ende (wenn)
+
+# Vars
+Variable setzen [ $actionPastTense ; Falls( 
+				$action = "Enable" ; "Enabled" ; 
+				$action = "Disable" ; "Disabled" ; 
+				$action = "LineNumbers.Enable" ; "Line Numbers Enabled" ; 
+				$action = "LineNumbers.Disable" ; "Line Numbers Disabled" ; 
+				$action = "VariableChecking.Enable" ; "Variable Checking Enabled" ; 
+				$action = "VariableChecking.Disable" ; "Variable Checking Disabled" ; 
+				$action = "Clear" ; "Cleared" ;
+				$action = "FactoryDefaults" ; "FactoryDefaults reset" ;
+				$action
+				) ]
+Variable setzen [ $actionVerb ; Falls( 
+				$action = "Enable" ; "enable syntax coloring" ; 
+				$action = "Disable" ; "disable syntax coloring" ; 
+				$action = "LineNumbers.Enable" ; "enable line numbers" ; 
+				$action = "LineNumbers.Disable" ; "disable line numbers" ; 
+				$action = "VariableChecking.Enable" ; "enable variable checking" ; 
+				$action = "VariableChecking.Disable" ; "disable variable checking" ; 
+				$action = "Clear" ; "clear all syntax coloring settings" ;
+				$action = "FactoryDefaults" ; "clear all syntax coloring settings back to the factory defaults" ;
+				$action
+				) ]
+
+Wenn [ ($action = "Clear" ODER
+				$action = "FactoryDefaults")
+				UND NICHT $noDialog ]
+	# Reset
+	Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Do you really want to " & $actionVerb & "?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Wenn [ Hole( LetzteMeldungswahl ) <> 2 ]
+		# Cancel
+		Feldwert setzen [ _Home::_gHomeScreenInfo ; "" ]
+		Aktuelles Script verlassen []
+		# -->
+	Ende (wenn)
+Ende (wenn)
+
+
+Variable setzen [ $MBS_Result ; MBS( "SyntaxColoring." & $action ) ]
+Feldwert setzen [ _Home::_gHomeScreenInfo ; $actionPastTense & " " & $MBS_Result ]
+
+Wenn [ $object = "LineNumbers" ]
+	# Make sure color is correctly set
+	Script ausführen [ Aus Liste ; "Set LineNumber Color" ]
+Ende (wenn)
+
+Script ausführen [ Aus Liste ; "MBS_SetSyntaxColoringEnabledStatus" ]

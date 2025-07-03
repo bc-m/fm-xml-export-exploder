@@ -1,0 +1,133 @@
+---
+source: src/main.rs
+expression: output_content
+---
+#  PURPOSE: Generate SSH keys
+#  HISTORY:
+     - Created:   2023-01-23 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# check name
+Wenn [ IstLeer ( PUB__publickeys::name ) ]
+	Eigenes Dialogfeld anzeigen [ Title: "Alert" ; Message: "Enter a name for this key." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen [  Wahr ]
+Ende (wenn)
+
+Wenn [ Abs ( Hole ( SystemPlattform ) ) = "1" ]
+	# mac
+	
+	# set vars
+	Variable setzen [ $this.path ; SetzeVar ([
+					  my.docpath = Hole ( DokumentenPfad );
+					  my.docpathright = ZeichenRechts ( my.docpath ; Länge ( my.docpath ) - 1 );
+					  my.array = Austauschen ( my.docpathright ; "/" ; "¶" );
+					  my.first = HoleWert ( my.array ; 1 );
+					  Dn = Hole ( SystemDatum ) ;
+					  date_string = Jahreszahl(Dn)*10^4 + MonatZahl(Dn)*100 + KalendertagZahl(Dn) ;
+					  Hr = Hole ( SystemUhrzeit ) ;
+					  time_string = Stunden ( Hr )*10^4 + Minuten( Hr )*100 + Sekunden( Hr );
+					
+					  my.path = Austauschen ( my.docpathright ; my.first ; "" ) & "d" & date_string & "t" & time_string & "_";
+					  my.end = ""
+					 ];
+					
+					my.path 
+					
+					) ]
+	Variable setzen [ $this.file ; $this.path & PUB__publickeys::name ]
+	# generate keys
+	Variable setzen [ $my.applescript ; "do shell script \"" & "ssh-keygen -t rsa -b 4096 -m PEM -f " & $this.file & ".key -N " & "\\\"\\\"" & "\"" ]
+	AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Variable setzen [ $my.applescript ; "do shell script \"" & "openssl rsa -in " & $this.file & ".key -pubout -outform PEM -out " & $this.file & ".key.pem\"" ]
+	AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
+		# get files
+		Variable setzen [ $this.url ; "file://" & $this.file & ".key" ]
+		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::privateKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		Variable setzen [ $this.url ; "file://" & $this.file & ".key.pem" ]
+		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::publicKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		# get text from files
+		Feldwert setzen [ PUB__publickeys::privateKey ; TextDecode ( PUB__publickeys::privateKey_r ; "utf-8" ) ]
+		Feldwert setzen [ PUB__publickeys::publicKey ; Austauschen ( 
+						  TextDecode ( PUB__publickeys::publicKey_r ; "utf-8" ) ;
+						  "¶" ; 
+						  "" 
+						) ]
+		Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+		
+		# do cleanup
+		Variable setzen [ $my.applescript ; "do shell script \"" & "rm " & $this.file & ".key\"" ]
+		AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		Variable setzen [ $my.applescript ; "do shell script \"" & "rm " & $this.file & ".key.pub\"" ]
+		AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		Variable setzen [ $my.applescript ; "do shell script \"" & "rm " & $this.file & ".key.pem\"" ]
+		AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		
+	Ende (wenn)
+	
+Sonst, wenn [ Abs ( Hole ( SystemPlattform ) ) = "2" ]
+	# win
+	
+	# set vars
+	Variable setzen [ $this.path ; SetzeVar ([
+					  my.docpath = Hole ( DokumentenPfad );
+					  my.docpathright = ZeichenRechts ( my.docpath ; Länge ( my.docpath ) - 1 );
+					
+					  Dn = Hole ( SystemDatum ) ;
+					  date_string = Jahreszahl(Dn)*10^4 + MonatZahl(Dn)*100 + KalendertagZahl(Dn) ;
+					  Hr = Hole ( SystemUhrzeit ) ;
+					  time_string = Stunden ( Hr )*10^4 + Minuten( Hr )*100 + Sekunden( Hr );
+					
+					  my.path = my.docpathright & "d" & date_string & "t" & time_string & "_";
+					
+					  my.end = ""
+					 ];
+					
+					my.path 
+					
+					) ]
+	Variable setzen [ $this.file ; $this.path & PUB__publickeys::name ]
+	# generate keys
+	Variable setzen [ $my.powershell ; "powershell.exe -Command \"ssh-keygen -t rsa -b 4096 -m PEM -f \"" & $this.file & ".key\" -N " & "'\"\"'" & "\"" ]
+	Event senden
+	Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Variable setzen [ $my.powershell ; "powershell.exe -Command \"openssl rsa -in \"" & $this.file & ".key\" -pubout -outform PEM -out " & $this.file & ".key.pem\"" ]
+	Event senden
+	Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
+		# get files
+		Variable setzen [ $this.url ; "file:///" & $this.file & ".key" ]
+		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::privateKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		Variable setzen [ $this.url ; "file:///" & $this.file & ".key.pem" ]
+		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::publicKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		# get text from files
+		Feldwert setzen [ PUB__publickeys::privateKey ; TextDecode ( PUB__publickeys::privateKey_r ; "utf-8" ) ]
+		Feldwert setzen [ PUB__publickeys::publicKey ; TextDecode ( PUB__publickeys::publicKey_r ; "utf-8" ) ]
+		Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+		
+		# do cleanup
+		Variable setzen [ $my.powershell ; "powershell.exe -Command \"Remove-Item " & $this.file & ".key\"" ]
+		Event senden
+		Variable setzen [ $my.powershell ; "powershell.exe -Command \"Remove-Item " & $this.file & ".key.pub\"" ]
+		Event senden
+		Variable setzen [ $my.powershell ; "powershell.exe -Command \"Remove-Item " & $this.file & ".key.pem\"" ]
+		Event senden
+		
+	Ende (wenn)
+	
+Sonst
+	# not supported
+	Eigenes Dialogfeld anzeigen [ Title: "Not Supported" ; Message: "This platform is not supported" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen [ Wahr ]
+	
+Ende (wenn)
+
+# clear container fields
+Feldwert setzen [ PUB__publickeys::privateKey_r ; "" ]
+Feldwert setzen [ PUB__publickeys::publicKey_r ; "" ]
+
+Aktuelles Script verlassen [ Wahr ]

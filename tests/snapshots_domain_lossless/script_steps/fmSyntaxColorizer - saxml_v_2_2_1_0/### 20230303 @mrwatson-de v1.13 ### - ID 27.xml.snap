@@ -1,0 +1,897 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="27" name="### 20230303 @mrwatson-de v1.13 ###" UUID="23C51521-1E7C-4CD7-A87D-B6661C79128F"></ScriptReference>
+	<ObjectList membercount="87">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D586067E-4E1C-4ED8-9985-74C2E47B7768</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="File: fmSyntaxColorizer"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7A84D801-E908-4EA2-BA71-79EFDDF4CBC5</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>19F904DB-E786-4AB8-92BF-A4B532D3EE8F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="© 2012-2023 MrW russell@mrwatson.de"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>ECFD5F8A-6BB1-4E85-8C59-043496237783</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A6F12207-1E81-4170-9BDE-1AC370C7BE2F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20230303 @mrwatson-de v1.13&#13;- Added `and color`, `or color`, `xor color` and `not color`"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>EC47C4BE-FF75-447D-BA48-B77EB5A2A0D6</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20230303 @mrwatson-de v1.12&#13;- Added Markers + tipps to GUI to help guide the user&#13;- Added `comment color`"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7F64CAD1-E151-44B3-BAF0-4FCE2188514E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20230225 @mrwatson-de v1.11&#13;- Fixed #10 Duplicate Palette&#13;- Fixed #11 `field color` added - to same color as layout color&#13;- Fixed #12 Users can now read the Changes / Version Script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A70C3DED-B291-4CE3-B710-2006A90E96E3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20230125 @mrwatson-de v1.10&#13;- Added Missing MBS Extras (Export Tooltips, Autocomplete Fn+Params, …)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4DF77877-4846-4E06-B6A6-D6D323759830</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20221228 @mrwatson-de v1.9.1&#10;- Corrected FM-Version field names"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AA5A6448-20C3-4CC7-9726-2A065A83B8FF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20221208 @mrwatson-de v1.9&#10;- Added Re-Login button (for quick administration)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9CA1A277-3985-46CB-9BD0-D0863AACFA15</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20220927 MrW v1.8.4&#13;- Removed fmScriptWorkspace"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="89" name="# (Kommentar)" enable="True">
+			<UUID>334821D1-B971-4B84-B44E-A028E2A32521</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20220922 MrW v1.8.3&#13;- Removed all GBS syntax rules which tried and failed to find commented out calculations"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="89" name="# (Kommentar)" enable="True">
+			<UUID>876F1CD4-D270-44BB-8E6A-30092964534B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20220812 MrW v1.8.2&#13;- Fixed a false Syntax warning caused by an over-lax syntax rule which tried to find commented out calculations"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0AC06C42-BA60-468D-B47D-C9E785B380E6</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20220318 MrW v1.8.1&#13;- [improvement] Changed the color highlighting to ScriptResult rather than ScriptParam"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>ABE8ABAF-82C3-4C64-9851-1575921E1ECC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20220317 MrW v1.8 Improvements to Syntax-Colorizing:&#13;- [feature] Added *ScriptParam* syntax to help distinguish ScriptParameters from ScriptResults! (I&apos;ve just used ScriptParameter once too often where I should be using ScriptResult!)&#13;- [feature] Pimped Markdown Headings (#...######) to make the structure of the script more vivid"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1A29014F-6FDD-4D87-8429-1A353E8BA9D2</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211209 MrW v1.7 Added MBS Variable autocomplete"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1863BD5C-9867-4C66-9CF1-369AEB43661B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211208 MrW v1.6.1 Moved &apos;#!&apos; and &apos;#/&apos; to the Core syntax, whilst &apos;#+Info+&apos; and &apos;#-Info-&apos; reamin in GBS syntax"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7D7D0391-8DDD-4CFE-8FCB-CD7331F2EEB7</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211208 MrW v1.6 Added syntax and colors to mark comments as Important or unimportant&#13;- added colors &apos;Comment Important&apos; and &apos;Comment Unimportant&apos; and&#13;- added comment prefix &apos;!&apos; or &apos;+Info+&apos; to mark important comments&#13;- added comment prefix &apos;/&apos; or &apos;-Info-&apos; to mark unimportant comments"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0756D210-9B88-484B-A97E-1011E6BB357E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211208 MrW v1.5.2 Made searching for categories easier"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="19" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8BA79536-D604-4DB9-AEE3-D59BED137974</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211205 MrW v1.5.1 Improved &quot;typical script&quot; to show parameter definition in comments better"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7AA3844E-A6CE-45B8-A1B6-D93DF9632116</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211104 MrW v1.5 Added options to set line limits on MBS Variable Check script scanning"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3BA61F93-F18B-4982-AD66-4D6326BD2538</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211015 MrW v1.4.1 Corrected MBS Version number required for new formula wildcards"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="89" name="# (Kommentar)" enable="True">
+			<UUID>EFFEF3AC-AB8A-446F-B919-BFF48393FB39</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211010 MrW v1.4 Added new colorizing functionality:&#13;- [feature] Added support for wildcard matches in calculation formulas, for example *zzz*()&#13;- [feature] Added zzz as warning to Core collection - I *think* this is probably general enough for the masses&#13;- [feature] Added MBS Blue color for MBS Script Step&#13;- [enhancement] Reduced the number of syntax definitions by deleting unnecessary entries&#13;- [enhancement] Also moved functions out of the Core to a new category, since they are all undefined in the default color palette anyhow"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7E26843E-CD0B-4CDA-AA82-8DC7EC30EFC9</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20211008 MrW v1.3.1 Fixed [bug] where colors were visible in the middle of the Color-Palettes layout"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5365EBFB-5F96-403B-AD68-6BFBD326DF3A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210924 MrW v1.3 Improved support for Dark Mode (Issue [#6])&#13;- [feature] Added a new dark mode Palette from Kristian Olsen: KO-Colors (Dark)&#13;- [feature] Added radio button to identify Dark/Light-Mode Palettes&#13;- [feature] Improved dark mode display of colors and selected palette&#13;- [feature] Added a tip after switching or colorizing, explaining what to do when switching between light &amp; dark modes&#13;- [feature] Automatically switch between suggested light/(Dark) palettes"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5A180032-F83A-4C93-8374-69F2C588AF41</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210916 MrW v1.2 You can simply change colors again with right-click &gt; Text Color !&#13;- [bug] fixed the Format menu, so that users can again set colors using right click &gt; Text Color - AT LAST! ([#1][i1])&#13;- [bug] removed some lingering pesky German  ([#3][i3])&#13;- [bug] fixed the release defaults to *not* turn on MBS calculation font size resizing to 30 px! ([#4][i4])&#13;&#13;[i1]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/1&#13;[i3]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/3&#13;[i4]: https://github.com/mrwatson-de/fmSyntaxColorizer/issues/4"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D022415E-3053-4058-9670-36812AD891F6</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210803 MrW 1.1.2 Corrected latest MBS Extras"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CB0592C6-D529-4F0E-900B-A75B455B2D8A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210803 MrW 1.1.1 Added latest MBS Extras inc. &apos;Debugger: Tooltips&apos;, &apos;Help Menu Entries&apos;, &apos;Schema - Don&apos;t Open in Relation Graph&apos;, &apos;Calculations: Calc. Tools&apos;, &apos;Calculations: Match Brackets&apos;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="89" name="# (Kommentar)" enable="True">
+			<UUID>920ADBEF-4FE6-4F48-AB1B-01ACB8DE921F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210322 MrW 1.0.1 Fixed VersionNr function to work for FM19.2"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5852349C-5B71-4DFD-8ECE-23EDCF877B7E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210114 MrW 1.0 fmSyntaxColorizer goes open source :-) Let&apos;s call it Version 1.0 at last!"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BA1C7DA7-53B5-4068-94B0-952A8DE63B78</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20201106 MrW 0.9v52 Highlighted the Colorize button - better UX"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AA512311-FF74-42A3-B53C-E4FAF3BF7399</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20201104 MrW 0.9v51 Corrected User&apos;s script access privs"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DC6AAFBB-C2B1-4C94-BF36-BD6E67D1032C</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20200708 MrW 0.9v50 Added recognition of targeted variables (Target: $)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="33" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FF9562F2-867E-4D00-A37E-C1CBFEBA8F2E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20200706 MrW 0.9v49 Added Collections and GitHub links"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3C838395-55E5-4067-8B88-37ECC8AF0793</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20200528 MrW 0.9v48 Added support for DarkMode, a Default DarkMode theme (needs tweaking) and some further color names in the color palettte. Plus fixed the jump from the Syntax list to the current color palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="35" id="89" name="# (Kommentar)" enable="True">
+			<UUID>783AD360-1766-4E80-9F51-3A8556B68AC5</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20191123 MrW 0.9v47 Added support for latest MBS options including keep column widths and custom calulation font size, search box width, and the search, highlight, if and loop colors."></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="36" id="89" name="# (Kommentar)" enable="True">
+			<UUID>231C557B-ABE1-44D9-8A21-6C78F88D1E0C</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20191008 MrW 0.9v46 Added support for global variable color and smaller bigger color (&lt;&gt;)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="37" id="89" name="# (Kommentar)" enable="True">
+			<UUID>375FB4CF-BE1F-4ADD-AF66-579C4A8B09FA</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20191003 MrW 0.9v45 Corrected editability of newer scripts"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="38" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5DBB8E48-F1FA-4121-B93D-3665DF6F84E7</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20191003 MrW 0.9v44 Added sorted steps for translation EN &lt;-&gt; IT"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="39" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CC55DCBA-49F5-42F4-ADBC-538F42445FB2</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20190524 MrW 0.9v43 Syntax for FileMaker 18"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="40" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C250F346-644B-4EAE-89EF-5971EEACD1DB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20190524 MrW 0.9v42 Added FM-Version when duplicating a syntax"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="41" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5D53B180-FBC7-4653-AD4C-02E8FDF10EAF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20190204 MrW 0.9v41 Enabled fmWorkMate to be called from AppleScript (privilege + added public API scripts to Activate fmWorkMate and open some important modules)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="42" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4913EC22-E12C-4F40-969F-74A3BE47878D</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20190203 MrW 0.9v40 Integrated fmScriptWorkspace "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="43" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D590EC4E-CAA9-4DF0-B65D-07395D85E129</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20190103 MrW 0.9v39 Added Syntax + Colors for some (FileMakery) Markdown in comments and some attempts to catch commented out code"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="44" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1BC3E450-F5E0-4F47-A95A-C8BC12FEFA7D</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20180509 MrW 0.9v38 Added fm17 syntax;&#13;plus a great new &quot;FileMaker Enhanced&quot; color palette as an extension of FileMaker&apos;s standard syntax colors&#13;plus removed some superceded stuff"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="45" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8F9A6518-C8B4-4322-BAD3-DFD7B481FCE3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20180506 MrW 0.9v37 Added fm17 script stuff"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="46" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DB844812-C26D-4BE7-B817-3171E33F1055</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20171006 MrW 0.9v36 Added some functions + steps from the last few fm releases that were missing"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="47" id="89" name="# (Kommentar)" enable="True">
+			<UUID>96D164C8-1DB9-49CA-9C26-4DB474CE6D0B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20171004 MrW 0.9v35 Added more important FileMakerDoc @tags"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="48" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2E6980E2-BFF7-49A6-B6E3-DEAB16D83314</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20171004 MrW 0.9v34 Added Warning color for Go to Record when Exit after last is Off"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="49" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9B7DAB67-8CF0-471B-A94C-F8EA2A4C6AD2</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20170927 MrW 0.9v33 Added many of the coming FileMakerDoc @tags"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="50" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A53E9696-3690-42E8-8672-F9122C3EAA54</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20170524 MrW 0.9v32 Made starting fmSyntaxColorizer simpler, more powerful and more beautiful than ever.&#13;All MBS developer extras can now be turned on &amp; off from the start page.&#13;Visual graphic shows exactly which options are activated.&#13;Foregrounded fmSyntaxColorizers minimized mode, and extended it 4 (fantastic) dynamic syntax colors.&#13;Updated all Syntax for fm16.&#13;Added new color group &quot;21 Plugin Steps&quot;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="51" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3E6CFA52-1652-4637-80C1-98EDBEE1513E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20170519 MrW 0.9v31 Changed New Window, Select Window and Close Window to Layout colours for fm16."></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="52" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B128A909-D265-4078-98E5-2639CDCAEDDE</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20170518 MrW 0.9v30 GUI overhaul ready for fm16 + MBS Plugins multiple new developer extras"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="53" id="89" name="# (Kommentar)" enable="True">
+			<UUID>24EDDE28-0158-4AD6-AA3B-016504611F2B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20160924 MrW 0.9v29 Preparing for FM15 compatability&#13;  - Added FM-Version Filter which automatically selects only the entries which are relevant for the current version&#13;  - Small view face-lift for the Syntax list view"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="54" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F215B173-01F6-4859-896D-63C7E32A4BB4</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20150912 MrW 0.9v28 Upgraded to fm14 platform"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="55" id="89" name="# (Kommentar)" enable="True">
+			<UUID>ED26081E-E9BB-48CC-9CB5-FEA2E57302C8</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140602 MrW 0.9v27 Help"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="56" id="89" name="# (Kommentar)" enable="True">
+			<UUID>12055395-FFC4-433E-926C-0DE4382CF0F9</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140509 MrW 0.9v26 Clearer state buttons for SyntaxColorizing, LineNumbers and VariableChecking - now also available in midimised view, and a few other GUI improvements."></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="57" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C81B5D7A-9054-44A5-89E0-EC548091DFC3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140430 MrW 0.9v25 New App-Menu, shortcut keys and fab new midimised state for active switching between palettes - cool!"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="58" id="89" name="# (Kommentar)" enable="True">
+			<UUID>18229A97-3128-4BF9-8DE5-3D9792E31ADC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW 0.9v24 Click the Sort heading with [SHIFT]+[CTRL]+[ALT] to perform a hard sort"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="59" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D6546261-3CF5-4766-BA48-1BFEBAE48296</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW 0.9v23 Corrected bug, whereby more than 1-click start may have been necessary"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="60" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DE565079-F668-42D2-9115-65699E391999</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140425 MrW 0.9v22 MBS-Plugin check extended to recognise a disabled plugin (fmp12 files)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="61" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6145DF8E-3741-40D3-9349-EEF82A9C0EFF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140423 MrW 0.9v21 Major improvements in the GUI:&#13;- Major overhaul of the home page on the principle of less is more.&#13;- Editing of colors including drag &amp; drop corrected, with standardised help info on the cyclone headings&#13;- The (i) Web info page now uses the full height of the monitor"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="62" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0A2ECF6F-338D-436C-9E31-FD8BD6A285AC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140423 MrW 0.9v20 fmSyntaxColorizer now correctly removes syntax colorizing"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="63" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4DD30D3E-8733-40EB-9B8C-6CED348D1193</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140423 MrW 0.9v19 Improved SyntaxColorizing:&#13;- Added syntax to mark &quot;*CurrentPrivilegeSetName*&quot; as &quot;Undesirable&quot;&#13;- Changed color for &quot;Halt Script&quot; and &quot;Exit Application&quot; to &quot;User Interaction&quot;&#13;- Corrected color name for &quot;#@&quot;&#13;- Improved typical script to highlight more features"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="64" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CAE55E0D-48F9-4E1F-BD56-7B69ECEE40C8</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140422 MrW 0.9v18 Support for MBS v4.2.0.04: Variable checking improved to ignore cut-off variable names [e.g.: $EndOfLin…]"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="65" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A243AAE7-A3F2-4B2B-89EA-522051527318</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131217 MrW 0.9v17 Close file instead of hiding - and open web"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="66" id="89" name="# (Kommentar)" enable="True">
+			<UUID>21502090-AAEA-485D-B427-193246EB4F70</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131216 MrW 0.9v16 New commands for fm13 (ScriptSteps) and new line number color function added"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="67" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6C1F6CDA-C720-4F64-9E6F-8654B9ECDF12</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131204 MrW 0.9v15 Variable-Checking added"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="68" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A5C2720D-0D5A-4FD2-A60D-2F0F8C693B5A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131119 MrW 0.9v14 Added new warning colour for seemingly commented out content"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="69" id="89" name="# (Kommentar)" enable="True">
+			<UUID>771DF526-4D3B-4EF0-A496-7C9FA786C342</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131023 MrW 0.9v13 New Example Script &quot;All script steps sorted by ID&quot;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="70" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2962AF32-E5EC-47C2-9BF8-0E033CF3C245</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131021 MrW 0.9v12 With separate enable/disable &amp; status for Line Numbers"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="71" id="89" name="# (Kommentar)" enable="True">
+			<UUID>26039E34-EBC1-4AED-9AFE-BFA29CD03D07</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131017 MrW 0.9v11 Support for MBS v3.5 and script line numbers :-) MBS-Plugin check greatly improved"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="72" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3176CAB5-86B4-426E-9A7A-4B1621BED827</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20130926 MrW 0.9v10 Bug removed: if no import file available returns to layout"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="73" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A26C52C5-5716-416B-A4C3-0D4BDDC6D253</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20130924 MrW 0.9v9 Hugely improved palette import &amp; export, where the user can choose which palettes to import"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="74" id="89" name="# (Kommentar)" enable="True">
+			<UUID>68DE0F18-40C5-48E1-B42B-99FF3B4B87B1</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20130923 MrW 0.9v8 Better introduction ; plus About *... Menu corrected and with Continue… menu item"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="75" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A8001E37-3019-4640-B7BA-F7CC318D8E96</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121202 MrW 0.9v7 Added fmp12 Commands; added App-Version to home page ; improved Color-Palettes layout ; Script Menu added"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="76" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0A232800-5FF4-4CE8-BE56-44A3863323BE</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121201 MrW 0.9v6 Programme and data improved for Windows, improved Script examples"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="77" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FE7413C8-FAD3-47F8-AAC2-7BB509AFDF52</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121126 MrW 0.9v5 Added functioning application Help, tidied layouts"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="78" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D26810A9-BAD3-4F76-B023-3C0F6BE9F4EB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121109 MrW 0.9v4 it just goes on and on!&#13;- Enabled Status and toggle button on the Home Screen&#13;- Now with script-wildcards, variables and function highlighting"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="79" id="89" name="# (Kommentar)" enable="True">
+			<UUID>31020C28-B7E8-4E16-9484-18515591C286</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121102 MrW 0.9v3 Wow!&#13;- Table view for palette-colours&#13;- Color-names reordered to make a more logical rainbow&#13;- Palette Sharing with Export/Import&#13;- Better MBS-integration&#13;- Simplified start page with one-click start!&#13;- &lt;Error&gt; tags introduced&#13;- Value list meta-values ++New++ and --None-- (cleverly) removed from the palettes color portal!&#13;- Comment (i) button added to Commands"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="80" id="89" name="# (Kommentar)" enable="True">
+			<UUID>44EBE4B2-09B5-4AD5-8E13-DC6FFA8220C9</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121031 MrW 0.9v2 Further developments:&#13;&#13;- Script and Calc types separated&#13;- Improved Help Menu with Send Feedback&#13;&#13;- Foreign commands corrected&#13;- Languages Table + WL&#13;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="81" id="89" name="# (Kommentar)" enable="True">
+			<UUID>57DDA48B-A43A-4738-B4FB-8544767CC44C</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121030 MrW 0.9v1 Lots of changes:&#13;- More finely tuned palettes, incl. Errors, Warnings, User Interactions, Ifs and Loops &#13;- More finely tuned commands, incl. Errors, Warnings and User Interactions&#13;- Calculation colors, incl. seperate portal for calculation colors in the palette view&#13;- Palette-switching, (colors are now referenced by name)&#13;- Test-scripts vastly improved&#13;- GUI tidied up a bit."></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="82" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7DF87281-9D44-4988-A073-43C872FA783F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121025 MrW 0.9v0 Nice :-)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="83" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2F0B6924-4D48-4044-A4B2-6C3A2E971D26</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="84" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FA8BF6F0-0E9B-4573-833F-DFD65E88BA1B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="85" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>C958738C-ABE3-4BB6-B0BB-26EC31F7DFED</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( DateiName ) & ":	" & Trimme( Austauschen( Hole( ScriptName ) ; "#" ; "" ) )]]></Text>
+							<ChunkList hash="2CF4D1572FA1897CA2E922EFBDD54AD5">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot;:	&quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Trimme</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">Austauschen</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> ) ; &quot;#&quot; ; &quot;&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="86" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BE4F2C66-7E4A-4739-8336-688CD8C5C4D9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

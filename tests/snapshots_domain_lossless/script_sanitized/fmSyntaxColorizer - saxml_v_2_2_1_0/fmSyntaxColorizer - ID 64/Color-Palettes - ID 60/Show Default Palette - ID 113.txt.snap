@@ -1,0 +1,24 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# 20121101 MrW
+# 20121025 MrW 0.9v1 
+
+# Default Einstellungen setzen
+Blätternmodus aktivieren [ Pause: OFF ]
+
+
+Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
+Datensätze zeigen als [ Als Formular anzeigen ]
+
+# Activate Default Colors
+Suchenmodus aktivieren [ Pause: OFF ]
+Feldwert setzen [ _Palette::PaletteName ; "=Default Colors" ]
+Ergebnismenge suchen
+Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
+	Alle Datensätze anzeigen
+	Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+Ende (wenn)
+Script ausführen [ Aus Liste ; "All" ]
+Datensätze zeigen als [ Als Formular anzeigen ]

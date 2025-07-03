@@ -1,0 +1,821 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<FMSaveAsXML version="2.2.1.0" Source="20.3.1" File="Admin API Tool.fmp12" UUID="8A846B17-4E07-4DD1-9EB6-B3BF3B0FEF11" locale="German">
+	<Structure membercount="1">
+		<AddAction membercount="17">
+			<BaseDirectoryCatalog membercount="1" generate="True" temporary="True">
+				<UUID modifications="2" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">1F66C6A2-20A3-4383-A5E2-967D849AD269</UUID>
+				<TagList></TagList>
+				<BaseDirectory name="fmsadmin/" id="0" relativeTo="True"></BaseDirectory>
+			</BaseDirectoryCatalog>
+			<BaseTableCatalog membercount="9">
+				<UUID modifications="12" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">4605A3B8-D43B-4391-A3F6-E1FADB5FE60D</UUID>
+				<BaseTable id="129" name="fmserver"></BaseTable>
+				<BaseTable id="130" name="schedules"></BaseTable>
+				<BaseTable id="131" name="files"></BaseTable>
+				<BaseTable id="132" name="clients"></BaseTable>
+				<BaseTable id="133" name="guestFiles"></BaseTable>
+				<BaseTable id="134" name="wpe"></BaseTable>
+				<BaseTable id="135" name="schedules_saved"></BaseTable>
+				<BaseTable id="137" name="plugins"></BaseTable>
+				<BaseTable id="138" name="publickeys"></BaseTable>
+			</BaseTableCatalog>
+			<TableOccurrenceCatalog membercount="29">
+				<UUID modifications="149" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">F3BB9ED8-A08B-4F12-837A-BF11CCB88381</UUID>
+				<TagList></TagList>
+				<TableOccurrence viewState="Collapse" height="38" id="1065089" name="FMS__fmserver" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065090" name="SCH__schedules" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="86" id="1065091" name="FIL__files" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="60" id="1065092" name="CLI__clients" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="86" id="1065093" name="GFI__guestFiles" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="48" id="1065094" name="FMS_GFI__guestFiles" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="60" id="1065095" name="FMS_GFI_CLI__clients" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065096" name="FMS_SCH__schedules" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065097" name="FMS_FIL__files" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="60" id="1065099" name="FMS_CLI_GFI__guestFiles" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="60" id="1065100" name="FMS_CLI__clients" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="60" id="1065101" name="CLI_GFI__guestFiles" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065102" name="FMS_CLI__clients_selected" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="60" id="1065103" name="FMS_FIL__files_selected" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065104" name="FMS_SCH__schedules_selected" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="86" id="1065105" name="WPE__wpe" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065106" name="FMS_WPE__wpe" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065107" name="FMS_FMS__fmserver_self" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065108" name="SCH_FMS__fmserver" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065110" name="SCH_FMS_FIL__files" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="86" id="1065111" name="SCHS__schedules_saved" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065112" name="FMS_SCHS__schedules_saved" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="86" id="1065113" name="PLG__plugins" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065114" name="FMS_PLG__plugins" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065115" name="FMS_SCHS__schedules_saved_selected" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="74" id="1065117" name="PUB__publickeys" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065118" name="FMS_PUB__publickeys" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="74" id="1065119" name="FMS_PUB__publickeys sync" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="74" id="1065120" name="PUB_FMS__fmserver" type="Local"></TableOccurrence>
+			</TableOccurrenceCatalog>
+			<CustomFunctionsCatalog membercount="2">
+				<UUID modifications="5" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">5A7108AD-4868-49E6-95B9-205666C8F23A</UUID>
+				<TagList></TagList>
+				<ObjectList membercount="2">
+					<CustomFunction id="12" name="JsonToVars" access="All"></CustomFunction>
+					<CustomFunction id="13" name="GetErrorDesc_en" access="All"></CustomFunction>
+				</ObjectList>
+			</CustomFunctionsCatalog>
+			<FieldsForTables membercount="9">
+				<FieldCatalog>
+					<BaseTableReference id="129" name="fmserver" UUID="9E487984-FBD2-4222-B953-6CE1BCD2981A"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="130" name="schedules" UUID="3EBF3110-E75E-47C0-B1EF-7B248965E9D9"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="131" name="files" UUID="771F1A20-A97A-42BB-B774-2B9122D88A76"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="clients" UUID="99FC8C8F-8C46-4EA8-9C13-74F16518A0ED"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="guestFiles" UUID="369F46E3-0485-4B1F-BE6C-6C135AF4E260"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="wpe" UUID="F4DCB4E0-1ADD-4962-A04B-83D97773BCCB"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="schedules_saved" UUID="AB5E8B34-CB93-45A6-9FAD-54AC0F220056"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="137" name="plugins" UUID="484D6327-B393-48E2-8986-FD3536D1ADCD"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="138" name="publickeys" UUID="C3D51E2B-0DF8-4C33-B990-F48BB3B8B7AD"></BaseTableReference>
+				</FieldCatalog>
+			</FieldsForTables>
+			<ValueListCatalog membercount="19">
+				<UUID modifications="33" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">59E83A24-91F0-408D-8A74-296023A9641E</UUID>
+				<TagList></TagList>
+				<ValueList id="1" name="Boolean"></ValueList>
+				<ValueList id="2" name="characterEncoding"></ValueList>
+				<ValueList id="3" name="errorMessageLanguage"></ValueList>
+				<ValueList id="4" name="serverStatus"></ValueList>
+				<ValueList id="5" name="One"></ValueList>
+				<ValueList id="6" name="Schedule_resourceType"></ValueList>
+				<ValueList id="7" name="Schedule_daysOfTheWeek"></ValueList>
+				<ValueList id="8" name="Schedule_repeatInterval"></ValueList>
+				<ValueList id="9" name="Schedule_repeatTask"></ValueList>
+				<ValueList id="10" name="Schedule_Type"></ValueList>
+				<ValueList id="11" name="databases"></ValueList>
+				<ValueList id="12" name="layouts"></ValueList>
+				<ValueList id="13" name="Schedule_resource_folders"></ValueList>
+				<ValueList id="14" name="Schedule_resource_files"></ValueList>
+				<ValueList id="15" name="smtpAuthType"></ValueList>
+				<ValueList id="16" name="smtpSecurity"></ValueList>
+				<ValueList id="17" name="schedules_saved"></ValueList>
+				<ValueList id="18" name="authenticatedStream"></ValueList>
+				<ValueList id="19" name="Zero"></ValueList>
+			</ValueListCatalog>
+			<RelationshipCatalog membercount="20">
+				<UUID modifications="28" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">A27E0EE1-0290-4930-A7E8-805897365919</UUID>
+				<Relationship id="5"></Relationship>
+				<Relationship id="6"></Relationship>
+				<Relationship id="7"></Relationship>
+				<Relationship id="8"></Relationship>
+				<Relationship id="9"></Relationship>
+				<Relationship id="10"></Relationship>
+				<Relationship id="11"></Relationship>
+				<Relationship id="12"></Relationship>
+				<Relationship id="14"></Relationship>
+				<Relationship id="15"></Relationship>
+				<Relationship id="16"></Relationship>
+				<Relationship id="17"></Relationship>
+				<Relationship id="18"></Relationship>
+				<Relationship id="20"></Relationship>
+				<Relationship id="21"></Relationship>
+				<Relationship id="22"></Relationship>
+				<Relationship id="24"></Relationship>
+				<Relationship id="25"></Relationship>
+				<Relationship id="26"></Relationship>
+				<Relationship id="27"></Relationship>
+			</RelationshipCatalog>
+			<CalcsForCustomFunctions membercount="2">
+				<ObjectList membercount="2">
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="12" name="JsonToVars" UUID="B7853AE0-EBF6-4F7A-96F0-46079BA23EB2"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="13" name="GetErrorDesc_en" UUID="D1A607BF-9A94-49BE-9255-59DB6E4EC471"></CustomFunctionReference>
+					</CustomFunctionCalc>
+				</ObjectList>
+			</CalcsForCustomFunctions>
+			<ScriptCatalog membercount="169">
+				<UUID modifications="1750" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">2B6BDF63-174F-4D7B-9368-DB41A735F60F</UUID>
+				<TagList></TagList>
+				<Script id="5" name="SCRIPT TEMPLATE ( json )"></Script>
+				<Script id="6" name="-" isSeparatorItem="True"></Script>
+				<Script id="7" name="TRIGGER - onFirstWindowOpen"></Script>
+				<Script id="8" name="TRIGGER - onLastWindowClose"></Script>
+				<Script id="3" name="-" isSeparatorItem="True"></Script>
+				<Script id="68" name="Navigation ( json )"></Script>
+				<Script id="10" name="Authentication" isFolder="True"></Script>
+				<Script id="4" name="Request Access Token"></Script>
+				<Script id="15" name="Invalidate Access Token"></Script>
+				<Script id="11" name="--" isFolder="Marker"></Script>
+				<Script id="12" name="Database Server" isFolder="True"></Script>
+				<Script id="118" name="Get Server Metadata"></Script>
+				<Script id="132" name="Update Admin Console Account"></Script>
+				<Script id="119" name="Update Server Name"></Script>
+				<Script id="30" name="Get Server Status"></Script>
+				<Script id="42" name="Update Server Status"></Script>
+				<Script id="36" name="Get Server Security Settings"></Script>
+				<Script id="38" name="Update Server Security Settings"></Script>
+				<Script id="14" name="Get Server General Settings"></Script>
+				<Script id="37" name="Update Server General Settings"></Script>
+				<Script id="120" name="Update Server Progressive Backups Setting"></Script>
+				<Script id="168" name="Cancel currently running backup"></Script>
+				<Script id="121" name="Enable/Disable Server Additional Database Folder Setting"></Script>
+				<Script id="163" name="Enable/Disable Server Discovery Setting"></Script>
+				<Script id="164" name="Get Authenticated Stream Setting"></Script>
+				<Script id="165" name="Set Authenticated Stream Setting"></Script>
+				<Script id="166" name="Get Allow certificate with unknown revocation status"></Script>
+				<Script id="167" name="Allow certificate with unknown revocation status"></Script>
+				<Script id="169" name="Get Server Parallel Backup Setting"></Script>
+				<Script id="170" name="Update Server Parallel Backup Setting"></Script>
+				<Script id="171" name="Get Restrict Access"></Script>
+				<Script id="172" name="Update Restrict Access"></Script>
+				<Script id="173" name="Get FileMaker Admin API Public Keys Server Setting"></Script>
+				<Script id="175" name="Add FileMaker Admin API Public Keys Server Setting"></Script>
+				<Script id="174" name="Update FileMaker Admin API Public Keys Server Setting"></Script>
+				<Script id="176" name="Delete FileMaker Admin API Public Keys"></Script>
+				<Script id="181" name="Get Persistent Cache Settings"></Script>
+				<Script id="182" name="Set Persistent Cache Setting"></Script>
+				<Script id="122" name="Get Server Current Folder Settings"></Script>
+				<Script id="123" name="Get Server Default Database Folder Path"></Script>
+				<Script id="124" name="Get Server Secure Database Folder Path"></Script>
+				<Script id="125" name="Get Server Additional Database Folder Path"></Script>
+				<Script id="126" name="Get Server Additional Remote Container Folder Path"></Script>
+				<Script id="127" name="Get Server Backup Folder Path"></Script>
+				<Script id="129" name="Update Server Default Backup Folder Path"></Script>
+				<Script id="128" name="Get Server Progressive Backup Folder Path"></Script>
+				<Script id="130" name="Update Server Progressive Backup Folder Path"></Script>
+				<Script id="13" name="--" isFolder="Marker"></Script>
+				<Script id="21" name="Databases" isFolder="True"></Script>
+				<Script id="23" name="List Databases"></Script>
+				<Script id="67" name="Perform Database Operations for All Databases ( json )"></Script>
+				<Script id="43" name="Perform Database Operations for a Database ( json )"></Script>
+				<Script id="22" name="--" isFolder="Marker"></Script>
+				<Script id="18" name="Clients" isFolder="True"></Script>
+				<Script id="65" name="List Clients"></Script>
+				<Script id="48" name="Send Message to Client ( json )"></Script>
+				<Script id="47" name="Disconnect Client ( json )"></Script>
+				<Script id="19" name="--" isFolder="Marker"></Script>
+				<Script id="16" name="Schedules" isFolder="True"></Script>
+				<Script id="20" name="List Schedules"></Script>
+				<Script id="85" name="Duplicate Schedule ( json )"></Script>
+				<Script id="49" name="Edit/Create Schedule"></Script>
+				<Script id="72" name="Get Schedule"></Script>
+				<Script id="87" name="Run Schedule ( json )"></Script>
+				<Script id="88" name="Enable/Disable Schedule ( json )"></Script>
+				<Script id="86" name="Delete Schedule ( json )"></Script>
+				<Script id="117" name="-" isSeparatorItem="True"></Script>
+				<Script id="116" name="TRIGGER - Load Saved Schedules"></Script>
+				<Script id="17" name="--" isFolder="Marker"></Script>
+				<Script id="25" name="PHP" isFolder="True"></Script>
+				<Script id="24" name="PHP Settings"></Script>
+				<Script id="39" name="Update PHP Settings"></Script>
+				<Script id="26" name="--" isFolder="Marker"></Script>
+				<Script id="133" name="External Authentication" isFolder="True"></Script>
+				<Script id="134" name="Get External Account Group Name"></Script>
+				<Script id="135" name="Update External Account Group Name"></Script>
+				<Script id="137" name="Get Amazon Identity Provider Information"></Script>
+				<Script id="138" name="Update Amazon Identity Provider Information"></Script>
+				<Script id="139" name="Get Google Identity Provider Information"></Script>
+				<Script id="140" name="Update Google Identity Provider Information"></Script>
+				<Script id="141" name="Get Microsoft Identity Provider Information"></Script>
+				<Script id="142" name="Update Microsoft Identity Provider Information"></Script>
+				<Script id="143" name="Enable/Disable Admin Console Sign-In"></Script>
+				<Script id="144" name="Database Sign-In for External Server Accounts"></Script>
+				<Script id="145" name="Database Sign-In for Amazon"></Script>
+				<Script id="146" name="Database Sign-In for Google"></Script>
+				<Script id="147" name="Database Sign-In for Microsoft"></Script>
+				<Script id="136" name="--" isFolder="Marker"></Script>
+				<Script id="148" name="FileMaker Client Settings" isFolder="True"></Script>
+				<Script id="150" name="FileMaker Pro and FileMaker Go Session Timeout Setting"></Script>
+				<Script id="151" name="Update FileMaker Pro and FileMaker Go Session Timeout"></Script>
+				<Script id="152" name="FileMaker WebDirect Session Timeout Setting"></Script>
+				<Script id="153" name="Update FileMaker WebDirect Session Timeout"></Script>
+				<Script id="180" name="Get Database Filtering Setting"></Script>
+				<Script id="154" name="Enable/Disable Database Filtering "></Script>
+				<Script id="149" name="--" isFolder="Marker"></Script>
+				<Script id="155" name="OData" isFolder="True"></Script>
+				<Script id="156" name="OData Settings"></Script>
+				<Script id="157" name="Update OData Settings"></Script>
+				<Script id="161" name="--" isFolder="Marker"></Script>
+				<Script id="27" name="XML" isFolder="True"></Script>
+				<Script id="28" name="XML Settings"></Script>
+				<Script id="40" name="Update XML Settings"></Script>
+				<Script id="29" name="--" isFolder="Marker"></Script>
+				<Script id="53" name="ODBC/JDBC" isFolder="True"></Script>
+				<Script id="54" name="ODBC/JDBC Settings"></Script>
+				<Script id="55" name="Update ODBC/JDBC Settings"></Script>
+				<Script id="56" name="--" isFolder="Marker"></Script>
+				<Script id="57" name="FileMaker Data API" isFolder="True"></Script>
+				<Script id="131" name="FileMaker Data API Usage"></Script>
+				<Script id="58" name="FileMaker Data API Settings"></Script>
+				<Script id="59" name="Update FileMaker Data API Settings"></Script>
+				<Script id="60" name="--" isFolder="Marker"></Script>
+				<Script id="61" name="Web Publishing Engine" isFolder="True"></Script>
+				<Script id="62" name="FileMaker WebDirect Settings"></Script>
+				<Script id="63" name="Update FileMaker WebDirect Settings"></Script>
+				<Script id="69" name="WPE Settings for All Machines"></Script>
+				<Script id="70" name="WPE Settings for a Single Machine"></Script>
+				<Script id="71" name="Update WPE Settings"></Script>
+				<Script id="183" name="Get Nginx Load Balancer URL Setting"></Script>
+				<Script id="184" name="Update Nginx Load Balancer URL Setting"></Script>
+				<Script id="64" name="--" isFolder="Marker"></Script>
+				<Script id="89" name="License" isFolder="True"></Script>
+				<Script id="91" name="Get License Information"></Script>
+				<Script id="92" name="Import License"></Script>
+				<Script id="93" name="Sync License"></Script>
+				<Script id="90" name="--" isFolder="Marker"></Script>
+				<Script id="94" name="Notifications" isFolder="True"></Script>
+				<Script id="98" name="Enable/Disable Email Notifications"></Script>
+				<Script id="96" name="Get Email Notification Settings"></Script>
+				<Script id="99" name="Update Email Notification Settings"></Script>
+				<Script id="95" name="--" isFolder="Marker"></Script>
+				<Script id="100" name="Certificate" isFolder="True"></Script>
+				<Script id="105" name="Create SSL CSR"></Script>
+				<Script id="102" name="Get Server Certificate Information"></Script>
+				<Script id="103" name="Import SSL Certificate"></Script>
+				<Script id="104" name="Delete SSL Certificate"></Script>
+				<Script id="101" name="--" isFolder="Marker"></Script>
+				<Script id="107" name="FMPlugins" isFolder="True"></Script>
+				<Script id="106" name="Get Plug-in List"></Script>
+				<Script id="115" name="Enable/Disable Individual Plug-in ( json )"></Script>
+				<Script id="111" name="Enable/Disable WPE Install Plug-in Script"></Script>
+				<Script id="112" name="Enable/Disable WPE Plug-ins"></Script>
+				<Script id="113" name="Enable/Disable DBS Install Plug-ins Script"></Script>
+				<Script id="114" name="Enable/Disable DBS Plug-ins"></Script>
+				<Script id="109" name="Get DBS Plug-in Configuration"></Script>
+				<Script id="110" name="Get WPE Plug-in Configuration"></Script>
+				<Script id="108" name="--" isFolder="Marker"></Script>
+				<Script id="34" name="-" isSeparatorItem="True"></Script>
+				<Script id="75" name="FM Data API" isFolder="True"></Script>
+				<Script id="82" name="Get Product Info"></Script>
+				<Script id="80" name="Get Databases"></Script>
+				<Script id="81" name="Get Layouts"></Script>
+				<Script id="83" name="Get Scripts"></Script>
+				<Script id="73" name="Request Data API Access Token"></Script>
+				<Script id="74" name="Invalidate Data API Access Token"></Script>
+				<Script id="77" name="Get Records"></Script>
+				<Script id="76" name="--" isFolder="Marker"></Script>
+				<Script id="32" name="Utility" isFolder="True"></Script>
+				<Script id="35" name="Set Config"></Script>
+				<Script id="78" name="Set Config FMDAPI"></Script>
+				<Script id="178" name="Generate SSH Keys"></Script>
+				<Script id="179" name="Generate JWT"></Script>
+				<Script id="31" name="Handle response"></Script>
+				<Script id="84" name="Handle response DAPI"></Script>
+				<Script id="41" name="View Docs"></Script>
+				<Script id="162" name="View Admin API Guide"></Script>
+				<Script id="79" name="View Docs FMDAPI"></Script>
+				<Script id="33" name="--" isFolder="Marker"></Script>
+			</ScriptCatalog>
+			<ThemeCatalog membercount="3">
+				<UUID modifications="48" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">81999920-A247-4424-91AA-2B6944DB78EF</UUID>
+				<TagList></TagList>
+				<Theme Display="Enlightened" Group="Aspire" version="6" locale="en" platform="1" name="com.filemaker.theme.enlightened" id="1"></Theme>
+				<Theme Display="Enlightened fmsadmin" Group="Custom" version="6" locale="en" platform="1" name="com.filemaker.theme.custom.A0ED6AD4_DD83_4D4B_97BA_F42453BB7F66" baseName="com.filemaker.theme.enlightened" baseVersion="6" id="2"></Theme>
+				<Theme Display="Apex Blue" Group="Apex Blue" version="1" locale="en" platform="2" name="com.filemaker.theme.apex_blue" id="3"></Theme>
+			</ThemeCatalog>
+			<LayoutCatalog membercount="14">
+				<UUID modifications="1040" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">133E2557-F253-4351-B17D-499EAA5609CF</UUID>
+				<TagList></TagList>
+				<Layout id="1" name="Admin API" width="1024"></Layout>
+				<Layout id="9" name="Data API" width="1024"></Layout>
+				<Layout id="7" name="Card - Schedule" width="870"></Layout>
+				<Layout id="14" name="Card - Public Keys" width="615"></Layout>
+				<Layout id="8" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="4" name="CLI__clients" width="1024"></Layout>
+				<Layout id="3" name="FIL__files" width="1024"></Layout>
+				<Layout id="5" name="GFI__guestFiles" width="1024"></Layout>
+				<Layout id="12" name="PLG__plugins" width="1024"></Layout>
+				<Layout id="2" name="SCH__schedules" width="1024"></Layout>
+				<Layout id="6" name="WPE__wpe" width="1024"></Layout>
+				<Layout id="13" name="PUB__publickeys" width="1024"></Layout>
+				<Layout id="10" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="11" name="SCHS__schedules_saved" width="1024"></Layout>
+			</LayoutCatalog>
+			<PrivilegeSetsCatalog membercount="3">
+				<UUID modifications="1" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">7AB1B329-9538-47A7-A15B-4F7EC7E8A7F5</UUID>
+				<TagList></TagList>
+				<ObjectList membercount="3">
+					<PrivilegeSet id="1" name="[Voller Zugriff]"></PrivilegeSet>
+					<PrivilegeSet id="2" name="[Nur Dateneingabe]"></PrivilegeSet>
+					<PrivilegeSet id="3" name="[Nur Lesezugriff]"></PrivilegeSet>
+				</ObjectList>
+			</PrivilegeSetsCatalog>
+			<ExtendedPrivilegesCatalog membercount="9">
+				<UUID modifications="1" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">A458E599-F0D6-4A14-ABBD-6E30C31058AF</UUID>
+				<ObjectList membercount="9">
+					<ExtendedPrivilege id="1" name="fmwebdirect"></ExtendedPrivilege>
+					<ExtendedPrivilege id="2" name="fmxdbc"></ExtendedPrivilege>
+					<ExtendedPrivilege id="3" name="fmapp"></ExtendedPrivilege>
+					<ExtendedPrivilege id="4" name="fmreauthenticate10"></ExtendedPrivilege>
+					<ExtendedPrivilege id="5" name="fmxml"></ExtendedPrivilege>
+					<ExtendedPrivilege id="6" name="fmphp"></ExtendedPrivilege>
+					<ExtendedPrivilege id="7" name="fmextscriptaccess"></ExtendedPrivilege>
+					<ExtendedPrivilege id="8" name="fmurlscript"></ExtendedPrivilege>
+					<ExtendedPrivilege id="9" name="fmrest"></ExtendedPrivilege>
+				</ObjectList>
+			</ExtendedPrivilegesCatalog>
+			<AccountsCatalog membercount="2">
+				<UUID modifications="3" userName="Malte Bastian" accountName="Admin" timestamp="2024-02-18T17:38:30">43330BC2-3C4A-415B-AED4-686D7F7A0600</UUID>
+				<Options>1</Options>
+				<ObjectList membercount="2">
+					<Account id="1" kind="0" type="FileMaker" enable="False"></Account>
+					<Account id="2" kind="0" type="FileMaker" enable="True"></Account>
+				</ObjectList>
+			</AccountsCatalog>
+			<StepsForScripts membercount="127">
+				<Script>
+					<ScriptReference id="5" name="SCRIPT TEMPLATE ( json )" UUID="D54CA235-79A4-4F64-B011-5A59AF9C2F7E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="7" name="TRIGGER - onFirstWindowOpen" UUID="4E76B7C5-E9EF-4025-9622-17401CF9D2F3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="8" name="TRIGGER - onLastWindowClose" UUID="6D549264-2F63-44BE-89EA-9E887BD0CB2A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="68" name="Navigation ( json )" UUID="2323A7B3-DD07-4BA6-8896-6567A550376F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="4" name="Request Access Token" UUID="3C9DE19A-6098-46A0-BB55-73FCFDDF3902"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="15" name="Invalidate Access Token" UUID="80E6C845-ACEB-42E6-9991-ED8B508F0E61"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="118" name="Get Server Metadata" UUID="56813A85-F7AE-4A36-A23C-19F878EA6B4E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="132" name="Update Admin Console Account" UUID="EB44C7F8-1242-45A9-8279-374BBD7AFFA1"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="119" name="Update Server Name" UUID="B7A20C3A-0E4D-47A5-B757-07DFB5F9F5BD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="30" name="Get Server Status" UUID="C0B37283-D73B-4DEF-8284-E044F6716A9A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="42" name="Update Server Status" UUID="651F61DF-E7B9-43C5-9C9D-6126F4767B03"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="36" name="Get Server Security Settings" UUID="B48027BA-019D-4D95-9AB0-66242F41C9A2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="38" name="Update Server Security Settings" UUID="73ED0A16-BDBA-47F4-A22D-9EA97444C03E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="14" name="Get Server General Settings" UUID="CB323F1E-5F23-45D7-B50A-EB8EF8DF8FD1"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="37" name="Update Server General Settings" UUID="B779F724-CCFB-4F49-AF28-3ACE46ABA916"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="120" name="Update Server Progressive Backups Setting" UUID="BEBCAACA-057B-463B-B45E-874CDFF9B632"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="168" name="Cancel currently running backup" UUID="4D3C8228-AB1C-4923-9CE7-398D06D84BAD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="121" name="Enable/Disable Server Additional Database Folder Setting" UUID="C8EA4520-AF11-499C-82E4-2C29330216AE"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="163" name="Enable/Disable Server Discovery Setting" UUID="7DB27F25-AD14-4218-842D-234A0677A841"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="164" name="Get Authenticated Stream Setting" UUID="61552BCA-63F8-487C-B899-2E38E1C350C7"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="165" name="Set Authenticated Stream Setting" UUID="D42DA482-4C44-4D26-8CC6-38BC74D58D8A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="166" name="Get Allow certificate with unknown revocation status" UUID="CCD8F33F-22A6-4DC8-A3C8-5BB44F1F6D0F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="167" name="Allow certificate with unknown revocation status" UUID="7D3BBCB4-D34D-45AF-8B32-79757FBDB797"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="169" name="Get Server Parallel Backup Setting" UUID="4908B4DF-69CE-45B4-8153-5C4AF3B013AA"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="170" name="Update Server Parallel Backup Setting" UUID="E0A51E96-D56D-491D-A6AB-D2A4ACB741DA"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="171" name="Get Restrict Access" UUID="55080FAA-2AD8-426E-A876-8F6E0C5B4AA3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="172" name="Update Restrict Access" UUID="47546126-4E3A-4635-8695-6043D57E788A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="173" name="Get FileMaker Admin API Public Keys Server Setting" UUID="F965D2B3-782D-41BE-ADDD-C042EDA9213C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="175" name="Add FileMaker Admin API Public Keys Server Setting" UUID="2BCC9AFF-BFEF-435D-9710-02F7EFCDE5E4"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="174" name="Update FileMaker Admin API Public Keys Server Setting" UUID="D7A48C2F-742D-4F71-8898-B7F370AB1BE8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="176" name="Delete FileMaker Admin API Public Keys" UUID="1542EA3E-E85D-46AE-9E6D-260F0FDE3E31"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="181" name="Get Persistent Cache Settings" UUID="4272861B-413A-4E62-899E-BD665EC4B227"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="182" name="Set Persistent Cache Setting" UUID="EDB8AAF1-B0DD-484B-A7CF-B071FAD88A68"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="122" name="Get Server Current Folder Settings" UUID="2EC48CF0-BA1F-4E26-84F3-FF9EB0D37C10"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="123" name="Get Server Default Database Folder Path" UUID="A324A012-F140-4222-B771-B59EECF91C07"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="124" name="Get Server Secure Database Folder Path" UUID="8D1542F1-9583-4E36-A12F-6B77EDFA04C5"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="125" name="Get Server Additional Database Folder Path" UUID="3D2F3833-C787-4F44-9BDB-704998B164E2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="126" name="Get Server Additional Remote Container Folder Path" UUID="C4CF7F81-5316-402D-A2ED-8BD399449891"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="127" name="Get Server Backup Folder Path" UUID="2E745A42-6FF6-4B13-A41C-F163057B2FFE"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="129" name="Update Server Default Backup Folder Path" UUID="011F9B13-CEA1-4CB6-96E4-9E64276F48E8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="128" name="Get Server Progressive Backup Folder Path" UUID="17CFE408-933F-4315-855C-BA0D5B40DBFF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="130" name="Update Server Progressive Backup Folder Path" UUID="18978907-DDAF-4B32-B8B9-CABF63224334"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="23" name="List Databases" UUID="4BF79E74-7B7F-49A8-A912-99F5B3E44278"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="67" name="Perform Database Operations for All Databases ( json )" UUID="A7787A17-19BD-4189-AA40-7234C60218CF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="43" name="Perform Database Operations for a Database ( json )" UUID="5381EEF8-ED65-4FDB-A558-7EB578A86D7F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="65" name="List Clients" UUID="B30EA7F8-3338-465C-9E22-194179E36E8C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="48" name="Send Message to Client ( json )" UUID="38A7FD17-F49A-4FAF-8532-2AB55424EB68"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="47" name="Disconnect Client ( json )" UUID="33C609A4-C9A1-4FBA-8B6C-16650C1E1D14"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="20" name="List Schedules" UUID="F896367F-4AF0-47F5-AD99-619941DD3191"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="85" name="Duplicate Schedule ( json )" UUID="173860C0-E105-4868-81DD-EC7B6195576F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="49" name="Edit/Create Schedule" UUID="77AF12D4-E5DB-40E4-9235-A48CADF2BC94"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="72" name="Get Schedule" UUID="B0783260-4419-4CB7-BECC-851AD7F35F2A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="87" name="Run Schedule ( json )" UUID="AEA60CBB-2412-4AC3-888B-B9CF5B568326"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="88" name="Enable/Disable Schedule ( json )" UUID="88D8CD0C-C7C4-41EF-A7CC-BED592EA8CA6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="86" name="Delete Schedule ( json )" UUID="0206683F-27B5-4042-BE69-35CDA3E1C484"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="116" name="TRIGGER - Load Saved Schedules" UUID="6B1BEBE4-A28A-40CA-BC00-74B5127D1C0B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="24" name="PHP Settings" UUID="CAC73430-E51F-4700-9FF3-9B2B44F9489A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="39" name="Update PHP Settings" UUID="FAE5DC3D-4844-4827-8721-91A8A39AFD30"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="134" name="Get External Account Group Name" UUID="17E45FD3-9B49-4526-BAE1-26AB24307B5E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="135" name="Update External Account Group Name" UUID="670D2275-F849-4F62-9148-0629CA47FBD6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="137" name="Get Amazon Identity Provider Information" UUID="973EC8E6-7189-4FCD-8D83-BDCFD23ABE29"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="138" name="Update Amazon Identity Provider Information" UUID="3E8A9CF4-7AF6-4591-856F-AF77587C4A80"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="139" name="Get Google Identity Provider Information" UUID="4DF36F91-5CD1-4A48-9E1F-EDC4ECCB8E0C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="140" name="Update Google Identity Provider Information" UUID="02097B3A-FD03-498D-92B4-3809D66140D8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="141" name="Get Microsoft Identity Provider Information" UUID="E4470A51-AA99-44DF-9B8D-24182C89E519"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="142" name="Update Microsoft Identity Provider Information" UUID="D7041BF4-FFD0-4E0D-9BCF-1E937B445B9F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="143" name="Enable/Disable Admin Console Sign-In" UUID="0D9F5BDD-83FC-41D1-8019-67FE22FF3604"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="144" name="Database Sign-In for External Server Accounts" UUID="F03BD34B-09FF-4945-A368-7AE92A0104BA"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="145" name="Database Sign-In for Amazon" UUID="DD4F5125-704B-4FB8-891D-85A6DE4635C3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="146" name="Database Sign-In for Google" UUID="B78D1CB9-9641-4886-8A36-FD3D3CD3AF01"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="147" name="Database Sign-In for Microsoft" UUID="758284B8-5F64-4669-AB9A-49AD66B393F1"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="150" name="FileMaker Pro and FileMaker Go Session Timeout Setting" UUID="0136DCC4-2E51-4682-AD3B-ACE4EA231BFD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="151" name="Update FileMaker Pro and FileMaker Go Session Timeout" UUID="7E913F98-12B6-4A58-9B9A-CF01FEF3A37F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="152" name="FileMaker WebDirect Session Timeout Setting" UUID="1203D3EF-9A56-4ADF-B34B-600929D07500"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="153" name="Update FileMaker WebDirect Session Timeout" UUID="AFCE58F9-FB89-4238-9561-A60B00B59A82"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="180" name="Get Database Filtering Setting" UUID="57598923-F1E2-49A2-948E-96E6E244DE38"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="154" name="Enable/Disable Database Filtering " UUID="E4A98125-B6A2-4DB2-917F-D6FA119E5ED1"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="156" name="OData Settings" UUID="AFB33D11-905B-4AF7-A035-FFCCAA8B3406"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="157" name="Update OData Settings" UUID="F9C32100-A35B-45B5-9508-A16CBB8622FE"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="28" name="XML Settings" UUID="5AF61EF3-F2A3-4235-9695-81AF7E7B38E8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="40" name="Update XML Settings" UUID="6249F29C-C15E-4995-ADDC-73217D221135"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="54" name="ODBC/JDBC Settings" UUID="A61D89F9-3C36-4004-BE41-7BE82EDE7014"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="55" name="Update ODBC/JDBC Settings" UUID="C43A9D14-2B13-4F75-B3E5-949C56886BB7"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="131" name="FileMaker Data API Usage" UUID="555769BB-A9DE-4E62-AFD9-7A066171EB54"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="58" name="FileMaker Data API Settings" UUID="1153A756-3F1B-44E6-9D37-9EBCCE5C757B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="59" name="Update FileMaker Data API Settings" UUID="861D2873-B3DA-487C-AD75-941EFB42CC7F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="62" name="FileMaker WebDirect Settings" UUID="335EC830-FC90-4F2B-B433-8942744AA1CB"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="63" name="Update FileMaker WebDirect Settings" UUID="BD92A58F-60BE-43F7-9C8A-F2883EFEADF2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="69" name="WPE Settings for All Machines" UUID="65ED4FC1-FCBB-42B0-A84B-29B4F5C75720"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="70" name="WPE Settings for a Single Machine" UUID="55696EE0-30D7-4E46-8C0B-8302EA0A4B8E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="71" name="Update WPE Settings" UUID="69A44A10-B5A9-4D88-A22D-AA4461ECD388"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="183" name="Get Nginx Load Balancer URL Setting" UUID="BE12542D-A99A-40DD-B08B-75EBBCF61BE6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="184" name="Update Nginx Load Balancer URL Setting" UUID="86C10E68-962E-41AF-A918-579D3FB202B3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="91" name="Get License Information" UUID="3B9240C0-7D79-4E1F-9D5F-89AB82CB6B3F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="92" name="Import License" UUID="906B07F7-4DA7-4A00-9E59-9DE9BA59423B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="93" name="Sync License" UUID="C7A89DE8-84F9-48C4-8826-103B737CABC4"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="98" name="Enable/Disable Email Notifications" UUID="B7174885-2E45-4AA2-8643-81423D6D2AA2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="96" name="Get Email Notification Settings" UUID="6EDBE46A-7DFC-44D6-A593-FAB43D794F66"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="99" name="Update Email Notification Settings" UUID="09C4AB17-73CE-4690-B4C3-844EDB51790E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="105" name="Create SSL CSR" UUID="70CFE044-7651-4610-B4B4-9FEAB420F613"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="102" name="Get Server Certificate Information" UUID="2499FD9E-00D7-412D-994B-C613D4B2A157"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="103" name="Import SSL Certificate" UUID="C29814FB-9C05-480F-BE8C-DE35C59AD3F2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="104" name="Delete SSL Certificate" UUID="34C98CDD-D7F9-4092-A2D8-604B930BF2BD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="106" name="Get Plug-in List" UUID="E3207DC3-1219-4052-ABDF-5900825BA1BC"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="115" name="Enable/Disable Individual Plug-in ( json )" UUID="056B109C-0AE2-43FB-B6C1-E1AA63A8043C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="111" name="Enable/Disable WPE Install Plug-in Script" UUID="5A8557B2-090F-4366-AEED-3D91CFD8318C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="112" name="Enable/Disable WPE Plug-ins" UUID="72F8515A-5B67-43A7-BFDF-F5927753065B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="113" name="Enable/Disable DBS Install Plug-ins Script" UUID="947A50DB-BA92-4EFF-A697-F18589314720"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="114" name="Enable/Disable DBS Plug-ins" UUID="7ADBCDBE-CC91-4770-AE2B-BB743C956BE3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="109" name="Get DBS Plug-in Configuration" UUID="B229EC81-D228-4F33-A77E-1B039B345C4E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="110" name="Get WPE Plug-in Configuration" UUID="6CE3B113-6352-4EFF-BD49-EA06D32738DD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="82" name="Get Product Info" UUID="39FBE0BE-3B7A-49B8-B83D-1C8893E1C166"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="80" name="Get Databases" UUID="14E371C8-C97C-42C6-8AEF-8F3910ACEDA1"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="81" name="Get Layouts" UUID="6FDFAC98-E20B-4DF9-8B4C-C7CAC846AC86"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="83" name="Get Scripts" UUID="1A1DB577-D99C-478D-8EEA-B868E4269F6B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="73" name="Request Data API Access Token" UUID="A2DA21BD-E78B-4ABC-BC63-377FE5E43470"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="74" name="Invalidate Data API Access Token" UUID="5218ACC3-7EFF-48CD-A652-A99B39001069"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="77" name="Get Records" UUID="3EE52E35-3A78-4695-A73D-6E3F7550419D"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="35" name="Set Config" UUID="6E806D84-9200-44AE-B032-89A6016326FF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="78" name="Set Config FMDAPI" UUID="27F607FB-46BE-4299-BE7B-AF9329BF5902"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="178" name="Generate SSH Keys" UUID="0364E358-2395-41DF-AC87-B2D8DA1C905B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="179" name="Generate JWT" UUID="569B2CCD-3F20-4F43-89C9-9F7C5CD06F51"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="31" name="Handle response" UUID="44FA18ED-6DEA-4F32-BDDB-09F438F6D005"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="84" name="Handle response DAPI" UUID="DA4B6B69-D437-4A81-9A80-EF35B66321BB"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="41" name="View Docs" UUID="CC7311D0-A373-4751-83C8-E0E440940274"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="162" name="View Admin API Guide" UUID="1936651E-99FB-4390-9F53-C253969F93F0"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="79" name="View Docs FMDAPI" UUID="31FEF756-9605-402B-A1F1-278D35869C43"></ScriptReference>
+				</Script>
+			</StepsForScripts>
+			<CustomMenuCatalog membercount="24">
+				<PasteIndexList membercount="24">
+					<Object id="1"></Object>
+					<Object id="10"></Object>
+					<Object id="11"></Object>
+					<Object id="12"></Object>
+					<Object id="13"></Object>
+					<Object id="14"></Object>
+					<Object id="15"></Object>
+					<Object id="16"></Object>
+					<Object id="17"></Object>
+					<Object id="18"></Object>
+					<Object id="19"></Object>
+					<Object id="2"></Object>
+					<Object id="20"></Object>
+					<Object id="21"></Object>
+					<Object id="22"></Object>
+					<Object id="23"></Object>
+					<Object id="24"></Object>
+					<Object id="3"></Object>
+					<Object id="4"></Object>
+					<Object id="5"></Object>
+					<Object id="6"></Object>
+					<Object id="7"></Object>
+					<Object id="8"></Object>
+					<Object id="9"></Object>
+				</PasteIndexList>
+				<UUID modifications="2" userName="Mike Duncan" accountName="Admin" timestamp="2020-12-18T12:17:11">E3698D7D-3468-4AAC-867A-E84FA3A9F77C</UUID>
+				<TagList></TagList>
+				<CustomMenu name="[Format]" id="1"></CustomMenu>
+				<CustomMenu name="[Scripts]" id="2"></CustomMenu>
+				<CustomMenu name="[Window]" id="3"></CustomMenu>
+				<CustomMenu name="[Recent]" id="4"></CustomMenu>
+				<CustomMenu name="[Import Records]" id="5"></CustomMenu>
+				<CustomMenu name="[Save/Send Records As]" id="6"></CustomMenu>
+				<CustomMenu name="[Go to Layout]" id="7"></CustomMenu>
+				<CustomMenu name="[Align Text]" id="8"></CustomMenu>
+				<CustomMenu name="[Manage]" id="9"></CustomMenu>
+				<CustomMenu name="[Find/Replace]" id="10"></CustomMenu>
+				<CustomMenu name="[Font]" id="11"></CustomMenu>
+				<CustomMenu name="[Line Spacing]" id="12"></CustomMenu>
+				<CustomMenu name="[Sharing]" id="13"></CustomMenu>
+				<CustomMenu name="[Go to Request]" id="14"></CustomMenu>
+				<CustomMenu name="[Go to Record]" id="15"></CustomMenu>
+				<CustomMenu name="[Show Window]" id="16"></CustomMenu>
+				<CustomMenu name="[Size]" id="17"></CustomMenu>
+				<CustomMenu name="[Spelling]" id="18"></CustomMenu>
+				<CustomMenu name="[Style]" id="19"></CustomMenu>
+				<CustomMenu name="[Text Color]" id="20"></CustomMenu>
+				<CustomMenu name="[Saved Finds]" id="21"></CustomMenu>
+				<CustomMenu name="[Send]" id="22"></CustomMenu>
+				<CustomMenu name="[Favorites]" id="23"></CustomMenu>
+				<CustomMenu name="[Hosts]" id="24"></CustomMenu>
+			</CustomMenuCatalog>
+			<PasteIndexList membercount="0"></PasteIndexList>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>

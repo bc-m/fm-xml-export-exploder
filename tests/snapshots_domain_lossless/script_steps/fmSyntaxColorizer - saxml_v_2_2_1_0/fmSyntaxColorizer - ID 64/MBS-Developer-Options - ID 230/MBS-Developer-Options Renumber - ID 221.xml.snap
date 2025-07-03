@@ -1,0 +1,105 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="221" name="MBS-Developer-Options Renumber" UUID="873A5EF0-130E-4F47-96EB-1EFE657815B9"></ScriptReference>
+	<ObjectList membercount="7">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1D87C897-9357-44EC-89ED-0B9BEAC6D3F8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>11BDDD82-C41C-4C6F-8E5D-22653CCDFA14</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20191123 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>37823516-F49A-40BB-B8EF-088A8450F18C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="23" name="Alle Datensätze anzeigen" enable="True">
+			<UUID>17950AA2-A914-4E7A-A4C2-DE025F89B556</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="4" id="39" name="Sortieren" enable="True">
+			<UUID>3E798220-3C88-4C70-B862-CC1FB7B82DED</UUID>
+			<OwnerID></OwnerID>
+			<Options>33587328</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Restore">
+					<Restore value="True"></Restore>
+				</Parameter>
+				<Parameter type="SortSpecification">
+					<SortSpecification value="True" maintain="True">
+						<SortList membercount="1">
+							<Sort type="Ascending">
+								<PrimaryField>
+									<FieldReference id="15" name="Prio" UUID="5B659683-EF8E-4170-A72F-D889FE52A586">
+										<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+									</FieldReference>
+								</PrimaryField>
+							</Sort>
+						</SortList>
+					</SortSpecification>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="91" name="Ersetze alle Feldwerte" enable="True">
+			<UUID>2C45A762-E7DC-448B-97DE-A36691C81462</UUID>
+			<OwnerID></OwnerID>
+			<Options>133</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="Prio" UUID="5B659683-EF8E-4170-A72F-D889FE52A586">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch fortlaufende Nummern ersetzen: " value="2">
+						<List name="Werte der Eingabeoptionen" value="False">
+							<Initial value="10"></Initial>
+							<increment value="10"></increment>
+						</List>
+						<Boolean type="Eingabeoptionen aktualisieren" value="False"></Boolean>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>27F9B10B-281A-4606-BA47-CBEFA68EC2FF</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

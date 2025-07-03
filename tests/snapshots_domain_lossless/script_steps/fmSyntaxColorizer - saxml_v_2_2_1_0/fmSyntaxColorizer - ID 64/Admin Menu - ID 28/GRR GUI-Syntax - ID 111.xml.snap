@@ -1,0 +1,160 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="111" name="GRR GUI-Syntax" UUID="53F39164-529F-4529-8ABC-5EC1E79AB9C0"></ScriptReference>
+	<ObjectList membercount="14">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BF3B96D8-6060-420C-AF38-D212869B6E11</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>695B0705-6A5F-4505-82DF-A8CDDBA4CB22</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140423 MrW  Corrected"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9B4F0A4E-969A-4021-A585-CE405ADE15B1</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20120706 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>90BC19A3-E8B5-40BF-81EF-54B7F0ECD4F8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>FE8495CB-EAF3-46E7-A3C4-B6573A5DEBA2</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>D3F6ECE4-1330-4717-A582-C9E567553073</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5DB6E4F6-D15D-4623-AACD-A87C1DD1D228</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="74" name="Gehe zu Bezugsdatensatz" enable="True">
+			<UUID>A2BDE5BD-BA0E-4F55-9BD8-D28CCEEF9DFD</UUID>
+			<OwnerID></OwnerID>
+			<Options>33554440</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Related">
+					<TableOccurrenceReference id="1065117" name="Syntax.GUISyntax" UUID="D6FA15E6-E89D-4561-8675-9E173161D4D0"></TableOccurrenceReference>
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="7" name="GUISyntax" UUID="D97A3B10-3C57-4331-9431-DE85B90B314F"></LayoutReference>
+					</LayoutReferenceContainer>
+					<Animation name="Ohne" value="0"></Animation>
+					<Options ShowRelated="True"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="68" name="Wenn" enable="True">
+			<UUID>475E9123-9A07-4B07-8DEA-2EE16CED1877</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT _IsLayoutTableName( _GUISyntax::__ID )]]></Text>
+							<ChunkList hash="3F1F7C201D2AD4749271EFB21A740264">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="CustomFunctionRef">_IsLayoutTableName</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="6" name="__ID" repetition="1" UUID="3BB730F8-E3BC-4D1D-93FE-7E45D968B98B">
+										<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>0C916A31-C983-4398-830E-9ACF02063B5D</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="7" name="GUISyntax" UUID="D97A3B10-3C57-4331-9431-DE85B90B314F"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="23" name="Alle Datensätze anzeigen" enable="True">
+			<UUID>9EF6E40A-A17A-4DE7-A5F1-BA15FD15E49B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="11" id="27" name="Nur Ausgeschlossene anzeigen" enable="True">
+			<UUID>5186ABAF-7CB5-47E4-BE55-13CEF995DD34</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="12" id="70" name="Ende (wenn)" enable="True">
+			<UUID>0FB07306-076F-434E-A791-1B0CD6EF3AF0</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0E4C36D8-66AE-4EAE-9A16-7A16FBC5FC9C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

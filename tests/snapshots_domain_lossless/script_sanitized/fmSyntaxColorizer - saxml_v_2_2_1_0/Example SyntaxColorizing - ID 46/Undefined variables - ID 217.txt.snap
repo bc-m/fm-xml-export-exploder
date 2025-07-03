@@ -1,0 +1,87 @@
+---
+source: src/main.rs
+expression: output_content
+---
+# # Variable checking with MBS
+
+
+# ## Examples of undefined variables:
+
+Variable setzen [ $i ; $i + 1 ]
+Feldwert setzen [ _Home::_gEmptyField ; $ThisIsAVar ]
+Feld nach Namen einstellen [ Zielfeld angeben: ON ;  $ThisIsAVar ; $ThisIsAnotherVar ]
+
+
+
+# ## Example of a defined variable:
+
+Variable setzen [ $i ; 0 ]
+Variable setzen [ $i ; $i + 1 ]
+
+
+# ## Variable definition via Comment:
+
+# @param $count
+Variable setzen [ $n ; $count ]
+
+# @var $someVariable
+Variable setzen [ $a ; $someVariable ]
+
+# @var $d,$e,$f
+Variable setzen [ $c ; $d + $e + $f ]
+
+# @const $A_CONSTANT
+Variable setzen [ $b ; $A_CONSTANT ]
+
+
+# ## Difficult Cases
+
+
+# Since FMI introduced target variables it has become more difficult for MBS to distinguish between READ and WRITE operations
+# MBS has got smarter, and can recognise better when a variable is being read or written:
+
+# The target variable of an Insert Calculated Results step is correctly ignored:
+# SUCCESS:
+Berechneten Wert einfügen [ Auswahl: ON ; Target: $TargetVar ; "whatever" ]
+
+# variable-read correctly recognised:
+# SUCCESS:
+Berechneten Wert einfügen [ Auswahl: ON ; Target: _Home::_gEmptyField ; $ThisIsAVar ]
+
+# However, this script text is however dubious (when you insert a variable into the current field - with NO target) MBS currently incorrectly assumes it's a target and doesn't flag the error:
+# FAIL:
+Berechneten Wert einfügen [ Auswahl: ON ; $whatever2 ]
+
+# SUCCESS: MBS correctly ignores variable names in strings
+Text einfügen [ Select ; Target: $TargetVar ; "$ThisIsNotAVariable" ]
+
+# SUCCESS: MBS applies variable checking to the various Insert steps
+Systemdatum einfügen [ Auswahl: ON ; Target: $TargetVar ]
+# SUCCESS:
+Systemuhrzeit einfügen [ Auswahl: ON ; Target: $TargetVar ]
+# SUCCESS:
+Benutzernamen einfügen [ Auswahl: ON ; Target: $TargetVar ]
+
+# SUCCESS:
+Von Gerät einfügen [ Vollbild ]
+
+# SUCCESS:
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: _Home::_gEmptyField ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+# SUCCESS:
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $TargetVar ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+# SUCCESS:
+Datei einfügen [ Target: $TargetVar ]
+
+# FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
+Audio/Video einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+# FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
+Datei einfügen [ Target: $TargetVar ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+# FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
+PDF einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+
+# FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
+Bild einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]

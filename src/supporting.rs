@@ -6,8 +6,9 @@ use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, start_element_to_string,
     text_element_to_string, XmlEventType,
 };
-use crate::utils::{push_line_to_skeleton, write_xml_file};
+use crate::utils::{build_out_dir_path, create_dir, push_line_to_skeleton, write_xml_file};
 use crate::xml_processor::ProcessingContext;
+use anyhow::Error;
 
 /// Extract entire element as is into its own file (don't split it into multiple files)
 /// Text content inside of <Chunk> tags needs special handling (replace tabs with &#09;)
@@ -16,13 +17,15 @@ pub fn process_supporting_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
     out_file_name: &str,
-) {
-    let out_file_path = context.current_out_dir.join(format!("{out_file_name}.xml"));
+) -> Result<(), Error> {
+    let out_dir_path = build_out_dir_path(context, None)?;
+    create_dir(&out_dir_path);
+    let out_file_path = out_dir_path.join(format!("{out_file_name}.xml"));
 
-    let mut ddr_info = String::new();
-    ddr_info.push_str(start_element_to_string(start_tag, context.flags).as_str());
+    let mut result = String::new();
+    result.push_str(start_element_to_string(start_tag, context.flags).as_str());
 
-    let mut depth = 1; // 1 means DDR_INFO
+    let mut depth = 1; // 1 means DDR_INFO or Metadata
     let base_depth = context.path_stack.len();
     let mut buf = Vec::new();
     let mut in_chunk = false;
@@ -52,7 +55,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
                     );
                 }
 
-                ddr_info.push_str(&start_tag);
+                result.push_str(&start_tag);
             }
             Ok(Event::End(e)) => {
                 depth -= 1;
@@ -69,7 +72,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
                     );
                 }
 
-                ddr_info.push_str(&end_tag);
+                result.push_str(&end_tag);
 
                 if in_chunk && e.name().as_ref() == b"Chunk" {
                     in_chunk = false;
@@ -77,27 +80,28 @@ pub fn process_supporting_element<R: Read + BufRead>(
 
                 // Write to file if we're at the end of the catalog
                 if depth == 0 {
-                    write_xml_file(&out_file_path, &ddr_info, 1, context.flags);
+                    write_xml_file(&out_file_path, &result, 1, context.flags);
                     context.path_stack.pop();
                     break;
                 }
             }
             Ok(Event::CData(e)) => {
-                ddr_info.push_str(cdata_element_to_string(&e).as_str());
+                result.push_str(cdata_element_to_string(&e).as_str());
             }
             Ok(Event::Text(e)) => {
                 let mut text_string = text_element_to_string(&e, true);
                 if in_chunk && !text_string.trim().is_empty() {
                     text_string = text_string.replace('\t', "&#09;");
                 }
-                ddr_info.push_str(text_string.as_str());
+                result.push_str(text_string.as_str());
             }
             Ok(Event::Comment(e)) => {
-                ddr_info.push_str(text_element_to_string(&e, false).as_str());
+                result.push_str(text_element_to_string(&e, false).as_str());
             }
             _ => {}
         }
 
         buf.clear()
     }
+    Ok(())
 }

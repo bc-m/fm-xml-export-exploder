@@ -1,0 +1,1762 @@
+---
+source: src/main.rs
+expression: output_content
+---
+<Layout id="1" name="My Layout for TestTable" width="1400">
+	<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+	<LayoutThemeReference id="2" name="com.filemaker.theme.custom.652F8B0F_1C44_4213_95C6_F833E0F68CF6" UUID="538D5459-513B-4966-BD36-FCB5D37AED28" Display="MyCustomTheme" Base="com.filemaker.theme.apex_blue"></LayoutThemeReference>
+	<PartsList membercount="10">
+		<Part type="Top Navigation" kind="12">
+			<Definition type="Top Navigation" kind="12" size="44" absolute="0" Options="0"></Definition>
+			<ObjectList membercount="2">
+				<LayoutObject hash="A798C2047CCC7FFAF944117AD7BADF8B" id="70" type="Text" name="" kind="2">
+					<UUID>A441F332-E576-46D9-8398-62D51E8BCCB6</UUID>
+					<Bounds top="10" left="10" bottom="32" right="120"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Top Navigation]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="8051477FCC37A2CDD566A777608F445A" id="89" type="Text" name="" kind="2">
+					<UUID>B850ECF6-9082-46D1-9418-C42D31AADDA9</UUID>
+					<Bounds top="4" left="480" bottom="35" right="979"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[This layout is using the MyCustomTheme theme]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="large_filled" displayName="Large Filled"><![CDATA[self.large_filled
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Title Header" kind="0">
+			<Definition type="Title Header" kind="0" size="32" absolute="44" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="1FBD070A44C6D541497FE64A421940FA" id="71" type="Text" name="" kind="2">
+					<UUID>066A3BD0-89FC-4184-B448-621139E4D898</UUID>
+					<Bounds top="49" left="10" bottom="71" right="100"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Title Header]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Header" kind="1">
+			<Definition type="Header" kind="1" size="35" absolute="76" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="AC2B1538CB4662C95727BDCCEECD6066" id="72" type="Text" name="" kind="2">
+					<UUID>C3FB5AF1-D369-4048-AA46-6E022BE411EA</UUID>
+					<Bounds top="83" left="10" bottom="105" right="66"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Header]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Leading Grand Summary" kind="2">
+			<Definition type="Leading Grand Summary" kind="2" size="35" absolute="111" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="F58E9ACCAFA5AF87A4FF259E79BE2714" id="73" type="Text" name="" kind="2">
+					<UUID>1BAA4753-6B52-4483-86DE-173E6E5E3231</UUID>
+					<Bounds top="118" left="10" bottom="140" right="193"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Leading Grand Summary]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Leading Sub-summary" kind="3" name="Sub-summary by TextField1 (Leading)">
+			<Definition type="Leading Sub-summary" kind="3" size="31" absolute="146" Options="0">
+				<FieldReference id="6" name="TextField1" UUID="0EC666FE-F018-4229-A068-104C00599D7F">
+					<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+				</FieldReference>
+			</Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="27DFE48DAF2974C0F1A6BCC7E59D50BA" id="74" type="Text" name="" kind="2">
+					<UUID>9180519D-EC8A-491D-BBA5-D5D8CFEEABCF</UUID>
+					<Bounds top="151" left="10" bottom="173" right="108"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Subsummary]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Body" kind="4">
+			<Definition type="Body" kind="4" size="900" absolute="177" Options="1024"></Definition>
+			<ObjectList membercount="47">
+				<LayoutObject hash="57003FADFFC0BDB233656DFF1936B7D7" id="21" type="Edit Box" name="" kind="1">
+					<UUID>EBF5876B-A1F9-4A90-975D-C283660269D3</UUID>
+					<Bounds top="316" left="214" bottom="347" right="315"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="12" name="CalcField1_c" repetition="1" UUID="3686EC6C-B572-4D52-A0E2-1C0C56F9360C">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>22</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="71284263DB9B24BE06440553A5DD71D1" id="22" type="Text" name="" kind="2">
+					<UUID>249485C6-B8B4-40EE-A61A-6B47D8FA2E73</UUID>
+					<Bounds top="321" left="105" bottom="343" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[CalcField1_c]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="A6F91B662C909F3F2613731624111EE9" id="23" type="Container" name="" kind="1">
+					<UUID>9A82667D-CF4C-4982-AC06-9663E379C443</UUID>
+					<Bounds top="351" left="214" bottom="406" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="11" name="ContainerField1" repetition="1" UUID="DE290E12-7D1F-4140-9835-620EC8219D6A">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>24</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="0AB89E016E8C544CDFD0F1FC596954F6" id="24" type="Text" name="" kind="2">
+					<UUID>E6D81A36-A4BF-4216-8331-97A78E58D997</UUID>
+					<Bounds top="356" left="85" bottom="378" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[ContainerField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="219E97B863B0B1E37818A51FCD10DA1E" id="25" type="Edit Box" name="" kind="1">
+					<UUID>C8CF174B-ED30-48E1-B7B5-1EE982EEFE84</UUID>
+					<Bounds top="469" left="214" bottom="500" right="335"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="8" name="DateField1" repetition="1" UUID="69B4E6EE-A87F-424E-BAA3-BCB5F2561314">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>26</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="580893F3AF514F6F424864B924ED943B" id="26" type="Text" name="" kind="2">
+					<UUID>F77D8AEA-068B-49CA-8EF9-324F2E213B93</UUID>
+					<Bounds top="474" left="121" bottom="496" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[DateField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="6B78E444FDD817CCF5B988B73EE77ADE" id="27" type="Edit Box" name="" kind="1">
+					<UUID>9438B979-8402-47D3-AABC-F59E5CD330A8</UUID>
+					<Bounds top="504" left="214" bottom="535" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="14" name="ID" repetition="1" UUID="3699B045-50A7-4EAE-B404-5C9A8564735B">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>28</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="D542F4FBBC1B926B7CD8EECC534FCD85" id="28" type="Text" name="" kind="2">
+					<UUID>DC1074E9-4F01-4966-8899-9A0D1706E201</UUID>
+					<Bounds top="509" left="182" bottom="531" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[ID]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="C9B767E25B297DAA6D294CEA0DC1954F" id="29" type="Edit Box" name="" kind="1">
+					<UUID>75C799B7-C131-4811-9C05-AAA1D16DA67B</UUID>
+					<Bounds top="539" left="214" bottom="570" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="7" name="NumberField1" repetition="1" UUID="CA9E740B-A5E6-45D0-A4BA-2C46D0C2930A">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>30</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="5AB9C59ADE694DD3A75793CA5CED209B" id="30" type="Text" name="" kind="2">
+					<UUID>6483F6C2-4409-4247-B5BE-673BA23371DA</UUID>
+					<Bounds top="544" left="97" bottom="566" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[NumberField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="FFD565B8E03553DF495D876444B34E69" id="31" type="Edit Box" name="" kind="1">
+					<UUID>F82F60E7-504B-4E88-BBE2-F7485A226AF9</UUID>
+					<Bounds top="574" left="214" bottom="605" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="13" name="SummaryField1" repetition="1" UUID="A3339F70-AD28-4611-9159-13C9EB51A302">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>32</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="7A1325E894C2D239666D48B20B1774A9" id="32" type="Text" name="" kind="2">
+					<UUID>64573630-AA83-4B01-8D34-40035A66331B</UUID>
+					<Bounds top="579" left="86" bottom="601" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[SummaryField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="2E37610F4DA54C88CEE78C71A2DCDE6E" id="33" type="Edit Box" name="" kind="1">
+					<UUID>0AA385FE-0D62-49F1-BEF2-14D75CAB4A2F</UUID>
+					<Bounds top="609" left="214" bottom="640" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="15" name="TextField_lotsTurnedOn" repetition="1" UUID="278BDE86-CE37-47D9-B5F3-53E4F171A19F">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>34</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="B0D4DC379978098C12B3847ECD1231AA" id="34" type="Text" name="" kind="2">
+					<UUID>D8F97355-70DA-44FD-BC1B-05D9F07B3237</UUID>
+					<Bounds top="614" left="30" bottom="636" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[TextField_lotsTurnedOn]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="DDF89A4CEE77512408A4CF22924F48FE" id="35" type="Edit Box" name="" kind="1">
+					<UUID>41739D55-0D1F-497A-A81D-BA735140A315</UUID>
+					<Bounds top="644" left="214" bottom="675" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="6" name="TextField1" repetition="1" UUID="0EC666FE-F018-4229-A068-104C00599D7F">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>36</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="276B5718709085F3552F3303D266CAFC" id="36" type="Text" name="" kind="2">
+					<UUID>0FC16C6B-E830-413F-8B40-D8AB21D4AE0D</UUID>
+					<Bounds top="649" left="125" bottom="671" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[TextField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="198F72C8EBD073B82C05C024D4D0DDB0" id="37" type="Edit Box" name="" kind="1">
+					<UUID>2E73174B-863E-4525-B009-347192BF5176</UUID>
+					<Bounds top="679" left="214" bottom="710" right="335"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="9" name="TimeField1" repetition="1" UUID="BF830532-3EAB-46A4-A33B-F47D3BD94766">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>38</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="4542A4B5A0C1ABF11095DB08764B5343" id="38" type="Text" name="" kind="2">
+					<UUID>0B620A18-1D11-4569-A76D-880785408D5D</UUID>
+					<Bounds top="684" left="119" bottom="706" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[TimeField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="A584D7600F0DB1BBF753A088FB9B2656" id="39" type="Edit Box" name="" kind="1">
+					<UUID>BD0CFD56-76AB-4D76-A785-13AC2019BC62</UUID>
+					<Bounds top="714" left="214" bottom="745" right="455"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="10" name="TimestampField1" repetition="1" UUID="6E00F1F2-ED0D-4394-BD26-5027A8838F6C">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>40</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="7053848916A89F6EA42C577CC8046134" id="40" type="Text" name="" kind="2">
+					<UUID>974E8A9F-C228-49BC-941E-151B49C6C965</UUID>
+					<Bounds top="719" left="74" bottom="741" right="201"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[TimestampField1]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="27485AC383BA3BA373C1A8D1449E0453" id="41" type="Line" name="" kind="4">
+					<UUID>73FB453F-F633-4CC9-8C22-86CCF3AB33EC</UUID>
+					<Bounds top="345" left="516" bottom="426" right="598"></Bounds>
+					<Options>805318656</Options>
+					<Line></Line>
+				</LayoutObject>
+				<LayoutObject hash="5289DE5464599B2676A41028CDD8FD33" id="42" type="Rectangle" name="" kind="5">
+					<UUID>AA0173A1-8C0B-4712-B7A4-21767D601DE1</UUID>
+					<Bounds top="457" left="516" bottom="512" right="649"></Bounds>
+					<Options>805306368</Options>
+					<Rectangle renderFormat="0"></Rectangle>
+				</LayoutObject>
+				<LayoutObject hash="864BE6C19A70734F549802A62C4AD088" id="44" type="Button" name="" kind="10">
+					<UUID>440C6F30-7E31-4C55-82FF-73D2A0047C10</UUID>
+					<Bounds top="321" left="555" bottom="352" right="789"></Bounds>
+					<Options>805371912</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[MyButton - single step]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="4" size="16">
+							<BinaryData>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="409">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCjxnIGNsYXNzPSJmbV9maWxsIj4NCjxyZWN0IHg9IjguNzk3IiB5PSI3LjgwNiIgIHdpZHRoPSIxNS4yMDMiIGhlaWdodD0iMTQuMTk0Ii8+DQo8cmVjdCB5PSI3LjczNyIgd2lkdGg9IjcuMTI3IiBoZWlnaHQ9IjE0LjE5NCIvPg0KPHJlY3QgeD0iMC4wMDIiIHk9IjIuMDA2IiB3aWR0aD0iMjMuOTk4IiBoZWlnaHQ9IjQuMjQ1Ii8+DQo8L2c+DQo8L3N2Zz4NCg==</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="23">000000010533373B3D3F000B3B6B053C35283774292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="1" name="Hello world" UUID="41D78F84-E8F2-4E2D-90F3-A3C380F22F7E"></ScriptReference>
+							<Calculation>
+								<DDRREF kind="ChunkList" hash="DE64B445CD4CFA7C12B9C5DAF2DBAFD0">_440C6F30-7E31-4C55-82FF-73D2A0047C10_action</DDRREF>
+								<Text><![CDATA["Aline"]]></Text>
+							</Calculation>
+						</action>
+					</Button>
+				</LayoutObject>
+				<LayoutObject hash="3ED78433CFACF7621DCC3FAE9A439B03" id="45" type="Button" name="" kind="10">
+					<UUID>2CB82524-7639-4834-A816-7A1BB8D21947</UUID>
+					<Bounds top="360" left="555" bottom="391" right="789"></Bounds>
+					<Options>805371912</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[MyButton - script]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="4" size="16">
+							<BinaryData>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="893">PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pg0NPHN2ZyB2aWV3Qm94PSIwIDAgOTYgOTYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+DQo8ZyBjbGFzcz0iZm1fZmlsbCI+DQk8cGF0aCBkPSJNIDk1IDguMyBDIDk1IDMuOSA5My4xIDIgODguNiAyIEMgNzQuNCAyIDYwLjkgMjEuNiA1OC4zIDIxLjYgQyA1Ny41IDIxLjYgNTcuMiAyMC45IDQ5LjMgMjEuMyBDIDQxLjQgMjEuMyA0OSAxNCA0MS4xIDE0LjEgQyAzNC4zIDE0LjIgMzUuNSAxOS44IDI4LjcgMTkuOCBDIDI4IDE5LjggNy4zIDE4LjIgNi42IDE4LjUgQyA1LjYgMTguOSA0LjkgMjAuMyAxIDI0LjYgTCA0MC43IDM5LjggQyAzMy42IDQ2LjggMjYuNSA1My45IDE5IDYwLjIgTCA4LjEgNjAuMiBDIDcuMiA2MC4yIDQuNSA2My4yIDIuMiA2NS43IEwgMTkuNSA3MiBMIDE1LjEgNzYuMiBMIDE4LjggODAuMiBMIDIzLjYgNzYgTCAzMC44IDkzLjUgQyAzMi43IDkxLjcgMzQuNSA4OS44IDM2LjIgODcuNiBMIDM2LjIgNzYuOCBDIDM2LjIgNzUuNyA0OS43IDYyLjggNTYuOCA1NS43IEwgNzIuNSA5NSBDIDc1LjIgOTIgNzkuNiA4OS4xIDc4LjUgODYuMSBMIDc3IDY3LjIgQyA3NyA2MC41IDgyLjggNjEuNyA4Mi44IDU1IEMgODIuOCA0OC41IDc2LjYgNTQuMiA3NS41IDQ3LjIgQyA3NS41IDM5LjQgNzUuMiAzOS4xIDc1LjIgMzcuOSBDIDc1LjIgMzUuNyA5NSAyMiA5NSA4LjMgWiIvPg08L2c+DQo8L3N2Zz4=</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="24">000000010533373B3D3F000C3B33282A363B343F74292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="1" name="Hello world" UUID="41D78F84-E8F2-4E2D-90F3-A3C380F22F7E"></ScriptReference>
+							<Calculation>
+								<DDRREF kind="ChunkList" hash="90213DC459B04C5A47C044B9460AEF7B">_2CB82524-7639-4834-A816-7A1BB8D21947_action</DDRREF>
+								<Text><![CDATA[123]]></Text>
+							</Calculation>
+						</action>
+					</Button>
+				</LayoutObject>
+				<LayoutObject hash="DDC008677E7EB98584A0C116C9F64F28" id="46" type="Button" name="" kind="10">
+					<UUID>48802617-203A-48FE-96E0-0E84CF91A123</UUID>
+					<Bounds top="400" left="555" bottom="431" right="789"></Bounds>
+					<Options>805306376</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[MyButton - noop]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="16"></IconData>
+					</Button>
+				</LayoutObject>
+				<LayoutObject hash="95EA42F14FCD88A637D1F60E71068AEA" id="47" type="Button Bar" name="" kind="18">
+					<UUID>56248680-F14E-4310-BE7C-0AC1234AE198</UUID>
+					<Bounds top="602" left="563" bottom="642" right="816"></Bounds>
+					<Options>805306368</Options>
+					<ButtonBar>
+						<Options>0</Options>
+						<Select>
+							<id>0</id>
+						</Select>
+						<ObjectList membercount="2">
+							<LayoutObject hash="6DB29BE01C66E2076D75C83FD147781F" id="49" type="Button" name="" kind="10">
+								<UUID>CFB6D48E-DA82-495B-88EA-8A1FB045313A</UUID>
+								<Bounds top="1" left="1" bottom="39" right="126"></Bounds>
+								<Options>805306376</Options>
+								<Button>
+									<Options>2</Options>
+									<Label>
+										<Calculation>
+											<DDRREF kind="ChunkList" hash="83BB79854016C4671705F0E12ACC04C2">_CFB6D48E-DA82-495B-88EA-8A1FB045313A_Label</DDRREF>
+											<Text><![CDATA["Segment1"]]></Text>
+										</Calculation>
+									</Label>
+									<IconData type="0" size="16"></IconData>
+								</Button>
+							</LayoutObject>
+							<LayoutObject hash="E3C626E6201422D587D8F6B74B730040" id="50" type="Button" name="" kind="10">
+								<UUID>AD1A410D-055A-4637-B68A-D36531820294</UUID>
+								<Bounds top="1" left="126" bottom="39" right="252"></Bounds>
+								<Options>805306376</Options>
+								<Button>
+									<Options>2</Options>
+									<Label>
+										<Calculation>
+											<DDRREF kind="ChunkList" hash="D49D05F0F19CFCB736D669A5880E63A9">_AD1A410D-055A-4637-B68A-D36531820294_Label</DDRREF>
+											<Text><![CDATA["Segment2"]]></Text>
+										</Calculation>
+									</Label>
+									<IconData type="0" size="16"></IconData>
+								</Button>
+							</LayoutObject>
+						</ObjectList>
+					</ButtonBar>
+				</LayoutObject>
+				<LayoutObject hash="11031AB64BDB5FCBB7B0AE5C5A1C9CF2" id="51" type="Tab Control" name="" kind="11">
+					<UUID>24F5CA4E-AABD-4B82-9F33-415D2BA681BD</UUID>
+					<Bounds top="665" left="516" bottom="824" right="808"></Bounds>
+					<Options>805306368</Options>
+					<TabControl default="0" visible="0" height="46" modifier="0" Location="0">
+						<Options>264</Options>
+						<ObjectList membercount="2">
+							<LayoutObject hash="7C0D95BF3B00DC590E1D48BE8B873EA5" id="53" type="Panel" name="" kind="12">
+								<UUID>A0F47E4F-53C1-4BA8-8C68-5E424405D5DA</UUID>
+								<Bounds top="0" left="0" bottom="159" right="292"></Bounds>
+								<Options>805306368</Options>
+								<TabPanel size="70" absolute="0">
+									<Options>1</Options>
+									<Calculation>
+										<DDRREF kind="ChunkList" hash="4136D13765CDC394E073F3CC1366BBD4">_A0F47E4F-53C1-4BA8-8C68-5E424405D5DA_TabPanel</DDRREF>
+										<Text><![CDATA["Tab1"]]></Text>
+									</Calculation>
+									<ObjectList membercount="1">
+										<LayoutObject hash="2C000329060536C3BA2F4DFA4C4CE25C" id="56" type="Text" name="" kind="2">
+											<UUID>A5037D31-6F7E-4736-B91C-005059D2E4F8</UUID>
+											<Bounds top="80" left="39" bottom="102" right="130"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>0</Options>
+												<StyledText>
+													<Data><![CDATA[Text in tab 1]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+									</ObjectList>
+								</TabPanel>
+							</LayoutObject>
+							<LayoutObject hash="A59D47DCC51E841F545F33F123CC873C" id="54" type="Panel" name="" kind="12">
+								<UUID>69423E1F-5D8F-4D7D-9922-120A66458A18</UUID>
+								<Bounds top="0" left="0" bottom="159" right="292"></Bounds>
+								<Options>805306368</Options>
+								<TabPanel size="70" absolute="69">
+									<Options>1</Options>
+									<Calculation>
+										<DDRREF kind="ChunkList" hash="C2516AB748C82832DD12DB8EC4B500B2">_69423E1F-5D8F-4D7D-9922-120A66458A18_TabPanel</DDRREF>
+										<Text><![CDATA["Tab2"]]></Text>
+									</Calculation>
+									<ObjectList membercount="1">
+										<LayoutObject hash="B1CBE08A84009D81A9DEA3B9D4AEF6D3" id="104" type="Tab Control" name="" kind="11">
+											<UUID>790103BD-FD69-4BC8-AABA-CCB8A8EC5A9A</UUID>
+											<Bounds top="59" left="40" bottom="140" right="260"></Bounds>
+											<Options>805306368</Options>
+											<TabControl default="0" visible="0" height="46" modifier="0" Location="0">
+												<Options>264</Options>
+												<ObjectList membercount="2">
+													<LayoutObject hash="7BE01109CE89239BEC085DC8DC09D3A0" id="105" type="Panel" name="" kind="12">
+														<UUID>4D60C2EF-9987-4F37-8834-104DD162A103</UUID>
+														<Bounds top="0" left="0" bottom="81" right="220"></Bounds>
+														<Options>805306368</Options>
+														<TabPanel size="96" absolute="0">
+															<Options>1</Options>
+															<Calculation>
+																<DDRREF kind="ChunkList" hash="AE9E8992AE2B20869362D3E8811D6AA7">_4D60C2EF-9987-4F37-8834-104DD162A103_TabPanel</DDRREF>
+																<Text><![CDATA["Subtab1"]]></Text>
+															</Calculation>
+															<ObjectList membercount="0"></ObjectList>
+														</TabPanel>
+													</LayoutObject>
+													<LayoutObject hash="8AB9F7BFF3EED427A81C53FD093AD8C5" id="107" type="Panel" name="" kind="12">
+														<UUID>96BC7780-1F10-4F29-9AB6-088C64D42ACC</UUID>
+														<Bounds top="0" left="0" bottom="81" right="220"></Bounds>
+														<Options>805306368</Options>
+														<TabPanel size="96" absolute="95">
+															<Options>1</Options>
+															<Calculation>
+																<DDRREF kind="ChunkList" hash="810D9AD0E585D734BAF501182AA50876">_96BC7780-1F10-4F29-9AB6-088C64D42ACC_TabPanel</DDRREF>
+																<Text><![CDATA["Subtab2"]]></Text>
+															</Calculation>
+															<ObjectList membercount="0"></ObjectList>
+														</TabPanel>
+													</LayoutObject>
+												</ObjectList>
+											</TabControl>
+										</LayoutObject>
+									</ObjectList>
+								</TabPanel>
+							</LayoutObject>
+						</ObjectList>
+					</TabControl>
+				</LayoutObject>
+				<LayoutObject hash="5A84C6294A70653575C6112B881BD914" id="57" type="Popover Button" name="" kind="14">
+					<UUID>E30034F5-EF02-4853-87B5-F158479A7DB5</UUID>
+					<Bounds top="465" left="758" bottom="493" right="978"></Bounds>
+					<Options>805306376</Options>
+					<PopoverButton>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[MyPopoverButton]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="16"></IconData>
+						<LayoutObject hash="162BDF83EC04A34E751ACCFB26456A59" id="58" type="PopoverPanel" name="" kind="15" position="0" Options="0">
+							<UUID>DD4F9C48-E1E7-43A8-B624-E12CFDB26DAB</UUID>
+							<Bounds top="289" left="989" bottom="430" right="1263"></Bounds>
+							<Options>805306368</Options>
+							<Title>
+								<DDRREF kind="ChunkList" hash="6C12A28B361E4D3F76CC0FC2B9B547C8">_DD4F9C48-E1E7-43A8-B624-E12CFDB26DAB_PopoverPanel</DDRREF>
+								<Text><![CDATA["MyPopoverTitle"]]></Text>
+							</Title>
+							<ObjectList membercount="1">
+								<LayoutObject hash="6EBC3B6C4A7C2BA34BCA6400CC552CAE" id="59" type="Text" name="" kind="2">
+									<UUID>BD3843AF-B712-4808-9A63-5B1C95F0F787</UUID>
+									<Bounds top="55" left="43" bottom="77" right="179"></Bounds>
+									<Options>805306368</Options>
+									<Text>
+										<Options>0</Options>
+										<StyledText>
+											<Data><![CDATA[Text in MyPopover]]></Data>
+										</StyledText>
+									</Text>
+								</LayoutObject>
+							</ObjectList>
+						</LayoutObject>
+					</PopoverButton>
+				</LayoutObject>
+				<LayoutObject hash="8B7CD73AD2210D3CA2D4E5A66B0941B9" id="60" type="Slide Control" name="" kind="16">
+					<UUID>565D47A6-F03D-4B8B-8C42-0444DA4F67E6</UUID>
+					<Bounds top="846" left="496" bottom="946" right="768"></Bounds>
+					<Options>2952790016</Options>
+					<SlideControl>
+						<Options>0</Options>
+						<ObjectList membercount="2">
+							<LayoutObject hash="EA964E0FF2DEEFCBBD65C3FB24F46BF5" id="62" type="Panel" name="" kind="17">
+								<UUID>086D107C-DB42-4DC3-ADF0-42D99777DF7F</UUID>
+								<Bounds top="0" left="0" bottom="100" right="272"></Bounds>
+								<Options>2952790016</Options>
+								<SlidePanel>
+									<Options>0</Options>
+									<ObjectList membercount="1">
+										<LayoutObject hash="EB54165595936142DCD252E98FCBB7EA" id="64" type="Text" name="" kind="2">
+											<UUID>90316483-F474-4A55-B8B8-C970281AECBF</UUID>
+											<Bounds top="22" left="21" bottom="44" right="162"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>0</Options>
+												<StyledText>
+													<Data><![CDATA[Text in slide control]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+									</ObjectList>
+								</SlidePanel>
+							</LayoutObject>
+							<LayoutObject hash="B064D0CA7B80A4A9CE06355BFB5466C0" id="63" type="Panel" name="" kind="17">
+								<UUID>3B86B7A1-F6D7-4483-AB11-B2C05079A876</UUID>
+								<Bounds top="0" left="0" bottom="100" right="272"></Bounds>
+								<Options>2952790016</Options>
+								<SlidePanel>
+									<Options>0</Options>
+									<ObjectList membercount="1">
+										<LayoutObject hash="01065381177E3B049349B30B8AABD14D" id="108" type="Slide Control" name="" kind="16">
+											<UUID>28EEA8AC-18D3-43AD-8055-5ACE4E38BBCD</UUID>
+											<Bounds top="11" left="37" bottom="68" right="234"></Bounds>
+											<Options>2952790016</Options>
+											<SlideControl>
+												<Options>0</Options>
+												<ObjectList membercount="2">
+													<LayoutObject hash="FB51DD2350175BE7D2C838A20F04A35E" id="109" type="Panel" name="" kind="17">
+														<UUID>018A5DF4-B8F3-4D0D-8374-2258B8F1E931</UUID>
+														<Bounds top="0" left="0" bottom="57" right="197"></Bounds>
+														<Options>2952790016</Options>
+														<SlidePanel>
+															<Options>0</Options>
+															<ObjectList membercount="1">
+																<LayoutObject hash="91E3A32B7C56205BD05802965AD0CD40" id="110" type="Text" name="" kind="2">
+																	<UUID>F3D03922-41EA-42DC-9710-2C97E2DAF512</UUID>
+																	<Bounds top="7" left="7" bottom="29" right="181"></Bounds>
+																	<Options>805306368</Options>
+																	<Text>
+																		<Options>0</Options>
+																		<StyledText>
+																			<Data><![CDATA[Text in sub-slide control]]></Data>
+																		</StyledText>
+																	</Text>
+																</LayoutObject>
+															</ObjectList>
+														</SlidePanel>
+													</LayoutObject>
+													<LayoutObject hash="A5D8F2E1E04B424FB7DF537B47A65FE2" id="111" type="Panel" name="" kind="17">
+														<UUID>F29C64D1-FD59-4576-8FCB-CDE1469FE025</UUID>
+														<Bounds top="0" left="0" bottom="57" right="197"></Bounds>
+														<Options>2952790016</Options>
+														<SlidePanel>
+															<Options>0</Options>
+															<ObjectList membercount="0"></ObjectList>
+														</SlidePanel>
+													</LayoutObject>
+												</ObjectList>
+											</SlideControl>
+										</LayoutObject>
+									</ObjectList>
+								</SlidePanel>
+							</LayoutObject>
+						</ObjectList>
+					</SlideControl>
+				</LayoutObject>
+				<LayoutObject hash="57AA4D77D48D283CF4F7BF6DB14B8ECB" id="65" type="Portal" name="" kind="9">
+					<UUID>9129860F-8C9B-4975-84EF-4FD323B29458</UUID>
+					<Bounds top="826" left="48" bottom="945" right="214"></Bounds>
+					<Options>805306368</Options>
+					<Portal>
+						<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
+						<Options index="1" show="3">397</Options>
+						<SortSpecification value="True" maintain="True">
+							<SortList membercount="1">
+								<Sort type="Ascending">
+									<PrimaryField>
+										<FieldReference id="6" name="Name" UUID="CDA37349-D2D9-4ACA-B58C-9F8272B51F9D">
+											<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
+										</FieldReference>
+									</PrimaryField>
+								</Sort>
+							</SortList>
+						</SortSpecification>
+						<Calculation>
+							<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_9129860F-8C9B-4975-84EF-4FD323B29458_Portal</DDRREF>
+							<Text><![CDATA[True]]></Text>
+						</Calculation>
+						<ObjectList membercount="1">
+							<LayoutObject hash="31AD2B4527EE2AA68F9BEF433A4706A8" id="66" type="Edit Box" name="" kind="1">
+								<UUID>77D2F6F9-2734-473C-9E8F-0463AD847A75</UUID>
+								<Bounds top="4" left="2" bottom="35" right="81"></Bounds>
+								<Options>805306368</Options>
+								<Field>
+									<FieldReference id="6" name="Name" repetition="1" UUID="CDA37349-D2D9-4ACA-B58C-9F8272B51F9D">
+										<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
+									</FieldReference>
+									<Options>1048608</Options>
+									<Display Style="0" show="1"></Display>
+									<Usage inputMode="0" type="1"></Usage>
+								</Field>
+								<ExtendedAttributes>
+									<Formatting>
+										<Graphic>
+											<Options>5</Options>
+										</Graphic>
+										<Time>
+											<Options>143</Options>
+										</Time>
+										<Numeric>
+											<Options>2304</Options>
+											<Style>
+												<Negative>
+													<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+												</Negative>
+											</Style>
+											<DecimalDigits>2</DecimalDigits>
+										</Numeric>
+									</Formatting>
+								</ExtendedAttributes>
+								<Accessibility>
+									<Label>67</Label>
+								</Accessibility>
+							</LayoutObject>
+						</ObjectList>
+					</Portal>
+				</LayoutObject>
+				<LayoutObject hash="3B1FF06E272C5E46FF160C1DCC262A21" id="67" type="Text" name="" kind="2">
+					<UUID>ADF74282-F13A-4B32-B483-6FDF2B548D7D</UUID>
+					<Bounds top="800" left="56" bottom="822" right="102"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Name]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="" displayName=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="FAB321A58F0521E3580409A24086C1EC" id="68" type="Chart" name="" kind="13">
+					<UUID>BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17</UUID>
+					<Bounds top="831" left="265" bottom="912" right="474"></Bounds>
+					<Options>805306368</Options>
+					<External type="CHRT" name="Chart" index="0">
+						<Options>19</Options>
+						<Chart>
+							<Title>
+								<CharacterStyle>
+									<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+									<Font-size>19</Font-size>
+									<Face>0</Face>
+									<Color>#282828FF</Color>
+								</CharacterStyle>
+								<Text>
+									<Calculation>
+										<DDRREF kind="ChunkList" hash="2EB2E3424EFFEBABC997D0006E685753">_BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17_Title</DDRREF>
+										<Text><![CDATA["MyColumnChart"]]></Text>
+									</Calculation>
+								</Text>
+							</Title>
+							<SeriesSource source="Current Found Set">
+								<ShowRecordGroupDataWhenSorted>True</ShowRecordGroupDataWhenSorted>
+							</SeriesSource>
+							<ChartSeries>
+								<XSeriesList>
+									<Series>
+										<Value>
+											<Calculation>
+												<DDRREF kind="ChunkList" hash="517470648284D606665432616C5D4E6E">_BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17_Series_Value</DDRREF>
+												<Text><![CDATA[TestTable::NumberField1]]></Text>
+											</Calculation>
+										</Value>
+										<Title>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>11</Font-size>
+												<Face>0</Face>
+												<Color>#282828FF</Color>
+											</CharacterStyle>
+											<Text></Text>
+										</Title>
+										<DataSymbol>1</DataSymbol>
+									</Series>
+								</XSeriesList>
+								<YSeriesList>
+									<Series>
+										<Value>
+											<Calculation>
+												<DDRREF kind="ChunkList" hash="BF13A2394490C13290712FD9F4C83707">_BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17_YSeriesList_0_Value</DDRREF>
+												<Text><![CDATA[TestTable::DateField1]]></Text>
+											</Calculation>
+										</Value>
+										<Title>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>11</Font-size>
+												<Face>0</Face>
+												<Color>#282828FF</Color>
+											</CharacterStyle>
+											<Text>
+												<Calculation>
+													<DDRREF kind="ChunkList" hash="427A80BF89DF419BC3B1C69A6DF4133D">_BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17_YSeriesList_0_Title</DDRREF>
+													<Text><![CDATA["Series 1"]]></Text>
+												</Calculation>
+											</Text>
+										</Title>
+										<DataSymbol>1</DataSymbol>
+									</Series>
+								</YSeriesList>
+								<WSeriesList>
+									<Series>
+										<Value></Value>
+										<Title>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>12</Font-size>
+												<Face>0</Face>
+												<Color>#000000FF</Color>
+											</CharacterStyle>
+											<Text></Text>
+										</Title>
+										<DataSymbol>1</DataSymbol>
+									</Series>
+								</WSeriesList>
+								<ZSeriesList>
+									<Series>
+										<Value></Value>
+										<Title>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>12</Font-size>
+												<Face>0</Face>
+												<Color>#000000FF</Color>
+											</CharacterStyle>
+											<Text></Text>
+										</Title>
+										<DataSymbol>1</DataSymbol>
+									</Series>
+								</ZSeriesList>
+							</ChartSeries>
+							<Visual>
+								<Type>Column</Type>
+								<Style>Solid</Style>
+								<Appearance>Flat</Appearance>
+								<Scheme>Muted Rainbow</Scheme>
+								<Background>
+									<Style>SolidFill</Style>
+									<ColorList>
+										<Color>#F9F9F9FF</Color>
+										<Color>#FFFFFFFF</Color>
+									</ColorList>
+								</Background>
+								<ShowDataPoints pieShowPercent="False" pieShowActual="False" value="True"></ShowDataPoints>
+							</Visual>
+							<VisualExtension>
+								<MajorGridLines value="False">
+									<Color>#666666FF</Color>
+								</MajorGridLines>
+								<MinorGridLines value="False">
+									<Color>#AAAAAAFF</Color>
+								</MinorGridLines>
+								<SeriesColor>
+									<Color>#3879A3FF</Color>
+									<Color>#D89241FF</Color>
+								</SeriesColor>
+								<SchemeColorTransparency value=""></SchemeColorTransparency>
+								<DataLabel>
+									<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+									<Font-size>12</Font-size>
+									<Face>0</Face>
+									<Color>#282828FF</Color>
+								</DataLabel>
+							</VisualExtension>
+							<Legend style="Normal">
+								<CharacterStyle>
+									<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+									<Font-size>11</Font-size>
+									<Face>0</Face>
+									<Color>#282828FF</Color>
+								</CharacterStyle>
+								<Border>
+									<Style>Rectangular Border</Style>
+									<Width>1</Width>
+									<Color>#E6E6E6FF</Color>
+								</Border>
+								<Background>
+									<Style>SolidFill</Style>
+									<ColorList>
+										<Color>#F9F9F9FF</Color>
+										<Color>#FFFFFFFF</Color>
+									</ColorList>
+								</Background>
+								<LegendPosition>Top</LegendPosition>
+							</Legend>
+							<ChartAxis>
+								<XAxisList>
+									<Axis>
+										<Title>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>15</Font-size>
+												<Face>0</Face>
+												<Color>#282828FF</Color>
+											</CharacterStyle>
+											<Text>
+												<Calculation>
+													<DDRREF kind="ChunkList" hash="3DDDA9578166F728518134DE851136A0">_BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17_XAxisList_Title</DDRREF>
+													<Text><![CDATA["MyXAxisTitle"]]></Text>
+												</Calculation>
+											</Text>
+										</Title>
+										<Label>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>12</Font-size>
+												<Face>0</Face>
+												<Color>#282828FF</Color>
+											</CharacterStyle>
+											<Angle>0</Angle>
+										</Label>
+										<ConstrainAxis enable="False">
+											<Min>?</Min>
+											<Max>?</Max>
+										</ConstrainAxis>
+									</Axis>
+									<XAxisExtension>
+										<MinCalc value="False"></MinCalc>
+										<MaxCalc value="False"></MaxCalc>
+										<MidPointCalc value="False"></MidPointCalc>
+										<MajorTickIncrement value="?" show="False"></MajorTickIncrement>
+										<MinorTickIncrement value="?" show="False"></MinorTickIncrement>
+										<Scale value="Linear"></Scale>
+									</XAxisExtension>
+									<XAxisFormat>
+										<FormatType value="NoFormat">
+											<NumFormat falseString="" trueString="" decimalDigits="2" negativeColor="0" decimalPoint="46" thousandsSep="44" currencySymbol="$" negativeStyle="0" charStyle="0" flags="1"></NumFormat>
+											<DateFormat separator="47" dayStyle="0" monthStyle="0" charStyle="0" format="0">
+												<DateElement>0</DateElement>
+												<DateElement>0</DateElement>
+												<DateElement>0</DateElement>
+												<DateElement>0</DateElement>
+												<DateElementSep index="0"></DateElementSep>
+												<DateElementSep index="1"></DateElementSep>
+												<DateElementSep index="2"></DateElementSep>
+												<DateElementSep index="3"></DateElementSep>
+												<DateElementSep index="4"></DateElementSep>
+											</DateFormat>
+											<TimeFormat ampmString="" pmString=" PM" amString=" AM" separator="58" minsecStyle="0" hourStyle="0" charStyle="0" flags="136"></TimeFormat>
+										</FormatType>
+									</XAxisFormat>
+								</XAxisList>
+								<YAxisList>
+									<Axis>
+										<Title>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>15</Font-size>
+												<Face>0</Face>
+												<Color>#282828FF</Color>
+											</CharacterStyle>
+											<Text>
+												<Calculation>
+													<DDRREF kind="ChunkList" hash="9749683451F051623578E54FF0C88FA2">_BCBFAF48-6D63-4F8C-B83C-CD2B4D1FBF17_YAxisList_Title</DDRREF>
+													<Text><![CDATA["MyYAxisTitle"]]></Text>
+												</Calculation>
+											</Text>
+										</Title>
+										<Label>
+											<CharacterStyle>
+												<font-family fontID="0" postscript="HelveticaNeue" codeset="Other">Helvetica Neue</font-family>
+												<Font-size>12</Font-size>
+												<Face>0</Face>
+												<Color>#282828FF</Color>
+											</CharacterStyle>
+											<Angle>0</Angle>
+										</Label>
+										<ConstrainAxis enable="False">
+											<Min>?</Min>
+											<Max>?</Max>
+										</ConstrainAxis>
+									</Axis>
+									<YAxisExtension>
+										<MinCalc value="False"></MinCalc>
+										<MaxCalc value="False"></MaxCalc>
+										<MidPointCalc value="False"></MidPointCalc>
+										<MajorTickIncrement value="?" show="False"></MajorTickIncrement>
+										<MinorTickIncrement value="?" show="False"></MinorTickIncrement>
+										<Scale value="Linear"></Scale>
+									</YAxisExtension>
+									<YAxisFormat>
+										<FormatType value="NumericFormat">
+											<NumFormat falseString="" trueString="" decimalDigits="2" negativeColor="0" decimalPoint="46" thousandsSep="44" currencySymbol="$" negativeStyle="0" charStyle="0" flags="1"></NumFormat>
+											<DateFormat separator="47" dayStyle="0" monthStyle="0" charStyle="0" format="0">
+												<DateElement>0</DateElement>
+												<DateElement>0</DateElement>
+												<DateElement>0</DateElement>
+												<DateElement>0</DateElement>
+												<DateElementSep index="0"></DateElementSep>
+												<DateElementSep index="1"></DateElementSep>
+												<DateElementSep index="2"></DateElementSep>
+												<DateElementSep index="3"></DateElementSep>
+												<DateElementSep index="4"></DateElementSep>
+											</DateFormat>
+											<TimeFormat ampmString="" pmString=" PM" amString=" AM" separator="58" minsecStyle="0" hourStyle="0" charStyle="0" flags="136"></TimeFormat>
+										</FormatType>
+									</YAxisFormat>
+								</YAxisList>
+							</ChartAxis>
+							<DataLabelFormat>
+								<FormatType value="NoFormat">
+									<NumFormat falseString="" trueString="" decimalDigits="2" negativeColor="0" decimalPoint="46" thousandsSep="44" currencySymbol="$" negativeStyle="0" charStyle="0" flags="1"></NumFormat>
+									<DateFormat separator="47" dayStyle="0" monthStyle="0" charStyle="0" format="0">
+										<DateElement>0</DateElement>
+										<DateElement>0</DateElement>
+										<DateElement>0</DateElement>
+										<DateElement>0</DateElement>
+										<DateElementSep index="0"></DateElementSep>
+										<DateElementSep index="1"></DateElementSep>
+										<DateElementSep index="2"></DateElementSep>
+										<DateElementSep index="3"></DateElementSep>
+										<DateElementSep index="4"></DateElementSep>
+									</DateFormat>
+									<TimeFormat ampmString="" pmString=" PM" amString=" AM" separator="58" minsecStyle="0" hourStyle="0" charStyle="0" flags="136"></TimeFormat>
+								</FormatType>
+							</DataLabelFormat>
+						</Chart>
+					</External>
+				</LayoutObject>
+				<LayoutObject hash="99D6086222A8CD5F8F873CF0D6195AE9" id="69" type="Web Viewer" name="" kind="13">
+					<UUID>5F802723-0694-47C1-85F0-1FAD5FA53E12</UUID>
+					<Bounds top="309" left="833" bottom="431" right="999"></Bounds>
+					<Options>1879048192</Options>
+					<External type="WEBV" name="Web Viewer" index="0">
+						<Options>79</Options>
+						<WebViewer>
+							<ParameterValues membercount="1">
+								<Parameter id="0">
+									<Calculation>
+										<DDRREF kind="ChunkList" hash="CF128791F09C6BD7AF67A4B08CCBB9A3">_5F802723-0694-47C1-85F0-1FAD5FA53E12_WebViewer</DDRREF>
+										<Text><![CDATA["http://local.google.com/maps?" & "q=" & /*Address=*/ "" & "," & /*City=*/ "" & "," & /*State=*/ "" & "," & /*Zip Code=*/ "" & "," & /*Country=*/ ""]]></Text>
+									</Calculation>
+								</Parameter>
+							</ParameterValues>
+						</WebViewer>
+					</External>
+				</LayoutObject>
+				<LayoutObject hash="10E20716AE354190341A5130226380E3" id="79" type="Container" name="" kind="1">
+					<UUID>B6423E58-C7B5-4682-9E0C-D6C6F1A706C3</UUID>
+					<Bounds top="410" left="214" bottom="465" right="467"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="17" name="ContainerField1_RC" repetition="1" UUID="E24478AB-5132-4FE0-8546-547CF1B90AB0">
+							<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>80</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="C45820A770759B6EFF9125FAB2D10053" id="80" type="Text" name="" kind="2">
+					<UUID>DA85C358-8204-448A-BC26-0FDDDAF3E0B1</UUID>
+					<Bounds top="415" left="50" bottom="437" right="197"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[ContainerField1_RC]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="4AADB57F568B1CD1D44366C2784828E5" id="81" type="Text" name="" kind="2">
+					<UUID>EA060255-F5E5-4AE2-B26F-50F6BFE672B0</UUID>
+					<Bounds top="546" left="727" bottom="574" right="999"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Text object with custom styling]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="" displayName=""><![CDATA[self:normal .self
+{
+	background-image: none;
+	background-color: rgba(99.9456%,98.6359%,25.3202%,1);
+	border-top-color: rgba(0%,0%,0%,1);
+	border-right-color: rgba(0%,0%,0%,1);
+	border-bottom-color: rgba(0%,0%,0%,1);
+	border-left-color: rgba(0%,0%,0%,1);
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+	border-image-source: none;
+	font-family: -fm-font-family(Helvetica Neue,HelveticaNeue-BoldItalic);
+	font-weight: bold;
+	font-style: italic;
+	font-size: 18pt;
+	text-align: center;
+	-fm-underline: underline;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="7D54FE7C7C87062E7B073CC728989F2E" id="82" type="Graphic" name="img_test1" kind="3">
+					<UUID>EAFBEB69-EA30-4183-868A-89344FC1F3BC</UUID>
+					<Bounds top="749" left="824" bottom="769" right="868"></Bounds>
+					<Options>805306368</Options>
+					<Graphic>
+						<Formatting>
+							<Options>3</Options>
+						</Formatting>
+						<BinaryData>
+							<StreamList>
+								<Stream name="MAIN" type="id" size="4">PNGf</Stream>
+								<Stream name="SIZE" type="Hex" size="4">00580028</Stream>
+								<Stream name="PNGf" type="Base64" size="6547">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</Stream>
+								<Stream name="FNAM" type="Hex" size="28">000000010533373B3D3F00102E3F292E7733373B3D3F776B742A343D</Stream>
+								<Stream name="DPI_" type="Hex" size="4">00900090</Stream>
+							</StreamList>
+						</BinaryData>
+					</Graphic>
+				</LayoutObject>
+				<LayoutObject hash="1BE951777A0753450EF92CC628CB2CCC" id="83" type="Text" name="label_test1" kind="2">
+					<UUID>DCCBE0A7-2129-46AA-B756-97B30E3326FA</UUID>
+					<Bounds top="721" left="824" bottom="743" right="1167"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[test1 image was added via Insert > Picture...]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="7C058B71F839D5BB3C2835FD9AE8BC4C" id="84" type="Graphic" name="img_test2" kind="3">
+					<UUID>4BC3970E-7AB3-4ED2-B8CF-0FCFC7844FA2</UUID>
+					<Bounds top="811" left="824" bottom="831" right="868"></Bounds>
+					<Options>805306368</Options>
+					<Graphic>
+						<Formatting>
+							<Options>3</Options>
+						</Formatting>
+						<BinaryData>
+							<StreamList>
+								<Stream name="MAIN" type="id" size="4">PNGf</Stream>
+								<Stream name="SIZE" type="Hex" size="4">00580028</Stream>
+								<Stream name="PNGf" type="Base64" size="6741">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</Stream>
+								<Stream name="FNAM" type="Hex" size="28">000000010533373B3D3F00102E3F292E7733373B3D3F7768742A343D</Stream>
+								<Stream name="DPI_" type="Hex" size="4">00900090</Stream>
+							</StreamList>
+						</BinaryData>
+					</Graphic>
+				</LayoutObject>
+				<LayoutObject hash="D5FB72C45D43D76E78C8865686426251" id="85" type="Text" name="label_test2" kind="2">
+					<UUID>FB3B1C44-874D-4191-B596-DB99204A3C97</UUID>
+					<Bounds top="784" left="824" bottom="806" right="1391"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[test2 image was added by drag-and-dropping the image from a Finder window]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="6D9EA4C2C1F6DB4DF7ABB1C76B97168F" id="86" type="Text" name="label_test1 Copy" kind="2">
+					<UUID>A70658AA-37C1-4BC1-90B3-9E68E0F1ED97</UUID>
+					<Bounds top="751" left="10" bottom="793" right="491"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[This text object is using the MyCustomStyle_BoldItalicsLabel custom style]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="FM-38B338BC-4795-4BF4-902F-3D14983EC456" displayName="MyCustomStyle_BoldItalicsLabel"><![CDATA[self.FM-38B338BC-4795-4BF4-902F-3D14983EC456
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="2404D86FE3261687170FF943F90C04B4" id="91" type="Text" name="" kind="2">
+					<UUID>F798FC3F-CC37-4D31-8221-8385C9971BD0</UUID>
+					<Bounds top="189" left="10" bottom="300" right="1384"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[This file endeavors to have an example of one of everything (Ooe), i.e. one of every possible configuration of a solution element.e.g. every kind of layout part or layout object, every kind of value list, every kind of script step, etc.Achieving this 100% is not a realistic goal, but the hope is that over time we can add examples of all these different permutations in this file.This file was last updated on 2025-06-09. Please update the Change Log script when you add something to this file.]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="FM-413A4E13-09BF-4799-B66D-27BE078F05E7" displayName="MyCustomStyleInApexBlue"><![CDATA[self.FM-413A4E13-09BF-4799-B66D-27BE078F05E7:normal .self
+{
+	background-image: none;
+	background-color: rgba(99.9456%,98.6359%,25.3202%,1);
+	border-image-source: none;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="0CBD3D24D46F36E2019A0942C7789E2D" id="98" type="Group" name="" kind="8">
+					<UUID>4C82010A-AD9A-404A-BBBB-5329EF4926BB</UUID>
+					<Bounds top="933" left="270" bottom="1025" right="398"></Bounds>
+					<Options>805306368</Options>
+					<GroupedButton>
+						<ObjectList membercount="2">
+							<LayoutObject hash="0E693FE23A92439F456B5DDFD03B0132" id="92" type="Text" name="" kind="2">
+								<UUID>101DB63B-90BA-4154-98F1-7718371BDECF</UUID>
+								<Bounds top="0" left="0" bottom="22" right="128"></Bounds>
+								<Options>805306368</Options>
+								<Text>
+									<Options>0</Options>
+									<StyledText>
+										<Data><![CDATA[Grouped objects:]]></Data>
+									</StyledText>
+								</Text>
+							</LayoutObject>
+							<LayoutObject hash="0FE0414A12598CDAC9837D79DEFAAFF6" id="97" type="Group" name="" kind="8">
+								<UUID>637C7D14-4C1C-4BE1-8B77-390006AF1E00</UUID>
+								<Bounds top="26" left="0" bottom="92" right="64"></Bounds>
+								<Options>805306368</Options>
+								<GroupedButton>
+									<ObjectList membercount="2">
+										<LayoutObject hash="81E2335FA992F7697D2A0313FA63BC5F" id="96" type="Group" name="NamedLayoutObjectSubgroup" kind="8">
+											<UUID>9D76DB33-C6F0-42A8-909C-9B9C84EFD9A5</UUID>
+											<Bounds top="0" left="0" bottom="44" right="64"></Bounds>
+											<Options>805306368</Options>
+											<GroupedButton>
+												<ObjectList membercount="2">
+													<LayoutObject hash="228727CFD0DE16EE108F633D35CCE5DC" id="93" type="Text" name="" kind="2">
+														<UUID>B24B6C1C-A0D3-4693-A831-0235F41C6EE0</UUID>
+														<Bounds top="0" left="0" bottom="22" right="64"></Bounds>
+														<Options>805306368</Options>
+														<Text>
+															<Options>0</Options>
+															<StyledText>
+																<Data><![CDATA[Object 1]]></Data>
+															</StyledText>
+														</Text>
+													</LayoutObject>
+													<LayoutObject hash="3263A28DB2567ED21A5FCF60CA6685A2" id="94" type="Text" name="" kind="2">
+														<UUID>920C502B-21F5-4ABC-B3F7-264B257C320C</UUID>
+														<Bounds top="22" left="0" bottom="44" right="64"></Bounds>
+														<Options>805306368</Options>
+														<Text>
+															<Options>0</Options>
+															<StyledText>
+																<Data><![CDATA[Object 2]]></Data>
+															</StyledText>
+														</Text>
+													</LayoutObject>
+												</ObjectList>
+											</GroupedButton>
+										</LayoutObject>
+										<LayoutObject hash="7CF0F50879D947B4BC1B0E5C510282C0" id="95" type="Text" name="" kind="2">
+											<UUID>0A705196-35DC-4EC8-BC6C-303620BBB904</UUID>
+											<Bounds top="44" left="0" bottom="66" right="64"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>0</Options>
+												<StyledText>
+													<Data><![CDATA[Object 3]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+									</ObjectList>
+								</GroupedButton>
+							</LayoutObject>
+						</ObjectList>
+					</GroupedButton>
+				</LayoutObject>
+				<LayoutObject hash="C6FE5D83E5836665DA44ED772F9B1660" id="100" type="Text" name="label_test1 Copy2" kind="2">
+					<UUID>73444B6A-B9CF-43C0-A9F1-39EA5B6E7087</UUID>
+					<Bounds top="846" left="824" bottom="868" right="1465"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[This image was added by duplicating the image above, and it also exists on other layouts]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="23EB15096D943D850D5037CED6D2D1CF" id="101" type="Graphic" name="img_test2 Copy" kind="3">
+					<UUID>F0175AB0-57F8-43CD-AEBD-6337AB3CD353</UUID>
+					<Bounds top="873" left="824" bottom="893" right="868"></Bounds>
+					<Options>805306368</Options>
+					<Graphic>
+						<Formatting>
+							<Options>3</Options>
+						</Formatting>
+						<BinaryData>
+							<StreamList>
+								<Stream name="MAIN" type="id" size="4">PNGf</Stream>
+								<Stream name="SIZE" type="Hex" size="4">00580028</Stream>
+								<Stream name="PNGf" type="Base64" size="6741">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</Stream>
+								<Stream name="FNAM" type="Hex" size="28">000000010533373B3D3F00102E3F292E7733373B3D3F7768742A343D</Stream>
+								<Stream name="DPI_" type="Hex" size="4">00900090</Stream>
+							</StreamList>
+						</BinaryData>
+					</Graphic>
+				</LayoutObject>
+				<LayoutObject hash="7B2923C5CAD6519DA16A5D6FD9C009B3" id="102" type="Text" name="label_test1 Copy3" kind="2">
+					<UUID>F2342ED2-B8AE-44BF-899C-3271721D1823</UUID>
+					<Bounds top="958" left="702" bottom="980" right="1159"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[The width of this text object was set automatically by FileMaker]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="F9E2A19F6BA431C8BFCFE8CFE93290C2" id="103" type="Text" name="label_test1 Copy4" kind="2">
+					<UUID>84DD7BFE-F1AF-40EA-B897-848AB6F94504</UUID>
+					<Bounds top="987" left="702" bottom="1045" right="922"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[The width of this text object was resized manually causing it wrap to multiple lines]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Trailing Grand Summary" kind="6">
+			<Definition type="Trailing Grand Summary" kind="6" size="33" absolute="1077" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="E61A02C5E968B1A57F223657EE537A46" id="75" type="Text" name="" kind="2">
+					<UUID>DE1E1312-890E-426F-91CD-482F6CB6BA68</UUID>
+					<Bounds top="1082" left="10" bottom="1104" right="186"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Trailing Grand Summary]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Footer" kind="7">
+			<Definition type="Footer" kind="7" size="33" absolute="1110" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="ACEFB73424E928F0D109E3863E3F2697" id="76" type="Text" name="" kind="2">
+					<UUID>1027C5EE-BF41-478E-83C8-58BF8B62236A</UUID>
+					<Bounds top="1115" left="10" bottom="1137" right="60"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Footer]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Title Footer" kind="8">
+			<Definition type="Title Footer" kind="8" size="38" absolute="1143" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="7456839E207A082FDEB518B06FB9B468" id="77" type="Text" name="" kind="2">
+					<UUID>D0DFF96C-2A43-43E4-B49F-5989CC0A3479</UUID>
+					<Bounds top="1151" left="10" bottom="1173" right="94"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Title Footer]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Bottom Navigation" kind="13">
+			<Definition type="Bottom Navigation" kind="13" size="41" absolute="1181" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject hash="C7622B6C2B2A5AA0BC6491B8F3B49359" id="78" type="Text" name="" kind="2">
+					<UUID>3736A847-1B52-47D7-9F66-4FF6B0C4BA50</UUID>
+					<Bounds top="1190" left="10" bottom="1212" right="147"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Bottom Navigation]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+	</PartsList>
+	<UUID modifications="97" userName="Mislav" accountName="admin" timestamp="2025-06-20T17:58:56">7F4B6F16-A82A-4570-A5D5-CCA1FD293498</UUID>
+	<TagList></TagList>
+	<GridStyle>
+		<Color red="0.500000" green="0.500000" blue="0.500000" alpha="1.000000"></Color>
+		<Style>5</Style>
+	</GridStyle>
+	<ClientType>3</ClientType>
+	<Options hidden="False">284362753</Options>
+	<ScriptTriggers membercount="12">
+		<ScriptTrigger id="101" action="OnLayoutEnter" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_101</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="102" action="OnLayoutKeystroke" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_102</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="103" action="OnRecordLoad" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_103</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="104" action="OnRecordCommit" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_104</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="105" action="OnRecordRevert" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_105</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="106" action="OnModeEnter" browseMode="True" findMode="True" previewMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_106</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="107" action="OnModeExit" browseMode="True" findMode="True" previewMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_107</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="109" action="OnLayoutExit" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_109</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="110" action="OnViewChange" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_110</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="111" action="OnLayoutSizeChange" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_111</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="112" action="OnGestureTap" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_112</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+		<ScriptTrigger id="113" action="OnExternalCommandReceived" browseMode="True">
+			<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_7F4B6F16-A82A-4570-A5D5-CCA1FD293498_ScriptTrigger_113</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+	</ScriptTriggers>
+	<MenuSet>
+		<CustomMenuSetReference id="0" name="[File Default]" UUID=""></CustomMenuSetReference>
+	</MenuSet>
+</Layout>
