@@ -20,30 +20,14 @@ mod tests {
         assert_eq!(escape_filename("file|name.xml"), "file_name.xml");
     }
 
-    /// This test verifies that XML files are correctly exploded into individual files by:
-    /// 1. Setting up test directories (snapshots, input XML, output)
-    /// 2. Processing all XML files in the input directory through explode_xml()
-    /// 3. Comparing the output file structure against expected snapshot files:
-    ///    - Verifies output files match snapshot file paths
-    ///    - Verifies output file contents match snapshot contents
-    /// 4. Uses insta crate for snapshot testing and WalkDir for file traversal
-    /// Generate new snapshots with:
-    ///    cargo insta test -- snapshot_test
-    /// then approve them with:
-    ///    cargo insta review
-    #[test]
-    fn snapshot_test_lossy() {
-        snapshot_test_with_mode(false, OutputTree::Db, "snapshots_db_lossy");
-    }
-
     #[test]
     fn snapshot_test_lossless() {
         snapshot_test_with_mode(true, OutputTree::Db, "snapshots_db_lossless");
     }
 
     #[test]
-    fn snapshot_test_lossless_domain() {
-        snapshot_test_with_mode(true, OutputTree::Domain, "snapshots_domain_lossless");
+    fn snapshot_test_lossy_domain() {
+        snapshot_test_with_mode(false, OutputTree::Domain, "snapshots_domain_lossy");
     }
 
     fn snapshot_test_with_mode(

@@ -1,115 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="39" name="_FMVersionNr"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* _FMVersionNr( pPrecision.123 )Gibt die Versionsnummer von FileMaker (bzw. der akt. Programm) als Text bzw. als Zahl zum Vergleichen zurück.Param & Rückgabewerte (am (fiktiven) Beispiel FileMaker Version "14.5.2"):  G_Sy_FMVersionNr( "" ) ->  "14.5.2" // Achtung: in fm<14 gibt eine v zurück: "12.5v2"  G_Sy_FMVersionNr( "." ) -> "14.5"  G_Sy_FMVersionNr( 1 ) -> 14  G_Sy_FMVersionNr( 2 ) -> 14,5  G_Sy_FMVersionNr( 3 ) -> 14,500002Hinweis: Falls jeine Minorversionsnummer >= 10 je vorkommt, wird eine extra 9 eingefügt, so dass die Zahlen noch verglichen werden können:  G_Sy_FMVersionNr( "" ) -> "14.11v1"  G_Sy_FMVersionNr( 2 ) -> 14,9112021-03-22 RW: Version 2.1.1 Bug#4890: Korrigieren für FM19.2: MinorNr als NUMMER formatieren (um verwirrende 19.92 zu vermeiden)2015-04-09 RW: Version 2.1 Dev#2567: Erweitert für fm142013-01-08 RW: Version 2.0.1 Paramname standardisiert2012-08-29 RW: Version 2.0 mit Parameter Präzision2012-06-19 RW: Version 1.0*/SetzeVar([vVersionString = WörterRechts( Hole ( ProgrammVersion ) ; 1 ) ;vPosPunkt2 = Position( vVersionString ; "." ; 1 ; 2 ) ;vVersionStringMitV = Falls( vPosPunkt2 > 0 ; Ersetzen( vVersionString ; vPosPunkt2 ; 1 ; "v" ) ; vVersionString ) ;vPos = Position( vVersionStringMitV  ; "v" ; 1 ;1 ) ;vMajorMinorString = ZeichenLinks( vVersionStringMitV ; vPos - 1) ;vMinorNr = LiesAlsZahl( ZeichenMitte( vMajorMinorString ; Position( vMajorMinorString ; "." ; 1 ; 1 ) + 1 ; 999 ) ) ;vMajorMinorNr = LiesAlsZahl( Austauschen( vMajorMinorString ; ["." ; ZeichenLinks( 1/2 ; 1 ) & Falls( vMinorNr >=10 ; "9" )] ) ) ];Falls( IstLeer( pPrecision.123 ) ; vVersionString ; Auswahl( pPrecision.123 ;/* "." */ vMajorMinorString ;/* 1 */ NächsteKleinereGanzzahl( vMajorMinorNr ) ;/* 2 */ vMajorMinorNr ;/* 3 */ vMajorMinorNr + (ZeichenRechts( vVersionString ; Länge( vVersionString ) - vPos ) / 1000000))))]]></Text>
-		<ChunkList hash="A84E1F13579EC09392BADB2FA51A2144">
-			<Chunk type="NoRef">/* _FMVersionNr( pPrecision.123 )&#13;&#13;Gibt die Versionsnummer von FileMaker (bzw. der akt. Programm) als Text bzw. als Zahl zum Vergleichen zurück.&#13;&#13;Param &amp; Rückgabewerte (am (fiktiven) Beispiel FileMaker Version &quot;14.5.2&quot;):&#13;&#13;  G_Sy_FMVersionNr( &quot;&quot; ) -&gt;  &quot;14.5.2&quot; // Achtung: in fm&lt;14 gibt eine v zurück: &quot;12.5v2&quot;&#13;  G_Sy_FMVersionNr( &quot;.&quot; ) -&gt; &quot;14.5&quot;&#13;  G_Sy_FMVersionNr( 1 ) -&gt; 14&#13;  G_Sy_FMVersionNr( 2 ) -&gt; 14,5&#13;  G_Sy_FMVersionNr( 3 ) -&gt; 14,500002&#13;&#13;Hinweis: Falls jeine Minorversionsnummer &gt;= 10 je vorkommt, wird eine extra 9 eingefügt, so dass die Zahlen noch verglichen werden können:&#13;&#13;  G_Sy_FMVersionNr( &quot;&quot; ) -&gt; &quot;14.11v1&quot;&#13;  G_Sy_FMVersionNr( 2 ) -&gt; 14,911&#13;&#13;2021-03-22 RW: Version 2.1.1 Bug#4890: Korrigieren für FM19.2: MinorNr als NUMMER formatieren (um verwirrende 19.92 zu vermeiden)&#13;2015-04-09 RW: Version 2.1 Dev#2567: Erweitert für fm14&#13;2013-01-08 RW: Version 2.0.1 Paramname standardisiert&#13;2012-08-29 RW: Version 2.0 mit Parameter Präzision&#13;2012-06-19 RW: Version 1.0&#13;*/&#13;&#13;&#13;&#13;&#13;</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">(&#13;[&#13;</Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">WörterRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef"> ( </Chunk>
-			<Chunk type="FunctionRef">ProgrammVersion</Chunk>
-			<Chunk type="NoRef"> ) ; 1 ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vPosPunkt2</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> ; &quot;.&quot; ; 1 ; 2 ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vVersionStringMitV</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vPosPunkt2</Chunk>
-			<Chunk type="NoRef"> &gt; 0 ; </Chunk>
-			<Chunk type="FunctionRef">Ersetzen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vPosPunkt2</Chunk>
-			<Chunk type="NoRef"> ; 1 ; &quot;v&quot; ) ; </Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vVersionStringMitV</Chunk>
-			<Chunk type="NoRef">  ; &quot;v&quot; ; 1 ;1 ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vMajorMinorString</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vVersionStringMitV</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> - 1) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vMinorNr</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vMajorMinorString</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vMajorMinorString</Chunk>
-			<Chunk type="NoRef"> ; &quot;.&quot; ; 1 ; 1 ) + 1 ; 999 ) ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vMajorMinorNr</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Austauschen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vMajorMinorString</Chunk>
-			<Chunk type="NoRef"> ; [&quot;.&quot; ; </Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">( 1/2 ; 1 ) &amp; </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vMinorNr</Chunk>
-			<Chunk type="NoRef"> &gt;=10 ; &quot;9&quot; )] ) ) &#13;];&#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">IstLeer</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pPrecision.123</Chunk>
-			<Chunk type="NoRef"> ) ; </Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> ; &#13;</Chunk>
-			<Chunk type="FunctionRef">Auswahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pPrecision.123</Chunk>
-			<Chunk type="NoRef"> ;&#13;/* &quot;.&quot; */ </Chunk>
-			<Chunk type="VariableReference">vMajorMinorString</Chunk>
-			<Chunk type="NoRef"> ;&#13;/* 1 */ </Chunk>
-			<Chunk type="FunctionRef">NächsteKleinereGanzzahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vMajorMinorNr</Chunk>
-			<Chunk type="NoRef"> ) ;&#13;/* 2 */ </Chunk>
-			<Chunk type="VariableReference">vMajorMinorNr</Chunk>
-			<Chunk type="NoRef"> ;&#13;/* 3 */ </Chunk>
-			<Chunk type="VariableReference">vMajorMinorNr</Chunk>
-			<Chunk type="NoRef"> + (</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="FunctionRef">Länge</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vVersionString</Chunk>
-			<Chunk type="NoRef"> ) - </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> ) / 1000000)&#13;)))</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

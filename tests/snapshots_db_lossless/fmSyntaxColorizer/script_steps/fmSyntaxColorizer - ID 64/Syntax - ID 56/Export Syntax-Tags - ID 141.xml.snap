@@ -1,0 +1,600 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="141" name="Export Syntax-Tags" UUID="9F3B7A48-ECAC-47BE-ABA3-26510A5BEF42"></ScriptReference>
+	<ObjectList membercount="36">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>97F878D6-3B24-453D-98EC-DE8F51C73D7B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>EA8E9ADD-0CE9-4334-8B0F-F0ECCBD420A6</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121126 MrW fmp12-compatible"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8A193D4E-0C27-4D47-8578-D87588000ABA</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121126 MrW Nice!"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>65FEF721-C143-428F-9906-E032C5776C4D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>3A95C901-DE91-47BD-8B1D-570D475CFDED</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>120BFAE2-E865-42CA-AA91-CE4E31A6CDCB</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>56B790A6-75DB-485E-B354-1FE91A3821C4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1E2C9FA2-93C3-4855-B5DE-42A7BB28FA3B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="141" name="Variable setzen" enable="True">
+			<UUID>E5BF55FF-E948-4DA8-89A8-AC988A9857B0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( DesktopPfad )]]></Text>
+								<ChunkList hash="AF56F6DD82F93BA8CAF61ABD29F9DEDB">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">DesktopPfad</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FolderPath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="141" name="Variable setzen" enable="True">
+			<UUID>B392076B-F430-4C57-8B25-2522E6987466</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["fmSyntaxColorizer-SyntaxTags." & _FileMakerExtension]]></Text>
+								<ChunkList hash="4CEE5CEF91391F7C44EA992E70724A33">
+									<Chunk type="NoRef">&quot;fmSyntaxColorizer-SyntaxTags.&quot; &amp; </Chunk>
+									<Chunk type="CustomFunctionRef">_FileMakerExtension</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FileName"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9ADE9D05-4236-4A13-B2CC-DBB089D78564</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D2CC6DC7-535D-44ED-BB75-65CB7F88D1E9</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Var"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="141" name="Variable setzen" enable="True">
+			<UUID>6CF2170A-EF51-47B8-AED7-72C3BAE23F0E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$FolderPath & $FileName]]></Text>
+								<ChunkList hash="1386CD25493DBBA837F63C5173FEC010">
+									<Chunk type="VariableReference">$FolderPath</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="VariableReference">$FileName</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FilePath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DE1C8E8D-D174-45F8-91E9-67D87CF0842B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B8D5B083-F721-4D75-BBA9-E024F0D127FA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="79" name="Fenster fixieren" enable="True">
+			<UUID>4B638C2B-FCB5-46A0-B5C6-D7EF6F4721BD</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="16" id="68" name="Wenn" enable="True">
+			<UUID>71E14A7B-E9C0-4BE1-9DC8-CBEC3CD90D8A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( AnzahlGefundeneDatensätze ) = 0]]></Text>
+							<ChunkList hash="E29DBC6914FAA8A724AE7C0480F7F1D7">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>1ADC3C54-FF97-4A2B-96DF-7D8C8C332BBD</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Please select some syntax-tags to export!"]]></Text>
+							<ChunkList hash="E8B868572DF19F23E1A70A8918A2192F">
+								<Chunk type="NoRef">&quot;Please select some syntax-tags to export!&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>A5C8A61F-48BF-4958-B63A-6B131DEA702D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="19" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AFC36A26-83C9-42FB-A45D-30B9F3D1D6A3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="70" name="Ende (wenn)" enable="True">
+			<UUID>D1E8DE2C-8F4C-40A1-AE7C-FAAB9FA8ACB6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="21" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D8B7B3DC-DE91-4861-9E3B-0FAAC8F9B2E7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="39" name="Sortieren" enable="True">
+			<UUID>C77FDFF3-5CFE-4E41-B1FA-22CCED271EC0</UUID>
+			<OwnerID></OwnerID>
+			<Options>33587328</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Restore">
+					<Restore value="True"></Restore>
+				</Parameter>
+				<Parameter type="SortSpecification">
+					<SortSpecification value="True" maintain="True">
+						<SortList membercount="1">
+							<Sort type="Ascending">
+								<PrimaryField>
+									<FieldReference id="1" name="Sort" UUID="335B603A-68A6-44A6-B5F1-D3BC0F18A5F0">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</PrimaryField>
+							</Sort>
+						</SortList>
+					</SortSpecification>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A4CE2BC4-4B5E-4C05-8245-B9EC9496409A</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2548893F-5E72-4166-A27B-ADC719F8390B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Export Syntax-Tags"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="36" name="Datensätze exportieren" enable="True">
+			<UUID>B956A511-F513-4CAA-B2E8-962FDF0CED5F</UUID>
+			<OwnerID></OwnerID>
+			<Options>33587360</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Ordner erstellen" id="512" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="UniversalPathList">
+					<UniversalPathList fileType="FMPR" membercount="1">
+						<ObjectList>
+							<Location><![CDATA[file:$FilePath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+				<Parameter type="Export">
+					<Export>
+						<Options name="Unicode (UTF-16)" value="3" Formatting="False"></Options>
+						<Order type="Group"></Order>
+						<Order type="Field">
+							<Field value="1">
+								<FieldReference id="12" name="__ID" UUID="658441A8-04DB-4055-BA92-C4AC8CEF6A5A">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="2">
+								<FieldReference id="1" name="Sort" UUID="335B603A-68A6-44A6-B5F1-D3BC0F18A5F0">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="3">
+								<FieldReference id="15" name="Selector" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="4">
+								<FieldReference id="2" name="Command_EN" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="5">
+								<FieldReference id="10" name="_ID_Palette" UUID="D836783C-5B36-4C11-8EB3-E7D2D2C5CDC7">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="6">
+								<FieldReference id="3" name="ColorName" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="7">
+								<FieldReference id="18" name="Comment" UUID="B6980B5E-3287-49E2-B32D-EA87F7F6DA8F">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+							<Field value="8">
+								<FieldReference id="6" name="On" UUID="E291E88D-75CB-4CE9-92E8-C58C91F07F4C">
+									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+								</FieldReference>
+							</Field>
+						</Order>
+					</Export>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="141" name="Variable setzen" enable="True">
+			<UUID>92E4C353-6870-4374-9740-3DC2ECD20859</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( LetzteFehlerNr )]]></Text>
+								<ChunkList hash="16999957E05D9809F9F88FA70C794553">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="68" name="Wenn" enable="True">
+			<UUID>BD2DBC50-08B7-49A2-83B6-469DB3CA9C07</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$error]]></Text>
+							<ChunkList hash="926F59D0E89012933FB1C2137ABF78F1">
+								<Chunk type="VariableReference">$error</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>42D2ED40-D9A8-4B33-B010-D0B5BC8627B5</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Error " & $error & " during the export."]]></Text>
+							<ChunkList hash="74F8D478A730C6DCE7BEC2FA2F332E97">
+								<Chunk type="NoRef">&quot;Error &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; during the export.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>907DC6BC-838C-409C-8588-AF7C6841734B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="30" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D4C7EE02-B4C7-4526-BF3D-72F1E24F62F4</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="70" name="Ende (wenn)" enable="True">
+			<UUID>715A9C77-C522-4720-A5F7-F8588F5C19D4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="32" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E62F0BA1-9E15-4C96-BE42-6B9BA6EA35AB</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="33" id="141" name="Variable setzen" enable="True">
+			<UUID>0E9E39E9-E947-44EC-9BC7-38EF01C21468</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( AnzahlGefundeneDatensätze )]]></Text>
+								<ChunkList hash="13CC8C1C176B732BA9A23A2B6F64C48C">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$n"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>850475C4-6121-4F92-B8D6-BC675EC76B11</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully exported to file " & Zitat( $FileName ) & " on the desktop."]]></Text>
+							<ChunkList hash="10BA92C39142185FDAEFC40776785329">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> = 1 ; &quot;One syntax-tag has been&quot; ; </Chunk>
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; syntax-tags have been&quot; ) &amp; &quot; successfully exported to file &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$FileName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; on the desktop.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="35" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AEA0B71D-22E6-473A-B79A-0A37D73BBD58</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

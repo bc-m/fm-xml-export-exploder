@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20121101 MrW
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Create hidden value liste entries ++New++ and --None--
+Gehe zu Layout [ Layout: "Colors" ; Animation: Ohne ]
+Suchenmodus aktivieren [ Pause: OFF ]
+Feldwert setzen [ _Color::_kIsColor ; 0 ]
+Ergebnismenge suchen
+Wenn [ Hole( AnzahlGefundeneDatensätze ) ≠ 4 ]
+	# Create hidden value liste entries ++New++ / --None-- * Script / Formula
+	Alle Datensätze löschen [ Mit Dialog: OFF ]
+	Neuer Datensatz/Abfrage
+	Feldwert setzen [ _Color::_ID_Palette ; 0 ]
+	Feldwert setzen [ _Color::ColorName ; "++New++" ]
+	Feldwert setzen [ _Color::PaletteType ; "Script" ]
+	Datensatz/Abfrage duplizieren
+	Feldwert setzen [ _Color::ColorName ; "--None--" ]
+	Datensatz/Abfrage duplizieren
+	Feldwert setzen [ _Color::PaletteType ; "Formula" ]
+	Feldwert setzen [ _Color::ColorName ; "++New++" ]
+	Datensatz/Abfrage duplizieren
+	Feldwert setzen [ _Color::ColorName ; "--None--" ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+	
+Ende (wenn)
+
+Script ausführen [ Aus Liste ; "All" ]
+Gehe zu Datens./Abfrage/Seite [ Erste(r) ]

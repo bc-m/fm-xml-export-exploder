@@ -1,0 +1,19 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="131" name="Contacts"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="8" name="OrderOfOperationsTest_u" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
+					<DDRREF kind="ChunkList" hash="">_BAD8B032-4CD5-420D-80A1-86A3AC338852_0</DDRREF>
+					<Text><![CDATA[Contacts_TestTable::TextField1& // This custom function references this field// It also references a related record// It's set up this way, so that we can see how SaXML handles this situationOrderOfOperations]]></Text>
+				</Calculation>
+				<BaseTableReference id="131" name="Contacts"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

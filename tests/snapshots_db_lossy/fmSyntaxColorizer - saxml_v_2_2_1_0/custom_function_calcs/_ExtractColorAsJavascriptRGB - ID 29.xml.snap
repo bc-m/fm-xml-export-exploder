@@ -1,52 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="29" name="_ExtractColorAsJavascriptRGB"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[SetzeVar([ vCSS = LiesAlsCSS ( ZeichenLinks( pText ; 1 ) ) ;vScrapePattern = "color: #" ;vPos = Position( vCSS ; vScrapePattern ; 1 ; 1 ) ;vHex = "#" & Falls( vPos ; WörterLinks( ZeichenMitte( vCSS ; vPos + Länge( vScrapePattern )  ; 6 ) ; 1 ) ; "000000" ) ];vHex)]]></Text>
-		<ChunkList hash="C077F4926BC46F678DE3F77EEC797350">
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">([ &#13;</Chunk>
-			<Chunk type="VariableReference">vCSS</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">LiesAlsCSS</Chunk>
-			<Chunk type="NoRef"> ( </Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pText</Chunk>
-			<Chunk type="NoRef"> ; 1 ) ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vScrapePattern</Chunk>
-			<Chunk type="NoRef"> = &quot;color: #&quot; ;&#13;</Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vCSS</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vScrapePattern</Chunk>
-			<Chunk type="NoRef"> ; 1 ; 1 ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> = &quot;#&quot; &amp; </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="FunctionRef">WörterLinks</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vCSS</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> + </Chunk>
-			<Chunk type="FunctionRef">Länge</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vScrapePattern</Chunk>
-			<Chunk type="NoRef"> )  ; 6 ) ; 1 ) ; &quot;000000&quot; ) &#13;];&#13;</Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef">&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

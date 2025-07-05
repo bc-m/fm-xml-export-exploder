@@ -1,61 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="13" name="_SR" UUID="53E76A0E-BF91-43D8-9740-D179DE0BD7C4"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* _SR( pN )Returns the pNth value in the script result.A plus after the number, e.g. "2+" means 'or more'.20151220 MrW Version 1.1 With automatic decoding of encoded returns20120817 MrW Version 1.0*/_SPDecode(Falls(ZeichenRechts( pN ; 1 ) = "+" ; SetzeVar( vPos = Position( "¶" & Hole( ScriptErgebnis ) ; "¶" ; 1 ; pN ) ; Falls( vPos ; ZeichenRechts( Hole( ScriptErgebnis ) ; Länge( Hole( ScriptErgebnis ) ) - vPos +1 ) ; "" ) ) ; pN > 0 ; HoleWert( Hole( ScriptErgebnis ) ; pN )))]]></Text>
-		<ChunkList hash="C07B51282FD9CBBBCB93961487D1B201">
-			<Chunk type="NoRef">/* _SR( pN )&#13;&#13;Returns the pNth value in the script result.&#13;A plus after the number, e.g. &quot;2+&quot; means &apos;or more&apos;.&#13;&#13;20151220 MrW Version 1.1 With automatic decoding of encoded returns&#13;20120817 MrW Version 1.0&#13;*/&#13;</Chunk>
-			<Chunk type="CustomFunctionRef">_SPDecode</Chunk>
-			<Chunk type="NoRef">(&#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">(&#13;</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pN</Chunk>
-			<Chunk type="NoRef"> ; 1 ) = &quot;+&quot; ; </Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( &quot;¶&quot; &amp; </Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ScriptErgebnis</Chunk>
-			<Chunk type="NoRef"> ) ; &quot;¶&quot; ; 1 ; </Chunk>
-			<Chunk type="VariableReference">pN</Chunk>
-			<Chunk type="NoRef"> ) ; </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ScriptErgebnis</Chunk>
-			<Chunk type="NoRef"> ) ; </Chunk>
-			<Chunk type="FunctionRef">Länge</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ScriptErgebnis</Chunk>
-			<Chunk type="NoRef"> ) ) - </Chunk>
-			<Chunk type="VariableReference">vPos</Chunk>
-			<Chunk type="NoRef"> +1 ) ; &quot;&quot; ) ) ; &#13;</Chunk>
-			<Chunk type="VariableReference">pN</Chunk>
-			<Chunk type="NoRef"> &gt; 0 ; </Chunk>
-			<Chunk type="FunctionRef">HoleWert</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ScriptErgebnis</Chunk>
-			<Chunk type="NoRef"> ) ; </Chunk>
-			<Chunk type="VariableReference">pN</Chunk>
-			<Chunk type="NoRef"> )&#13;))</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

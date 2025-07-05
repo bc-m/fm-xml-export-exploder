@@ -1,0 +1,25 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20200708 MrW Corrected sort for collections
+# 20121101 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Alle Datensätze anzeigen
+
+Wenn [ Hole( Fenstermodus ) = 1 ]
+	# Find mode
+	
+Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
+	# Not browse mode
+	
+Sonst, wenn [ _IsLayoutTableName ( _Syntax::__ID ) ]
+	Script ausführen [ Aus Liste ; "Sort Syntax" ]
+	
+Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
+	Sortieren [ Mit Dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+	
+Ende (wenn)

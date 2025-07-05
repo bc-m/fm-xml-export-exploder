@@ -1,65 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="2" name="_0x" UUID="4BFC88F2-EF5E-40E2-8F43-47C0D947C365"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* _0x( pHexString )Converts the hexadecimal string to a decimal number.  - Only positive integer values (min=0, max=biggest number that FileMaker can store.) - Hexadecimal letters can be in any case - all extra characters are ignored. - Three digit CSS colours are also correctly interpreted if preceded by a "#". ("#RGB" is first converted to a six digit hex string "RRGGBB".) - No recursion! => Very fast (3 times faster than equivalent recursive CF) => Embeddable in other CFsE.g.:   _0x("2588") -> 9608   Code( _0x("U+2588") ) -> "█" - Unicode character 'full block'.20120411 MrW Version 1.0v0*/SetzeVar([vHex = FilterZeichen( Großbuchstaben( pHexString ) ; "#0123456789ABCDEF" ) ;vHex = Falls( ZeichenLinks( vHex ; 1 ) = "#" UND Länge( vHex ) = 4 ; ZeichenMitte( vHex ; 2 ; 1 ) & ZeichenMitte( vHex ; 2 ; 2 ) & ZeichenMitte( vHex ; 3 ; 2 ) & ZeichenRechts( vHex ; 1 ) ; vHex )];Berechne( Austauschen( vHex; ["#" ; ""]; ["0" ; "("]; ["1" ; "("]; ["2" ; "("]; ["3" ; "("]; ["4" ; "("]; ["5" ; "("]; ["6" ; "("]; ["7" ; "("]; ["8" ; "("]; ["9" ; "("]; ["A" ; "("]; ["B" ; "("]; ["C" ; "("]; ["D" ; "("]; ["E" ; "("]; ["F" ; "("] ) & "0" & Austauschen( vHex; ["#" ; ""]; ["0" ; "G0"]; ["1" ; "G1"]; ["2" ; "G2"]; ["3" ; "G3"]; ["4" ; "G4"]; ["5" ; "G5"]; ["6" ; "G6"]; ["7" ; "G7"]; ["8" ; "G8"]; ["9" ; "G9"]; ["A" ; "G10"]; ["B" ; "G11"]; ["C" ; "G12"]; ["D" ; "G13"]; ["E" ; "G14"]; ["F" ; "G15"]; ["G" ; ")*16+"] )))]]></Text>
-		<ChunkList hash="30A19541E7829D16CEB7AC5A22F83F16">
-			<Chunk type="NoRef">/* _0x( pHexString )&#13;&#13;Converts the hexadecimal string to a decimal number. &#13; - Only positive integer values (min=0, max=biggest number that FileMaker can store.)&#13; - Hexadecimal letters can be in any case - all extra characters are ignored.&#13; - Three digit CSS colours are also correctly interpreted if preceded by a &quot;#&quot;. (&quot;#RGB&quot; is first converted to a six digit hex string &quot;RRGGBB&quot;.)&#13; - No recursion!&#13; =&gt; Very fast (3 times faster than equivalent recursive CF)&#13; =&gt; Embeddable in other CFs&#13;&#13;E.g.:&#13;   _0x(&quot;2588&quot;) -&gt; 9608&#13;   Code( _0x(&quot;U+2588&quot;) ) -&gt; &quot;█&quot; - Unicode character &apos;full block&apos;.&#13;&#13;20120411 MrW Version 1.0v0&#13;*/&#13;</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">([&#13;</Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">FilterZeichen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Großbuchstaben</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pHexString</Chunk>
-			<Chunk type="NoRef"> ) ; &quot;#0123456789ABCDEF&quot; ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> ; 1 ) = &quot;#&quot; </Chunk>
-			<Chunk type="FunctionRef">UND</Chunk>
-			<Chunk type="NoRef"> </Chunk>
-			<Chunk type="FunctionRef">Länge</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> ) = 4 ; </Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> ; 2 ; 1 ) &amp; </Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> ; 2 ; 2 ) &amp; </Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> ; 3 ; 2 ) &amp; </Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> ; 1 ) ; </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef"> )&#13;];&#13;</Chunk>
-			<Chunk type="FunctionRef">Berechne</Chunk>
-			<Chunk type="NoRef">( &#13;</Chunk>
-			<Chunk type="FunctionRef">Austauschen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef">; [&quot;#&quot; ; &quot;&quot;]; [&quot;0&quot; ; &quot;(&quot;]; [&quot;1&quot; ; &quot;(&quot;]; [&quot;2&quot; ; &quot;(&quot;]; [&quot;3&quot; ; &quot;(&quot;]; [&quot;4&quot; ; &quot;(&quot;]; [&quot;5&quot; ; &quot;(&quot;]; [&quot;6&quot; ; &quot;(&quot;]; [&quot;7&quot; ; &quot;(&quot;]; [&quot;8&quot; ; &quot;(&quot;]; [&quot;9&quot; ; &quot;(&quot;]; [&quot;A&quot; ; &quot;(&quot;]; [&quot;B&quot; ; &quot;(&quot;]; [&quot;C&quot; ; &quot;(&quot;]; [&quot;D&quot; ; &quot;(&quot;]; [&quot;E&quot; ; &quot;(&quot;]; [&quot;F&quot; ; &quot;(&quot;] ) &amp; &#13;&quot;0&quot; &amp; &#13;</Chunk>
-			<Chunk type="FunctionRef">Austauschen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vHex</Chunk>
-			<Chunk type="NoRef">; [&quot;#&quot; ; &quot;&quot;]; [&quot;0&quot; ; &quot;G0&quot;]; [&quot;1&quot; ; &quot;G1&quot;]; [&quot;2&quot; ; &quot;G2&quot;]; [&quot;3&quot; ; &quot;G3&quot;]; [&quot;4&quot; ; &quot;G4&quot;]; [&quot;5&quot; ; &quot;G5&quot;]; [&quot;6&quot; ; &quot;G6&quot;]; [&quot;7&quot; ; &quot;G7&quot;]; [&quot;8&quot; ; &quot;G8&quot;]; [&quot;9&quot; ; &quot;G9&quot;]; [&quot;A&quot; ; &quot;G10&quot;]; [&quot;B&quot; ; &quot;G11&quot;]; [&quot;C&quot; ; &quot;G12&quot;]; [&quot;D&quot; ; &quot;G13&quot;]; [&quot;E&quot; ; &quot;G14&quot;]; [&quot;F&quot; ; &quot;G15&quot;]; [&quot;G&quot; ; &quot;)*16+&quot;] )&#13;)&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

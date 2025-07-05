@@ -1,0 +1,21 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20210916 MrW Removed lingering pesky German :D
+# 20121102 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Schleife (Anfang) [ Flush: Immer ]
+	Wenn [ NICHT IstLeer( Palette.Color_Formula::Comment ) ]
+		# Read
+		Eigenes Dialogfeld anzeigen [ Title: Palette.Color_Formula::ColorName ; Message: Austauschen( Palette.Color_Formula::Comment ; "\¶" ; "¶" ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Verlasse Schleife wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
+	Ende (wenn)
+	# Edit
+	Variable setzen [ $Comment ; Palette.Color_Formula::Comment ]
+	Eigenes Dialogfeld anzeigen [ Title: "\"" & Palette.Color_Formula::ColorName & "\"" ; Message: "You may enter a comment to explain what this entry is about." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
+	Verlasse Schleife wenn [ IstLeer( Palette.Color_Formula::Comment ) ODER Palette.Color_Formula::Comment = $Comment ]
+Schleife (Ende)

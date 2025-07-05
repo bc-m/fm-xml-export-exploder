@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="50">
+	<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">6DB2BA1E-360F-4A3C-93B0-A0126A5F3591</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="True" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065155" name="Home.Syntax_Dynamic1" UUID="FA9CE8C0-11D1-4024-9A54-9DC70A011BE0"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="40" name="_gDynamic1Comment" UUID="0D287D4B-2522-4A30-A1C9-A4142C4238AC">
+					<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="18" name="Comment" UUID="B6980B5E-3287-49E2-B32D-EA87F7F6DA8F">
+					<TableOccurrenceReference id="1065155" name="Home.Syntax_Dynamic1" UUID="FA9CE8C0-11D1-4024-9A54-9DC70A011BE0"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

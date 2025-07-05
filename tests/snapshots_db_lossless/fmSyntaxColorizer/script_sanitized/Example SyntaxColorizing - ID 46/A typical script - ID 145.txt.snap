@@ -1,0 +1,660 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# /##
+# This is an example typical script (in development) which you can edit and use to see how your colors look.
+
+# Parameters
+
+# Use the @param tag to define (one or more comma-separated) parameters, specifying the variable name...
+
+# @param param1 (text) - Parameter 1 // ...WITHOUT a $ symbol if you don't want MBS plugin to consider this a definition 
+# @param optParam1,optParam1, (text) - optional Parameters 2 and 3 // Use comma to specify multiple variables
+# @param $a, $b, $c // ...WITH a $ symbol to tell the MBS Plugin NOT to flag up this variable name
+# @returns length | ""
+# @throws all kinds of errors!
+# @referencedByName
+
+# Note: You have to use the the FileMakerDoc collection to get the above in warning colours
+
+# You may want to provide an example template of the code to pass parameters in:
+# - either as a commented out Insert Text step
+// Text einfügen [ Select ; Target: $@example ; "$param1 & ¶ &
+				$optParam2 & ¶ &
+				$optParam3
+				" ]
+# - or as a comment using Markdown-ish code formatting:
+# ` Perform Script [ Specified: From list ; “All script steps and all options” ; Parameter: “$param1 & ¶ & $optParam2 & ¶ & $optParam3” ]
+
+# # Markdown Heading 1
+# foo
+
+# ## Markdown Heading 2
+# bar
+
+# ### Markdown Heading 3
+# baz
+
+# #/
+
+# ! DO NOT REMOVE !
+Aktuelles Script verlassen []
+# / The rest of the script will not be executed / is safe
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ OFF ]
+
+# Inputs
+Variable setzen [ $IsFullAccess ; Hole ( KontoBerechtigungenName ) = "[Full Access]" ]
+Variable setzen [ $NumberOfColors ; Anzahl( Palette.Color::__ID ) ]
+Variable setzen [ $User Name ; Hole ( ProgrammBenutzername ) ]
+Variable setzen [ $d ; $a + $b + $c ]
+Variable setzen [ $deprecated ; _Home::zzz_UNUSED ]
+
+# # Preconditions
+Wenn [ NICHT $IsFullAccess ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Sorry, you do not have permission to run this script." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Alle Scripts abbrechen
+	# --X
+Ende (wenn)
+
+Wenn [ $User Name = "MrWatson" ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Debug?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
+	Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
+		# DEBUG
+		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Ende (wenn)
+Ende (wenn)
+
+Wenn [ NICHT _Palette::__ID ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please first choose a palette" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen []
+	# -->
+Ende (wenn)
+
+# FIXME: This broke after restructuring
+Script ausführen [ Aus Liste ; "" ; File: "<Unbekannt>" ]
+
+# # Duplicate Palette
+
+Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
+Suchenmodus aktivieren [ Pause: OFF ]
+Berechneten Wert einfügen [ Auswahl: ON ; Target: _Palette::_gDuplicatePaletteFrom ; _Palette::__ID ]
+Ergebnismenge suchen [ ⚠️ RESTORE ⚠️ ]
+Sortieren [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+
+
+# Duplicate with increased name
+Datensatz/Abfrage duplizieren
+Schleife (Anfang) [ Flush: Immer ]
+	Feldwert setzen [ _Palette::PaletteName ; Falls( Ganzzahl( WörterRechts( _Palette::PaletteName ; 1 ) ) = WörterRechts( _Palette::PaletteName ; 1 ) ; FortlNrInTextÄndern ( _Palette::PaletteName ; 1 ) ; _Palette::PaletteName & " 2" ) ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+	Verlasse Schleife wenn [ Anzahl( Palette.Palette_SameName::__ID ) =$DefaulPaletteID ]
+	Variable setzen [ $i ; $i + 1 ]
+Schleife (Ende)
+
+Gehe zu Layout [ Layout: "I_Duplicate_Palette" ; Animation: Ohne ]
+# FOR EACH Color
+Variable setzen [ $i ; 1 ]
+Variable setzen [ $n ; $NumberOfColours ]
+Schleife (Anfang) [ Flush: Immer ]
+	Verlasse Schleife wenn [ $i > $n ]
+	
+	# Duplicate the color
+	Gehe zu Ausschnittreihe [ Auswahl: OFF ; Letzte(r) ]
+	Feldwert setzen [ Palette.Color::PaletteType ; HoleNtenDatensatz( Palette.Color_toDuplicate::PaletteType ; $i ) ]
+	Feldwert setzen [ Palette.Color::ColorName ; HoleNtenDatensatz( Palette.Color_toDuplicate::ColorName ; $i ) ]
+	Feldwert setzen [ Palette.Color::Comment ; HoleNtenDatensatz( Palette.Color_toDuplicate::Comment ; $i ) ]
+	// Feldwert setzen [ Palette.Color::ColorInput ; Falls( 
+					$blackenInactiveColors UND NICHT HoleNtenDatensatz( Palette.Color_toDuplicate::_kCountActiveSyntaxUsage ; $i ) ; Palette.Color_toDuplicate::_kkFullBlock ; /* black */
+					HoleNtenDatensatz( Palette.Color_toDuplicate::ColorInput ; $i )
+					) ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: ON ]
+	
+	# NEXT Color
+	Variable setzen [ $i ; $i + 1 ]
+	Verlasse Schleife wenn []
+Schleife (Ende)
+
+Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+Schleife (Anfang) [ Flush: Immer ]
+	# Oops, forgot to turn on the exit after last option:
+	Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: OFF ]
+Schleife (Ende)
+
+Suchenmodus aktivieren [ Pause: OFF ]
+
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+Gehe zu Feld [ Auswählen/Ausführen ; _Palette::PaletteName ]
+Datensätze zeigen als [ Als Formular anzeigen ]
+
+
+# FIXME: This broke too when I pasted it in - either the language was incorrectly set - or the field is missing
+// Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+// Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+// Sonst
+// Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+// Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+// Sonst
+// Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+// Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+// Sonst
+// Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+// Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+// Sonst
+// Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+// Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+// Sonst
+// Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+// Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+// Sonst
+// Ende (wenn)
+// Ende (wenn)
+// Ende (wenn)
+// Ende (wenn)
+// Ende (wenn)
+// Ende (wenn)
+Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
+	Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
+Ende (wenn)
+
+Script ausführen [ Aus Liste ; "Apply Palette" ]
+Variable setzen [ $Error ; Hole ( ScriptParameter ) ]
+# Note the wrong get function here ^^^^ (denoted by the 'normal' color)
+
+Script ausführen [ Aus Liste ; "Apply Palette" ]
+Variable setzen [ $Error ; Hole ( ScriptErgebnis ) ]
+# You should see an affirmative color ^^^^, when getting the Script Result
+
+URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+# @var $a - this comment defines the variable a
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $a ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+
+AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+
+MBS
+
+Aktuelles Script verlassen []
+
+# Here are some comments of mixed importance
+
+# This is a normal comment
+# This is a normal comment
+# +Info+ Important! Think carefully before using Plugin Steps
+# -Info- This comment is not so important - Nothing after the Exit Script step gets executed
+# This is another normal comment
+# This is another normal comment
+# ! Alternatively just an exclamation mark at the start of an important line
+# / And just a single slash at the start of an unimportant line = 1/2 commented out, so to speak
+# One final normal comment
+# One final normal comment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# This line is to test how far the MBS variable checking works
+  ... if the MBS plugin says "$i not found!" you might want to increase the MBS variable scan line option on the MBS Extras popover
+Variable setzen [ $i ; $i+1 ]

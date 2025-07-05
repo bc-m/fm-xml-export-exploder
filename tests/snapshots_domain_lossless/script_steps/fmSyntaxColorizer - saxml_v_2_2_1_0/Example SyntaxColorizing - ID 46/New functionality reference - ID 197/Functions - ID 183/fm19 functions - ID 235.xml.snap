@@ -1,645 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<Script>
-	<ScriptReference id="235" name="fm19 functions" UUID="9C43E74D-9F4E-4DA9-9554-A164EE99CF2E"></ScriptReference>
-	<ObjectList membercount="18">
-		<Step index="0" id="89" name="# (Kommentar)" enable="True">
-			<UUID>5F52D354-6688-45EC-99FA-DA96227AB506</UUID>
-			<OwnerID></OwnerID>
-			<Options>0</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="1" id="89" name="# (Kommentar)" enable="True">
-			<UUID>27DB91D9-61DD-4177-BC5B-3B839E829BDC</UUID>
-			<OwnerID></OwnerID>
-			<Options>4</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment value="New in FileMaker 19.0"></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="2" id="141" name="Variable setzen" enable="True">
-			<UUID>8D9F044A-E84C-403C-83AF-A6AF3BF6D091</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[ComputeModel ( "modelName" ; "parameterName1" ; "value1" )]]></Text>
-								<ChunkList hash="4FED8CC1144248E814E4B990798E1DA0">
-									<Chunk type="FunctionRef">ComputeModel</Chunk>
-									<Chunk type="NoRef"> ( &quot;modelName&quot; ; &quot;parameterName1&quot; ; &quot;value1&quot; )</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$$Function.ComputeModel"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="3" id="141" name="Variable setzen" enable="True">
-			<UUID>CADB6015-BC79-4EFD-A1F2-08952B2F91EB</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[Liste(ConvertFromFileMakerPath( Hole ( DokumentenPfad ) ; PosixPath ) ;ConvertFromFileMakerPath( Hole ( DokumentenPfad ) ; WinPath ) ;ConvertFromFileMakerPath( Hole ( DokumentenPfad ) ; URLPath ))]]></Text>
-								<ChunkList hash="3CC57A686513127E635559E4B9F93146">
-									<Chunk type="FunctionRef">Liste</Chunk>
-									<Chunk type="NoRef">(&#13;</Chunk>
-									<Chunk type="FunctionRef">ConvertFromFileMakerPath</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="FunctionRef">Hole</Chunk>
-									<Chunk type="NoRef"> ( </Chunk>
-									<Chunk type="FunctionRef">DokumentenPfad</Chunk>
-									<Chunk type="NoRef"> ) ; </Chunk>
-									<Chunk type="FunctionRef">PosixPath</Chunk>
-									<Chunk type="NoRef"> ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">ConvertFromFileMakerPath</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="FunctionRef">Hole</Chunk>
-									<Chunk type="NoRef"> ( </Chunk>
-									<Chunk type="FunctionRef">DokumentenPfad</Chunk>
-									<Chunk type="NoRef"> ) ; </Chunk>
-									<Chunk type="FunctionRef">WinPath</Chunk>
-									<Chunk type="NoRef"> ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">ConvertFromFileMakerPath</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="FunctionRef">Hole</Chunk>
-									<Chunk type="NoRef"> ( </Chunk>
-									<Chunk type="FunctionRef">DokumentenPfad</Chunk>
-									<Chunk type="NoRef"> ) ; </Chunk>
-									<Chunk type="FunctionRef">URLPath</Chunk>
-									<Chunk type="NoRef"> )&#13;)</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$$Function.ConvertFromFileMakerPath"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="4" id="141" name="Variable setzen" enable="True">
-			<UUID>01A981F7-E146-4049-A92B-FBD2F3ED69A7</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[Liste(ConvertToFileMakerPath( "~/" ; PosixPath ) ;ConvertToFileMakerPath( "\\\server\shareName\some\path" ; WinPath ) ;ConvertToFileMakerPath( "file:///User/r.watson/Documents/fmCheckMate/fmxmlsnippet.xml" ; URLPath ))]]></Text>
-								<ChunkList hash="D739E4AAAA01D2325311DCB4814ED918">
-									<Chunk type="FunctionRef">Liste</Chunk>
-									<Chunk type="NoRef">(&#13;</Chunk>
-									<Chunk type="FunctionRef">ConvertToFileMakerPath</Chunk>
-									<Chunk type="NoRef">( &quot;~/&quot; ; </Chunk>
-									<Chunk type="FunctionRef">PosixPath</Chunk>
-									<Chunk type="NoRef"> ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">ConvertToFileMakerPath</Chunk>
-									<Chunk type="NoRef">( &quot;\\\server\shareName\some\path&quot; ; </Chunk>
-									<Chunk type="FunctionRef">WinPath</Chunk>
-									<Chunk type="NoRef"> ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">ConvertToFileMakerPath</Chunk>
-									<Chunk type="NoRef">( &quot;file:///User/r.watson/Documents/fmCheckMate/fmxmlsnippet.xml&quot; ; </Chunk>
-									<Chunk type="FunctionRef">URLPath</Chunk>
-									<Chunk type="NoRef"> )&#13;)</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$$Function.ConvertToFileMakerPath"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="5" id="89" name="# (Kommentar)" enable="True">
-			<UUID>852A7AE6-A279-4892-8D8A-F59C78D4E913</UUID>
-			<OwnerID></OwnerID>
-			<Options>0</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="6" id="89" name="# (Kommentar)" enable="True">
-			<UUID>14E12A07-3A69-4204-B0EF-1663110AB1C7</UUID>
-			<OwnerID></OwnerID>
-			<Options>4</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment value="New in FileMaker 19.1.2"></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="7" id="141" name="Variable setzen" enable="True">
-			<UUID>3A3185F9-625D-4883-8F4D-1E4AFCAA3660</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[Hole(DateiGebietsschemaElemente)]]></Text>
-								<ChunkList hash="A2FB040C75FDF0426AD6AE0F95A45B67">
-									<Chunk type="FunctionRef">Hole</Chunk>
-									<Chunk type="NoRef">(</Chunk>
-									<Chunk type="FunctionRef">DateiGebietsschemaElemente</Chunk>
-									<Chunk type="NoRef">)</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$$Function.Get.FileLocaleElements"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="8" id="141" name="Variable setzen" enable="True">
-			<UUID>21995514-02E6-47B2-BBCC-5C5CCDB2D513</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[Hole(SystemGebietsschemaElemente)]]></Text>
-								<ChunkList hash="7EB2CC3B6C956EBA91A755AF36CA214C">
-									<Chunk type="FunctionRef">Hole</Chunk>
-									<Chunk type="NoRef">(</Chunk>
-									<Chunk type="FunctionRef">SystemGebietsschemaElemente</Chunk>
-									<Chunk type="NoRef">)</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$$Function.Get.SystemLocaleElements"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="9" id="89" name="# (Kommentar)" enable="True">
-			<UUID>6BA0332E-9ED9-4E11-8D11-C9B4D93C5266</UUID>
-			<OwnerID></OwnerID>
-			<Options>0</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="10" id="89" name="# (Kommentar)" enable="True">
-			<UUID>02FD7B8E-42AE-4F39-9C92-D051B5EAEFD1</UUID>
-			<OwnerID></OwnerID>
-			<Options>4</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment value="LocaleElements"></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="11" id="141" name="Variable setzen" enable="True">
-			<UUID>60F4E12E-B101-489B-8BE5-43CCBCACC398</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[JSONSetElement( "{}" ;[ "APIVers" ; 1 ; JSONNumber ] ;[ "Currency.Leading" ; 0 ; JSONNumber ] ;[ "Currency.Symbol" ; "€" ; JSONString ] ;[ "Date.DMQ.1stDayOfWeek" ; 1 ; JSONNumber ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[0]" ; "Sun" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[1]" ; "Mon" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[2]" ; "Tue" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[3]" ; "Wed" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[4]" ; "Thu" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[5]" ; "Fri" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.AbbrvList[6]" ; "Sat" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[0]" ; "Sunday" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[1]" ; "Monday" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[2]" ; "Tuesday" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[3]" ; "Wednesday" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[4]" ; "Thursday" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[5]" ; "Friday" ; JSONString ] ;[ "Date.DMQ.DaysOfWeek.NameList[6]" ; "Saturday" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[0]" ; "Jan" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[1]" ; "Feb" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[2]" ; "Mar" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[3]" ; "Apr" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[4]" ; "May" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[5]" ; "Jun" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[6]" ; "Jul" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[7]" ; "Aug" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[8]" ; "Sep" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[9]" ; "Oct" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[10]" ; "Nov" ; JSONString ] ;[ "Date.DMQ.Months.AbbrvList[11]" ; "Dec" ; JSONString ] ;[ "Date.DMQ.Months.NameList[0]" ; "January" ; JSONString ] ;[ "Date.DMQ.Months.NameList[1]" ; "February" ; JSONString ] ;[ "Date.DMQ.Months.NameList[2]" ; "March" ; JSONString ] ;[ "Date.DMQ.Months.NameList[3]" ; "April" ; JSONString ] ;[ "Date.DMQ.Months.NameList[4]" ; "May" ; JSONString ] ;[ "Date.DMQ.Months.NameList[5]" ; "June" ; JSONString ] ;[ "Date.DMQ.Months.NameList[6]" ; "July" ; JSONString ] ;[ "Date.DMQ.Months.NameList[7]" ; "August" ; JSONString ] ;[ "Date.DMQ.Months.NameList[8]" ; "September" ; JSONString ] ;[ "Date.DMQ.Months.NameList[9]" ; "October" ; JSONString ] ;[ "Date.DMQ.Months.NameList[10]" ; "November" ; JSONString ] ;[ "Date.DMQ.Months.NameList[11]" ; "December" ; JSONString ] ;[ "Date.DMQ.Quarters.AbbrvList[0]" ; "Q1" ; JSONString ] ;[ "Date.DMQ.Quarters.AbbrvList[1]" ; "Q2" ; JSONString ] ;[ "Date.DMQ.Quarters.AbbrvList[2]" ; "Q3" ; JSONString ] ;[ "Date.DMQ.Quarters.AbbrvList[3]" ; "Q4" ; JSONString ] ;[ "Date.DMQ.Quarters.NameList[0]" ; "1. Quartal" ; JSONString ] ;[ "Date.DMQ.Quarters.NameList[1]" ; "2. Quartal" ; JSONString ] ;[ "Date.DMQ.Quarters.NameList[2]" ; "3. Quartal" ; JSONString ] ;[ "Date.DMQ.Quarters.NameList[3]" ; "4. Quartal" ; JSONString ] ;[ "Date.DMY.ElementArray.NameList[0]" ; "D#" ; JSONString ] ;[ "Date.DMY.ElementArray.NameList[1]" ; "M$" ; JSONString ] ;[ "Date.DMY.ElementArray.NameList[2]" ; "YYYY#" ; JSONString ] ;[ "Date.DMY.ElementArray.NameList[3]" ; "D$" ; JSONString ] ;[ "Date.DMY.ElementArray.SepList[0]" ; ", " ; JSONString ] ;[ "Date.DMY.ElementArray.SepList[1]" ; ". " ; JSONString ] ;[ "Date.DMY.ElementArray.SepList[2]" ; " " ; JSONString ] ;[ "Date.DMY.ElementArray.SepList[3]" ; "" ; JSONString ] ;[ "Date.DMY.MustUseLocalesSep" ; 0 ; JSONNumber ] ;[ "Date.DateNums.0d" ; 1 ; JSONNumber ] ; /* 1=DD, 0=D // Zero before the day */[ "Date.DateNums.0m" ; 1 ; JSONNumber ] ; /* 1=MM, 0=M // Zero before the month */[ "Date.DateNums.YYyy" ; 0 ; JSONNumber ] ;[ "Date.DateOrderID" ; 1 ; JSONNumber ] ;[ "Date.DateOrderName" ; "DMY" ; JSONString ] ;[ "Date.Sep" ; "." ; JSONString ] ;[ "LocaleID.IDNum" ; 25 ; JSONNumber ] ;[ "LocaleID.IDStr" ; "German" ; JSONString ] ;[ "LocaleID.ISOLangCode" ; "de" ; JSONString ] ;[ "LocaleID.LID" ; "German" ; JSONString ] ;[ "LocaleID.Name" ; "German" ; JSONString ] ;[ "Misc.Active" ; 0 ; JSONNumber ] ;[ "Misc.Metric" ; 1 ; JSONNumber ] ;[ "Num.1000s" ; "." ; JSONString ] ;[ "Num.Decimal" ; "," ; JSONString ] ;[ "Num.Lead0" ; 1 ; JSONNumber ] ;[ "Text.SQuotLead" ; "\“" ; JSONString ] ;[ "Text.SQuotTrail" ; "\”" ; JSONString ] ;[ "Text.Sep" ; ";" ; JSONString ] ;[ "Time.12h" ; 0 ; JSONNumber ] ;[ "Time.HMS.0h" ; 1 ; JSONNumber ] ;[ "Time.HMS.24h" ; "" ; JSONString ] ;[ "Time.HMS.Seconds" ; 0 ; JSONNumber ] ;[ "Time.NightDay.12hSuffix" ; 1 ; JSONNumber ] ;[ "Time.NightDay.amStr" ; " AM" ; JSONString ] ;[ "Time.NightDay.pmStr" ; " PM" ; JSONString ] ;[ "Time.Sep" ; ":" ; JSONString ])]]></Text>
-								<ChunkList hash="877627094D489DDB52182F2E43478D89">
-									<Chunk type="FunctionRef">JSONSetElement</Chunk>
-									<Chunk type="NoRef">( &quot;{}&quot; ;&#13;[ &quot;APIVers&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Currency.Leading&quot; ; 0 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Currency.Symbol&quot; ; &quot;€&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.1stDayOfWeek&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[0]&quot; ; &quot;Sun&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[1]&quot; ; &quot;Mon&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[2]&quot; ; &quot;Tue&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[3]&quot; ; &quot;Wed&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[4]&quot; ; &quot;Thu&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[5]&quot; ; &quot;Fri&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.AbbrvList[6]&quot; ; &quot;Sat&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[0]&quot; ; &quot;Sunday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[1]&quot; ; &quot;Monday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[2]&quot; ; &quot;Tuesday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[3]&quot; ; &quot;Wednesday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[4]&quot; ; &quot;Thursday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[5]&quot; ; &quot;Friday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.DaysOfWeek.NameList[6]&quot; ; &quot;Saturday&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMQ.Months.AbbrvList[0]&quot; ; &quot;Jan&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[1]&quot; ; &quot;Feb&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[2]&quot; ; &quot;Mar&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[3]&quot; ; &quot;Apr&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[4]&quot; ; &quot;May&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[5]&quot; ; &quot;Jun&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[6]&quot; ; &quot;Jul&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[7]&quot; ; &quot;Aug&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[8]&quot; ; &quot;Sep&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[9]&quot; ; &quot;Oct&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[10]&quot; ; &quot;Nov&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.AbbrvList[11]&quot; ; &quot;Dec&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMQ.Months.NameList[0]&quot; ; &quot;January&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[1]&quot; ; &quot;February&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[2]&quot; ; &quot;March&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[3]&quot; ; &quot;April&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[4]&quot; ; &quot;May&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[5]&quot; ; &quot;June&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[6]&quot; ; &quot;July&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[7]&quot; ; &quot;August&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[8]&quot; ; &quot;September&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[9]&quot; ; &quot;October&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[10]&quot; ; &quot;November&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Months.NameList[11]&quot; ; &quot;December&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMQ.Quarters.AbbrvList[0]&quot; ; &quot;Q1&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Quarters.AbbrvList[1]&quot; ; &quot;Q2&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Quarters.AbbrvList[2]&quot; ; &quot;Q3&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Quarters.AbbrvList[3]&quot; ; &quot;Q4&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMQ.Quarters.NameList[0]&quot; ; &quot;1. Quartal&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Quarters.NameList[1]&quot; ; &quot;2. Quartal&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Quarters.NameList[2]&quot; ; &quot;3. Quartal&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMQ.Quarters.NameList[3]&quot; ; &quot;4. Quartal&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMY.ElementArray.NameList[0]&quot; ; &quot;D#&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMY.ElementArray.NameList[1]&quot; ; &quot;M$&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMY.ElementArray.NameList[2]&quot; ; &quot;YYYY#&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMY.ElementArray.NameList[3]&quot; ; &quot;D$&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMY.ElementArray.SepList[0]&quot; ; &quot;, &quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMY.ElementArray.SepList[1]&quot; ; &quot;. &quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMY.ElementArray.SepList[2]&quot; ; &quot; &quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DMY.ElementArray.SepList[3]&quot; ; &quot;&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DMY.MustUseLocalesSep&quot; ; 0 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Date.DateNums.0d&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ; /* 1=DD, 0=D // Zero before the day */&#13;[ &quot;Date.DateNums.0m&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ; /* 1=MM, 0=M // Zero before the month */&#13;[ &quot;Date.DateNums.YYyy&quot; ; 0 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DateOrderID&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.DateOrderName&quot; ; &quot;DMY&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Date.Sep&quot; ; &quot;.&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;LocaleID.IDNum&quot; ; 25 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;LocaleID.IDStr&quot; ; &quot;German&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;LocaleID.ISOLangCode&quot; ; &quot;de&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;LocaleID.LID&quot; ; &quot;German&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;LocaleID.Name&quot; ; &quot;German&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Misc.Active&quot; ; 0 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Misc.Metric&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Num.1000s&quot; ; &quot;.&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Num.Decimal&quot; ; &quot;,&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Num.Lead0&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Text.SQuotLead&quot; ; &quot;\“&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Text.SQuotTrail&quot; ; &quot;\”&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Text.Sep&quot; ; &quot;;&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;&#13;[ &quot;Time.12h&quot; ; 0 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.HMS.0h&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.HMS.24h&quot; ; &quot;&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.HMS.Seconds&quot; ; 0 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.NightDay.12hSuffix&quot; ; 1 ; </Chunk>
-									<Chunk type="FunctionRef">JSONNumber</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.NightDay.amStr&quot; ; &quot; AM&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.NightDay.pmStr&quot; ; &quot; PM&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ] ;&#13;[ &quot;Time.Sep&quot; ; &quot;:&quot; ; </Chunk>
-									<Chunk type="FunctionRef">JSONString</Chunk>
-									<Chunk type="NoRef"> ]&#13;&#13;)</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$json"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="12" id="141" name="Variable setzen" enable="True">
-			<UUID>2E8DE59F-63F9-4D70-8C2E-FD4201D2C949</UUID>
-			<OwnerID></OwnerID>
-			<Options>16388</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Variable">
-					<value>
-						<Calculation datatype="1" position="1">
-							<Calculation>
-								<Text><![CDATA[Liste(JSONGetElement( $json ; "APIVers" ) ;JSONGetElement( $json ; "Currency.Leading" ) ;JSONGetElement( $json ; "Currency.Symbol" ) ;JSONGetElement( $json ; "Date.DMQ.1stDayOfWeek" ) ;JSONListValues( $json ; "Date.DMQ.DaysOfWeek.AbbrvLis" ) ;JSONListValues( $json ; "Date.DMQ.DaysOfWeek.NameLis" ) ;JSONListValues( $json ; "Date.DMQ.Months.AbbrvLis" ) ;JSONListValues( $json ; "Date.DMQ.Months.NameLis" ) ;JSONListValues( $json ; "Date.DMQ.Quarters.AbbrvLis" ) ;JSONListValues( $json ; "Date.DMQ.Quarters.NameLis" ) ;JSONListValues( $json ; "Date.DMY.ElementArray.NameLis" ) ;JSONListValues( $json ; "Date.DMY.ElementArray.SepLis" ) ;JSONGetElement( $json ; "Date.DMY.MustUseLocalesSep" ) ;JSONGetElement( $json ; "Date.DateNums.0d" ) ; /* 1=DD, 0=D // Zero before the day */JSONGetElement( $json ; "Date.DateNums.0m" ) ; /* 1=MM, 0=M // Zero before the month */JSONGetElement( $json ; "Date.DateNums.YYyy" ) ;JSONGetElement( $json ; "Date.DateOrderID" ) ;JSONGetElement( $json ; "Date.DateOrderName" ) ;JSONGetElement( $json ; "Date.Sep" ) ;JSONGetElement( $json ; "LocaleID.IDNum" ) ;JSONGetElement( $json ; "LocaleID.IDStr" ) ;JSONGetElement( $json ; "LocaleID.ISOLangCode" ) ;JSONGetElement( $json ; "LocaleID.LID" ) ;JSONGetElement( $json ; "LocaleID.Name" ) ;JSONGetElement( $json ; "Misc.Active" ) ;JSONGetElement( $json ; "Misc.Metric" ) ;JSONGetElement( $json ; "Num.1000s" ) ;JSONGetElement( $json ; "Num.Decimal" ) ;JSONGetElement( $json ; "Num.Lead0" ) ;JSONGetElement( $json ; "Text.SQuotLead" ) ;JSONGetElement( $json ; "Text.SQuotTrail" ) ;JSONGetElement( $json ; "Text.Sep" ) ;JSONGetElement( $json ; "Time.12h" ) ;JSONGetElement( $json ; "Time.HMS.0h" ) ;JSONGetElement( $json ; "Time.HMS.24h" ) ;JSONGetElement( $json ; "Time.HMS.Seconds" ) ;JSONGetElement( $json ; "Time.NightDay.12hSuffix" ) ;JSONGetElement( $json ; "Time.NightDay.amStr" ) ;JSONGetElement( $json ; "Time.NightDay.pmStr" ) ;JSONGetElement( $json ; "Time.Sep" ))]]></Text>
-								<ChunkList hash="C8AF98734AC49832C34E720431F48074">
-									<Chunk type="FunctionRef">Liste</Chunk>
-									<Chunk type="NoRef">(&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;APIVers&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Currency.Leading&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Currency.Symbol&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.1stDayOfWeek&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.DaysOfWeek.AbbrvLis&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.DaysOfWeek.NameLis&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.Months.AbbrvLis&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.Months.NameLis&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.Quarters.AbbrvLis&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMQ.Quarters.NameLis&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMY.ElementArray.NameLis&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONListValues</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMY.ElementArray.SepLis&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DMY.MustUseLocalesSep&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DateNums.0d&quot; ) ; /* 1=DD, 0=D // Zero before the day */&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DateNums.0m&quot; ) ; /* 1=MM, 0=M // Zero before the month */&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DateNums.YYyy&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DateOrderID&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.DateOrderName&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Date.Sep&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;LocaleID.IDNum&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;LocaleID.IDStr&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;LocaleID.ISOLangCode&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;LocaleID.LID&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;LocaleID.Name&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Misc.Active&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Misc.Metric&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Num.1000s&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Num.Decimal&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Num.Lead0&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Text.SQuotLead&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Text.SQuotTrail&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Text.Sep&quot; ) ;&#13;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.12h&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.HMS.0h&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.HMS.24h&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.HMS.Seconds&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.NightDay.12hSuffix&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.NightDay.amStr&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.NightDay.pmStr&quot; ) ;&#13;</Chunk>
-									<Chunk type="FunctionRef">JSONGetElement</Chunk>
-									<Chunk type="NoRef">( </Chunk>
-									<Chunk type="VariableReference">$json</Chunk>
-									<Chunk type="NoRef"> ; &quot;Time.Sep&quot; )&#13;&#13;)</Chunk>
-								</ChunkList>
-							</Calculation>
-						</Calculation>
-					</value>
-					<Name value="$$FileLocaleElements_JSONGetElement"></Name>
-					<repetition></repetition>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="13" id="89" name="# (Kommentar)" enable="True">
-			<UUID>DE649B80-C7E7-4EED-815A-7EE4FDFBB6C9</UUID>
-			<OwnerID></OwnerID>
-			<Options>0</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="14" id="89" name="# (Kommentar)" enable="True">
-			<UUID>409DFDD3-199A-4282-AFDF-8EE2774B1D25</UUID>
-			<OwnerID></OwnerID>
-			<Options>1048580</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment value="New in FileMaker 19.1.3"></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="15" id="89" name="# (Kommentar)" enable="True">
-			<UUID>256E2200-FE9E-411B-8B44-06C849418BA1</UUID>
-			<OwnerID></OwnerID>
-			<Options>0</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="16" id="89" name="# (Kommentar)" enable="True">
-			<UUID>838FE5E3-9427-4FED-975A-8D1E88149251</UUID>
-			<OwnerID></OwnerID>
-			<Options>1048580</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment value="New in FileMaker 19.2.1"></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-		<Step index="17" id="89" name="# (Kommentar)" enable="True">
-			<UUID>321913D2-3B2F-4ACB-9E97-AD2E507FC987</UUID>
-			<OwnerID></OwnerID>
-			<Options>0</Options>
-			<ParameterValues membercount="1">
-				<Parameter type="Comment">
-					<Comment></Comment>
-				</Parameter>
-			</ParameterValues>
-		</Step>
-	</ObjectList>
-</Script>

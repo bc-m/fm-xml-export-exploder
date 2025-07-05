@@ -1,0 +1,31 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20160923 MrW SyntaxColorizing for specific FM-Versions
+# 20121101 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# Check MBS
+Script ausführen [ Aus Liste ; "MBS Plugin check" ]
+
+# Clean up, Reset colors
+Script ausführen [ Aus Liste ; "MBS_SyntaxColoring( Action )" ; Parameter: "Clear" & "¶" & 1 ]
+Script ausführen [ Aus Liste ; "Set LineNumber Color" ]
+Script ausführen [ Aus Liste ; "MBS_SyntaxColoring( Action )" ; Parameter: "Enable" ]
+
+# Select the necessary entries
+// Script ausführen [ Aus Liste ; "Show All Syntax" ]
+Script ausführen [ Aus Liste ; "Go to Syntax for given FM-Version" ]
+
+# Apply colors from the current palette
+Wenn [ Syntax.Palette_Active::_k1 = 1 ]
+	Script ausführen [ Aus Liste ; "Change Palette" ]
+Sonst
+	Script ausführen [ Aus Liste ; "Show Default Palette" ]
+	Script ausführen [ Aus Liste ; "Apply Palette" ]
+Ende (wenn)
+
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]

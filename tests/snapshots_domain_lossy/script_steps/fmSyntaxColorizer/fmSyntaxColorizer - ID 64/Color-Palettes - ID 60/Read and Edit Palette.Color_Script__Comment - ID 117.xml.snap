@@ -1,0 +1,296 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="117" name="Read and Edit Palette.Color_Script::Comment"></ScriptReference>
+	<ObjectList membercount="19">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210916 MrW Removed lingering pesky German :D"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121102 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="71" name="Schleife (Anfang)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Immer" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer( Palette.Color_Script::Comment )]]></Text>
+							<ChunkList hash="DF4D682DE3A988DFBBFA751152A8050C">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1">
+										<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Read"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Palette.Color_Script::ColorName]]></Text>
+							<ChunkList hash="E45063A34337483C2574C616C447302D">
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="ColorName" repetition="1">
+										<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Austauschen( Palette.Color_Script::Comment ; "\¶" ; "¶" )]]></Text>
+							<ChunkList hash="8925055EB8459272D208E2BB5A1AF7D2">
+								<Chunk type="FunctionRef">Austauschen</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1">
+										<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ; &quot;\¶&quot; ; &quot;¶&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Edit">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="72" name="Verlasse Schleife wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteMeldungswahl ) = 1]]></Text>
+							<ChunkList hash="8C579970D437A4505D25C8DA36467E6A">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Edit"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Palette.Color_Script::Comment]]></Text>
+								<ChunkList hash="BA4E1D8E4F6D3AE83C7ED5A82F02337F">
+									<Chunk type="FieldRef">
+										<FieldReference id="19" name="Comment" repetition="1">
+											<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Comment"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="6">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["\"" & Palette.Color_Script::ColorName & "\""]]></Text>
+							<ChunkList hash="A62277653636B949F182B12D7B216470">
+								<Chunk type="NoRef">&quot;\&quot;&quot; &amp; </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="ColorName" repetition="1">
+										<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;\&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["You may enter a comment to explain what this entry is about."]]></Text>
+							<ChunkList hash="3BF7D0ABDF9253F6BAC3502AB9056A70">
+								<Chunk type="NoRef">&quot;You may enter a comment to explain what this entry is about.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Field1">
+					<Parameter type="Target">
+						<FieldReference id="19" name="Comment">
+							<repetition value="1"></repetition>
+							<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+						</FieldReference>
+					</Parameter>
+					<Boolean type="Passwort" value="False"></Boolean>
+					<Parameter type="Label">
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA["Comment"]]></Text>
+								<ChunkList hash="26B16D9CEE8EB7A643A9BB508F2E0546">
+									<Chunk type="NoRef">&quot;Comment&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="72" name="Verlasse Schleife wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer( Palette.Color_Script::Comment ) ODER Palette.Color_Script::Comment = $Comment]]></Text>
+							<ChunkList hash="B298DC0DFD4E3CE44F439F900A7DF091">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1">
+										<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) </Chunk>
+								<Chunk type="FunctionRef">ODER</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1">
+										<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="VariableReference">$Comment</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="73" name="Schleife (Ende)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

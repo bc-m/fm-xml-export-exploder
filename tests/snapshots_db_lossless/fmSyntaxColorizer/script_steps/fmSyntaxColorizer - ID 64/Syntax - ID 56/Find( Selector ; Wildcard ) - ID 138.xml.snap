@@ -1,0 +1,452 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="138" name="Find( Selector ; Wildcard )" UUID="4AF26F45-DF1A-475B-A6BF-A57695E21089"></ScriptReference>
+	<ObjectList membercount="33">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2958683D-942B-4EC9-918D-03F864991098</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FD20AD3C-ABAF-4DDF-AD02-BC3547E718DB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121106 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9EA62E1C-869E-476B-880E-F60407567FB9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>C5A15404-0B46-43CF-BA4B-1325975CF5C8</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>F153CCF6-4810-49F5-B30F-B36BA9060423</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5F3742AD-F4BF-444B-9695-1E2685161843</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6DD72A36-E28E-4FE7-B971-FBA9B3DCF674</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Parameter"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="141" name="Variable setzen" enable="True">
+			<UUID>62E4D631-23F8-4697-A312-2CDAFFF5A920</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP( 1 )]]></Text>
+								<ChunkList hash="0833C8A527A8E2C55E64700265CC2606">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">( 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Selector"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="141" name="Variable setzen" enable="True">
+			<UUID>C539518E-D574-4A8C-A5C8-E6481DD73A06</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP( 2 )]]></Text>
+								<ChunkList hash="3E97A989451F3B2649006AB48154DC17">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">( 2 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Wildcard"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4165DB3B-7B22-4F88-832E-63BA3EF5620D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>90C9BFD4-8AFF-4475-BB0D-A2CCD8D8C5BF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Input"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="141" name="Variable setzen" enable="True">
+			<UUID>EC7F0D15-ACA2-4652-BB68-8FAE859624EE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_IsKeyALT]]></Text>
+								<ChunkList hash="D3564FD1BB6794CD7CB442343A26EE95">
+									<Chunk type="CustomFunctionRef">_IsKeyALT</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Filter"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="89" name="# (Kommentar)" enable="True">
+			<UUID>698B053F-BA12-4A51-B888-E7CBF15F779F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>EB81DACE-9ADB-4D82-A6A0-652DF99969E9</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="141" name="Variable setzen" enable="True">
+			<UUID>06E125D4-2499-4B19-9B9B-70F7544C2400</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[ZeichenLinks( $Selector ; 2 ) = "<>" ODER ZeichenLinks( $Selector ; 1 ) = "≠"]]></Text>
+								<ChunkList hash="78E9F99660200E1BEBF9F91CB6A475DE">
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 2 ) = &quot;&lt;&gt;&quot; </Chunk>
+									<Chunk type="FunctionRef">ODER</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 1 ) = &quot;≠&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$ohne"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="141" name="Variable setzen" enable="True">
+			<UUID>1B283B26-58F9-42CD-94CF-52B7D3D7EBAE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls(ZeichenLinks( $Selector ; 2 ) = "<>" ; ZeichenRechts( $Selector ; Länge( $Selector ) - 2 ) ;ZeichenLinks( $Selector ; 1 ) = "≠" ; ZeichenRechts( $Selector ; Länge( $Selector ) - 1 ) ;$Selector)]]></Text>
+								<ChunkList hash="4DD9EC25DCCB12AADADA78DD9CCD17E2">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">(&#13;</Chunk>
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 2 ) = &quot;&lt;&gt;&quot; ; </Chunk>
+									<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Länge</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ) - 2 ) ;&#13;</Chunk>
+									<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; 1 ) = &quot;≠&quot; ; </Chunk>
+									<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Länge</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef"> ) - 1 ) ;&#13;</Chunk>
+									<Chunk type="VariableReference">$Selector</Chunk>
+									<Chunk type="NoRef">&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Selector"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="89" name="# (Kommentar)" enable="True">
+			<UUID>EF0FB67F-4934-4A78-B8BE-0DDF6F9FDE7E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>FFFF3F10-2DE8-41CB-AC2B-13A927E7B634</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="6" name="Syntax" UUID="F17CAF44-B606-4254-AED4-C7F2A12D3521"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="22" name="Suchenmodus aktivieren" enable="True">
+			<UUID>D7D66DE9-8A46-4A9A-8E36-946D03D6A6C7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="19" id="76" name="Feldwert setzen" enable="True">
+			<UUID>992FB0D9-DA16-4908-A1C8-AF1CE89D6A09</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="Selector" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$Selector]]></Text>
+							<ChunkList hash="3A11B6C860E9E0BE0B0C3D52BEB31345">
+								<Chunk type="VariableReference">$Selector</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="76" name="Feldwert setzen" enable="True">
+			<UUID>0202A985-8C7A-4D90-8B19-E40C7A65A261</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="21" name="_kIsWildcard" UUID="527A4D55-F770-4378-927C-EAEC6E5384B1">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$Wildcard]]></Text>
+							<ChunkList hash="E9A4037795AFB795F208913196D8F490">
+								<Chunk type="VariableReference">$Wildcard</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="89" name="# (Kommentar)" enable="True">
+			<UUID>449CC26C-D04A-44F2-8A46-7F783CC8C0F1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="68" name="Wenn" enable="True">
+			<UUID>613D23DC-4B2E-4714-AE07-F41BCD66F683</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$ohne]]></Text>
+							<ChunkList hash="3210F265468AD3664F2100D385C22DA8">
+								<Chunk type="VariableReference">$ohne</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="25" name="Aktuellen Datens. ausschließen" enable="True">
+			<UUID>848881C1-85A5-416B-93C8-500E4CD32976</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="24" id="70" name="Ende (wenn)" enable="True">
+			<UUID>665AE7C1-A9FD-418B-835F-F552966D9D11</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="25" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5CB25F65-6D85-4C3C-872B-FC238E0EF4CD</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="68" name="Wenn" enable="True">
+			<UUID>E62FD8C4-380C-4DD1-99BB-601F964A10A9</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$Filter]]></Text>
+							<ChunkList hash="8FB92A7B033EB04F466C4FE5C1C08FEC">
+								<Chunk type="VariableReference">$Filter</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="126" name="Ergebnismenge einschränken" enable="True">
+			<UUID>96DF74E8-A300-4F24-BD3D-60A5F55FF40F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="28" id="69" name="Sonst" enable="True">
+			<UUID>AD7CEA15-5421-40BF-8FBB-53DD79085BFB</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="29" id="28" name="Ergebnismenge suchen" enable="True">
+			<UUID>5810B9D5-0C9B-48C6-844E-D8973C740DF2</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="30" id="70" name="Ende (wenn)" enable="True">
+			<UUID>F45C773D-C28F-4D99-85FF-42799FB545DB</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="31" id="1" name="Script ausführen" enable="True">
+			<UUID>4F2F8B3A-1992-44A9-8916-D4390399E869</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="87" name="Sort Syntax" UUID="A86CEDE0-8EFC-4932-936F-3B364048DD43"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5AEA1309-096B-42C1-8D53-89C4D6236BC7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

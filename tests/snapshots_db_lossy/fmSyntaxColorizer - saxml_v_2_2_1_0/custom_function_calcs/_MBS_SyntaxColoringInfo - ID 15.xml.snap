@@ -1,82 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="15" name="_MBS_SyntaxColoringInfo"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[SetzeVar([vN = ElementeAnzahl( pTags ) ;vTag = Falls( vN>0 ;HoleWert( pTags ; 1 ) ) ;vRestTags = Falls( vN>1 ; ElementeRechts( pTags ; vN - 1 ) ) ;vTags = Falls( vN=0 ;MBS( "SyntaxColoring.GetTags" ) ) ];Falls( vN = 0 ; Falls( ElementeAnzahl( vTags ) ; _MBS_SyntaxColoringInfo( vTags ) ) ;vTag  & "	" & MBS( "SyntaxColoring.GetTag" ; vTag ) & Falls( vN > 1  UND vRestTags <> "¶" ; "¶" & _MBS_SyntaxColoringInfo( vRestTags ) )))]]></Text>
-		<ChunkList hash="259AB891BD1E722F3E234B1F30CA6A6C">
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">([&#13;</Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">ElementeAnzahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pTags</Chunk>
-			<Chunk type="NoRef"> ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vTag</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef">&gt;0 ;</Chunk>
-			<Chunk type="FunctionRef">HoleWert</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pTags</Chunk>
-			<Chunk type="NoRef"> ; 1 ) ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vRestTags</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef">&gt;1 ; </Chunk>
-			<Chunk type="FunctionRef">ElementeRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pTags</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> - 1 ) ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vTags</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef">=0 ;</Chunk>
-			<Chunk type="FunctionRef">MBS</Chunk>
-			<Chunk type="NoRef">( &quot;SyntaxColoring.GetTags&quot; ) ) &#13;];&#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( &#13;</Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> = 0 ; </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">ElementeAnzahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vTags</Chunk>
-			<Chunk type="NoRef"> ) ; </Chunk>
-			<Chunk type="CustomFunctionRef">_MBS_SyntaxColoringInfo</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vTags</Chunk>
-			<Chunk type="NoRef"> ) ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vTag</Chunk>
-			<Chunk type="NoRef">  &amp; &quot;	&quot; &amp; </Chunk>
-			<Chunk type="FunctionRef">MBS</Chunk>
-			<Chunk type="NoRef">( &quot;SyntaxColoring.GetTag&quot; ; </Chunk>
-			<Chunk type="VariableReference">vTag</Chunk>
-			<Chunk type="NoRef"> ) &amp; &#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> &gt; 1  </Chunk>
-			<Chunk type="FunctionRef">UND</Chunk>
-			<Chunk type="NoRef"> </Chunk>
-			<Chunk type="VariableReference">vRestTags</Chunk>
-			<Chunk type="NoRef"> &lt;&gt; &quot;¶&quot; ; &quot;¶&quot; &amp; </Chunk>
-			<Chunk type="CustomFunctionRef">_MBS_SyntaxColoringInfo</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vRestTags</Chunk>
-			<Chunk type="NoRef"> ) )&#13;))</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

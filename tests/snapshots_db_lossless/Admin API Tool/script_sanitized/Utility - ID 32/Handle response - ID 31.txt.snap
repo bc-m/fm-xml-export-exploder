@@ -1,0 +1,74 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Handle parsing the response, error trapping
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2019-04-23 by Mike Duncan, update to v2 admin api
+
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Variable setzen [ $this.headers ; Austauschen ( $$my.headers ; "HTTP/1.1 100 Continue" & "¶¶" ; "" ) ]
+
+Variable setzen [ $my.response ; Austauschen ( HoleWert ( $this.headers ; 1 ) ; "HTTP/1.1 " ; "" ) ]
+Wenn [ $my.response = "200 OK" ]
+	# refresh token timeout
+	Feldwert setzen [ FMS__fmserver::token_expires ; Hole ( SystemZeitstempel ) + ( 15 * 60 ) ]
+	Wenn [ $$API.UPDATE = 1 ]
+		# check json result
+		Wenn [ JSONGetElement ( $$my.result ; "messages[0].code" ) = "0" ]
+			Variable setzen [ $$UI.MESSAGE ; "Config Saved." ]
+			Layoutobjekt-Animation festlegen [ OFF ]
+			// Gehe zu Objekt [ "stage_left" ]
+			Gehe zu Objekt [ "stage_center" ]
+			Layoutobjekt-Animation festlegen [ ON ]
+			Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+			Popover schließen
+		Ende (wenn)
+	Ende (wenn)
+	
+Sonst, wenn [ $my.response = "401 Unauthorized" ]
+	# try to log in
+	Eigenes Dialogfeld anzeigen [ Title: "Authentication Error" ; Message: "Please Log In. Server Replied: " & $my.response ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Variable setzen [ $error ; "401" ]
+	
+Sonst
+	# error trap
+	Wenn [ ZeichenLinks ( JSONFormatElements ( $$my.result ) ; 1 ) = "?" ]
+		# clear api update variable
+		Variable setzen [ $$API.UPDATE ; "" ]
+		Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "Server Replied: " & $my.response & "¶" &
+						"Invalid JSON response." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Alle Scripts abbrechen
+	Ende (wenn)
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "Server Replied: " & $my.response & "¶" &
+					Falls (
+					 NICHT IstLeer ( JSONGetElement ( $$my.result ; "messages[0]text" ) );
+					 "Error: " & JSONGetElement ( $$my.result ; "messages[0]text" );
+					
+					 ""
+					) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Variable setzen [ $error ; $my.response ]
+	
+Ende (wenn)
+
+# clear api update variable
+Variable setzen [ $$API.UPDATE ; "" ]
+
+Feldwert setzen [ FMS__fmserver::zz_result_g ; $$my.result ]
+Feldwert setzen [ FMS__fmserver::zz_headers_g ; $$my.headers ]
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

@@ -1,0 +1,28 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="13" name="_kIsEnglish" repetition="1" UUID="692265C8-5EFD-43D4-86DA-78B2A2BB678B">
+				<Calculation>
+					<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( Language = "English" ; 1 )]]></Text>
+					<ChunkList hash="853F7A8534BCE058081CE36336DD2EE4">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="Language" repetition="1" UUID="A51CFB85-C505-4883-8F99-4A2F5FAD0BB8">
+								<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = &quot;English&quot; ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

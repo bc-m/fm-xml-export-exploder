@@ -1,0 +1,29 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="25">
+	<UUID modifications="1" userName="Mike Duncan" accountName="Admin" timestamp="2022-12-19T12:20:58">6F5B30C4-4AB7-40E0-95B2-5EF76ABC0B91</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="True" type="Local">
+		<TableOccurrenceReference id="1065118" name="FMS_PUB__publickeys"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="7" name="ID_Server">
+					<TableOccurrenceReference id="1065118" name="FMS_PUB__publickeys"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="1" name="ID">
+					<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

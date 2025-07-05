@@ -1,0 +1,1378 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FMSaveAsXML version="2.2.1.0" Source="20.3.1" File="fmSyntaxColorizer.fmp12" UUID="08115AB3-B156-4BA5-83B5-DEE0F0E1A2A8" locale="German">
+	<Structure membercount="2">
+		<AddAction membercount="18">
+			<BaseDirectoryCatalog membercount="1" generate="True" temporary="True">
+				<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">CBC56630-C4CD-44E5-AEE2-A1D4F9FA1359</UUID>
+				<TagList></TagList>
+				<BaseDirectory name="fmSyntaxColorizer/" id="0" relativeTo="True"></BaseDirectory>
+			</BaseDirectoryCatalog>
+			<ExternalDataSourceCatalog membercount="2">
+				<UUID modifications="12" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-15T12:49:49">ED08A01E-CD1E-4611-8A42-D08069A69391</UUID>
+				<TagList></TagList>
+				<ExternalDataSource name="Self" type="FileMaker" id="2"></ExternalDataSource>
+				<ExternalDataSource name="fm17_ETS" type="FileMaker" id="3"></ExternalDataSource>
+			</ExternalDataSourceCatalog>
+			<BaseTableCatalog membercount="8">
+				<UUID modifications="17" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">5DA826C1-E43B-4258-A324-F31A3894800A</UUID>
+				<BaseTable id="132" name="_Color"></BaseTable>
+				<BaseTable id="133" name="_Syntax"></BaseTable>
+				<BaseTable id="134" name="_GUISyntax"></BaseTable>
+				<BaseTable id="135" name="_Palette"></BaseTable>
+				<BaseTable id="136" name="_Home"></BaseTable>
+				<BaseTable id="137" name="_Language"></BaseTable>
+				<BaseTable id="138" name="_SyntaxTemp"></BaseTable>
+				<BaseTable id="140" name="_MBS_DeveloperOptions"></BaseTable>
+			</BaseTableCatalog>
+			<TableOccurrenceCatalog membercount="46">
+				<UUID modifications="467" userName="R.Watson" accountName="admin" timestamp="2023-03-03T14:16:03">FBDDE5E9-2B92-4DFD-A77A-B119000F53E0</UUID>
+				<TagList></TagList>
+				<TableOccurrenceNotes>
+					<ObjectList membercount="1">
+						<LayoutObject id="3" type="Text" name="" kind="2">
+							<UUID>09185B2B-5622-4DF0-81CC-EAA416E292DB</UUID>
+							<Bounds top="423" left="1036" bottom="458" right="1268"></Bounds>
+							<Options>805306368</Options>
+							<Text>
+								<Options>0</Options>
+								<StyledText>
+									<Data><![CDATA[Internal tables]]></Data>
+								</StyledText>
+							</Text>
+							<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(94.902%,98.0392%,51.3726%,1);
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-family: -fm-font-family(Lucida Grande,LucidaGrande);
+	font-size: 10pt;
+	direction: ;
+	box-shadow: none;
+}
+]]></LocalCSS>
+						</LayoutObject>
+					</ObjectList>
+				</TableOccurrenceNotes>
+				<TableOccurrence viewState="Related" height="-12" id="1065112" name="_Color" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="38" id="1065113" name="_Syntax" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065114" name="_GUISyntax" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="-12" id="1065115" name="_Palette" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="0" id="1065116" name="Syntax.Color" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="12" id="1065117" name="Syntax.GUISyntax" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065118" name="Palette.Color" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065120" name="Palette.Color_toDuplicate" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="12" id="1065121" name="Syntax.Palette.Color_VL" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065122" name="GUISyntax.Syntax" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065123" name="_Home" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065125" name="_Language" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="12" id="1065126" name="Palette.Color_Script" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="12" id="1065127" name="Palette.Color_Formula" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065128" name="Color.Palette_byID" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065130" name="Color.Palette_byName" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065131" name="Syntax.Palette_Active" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065133" name="Home.Syntax_ALL" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="12" id="1065134" name="Color.Syntax" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065136" name="Palette.Palette_SameName" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="12" id="1065137" name="Color.Color_CountPalettes" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065138" name="Color.Palette_all" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="0" id="1065139" name="Syntax.Color_specific_to_Palette" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="0" id="1065140" name="Syntax.Color_InActivePaletteByCommand" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="0" id="1065141" name="Syntax.Color_active" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="24" id="1065142" name="Color.Syntax_byCommand" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="12" id="1065145" name="Palette.Color_OnlyPaletteSpecificColors" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="84" id="1065146" name="Home.Syntax.Palette_Active" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="84" id="1065147" name="Home.Syntax_ALL.GUISyntax" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065148" name="_SyntaxTemp" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="12" id="1065149" name="Syntax.Color_InAnyPaletteByCommand" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="36" id="1065151" name="Syntax.Filter_FmVersion" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="74" id="1065152" name="_MBS_DeveloperOptions" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="72" id="1065153" name="Home.MBS_DeveloperOptions" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="48" id="1065154" name="Syntax.Syntax_CommandStub" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065155" name="Home.Syntax_Dynamic1" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065156" name="Home.Syntax_Dynamic2" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065157" name="Home.Syntax_Dynamic3" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065158" name="Home.Syntax_Dynamic4" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="36" id="1065159" name="Home.Syntax_Dynamic1.Palette.Color_VL" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065160" name="Home.Syntax_Dynamic2.Palette.Color_VL" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065161" name="Home.Syntax_Dynamic3.Palette.Color_VL" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Collapse" height="38" id="1065162" name="Home.Syntax_Dynamic4.Palette.Color_VL" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="38" id="1065163" name="GUISyntax.Self_EN" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="74" id="1065164" name="MBS_DeveloperOptions.Self_Renumber" type="Local"></TableOccurrence>
+				<TableOccurrence viewState="Related" height="38" id="1065166" name="Palette.Palette_SwitchDarkLight" type="Local"></TableOccurrence>
+			</TableOccurrenceCatalog>
+			<CustomFunctionsCatalog membercount="41">
+				<UUID modifications="59" userName="R.Watson" accountName="admin" timestamp="2021-09-24T09:46:19">C368A628-0224-4B25-ABDD-16E892ADEA69</UUID>
+				<TagList></TagList>
+				<ObjectList membercount="41">
+					<CustomFunction id="2" name="_0x" access="All"></CustomFunction>
+					<CustomFunction id="3" name="_Bookmark" access="All"></CustomFunction>
+					<CustomFunction id="4" name="_BookmarkStandard" access="All"></CustomFunction>
+					<CustomFunction id="5" name="_IsKeyALT" access="All"></CustomFunction>
+					<CustomFunction id="6" name="_IsKeyCAPS" access="All"></CustomFunction>
+					<CustomFunction id="7" name="_IsKeyCMDWIN" access="All"></CustomFunction>
+					<CustomFunction id="8" name="_IsKeyCTRL" access="All"></CustomFunction>
+					<CustomFunction id="9" name="_IsKeySHIFT" access="All"></CustomFunction>
+					<CustomFunction id="10" name="_IsMAC" access="All"></CustomFunction>
+					<CustomFunction id="11" name="_IsRUNTIME" access="All"></CustomFunction>
+					<CustomFunction id="12" name="_SP" access="All"></CustomFunction>
+					<CustomFunction id="13" name="_SR" access="All"></CustomFunction>
+					<CustomFunction id="14" name="_IsWIN" access="All"></CustomFunction>
+					<CustomFunction id="15" name="_MBS_SyntaxColoringInfo" access="All"></CustomFunction>
+					<CustomFunction id="16" name="_UUID" access="All"></CustomFunction>
+					<CustomFunction id="18" name="_Hex" access="All"></CustomFunction>
+					<CustomFunction id="19" name="_HexF" access="All"></CustomFunction>
+					<CustomFunction id="21" name="_GetFieldsTableName" access="All"></CustomFunction>
+					<CustomFunction id="22" name="_GetTableName" access="All"></CustomFunction>
+					<CustomFunction id="23" name="_IsLayoutTableName" access="All"></CustomFunction>
+					<CustomFunction id="24" name="Test" access="All"></CustomFunction>
+					<CustomFunction id="26" name="_AppVersion" access="All"></CustomFunction>
+					<CustomFunction id="27" name="_FileMakerExtension" access="All"></CustomFunction>
+					<CustomFunction id="28" name="_TrimWS" access="All"></CustomFunction>
+					<CustomFunction id="29" name="_ExtractColorAsJavascriptRGB" access="All"></CustomFunction>
+					<CustomFunction id="30" name="_FullBlock" access="All"></CustomFunction>
+					<CustomFunction id="31" name="_FullBlockDropColor" access="All"></CustomFunction>
+					<CustomFunction id="32" name="_IsFullAccessUser" access="All"></CustomFunction>
+					<CustomFunction id="33" name="_Plugin" access="All"></CustomFunction>
+					<CustomFunction id="34" name="_Default" access="All"></CustomFunction>
+					<CustomFunction id="35" name="_IsFrontObject" access="All"></CustomFunction>
+					<CustomFunction id="36" name="_Label" access="All"></CustomFunction>
+					<CustomFunction id="37" name="_SPDecode" access="All"></CustomFunction>
+					<CustomFunction id="38" name="_SPEncode" access="All"></CustomFunction>
+					<CustomFunction id="39" name="_FMVersionNr" access="All"></CustomFunction>
+					<CustomFunction id="40" name="_TextBetween" access="All"></CustomFunction>
+					<CustomFunction id="41" name="_BeginsWith" access="All"></CustomFunction>
+					<CustomFunction id="42" name="_EndsWith" access="All"></CustomFunction>
+					<CustomFunction id="43" name="_ColorHex" access="All"></CustomFunction>
+					<CustomFunction id="46" name="_TextGetRRGGBB" access="All"></CustomFunction>
+					<CustomFunction id="47" name="_IsDarkMode" access="All"></CustomFunction>
+				</ObjectList>
+			</CustomFunctionsCatalog>
+			<FieldsForTables membercount="8">
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="137" name="_Language" UUID="DDFCA42A-3F9C-4F7D-914E-A1010F573F8F"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="138" name="_SyntaxTemp" UUID="F7B2B383-0654-4F30-9C5D-E66CF3A480DA"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+				</FieldCatalog>
+			</FieldsForTables>
+			<ValueListCatalog membercount="17">
+				<UUID modifications="38" userName="R.Watson" accountName="admin" timestamp="2021-09-23T21:53:14">050B680B-1B3A-4240-945B-2AE6262A935E</UUID>
+				<TagList></TagList>
+				<ValueList id="1" name="Colors"></ValueList>
+				<ValueList id="2" name="1"></ValueList>
+				<ValueList id="3" name="Palettes"></ValueList>
+				<ValueList id="5" name="Languages"></ValueList>
+				<ValueList id="6" name="Languages.Sort"></ValueList>
+				<ValueList id="8" name="Selector"></ValueList>
+				<ValueList id="9" name="Syntax entry"></ValueList>
+				<ValueList id="10" name="_Syntax::FM Version"></ValueList>
+				<ValueList id="11" name="MBS.Checkboxes"></ValueList>
+				<ValueList id="12" name="Colors for Dynamic1"></ValueList>
+				<ValueList id="13" name="Colors for Dynamic2"></ValueList>
+				<ValueList id="14" name="Colors for Dynamic3"></ValueList>
+				<ValueList id="15" name="Colors for Dynamic4"></ValueList>
+				<ValueList id="16" name="Font Size"></ValueList>
+				<ValueList id="18" name="Relationship Search Box Width"></ValueList>
+				<ValueList id="19" name="Collection"></ValueList>
+				<ValueList id="20" name="0,1"></ValueList>
+			</ValueListCatalog>
+			<RelationshipCatalog membercount="38">
+				<UUID modifications="79" userName="R.Watson" accountName="admin" timestamp="2021-09-24T09:38:25">1BC77BB2-004D-4676-A051-CF82FDBA0242</UUID>
+				<Relationship id="17"></Relationship>
+				<Relationship id="18"></Relationship>
+				<Relationship id="19"></Relationship>
+				<Relationship id="21"></Relationship>
+				<Relationship id="22"></Relationship>
+				<Relationship id="23"></Relationship>
+				<Relationship id="25"></Relationship>
+				<Relationship id="26"></Relationship>
+				<Relationship id="27"></Relationship>
+				<Relationship id="28"></Relationship>
+				<Relationship id="29"></Relationship>
+				<Relationship id="30"></Relationship>
+				<Relationship id="31"></Relationship>
+				<Relationship id="32"></Relationship>
+				<Relationship id="35"></Relationship>
+				<Relationship id="36"></Relationship>
+				<Relationship id="37"></Relationship>
+				<Relationship id="38"></Relationship>
+				<Relationship id="39"></Relationship>
+				<Relationship id="40"></Relationship>
+				<Relationship id="43"></Relationship>
+				<Relationship id="44"></Relationship>
+				<Relationship id="45"></Relationship>
+				<Relationship id="46"></Relationship>
+				<Relationship id="47"></Relationship>
+				<Relationship id="48"></Relationship>
+				<Relationship id="49"></Relationship>
+				<Relationship id="50"></Relationship>
+				<Relationship id="51"></Relationship>
+				<Relationship id="52"></Relationship>
+				<Relationship id="53"></Relationship>
+				<Relationship id="54"></Relationship>
+				<Relationship id="55"></Relationship>
+				<Relationship id="56"></Relationship>
+				<Relationship id="57"></Relationship>
+				<Relationship id="58"></Relationship>
+				<Relationship id="59"></Relationship>
+				<Relationship id="61"></Relationship>
+			</RelationshipCatalog>
+			<CalcsForCustomFunctions membercount="41">
+				<ObjectList membercount="41">
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="2" name="_0x" UUID="4BFC88F2-EF5E-40E2-8F43-47C0D947C365"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="3" name="_Bookmark" UUID="E7F707B0-9229-4F85-A02D-2F9F990072A8"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="4" name="_BookmarkStandard" UUID="8FF3C22B-35BE-4964-B5B6-0CB6356C6C29"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="5" name="_IsKeyALT" UUID="B00D88BC-77B8-44A6-886A-A5AD77DB2FEF"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="6" name="_IsKeyCAPS" UUID="04F1BF39-DD32-4612-8450-89C500CA5576"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="7" name="_IsKeyCMDWIN" UUID="46BEDD8C-88C5-4E96-A3B7-2DCABDA418DF"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="8" name="_IsKeyCTRL" UUID="8DB3BF45-25AA-4251-A5E3-22937FEF7014"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="9" name="_IsKeySHIFT" UUID="DEF9393E-24EE-4A33-99D7-EA75EE527A0E"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="10" name="_IsMAC" UUID="677B3AC5-A294-4BCE-A828-F2581C34EBCD"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="11" name="_IsRUNTIME" UUID="743AB5C5-B293-442B-BF4D-6254F1EB5A8E"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="12" name="_SP" UUID="2515B3CA-8BCE-4200-9962-9C2BFB5D14BF"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="13" name="_SR" UUID="53E76A0E-BF91-43D8-9740-D179DE0BD7C4"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="14" name="_IsWIN" UUID="B2695CCC-E9AB-4222-98CB-B2B79975EE35"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="15" name="_MBS_SyntaxColoringInfo" UUID="A6EE67F1-83C6-44CF-A81C-08DA2D5A51C7"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="16" name="_UUID" UUID="A7F53C9D-870A-48C1-8C9E-92CE232A31EF"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="18" name="_Hex" UUID="EB84C840-E38F-40FF-AACC-8EBEF71068C7"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="19" name="_HexF" UUID="BEEA2058-6F77-49A5-B5EC-8F097C7C22F9"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="21" name="_GetFieldsTableName" UUID="B4021738-82D7-403A-896A-B0A1439AC669"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="22" name="_GetTableName" UUID="91293456-845D-4BC8-BF49-435878838A49"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="23" name="_IsLayoutTableName" UUID="2A26C0A6-E9B2-42B1-967B-FBB4E3639F1F"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="24" name="Test" UUID="D3D660C2-033B-4FE9-A692-A5DAA9324FB6"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="26" name="_AppVersion" UUID="3F56F465-81F5-4255-8839-ED896517FDD0"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="27" name="_FileMakerExtension" UUID="88A842F9-728F-458A-86F8-B4B36BB39026"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="28" name="_TrimWS" UUID="E13E2128-3895-4935-A36B-C785C236BA1E"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="29" name="_ExtractColorAsJavascriptRGB" UUID="6C7AC79E-B847-4E1B-A272-F00D07B61CB0"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="30" name="_FullBlock" UUID="55B0A833-ED53-4D91-B557-88D1E10E60DD"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="31" name="_FullBlockDropColor" UUID="92D565AA-3954-4E84-90ED-F6674F22AF44"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="32" name="_IsFullAccessUser" UUID="7A79F18F-65DC-4C04-B638-5E1DB505A711"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="33" name="_Plugin" UUID="E9F073BA-2C3B-4087-BF31-6C21A12DF0D0"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="34" name="_Default" UUID="568CE75A-F7E3-4AF5-9A3D-4FDEF1391786"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="35" name="_IsFrontObject" UUID="7CC77A2F-5BD9-417B-93DC-AEB5D99A08E9"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="36" name="_Label" UUID="6976E631-C70B-40BB-9E66-5A485D888900"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="37" name="_SPDecode" UUID="F6D1420B-AE87-4409-945F-D947F073A90E"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="38" name="_SPEncode" UUID="848132CB-1660-4134-8917-B4F45C648032"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="39" name="_FMVersionNr" UUID="7D760201-630D-40D7-9E46-12679370AA3C"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="40" name="_TextBetween" UUID="29DB9719-2738-4C88-90B5-D16410C0BE33"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="41" name="_BeginsWith" UUID="68BCF67C-D2F7-450F-9322-32F79E5325F2"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="42" name="_EndsWith" UUID="CBE86D33-81CC-4905-B7E5-8D502A23EAE8"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="43" name="_ColorHex" UUID="99349772-3D68-454C-A343-4C74A882ACF9"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="46" name="_TextGetRRGGBB" UUID="A4F6437F-5B74-453F-9A22-4074C78A0E9C"></CustomFunctionReference>
+					</CustomFunctionCalc>
+					<CustomFunctionCalc>
+						<CustomFunctionReference id="47" name="_IsDarkMode" UUID="AF838C74-239E-487C-9DC8-0E9616886DF2"></CustomFunctionReference>
+					</CustomFunctionCalc>
+				</ObjectList>
+			</CalcsForCustomFunctions>
+			<ScriptCatalog membercount="198">
+				<UUID modifications="3013" userName="R.Watson" accountName="admin" timestamp="2023-03-03T14:42:02">3CF094E3-3E11-4672-9716-EA556E56A2B9</UUID>
+				<TagList></TagList>
+				<Script id="27" name="### 20230303 @mrwatson-de v1.13 ###"></Script>
+				<Script id="46" name="Example SyntaxColorizing" isFolder="True"></Script>
+				<Script id="145" name="A typical script"></Script>
+				<Script id="9" name="All script steps"></Script>
+				<Script id="151" name="All script steps sorted by ID"></Script>
+				<Script id="218" name="All script steps sorted in English"></Script>
+				<Script id="219" name="All script steps sorted in Italian"></Script>
+				<Script id="11" name="All script steps and all options"></Script>
+				<Script id="201" name="Hello::World"></Script>
+				<Script id="217" name="Undefined variables"></Script>
+				<Script id="197" name="New functionality reference" isFolder="True"></Script>
+				<Script id="199" name="Script steps" isFolder="True"></Script>
+				<Script id="146" name="fm12 script steps"></Script>
+				<Script id="152" name="fm13 script steps"></Script>
+				<Script id="164" name="fm14 script steps"></Script>
+				<Script id="165" name="fm15 script steps"></Script>
+				<Script id="166" name="fm15 changed script steps"></Script>
+				<Script id="176" name="fm16 script steps"></Script>
+				<Script id="192" name="fm17 script steps"></Script>
+				<Script id="193" name="fm18 script steps"></Script>
+				<Script id="222" name="fm19 script steps"></Script>
+				<Script id="200" name="--" isFolder="Marker"></Script>
+				<Script id="183" name="Functions" isFolder="True"></Script>
+				<Script id="167" name="fm14 functions"></Script>
+				<Script id="168" name="fm15 functions "></Script>
+				<Script id="194" name="fm16 functions"></Script>
+				<Script id="195" name="fm17 functions"></Script>
+				<Script id="196" name="fm18 functions"></Script>
+				<Script id="235" name="fm19 functions"></Script>
+				<Script id="154" name="Functions"></Script>
+				<Script id="184" name="--" isFolder="Marker"></Script>
+				<Script id="198" name="--" isFolder="Marker"></Script>
+				<Script id="54" name="-" isSeparatorItem="True"></Script>
+				<Script id="174" name="Custom scripts" isFolder="True"></Script>
+				<Script id="52" name="Custom script 1"></Script>
+				<Script id="102" name="Custom script 2"></Script>
+				<Script id="103" name="Custom script 3"></Script>
+				<Script id="104" name="Custom script 4"></Script>
+				<Script id="105" name="Custom script 5"></Script>
+				<Script id="175" name="--" isFolder="Marker"></Script>
+				<Script id="47" name="--" isFolder="Marker"></Script>
+				<Script id="64" name="fmSyntaxColorizer" isFolder="True"></Script>
+				<Script id="203" name="Modules" isFolder="True"></Script>
+				<Script id="238" name="fmIDE Module" isFolder="True"></Script>
+				<Script id="239" name="fmIDE public api" isFolder="True"></Script>
+				<Script id="240" name="fmIDE"></Script>
+				<Script id="241" name="--" isFolder="Marker"></Script>
+				<Script id="242" name="--" isFolder="Marker"></Script>
+				<Script id="204" name="--" isFolder="Marker"></Script>
+				<Script id="97" name="System" isFolder="True"></Script>
+				<Script id="23" name="OnFirstWindowOpen"></Script>
+				<Script id="130" name="StartSession"></Script>
+				<Script id="37" name="Install Menus"></Script>
+				<Script id="36" name="OnLastWindowClose"></Script>
+				<Script id="99" name="-" isSeparatorItem="True"></Script>
+				<Script id="148" name="Set LastMessageChoice( Nr )"></Script>
+				<Script id="95" name="HALT on Windows"></Script>
+				<Script id="96" name="HALT if not browse mode"></Script>
+				<Script id="155" name="Empty Script"></Script>
+				<Script id="191" name="Close Popover"></Script>
+				<Script id="98" name="--" isFolder="Marker"></Script>
+				<Script id="19" name="Navi" isFolder="True"></Script>
+				<Script id="34" name="Home BTN"></Script>
+				<Script id="156" name="Home Info BTN"></Script>
+				<Script id="20" name="Logo BTN"></Script>
+				<Script id="21" name="Logo open URL"></Script>
+				<Script id="225" name="Open repo BTN"></Script>
+				<Script id="171" name="Omit RecordNav BTN"></Script>
+				<Script id="22" name="--" isFolder="Marker"></Script>
+				<Script id="58" name="Buttonbar" isFolder="True"></Script>
+				<Script id="39" name="View"></Script>
+				<Script id="80" name="New"></Script>
+				<Script id="40" name="All"></Script>
+				<Script id="76" name="Delete"></Script>
+				<Script id="84" name="Duplicate"></Script>
+				<Script id="129" name="-" isSeparatorItem="True"></Script>
+				<Script id="121" name="Comment Column i-Header"></Script>
+				<Script id="59" name="--" isFolder="Marker"></Script>
+				<Script id="28" name="Admin Menu" isFolder="True"></Script>
+				<Script id="29" name="Toggle Toolbar"></Script>
+				<Script id="147" name="Halt Script"></Script>
+				<Script id="30" name="-" isSeparatorItem="True"></Script>
+				<Script id="31" name="Prepare Release"></Script>
+				<Script id="149" name="Open Scripts"></Script>
+				<Script id="157" name="Postpare Release"></Script>
+				<Script id="158" name="Hard sort Syntax"></Script>
+				<Script id="185" name="Resort Syntax"></Script>
+				<Script id="150" name="-" isSeparatorItem="True"></Script>
+				<Script id="48" name="Close File"></Script>
+				<Script id="110" name="GRR Colors"></Script>
+				<Script id="111" name="GRR GUI-Syntax"></Script>
+				<Script id="32" name="--" isFolder="Marker"></Script>
+				<Script id="67" name="Help Menu" isFolder="True"></Script>
+				<Script id="68" name="Application Help"></Script>
+				<Script id="69" name="-" isSeparatorItem="True"></Script>
+				<Script id="70" name="Send Feedback"></Script>
+				<Script id="71" name="-" isSeparatorItem="True"></Script>
+				<Script id="72" name="About this Application…"></Script>
+				<Script id="73" name="--" isFolder="Marker"></Script>
+				<Script id="44" name="MBS" isFolder="True"></Script>
+				<Script id="35" name="MBS Logo BTN"></Script>
+				<Script id="42" name="MBS Plugin check"></Script>
+				<Script id="41" name="MBS_SyntaxColoring( Action )"></Script>
+				<Script id="144" name="MBS_SetSyntaxColoringEnabledStatus"></Script>
+				<Script id="178" name="MBS_DeveloperTools Init"></Script>
+				<Script id="179" name="MBS_DeveloperTools All"></Script>
+				<Script id="180" name="MBS_DeveloperTools One"></Script>
+				<Script id="107" name="WWW" isFolder="True"></Script>
+				<Script id="109" name="MonkeyBreadSoftware"></Script>
+				<Script id="106" name="MBS Filemaker Plugin"></Script>
+				<Script id="38" name="MBS Filemaker Plugin Documentation"></Script>
+				<Script id="108" name="--" isFolder="Marker"></Script>
+				<Script id="45" name="--" isFolder="Marker"></Script>
+				<Script id="50" name="-" isSeparatorItem="True"></Script>
+				<Script id="89" name="Home" isFolder="True"></Script>
+				<Script id="140" name="Go to Home Layout"></Script>
+				<Script id="66" name="Prepare Home Screen"></Script>
+				<Script id="236" name="Switch active palette between Dark/Light mode automatically"></Script>
+				<Script id="126" name="-" isSeparatorItem="True"></Script>
+				<Script id="88" name="Colorize!"></Script>
+				<Script id="153" name="Set LineNumber Color"></Script>
+				<Script id="163" name="Home_Midimised"></Script>
+				<Script id="189" name="Set Home Screen Info to content of ( Object )"></Script>
+				<Script id="234" name="Clear Home Info"></Script>
+				<Script id="90" name="--" isFolder="Marker"></Script>
+				<Script id="56" name="Syntax" isFolder="True"></Script>
+				<Script id="124" name="Prepare Syntax"></Script>
+				<Script id="173" name="Go to Syntax for given FM-Version"></Script>
+				<Script id="125" name="-" isSeparatorItem="True"></Script>
+				<Script id="63" name="OnObjectModify ColorName #T#"></Script>
+				<Script id="83" name="OnObjectModify _gID_ActivePalette #T#"></Script>
+				<Script id="128" name="-" isSeparatorItem="True"></Script>
+				<Script id="122" name="BTN Sort Syntax"></Script>
+				<Script id="87" name="Sort Syntax"></Script>
+				<Script id="159" name="Renumber ALL Syntax"></Script>
+				<Script id="91" name="Show All Syntax"></Script>
+				<Script id="138" name="Find( Selector ; Wildcard )"></Script>
+				<Script id="172" name="Filter FM-Version"></Script>
+				<Script id="114" name="Duplicate Syntax"></Script>
+				<Script id="115" name="-" isSeparatorItem="True"></Script>
+				<Script id="43" name="Change Palette"></Script>
+				<Script id="55" name="Refresh all"></Script>
+				<Script id="53" name="Add all"></Script>
+				<Script id="62" name="Remove all"></Script>
+				<Script id="49" name="Open Script Editor"></Script>
+				<Script id="116" name="Read and Edit Syntax Comment"></Script>
+				<Script id="143" name="-" isSeparatorItem="True"></Script>
+				<Script id="141" name="Export Syntax-Tags"></Script>
+				<Script id="142" name="Import Syntax-Tags"></Script>
+				<Script id="161" name="SyntaxTemp" isFolder="True"></Script>
+				<Script id="160" name="Tidy up _SyntaxTemp"></Script>
+				<Script id="162" name="--" isFolder="Marker"></Script>
+				<Script id="57" name="--" isFolder="Marker"></Script>
+				<Script id="227" name="Syntax-Collections" isFolder="True"></Script>
+				<Script id="226" name="Collection Filter this collection"></Script>
+				<Script id="228" name="--" isFolder="Marker"></Script>
+				<Script id="60" name="Color-Palettes" isFolder="True"></Script>
+				<Script id="85" name="OnObjectModify _kIsActivePalette #T#"></Script>
+				<Script id="86" name="OnEnterObject PaletteName #T#"></Script>
+				<Script id="127" name="-" isSeparatorItem="True"></Script>
+				<Script id="113" name="Show Default Palette"></Script>
+				<Script id="224" name="Show Current Palette"></Script>
+				<Script id="77" name="Set Palette as Default"></Script>
+				<Script id="75" name="Apply Palette"></Script>
+				<Script id="33" name="Duplicate Palette"></Script>
+				<Script id="51" name="Set Color( Field )"></Script>
+				<Script id="223" name="Show Color Help"></Script>
+				<Script id="229" name="-" isSeparatorItem="True"></Script>
+				<Script id="81" name="Export Color-Palettes"></Script>
+				<Script id="82" name="Import Color-Palettes"></Script>
+				<Script id="117" name="Read and Edit Palette.Color_Script::Comment"></Script>
+				<Script id="123" name="Read and Edit Palette.Color_Formula::Comment"></Script>
+				<Script id="61" name="--" isFolder="Marker"></Script>
+				<Script id="118" name="Colors" isFolder="True"></Script>
+				<Script id="120" name="Prepare Colors"></Script>
+				<Script id="119" name="--" isFolder="Marker"></Script>
+				<Script id="93" name="GUI-Syntax" isFolder="True"></Script>
+				<Script id="100" name="Prepare GUI-Syntax"></Script>
+				<Script id="112" name="Delete orphaned and empty GUI-Syntax entries"></Script>
+				<Script id="92" name="Show All GUI-Syntax"></Script>
+				<Script id="202" name="Import Column 5 from en fmXRaySelf"></Script>
+				<Script id="94" name="--" isFolder="Marker"></Script>
+				<Script id="230" name="MBS-Developer-Options" isFolder="True"></Script>
+				<Script id="221" name="MBS-Developer-Options Renumber"></Script>
+				<Script id="231" name="--" isFolder="Marker"></Script>
+				<Script id="186" name="Common functions" isFolder="True"></Script>
+				<Script id="188" name="Windows User Comiserations"></Script>
+				<Script id="190" name="OnEnterTextField open URL #T#"></Script>
+				<Script id="187" name="--" isFolder="Marker"></Script>
+				<Script id="78" name="In Devel" isFolder="True"></Script>
+				<Script id="139" name="Allow Formatting Bar ( 0/1 )"></Script>
+				<Script id="79" name="--" isFolder="Marker"></Script>
+				<Script id="232" name="Scripts for Buttons" isFolder="True"></Script>
+				<Script id="243" name="Re-Login"></Script>
+				<Script id="233" name="--" isFolder="Marker"></Script>
+				<Script id="237" name="Mode Change ( Event )"></Script>
+				<Script id="65" name="--" isFolder="Marker"></Script>
+				<Script id="101" name="-" isSeparatorItem="True"></Script>
+			</ScriptCatalog>
+			<ThemeCatalog membercount="2">
+				<UUID modifications="11" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-15T15:08:59">9796E984-DD92-431F-AEF6-F668030F32B7</UUID>
+				<TagList></TagList>
+				<Theme Display="Classic" Group="Basic" version="6" locale="en" platform="1" name="com.filemaker.theme.classic" id="1"></Theme>
+				<Theme Display="Minimalist" Group="Custom" version="6" locale="en" platform="1" name="com.filemaker.theme.custom.C46979BA_0E3F_406B_83C3_2921421FD910" baseName="com.filemaker.theme.minimalist" baseVersion="6" id="3"></Theme>
+			</ThemeCatalog>
+			<LayoutCatalog membercount="23">
+				<UUID modifications="2761" userName="Rus Master" accountName="admin" timestamp="2021-12-08T14:10:58">261B2A69-7625-4F68-BFDC-D9F155A1464A</UUID>
+				<TagList></TagList>
+				<Layout id="9" name="Home" width="1146"></Layout>
+				<Layout id="25" name="Home_Info" width="1116"></Layout>
+				<Layout id="35" name="Home_Minimised" width="293"></Layout>
+				<Layout id="14" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="6" name="Syntax" width="1131"></Layout>
+				<Layout id="8" name="Palettes" width="1116"></Layout>
+				<Layout id="5" name="Colors" width="1017"></Layout>
+				<Layout id="15" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="7" name="GUISyntax" width="973"></Layout>
+				<Layout id="12" name="Languages" width="742"></Layout>
+				<Layout id="17" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="32" name="A Import Palettes" width="1104"></Layout>
+				<Layout id="13" name="A About" width="223"></Layout>
+				<Layout id="22" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="30" name="Internal" isFolder="True"></Layout>
+				<Layout id="16" name="I_Duplicate_Palette" width="590"></Layout>
+				<Layout id="37" name="I_Palette" width="590"></Layout>
+				<Layout id="24" name="-" width="1024" isSeparatorItem="True"></Layout>
+				<Layout id="36" name="MBS-DeveloperOptions" width="1024"></Layout>
+				<Layout id="23" name="I_Syntax_ADMIN" width="1255"></Layout>
+				<Layout id="34" name="I_SyntaxTemp ADMIN" width="513"></Layout>
+				<Layout id="20" name="I Home ADMIN" width="1116"></Layout>
+				<Layout id="31" name="--" isFolder="Marker"></Layout>
+			</LayoutCatalog>
+			<PrivilegeSetsCatalog membercount="4">
+				<UUID modifications="24" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-25T22:25:53">EF42DDED-143E-44CB-940F-695D6E82AB30</UUID>
+				<TagList></TagList>
+				<ObjectList membercount="4">
+					<PrivilegeSet id="1" name="[Voller Zugriff]"></PrivilegeSet>
+					<PrivilegeSet id="2" name="[Nur Dateneingabe]"></PrivilegeSet>
+					<PrivilegeSet id="3" name="[Nur Lesezugriff]"></PrivilegeSet>
+					<PrivilegeSet id="4" name="USER"></PrivilegeSet>
+				</ObjectList>
+			</PrivilegeSetsCatalog>
+			<ExtendedPrivilegesCatalog membercount="11">
+				<UUID modifications="34" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-25T22:25:53">5F0F18C8-089B-41C7-A10C-8457D69954A4</UUID>
+				<ObjectList membercount="11">
+					<ExtendedPrivilege id="1" name="fmiwp"></ExtendedPrivilege>
+					<ExtendedPrivilege id="2" name="fmxdbc"></ExtendedPrivilege>
+					<ExtendedPrivilege id="3" name="fmapp"></ExtendedPrivilege>
+					<ExtendedPrivilege id="5" name="fmxml"></ExtendedPrivilege>
+					<ExtendedPrivilege id="7" name="fmphp"></ExtendedPrivilege>
+					<ExtendedPrivilege id="8" name="fmwebdirect"></ExtendedPrivilege>
+					<ExtendedPrivilege id="9" name="fmreauthenticate10"></ExtendedPrivilege>
+					<ExtendedPrivilege id="11" name="fmextscriptaccess"></ExtendedPrivilege>
+					<ExtendedPrivilege id="12" name="fmurlscript"></ExtendedPrivilege>
+					<ExtendedPrivilege id="13" name="fmrest"></ExtendedPrivilege>
+					<ExtendedPrivilege id="14" name="fmodata"></ExtendedPrivilege>
+				</ObjectList>
+			</ExtendedPrivilegesCatalog>
+			<AccountsCatalog membercount="3">
+				<UUID modifications="11" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">EA9623DD-30F5-4696-9A4B-BB1F53D3B209</UUID>
+				<Options>1</Options>
+				<ObjectList membercount="3">
+					<Account id="1" kind="0" type="FileMaker" enable="False"></Account>
+					<Account id="2" kind="0" type="FileMaker" enable="True"></Account>
+					<Account id="3" kind="0" type="FileMaker" enable="True"></Account>
+				</ObjectList>
+			</AccountsCatalog>
+			<StepsForScripts membercount="128">
+				<Script>
+					<ScriptReference id="27" name="### 20230303 @mrwatson-de v1.13 ###" UUID="23C51521-1E7C-4CD7-A87D-B6661C79128F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="145" name="A typical script" UUID="768AD907-DA09-413B-A837-0AD8B4775746"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="9" name="All script steps" UUID="CF0BB63B-BC01-4B04-99A9-AA128E2ED183"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="151" name="All script steps sorted by ID" UUID="37C789DE-CFBA-4B3D-BCE7-02A08DBB59CB"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="218" name="All script steps sorted in English" UUID="12EA12D2-9E33-45B0-A05E-7B2D1C1ACD6E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="219" name="All script steps sorted in Italian" UUID="11E752E9-B567-4197-B95C-FFC32FD361F4"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="11" name="All script steps and all options" UUID="8F7D7EB6-7A93-47B5-B5AF-F1C595901AAD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="201" name="Hello::World" UUID="57251882-59CD-455B-8A2F-3DE70C6F6CE5"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="217" name="Undefined variables" UUID="E9A609B2-A5DC-4FD4-A369-C3BA6C09D076"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="146" name="fm12 script steps" UUID="2961DC1D-9D50-4427-857B-83AA76DB5929"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="152" name="fm13 script steps" UUID="4116BC39-8EC9-4800-B13A-2E65B446C948"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="164" name="fm14 script steps" UUID="9AE120D8-D29C-4542-A8CE-DF0B266151C0"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="165" name="fm15 script steps" UUID="B5C33012-60B3-4B78-A3D6-8958E37E84B5"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="166" name="fm15 changed script steps" UUID="7B18826D-4B77-4246-9BBA-83224B7406EF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="176" name="fm16 script steps" UUID="25016C4D-8930-48B8-B178-5437B741CCE6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="192" name="fm17 script steps" UUID="C65E81AE-6411-4A77-8F64-AD4AE62FD728"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="193" name="fm18 script steps" UUID="487C85E7-B4A9-44D1-8F44-16C3B79E04CB"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="222" name="fm19 script steps" UUID="B20760A1-0A4C-447F-B3A0-6017226CC5AD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="167" name="fm14 functions" UUID="D4E307B1-21DB-4D8C-9E56-764A2310ADF8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="168" name="fm15 functions " UUID="709F6EEE-DA81-4218-853D-61E4760D3B11"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="194" name="fm16 functions" UUID="9386050C-EEBE-43CE-A0E1-EEEFB3DBDEEF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="195" name="fm17 functions" UUID="E2D5C35D-DCEB-46BC-9527-948318279C21"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="196" name="fm18 functions" UUID="C8A08DEC-6613-4C29-8E67-EADFCAEA2531"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="235" name="fm19 functions" UUID="9C43E74D-9F4E-4DA9-9554-A164EE99CF2E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="154" name="Functions" UUID="9458303A-B35D-4E1C-BF74-BA256C5A7C4C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="52" name="Custom script 1" UUID="1A8B04B1-6A45-4E22-BACA-6B6BE9A55FF0"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="102" name="Custom script 2" UUID="EFFDEACC-6ADD-40BE-9EC6-481494852C3B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="103" name="Custom script 3" UUID="656FDA56-511E-4AA9-BF7E-C2F825419BEC"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="104" name="Custom script 4" UUID="CC46D82E-F682-4979-ADCC-5AB99ABE3779"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="105" name="Custom script 5" UUID="075A75B2-E3D0-4B86-9E08-2C543C8DD4D8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="240" name="fmIDE" UUID="1AAC274C-8C92-432E-99B8-4A33E6E51570"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="23" name="OnFirstWindowOpen" UUID="429651CB-3634-4F3A-A380-97D07AB3A5A0"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="130" name="StartSession" UUID="5C377A0C-3F69-4A1F-903F-DD45788CBFE4"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="37" name="Install Menus" UUID="6D0EF852-72EF-410C-9F3E-706468231EF2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="36" name="OnLastWindowClose" UUID="C66E770B-FCED-4F51-9C81-3B0579A03238"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="148" name="Set LastMessageChoice( Nr )" UUID="D96DA0FA-10A8-4B38-B954-31E6B49B927D"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="95" name="HALT on Windows" UUID="379039F3-4422-4668-A3E5-97C1F4D7EA20"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="96" name="HALT if not browse mode" UUID="6E9C5D55-B299-49BC-ADB6-D0614DA8999C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="155" name="Empty Script" UUID="B08FB944-50FF-4E36-BA7B-9E006FBC939C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="191" name="Close Popover" UUID="0F966F29-1E85-43DC-ABB3-B8C39555F381"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="34" name="Home BTN" UUID="919D7747-F34B-4671-9E31-F88ADC220515"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="156" name="Home Info BTN" UUID="810E5701-C06D-4C85-AE61-BCA97DDEE521"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="20" name="Logo BTN" UUID="BC054144-E685-4864-8B23-53D2D536BA3A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="21" name="Logo open URL" UUID="613998D3-232B-4D29-A4B5-981CA23147E8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="225" name="Open repo BTN" UUID="6207B574-4F00-4530-A3BA-65690E12835D"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="171" name="Omit RecordNav BTN" UUID="B2DD6C34-C94C-4395-BC8B-120D974A9F36"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="39" name="View" UUID="AB986925-E774-40D9-A85E-14F49DC533D8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="80" name="New" UUID="624646A2-AE84-49F5-A4E0-ACC2F62B295E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="40" name="All" UUID="F220C1F1-8D42-47FD-9F43-C509AD996DE1"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="76" name="Delete" UUID="07E7008B-8DDE-4B49-9C44-179967005D3E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="84" name="Duplicate" UUID="EFC98815-825A-4DAC-AAAA-FA6AB90F9EAF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="121" name="Comment Column i-Header" UUID="62AF5660-2AE2-4398-AE58-464BB7CEB808"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="29" name="Toggle Toolbar" UUID="2194DA9E-5CA2-41D7-BC96-4BB43A9334BC"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="147" name="Halt Script" UUID="FDDDC8F7-A383-4B83-BB0B-2A4474D6BF50"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="31" name="Prepare Release" UUID="E6144105-B3BE-411A-A2A6-8C03357BFFBD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="149" name="Open Scripts" UUID="24EA5A6C-510D-469B-A21B-F7D574E629FE"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="157" name="Postpare Release" UUID="2959CF12-A10A-4A6B-913B-22CC40E21834"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="158" name="Hard sort Syntax" UUID="92F07D45-236B-4019-8020-94755488AFDA"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="185" name="Resort Syntax" UUID="0763CB93-D3BF-44A9-8204-9D7B278B1211"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="48" name="Close File" UUID="5336AC2A-666F-45F5-9FBF-4C7F85A2414E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="110" name="GRR Colors" UUID="ED2B2A19-1845-4B93-91E3-5FAD4B70E3A8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="111" name="GRR GUI-Syntax" UUID="53F39164-529F-4529-8ABC-5EC1E79AB9C0"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="68" name="Application Help" UUID="E976F9C0-642B-4281-89C6-CE6B9D9A0DF5"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="70" name="Send Feedback" UUID="30A19DBA-7539-438A-8B21-DCE746A2A597"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="72" name="About this Application…" UUID="8053770E-ACF7-488B-8FD4-8F34CEB21498"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="35" name="MBS Logo BTN" UUID="72739632-B17D-46B8-804D-C373747B4696"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="42" name="MBS Plugin check" UUID="5BBDAAD0-7AB8-4A77-895B-57130030A4F9"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="41" name="MBS_SyntaxColoring( Action )" UUID="94800040-8D8C-4FC7-98B2-48ABD1792476"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="144" name="MBS_SetSyntaxColoringEnabledStatus" UUID="D299CE28-B478-4C60-BBAC-82515F75465D"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="178" name="MBS_DeveloperTools Init" UUID="BDA99442-00F7-461E-AA90-889B3658605E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="179" name="MBS_DeveloperTools All" UUID="6C0F3022-B71E-48CD-B5A0-FD9539C7FD2B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="180" name="MBS_DeveloperTools One" UUID="B749060A-4E6C-4601-8795-2F85E8F627D9"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="109" name="MonkeyBreadSoftware" UUID="35A290A6-0A96-4E67-B0E2-0ADEDD25CB10"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="106" name="MBS Filemaker Plugin" UUID="042E057E-0B56-4475-B816-3592BB5011BD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="38" name="MBS Filemaker Plugin Documentation" UUID="F905943B-CC86-4602-B084-4F860EF28CB5"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="140" name="Go to Home Layout" UUID="6018F238-AE2D-49FF-9959-F0FE8E0C429E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="66" name="Prepare Home Screen" UUID="9DB7D005-421B-4129-BAD6-6E9942A70910"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="236" name="Switch active palette between Dark/Light mode automatically" UUID="D7EAEC6D-E198-47BD-9D89-49A017B55CB6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="88" name="Colorize!" UUID="8D7AC5F9-C99A-4893-856C-802B33210DA8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="153" name="Set LineNumber Color" UUID="DE3EAB18-C424-4944-A9B3-8AB2916E5A35"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="163" name="Home_Midimised" UUID="6BA6BB57-41A0-4C2A-BBAB-DC9F93C5B42A"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )" UUID="8C8A6C72-D947-4D77-BB88-D12C62B698C8"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="234" name="Clear Home Info" UUID="C822B52C-E582-4C34-99AC-48A1839B2586"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="124" name="Prepare Syntax" UUID="C75AA2BB-08B5-403B-82F9-86F6F83BC909"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="173" name="Go to Syntax for given FM-Version" UUID="31AC34A4-19EA-4549-8512-0AEE794056A3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="63" name="OnObjectModify ColorName #T#" UUID="2A958C33-5754-44B1-8120-9FC883CF2945"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="83" name="OnObjectModify _gID_ActivePalette #T#" UUID="87B0BDDA-CDE7-41FA-8AAB-FE3D5B41D231"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="122" name="BTN Sort Syntax" UUID="4B982850-F638-4004-B420-07E4928810E5"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="87" name="Sort Syntax" UUID="A86CEDE0-8EFC-4932-936F-3B364048DD43"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="159" name="Renumber ALL Syntax" UUID="E94F7123-8247-400F-8BCB-D79FC43C0692"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="91" name="Show All Syntax" UUID="70295774-FF91-4196-AEF7-EEE9B5DF14AF"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="138" name="Find( Selector ; Wildcard )" UUID="4AF26F45-DF1A-475B-A6BF-A57695E21089"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="172" name="Filter FM-Version" UUID="E2E57B95-4287-4AC7-B1FF-B0D2F38BB692"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="114" name="Duplicate Syntax" UUID="FE2F614F-7EA0-478B-A543-317C9FAD7850"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="43" name="Change Palette" UUID="BBF813E4-1F38-4818-B916-1F6745804F25"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="55" name="Refresh all" UUID="8FB4F080-AA9A-4595-BADA-DA289E995E78"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="53" name="Add all" UUID="032111A6-4EA2-403D-8329-A7576FC11ACD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="62" name="Remove all" UUID="20A6A587-5EC6-4A07-9D9D-E45623FCE6D7"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="49" name="Open Script Editor" UUID="4EECD707-8678-4DA6-97A6-C76D6F25F33C"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="116" name="Read and Edit Syntax Comment" UUID="BB54673E-C13E-4607-9A88-3FF7CC651E2D"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="141" name="Export Syntax-Tags" UUID="9F3B7A48-ECAC-47BE-ABA3-26510A5BEF42"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="142" name="Import Syntax-Tags" UUID="144342C9-2F46-47D7-8EF3-5114859F3EBD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="160" name="Tidy up _SyntaxTemp" UUID="89054EFF-387A-49C9-A857-8FA76AAE5A1B"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="226" name="Collection Filter this collection" UUID="9F606E6C-62F7-4C70-A1E4-A60C82F7A003"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="85" name="OnObjectModify _kIsActivePalette #T#" UUID="018AC2F2-CCFE-4B35-8662-1C7A277306DD"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="86" name="OnEnterObject PaletteName #T#" UUID="2BC1B9AB-456F-47FB-BCE8-85F33D77E882"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="113" name="Show Default Palette" UUID="AA60AB8F-9719-487F-85A3-0B5FED0CE71E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="224" name="Show Current Palette" UUID="C3178B97-5DC7-4E88-A8C2-60EC4FD01248"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="77" name="Set Palette as Default" UUID="336817AD-C48F-4E6F-88DB-6372CAC0AC67"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="75" name="Apply Palette" UUID="C4ADA835-B284-4A95-9DA2-CF368EA87868"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="33" name="Duplicate Palette" UUID="E402A948-995C-4A66-AD31-BDB134E3E1F6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="51" name="Set Color( Field )" UUID="3D068B4D-0331-4F98-B2D5-3E21072DC4A3"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="223" name="Show Color Help" UUID="88B05C87-E7F7-4ADC-8284-D29EBBDEC9D9"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="81" name="Export Color-Palettes" UUID="9D330AE8-F2D9-4B44-BE17-8F27BB138761"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="82" name="Import Color-Palettes" UUID="A494478F-C5C6-45F4-9FA9-861EF8C8B071"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="117" name="Read and Edit Palette.Color_Script::Comment" UUID="4844F813-9B45-4449-B841-74243371C011"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="123" name="Read and Edit Palette.Color_Formula::Comment" UUID="E1775495-D5B7-4750-BB74-AB6CAB4BB482"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="120" name="Prepare Colors" UUID="EE9A2649-2D55-47D4-B389-2CB033D00C56"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="100" name="Prepare GUI-Syntax" UUID="6AB9906E-20D1-4970-8109-0CEF2CC30DA7"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="112" name="Delete orphaned and empty GUI-Syntax entries" UUID="0D09280E-CCD9-4BCF-AB0C-293DC705F96E"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="92" name="Show All GUI-Syntax" UUID="126051B4-02E6-41A3-A7F3-4362C9BA4958"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="202" name="Import Column 5 from en fmXRaySelf" UUID="9E68046F-9001-4110-936F-BC596DAFC0B2"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="221" name="MBS-Developer-Options Renumber" UUID="873A5EF0-130E-4F47-96EB-1EFE657815B9"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="188" name="Windows User Comiserations" UUID="74046E16-5A9D-4E53-AFE7-382B762E2655"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="190" name="OnEnterTextField open URL #T#" UUID="A2DE4B4D-EA24-4071-9E77-2EED1F0C890F"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="139" name="Allow Formatting Bar ( 0/1 )" UUID="411C91D2-0BF0-4E43-85EB-EEE66CCEF8C6"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="243" name="Re-Login" UUID="7065C50D-C86B-43BC-B499-E02B67E05DAB"></ScriptReference>
+				</Script>
+				<Script>
+					<ScriptReference id="237" name="Mode Change ( Event )" UUID="D9C183F2-CCCD-41A7-B775-F10DD2A17FCC"></ScriptReference>
+				</Script>
+			</StepsForScripts>
+			<CustomMenuCatalog membercount="41">
+				<PasteIndexList membercount="41">
+					<Object id="1"></Object>
+					<Object id="10"></Object>
+					<Object id="12"></Object>
+					<Object id="13"></Object>
+					<Object id="14"></Object>
+					<Object id="15"></Object>
+					<Object id="16"></Object>
+					<Object id="17"></Object>
+					<Object id="18"></Object>
+					<Object id="19"></Object>
+					<Object id="2"></Object>
+					<Object id="20"></Object>
+					<Object id="21"></Object>
+					<Object id="22"></Object>
+					<Object id="23"></Object>
+					<Object id="24"></Object>
+					<Object id="25"></Object>
+					<Object id="26"></Object>
+					<Object id="27"></Object>
+					<Object id="28"></Object>
+					<Object id="29"></Object>
+					<Object id="3"></Object>
+					<Object id="31"></Object>
+					<Object id="32"></Object>
+					<Object id="33"></Object>
+					<Object id="34"></Object>
+					<Object id="35"></Object>
+					<Object id="36"></Object>
+					<Object id="37"></Object>
+					<Object id="38"></Object>
+					<Object id="39"></Object>
+					<Object id="4"></Object>
+					<Object id="40"></Object>
+					<Object id="42"></Object>
+					<Object id="43"></Object>
+					<Object id="44"></Object>
+					<Object id="5"></Object>
+					<Object id="6"></Object>
+					<Object id="7"></Object>
+					<Object id="8"></Object>
+					<Object id="9"></Object>
+				</PasteIndexList>
+				<UUID modifications="84" userName="R.Watson" accountName="admin" timestamp="2023-02-03T07:58:23">208EEE5A-5665-4D4A-8822-4ADDE19905EB</UUID>
+				<TagList></TagList>
+				<CustomMenu name="FileMaker Pro Menu" id="1"></CustomMenu>
+				<CustomMenu name="File Menu ADMIN" id="2"></CustomMenu>
+				<CustomMenu name="Edit Menu" id="3"></CustomMenu>
+				<CustomMenu name="View Menu ADMIN" id="4"></CustomMenu>
+				<CustomMenu name="Insert Menu" id="5"></CustomMenu>
+				<CustomMenu name="[Format]" id="6"></CustomMenu>
+				<CustomMenu name="Requests Menu" id="7"></CustomMenu>
+				<CustomMenu name="Records Menu" id="8"></CustomMenu>
+				<CustomMenu name="[Scripts]" id="9"></CustomMenu>
+				<CustomMenu name="[Fenster]" id="10"></CustomMenu>
+				<CustomMenu name="[Letzte öffnen]" id="12"></CustomMenu>
+				<CustomMenu name="[Datensätze importieren]" id="13"></CustomMenu>
+				<CustomMenu name="[Datensätze speichern/senden unter]" id="14"></CustomMenu>
+				<CustomMenu name="[Gehe zu Layout]" id="15"></CustomMenu>
+				<CustomMenu name="[Ausrichtung]" id="16"></CustomMenu>
+				<CustomMenu name="[Verwalten]" id="17"></CustomMenu>
+				<CustomMenu name="[Suchen/Ersetzen]" id="18"></CustomMenu>
+				<CustomMenu name="[Schrift]" id="19"></CustomMenu>
+				<CustomMenu name="[Zeilenabstand]" id="20"></CustomMenu>
+				<CustomMenu name="[Objekt]" id="21"></CustomMenu>
+				<CustomMenu name="[Sharing]" id="22"></CustomMenu>
+				<CustomMenu name="[Gehe zu Abfrage]" id="23"></CustomMenu>
+				<CustomMenu name="[Gehe zu Datensatz]" id="24"></CustomMenu>
+				<CustomMenu name="[Fenster einblenden]" id="25"></CustomMenu>
+				<CustomMenu name="[Größe]" id="26"></CustomMenu>
+				<CustomMenu name="[Rechtschreibung]" id="27"></CustomMenu>
+				<CustomMenu name="[Stil]" id="28"></CustomMenu>
+				<CustomMenu name="[Textfarbe]" id="29"></CustomMenu>
+				<CustomMenu name="[Produktdokumentation]" id="31"></CustomMenu>
+				<CustomMenu name="[Gespeicherte Suchen]" id="32"></CustomMenu>
+				<CustomMenu name="[Senden]" id="33"></CustomMenu>
+				<CustomMenu name="[Favorit öffnen]" id="34"></CustomMenu>
+				<CustomMenu name="App Menu" id="35"></CustomMenu>
+				<CustomMenu name="Admin Menu ADMIN" id="36"></CustomMenu>
+				<CustomMenu name="Color Menu" id="37"></CustomMenu>
+				<CustomMenu name="View Menu USER" id="38"></CustomMenu>
+				<CustomMenu name="File Menu USER" id="39"></CustomMenu>
+				<CustomMenu name="Help Menu" id="40"></CustomMenu>
+				<CustomMenu name="App Menu CONTINUE" id="42"></CustomMenu>
+				<CustomMenu name="Windows" id="43"></CustomMenu>
+				<CustomMenu name="[Hosts]" id="44"></CustomMenu>
+			</CustomMenuCatalog>
+			<CustomMenuSetCatalog membercount="3">
+				<PasteIndexList membercount="3">
+					<Object id="2"></Object>
+					<Object id="3"></Object>
+					<Object id="4"></Object>
+				</PasteIndexList>
+				<UUID modifications="26" userName="R.Watson" accountName="admin" timestamp="2021-09-16T22:13:32">A1F1717D-ABA8-4E5C-BC56-CB495EA71251</UUID>
+				<TagList></TagList>
+				<CustomMenuSetReference id="2" name="USER Menuset"></CustomMenuSetReference>
+				<ObjectList membercount="3">
+					<CustomMenuSet name="USER Menuset" id="2" comment=""></CustomMenuSet>
+					<CustomMenuSet name="ADMIN Menuset" id="3" comment=""></CustomMenuSet>
+					<CustomMenuSet name="CONTINUE Menuset" id="4" comment=""></CustomMenuSet>
+				</ObjectList>
+			</CustomMenuSetCatalog>
+		</AddAction>
+		<ModifyAction membercount="2">
+			<FieldsForTables membercount="79">
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="134" name="_GUISyntax" UUID="4B7BD803-EF72-4256-8FBD-81101583D173"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="137" name="_Language" UUID="DDFCA42A-3F9C-4F7D-914E-A1010F573F8F"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="137" name="_Language" UUID="DDFCA42A-3F9C-4F7D-914E-A1010F573F8F"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+				</FieldCatalog>
+				<FieldCatalog>
+					<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+				</FieldCatalog>
+			</FieldsForTables>
+			<LayoutCatalog membercount="1">
+				<Layout>
+					<LayoutReference id="9" name="Home" UUID="66D75489-E581-415A-A054-FD9C03DEAF52"></LayoutReference>
+				</Layout>
+			</LayoutCatalog>
+		</ModifyAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>

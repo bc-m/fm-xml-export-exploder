@@ -1,0 +1,127 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="3" name="_Bookmark"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/*_Bookmark( pSwitches; pFormat )Author: MrWatson 09Nov07returns "RecNr / Found / Total" or equivalentpSwitches:  "-Unused"pFormat: A string in which the following placeholders may be used<i> - Current record number<n> - Found Count<o> - Count of omitted<-o> - Minus count of omitted<t> - Total Record Count*/SetzeVar( $$BookmarkPageCount = Falls( Hole( Fenstermodus ) = 2 ; Max( $$BookmarkPageCount ; Hole( Seitennummer ) ) ); Falls( Hole( Fenstermodus ) = 0  ; SetzeVar    ( $$BookmarkPageCount = ""    ; Austauschen      ( pFormat      ; ["<i>" ; Hole( DatensatzPositionInErgebnismenge ) ]      ; ["<n>" ; Hole( AnzahlGefundeneDatensätze ) ]      ; ["<o>" ; Hole( AnzahlDatensätzeGesamt ) - Hole( AnzahlGefundeneDatensätze ) ]      ; ["<-o>" ; Hole( AnzahlGefundeneDatensätze ) - Hole( AnzahlDatensätzeGesamt ) ]      ; ["<--o>" ; "- " & Hole( AnzahlDatensätzeGesamt ) - Hole( AnzahlGefundeneDatensätze ) ]      ; ["<t>" ; Hole( AnzahlDatensätzeGesamt ) ]      ; ["<->" ; "-" ]      ; ["</>" ; "/" ]      )    ); Hole( Fenstermodus ) = 1  ; SetzeVar    ( $$BookmarkPageCount = ""    ; Austauschen      ( pFormat      ; ["<i>" ; Hole( DatensatzPositionInErgebnismenge ) ]      ; ["<n>" ; Hole( AnzahlAbfrageEinträge ) ]      ; ["<o>" ; "" ]      ; ["<-o>" ; "" ]      ; ["<--o>" ; "" ]      ; ["<t>" ; "" ]      ; ["<->" ; "" ]      ; ["</>" ; "" ]      )    ); Hole( Fenstermodus ) >= 2  ; SetzeVar     ( $$BookmarkPageCount = Max( $$BookmarkPageCount ; Hole( Seitennummer ) )    ; Austauschen      ( pFormat      ; ["<i>" ; Hole( Seitennummer ) ]      ; ["<n>" ; $$BookmarkPageCount ]      ; ["<o>" ; "" ]      ; ["<-o>" ; "" ]      ; ["<--o>" ; "" ]      ; ["<t>" ; "" ]      ; ["<->" ; "" ]      ; ["</>" ; "" ]      )    )))]]></Text>
+		<ChunkList hash="CDA335B9CBD82CB2A5428CAF8E72B38F">
+			<Chunk type="NoRef">/*_Bookmark( pSwitches; pFormat )&#13;Author: MrWatson 09Nov07&#13;returns &quot;RecNr / Found / Total&quot; or equivalent&#13;pSwitches:  &quot;-Unused&quot;&#13;pFormat: A string in which the following placeholders may be used&#13;&lt;i&gt; - Current record number&#13;&lt;n&gt; - Found Count&#13;&lt;o&gt; - Count of omitted&#13;&lt;-o&gt; - Minus count of omitted&#13;&lt;t&gt; - Total Record Count&#13;*/&#13;&#13;</Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">&#13;( </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Fenstermodus</Chunk>
+			<Chunk type="NoRef"> ) = 2 ; </Chunk>
+			<Chunk type="FunctionRef">Max</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Seitennummer</Chunk>
+			<Chunk type="NoRef"> ) ) )&#13;; </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">&#13;( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Fenstermodus</Chunk>
+			<Chunk type="NoRef"> ) = 0&#13;  ; </Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">&#13;    ( </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> = &quot;&quot;&#13;    ; </Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">&#13;      ( </Chunk>
+			<Chunk type="VariableReference">pFormat</Chunk>
+			<Chunk type="NoRef">&#13;      ; [&quot;&lt;i&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">DatensatzPositionInErgebnismenge</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;n&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;o&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+			<Chunk type="NoRef"> ) - </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;-o&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+			<Chunk type="NoRef"> ) - </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;--o&gt;&quot; ; &quot;- &quot; &amp; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+			<Chunk type="NoRef"> ) - </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;t&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;-&gt;&quot; ; &quot;-&quot; ]&#13;      ; [&quot;&lt;/&gt;&quot; ; &quot;/&quot; ]&#13;      )&#13;    )&#13;&#13;; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Fenstermodus</Chunk>
+			<Chunk type="NoRef"> ) = 1&#13;  ; </Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">&#13;    ( </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> = &quot;&quot;&#13;    ; </Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">&#13;      ( </Chunk>
+			<Chunk type="VariableReference">pFormat</Chunk>
+			<Chunk type="NoRef">&#13;      ; [&quot;&lt;i&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">DatensatzPositionInErgebnismenge</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;n&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">AnzahlAbfrageEinträge</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;o&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;-o&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;--o&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;t&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;-&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;/&gt;&quot; ; &quot;&quot; ]&#13;      )&#13;    )&#13;&#13;; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Fenstermodus</Chunk>
+			<Chunk type="NoRef"> ) &gt;= 2&#13;  ; </Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">&#13;     ( </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Max</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Seitennummer</Chunk>
+			<Chunk type="NoRef"> ) )&#13;    ; </Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">&#13;      ( </Chunk>
+			<Chunk type="VariableReference">pFormat</Chunk>
+			<Chunk type="NoRef">&#13;      ; [&quot;&lt;i&gt;&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Seitennummer</Chunk>
+			<Chunk type="NoRef"> ) ]&#13;      ; [&quot;&lt;n&gt;&quot; ; </Chunk>
+			<Chunk type="VariableReference">$$BookmarkPageCount</Chunk>
+			<Chunk type="NoRef"> ]&#13;      ; [&quot;&lt;o&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;-o&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;--o&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;t&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;-&gt;&quot; ; &quot;&quot; ]&#13;      ; [&quot;&lt;/&gt;&quot; ; &quot;&quot; ]&#13;      )&#13;    )&#13;)&#13;)</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

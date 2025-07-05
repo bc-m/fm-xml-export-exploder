@@ -1,0 +1,200 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="173" name="Go to Syntax for given FM-Version" UUID="31AC34A4-19EA-4549-8512-0AEE794056A3"></ScriptReference>
+	<ObjectList membercount="15">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6B39404E-54CD-400A-914F-BFBBAE599DE4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2909E9ED-4209-4970-867E-8D8DD3231DA4</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW Corrected bug, whereby more than 1-click start may have been necessary"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4A07BD17-227F-406E-9EAF-BFD3E5427EEB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7653DFF0-6AA3-4953-AC05-DFA05EB7EDE5</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>61DEFA42-C659-4258-91ED-27BC1B4B2760</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>268AE1A9-BC2B-44DD-BE43-DD7630405DEB</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>74E5A28F-112C-455B-A045-AE7C3CC5EC78</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="68" name="Wenn" enable="True">
+			<UUID>88875C69-38A4-4E99-9C66-235CB2F3CD68</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer ( _Syntax::_gFM_Version ) ODER _IsKeyALT]]></Text>
+							<ChunkList hash="F1E97BBC3C5C7E5AFA77A0E2871C4345">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="37" name="_gFM_Version" repetition="1" UUID="6A721FEC-CF7B-45EA-A922-5B169BC8D403">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) </Chunk>
+								<Chunk type="FunctionRef">ODER</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="CustomFunctionRef">_IsKeyALT</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="76" name="Feldwert setzen" enable="True">
+			<UUID>32EC2F8C-54FE-457D-89B4-407EBE2D3014</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="37" name="_gFM_Version" UUID="6A721FEC-CF7B-45EA-A922-5B169BC8D403">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[_FMVersionNr ( 2 )]]></Text>
+							<ChunkList hash="85139CFFA8BAE6C32C6FFFA8E4444AD4">
+								<Chunk type="CustomFunctionRef">_FMVersionNr</Chunk>
+								<Chunk type="NoRef"> ( 2 )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="70" name="Ende (wenn)" enable="True">
+			<UUID>B9EA95FF-216E-4C9E-8643-8D6DF6695E3D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0D2E467F-56E1-4BDC-BE8E-2755BD4EC5EC</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>991EA0AD-4C29-43FB-B869-9BEE9E412DC9</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="6" name="Syntax" UUID="F17CAF44-B606-4254-AED4-C7F2A12D3521"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="74" name="Gehe zu Bezugsdatensatz" enable="True">
+			<UUID>A39A3862-CF5E-41BA-A773-03D2AD0E55E3</UUID>
+			<OwnerID></OwnerID>
+			<Options>33554442</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Related">
+					<TableOccurrenceReference id="1065151" name="Syntax.Filter_FmVersion" UUID="E912CA2A-674C-41D2-85EC-F5792A9D172D"></TableOccurrenceReference>
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="6" name="Syntax" UUID="F17CAF44-B606-4254-AED4-C7F2A12D3521"></LayoutReference>
+					</LayoutReferenceContainer>
+					<Animation name="Ohne" value="0"></Animation>
+					<Options ShowRelated="True"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FFFD8EFD-D5F2-45A5-8469-06128FA14BDB</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="1" name="Script ausführen" enable="True">
+			<UUID>5D3F07DB-2CD5-4EFC-B9FF-235CD3DC94EC</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="87" name="Sort Syntax" UUID="A86CEDE0-8EFC-4932-936F-3B364048DD43"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,45 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="26" name="_AppVersion" UUID="3F56F465-81F5-4255-8839-ED896517FDD0"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/*Returns FileMaker version as number to 1 decimal place.20130924 MrW Bug removed - I was apparently seriously tired when I wrote this first ;-)*/SetzeVar([vNr = WörterRechts( Hole ( ProgrammVersion ) ; 1 ) ;vNr = ZeichenLinks( vNr ; Position( vNr & "v" ; "v" ; 1 ; 1 ) - 1 ) ;vNr = LiesAlsZahl( Austauschen( vNr ; "." ; ZeichenLinks( 1/2 ; 1 ) ) )];vNr)]]></Text>
-		<ChunkList hash="E73A60B445C07B130846969DECB7D56A">
-			<Chunk type="NoRef">/*&#13;Returns FileMaker version as number to 1 decimal place.&#13;&#13;20130924 MrW Bug removed - I was apparently seriously tired when I wrote this first ;-)&#13;*/&#13;</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">([&#13;</Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">WörterRechts</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef"> ( </Chunk>
-			<Chunk type="FunctionRef">ProgrammVersion</Chunk>
-			<Chunk type="NoRef"> ) ; 1 ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef"> &amp; &quot;v&quot; ; &quot;v&quot; ; 1 ; 1 ) - 1 ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Austauschen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef"> ; &quot;.&quot; ; </Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">( 1/2 ; 1 ) ) )&#13;];&#13;</Chunk>
-			<Chunk type="VariableReference">vNr</Chunk>
-			<Chunk type="NoRef">&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

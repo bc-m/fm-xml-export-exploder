@@ -1,0 +1,22 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20200528 MrW
+
+Blätternmodus aktivieren [ Pause: OFF ]
+
+
+Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
+Datensätze zeigen als [ Als Formular anzeigen ]
+
+# Find active palette
+Suchenmodus aktivieren [ Pause: OFF ]
+Feldwert setzen [ _Palette::_kIsActivePalette ; 1 ]
+Ergebnismenge suchen
+Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
+	Alle Datensätze anzeigen
+	Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
+Ende (wenn)
+Script ausführen [ Aus Liste ; "All" ]
+Datensätze zeigen als [ Als Formular anzeigen ]

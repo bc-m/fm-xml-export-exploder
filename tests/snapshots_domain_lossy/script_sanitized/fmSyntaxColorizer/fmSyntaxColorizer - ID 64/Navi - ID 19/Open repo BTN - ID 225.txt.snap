@@ -1,0 +1,15 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20200706 MrW 
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+# Script settings
+Variable setzen [ $RepoUser ; "mrwatson-de" ]
+Variable setzen [ $RepoName ; "fmSyntaxColorizer" ]
+
+Variable setzen [ $URL ; "https://github.com/" & $RepoUser & "/" & $RepoName ]
+URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]

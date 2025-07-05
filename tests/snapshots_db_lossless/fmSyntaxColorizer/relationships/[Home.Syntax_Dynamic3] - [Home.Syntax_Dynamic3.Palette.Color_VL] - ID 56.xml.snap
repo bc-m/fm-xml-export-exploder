@@ -1,0 +1,42 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="56">
+	<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">DA82CB93-5734-4EA7-A9A9-DB8FECC04450</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065157" name="Home.Syntax_Dynamic3" UUID="CE0350AC-C2B3-4101-A1C2-7B764CA9C884"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065161" name="Home.Syntax_Dynamic3.Palette.Color_VL" UUID="6DC37F1B-1DE3-4705-B553-022DCEBA7A4E"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="19" name="_kID_PaletteMLK0" UUID="8C679871-D473-4FBC-B8B7-010B573FB458">
+					<TableOccurrenceReference id="1065157" name="Home.Syntax_Dynamic3" UUID="CE0350AC-C2B3-4101-A1C2-7B764CA9C884"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+					<TableOccurrenceReference id="1065161" name="Home.Syntax_Dynamic3.Palette.Color_VL" UUID="6DC37F1B-1DE3-4705-B553-022DCEBA7A4E"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="22" name="_kPaletteType" UUID="F3E7B306-A4D9-48B7-8C89-1B74DAA03AEC">
+					<TableOccurrenceReference id="1065157" name="Home.Syntax_Dynamic3" UUID="CE0350AC-C2B3-4101-A1C2-7B764CA9C884"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+					<TableOccurrenceReference id="1065161" name="Home.Syntax_Dynamic3.Palette.Color_VL" UUID="6DC37F1B-1DE3-4705-B553-022DCEBA7A4E"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

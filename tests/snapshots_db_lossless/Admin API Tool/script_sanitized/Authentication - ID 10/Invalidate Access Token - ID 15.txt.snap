@@ -1,0 +1,75 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Logout via Admin API and store token
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2019-04-23 by Mike Duncan, update to v2 admin api
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+#  Exit if in find mode, if needed
+Wenn [ Hole ( Fenstermodus ) = 1 // find mode ]
+	Variable setzen [ $error ; 1 // exit true ]
+	Aktuelles Script verlassen [ $error ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Variable setzen [ $$server ; "https://" & FMS__fmserver::server_address & Falls ( FMS__fmserver::usePort = 1 ; ":16000" ) & "/fmi/admin/api/v2" ]
+Variable setzen [ $endpoint ; "/user/auth/" & $$my.token ]
+Variable setzen [ $curloptions ; " --request DELETE" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --header \"Content-Length: 0\"" &
+				
+				" --dump-header $$my.headers" &
+				
+				"" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+
+# inspect result
+Variable setzen [ $my.response ; Austauschen ( HoleWert ( $$my.headers ; 1 ) ; "HTTP/1.1 " ; "" ) ]
+Wenn [ $my.response = "200 OK" ]
+	# continue
+	Wenn [ JSONGetElement ( $$my.result ; "messages[0].code" ) = "0" ]
+		Variable setzen [ $$my.token ; "" ]
+		Feldwert setzen [ FMS__fmserver::token ; "" ]
+		Feldwert setzen [ FMS__fmserver::token_expires ; "" ]
+		
+	Sonst
+		# invalid result
+		Eigenes Dialogfeld anzeigen [ Title: "Logout Failure" ; Message: "Login Failed, server responded: " & JSONGetElement ( $$my.result ; "messages[0].code" ) & ": " & JSONGetElement ( $$my.result ; "messages[0].text" ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		
+	Ende (wenn)
+	
+Sonst, wenn [ $my.response = "401 Unauthorized" ]
+	# log in failed
+	Eigenes Dialogfeld anzeigen [ Title: "Login Failure" ; Message: "Login Failed, server responded: " & $my.response ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	
+Sonst
+	# error trap
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "Server Replied: " & $my.response ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	
+Ende (wenn)
+
+Feldwert setzen [ FMS__fmserver::zz_result_g ; $$my.result ]
+Feldwert setzen [ FMS__fmserver::zz_headers_g ; $$my.headers ]
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

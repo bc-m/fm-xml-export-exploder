@@ -1,0 +1,264 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Edit/Create Schedule
+#  HISTORY:
+     - Created:   2020-04-23 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2018-MM-DD by FName LName
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Fenster fixieren
+Gehe zu Bezugsdatensatz [ Table: SCH_FMS__fmserver ; Layout: "Admin API" ; Show related ]
+Script ausführen [ Aus Liste ; "Set Config" ]
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+
+Variable setzen [ $json ; JSONSetElement ( ""
+				
+				 ; [ "enabled"; SCH__schedules::enabled ; JSONBoolean ]
+				
+				) ]
+Variable setzen [ $json ; Falls (
+				  IstLeer ( SCH__schedules::sendEmail );
+				  $json;
+				
+				  JSONSetElement ( $json
+				
+				   ; [ "sendEmail"; "[\"" & Austauschen ( SCH__schedules::sendEmail ; [" " ; ""] ; ["," ; "\",\""] ) & "\"]" ; JSONArray ]
+				
+				  )
+				
+				) ]
+
+# set the payload, depending on the script type and repeat
+Wenn [ SCH__schedules::Type = "Backup" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "name" ; SCH__schedules::name ; JSONString ]
+					
+					 ;[ "backupType.resourceType" ; SCH__schedules::resourceType ; JSONString ]
+					 ;[ "backupType.backupTarget" ; SCH__schedules::backupTarget ; JSONString ]
+					 ;[ "backupType.maxBackups" ; SCH__schedules::maxBackups ; JSONNumber ]
+					 ;[ "backupType.clone" ; SCH__schedules::clone ; JSONBoolean ]
+					 ;[ "backupType.cloneOnly" ; SCH__schedules::cloneOnly ; JSONBoolean ]
+					 ;[ "backupType.verify" ; SCH__schedules::verify ; JSONBoolean ]
+					
+					) ]
+	Wenn [ NICHT IstLeer ( SCH__schedules::resource ) UND SCH__schedules::resourceType ≠ "ALL_DB" ]
+		Variable setzen [ $json ; JSONSetElement ( $json 
+						
+						 ;[ "backupType.resource" ; SCH__schedules::resource ; JSONString ]
+						
+						) ]
+	Ende (wenn)
+Sonst, wenn [ SCH__schedules::Type = "FileMaker Script" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "name" ; SCH__schedules::name ; JSONString ]
+					
+					 ;[ "filemakerScriptType.resource" ; SCH__schedules::resource ; JSONString ]
+					 ;[ "filemakerScriptType.fmScriptName" ; SCH__schedules::fmScriptName ; JSONString ]
+					 ;[ "filemakerScriptType.fmScriptParam" ; SCH__schedules::fmScriptParam ; JSONString ]
+					 ;[ "filemakerScriptType.fmScriptAccount" ; SCH__schedules::fmScriptAccount ; JSONString ]
+					 ;[ "filemakerScriptType.fmScriptPassword" ; SCH__schedules::fmScriptPassword ; JSONString ]
+					 ;[ "filemakerScriptType.autoAbort" ; SCH__schedules::autoAbort ; JSONBoolean ]
+					 ;[ "filemakerScriptType.timeout" ; SCH__schedules::timeout ; JSONNumber ]
+					
+					) ]
+Sonst, wenn [ SCH__schedules::Type = "Message" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "name" ; SCH__schedules::name ; JSONString ]
+					 ;[ "messageType.resourceType" ; SCH__schedules::resourceType ; JSONString ]
+					 ;[ "messageType.messageText" ; SCH__schedules::messageText ; JSONString ]
+					
+					) ]
+	Wenn [ NICHT IstLeer ( SCH__schedules::resource ) UND SCH__schedules::resourceType ≠ "ALL_DB" ]
+		Variable setzen [ $json ; JSONSetElement ( $json 
+						
+						 ;[ "messageType.resource" ; SCH__schedules::resource ; JSONString ]
+						
+						) ]
+	Ende (wenn)
+Sonst, wenn [ SCH__schedules::Type = "Script Sequence" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "name" ; SCH__schedules::name ; JSONString ]
+					
+					 ;[ "scriptSequenceType.resource" ; SCH__schedules::resource ; JSONString ]
+					 ;[ "scriptSequenceType.fmScriptName" ; SCH__schedules::fmScriptName ; JSONString ]
+					 ;[ "scriptSequenceType.fmScriptParam" ; SCH__schedules::fmScriptParam ; JSONString ]
+					 ;[ "scriptSequenceType.fmScriptAccount" ; SCH__schedules::fmScriptAccount ; JSONString ]
+					 ;[ "scriptSequenceType.fmScriptPassword" ; SCH__schedules::fmScriptPassword ; JSONString ]
+					 ;[ "scriptSequenceType.osScript" ; SCH__schedules::osScript ; JSONString ]
+					 ;[ "scriptSequenceType.osScriptParam" ; SCH__schedules::osScriptParam ; JSONString ]
+					 ;[ "scriptSequenceType.osScript2" ; SCH__schedules::osScript2 ; JSONString ]
+					 ;[ "scriptSequenceType.osScriptParam2" ; SCH__schedules::osScriptParam2 ; JSONString ]
+					 ;[ "scriptSequenceType.runOSScriptsAsUser.osScriptAccount" ; SCH__schedules::osScriptAccount ; JSONString ]
+					 ;[ "scriptSequenceType.runOSScriptsAsUser.osScriptPassword" ; SCH__schedules::osScriptPassword ; JSONString ]
+					 ;[ "scriptSequenceType.autoAbort" ; SCH__schedules::autoAbort ; JSONBoolean ]
+					 ;[ "scriptSequenceType.timeout" ; SCH__schedules::timeout ; JSONNumber ]
+					
+					) ]
+Sonst, wenn [ SCH__schedules::Type = "System Script" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "name" ; SCH__schedules::name ; JSONString ]
+					
+					 ;[ "systemScriptType.resource" ; SCH__schedules::resource ; JSONString ]
+					 ;[ "systemScriptType.fmScriptName" ; SCH__schedules::fmScriptName ; JSONString ]
+					 ;[ "systemScriptType.fmScriptParam" ; SCH__schedules::fmScriptParam ; JSONString ]
+					 ;[ "systemScriptType.fmScriptAccount" ; SCH__schedules::fmScriptAccount ; JSONString ]
+					 ;[ "systemScriptType.fmScriptPassword" ; SCH__schedules::fmScriptPassword ; JSONString ]
+					 ;[ "systemScriptType.osScript" ; SCH__schedules::osScript ; JSONString ]
+					 ;[ "systemScriptType.osScriptParam" ; SCH__schedules::osScriptParam ; JSONString ]
+					 ;[ "systemScriptType.osScript2" ; SCH__schedules::osScript2 ; JSONString ]
+					 ;[ "systemScriptType.osScriptParam2" ; SCH__schedules::osScriptParam2 ; JSONString ]
+					 ;[ "systemScriptType.runOSScriptsAsUser.osScriptAccount" ; SCH__schedules::osScriptAccount ; JSONString ]
+					 ;[ "systemScriptType.runOSScriptsAsUser.osScriptPassword" ; SCH__schedules::osScriptPassword ; JSONString ]
+					 ;[ "systemScriptType.autoAbort" ; SCH__schedules::autoAbort ; JSONBoolean ]
+					 ;[ "systemScriptType.timeout" ; SCH__schedules::timeout ; JSONNumber ]
+					
+					) ]
+Sonst, wenn [ SCH__schedules::Type = "Verify" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "name" ; SCH__schedules::name ; JSONString ]
+					
+					 ;[ "verifyType.resourceType" ; SCH__schedules::resourceType ; JSONString ]
+					 ;[ "verifyType.messageText" ; SCH__schedules::messageText ; JSONString ]
+					 ;[ "verifyType.timeDelay" ; SCH__schedules::timeDelay ; JSONNumber ]
+					
+					) ]
+	Wenn [ NICHT IstLeer ( SCH__schedules::resource ) UND SCH__schedules::resourceType ≠ "ALL_DB" ]
+		Variable setzen [ $json ; JSONSetElement ( $json 
+						
+						 ;[ "verifyType.resource" ; SCH__schedules::resource ; JSONString ]
+						
+						) ]
+	Ende (wenn)
+Ende (wenn)
+
+# set the payload, depending on the script type and repeat
+Wenn [ SCH__schedules::Repeat = "Once" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "onceType.startTimeStamp" ; SCH__schedules::startTimeStamp ; JSONString ]
+					
+					) ]
+Sonst, wenn [ SCH__schedules::Repeat = "Weekly" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "weeklyType.startTimeStamp" ; SCH__schedules::startTimeStamp ; JSONString ]
+					 ;[ "weeklyType.endDate" ; SCH__schedules::endDate ; JSONString ]
+					
+					) ]
+	Variable setzen [ $json ; Falls (
+					  IstLeer ( SCH__schedules::daysOfTheWeek );
+					  $json;
+					
+					  JSONSetElement ( $json
+					
+					   ; [ "weeklyType.daysOfTheWeek"; "[\"" & Austauschen ( SCH__schedules::daysOfTheWeek ; [" " ; ""] ; ["¶" ; "\",\""] ) & "\"]" ; JSONArray ]
+					
+					  )
+					
+					) ]
+	Variable setzen [ $json ; Falls ( 
+					
+					 SCH__schedules::repeatFrequency > 0 UND NICHT IstLeer ( SCH__schedules::repeatInterval ) UND NICHT IstLeer ( SCH__schedules::endTime );
+					 JSONSetElement ( $json 
+					
+					  ;[ "weeklyType.repeatTask.repeatInterval" ; SCH__schedules::repeatInterval ; JSONString ]
+					  ;[ "weeklyType.repeatTask.repeatFrequency" ; SCH__schedules::repeatFrequency ; JSONNumber ]
+					  ;[ "weeklyType.repeatTask.endTime" ; SCH__schedules::endTime ; JSONString ]
+					
+					 );
+					
+					 $json 
+					
+					) ]
+Sonst, wenn [ SCH__schedules::Repeat = "Every N Days" ]
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					
+					 ;[ "everyndaysType.startTimeStamp" ; SCH__schedules::startTimeStamp ; JSONString ]
+					 ;[ "everyndaysType.dailyDays" ; SCH__schedules::dailyDays ; JSONNumber ]
+					 ;[ "everyndaysType.endDate" ; SCH__schedules::endDate ; JSONString ]
+					
+					) ]
+	Variable setzen [ $json ; Falls ( 
+					
+					 SCH__schedules::repeatFrequency > 0 UND NICHT IstLeer ( SCH__schedules::repeatInterval ) UND NICHT IstLeer ( SCH__schedules::endTime );
+					 JSONSetElement ( $json 
+					
+					  ;[ "everyndaysType.repeatTask.repeatInterval" ; SCH__schedules::repeatInterval ; JSONString ]
+					  ;[ "everyndaysType.repeatTask.repeatFrequency" ; SCH__schedules::repeatFrequency ; JSONNumber ]
+					  ;[ "everyndaysType.repeatTask.endTime" ; SCH__schedules::endTime ; JSONString ]
+					
+					 );
+					
+					 $json 
+					
+					) ]
+Ende (wenn)
+
+Wenn [ IstLeer ( SCH__schedules::id_schedule ) ]
+	# create new schedule
+	Variable setzen [ $curloptions ; " --request POST" &
+					" --header \"Authorization: Bearer " & $$my.token & "\"" &
+					" --header \"Content-Type: application/json\"" &
+					" --data @$json" &
+					" --dump-header $$my.headers" ]
+	Wenn [ SCH__schedules::Type = "Backup" ]
+		Variable setzen [ $endpoint ; "/schedules/backup" ]
+	Sonst, wenn [ SCH__schedules::Type = "FileMaker Script" ]
+		Variable setzen [ $endpoint ; "/schedules/filemakerscript" ]
+	Sonst, wenn [ SCH__schedules::Type = "Message" ]
+		Variable setzen [ $endpoint ; "/schedules/message" ]
+	Sonst, wenn [ SCH__schedules::Type = "Script Sequence" ]
+		Variable setzen [ $endpoint ; "/schedules/scriptsequence" ]
+	Sonst, wenn [ SCH__schedules::Type = "System Script" ]
+		Variable setzen [ $endpoint ; "/schedules/systemscript" ]
+	Sonst, wenn [ SCH__schedules::Type = "Verify" ]
+		Variable setzen [ $endpoint ; "/schedules/verify" ]
+	Ende (wenn)
+	
+Sonst
+	# edit schedule
+	Variable setzen [ $curloptions ; " --request PATCH" &
+					" --header \"Authorization: Bearer " & $$my.token & "\"" &
+					" --header \"Content-Type: application/json\"" &
+					" --data @$json" &
+					" --dump-header $$my.headers" ]
+	Variable setzen [ $endpoint ; "/schedules/" & SCH__schedules::id_schedule ]
+	
+Ende (wenn)
+# set api update variable
+Variable setzen [ $$API.UPDATE ; "1" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Fenster schließen [ Name: "Schedule Detail" ; Current file ]
+
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+# list schedules again
+Script ausführen [ Aus Liste ; "List Schedules" ]
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

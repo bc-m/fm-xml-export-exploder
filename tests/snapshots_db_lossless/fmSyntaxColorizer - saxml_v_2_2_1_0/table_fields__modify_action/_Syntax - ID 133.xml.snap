@@ -1,36 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<FieldCatalog>
-	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
-	<ObjectList membercount="1">
-		<Field>
-			<FieldReference id="43" name="_gID_ActivePaletteSwapID" repetition="1" UUID="4BDB4D7E-A5F3-424B-B4F3-DADEC923B0BF">
-				<Calculation>
-					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-					<Text><![CDATA[Falls ( /* wrong pallette type */Syntax.Palette_Active::_kIsDarkModePalette ≠ _IsDarkMode ;/* Return an alternative palette, if one exists */Syntax.Palette_Active::_kSwitchDarkLightPaletteID)]]></Text>
-					<ChunkList hash="D956DE2BCA405D07A5D975E6CA3DD84E">
-						<Chunk type="FunctionRef">Falls</Chunk>
-						<Chunk type="NoRef"> ( &#13;/* wrong pallette type */&#13;</Chunk>
-						<Chunk type="FieldRef">
-							<FieldReference id="16" name="_kIsDarkModePalette" repetition="1" UUID="BF865AEC-E517-41AB-A492-C1C243407CCF">
-								<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active" UUID="1D9B0FEF-D801-4964-A4D4-64CA2123BCEE"></TableOccurrenceReference>
-							</FieldReference>
-						</Chunk>
-						<Chunk type="NoRef"> ≠ </Chunk>
-						<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
-						<Chunk type="NoRef"> ;&#13;&#13;/* Return an alternative palette, if one exists */&#13;</Chunk>
-						<Chunk type="FieldRef">
-							<FieldReference id="18" name="_kSwitchDarkLightPaletteID" repetition="1" UUID="AF867338-9873-4350-804C-5F79C30ABD15">
-								<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active" UUID="1D9B0FEF-D801-4964-A4D4-64CA2123BCEE"></TableOccurrenceReference>
-							</FieldReference>
-						</Chunk>
-						<Chunk type="NoRef">&#13;)</Chunk>
-					</ChunkList>
-				</Calculation>
-				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
-			</FieldReference>
-		</Field>
-	</ObjectList>
-</FieldCatalog>

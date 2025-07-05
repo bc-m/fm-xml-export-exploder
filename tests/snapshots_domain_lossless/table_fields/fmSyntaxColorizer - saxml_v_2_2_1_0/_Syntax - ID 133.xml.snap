@@ -1,1235 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<FieldCatalog>
-	<UUID modifications="177" userName="R.Watson" accountName="admin" timestamp="2023-03-03T14:16:03">8910A7BB-7A05-47B7-8038-88067D3757D4</UUID>
-	<TagList></TagList>
-	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
-	<ObjectList membercount="41">
-		<Field DefaultStyle="" id="1" name="Sort" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">335B603A-68A6-44A6-B5F1-D3BC0F18A5F0</UUID>
-			<AutoEnter type="SerialNumber" prohibitModification="False">
-				<SerialNumber increment="1" nextvalue="638" generate="OnCreation"></SerialNumber>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="2" name="Command_EN" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="3" userName="Rus Master" accountName="admin" timestamp="2021-10-10T12:19:44">4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E</UUID>
-			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
-				<Calculated>
-					<Calculation>
-						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						<Text><![CDATA[Falls ( ZeichenRechts ( Selbst ; 3 ) <> "*()" ; Selbst  ; Austauschen( Selbst ; "()" ; TextFarbe ( "()" ; RGB ( 145 ; 145 ; 145 ) ) ) )]]></Text>
-						<ChunkList hash="9B1905F999B012C4EA0BE2C83AF5FE3F">
-							<Chunk type="FunctionRef">Falls</Chunk>
-							<Chunk type="NoRef"> ( </Chunk>
-							<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-							<Chunk type="NoRef"> ( </Chunk>
-							<Chunk type="FunctionRef">Selbst</Chunk>
-							<Chunk type="NoRef"> ; 3 ) &lt;&gt; &quot;*()&quot; ; </Chunk>
-							<Chunk type="FunctionRef">Selbst</Chunk>
-							<Chunk type="NoRef">  ; </Chunk>
-							<Chunk type="FunctionRef">Austauschen</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FunctionRef">Selbst</Chunk>
-							<Chunk type="NoRef"> ; &quot;()&quot; ; </Chunk>
-							<Chunk type="FunctionRef">TextFarbe</Chunk>
-							<Chunk type="NoRef"> ( &quot;()&quot; ; </Chunk>
-							<Chunk type="FunctionRef">RGB</Chunk>
-							<Chunk type="NoRef"> ( 145 ; 145 ; 145 ) ) ) )</Chunk>
-						</ChunkList>
-					</Calculation>
-				</Calculated>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="3" name="ColorName" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="4" name="MBS_Command_Results" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="60" userName="Rus Master" accountName="admin" timestamp="2021-10-09T07:44:12">80900487-9056-4A9A-BF47-05077D4C6FF7</UUID>
-			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
-				<Calculated>
-					<Calculation>
-						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						<Text><![CDATA[SetzeVar([ /* Inputs */vSelector          = Selector ;vCommand_EN        = Command_EN ;vCommand_Foreign   = Syntax.GUISyntax::Command ;vCommandColoringOn = (On = 1);vColorExists       = Syntax.Color_active::_k1 ;vColorHex          = Syntax.Color_active::_kColorHex ;vWildcard          = Falls( _kIsWildcard ; " Keyword" );/* Remove the "()" from Function wildcard tags */vIsFunctionTag     = (Ersetzen( vCommand_EN ; 2 ; Länge ( vCommand_EN ) - 4 ; "" )="**()");vCommand_EN        = ZeichenLinks( vCommand_EN ; Länge ( vCommand_EN ) - 2* vIsFunctionTag ) ;vCommand_Foreign   = ZeichenLinks( vCommand_Foreign ; Länge ( vCommand_Foreign ) - 2* vIsFunctionTag )];Falls( /* Case 1 - Ignore title records*/_kIsGroupTitle ; "" ;/* Case 2 - Ignore empty records*/IstLeer( vCommand_EN ) ; "" ;/* Case 3 - REMOVE deactivated or colorless commands */NICHT vCommandColoringOn ODER NICHT vColorExists ;"Removed" & vWildcard & ": English " & MBS( "SyntaxColoring.RemoveTag" ; vCommand_EN ) & /*" " & vSelector & "/" & vCommand_EN & */Falls( _gLanguage <> "English" UND NICHT IstLeer( vCommand_Foreign ) ;  ", " & _gLanguage & " " & MBS( "SyntaxColoring.RemoveTag" ; vCommand_Foreign )) ;/* Case 4 - ADD activated commands that have a color */vCommandColoringOn UND vColorExists ;"Added" & vWildcard & ": English " & MBS( "SyntaxColoring.AddTag" ; vSelector ; vCommand_EN ; vColorHex ) & Falls( _gLanguage <> "English" UND NICHT IstLeer( vCommand_Foreign ) ;  ", " & _gLanguage & " " & MBS( "SyntaxColoring.AddTag" ; vSelector ; vCommand_Foreign ; vColorHex )) ;"-"))]]></Text>
-						<ChunkList hash="806DDBC008E54516A75339DFCAF73ABE">
-							<Chunk type="FunctionRef">SetzeVar</Chunk>
-							<Chunk type="NoRef">([ &#13;&#13;/* Inputs */&#13;&#13;</Chunk>
-							<Chunk type="VariableReference">vSelector</Chunk>
-							<Chunk type="NoRef">          = </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="15" name="Selector" repetition="1" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ;&#13;</Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef">        = </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ;&#13;</Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef">   = </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="2" name="Command" repetition="1" UUID="B373644E-0DD0-47E5-BDD6-18162D8AA773">
-									<TableOccurrenceReference id="1065117" name="Syntax.GUISyntax" UUID="D6FA15E6-E89D-4561-8675-9E173161D4D0"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ;&#13;</Chunk>
-							<Chunk type="VariableReference">vCommandColoringOn</Chunk>
-							<Chunk type="NoRef"> = (</Chunk>
-							<Chunk type="VariableReference">On</Chunk>
-							<Chunk type="NoRef"> = 1);&#13;&#13;</Chunk>
-							<Chunk type="VariableReference">vColorExists</Chunk>
-							<Chunk type="NoRef">       = </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="17" name="_k1" repetition="1" UUID="2C3A58E5-CCDD-4CA7-BFE2-580E67E07CEB">
-									<TableOccurrenceReference id="1065141" name="Syntax.Color_active" UUID="11129895-EF11-435D-B1CA-4343E5DA5AF2"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ;&#13;</Chunk>
-							<Chunk type="VariableReference">vColorHex</Chunk>
-							<Chunk type="NoRef">          = </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="6" name="_kColorHex" repetition="1" UUID="D61AAB61-B5AB-4C22-9C0F-8BCF3D8538DA">
-									<TableOccurrenceReference id="1065141" name="Syntax.Color_active" UUID="11129895-EF11-435D-B1CA-4343E5DA5AF2"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ;&#13;</Chunk>
-							<Chunk type="VariableReference">vWildcard</Chunk>
-							<Chunk type="NoRef">          = </Chunk>
-							<Chunk type="FunctionRef">Falls</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="21" name="_kIsWildcard" repetition="1" UUID="527A4D55-F770-4378-927C-EAEC6E5384B1">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ; &quot; Keyword&quot; );&#13;&#13;/* Remove the &quot;()&quot; from Function wildcard tags */&#13;</Chunk>
-							<Chunk type="VariableReference">vIsFunctionTag</Chunk>
-							<Chunk type="NoRef">     = (</Chunk>
-							<Chunk type="FunctionRef">Ersetzen</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ; 2 ; </Chunk>
-							<Chunk type="FunctionRef">Länge</Chunk>
-							<Chunk type="NoRef"> ( </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ) - 4 ; &quot;&quot; )=&quot;**()&quot;);&#13;</Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef">        = </Chunk>
-							<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ; </Chunk>
-							<Chunk type="FunctionRef">Länge</Chunk>
-							<Chunk type="NoRef"> ( </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ) - 2* </Chunk>
-							<Chunk type="VariableReference">vIsFunctionTag</Chunk>
-							<Chunk type="NoRef"> ) ;&#13;</Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef">   = </Chunk>
-							<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef"> ; </Chunk>
-							<Chunk type="FunctionRef">Länge</Chunk>
-							<Chunk type="NoRef"> ( </Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef"> ) - 2* </Chunk>
-							<Chunk type="VariableReference">vIsFunctionTag</Chunk>
-							<Chunk type="NoRef"> )&#13;&#13;];&#13;&#13;</Chunk>
-							<Chunk type="FunctionRef">Falls</Chunk>
-							<Chunk type="NoRef">( &#13;&#13;/* Case 1 - Ignore title records*/&#13;</Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="8" name="_kIsGroupTitle" repetition="1" UUID="6238CFF2-CBA4-4859-8544-207CFA3AF843">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ; &quot;&quot; ;&#13;&#13;/* Case 2 - Ignore empty records*/&#13;</Chunk>
-							<Chunk type="FunctionRef">IstLeer</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ) ; &quot;&quot; ;&#13;&#13;/* Case 3 - REMOVE deactivated or colorless commands */&#13;</Chunk>
-							<Chunk type="FunctionRef">NICHT</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="VariableReference">vCommandColoringOn</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">ODER</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">NICHT</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="VariableReference">vColorExists</Chunk>
-							<Chunk type="NoRef"> ;&#13;&quot;Removed&quot; &amp; </Chunk>
-							<Chunk type="VariableReference">vWildcard</Chunk>
-							<Chunk type="NoRef"> &amp; &quot;: English &quot; &amp; </Chunk>
-							<Chunk type="FunctionRef">MBS</Chunk>
-							<Chunk type="NoRef">( &quot;SyntaxColoring.RemoveTag&quot; ; </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ) &amp; /*&quot; &quot; &amp; vSelector &amp; &quot;/&quot; &amp; vCommand_EN &amp; */&#13;</Chunk>
-							<Chunk type="FunctionRef">Falls</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="5" name="_gLanguage" repetition="1" UUID="E87D0A07-30F7-4681-A0FD-95A189B1C144">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> &lt;&gt; &quot;English&quot; </Chunk>
-							<Chunk type="FunctionRef">UND</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">NICHT</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">IstLeer</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef"> ) ;&#13;  &quot;, &quot; &amp; </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="5" name="_gLanguage" repetition="1" UUID="E87D0A07-30F7-4681-A0FD-95A189B1C144">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> &amp; &quot; &quot; &amp; </Chunk>
-							<Chunk type="FunctionRef">MBS</Chunk>
-							<Chunk type="NoRef">( &quot;SyntaxColoring.RemoveTag&quot; ; </Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef"> )&#13;) ;&#13;&#13;/* Case 4 - ADD activated commands that have a color */&#13;</Chunk>
-							<Chunk type="VariableReference">vCommandColoringOn</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">UND</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="VariableReference">vColorExists</Chunk>
-							<Chunk type="NoRef"> ;&#13;&quot;Added&quot; &amp; </Chunk>
-							<Chunk type="VariableReference">vWildcard</Chunk>
-							<Chunk type="NoRef"> &amp; &quot;: English &quot; &amp; </Chunk>
-							<Chunk type="FunctionRef">MBS</Chunk>
-							<Chunk type="NoRef">( &quot;SyntaxColoring.AddTag&quot; ; </Chunk>
-							<Chunk type="VariableReference">vSelector</Chunk>
-							<Chunk type="NoRef"> ; </Chunk>
-							<Chunk type="VariableReference">vCommand_EN</Chunk>
-							<Chunk type="NoRef"> ; </Chunk>
-							<Chunk type="VariableReference">vColorHex</Chunk>
-							<Chunk type="NoRef"> ) &amp; &#13;</Chunk>
-							<Chunk type="FunctionRef">Falls</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="5" name="_gLanguage" repetition="1" UUID="E87D0A07-30F7-4681-A0FD-95A189B1C144">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> &lt;&gt; &quot;English&quot; </Chunk>
-							<Chunk type="FunctionRef">UND</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">NICHT</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">IstLeer</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef"> ) ;&#13;  &quot;, &quot; &amp; </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="5" name="_gLanguage" repetition="1" UUID="E87D0A07-30F7-4681-A0FD-95A189B1C144">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> &amp; &quot; &quot; &amp; </Chunk>
-							<Chunk type="FunctionRef">MBS</Chunk>
-							<Chunk type="NoRef">( &quot;SyntaxColoring.AddTag&quot; ; </Chunk>
-							<Chunk type="VariableReference">vSelector</Chunk>
-							<Chunk type="NoRef"> ; </Chunk>
-							<Chunk type="VariableReference">vCommand_Foreign</Chunk>
-							<Chunk type="NoRef"> ; </Chunk>
-							<Chunk type="VariableReference">vColorHex</Chunk>
-							<Chunk type="NoRef"> )&#13;) ;&#13;&#13;&#13;&#13;&quot;-&quot;&#13;&#13;))</Chunk>
-						</ChunkList>
-					</Calculation>
-				</Calculated>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="5" name="_gLanguage" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">E87D0A07-30F7-4681-A0FD-95A189B1C144</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage global="True" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="6" name="On" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">E291E88D-75CB-4CE9-92E8-C58C91F07F4C</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="8" name="_kIsGroupTitle" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">6238CFF2-CBA4-4859-8544-207CFA3AF843</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Falls( ZeichenLinks( Command_EN ; 1 ) ="#" UND Länge( Command_EN ) > 1 UND ColorName = "--None--" UND NICHT On ; 1 )]]></Text>
-				<ChunkList hash="256F44A12DC75F38BF3440331D10C0FC">
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; 1 ) =&quot;#&quot; </Chunk>
-					<Chunk type="FunctionRef">UND</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FunctionRef">Länge</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ) &gt; 1 </Chunk>
-					<Chunk type="FunctionRef">UND</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> = &quot;--None--&quot; </Chunk>
-					<Chunk type="FunctionRef">UND</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FunctionRef">NICHT</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="6" name="On" repetition="1" UUID="E291E88D-75CB-4CE9-92E8-C58C91F07F4C">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; 1 )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="9" name="_kColoredCommandExample" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="12" userName="R.Watson" accountName="admin" timestamp="2020-05-28T18:59:10">62C4F0B0-638C-4ED2-89A7-B18309E6B8C2</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[SetzeVar( vCommand = HoleWert( Liste( _kCalculationChar ; Syntax.GUISyntax::Command ; Command_EN ) ; 1 ) ; Falls(IstLeer ( ColorName ) ODER ColorName ="--None--" ; vCommand ;TextFarbe ( vCommand ; Syntax.Color_active::_kColorRGB )))]]></Text>
-				<ChunkList hash="44C510C4FF259DC42F76DD01079E6EDA">
-					<Chunk type="FunctionRef">SetzeVar</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> = </Chunk>
-					<Chunk type="FunctionRef">HoleWert</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FunctionRef">Liste</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="20" name="_kCalculationChar" repetition="1" UUID="D0DBE329-186C-4277-9C3A-8D4BB08802DB">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command" repetition="1" UUID="B373644E-0DD0-47E5-BDD6-18162D8AA773">
-							<TableOccurrenceReference id="1065117" name="Syntax.GUISyntax" UUID="D6FA15E6-E89D-4561-8675-9E173161D4D0"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ) ; 1 ) ; &#13;&#13;</Chunk>
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">(&#13;</Chunk>
-					<Chunk type="FunctionRef">IstLeer</Chunk>
-					<Chunk type="NoRef"> ( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ) </Chunk>
-					<Chunk type="FunctionRef">ODER</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> =&quot;--None--&quot; ; </Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> ;&#13;</Chunk>
-					<Chunk type="FunctionRef">TextFarbe</Chunk>
-					<Chunk type="NoRef"> ( </Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> ; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="_kColorRGB" repetition="1" UUID="9A78DE3F-088F-4AD1-9EF4-7B48E554590F">
-							<TableOccurrenceReference id="1065141" name="Syntax.Color_active" UUID="11129895-EF11-435D-B1CA-4343E5DA5AF2"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> )&#13;)&#13;&#13;)</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="10" name="_ID_Palette" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">D836783C-5B36-4C11-8EB3-E7D2D2C5CDC7</UUID>
-			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="False" alwaysEvaluate="False">
-				<Calculated>
-					<Calculation>
-						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						<Text><![CDATA[_gID_ActivePalette]]></Text>
-						<ChunkList hash="8947C3B6879702B8A3EB5FB7A8882C82">
-							<Chunk type="FieldRef">
-								<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-						</ChunkList>
-					</Calculation>
-				</Calculated>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage autoIndex="True" index="Minimal" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="11" name="_gID_ActivePalette" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B73731A1-AAF9-4B35-96E4-32974E94D0C1</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage global="True" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="12" name="__ID" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">658441A8-04DB-4055-BA92-C4AC8CEF6A5A</UUID>
-			<AutoEnter type="SerialNumber" prohibitModification="False">
-				<SerialNumber increment="1" nextvalue="1874" generate="OnCreation"></SerialNumber>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="13" name="_kDS" fieldtype="Calculated" datatype="Text" comment="k_DS (T)//Standard Datensatznummer anzeige">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">51C7707A-2DB4-4115-AE73-D31D0B9AC803</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[_BookmarkStandard]]></Text>
-				<ChunkList hash="48A71BC49C3A25519F5D1CDFCBCB4257">
-					<Chunk type="CustomFunctionRef">_BookmarkStandard</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="14" name="_kColorHexAdded" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">69686B56-3FD8-489A-8419-0F12A3337FE3</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[ZeichenLinks( MBS_Command_Results ; 0 ) & MBS( "SyntaxColoring.GetTag" ; Command_EN )]]></Text>
-				<ChunkList hash="7F131284A10F02B757FF246C40BA49BD">
-					<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="4" name="MBS_Command_Results" repetition="1" UUID="80900487-9056-4A9A-BF47-05077D4C6FF7">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; 0 ) &amp; </Chunk>
-					<Chunk type="FunctionRef">MBS</Chunk>
-					<Chunk type="NoRef">( &quot;SyntaxColoring.GetTag&quot; ; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="15" name="Selector" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="17" userName="Rus Master" accountName="admin" timestamp="2021-10-09T09:19:15">974B13A3-2893-481A-A44C-F501213FB71B</UUID>
-			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
-				<Calculated>
-					<Calculation>
-						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						<Text><![CDATA[Falls(ZeichenLinks( Command_EN ; 1 ) = "$" ; "Variable" ;ZeichenRechts( Command_EN ; 3 ) = "*()" ; "Formula" ;ZeichenRechts( Command_EN ; 2 ) = "()" ; "Function" ;NICHT IstLeer( _kCalculationChar ) ; "Formula" ;"ScriptStep")]]></Text>
-						<ChunkList hash="A16A3985CD1F3FEA7224EF35B06DB3B8">
-							<Chunk type="FunctionRef">Falls</Chunk>
-							<Chunk type="NoRef">(&#13;</Chunk>
-							<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ; 1 ) = &quot;$&quot; ; &quot;Variable&quot; ;&#13;</Chunk>
-							<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ; 3 ) = &quot;*()&quot; ; &quot;Formula&quot; ;&#13;</Chunk>
-							<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ; 2 ) = &quot;()&quot; ; &quot;Function&quot; ;&#13;</Chunk>
-							<Chunk type="FunctionRef">NICHT</Chunk>
-							<Chunk type="NoRef"> </Chunk>
-							<Chunk type="FunctionRef">IstLeer</Chunk>
-							<Chunk type="NoRef">( </Chunk>
-							<Chunk type="FieldRef">
-								<FieldReference id="20" name="_kCalculationChar" repetition="1" UUID="D0DBE329-186C-4277-9C3A-8D4BB08802DB">
-									<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-								</FieldReference>
-							</Chunk>
-							<Chunk type="NoRef"> ) ; &quot;Formula&quot; ;&#13;&quot;ScriptStep&quot;&#13;)</Chunk>
-						</ChunkList>
-					</Calculation>
-				</Calculated>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="16" name="_kCommand_ID_Int" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">716759B5-DE20-428D-B8C1-64BDD1423F8E</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Ganzzahl( Sort )]]></Text>
-				<ChunkList hash="18DDC7200605C1935FB5E380D355EBFA">
-					<Chunk type="FunctionRef">Ganzzahl</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="1" name="Sort" repetition="1" UUID="335B603A-68A6-44A6-B5F1-D3BC0F18A5F0">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="17" name="_k1" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">70571E8A-BB3C-42AF-8C79-E91C39A7AF8E</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[1]]></Text>
-				<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
-					<Chunk type="NoRef">1</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="18" name="Comment" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B6980B5E-3287-49E2-B32D-EA87F7F6DA8F</UUID>
-			<AutoEnter type="ConstantData" prohibitModification="False">
-				<ConstantData></ConstantData>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="19" name="_kID_PaletteMLK0" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8C679871-D473-4FBC-B8B7-010B573FB458</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[_ID_Palette & "¶0"]]></Text>
-				<ChunkList hash="6706EE943BA5335DB5DFFBB47D39FEDE">
-					<Chunk type="FieldRef">
-						<FieldReference id="10" name="_ID_Palette" repetition="1" UUID="D836783C-5B36-4C11-8EB3-E7D2D2C5CDC7">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> &amp; &quot;¶0&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="20" name="_kCalculationChar" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2023-03-03T14:16:02">D0DBE329-186C-4277-9C3A-8D4BB08802DB</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="True" autoIndex="True" index="None" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[SetzeVar( vName = Command_EN ;Falls( vName = "and color" ; "∧";vName = "and sign color" ; "&" ;vName = "bigger equal sign color" ; "≥" ;vName = "bigger sign color" ; ">" ;vName = "caret sign color" ; "^" ;vName = "cent variable color" ; "¢" ;vName = "comment color" ; "/*" ;vName = "curly bracket color" ; "{}" ;vName = "equal sign color" ; "=" ;vName = "field color" ; "::" ;vName = "function color" ; "fn" ;vName = "global variable color" ; "$$" ;vName = "minus sign color" ; "-" ;vName = "not color" ; "¬";vName = "not equal sign color" ; "≠" ;vName = "number color" ; "8" ;vName = "or color" ; "∨";vName = "paragraph sign color" ; "\¶" ;vName = "plus sign color" ; "+" ;vName = "round bracket color" ; "()" ;vName = "slash sign color" ; "/" ;vName = "smaller bigger sign color" ; "<>" ;vName = "smaller equal sign color" ; "≤" ;vName = "smaller sign color" ; "<" ;vName = "square bracket color" ; "[]" ;vName = "star sign color" ; "*" ;vName = "text color" ; "\"\"" ;vName = "tilde variable color" ; "~" ;vName = "underscore variable color" ; "_" ;vName = "variable color" ; "$" ;vName = "xor color" ; "⊻";Ersetzen( vName ; 2 ; Länge ( vName ) - 4 ; "" )="**()" ; "**"))]]></Text>
-				<ChunkList hash="F53F120E67430F3CF7A533D5CD5BE4E7">
-					<Chunk type="FunctionRef">SetzeVar</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ;&#13;</Chunk>
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">( &#13;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;and color&quot; ; &quot;∧&quot;;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;and sign color&quot; ; &quot;&amp;&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;bigger equal sign color&quot; ; &quot;≥&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;bigger sign color&quot; ; &quot;&gt;&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;caret sign color&quot; ; &quot;^&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;cent variable color&quot; ; &quot;¢&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;comment color&quot; ; &quot;/*&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;curly bracket color&quot; ; &quot;{}&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;equal sign color&quot; ; &quot;=&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;field color&quot; ; &quot;::&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;function color&quot; ; &quot;fn&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;global variable color&quot; ; &quot;$$&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;minus sign color&quot; ; &quot;-&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;not color&quot; ; &quot;¬&quot;;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;not equal sign color&quot; ; &quot;≠&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;number color&quot; ; &quot;8&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;or color&quot; ; &quot;∨&quot;;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;paragraph sign color&quot; ; &quot;\¶&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;plus sign color&quot; ; &quot;+&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;round bracket color&quot; ; &quot;()&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;slash sign color&quot; ; &quot;/&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;smaller bigger sign color&quot; ; &quot;&lt;&gt;&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;smaller equal sign color&quot; ; &quot;≤&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;smaller sign color&quot; ; &quot;&lt;&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;square bracket color&quot; ; &quot;[]&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;star sign color&quot; ; &quot;*&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;text color&quot; ; &quot;\&quot;\&quot;&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;tilde variable color&quot; ; &quot;~&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;underscore variable color&quot; ; &quot;_&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;variable color&quot; ; &quot;$&quot; ;&#13;</Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> = &quot;xor color&quot; ; &quot;⊻&quot;;&#13;&#13;</Chunk>
-					<Chunk type="FunctionRef">Ersetzen</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> ; 2 ; </Chunk>
-					<Chunk type="FunctionRef">Länge</Chunk>
-					<Chunk type="NoRef"> ( </Chunk>
-					<Chunk type="VariableReference">vName</Chunk>
-					<Chunk type="NoRef"> ) - 4 ; &quot;&quot; )=&quot;**()&quot; ; &quot;**&quot;&#13;))</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="21" name="_kIsWildcard" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">527A4D55-F770-4378-927C-EAEC6E5384B1</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[ZeichenLinks( Command_EN ; 1 ) = "*" UND ZeichenRechts( Command_EN ; 1 ) = "*"]]></Text>
-				<ChunkList hash="C2310A14B1EE59A69D77491BE5447ED2">
-					<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; 1 ) = &quot;*&quot; </Chunk>
-					<Chunk type="FunctionRef">UND</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; 1 ) = &quot;*&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="22" name="_kPaletteType" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">F3E7B306-A4D9-48B7-8C89-1B74DAA03AEC</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" autoIndex="True" index="Minimal" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Falls( Selector = "ScriptStep" ; "Script" ; "Formula" )]]></Text>
-				<ChunkList hash="3EADB1B60D8565F024490BD1695D23F4">
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="15" name="Selector" repetition="1" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> = &quot;ScriptStep&quot; ; &quot;Script&quot; ; &quot;Formula&quot; )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="23" name="IsMarked" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8267A020-D530-492E-AB10-02E65A2E0D50</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="24" name="FM_internal_ID" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8B83ED0C-AB2E-4795-8618-B74F55A0B44D</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="25" name="FM_Version" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">6920B760-BFB8-4FC9-A50B-25A993BE3FE3</UUID>
-			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
-				<Calculated>
-					<Calculation>
-						<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						<Text><![CDATA[Austauschen(Selbst ;[" ";""] ;["…";"..."] ; ["-";"..."] ;["......";"..."] ;["......";"..."] ;[".....";"..."] ;["....";"..."] ;["..";"..."] ;["....";"..."])]]></Text>
-						<ChunkList hash="1A99F2BC553F6C39DC7232B865599443">
-							<Chunk type="FunctionRef">Austauschen</Chunk>
-							<Chunk type="NoRef">(&#13;</Chunk>
-							<Chunk type="FunctionRef">Selbst</Chunk>
-							<Chunk type="NoRef"> ;&#13;[&quot; &quot;;&quot;&quot;] ;&#13;[&quot;…&quot;;&quot;...&quot;] ; &#13;[&quot;-&quot;;&quot;...&quot;] ;&#13;[&quot;......&quot;;&quot;...&quot;] ;&#13;[&quot;......&quot;;&quot;...&quot;] ;&#13;[&quot;.....&quot;;&quot;...&quot;] ;&#13;[&quot;....&quot;;&quot;...&quot;] ;&#13;[&quot;..&quot;;&quot;...&quot;] ;&#13;[&quot;....&quot;;&quot;...&quot;]&#13;)</Chunk>
-						</ChunkList>
-					</Calculation>
-				</Calculated>
-			</AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="26" name="_kColorNameWithoutNone" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="14" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">41C9ABDB-EDF6-4F0A-809E-DD02B1529E8B</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Falls( ColorName ≠ "--None--" UND ColorName ≠ "++New++" ; ColorName )]]></Text>
-				<ChunkList hash="23E80E2A416B340D9D6F5FB78B177679">
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ≠ &quot;--None--&quot; </Chunk>
-					<Chunk type="FunctionRef">UND</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ≠ &quot;++New++&quot; ; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="27" name="_kColorNamePaletteSpecific" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="17" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">14C3BEAE-C20A-4D45-93E9-5F63848E82E5</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA["{" & Command_EN & "}"]]></Text>
-				<ChunkList hash="D9B81AFBF2BFA7EFFE46049901E3A03E">
-					<Chunk type="NoRef">&quot;{&quot; &amp; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> &amp; &quot;}&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="28" name="_kColorNameActive" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="15" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">D78CBA54-3CE0-433E-91FC-76FAEF0788D4</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[_Default ( Syntax.Color_InActivePaletteByCommand::ColorName ; ColorName )]]></Text>
-				<ChunkList hash="39ED858100C609C993C85F336B19CC96">
-					<Chunk type="CustomFunctionRef">_Default</Chunk>
-					<Chunk type="NoRef"> ( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
-							<TableOccurrenceReference id="1065140" name="Syntax.Color_InActivePaletteByCommand" UUID="1AF1DFBE-D2C1-462E-8393-69C7CE00CD40"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="29" name="_kActivePaletteName" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">5154119E-4802-46E7-A612-3066DD482499</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Syntax.Palette_Active::PaletteName]]></Text>
-				<ChunkList hash="6846EF6255D0583299606AE1D76B0F7A">
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="PaletteName" repetition="1" UUID="F40EF81B-1897-474F-84CC-56818E6D3F6A">
-							<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active" UUID="1D9B0FEF-D801-4964-A4D4-64CA2123BCEE"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="30" name="_kProblems" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">93CBC842-1FAB-4434-A01B-EE228BAAFCDC</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Falls(NICHT _kIsWildcard UND MusterAnzahl( Austauschen( Command_EN ; ["-";""] ) ; " " ) > 7 ; "Expression is too long")]]></Text>
-				<ChunkList hash="F1898F302262C2B6C4F0AB21C469CE75">
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">(&#13;</Chunk>
-					<Chunk type="FunctionRef">NICHT</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="21" name="_kIsWildcard" repetition="1" UUID="527A4D55-F770-4378-927C-EAEC6E5384B1">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FunctionRef">UND</Chunk>
-					<Chunk type="NoRef"> </Chunk>
-					<Chunk type="FunctionRef">MusterAnzahl</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FunctionRef">Austauschen</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; [&quot;-&quot;;&quot;&quot;] ) ; &quot; &quot; ) &gt; 7 ; &quot;Expression is too long&quot;&#13;)</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="31" name="_kIsScriptStep" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">28F2D7D3-D724-4B45-8C21-72EF808E0443</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Selector = "ScriptStep"]]></Text>
-				<ChunkList hash="27FF43DAAC42E84F2AF4147458403D23">
-					<Chunk type="FieldRef">
-						<FieldReference id="15" name="Selector" repetition="1" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> = &quot;ScriptStep&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="32" name="_kIsFunction" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="11" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">6F0D2854-55B6-4E5C-988B-77B677D9099A</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Selector = "Function"]]></Text>
-				<ChunkList hash="A675FA6A8232F0D6B34216D002794212">
-					<Chunk type="FieldRef">
-						<FieldReference id="15" name="Selector" repetition="1" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> = &quot;Function&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="33" name="_kIsFormula" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="13" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">7003BF9A-ABFA-473D-A5BE-48A50801F1F1</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Selector = "Formula"]]></Text>
-				<ChunkList hash="17202DC5CD6B16B0C64258B7349834BA">
-					<Chunk type="FieldRef">
-						<FieldReference id="15" name="Selector" repetition="1" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> = &quot;Formula&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="34" name="_kIsVariable" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="15" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">0E554CEB-7F3F-45CD-B10E-9B16957CCE84</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Selector = "Variable"]]></Text>
-				<ChunkList hash="3FAD4A06CB7133CBE7DDBD884EC2C8B5">
-					<Chunk type="FieldRef">
-						<FieldReference id="15" name="Selector" repetition="1" UUID="974B13A3-2893-481A-A44C-F501213FB71B">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> = &quot;Variable&quot;</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="35" name="_kFM_VersionFrom" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="10" userName="R.Watson" accountName="admin" timestamp="2022-12-28T07:12:51">ECB6450F-C21B-42AE-9D86-7F5D46BE851F</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[_Default ( Falls(Position(  FM_Version ; "..." ; 1 ; 1 ) ;HoleWert( Austauschen( FM_Version ; "..." ; "¶" ) ; 1 ) ;FM_Version); 0 )]]></Text>
-				<ChunkList hash="764BA57E8929C8FAC674F7B4259D9391">
-					<Chunk type="CustomFunctionRef">_Default</Chunk>
-					<Chunk type="NoRef"> ( &#13;&#13;</Chunk>
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">(&#13;</Chunk>
-					<Chunk type="FunctionRef">Position</Chunk>
-					<Chunk type="NoRef">(  </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; &quot;...&quot; ; 1 ; 1 ) ;&#13;</Chunk>
-					<Chunk type="FunctionRef">HoleWert</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FunctionRef">Austauschen</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; &quot;...&quot; ; &quot;¶&quot; ) ; 1 ) ;&#13;</Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef">&#13;)&#13;&#13;; 0 )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="36" name="_kFM_VersionTo" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="11" userName="R.Watson" accountName="admin" timestamp="2022-12-28T07:12:56">FC37BB0D-4290-4298-AA39-E371C2CDA5BD</UUID>
-			<AutoEnter alwaysEvaluate="True"></AutoEnter>
-			<Storage storeCalculationResults="True" index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[_Default ( Falls(Position(  FM_Version ; "..." ; 1 ; 1 ) ;HoleWert( Austauschen( FM_Version ; "..." ; "¶" ) ; 2 ) ;FM_Version); 99 )]]></Text>
-				<ChunkList hash="75B75F79F977601E650DC36DED73DEC3">
-					<Chunk type="CustomFunctionRef">_Default</Chunk>
-					<Chunk type="NoRef"> ( &#13;&#13;</Chunk>
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef">(&#13;</Chunk>
-					<Chunk type="FunctionRef">Position</Chunk>
-					<Chunk type="NoRef">(  </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; &quot;...&quot; ; 1 ; 1 ) ;&#13;</Chunk>
-					<Chunk type="FunctionRef">HoleWert</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FunctionRef">Austauschen</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ; &quot;...&quot; ; &quot;¶&quot; ) ; 2 ) ;&#13;</Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef">&#13;)&#13;&#13;; 99 )</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="37" name="_gFM_Version" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">6A721FEC-CF7B-45EA-A922-5B169BC8D403</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage global="True" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="39" name="_kCommandStub" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">A1F7DF82-4E3E-4C0F-A3B0-E27DF7D8D094</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="True" autoIndex="True" index="Minimal" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[SetzeVar([vCommand = Command_EN ;vCommand = Trimme( _TextBetween ( vCommand & "[" ; "" ; "[" )) ;vCommand = Trimme( _TextBetween ( vCommand & "(" ; "" ; "(" ))];vCommand)]]></Text>
-				<ChunkList hash="BBB374D39C87411322CB3C8DA5079807">
-					<Chunk type="FunctionRef">SetzeVar</Chunk>
-					<Chunk type="NoRef">(&#13;[&#13;</Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> = </Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
-							<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ;&#13;</Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> = </Chunk>
-					<Chunk type="FunctionRef">Trimme</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="CustomFunctionRef">_TextBetween</Chunk>
-					<Chunk type="NoRef"> ( </Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> &amp; &quot;[&quot; ; &quot;&quot; ; &quot;[&quot; )) ;&#13;</Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> = </Chunk>
-					<Chunk type="FunctionRef">Trimme</Chunk>
-					<Chunk type="NoRef">( </Chunk>
-					<Chunk type="CustomFunctionRef">_TextBetween</Chunk>
-					<Chunk type="NoRef"> ( </Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef"> &amp; &quot;(&quot; ; &quot;&quot; ; &quot;(&quot; ))&#13;];&#13;</Chunk>
-					<Chunk type="VariableReference">vCommand</Chunk>
-					<Chunk type="NoRef">&#13;)</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="40" name="_kColorOutput" fieldtype="Calculated" datatype="Text" comment="">
-			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2D747E74-BD20-45CD-B048-E3781CC039D6</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Syntax.Color::ColorInput]]></Text>
-				<ChunkList hash="338BF0A5596EE12ACBB7689A8D22CF53">
-					<Chunk type="FieldRef">
-						<FieldReference id="5" name="ColorInput" repetition="1" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
-							<TableOccurrenceReference id="1065116" name="Syntax.Color" UUID="43397922-1FCE-4519-9BCF-ED388DD51F7D"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="41" name="Collection" fieldtype="Normal" datatype="Text" comment="">
-			<UUID modifications="1" userName="R.Watson" accountName="admin" timestamp="2020-07-06T12:21:52">800F4FE4-9257-4C47-A3A5-BBB3714C661E</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage index="All" global="False" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="42" name="_gCollection" fieldtype="Normal" datatype="Number" comment="">
-			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-07-06T12:57:40">65916BF1-9BF4-4FE9-A448-8D1F3B311BCB</UUID>
-			<AutoEnter type="" prohibitModification="False"></AutoEnter>
-			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
-			<Storage global="True" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<TagList></TagList>
-		</Field>
-		<Field DefaultStyle="" id="43" name="_gID_ActivePaletteSwapID" fieldtype="Calculated" datatype="Number" comment="">
-			<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2021-09-24T09:46:47">4BDB4D7E-A5F3-424B-B4F3-DADEC923B0BF</UUID>
-			<AutoEnter alwaysEvaluate="False"></AutoEnter>
-			<Storage global="True" maxRepetitions="1">
-				<LanguageReference name="German" id="25"></LanguageReference>
-			</Storage>
-			<Calculation>
-				<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
-				<Text><![CDATA[Falls ( /* wrong pallette type */Syntax.Palette_Active::_kIsDarkModePalette ≠ _IsDarkMode ;/* Return an alternative palette, if one exists */Syntax.Palette_Active::_kSwitchDarkLightPaletteID)]]></Text>
-				<ChunkList hash="D956DE2BCA405D07A5D975E6CA3DD84E">
-					<Chunk type="FunctionRef">Falls</Chunk>
-					<Chunk type="NoRef"> ( &#13;/* wrong pallette type */&#13;</Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="16" name="_kIsDarkModePalette" repetition="1" UUID="BF865AEC-E517-41AB-A492-C1C243407CCF">
-							<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active" UUID="1D9B0FEF-D801-4964-A4D4-64CA2123BCEE"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef"> ≠ </Chunk>
-					<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
-					<Chunk type="NoRef"> ;&#13;&#13;/* Return an alternative palette, if one exists */&#13;</Chunk>
-					<Chunk type="FieldRef">
-						<FieldReference id="18" name="_kSwitchDarkLightPaletteID" repetition="1" UUID="AF867338-9873-4350-804C-5F79C30ABD15">
-							<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active" UUID="1D9B0FEF-D801-4964-A4D4-64CA2123BCEE"></TableOccurrenceReference>
-						</FieldReference>
-					</Chunk>
-					<Chunk type="NoRef">&#13;)</Chunk>
-				</ChunkList>
-			</Calculation>
-			<TagList></TagList>
-		</Field>
-	</ObjectList>
-</FieldCatalog>

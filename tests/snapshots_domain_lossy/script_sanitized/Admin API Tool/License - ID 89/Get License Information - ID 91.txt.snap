@@ -1,0 +1,83 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Get License Information
+#  HISTORY:
+     - Created:   2020-01-11 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/license/info" ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# 19.5+ changes the structure of the JSON returned
+	Wenn [ LiesAlsZahl ( FMS__fmserver::serverVersion ) > 19.4 ]
+		# parse json response
+		Feldwert setzen [ FMS__fmserver::Annual_Reset_Date ; JSONGetElement ( $$my.result ; "response.Annual_Reset_Date" ) ]
+		Feldwert setzen [ FMS__fmserver::Computer_Size ; JSONGetElement ( $$my.result ; "response.Computer_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Concurrent_User ; JSONGetElement ( $$my.result ; "response.Concurrent_User" ) ]
+		Feldwert setzen [ FMS__fmserver::Core_User ; JSONGetElement ( $$my.result ; "response.Core_User" ) ]
+		Feldwert setzen [ FMS__fmserver::Data_API_Size ; JSONGetElement ( $$my.result ; "response.Data_API_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Data_API_Unit ; JSONGetElement ( $$my.result ; "response.Data_API_Unit" ) ]
+		Feldwert setzen [ FMS__fmserver::Data_Size ; JSONGetElement ( $$my.result ; "response.Data_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Expiration_Time ; JSONGetElement ( $$my.result ; "response.Expiration_Time" ) ]
+		Feldwert setzen [ FMS__fmserver::Named_User ; JSONGetElement ( $$my.result ; "response.Named_User" ) ]
+		Feldwert setzen [ FMS__fmserver::Networks_Size ; JSONGetElement ( $$my.result ; "response.Networks_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Product_Name ; JSONGetElement ( $$my.result ; "response.Product_Name" ) ]
+		Feldwert setzen [ FMS__fmserver::Product_Version ; JSONGetElement ( $$my.result ; "response.Product_Version" ) ]
+		Feldwert setzen [ FMS__fmserver::Publishing_Engine ; JSONGetElement ( $$my.result ; "response.Publishing_Engine" ) ]
+		Feldwert setzen [ FMS__fmserver::Purchase_ID ; JSONGetElement ( $$my.result ; "response.Purchase_ID" ) ]
+		Feldwert setzen [ FMS__fmserver::Purchase_Type ; JSONGetElement ( $$my.result ; "response.Purchase_Type" ) ]
+		Feldwert setzen [ FMS__fmserver::Shared_Files ; JSONGetElement ( $$my.result ; "response.Shared_Files" ) ]
+		Feldwert setzen [ FMS__fmserver::xDBC ; JSONGetElement ( $$my.result ; "response.xDBC" ) ]
+		
+	Sonst
+		# parse json response
+		Feldwert setzen [ FMS__fmserver::Annual_Reset_Date ; JSONGetElement ( $$my.result ; "response.data.Annual_Reset_Date" ) ]
+		Feldwert setzen [ FMS__fmserver::Computer_Size ; JSONGetElement ( $$my.result ; "response.data.Computer_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Concurrent_User ; JSONGetElement ( $$my.result ; "response.data.Concurrent_User" ) ]
+		Feldwert setzen [ FMS__fmserver::Core_User ; JSONGetElement ( $$my.result ; "response.data.Core_User" ) ]
+		Feldwert setzen [ FMS__fmserver::Data_API_Size ; JSONGetElement ( $$my.result ; "response.data.Data_API_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Data_API_Unit ; JSONGetElement ( $$my.result ; "response.data.Data_API_Unit" ) ]
+		Feldwert setzen [ FMS__fmserver::Data_Size ; JSONGetElement ( $$my.result ; "response.data.Data_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Expiration_Time ; JSONGetElement ( $$my.result ; "response.data.Expiration_Time" ) ]
+		Feldwert setzen [ FMS__fmserver::Named_User ; JSONGetElement ( $$my.result ; "response.data.Named_User" ) ]
+		Feldwert setzen [ FMS__fmserver::Networks_Size ; JSONGetElement ( $$my.result ; "response.data.Networks_Size" ) ]
+		Feldwert setzen [ FMS__fmserver::Product_Name ; JSONGetElement ( $$my.result ; "response.data.Product_Name" ) ]
+		Feldwert setzen [ FMS__fmserver::Product_Version ; JSONGetElement ( $$my.result ; "response.data.Product_Version" ) ]
+		Feldwert setzen [ FMS__fmserver::Publishing_Engine ; JSONGetElement ( $$my.result ; "response.data.Publishing_Engine" ) ]
+		Feldwert setzen [ FMS__fmserver::Purchase_ID ; JSONGetElement ( $$my.result ; "response.data.Purchase_ID" ) ]
+		Feldwert setzen [ FMS__fmserver::Purchase_Type ; JSONGetElement ( $$my.result ; "response.data.Purchase_Type" ) ]
+		Feldwert setzen [ FMS__fmserver::Shared_Files ; JSONGetElement ( $$my.result ; "response.data.Shared_Files" ) ]
+		Feldwert setzen [ FMS__fmserver::xDBC ; JSONGetElement ( $$my.result ; "response.data.xDBC" ) ]
+		
+	Ende (wenn)
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

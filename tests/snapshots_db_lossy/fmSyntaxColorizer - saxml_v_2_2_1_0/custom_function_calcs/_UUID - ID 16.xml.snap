@@ -1,143 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="16" name="_UUID"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* _UUID( Type )Generate a Universally Unique IdentifierParameters:	1    Generate a version 1 (MAC address) UUID with no hyphens	1h   Generate a version 1 UUID with hyphens	4    Generate a version 4 (random) UUID with no hyphens	4h   Generate a version 4 UUID with hyphensVersion 1 UUIDs are based on the current timestamp and MAC address and are in the form xxxxxxxx-xxxx-1xxx-yxxx-xxxxxxxxxxxx, where x is 0–F and y is 8–B.  e.g. 7f23c000-b6fa-11ad-802a-136a8c2f7100.Version 4 UUIDs are randomly generated and in the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx.  e.g. f47ac10b-58cc-4372-a567-0e02b2c3d479.The advantages of using a UUID over a serial number is there’s no need to worry about the next value of a serial number or a serial number collision, forinstance when importing records.  The downside is they’re not appropriate to expose to a user.UUID example:  Dick and Harry both create records in their own copies of a database.  Each record needs a unique serial number so they can be combined at a later date.  After a total of 68,719,476,736 (2^36) records are created the probability of a collision is 0.0000000000000004 (4 × 10^−16)Further reading:  <http://en.wikipedia.org/wiki/UUID>Caveats:- Because FileMaker’s clock resolution is only in seconds the version 1 UUID can return duplicates if called multiple times a second (there’s a 14-bit random number included which usually prevents this).- FileMaker 8.5–10.0v2 (and maybe earlier) have a bug where on some machines the random function returns the same sequence of random numbers every time FileMaker is restarted!  This obviously corrupts the generation of unique identifiers.  Using a version 1 UUID is safer in this instance.  10.0v3 fixes this.- I *think* I have the version 1 UUIDs correctly following the spec.  Note they include local time (not UTC) and clock sequence is always random—both allowed but not recommended.Author:	2009-02-01 Tom Robinson <http://www.tomrobinson.co.nz/>Change History:	2009-02-06		Add patch parameter after discovery of FileMaker bug causing client’s machine to create duplicate UUIDs		Generate lowercase UUIDs per RFC 4122	2009-02-11		Remove patch code and add generation of version 1 UUIDs as patch parameter was still returning duplicates		Utilise DecToHex custom function	2009-08-07		Update docs to note random bug is fixed in 10.0v3	2010-05-12		DecToHex is now NumToHex		Split last group in 4/4h from Random*281474976710656 (12 digits) to 2 × Random*16777216 (6+6 digits) as random function in 10.0v3 appears to have less precision—UUIDs were always ending in 0000 or ffff	2012-11-01 MrW Adapted from <http://www.briandunning.com/cf/969> (With my naming convention and _Hex function)*/Falls(	ZeichenLinks(Type;1)="1";		SetzeVar(			[				h=Wenn(ZeichenRechts(Type;1)="h";"-";"");				t=Kleinbuchstaben(_Hex((Hole(SystemZeitstempel)-49916304000)*10000000))  /* Subtract to move timestamp epoch from 0001-01-01T00:00:00 to 1582-10-15T00:00:00, multiply to get from seconds to hundred-nanosecond intervals */			];			ZeichenRechts(t;8)&h&      /* RFC 4122 time_low */			ZeichenMitte(t;4;4)&h&   /* time_mid */			"1"&ZeichenLinks(t;3)&h&   /* time_hi_and_version */			ZeichenMitte("89abb";Zufall*4+1;1)&ZeichenRechts("00"&Kleinbuchstaben(_Hex(Zufall*4096));3)&h&				/* clock_seq_hi_and_reserved & clock_seq_low                          */				/* Note random can return 1 in which case result is 2nd ‘b’ or ‘000’ */			Austauschen(HoleWert(Hole(SystemNICAdresse);1);":";"")   /* node */		);	ZeichenLinks(Type;1)="4";		SetzeVar(			h=Wenn(ZeichenRechts(Type;1)="h";"-";"");			Kleinbuchstaben(				ZeichenRechts("0000000"&_Hex(Zufall*4294967296);8)&h&				ZeichenRechts("000"&_Hex(Zufall*65536);4)&h&				"4"&ZeichenRechts("00"&_Hex(Zufall*4096);3)&h&				ZeichenMitte("89abb";Zufall*4+1;1)&ZeichenRechts("00"&_Hex(Zufall*4096);3)&h&				ZeichenRechts("00000"&_Hex(Zufall*16777216);6)&ZeichenRechts("00000"&_Hex(Zufall*16777216);6)			)		);	"")]]></Text>
-		<ChunkList hash="3D5676D45CF026F127A6F89E4945419E">
-			<Chunk type="NoRef">/* _UUID( Type )&#13;Generate a Universally Unique Identifier&#13;&#13;Parameters:&#13;	1    Generate a version 1 (MAC address) UUID with no hyphens&#13;	1h   Generate a version 1 UUID with hyphens&#13;	4    Generate a version 4 (random) UUID with no hyphens&#13;	4h   Generate a version 4 UUID with hyphens&#13;&#13;Version 1 UUIDs are based on the current timestamp and MAC address and are in the form xxxxxxxx-xxxx-1xxx-yxxx-xxxxxxxxxxxx, where x is 0–F and y is 8–B.  e.g. 7f23c000-b6fa-11ad-802a-136a8c2f7100.&#13;&#13;Version 4 UUIDs are randomly generated and in the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx.  e.g. f47ac10b-58cc-4372-a567-0e02b2c3d479.&#13;&#13;The advantages of using a UUID over a serial number is there’s no need to worry about the next value of a serial number or a serial number collision, forinstance when importing records.  The downside is they’re not appropriate to expose to a user.&#13;&#13;UUID example:  Dick and Harry both create records in their own copies of a database.  Each record needs a unique serial number so they can be combined at a later date.  After a total of 68,719,476,736 (2^36) records are created the probability of a collision is 0.0000000000000004 (4 × 10^−16)&#13;&#13;Further reading:  &lt;http://en.wikipedia.org/wiki/UUID&gt;&#13;&#13;Caveats:&#13;- Because FileMaker’s clock resolution is only in seconds the version 1 UUID can return duplicates if called multiple times a second (there’s a 14-bit random number included which usually prevents this).&#13;- FileMaker 8.5–10.0v2 (and maybe earlier) have a bug where on some machines the random function returns the same sequence of random numbers every time FileMaker is restarted!  This obviously corrupts the generation of unique identifiers.  Using a version 1 UUID is safer in this instance.  10.0v3 fixes this.&#13;- I *think* I have the version 1 UUIDs correctly following the spec.  Note they include local time (not UTC) and clock sequence is always random—both allowed but not recommended.&#13;&#13;Author:&#13;	2009-02-01 Tom Robinson &lt;http://www.tomrobinson.co.nz/&gt;&#13;&#13;Change History:&#13;	2009-02-06&#13;		Add patch parameter after discovery of FileMaker bug causing client’s machine to create duplicate UUIDs&#13;		Generate lowercase UUIDs per RFC 4122&#13;	2009-02-11&#13;		Remove patch code and add generation of version 1 UUIDs as patch parameter was still returning duplicates&#13;		Utilise DecToHex custom function&#13;	2009-08-07&#13;		Update docs to note random bug is fixed in 10.0v3&#13;	2010-05-12&#13;		DecToHex is now NumToHex&#13;		Split last group in 4/4h from Random*281474976710656 (12 digits) to 2 × Random*16777216 (6+6 digits) as random function in 10.0v3 appears to have less precision—UUIDs were always ending in 0000 or ffff&#13;	2012-11-01 MrW Adapted from &lt;http://www.briandunning.com/cf/969&gt; (With my naming convention and _Hex function)&#13;&#13;*/&#13;&#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">(&#13;	</Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">Type</Chunk>
-			<Chunk type="NoRef">;1)=&quot;1&quot;;&#13;		</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">(&#13;			[&#13;				</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">=</Chunk>
-			<Chunk type="FunctionRef">Wenn</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">Type</Chunk>
-			<Chunk type="NoRef">;1)=&quot;h&quot;;&quot;-&quot;;&quot;&quot;);&#13;				</Chunk>
-			<Chunk type="VariableReference">t</Chunk>
-			<Chunk type="NoRef">=</Chunk>
-			<Chunk type="FunctionRef">Kleinbuchstaben</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">((</Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">SystemZeitstempel</Chunk>
-			<Chunk type="NoRef">)-49916304000)*10000000))  /* Subtract to move timestamp epoch from 0001-01-01T00:00:00 to 1582-10-15T00:00:00, multiply to get from seconds to hundred-nanosecond intervals */&#13;			];&#13;			</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">t</Chunk>
-			<Chunk type="NoRef">;8)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;      /* RFC 4122 time_low */&#13;			</Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">t</Chunk>
-			<Chunk type="NoRef">;4;4)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;   /* time_mid */&#13;			&quot;1&quot;&amp;</Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">t</Chunk>
-			<Chunk type="NoRef">;3)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;   /* time_hi_and_version */&#13;			</Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">(&quot;89abb&quot;;</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*4+1;1)&amp;</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;00&quot;&amp;</Chunk>
-			<Chunk type="FunctionRef">Kleinbuchstaben</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*4096));3)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;&#13;				/* clock_seq_hi_and_reserved &amp; clock_seq_low                          */&#13;				/* Note random can return 1 in which case result is 2nd ‘b’ or ‘000’ */&#13;			</Chunk>
-			<Chunk type="FunctionRef">Austauschen</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">HoleWert</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Hole</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">SystemNICAdresse</Chunk>
-			<Chunk type="NoRef">);1);&quot;:&quot;;&quot;&quot;)   /* node */&#13;		);&#13;&#13;	</Chunk>
-			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">Type</Chunk>
-			<Chunk type="NoRef">;1)=&quot;4&quot;;&#13;		</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">(&#13;			</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">=</Chunk>
-			<Chunk type="FunctionRef">Wenn</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="VariableReference">Type</Chunk>
-			<Chunk type="NoRef">;1)=&quot;h&quot;;&quot;-&quot;;&quot;&quot;);&#13;			</Chunk>
-			<Chunk type="FunctionRef">Kleinbuchstaben</Chunk>
-			<Chunk type="NoRef">(&#13;				</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;0000000&quot;&amp;</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*4294967296);8)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;&#13;				</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;000&quot;&amp;</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*65536);4)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;&#13;				&quot;4&quot;&amp;</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;00&quot;&amp;</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*4096);3)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;&#13;				</Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">(&quot;89abb&quot;;</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*4+1;1)&amp;</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;00&quot;&amp;</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*4096);3)&amp;</Chunk>
-			<Chunk type="VariableReference">h</Chunk>
-			<Chunk type="NoRef">&amp;&#13;				</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;00000&quot;&amp;</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*16777216);6)&amp;</Chunk>
-			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
-			<Chunk type="NoRef">(&quot;00000&quot;&amp;</Chunk>
-			<Chunk type="CustomFunctionRef">_Hex</Chunk>
-			<Chunk type="NoRef">(</Chunk>
-			<Chunk type="FunctionRef">Zufall</Chunk>
-			<Chunk type="NoRef">*16777216);6)&#13;			)&#13;		);&#13;&#13;	&quot;&quot;&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

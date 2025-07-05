@@ -1,0 +1,488 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="76" name="Delete" UUID="07E7008B-8DDE-4B49-9C44-179967005D3E"></ScriptReference>
+	<ObjectList membercount="38">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9E748981-2FF6-49C5-9AF8-FA50442C9465</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4D61AA0B-5C33-44CD-B6AF-44F1FBFC8B01</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9973DE38-B199-483C-A0D1-03B655227729</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>DB9DCB83-0F01-46D4-B87E-AE54E3026DCC</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>8DCDC0BD-7D08-48E6-8B3E-7F100BDAFDB1</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B72B53EC-8E95-4163-8BCD-F1EF546435C5</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="68" name="Wenn" enable="True">
+			<UUID>23770F66-3495-44B4-9ED8-0F73BAB4AAF8</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( Fenstermodus ) = 0]]></Text>
+							<ChunkList hash="5D96F6AE4DFCFB69B4B5422AD44E1516">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">Fenstermodus</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D52BDE5F-53A0-4EBC-8C5A-34C5FDE9BA7A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Find mode"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="9" name="Datensatz/Abfrage löschen" enable="True">
+			<UUID>66A776A2-F68F-430C-A556-F729BE94B776</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9850BBC9-006F-44EA-A65C-BDDC648117A4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="125" name="Sonst, wenn" enable="True">
+			<UUID>E2C74E28-88B4-4FB9-A43E-3472035A30D4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( Fenstermodus ) ≠ 0]]></Text>
+							<ChunkList hash="A8E47D1BC67194FD0EE86DEE6D63018B">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">Fenstermodus</Chunk>
+								<Chunk type="NoRef"> ) ≠ 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="89" name="# (Kommentar)" enable="True">
+			<UUID>47ADEDF2-7820-4EC1-96EC-F22FE12EEC2A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Not browse mode"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>65C70C30-B95B-452A-A021-4B512285A6BD</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B36858ED-04EA-4CD2-95D3-68226D221682</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="125" name="Sonst, wenn" enable="True">
+			<UUID>159898A3-6D05-4303-860D-78FFDC7D7EDB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_IsLayoutTableName ( _Palette::__ID )]]></Text>
+							<ChunkList hash="31136CDF4076EC4079DE278FDB71A942">
+								<Chunk type="CustomFunctionRef">_IsLayoutTableName</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+										<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BF6E8775-8066-48C9-8F02-D628FA131031</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Delete color-palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="68" name="Wenn" enable="True">
+			<UUID>C7EED9AD-5B05-48FE-85F1-6B0C5543646D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_Palette::__ID = 1]]></Text>
+							<ChunkList hash="6552933A618B65C2C203F582EEAB38F2">
+								<Chunk type="FieldRef">
+									<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+										<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>377D6884-4EA2-43D5-B937-2987C677C826</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Delete"]]></Text>
+							<ChunkList hash="CD4749BBDACF9A16C19572ABDB904F65">
+								<Chunk type="NoRef">&quot;Delete&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["You may not delete the default colors palette!"]]></Text>
+							<ChunkList hash="2B7DF3B38ED546F5BC60728700882153">
+								<Chunk type="NoRef">&quot;You may not delete the default colors palette!&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>BBB25718-07BA-473F-A213-959D04CE1BA4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="19" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7CDC72EA-4CE1-40E1-8A71-AA948F2AF329</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="70" name="Ende (wenn)" enable="True">
+			<UUID>69079851-0BC9-47D5-AC0D-DDC9695262C4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="21" id="89" name="# (Kommentar)" enable="True">
+			<UUID>266375F6-4104-4CE7-9C7A-4AEB755A0DD6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="141" name="Variable setzen" enable="True">
+			<UUID>52D23B02-D423-45E5-9FEE-35E9C518F0E7</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_Palette::__ID]]></Text>
+								<ChunkList hash="BE8A01A36B8393A88C6928ED8AB541B0">
+									<Chunk type="FieldRef">
+										<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+											<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$_Palette__ID"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="9" name="Datensatz/Abfrage löschen" enable="True">
+			<UUID>32386755-B914-4860-BD5B-76DA6FD128FB</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="141" name="Variable setzen" enable="True">
+			<UUID>10FF6830-3CA4-45D6-B9C1-9982E9F444E2</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole ( LetzteFehlerNr )]]></Text>
+								<ChunkList hash="5E4048BA2AB4D1F04CEA9FB679B145E0">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="68" name="Wenn" enable="True">
+			<UUID>F9993057-6AEB-44B2-9AE0-08C3321933FF</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT $error UND _Syntax::_gID_ActivePalette = $_Palette__ID]]></Text>
+							<ChunkList hash="DE6AE811B16A20AB5E5CD447A903C54A">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">UND</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="VariableReference">$_Palette__ID</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>D893E6E8-9547-446F-8359-02EADEC206DE</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Activate another palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="70" name="Ende (wenn)" enable="True">
+			<UUID>F6481A65-103C-4CC9-9C00-B0197D1D0BA6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="28" id="89" name="# (Kommentar)" enable="True">
+			<UUID>450EDA13-5601-454A-B468-8FDEC4A1A4DA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="125" name="Sonst, wenn" enable="True">
+			<UUID>950656E2-D37E-4A83-94CE-F1E216CEFAC3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_IsLayoutTableName ( _Home::__ID )]]></Text>
+							<ChunkList hash="B352B39765068DA3CE2D0EEB9C9BE681">
+								<Chunk type="CustomFunctionRef">_IsLayoutTableName</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="1" name="__ID" repetition="1" UUID="C8593591-24F4-49A8-85FE-8EC63AE0F987">
+										<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="93" name="Fehlerton" enable="True">
+			<UUID>FDF8523F-7C07-43E6-8136-C35FACED412C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="31" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8995FEC7-5D3E-47AE-8C1A-41AA24D2FC23</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="69" name="Sonst" enable="True">
+			<UUID>234AAF94-6D7A-4E36-B29B-0D459522168F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="33" id="89" name="# (Kommentar)" enable="True">
+			<UUID>20378B7F-76C3-4AFB-BD92-D4C7284990AF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Delete record"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="9" name="Datensatz/Abfrage löschen" enable="True">
+			<UUID>4507FF6B-2770-4BEC-A514-D51357F29327</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="35" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3B906331-0938-41C6-B2C8-DEAFF4D3AD92</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="36" id="70" name="Ende (wenn)" enable="True">
+			<UUID>54EFC4CD-B495-4101-AE4E-09AFF55E5DB9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="37" id="89" name="# (Kommentar)" enable="True">
+			<UUID>545DD31E-3F3B-4558-A476-34D8F48CE22E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

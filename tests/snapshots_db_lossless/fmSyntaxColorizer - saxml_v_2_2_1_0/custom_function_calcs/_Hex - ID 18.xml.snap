@@ -1,57 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="18" name="_Hex" UUID="EB84C840-E38F-40FF-AACC-8EBEF71068C7"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* _Hex( pNumber )returns the hex representation of the number.20120411 MrW Version 1.0v0*/Falls( NICHT IstLeer( LiesAlsZahl( pNumber ) ) ;SetzeVar([vN = Abs( Ganzzahl( pNumber ) ) ;vFormula = ";¶vM = Mod( vN ; 16 ) ; vN = Div( vN ; 16 ) ; vR = Case( vN or vM or isempty( vR ) ; Middle( \"0123456789ABCDEF\" ; vM + 1 ; 1 ) ) & vR" ;vFormula = Falls( NICHT IstLeer( vN ) ; "Let([¶vN=" & vN & ";¶vR=\"\"" & Austauschen( vN; ["0";"A"];["1";"A"];["2";"A"];["3";"A"];["4";"A"];["5";"A"];["6";"A"];["7";"A"];["8";"A"];["9";"A"];["A";vFormula]) & "¶];¶vR¶)" )];Berechne( vFormula )))]]></Text>
-		<ChunkList hash="2AF86BA543F2D2FA66E83EEB7E114F5F">
-			<Chunk type="NoRef">/* _Hex( pNumber )&#13;&#13;returns the hex representation of the number.&#13;&#13;20120411 MrW Version 1.0v0&#13;*/&#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">NICHT</Chunk>
-			<Chunk type="NoRef"> </Chunk>
-			<Chunk type="FunctionRef">IstLeer</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pNumber</Chunk>
-			<Chunk type="NoRef"> ) ) ;&#13;</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">([&#13;</Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Abs</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">Ganzzahl</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pNumber</Chunk>
-			<Chunk type="NoRef"> ) ) ;&#13;&#13;</Chunk>
-			<Chunk type="VariableReference">vFormula</Chunk>
-			<Chunk type="NoRef"> = &quot;;¶vM = Mod( vN ; 16 ) ; vN = Div( vN ; 16 ) ; vR = Case( vN or vM or isempty( vR ) ; Middle( \&quot;0123456789ABCDEF\&quot; ; vM + 1 ; 1 ) ) &amp; vR&quot; ;&#13;&#13;</Chunk>
-			<Chunk type="VariableReference">vFormula</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">NICHT</Chunk>
-			<Chunk type="NoRef"> </Chunk>
-			<Chunk type="FunctionRef">IstLeer</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> ) ; &quot;&#13;Let([¶&#13;vN=&quot; &amp; </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef"> &amp; &quot;;¶&#13;vR=\&quot;\&quot;&quot; &amp; &#13;</Chunk>
-			<Chunk type="FunctionRef">Austauschen</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vN</Chunk>
-			<Chunk type="NoRef">; [&quot;0&quot;;&quot;A&quot;];[&quot;1&quot;;&quot;A&quot;];[&quot;2&quot;;&quot;A&quot;];[&quot;3&quot;;&quot;A&quot;];[&quot;4&quot;;&quot;A&quot;];[&quot;5&quot;;&quot;A&quot;];[&quot;6&quot;;&quot;A&quot;];[&quot;7&quot;;&quot;A&quot;];[&quot;8&quot;;&quot;A&quot;];[&quot;9&quot;;&quot;A&quot;];[&quot;A&quot;;</Chunk>
-			<Chunk type="VariableReference">vFormula</Chunk>
-			<Chunk type="NoRef">]) &amp; &quot;¶&#13;];¶&#13;vR¶&#13;)&quot; )&#13;&#13;];&#13;&#13;</Chunk>
-			<Chunk type="FunctionRef">Berechne</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vFormula</Chunk>
-			<Chunk type="NoRef"> )&#13;)&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

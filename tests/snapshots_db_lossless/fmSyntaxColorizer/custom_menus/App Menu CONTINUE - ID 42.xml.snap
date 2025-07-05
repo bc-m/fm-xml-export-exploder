@@ -1,0 +1,53 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomMenu name="App Menu CONTINUE" id="42">
+	<UUID modifications="22" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">DA622867-B57B-4153-803B-6B47B9EED6F9</UUID>
+	<TagList></TagList>
+	<MenuItemList membercount="1">
+		<CustomMenuItem index="0" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>9DF26F2E-9C9F-44F0-801A-485661EFEDE3</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["Continue..."]]></Calculation>
+				<ChunkList hash="F632F46FCF432248762F22950E2256B2">
+					<Chunk type="NoRef">&quot;Continue...&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Shortcut key="49" modifier="4"></Shortcut>
+			<Command id="0"></Command>
+			<Override name="True" action="True" Shortcut="True"></Override>
+			<Step enable="True" id="62" name="Scriptpause setzen">
+				<StepText>Scriptpause setzen [ Unbegrenzt ]</StepText>
+				<PauseTime value="Indefinitely"></PauseTime>
+			</Step>
+		</CustomMenuItem>
+	</MenuItemList>
+	<Conditions>
+		<Install>
+			<Calculation><![CDATA[1]]></Calculation>
+			<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+				<Chunk type="NoRef">1</Chunk>
+			</ChunkList>
+		</Install>
+	</Conditions>
+	<Comment></Comment>
+	<Options browseMode="True" findMode="True" previewMode="True">
+		<Override>
+			<name>
+				<Calculation><![CDATA["fmSyntaxColorizer"]]></Calculation>
+				<ChunkList hash="293F258D43EE21E6BB4029DC29B7C1AF">
+					<Chunk type="NoRef">&quot;fmSyntaxColorizer&quot;</Chunk>
+				</ChunkList>
+			</name>
+		</Override>
+	</Options>
+</CustomMenu>

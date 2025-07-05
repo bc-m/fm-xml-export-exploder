@@ -1,0 +1,184 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# New in FileMaker 19.0
+Variable setzen [ $$Function.ComputeModel ; ComputeModel ( "modelName" ; "parameterName1" ; "value1" ) ]
+Variable setzen [ $$Function.ConvertFromFileMakerPath ; Liste(
+				ConvertFromFileMakerPath( Hole ( DokumentenPfad ) ; PosixPath ) ;
+				ConvertFromFileMakerPath( Hole ( DokumentenPfad ) ; WinPath ) ;
+				ConvertFromFileMakerPath( Hole ( DokumentenPfad ) ; URLPath )
+				) ]
+Variable setzen [ $$Function.ConvertToFileMakerPath ; Liste(
+				ConvertToFileMakerPath( "~/" ; PosixPath ) ;
+				ConvertToFileMakerPath( "\\\server\shareName\some\path" ; WinPath ) ;
+				ConvertToFileMakerPath( "file:///User/r.watson/Documents/fmCheckMate/fmxmlsnippet.xml" ; URLPath )
+				) ]
+
+# New in FileMaker 19.1.2
+Variable setzen [ $$Function.Get.FileLocaleElements ; Hole(DateiGebietsschemaElemente) ]
+Variable setzen [ $$Function.Get.SystemLocaleElements ; Hole(SystemGebietsschemaElemente) ]
+
+# LocaleElements
+Variable setzen [ $json ; JSONSetElement( "{}" ;
+				[ "APIVers" ; 1 ; JSONNumber ] ;
+				[ "Currency.Leading" ; 0 ; JSONNumber ] ;
+				[ "Currency.Symbol" ; "€" ; JSONString ] ;
+				[ "Date.DMQ.1stDayOfWeek" ; 1 ; JSONNumber ] ;
+				
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[0]" ; "Sun" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[1]" ; "Mon" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[2]" ; "Tue" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[3]" ; "Wed" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[4]" ; "Thu" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[5]" ; "Fri" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.AbbrvList[6]" ; "Sat" ; JSONString ] ;
+				
+				[ "Date.DMQ.DaysOfWeek.NameList[0]" ; "Sunday" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.NameList[1]" ; "Monday" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.NameList[2]" ; "Tuesday" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.NameList[3]" ; "Wednesday" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.NameList[4]" ; "Thursday" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.NameList[5]" ; "Friday" ; JSONString ] ;
+				[ "Date.DMQ.DaysOfWeek.NameList[6]" ; "Saturday" ; JSONString ] ;
+				
+				[ "Date.DMQ.Months.AbbrvList[0]" ; "Jan" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[1]" ; "Feb" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[2]" ; "Mar" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[3]" ; "Apr" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[4]" ; "May" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[5]" ; "Jun" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[6]" ; "Jul" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[7]" ; "Aug" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[8]" ; "Sep" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[9]" ; "Oct" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[10]" ; "Nov" ; JSONString ] ;
+				[ "Date.DMQ.Months.AbbrvList[11]" ; "Dec" ; JSONString ] ;
+				
+				[ "Date.DMQ.Months.NameList[0]" ; "January" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[1]" ; "February" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[2]" ; "March" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[3]" ; "April" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[4]" ; "May" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[5]" ; "June" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[6]" ; "July" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[7]" ; "August" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[8]" ; "September" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[9]" ; "October" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[10]" ; "November" ; JSONString ] ;
+				[ "Date.DMQ.Months.NameList[11]" ; "December" ; JSONString ] ;
+				
+				[ "Date.DMQ.Quarters.AbbrvList[0]" ; "Q1" ; JSONString ] ;
+				[ "Date.DMQ.Quarters.AbbrvList[1]" ; "Q2" ; JSONString ] ;
+				[ "Date.DMQ.Quarters.AbbrvList[2]" ; "Q3" ; JSONString ] ;
+				[ "Date.DMQ.Quarters.AbbrvList[3]" ; "Q4" ; JSONString ] ;
+				
+				[ "Date.DMQ.Quarters.NameList[0]" ; "1. Quartal" ; JSONString ] ;
+				[ "Date.DMQ.Quarters.NameList[1]" ; "2. Quartal" ; JSONString ] ;
+				[ "Date.DMQ.Quarters.NameList[2]" ; "3. Quartal" ; JSONString ] ;
+				[ "Date.DMQ.Quarters.NameList[3]" ; "4. Quartal" ; JSONString ] ;
+				
+				[ "Date.DMY.ElementArray.NameList[0]" ; "D#" ; JSONString ] ;
+				[ "Date.DMY.ElementArray.NameList[1]" ; "M$" ; JSONString ] ;
+				[ "Date.DMY.ElementArray.NameList[2]" ; "YYYY#" ; JSONString ] ;
+				[ "Date.DMY.ElementArray.NameList[3]" ; "D$" ; JSONString ] ;
+				
+				[ "Date.DMY.ElementArray.SepList[0]" ; ", " ; JSONString ] ;
+				[ "Date.DMY.ElementArray.SepList[1]" ; ". " ; JSONString ] ;
+				[ "Date.DMY.ElementArray.SepList[2]" ; " " ; JSONString ] ;
+				[ "Date.DMY.ElementArray.SepList[3]" ; "" ; JSONString ] ;
+				
+				[ "Date.DMY.MustUseLocalesSep" ; 0 ; JSONNumber ] ;
+				
+				[ "Date.DateNums.0d" ; 1 ; JSONNumber ] ; /* 1=DD, 0=D // Zero before the day */
+				[ "Date.DateNums.0m" ; 1 ; JSONNumber ] ; /* 1=MM, 0=M // Zero before the month */
+				[ "Date.DateNums.YYyy" ; 0 ; JSONNumber ] ;
+				[ "Date.DateOrderID" ; 1 ; JSONNumber ] ;
+				[ "Date.DateOrderName" ; "DMY" ; JSONString ] ;
+				[ "Date.Sep" ; "." ; JSONString ] ;
+				
+				[ "LocaleID.IDNum" ; 25 ; JSONNumber ] ;
+				[ "LocaleID.IDStr" ; "German" ; JSONString ] ;
+				[ "LocaleID.ISOLangCode" ; "de" ; JSONString ] ;
+				[ "LocaleID.LID" ; "German" ; JSONString ] ;
+				[ "LocaleID.Name" ; "German" ; JSONString ] ;
+				
+				[ "Misc.Active" ; 0 ; JSONNumber ] ;
+				[ "Misc.Metric" ; 1 ; JSONNumber ] ;
+				
+				[ "Num.1000s" ; "." ; JSONString ] ;
+				[ "Num.Decimal" ; "," ; JSONString ] ;
+				[ "Num.Lead0" ; 1 ; JSONNumber ] ;
+				
+				[ "Text.SQuotLead" ; "\“" ; JSONString ] ;
+				[ "Text.SQuotTrail" ; "\”" ; JSONString ] ;
+				[ "Text.Sep" ; ";" ; JSONString ] ;
+				
+				[ "Time.12h" ; 0 ; JSONNumber ] ;
+				[ "Time.HMS.0h" ; 1 ; JSONNumber ] ;
+				[ "Time.HMS.24h" ; "" ; JSONString ] ;
+				[ "Time.HMS.Seconds" ; 0 ; JSONNumber ] ;
+				[ "Time.NightDay.12hSuffix" ; 1 ; JSONNumber ] ;
+				[ "Time.NightDay.amStr" ; " AM" ; JSONString ] ;
+				[ "Time.NightDay.pmStr" ; " PM" ; JSONString ] ;
+				[ "Time.Sep" ; ":" ; JSONString ]
+				
+				) ]
+Variable setzen [ $$FileLocaleElements_JSONGetElement ; Liste(
+				JSONGetElement( $json ; "APIVers" ) ;
+				JSONGetElement( $json ; "Currency.Leading" ) ;
+				JSONGetElement( $json ; "Currency.Symbol" ) ;
+				JSONGetElement( $json ; "Date.DMQ.1stDayOfWeek" ) ;
+				
+				JSONListValues( $json ; "Date.DMQ.DaysOfWeek.AbbrvLis" ) ;
+				JSONListValues( $json ; "Date.DMQ.DaysOfWeek.NameLis" ) ;
+				
+				JSONListValues( $json ; "Date.DMQ.Months.AbbrvLis" ) ;
+				JSONListValues( $json ; "Date.DMQ.Months.NameLis" ) ;
+				
+				JSONListValues( $json ; "Date.DMQ.Quarters.AbbrvLis" ) ;
+				JSONListValues( $json ; "Date.DMQ.Quarters.NameLis" ) ;
+				
+				JSONListValues( $json ; "Date.DMY.ElementArray.NameLis" ) ;
+				JSONListValues( $json ; "Date.DMY.ElementArray.SepLis" ) ;
+				
+				JSONGetElement( $json ; "Date.DMY.MustUseLocalesSep" ) ;
+				
+				JSONGetElement( $json ; "Date.DateNums.0d" ) ; /* 1=DD, 0=D // Zero before the day */
+				JSONGetElement( $json ; "Date.DateNums.0m" ) ; /* 1=MM, 0=M // Zero before the month */
+				JSONGetElement( $json ; "Date.DateNums.YYyy" ) ;
+				JSONGetElement( $json ; "Date.DateOrderID" ) ;
+				JSONGetElement( $json ; "Date.DateOrderName" ) ;
+				JSONGetElement( $json ; "Date.Sep" ) ;
+				
+				JSONGetElement( $json ; "LocaleID.IDNum" ) ;
+				JSONGetElement( $json ; "LocaleID.IDStr" ) ;
+				JSONGetElement( $json ; "LocaleID.ISOLangCode" ) ;
+				JSONGetElement( $json ; "LocaleID.LID" ) ;
+				JSONGetElement( $json ; "LocaleID.Name" ) ;
+				
+				JSONGetElement( $json ; "Misc.Active" ) ;
+				JSONGetElement( $json ; "Misc.Metric" ) ;
+				
+				JSONGetElement( $json ; "Num.1000s" ) ;
+				JSONGetElement( $json ; "Num.Decimal" ) ;
+				JSONGetElement( $json ; "Num.Lead0" ) ;
+				
+				JSONGetElement( $json ; "Text.SQuotLead" ) ;
+				JSONGetElement( $json ; "Text.SQuotTrail" ) ;
+				JSONGetElement( $json ; "Text.Sep" ) ;
+				
+				JSONGetElement( $json ; "Time.12h" ) ;
+				JSONGetElement( $json ; "Time.HMS.0h" ) ;
+				JSONGetElement( $json ; "Time.HMS.24h" ) ;
+				JSONGetElement( $json ; "Time.HMS.Seconds" ) ;
+				JSONGetElement( $json ; "Time.NightDay.12hSuffix" ) ;
+				JSONGetElement( $json ; "Time.NightDay.amStr" ) ;
+				JSONGetElement( $json ; "Time.NightDay.pmStr" ) ;
+				JSONGetElement( $json ; "Time.Sep" )
+				
+				) ]
+
+# New in FileMaker 19.1.3
+
+# New in FileMaker 19.2.1

@@ -1,73 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="40" name="_TextBetween" UUID="29DB9719-2738-4C88-90B5-D16410C0BE33"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* _TextBetween( pText; pPrefix; pSuffix ) Returns the text between pPrefix and pSuffix. If either is not found then an empt string is returned. An empty pPrefix or pSuffix is interpreted as from the start/to the end of the string.20130617 MrW More useful function when prefix or suffix is empty20130201 MrW */SetzeVar([vPos1 = Falls( IstLeer( pPrefix ) ; 1 ; Position( pText ; pPrefix ; 1 ; 1 ) ) ;vPos2 = vPos1 + Länge( pPrefix ) ;vPos3 = Falls( vPos1=0 ; 0 ; IstLeer( pSuffix ) ; Länge( pText ) + 1 ; Position( pText ; pSuffix ; vPos2 ; 1 ) )];Falls( vPos3 ; ZeichenMitte( pText ; vPos2 ; vPos3-vPos2 ) ))]]></Text>
-		<ChunkList hash="173844B8E70F72E6580D3253BAFD12A4">
-			<Chunk type="NoRef">/* _TextBetween( pText; pPrefix; pSuffix ) &#13;&#13;Returns the text between pPrefix and pSuffix. If either is not found then an empt string is returned. An empty pPrefix or pSuffix is interpreted as from the start/to the end of the string.&#13;&#13;20130617 MrW More useful function when prefix or suffix is empty&#13;20130201 MrW &#13;*/&#13;&#13;</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef">([&#13;</Chunk>
-			<Chunk type="VariableReference">vPos1</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="FunctionRef">IstLeer</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pPrefix</Chunk>
-			<Chunk type="NoRef"> ) ; 1 ; </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pText</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">pPrefix</Chunk>
-			<Chunk type="NoRef"> ; 1 ; 1 ) ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vPos2</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="VariableReference">vPos1</Chunk>
-			<Chunk type="NoRef"> + </Chunk>
-			<Chunk type="FunctionRef">Länge</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pPrefix</Chunk>
-			<Chunk type="NoRef"> ) ;&#13;</Chunk>
-			<Chunk type="VariableReference">vPos3</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vPos1</Chunk>
-			<Chunk type="NoRef">=0 ; 0 ; </Chunk>
-			<Chunk type="FunctionRef">IstLeer</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pSuffix</Chunk>
-			<Chunk type="NoRef"> ) ; </Chunk>
-			<Chunk type="FunctionRef">Länge</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pText</Chunk>
-			<Chunk type="NoRef"> ) + 1 ; </Chunk>
-			<Chunk type="FunctionRef">Position</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pText</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">pSuffix</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vPos2</Chunk>
-			<Chunk type="NoRef"> ; 1 ) )&#13;];&#13;</Chunk>
-			<Chunk type="FunctionRef">Falls</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">vPos3</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
-			<Chunk type="NoRef">( </Chunk>
-			<Chunk type="VariableReference">pText</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vPos2</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">vPos3</Chunk>
-			<Chunk type="NoRef">-</Chunk>
-			<Chunk type="VariableReference">vPos2</Chunk>
-			<Chunk type="NoRef"> ) )&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

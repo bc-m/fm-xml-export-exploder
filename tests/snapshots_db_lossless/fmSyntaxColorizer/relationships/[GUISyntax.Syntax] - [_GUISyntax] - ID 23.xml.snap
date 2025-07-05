@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="23">
+	<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">CB417094-9A62-4566-BD41-91474E9533AC</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065122" name="GUISyntax.Syntax" UUID="089251D8-03E5-4D58-8027-134E08D1237C"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="Command_EN" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+					<TableOccurrenceReference id="1065122" name="GUISyntax.Syntax" UUID="089251D8-03E5-4D58-8027-134E08D1237C"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="7" name="Command_EN" UUID="D22BE1AC-B698-4986-A656-76383C8CF7DC">
+					<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

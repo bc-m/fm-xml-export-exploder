@@ -1,529 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="13" name="GetErrorDesc_en"></CustomFunctionReference>
-	<Calculation>
-		<Text><![CDATA[/* * @SIGNATURE: * #GetErrorDesc_en *  * @PARAMETERS: * errorcode *  * @HISTORY: * Created: 2019-01-15 by Mike Duncan *  * @PURPOSE: * Display the text result of an error, look up from table listed in documentation of error codes * https://fmhelp.filemaker.com/help/17/fmp/en/index.html#page/FMP_Help%2Ferror-codes.html%23ww1030072 *  * @RESULT: * The description from a given error code *  * @NOTES: * This function requires JSON functions available in FileMaker 16+ * Usage example: * GetErrorDesc ( Get ( LastError ) ) *  */SetzeVar ([  errors = JSONSetElement ( ""      ; ["-1" ; "Unknown error" ; JSONString ]    ; ["0" ; "No error" ; JSONString ]    ; ["1" ; "User canceled action" ; JSONString ]    ; ["2" ; "Memory error" ; JSONString ]    ; ["3" ; "Command is unavailable (for example, wrong operating system or mode)" ; JSONString ]    ; ["4" ; "Command is unknown" ; JSONString ]    ; ["5" ; "Command is invalid (for example, a Set Field script step does not have a calculation specified)" ; JSONString ]    ; ["6" ; "File is read-only" ; JSONString ]    ; ["7" ; "Running out of memory" ; JSONString ]    ; ["8" ; "Empty result" ; JSONString ]    ; ["9" ; "Insufficient privileges" ; JSONString ]    ; ["10" ; "Requested data is missing" ; JSONString ]    ; ["11" ; "Name is not valid" ; JSONString ]    ; ["12" ; "Name already exists" ; JSONString ]    ; ["13" ; "File or object is in use" ; JSONString ]    ; ["14" ; "Out of range" ; JSONString ]    ; ["15" ; "Can't divide by zero" ; JSONString ]    ; ["16" ; "Operation failed; request retry (for example, a user query)" ; JSONString ]    ; ["17" ; "Attempt to convert foreign character set to UTF-16 failed" ; JSONString ]    ; ["18" ; "Client must provide account information to proceed" ; JSONString ]    ; ["19" ; "String contains characters other than A-Z, a-z, 0-9 (ASCII)" ; JSONString ]    ; ["20" ; "Command/operation canceled by triggered script" ; JSONString ]    ; ["21" ; "Request not supported (for example, when creating a hard link on a file system that does not support hard links)" ; JSONString ]    ; ["100" ; "File is missing" ; JSONString ]    ; ["101" ; "Record is missing" ; JSONString ]    ; ["102" ; "Field is missing" ; JSONString ]    ; ["103" ; "Relationship is missing" ; JSONString ]    ; ["104" ; "Script is missing" ; JSONString ]    ; ["105" ; "Layout is missing" ; JSONString ]    ; ["106" ; "Table is missing" ; JSONString ]    ; ["107" ; "Index is missing" ; JSONString ]    ; ["108" ; "Value list is missing" ; JSONString ]    ; ["109" ; "Privilege set is missing" ; JSONString ]    ; ["110" ; "Related tables are missing" ; JSONString ]    ; ["111" ; "Field repetition is invalid" ; JSONString ]    ; ["112" ; "Window is missing" ; JSONString ]    ; ["113" ; "Function is missing" ; JSONString ]    ; ["114" ; "File reference is missing" ; JSONString ]    ; ["115" ; "Menu set is missing" ; JSONString ]    ; ["116" ; "Layout object is missing" ; JSONString ]    ; ["117" ; "Data source is missing" ; JSONString ]    ; ["118" ; "Theme is missing" ; JSONString ]    ; ["130" ; "Files are damaged or missing and must be reinstalled" ; JSONString ]    ; ["131" ; "Language pack files are missing" ; JSONString ]    ; ["200" ; "Record access is denied" ; JSONString ]    ; ["201" ; "Field cannot be modified" ; JSONString ]    ; ["202" ; "Field access is denied" ; JSONString ]    ; ["203" ; "No records in file to print, or password doesn't allow print access" ; JSONString ]    ; ["204" ; "No access to field(s) in sort order" ; JSONString ]    ; ["205" ; "User does not have access privileges to create new records; import will overwrite existing data" ; JSONString ]    ; ["206" ; "User does not have password change privileges, or file is not modifiable" ; JSONString ]    ; ["207" ; "User does not have privileges to change database schema, or file is not modifiable" ; JSONString ]    ; ["208" ; "Password does not contain enough characters" ; JSONString ]    ; ["209" ; "New password must be different from existing one" ; JSONString ]    ; ["210" ; "User account is inactive" ; JSONString ]    ; ["211" ; "Password has expired" ; JSONString ]    ; ["212" ; "Invalid user account and/or password; please try again" ; JSONString ]    ; ["214" ; "Too many login attempts" ; JSONString ]    ; ["215" ; "Administrator privileges cannot be duplicated" ; JSONString ]    ; ["216" ; "Guest account cannot be duplicated" ; JSONString ]    ; ["217" ; "User does not have sufficient privileges to modify administrator account" ; JSONString ]    ; ["218" ; "Password and verify password do not match" ; JSONString ]    ; ["300" ; "File is locked or in use" ; JSONString ]    ; ["301" ; "Record is in use by another user" ; JSONString ]    ; ["302" ; "Table is in use by another user" ; JSONString ]    ; ["303" ; "Database schema is in use by another user" ; JSONString ]    ; ["304" ; "Layout is in use by another user" ; JSONString ]    ; ["306" ; "Record modification ID does not match" ; JSONString ]    ; ["307" ; "Transaction could not be locked because of a communication error with the host" ; JSONString ]    ; ["308" ; "Theme is locked and in use by another user" ; JSONString ]    ; ["400" ; "Find criteria are empty" ; JSONString ]    ; ["401" ; "No records match the request" ; JSONString ]    ; ["402" ; "Selected field is not a match field for a lookup" ; JSONString ]    ; ["404" ; "Sort order is invalid" ; JSONString ]    ; ["405" ; "Number of records specified exceeds number of records that can be omitted" ; JSONString ]    ; ["406" ; "Replace/reserialize criteria are invalid" ; JSONString ]    ; ["407" ; "One or both match fields are missing (invalid relationship)" ; JSONString ]    ; ["408" ; "Specified field has inappropriate data type for this operation" ; JSONString ]    ; ["409" ; "Import order is invalid" ; JSONString ]    ; ["410" ; "Export order is invalid" ; JSONString ]    ; ["412" ; "Wrong version of FileMaker Pro Advanced used to recover file" ; JSONString ]    ; ["413" ; "Specified field has inappropriate field type" ; JSONString ]    ; ["414" ; "Layout cannot display the result" ; JSONString ]    ; ["415" ; "One or more required related records are not available" ; JSONString ]    ; ["416" ; "A primary key is required from the data source table" ; JSONString ]    ; ["417" ; "File is not a supported data source" ; JSONString ]    ; ["418" ; "Internal failure in INSERT operation into a field" ; JSONString ]    ; ["500" ; "Date value does not meet validation entry options" ; JSONString ]    ; ["501" ; "Time value does not meet validation entry options" ; JSONString ]    ; ["502" ; "Number value does not meet validation entry options" ; JSONString ]    ; ["503" ; "Value in field is not within the range specified in validation entry options" ; JSONString ]    ; ["504" ; "Value in field is not unique, as required in validation entry options" ; JSONString ]    ; ["505" ; "Value in field is not an existing value in the file, as required in validation entry options" ; JSONString ]    ; ["506" ; "Value in field is not listed in the value list specified in validation entry option" ; JSONString ]    ; ["507" ; "Value in field failed calculation test of validation entry option" ; JSONString ]    ; ["508" ; "Invalid value entered in Find mode" ; JSONString ]    ; ["509" ; "Field requires a valid value" ; JSONString ]    ; ["510" ; "Related value is empty or unavailable" ; JSONString ]    ; ["511" ; "Value in field exceeds maximum field size" ; JSONString ]    ; ["512" ; "Record was already modified by another user" ; JSONString ]    ; ["513" ; "No validation was specified but data cannot fit into the field" ; JSONString ]    ; ["600" ; "Print error has occurred" ; JSONString ]    ; ["601" ; "Combined header and footer exceed one page" ; JSONString ]    ; ["602" ; "Body doesn't fit on a page for current column setup" ; JSONString ]    ; ["603" ; "Print connection lost" ; JSONString ]    ; ["700" ; "File is of the wrong file type for import" ; JSONString ]    ; ["706" ; "EPS file has no preview image" ; JSONString ]    ; ["707" ; "Graphic translator cannot be found" ; JSONString ]    ; ["708" ; "Can't import the file, or need color monitor support to import file" ; JSONString ]    ; ["711" ; "Import translator cannot be found" ; JSONString ]    ; ["714" ; "Password privileges do not allow the operation" ; JSONString ]    ; ["715" ; "Specified Excel worksheet or named range is missing" ; JSONString ]    ; ["716" ; "A SQL query using DELETE, INSERT, or UPDATE is not allowed for ODBC import" ; JSONString ]    ; ["717" ; "There is not enough XML/XSL information to proceed with the import or export" ; JSONString ]    ; ["718" ; "Error in parsing XML file (from Xerces)" ; JSONString ]    ; ["719" ; "Error in transforming XML using XSL (from Xalan)" ; JSONString ]    ; ["720" ; "Error when exporting; intended format does not support repeating fields" ; JSONString ]    ; ["721" ; "Unknown error occurred in the parser or the transformer" ; JSONString ]    ; ["722" ; "Cannot import data into a file that has no fields" ; JSONString ]    ; ["723" ; "You do not have permission to add records to or modify records in the target table" ; JSONString ]    ; ["724" ; "You do not have permission to add records to the target table" ; JSONString ]    ; ["725" ; "You do not have permission to modify records in the target table" ; JSONString ]    ; ["726" ; "Source file has more records than the target table; not all records were imported" ; JSONString ]    ; ["727" ; "Target table has more records than the source file; not all records were updated" ; JSONString ]    ; ["729" ; "Errors occurred during import; records could not be imported" ; JSONString ]    ; ["730" ; "Unsupported Excel version; convert file to the current Excel format and try again" ; JSONString ]    ; ["731" ; "File you are importing from contains no data" ; JSONString ]    ; ["732" ; "This file cannot be inserted because it contains other files" ; JSONString ]    ; ["733" ; "A table cannot be imported into itself" ; JSONString ]    ; ["734" ; "This file type cannot be displayed as a picture" ; JSONString ]    ; ["735" ; "This file type cannot be displayed as a picture; it will be inserted and displayed as a file" ; JSONString ]    ; ["736" ; "Too much data to export to this format; data will be truncated" ; JSONString ]    ; ["738" ; "The theme you are importing already exists" ; JSONString ]    ; ["800" ; "Unable to create file on disk" ; JSONString ]    ; ["801" ; "Unable to create temporary file on System disk" ; JSONString ]    ; ["802" ; "Unable to open file" ; JSONString ]    ; ["803" ; "File is single-user, or host cannot be found" ; JSONString ]    ; ["804" ; "File cannot be opened as read-only in its current state" ; JSONString ]    ; ["805" ; "File is damaged; use Recover command" ; JSONString ]    ; ["806" ; "File cannot be opened with this version of a FileMaker client" ; JSONString ]    ; ["807" ; "File is not a FileMaker Pro Advanced file or is severely damaged" ; JSONString ]    ; ["808" ; "Cannot open file because access privileges are damaged" ; JSONString ]    ; ["809" ; "Disk/volume is full" ; JSONString ]    ; ["810" ; "Disk/volume is locked" ; JSONString ]    ; ["811" ; "Temporary file cannot be opened as FileMaker Pro Advanced file" ; JSONString ]    ; ["812" ; "Exceeded host’s capacity" ; JSONString ]    ; ["813" ; "Record synchronization error on network" ; JSONString ]    ; ["814" ; "File(s) cannot be opened because maximum number is open" ; JSONString ]    ; ["815" ; "Couldn’t open lookup file" ; JSONString ]    ; ["816" ; "Unable to convert file" ; JSONString ]    ; ["817" ; "Unable to open file because it does not belong to this solution" ; JSONString ]    ; ["819" ; "Cannot save a local copy of a remote file" ; JSONString ]    ; ["820" ; "File is being closed" ; JSONString ]    ; ["821" ; "Host forced a disconnect" ; JSONString ]    ; ["822" ; "FileMaker Pro Advanced files not found; reinstall missing files" ; JSONString ]    ; ["823" ; "Cannot set file to single-user; guests are connected" ; JSONString ]    ; ["824" ; "File is damaged or not a FileMaker Pro Advanced file" ; JSONString ]    ; ["825" ; "File is not authorized to reference the protected file" ; JSONString ]    ; ["826" ; "File path specified is not a valid file path" ; JSONString ]    ; ["827" ; "File was not created because the source contained no data or is a reference" ; JSONString ]    ; ["850" ; "Path is not valid for the operating system" ; JSONString ]    ; ["851" ; "Cannot delete an external file from disk" ; JSONString ]    ; ["852" ; "Cannot write a file to the external storage" ; JSONString ]    ; ["853" ; "One or more containers failed to transfer" ; JSONString ]    ; ["900" ; "General spelling engine error" ; JSONString ]    ; ["901" ; "Main spelling dictionary not installed" ; JSONString ]    ; ["903" ; "Command cannot be used in a shared file" ; JSONString ]    ; ["905" ; "Command requires a field to be active" ; JSONString ]    ; ["906" ; "Current file is not shared; command can be used only if the file is shared" ; JSONString ]    ; ["920" ; "Cannot initialize the spelling engine" ; JSONString ]    ; ["921" ; "User dictionary cannot be loaded for editing" ; JSONString ]    ; ["922" ; "User dictionary cannot be found" ; JSONString ]    ; ["923" ; "User dictionary is read-only" ; JSONString ]    ; ["951" ; "An unexpected error occurred (*)" ; JSONString ]    ; ["952" ; "Invalid FileMaker Data API token (*)" ; JSONString ]    ; ["953" ; "Exceeded limit on data the FileMaker Data API can transmit (*)" ; JSONString ]    ; ["954" ; "Unsupported XML grammar (*)" ; JSONString ]    ; ["955" ; "No database name (*)" ; JSONString ]    ; ["956" ; "Maximum number of database sessions exceeded (*)" ; JSONString ]    ; ["957" ; "Conflicting commands (*)" ; JSONString ]    ; ["958" ; "Parameter missing (*)" ; JSONString ]    ; ["959" ; "Custom Web Publishing technology is disabled" ; JSONString ]    ; ["960" ; "Parameter is invalid" ; JSONString ]    ; ["1200" ; "Generic calculation error" ; JSONString ]    ; ["1201" ; "Too few parameters in the function" ; JSONString ]    ; ["1202" ; "Too many parameters in the function" ; JSONString ]    ; ["1203" ; "Unexpected end of calculation" ; JSONString ]    ; ["1204" ; "Number, text constant, field name, or \"(\" expected" ; JSONString ]    ; ["1205" ; "Comment is not terminated with \"*/\"" ; JSONString ]    ; ["1206" ; "Text constant must end with a quotation mark" ; JSONString ]    ; ["1207" ; "Unbalanced parenthesis" ; JSONString ]    ; ["1208" ; "Operator missing, function not found, or \"(\" not expected" ; JSONString ]    ; ["1209" ; "Name (such as field name or layout name) is missing" ; JSONString ]    ; ["1210" ; "Plug-in function or script step has already been registered" ; JSONString ]    ; ["1211" ; "List usage is not allowed in this function" ; JSONString ]    ; ["1212" ; "An operator (for example, +, -, *) is expected here" ; JSONString ]    ; ["1213" ; "This variable has already been defined in the Let function" ; JSONString ]    ; ["1214" ; "Average, Count, Extend, GetRepetition, Max, Min, NPV, StDev, Sum, and GetSummary: expression found where a field alone is needed" ; JSONString ]    ; ["1215" ; "This parameter is an invalid Get function parameter" ; JSONString ]    ; ["1216" ; "Only summary fields are allowed as first argument in GetSummary" ; JSONString ]    ; ["1217" ; "Break field is invalid" ; JSONString ]    ; ["1218" ; "Cannot evaluate the number" ; JSONString ]    ; ["1219" ; "A field cannot be used in its own formula" ; JSONString ]    ; ["1220" ; "Field type must be normal or calculated" ; JSONString ]    ; ["1221" ; "Data type must be number, date, time, or timestamp" ; JSONString ]    ; ["1222" ; "Calculation cannot be stored" ; JSONString ]    ; ["1223" ; "Function referred to is not yet implemented" ; JSONString ]    ; ["1224" ; "Function referred to does not exist" ; JSONString ]    ; ["1225" ; "Function referred to is not supported in this context" ; JSONString ]    ; ["1300" ; "The specified name can't be used" ; JSONString ]    ; ["1301" ; "A parameter of the imported or pasted function has the same name as a function in the file" ; JSONString ]    ; ["1400" ; "ODBC client driver initialization failed; make sure ODBC client drivers are properly installed" ; JSONString ]    ; ["1401" ; "Failed to allocate environment (ODBC)" ; JSONString ]    ; ["1402" ; "Failed to free environment (ODBC)" ; JSONString ]    ; ["1403" ; "Failed to disconnect (ODBC)" ; JSONString ]    ; ["1404" ; "Failed to allocate connection (ODBC)" ; JSONString ]    ; ["1405" ; "Failed to free connection (ODBC)" ; JSONString ]    ; ["1406" ; "Failed check for SQL API (ODBC)" ; JSONString ]    ; ["1407" ; "Failed to allocate statement (ODBC)" ; JSONString ]    ; ["1408" ; "Extended error (ODBC)" ; JSONString ]    ; ["1409" ; "Error (ODBC)" ; JSONString ]    ; ["1413" ; "Failed communication link (ODBC)" ; JSONString ]    ; ["1414" ; "SQL statement is too long" ; JSONString ]    ; ["1450" ; "Action requires PHP privilege extension (*)" ; JSONString ]    ; ["1451" ; "Action requires that current file be remote" ; JSONString ]    ; ["1501" ; "SMTP authentication failed" ; JSONString ]    ; ["1502" ; "Connection refused by SMTP server" ; JSONString ]    ; ["1503" ; "Error with SSL" ; JSONString ]    ; ["1504" ; "SMTP server requires the connection to be encrypted" ; JSONString ]    ; ["1505" ; "Specified authentication is not supported by SMTP server" ; JSONString ]    ; ["1506" ; "Email message(s) could not be sent successfully" ; JSONString ]    ; ["1507" ; "Unable to log in to the SMTP server" ; JSONString ]    ; ["1550" ; "Cannot load the plug-in, or the plug-in is not a valid plug-in" ; JSONString ]    ; ["1551" ; "Cannot install the plug-in; cannot delete an existing plug-in or write to the folder or disk" ; JSONString ]    ; ["1552" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1553" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1554" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1555" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1556" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1557" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1558" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1559" ; "Returned by plug-ins; see the documentation that came with the plug-in" ; JSONString ]    ; ["1626" ; "Protocol is not supported" ; JSONString ]    ; ["1627" ; "Authentication failed" ; JSONString ]    ; ["1628" ; "There was an error with SSL" ; JSONString ]    ; ["1629" ; "Connection timed out; the timeout value is 60 seconds" ; JSONString ]    ; ["1630" ; "URL format is incorrect" ; JSONString ]    ; ["1631" ; "Connection failed" ; JSONString ]    ; ["1632" ; "The certificate has expired" ; JSONString ]    ; ["1633" ; "The certificate is self-signed" ; JSONString ]    ; ["1634" ; "A certificate verification error occurred" ; JSONString ]    ; ["1635" ; "Connection is unencrypted" ; JSONString ]      )  ]; JSONGetElement ( errors ; errorcode ))]]></Text>
-		<ChunkList hash="A6C87D4719024A869CFB517695A3E3D2">
-			<Chunk type="NoRef">/*&#13; * @SIGNATURE:&#13; * #GetErrorDesc_en&#13; * &#13; * @PARAMETERS:&#13; * errorcode&#13; * &#13; * @HISTORY:&#13; * Created: 2019-01-15 by Mike Duncan&#13; * &#13; * @PURPOSE:&#13; * Display the text result of an error, look up from table listed in documentation of error codes&#13; * https://fmhelp.filemaker.com/help/17/fmp/en/index.html#page/FMP_Help%2Ferror-codes.html%23ww1030072&#13; * &#13; * @RESULT:&#13; * The description from a given error code&#13; * &#13; * @NOTES:&#13; * This function requires JSON functions available in FileMaker 16+&#13; * Usage example:&#13; * GetErrorDesc ( Get ( LastError ) )&#13; * &#13; */&#13;&#13;</Chunk>
-			<Chunk type="FunctionRef">SetzeVar</Chunk>
-			<Chunk type="NoRef"> ([&#13;&#13;  </Chunk>
-			<Chunk type="VariableReference">errors</Chunk>
-			<Chunk type="NoRef"> = </Chunk>
-			<Chunk type="FunctionRef">JSONSetElement</Chunk>
-			<Chunk type="NoRef"> ( &quot;&quot;&#13;  &#13;    ; [&quot;-1&quot; ; &quot;Unknown error&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;0&quot; ; &quot;No error&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1&quot; ; &quot;User canceled action&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;2&quot; ; &quot;Memory error&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;3&quot; ; &quot;Command is unavailable (for example, wrong operating system or mode)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;4&quot; ; &quot;Command is unknown&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;5&quot; ; &quot;Command is invalid (for example, a Set Field script step does not have a calculation specified)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;6&quot; ; &quot;File is read-only&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;7&quot; ; &quot;Running out of memory&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;8&quot; ; &quot;Empty result&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;9&quot; ; &quot;Insufficient privileges&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;10&quot; ; &quot;Requested data is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;11&quot; ; &quot;Name is not valid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;12&quot; ; &quot;Name already exists&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;13&quot; ; &quot;File or object is in use&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;14&quot; ; &quot;Out of range&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;15&quot; ; &quot;Can&apos;t divide by zero&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;16&quot; ; &quot;Operation failed; request retry (for example, a user query)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;17&quot; ; &quot;Attempt to convert foreign character set to UTF-16 failed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;18&quot; ; &quot;Client must provide account information to proceed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;19&quot; ; &quot;String contains characters other than A-Z, a-z, 0-9 (ASCII)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;20&quot; ; &quot;Command/operation canceled by triggered script&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;21&quot; ; &quot;Request not supported (for example, when creating a hard link on a file system that does not support hard links)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;100&quot; ; &quot;File is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;101&quot; ; &quot;Record is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;102&quot; ; &quot;Field is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;103&quot; ; &quot;Relationship is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;104&quot; ; &quot;Script is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;105&quot; ; &quot;Layout is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;106&quot; ; &quot;Table is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;107&quot; ; &quot;Index is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;108&quot; ; &quot;Value list is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;109&quot; ; &quot;Privilege set is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;110&quot; ; &quot;Related tables are missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;111&quot; ; &quot;Field repetition is invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;112&quot; ; &quot;Window is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;113&quot; ; &quot;Function is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;114&quot; ; &quot;File reference is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;115&quot; ; &quot;Menu set is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;116&quot; ; &quot;Layout object is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;117&quot; ; &quot;Data source is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;118&quot; ; &quot;Theme is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;130&quot; ; &quot;Files are damaged or missing and must be reinstalled&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;131&quot; ; &quot;Language pack files are missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;200&quot; ; &quot;Record access is denied&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;201&quot; ; &quot;Field cannot be modified&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;202&quot; ; &quot;Field access is denied&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;203&quot; ; &quot;No records in file to print, or password doesn&apos;t allow print access&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;204&quot; ; &quot;No access to field(s) in sort order&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;205&quot; ; &quot;User does not have access privileges to create new records; import will overwrite existing data&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;206&quot; ; &quot;User does not have password change privileges, or file is not modifiable&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;207&quot; ; &quot;User does not have privileges to change database schema, or file is not modifiable&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;208&quot; ; &quot;Password does not contain enough characters&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;209&quot; ; &quot;New password must be different from existing one&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;210&quot; ; &quot;User account is inactive&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;211&quot; ; &quot;Password has expired&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;212&quot; ; &quot;Invalid user account and/or password; please try again&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;214&quot; ; &quot;Too many login attempts&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;215&quot; ; &quot;Administrator privileges cannot be duplicated&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;216&quot; ; &quot;Guest account cannot be duplicated&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;217&quot; ; &quot;User does not have sufficient privileges to modify administrator account&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;218&quot; ; &quot;Password and verify password do not match&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;300&quot; ; &quot;File is locked or in use&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;301&quot; ; &quot;Record is in use by another user&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;302&quot; ; &quot;Table is in use by another user&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;303&quot; ; &quot;Database schema is in use by another user&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;304&quot; ; &quot;Layout is in use by another user&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;306&quot; ; &quot;Record modification ID does not match&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;307&quot; ; &quot;Transaction could not be locked because of a communication error with the host&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;308&quot; ; &quot;Theme is locked and in use by another user&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;400&quot; ; &quot;Find criteria are empty&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;401&quot; ; &quot;No records match the request&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;402&quot; ; &quot;Selected field is not a match field for a lookup&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;404&quot; ; &quot;Sort order is invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;405&quot; ; &quot;Number of records specified exceeds number of records that can be omitted&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;406&quot; ; &quot;Replace/reserialize criteria are invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;407&quot; ; &quot;One or both match fields are missing (invalid relationship)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;408&quot; ; &quot;Specified field has inappropriate data type for this operation&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;409&quot; ; &quot;Import order is invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;410&quot; ; &quot;Export order is invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;412&quot; ; &quot;Wrong version of FileMaker Pro Advanced used to recover file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;413&quot; ; &quot;Specified field has inappropriate field type&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;414&quot; ; &quot;Layout cannot display the result&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;415&quot; ; &quot;One or more required related records are not available&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;416&quot; ; &quot;A primary key is required from the data source table&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;417&quot; ; &quot;File is not a supported data source&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;418&quot; ; &quot;Internal failure in INSERT operation into a field&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;500&quot; ; &quot;Date value does not meet validation entry options&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;501&quot; ; &quot;Time value does not meet validation entry options&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;502&quot; ; &quot;Number value does not meet validation entry options&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;503&quot; ; &quot;Value in field is not within the range specified in validation entry options&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;504&quot; ; &quot;Value in field is not unique, as required in validation entry options&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;505&quot; ; &quot;Value in field is not an existing value in the file, as required in validation entry options&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;506&quot; ; &quot;Value in field is not listed in the value list specified in validation entry option&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;507&quot; ; &quot;Value in field failed calculation test of validation entry option&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;508&quot; ; &quot;Invalid value entered in Find mode&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;509&quot; ; &quot;Field requires a valid value&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;510&quot; ; &quot;Related value is empty or unavailable&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;511&quot; ; &quot;Value in field exceeds maximum field size&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;512&quot; ; &quot;Record was already modified by another user&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;513&quot; ; &quot;No validation was specified but data cannot fit into the field&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;600&quot; ; &quot;Print error has occurred&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;601&quot; ; &quot;Combined header and footer exceed one page&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;602&quot; ; &quot;Body doesn&apos;t fit on a page for current column setup&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;603&quot; ; &quot;Print connection lost&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;700&quot; ; &quot;File is of the wrong file type for import&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;706&quot; ; &quot;EPS file has no preview image&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;707&quot; ; &quot;Graphic translator cannot be found&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;708&quot; ; &quot;Can&apos;t import the file, or need color monitor support to import file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;711&quot; ; &quot;Import translator cannot be found&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;714&quot; ; &quot;Password privileges do not allow the operation&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;715&quot; ; &quot;Specified Excel worksheet or named range is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;716&quot; ; &quot;A SQL query using DELETE, INSERT, or UPDATE is not allowed for ODBC import&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;717&quot; ; &quot;There is not enough XML/XSL information to proceed with the import or export&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;718&quot; ; &quot;Error in parsing XML file (from Xerces)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;719&quot; ; &quot;Error in transforming XML using XSL (from Xalan)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;720&quot; ; &quot;Error when exporting; intended format does not support repeating fields&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;721&quot; ; &quot;Unknown error occurred in the parser or the transformer&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;722&quot; ; &quot;Cannot import data into a file that has no fields&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;723&quot; ; &quot;You do not have permission to add records to or modify records in the target table&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;724&quot; ; &quot;You do not have permission to add records to the target table&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;725&quot; ; &quot;You do not have permission to modify records in the target table&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;726&quot; ; &quot;Source file has more records than the target table; not all records were imported&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;727&quot; ; &quot;Target table has more records than the source file; not all records were updated&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;729&quot; ; &quot;Errors occurred during import; records could not be imported&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;730&quot; ; &quot;Unsupported Excel version; convert file to the current Excel format and try again&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;731&quot; ; &quot;File you are importing from contains no data&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;732&quot; ; &quot;This file cannot be inserted because it contains other files&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;733&quot; ; &quot;A table cannot be imported into itself&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;734&quot; ; &quot;This file type cannot be displayed as a picture&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;735&quot; ; &quot;This file type cannot be displayed as a picture; it will be inserted and displayed as a file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;736&quot; ; &quot;Too much data to export to this format; data will be truncated&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;738&quot; ; &quot;The theme you are importing already exists&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;800&quot; ; &quot;Unable to create file on disk&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;801&quot; ; &quot;Unable to create temporary file on System disk&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;802&quot; ; &quot;Unable to open file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;803&quot; ; &quot;File is single-user, or host cannot be found&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;804&quot; ; &quot;File cannot be opened as read-only in its current state&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;805&quot; ; &quot;File is damaged; use Recover command&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;806&quot; ; &quot;File cannot be opened with this version of a FileMaker client&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;807&quot; ; &quot;File is not a FileMaker Pro Advanced file or is severely damaged&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;808&quot; ; &quot;Cannot open file because access privileges are damaged&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;809&quot; ; &quot;Disk/volume is full&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;810&quot; ; &quot;Disk/volume is locked&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;811&quot; ; &quot;Temporary file cannot be opened as FileMaker Pro Advanced file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;812&quot; ; &quot;Exceeded host’s capacity&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;813&quot; ; &quot;Record synchronization error on network&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;814&quot; ; &quot;File(s) cannot be opened because maximum number is open&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;815&quot; ; &quot;Couldn’t open lookup file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;816&quot; ; &quot;Unable to convert file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;817&quot; ; &quot;Unable to open file because it does not belong to this solution&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;819&quot; ; &quot;Cannot save a local copy of a remote file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;820&quot; ; &quot;File is being closed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;821&quot; ; &quot;Host forced a disconnect&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;822&quot; ; &quot;FileMaker Pro Advanced files not found; reinstall missing files&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;823&quot; ; &quot;Cannot set file to single-user; guests are connected&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;824&quot; ; &quot;File is damaged or not a FileMaker Pro Advanced file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;825&quot; ; &quot;File is not authorized to reference the protected file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;826&quot; ; &quot;File path specified is not a valid file path&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;827&quot; ; &quot;File was not created because the source contained no data or is a reference&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;850&quot; ; &quot;Path is not valid for the operating system&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;851&quot; ; &quot;Cannot delete an external file from disk&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;852&quot; ; &quot;Cannot write a file to the external storage&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;853&quot; ; &quot;One or more containers failed to transfer&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;900&quot; ; &quot;General spelling engine error&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;901&quot; ; &quot;Main spelling dictionary not installed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;903&quot; ; &quot;Command cannot be used in a shared file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;905&quot; ; &quot;Command requires a field to be active&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;906&quot; ; &quot;Current file is not shared; command can be used only if the file is shared&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;920&quot; ; &quot;Cannot initialize the spelling engine&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;921&quot; ; &quot;User dictionary cannot be loaded for editing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;922&quot; ; &quot;User dictionary cannot be found&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;923&quot; ; &quot;User dictionary is read-only&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;951&quot; ; &quot;An unexpected error occurred (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;952&quot; ; &quot;Invalid FileMaker Data API token (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;953&quot; ; &quot;Exceeded limit on data the FileMaker Data API can transmit (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;954&quot; ; &quot;Unsupported XML grammar (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;955&quot; ; &quot;No database name (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;956&quot; ; &quot;Maximum number of database sessions exceeded (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;957&quot; ; &quot;Conflicting commands (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;958&quot; ; &quot;Parameter missing (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;959&quot; ; &quot;Custom Web Publishing technology is disabled&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;960&quot; ; &quot;Parameter is invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1200&quot; ; &quot;Generic calculation error&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1201&quot; ; &quot;Too few parameters in the function&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1202&quot; ; &quot;Too many parameters in the function&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1203&quot; ; &quot;Unexpected end of calculation&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1204&quot; ; &quot;Number, text constant, field name, or \&quot;(\&quot; expected&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1205&quot; ; &quot;Comment is not terminated with \&quot;*/\&quot;&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1206&quot; ; &quot;Text constant must end with a quotation mark&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1207&quot; ; &quot;Unbalanced parenthesis&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1208&quot; ; &quot;Operator missing, function not found, or \&quot;(\&quot; not expected&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1209&quot; ; &quot;Name (such as field name or layout name) is missing&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1210&quot; ; &quot;Plug-in function or script step has already been registered&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1211&quot; ; &quot;List usage is not allowed in this function&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1212&quot; ; &quot;An operator (for example, +, -, *) is expected here&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1213&quot; ; &quot;This variable has already been defined in the Let function&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1214&quot; ; &quot;Average, Count, Extend, GetRepetition, Max, Min, NPV, StDev, Sum, and GetSummary: expression found where a field alone is needed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1215&quot; ; &quot;This parameter is an invalid Get function parameter&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1216&quot; ; &quot;Only summary fields are allowed as first argument in GetSummary&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1217&quot; ; &quot;Break field is invalid&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1218&quot; ; &quot;Cannot evaluate the number&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1219&quot; ; &quot;A field cannot be used in its own formula&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1220&quot; ; &quot;Field type must be normal or calculated&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1221&quot; ; &quot;Data type must be number, date, time, or timestamp&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1222&quot; ; &quot;Calculation cannot be stored&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1223&quot; ; &quot;Function referred to is not yet implemented&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1224&quot; ; &quot;Function referred to does not exist&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1225&quot; ; &quot;Function referred to is not supported in this context&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1300&quot; ; &quot;The specified name can&apos;t be used&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1301&quot; ; &quot;A parameter of the imported or pasted function has the same name as a function in the file&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1400&quot; ; &quot;ODBC client driver initialization failed; make sure ODBC client drivers are properly installed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1401&quot; ; &quot;Failed to allocate environment (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1402&quot; ; &quot;Failed to free environment (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1403&quot; ; &quot;Failed to disconnect (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1404&quot; ; &quot;Failed to allocate connection (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1405&quot; ; &quot;Failed to free connection (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1406&quot; ; &quot;Failed check for SQL API (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1407&quot; ; &quot;Failed to allocate statement (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1408&quot; ; &quot;Extended error (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1409&quot; ; &quot;Error (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1413&quot; ; &quot;Failed communication link (ODBC)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1414&quot; ; &quot;SQL statement is too long&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1450&quot; ; &quot;Action requires PHP privilege extension (*)&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1451&quot; ; &quot;Action requires that current file be remote&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1501&quot; ; &quot;SMTP authentication failed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1502&quot; ; &quot;Connection refused by SMTP server&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1503&quot; ; &quot;Error with SSL&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1504&quot; ; &quot;SMTP server requires the connection to be encrypted&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1505&quot; ; &quot;Specified authentication is not supported by SMTP server&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1506&quot; ; &quot;Email message(s) could not be sent successfully&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1507&quot; ; &quot;Unable to log in to the SMTP server&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1550&quot; ; &quot;Cannot load the plug-in, or the plug-in is not a valid plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1551&quot; ; &quot;Cannot install the plug-in; cannot delete an existing plug-in or write to the folder or disk&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1552&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1553&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1554&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1555&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1556&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1557&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1558&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1559&quot; ; &quot;Returned by plug-ins; see the documentation that came with the plug-in&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1626&quot; ; &quot;Protocol is not supported&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1627&quot; ; &quot;Authentication failed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1628&quot; ; &quot;There was an error with SSL&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1629&quot; ; &quot;Connection timed out; the timeout value is 60 seconds&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1630&quot; ; &quot;URL format is incorrect&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1631&quot; ; &quot;Connection failed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1632&quot; ; &quot;The certificate has expired&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1633&quot; ; &quot;The certificate is self-signed&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1634&quot; ; &quot;A certificate verification error occurred&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    ; [&quot;1635&quot; ; &quot;Connection is unencrypted&quot; ; </Chunk>
-			<Chunk type="FunctionRef">JSONString</Chunk>
-			<Chunk type="NoRef"> ]&#13;    &#13;  )&#13;&#13;  ];&#13;&#13; </Chunk>
-			<Chunk type="FunctionRef">JSONGetElement</Chunk>
-			<Chunk type="NoRef"> ( </Chunk>
-			<Chunk type="VariableReference">errors</Chunk>
-			<Chunk type="NoRef"> ; </Chunk>
-			<Chunk type="VariableReference">errorcode</Chunk>
-			<Chunk type="NoRef"> )&#13;&#13;)</Chunk>
-		</ChunkList>
-	</Calculation>
-</CustomFunctionCalc>

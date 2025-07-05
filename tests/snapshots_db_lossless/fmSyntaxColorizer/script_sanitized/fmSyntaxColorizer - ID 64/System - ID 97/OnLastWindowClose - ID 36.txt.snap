@@ -1,0 +1,22 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20121102 MrW Foreign Commands aufräumen
+# 20120106 MrW
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+# Script settings
+Variable setzen [ $ToolsWindowName ; "fmWorkMate" ]
+
+Fenster fixieren
+Script ausführen [ Aus Liste ; "Delete orphaned and empty GUI-Syntax entries" ]
+
+Blätternmodus aktivieren [ Pause: OFF ]
+Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
+
+Wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $ToolsWindowName ) ) ]
+	Fenster aktivieren [ Name: $ToolsWindowName ]
+Ende (wenn)

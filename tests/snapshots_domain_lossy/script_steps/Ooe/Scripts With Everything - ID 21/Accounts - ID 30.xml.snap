@@ -1,0 +1,59 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="30" name="Accounts"></ScriptReference>
+	<ObjectList membercount="6">
+		<Step hash="12760FE5C3DC0C473755D8AF1BBBC63C" id="134" name="Add Account" enable="True">
+			<DDRREF kind="StepText" hash="15D7E3BBF3D4D9F43288679394F63491">_66C53BCD-43BC-411F-AFBB-C63207E4AE5B</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="AccountType">
+					<List name="FileMaker" value="0"></List>
+				</Parameter>
+				<Parameter type="PrivilegeSetReference">
+					<PrivilegeSetReference id="0" name="&lt;unknown&gt;"></PrivilegeSetReference>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Expire password" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BF0E2E516E73184CE4B9A4BED1B9CDBA" id="83" name="Change Password" enable="True">
+			<DDRREF kind="StepText" hash="CA6FD49A2A03C59622A98E273A2947F7">_18E03F32-8093-440F-BB29-C6B061FCD1F0</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E01A34A0D2C41345C11A5A1E89464687" id="135" name="Delete Account" enable="True">
+			<DDRREF kind="StepText" hash="0B65D3F5BF72D2AD728C72050C5CC4AA">_59982BA3-CC29-4E18-9750-5C646AD83034</DDRREF>
+		</Step>
+		<Step hash="3BFA57147673B58C4C25541A76B70DBA" id="137" name="Enable Account" enable="True">
+			<DDRREF kind="StepText" hash="FB4B5DFCBB6EEA151AC41EB96B54285E">_F76BA728-0757-4DB2-B9C1-BE93882DD504</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean value="True" name="Activate" type="enable"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F50D6EC3B4A0D7BB74E9A6E35A3DBFF7" id="138" name="Re-Login" enable="True">
+			<Options>128</Options>
+			<DDRREF kind="StepText" hash="CBE01E501C55A62FAD41FC381D168DE3">_FD5BD718-0F7C-4474-9AC7-036F5879D4E5</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="84FBC15650607CCEFDCD7F531C5686A9" id="136" name="Reset Account Password" enable="True">
+			<DDRREF kind="StepText" hash="FB2FC57E4568CC4357077345F1700107">_14A6B03B-3038-4881-8A95-438C2FC5E6DF</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean value="False" type="Password"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

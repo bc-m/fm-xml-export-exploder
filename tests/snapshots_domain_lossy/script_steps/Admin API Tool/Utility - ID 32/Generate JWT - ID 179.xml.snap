@@ -1,0 +1,380 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="179" name="Generate JWT"></ScriptReference>
+	<ObjectList membercount="19">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" PURPOSE: Genterate JWT"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" HISTORY:&#13;   - Created:   2023-01-23 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="check required values"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer ( PUB__publickeys::name ) ODER IstLeer ( PUB__publickeys::privateKey )]]></Text>
+							<ChunkList hash="FF63EC91B4FD844022CB8B7022056932">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="8" name="name" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) </Chunk>
+								<Chunk type="FunctionRef">ODER</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="13" name="privateKey" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Alert"]]></Text>
+							<ChunkList hash="A7C4DFE9F6C28272D4CE32E101DE7174">
+								<Chunk type="NoRef">&quot;Alert&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Name or Private Key is missing."]]></Text>
+							<ChunkList hash="BA33F7672F642917AD70CF616F5E0D65">
+								<Chunk type="NoRef">&quot;Name or Private Key is missing.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[ Wahr]]></Text>
+							<ChunkList hash="C0EC5F4A1162B7DB676B2D6FED7B9E8A">
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">Wahr</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[SetzeVar ([    this.secret = PUB__publickeys::privateKey ;    this.keyName = PUB__publickeys::name ;    this.expDays = Falls ( IstLeer ( PUB__publickeys::Expires_days ) ; 365 ; PUB__publickeys::Expires_days ) ;    this.lifespan = this.expDays * 86400 ; // 86400 seconds in a day    this.currentUTC = Runden ( Hole ( SystemUhrzeitUTCMillisekunden ) / 1000 ; 0 );    this.epoch = LiesAlsZahl (ZeitStempel ("01/01/1970" ; "00:00:00"));    this.timestamp = this.currentUTC - this.epoch + this.lifespan ;    this.header =  JSONSetElement ( "" ; [ "alg" ; "RS256" ; JSONString ] ; [ "typ" ; "JWT" ; JSONString ] ) ;    this.payload = JSONSetElement ( "" ; [ "iss" ; this.keyName ; JSONString ] ; [ "aud" ; "fmsadminapi" ; JSONString ] ; [ "exp" ; this.timestamp ; JSONNumber ] ) ;    $expiration_time = LiesAlsZeitstempel ( this.currentUTC + this.lifespan );    this.encodedHeader = Austauschen (         Base64EncodeRFC ( 4648 ; this.header ) ;        [ "=" ; "" ] ; [ "+" ; "-" ] ; [ "/" ; "_" ]    ) ;    this.encodedPayload = Austauschen (         Base64EncodeRFC ( 4648 ; this.payload ) ;        [ "=" ; "" ] ; [ "+" ; "-" ] ; [ "/" ; "_" ]    ) ;    this.body = this.encodedHeader & "." & this.encodedPayload ;        this.signature = Austauschen (         Base64EncodeRFC ( 4648 ;            CryptGenerateSignature ( this.body ; "SHA256" ; this.secret ; "" )        );        [ "=" ; "" ] ; [ "+" ; "-" ] ; [ "/" ; "_" ]    )    ];  this.body & "." & this.signature)]]></Text>
+								<ChunkList hash="4292C4DE8CA2F0D15D6BBA6586F8293F">
+									<Chunk type="FunctionRef">SetzeVar</Chunk>
+									<Chunk type="NoRef"> ([&#13;    </Chunk>
+									<Chunk type="VariableReference">this.secret</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="13" name="privateKey" repetition="1">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.keyName</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="8" name="name" repetition="1">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.expDays</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="16" name="Expires_days" repetition="1">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ) ; 365 ; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="16" name="Expires_days" repetition="1">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.lifespan</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="VariableReference">this.expDays</Chunk>
+									<Chunk type="NoRef"> * 86400 ; // 86400 seconds in a day&#13;    </Chunk>
+									<Chunk type="VariableReference">this.currentUTC</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Runden</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">SystemUhrzeitUTCMillisekunden</Chunk>
+									<Chunk type="NoRef"> ) / 1000 ; 0 );&#13;    </Chunk>
+									<Chunk type="VariableReference">this.epoch</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
+									<Chunk type="NoRef"> (</Chunk>
+									<Chunk type="FunctionRef">ZeitStempel</Chunk>
+									<Chunk type="NoRef"> (&quot;01/01/1970&quot; ; &quot;00:00:00&quot;));&#13;    </Chunk>
+									<Chunk type="VariableReference">this.timestamp</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="VariableReference">this.currentUTC</Chunk>
+									<Chunk type="NoRef"> - </Chunk>
+									<Chunk type="VariableReference">this.epoch</Chunk>
+									<Chunk type="NoRef"> + </Chunk>
+									<Chunk type="VariableReference">this.lifespan</Chunk>
+									<Chunk type="NoRef"> ;&#13;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.header</Chunk>
+									<Chunk type="NoRef"> =  </Chunk>
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; ; [ &quot;alg&quot; ; &quot;RS256&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ] ; [ &quot;typ&quot; ; &quot;JWT&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ] ) ;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.payload</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; ; [ &quot;iss&quot; ; </Chunk>
+									<Chunk type="VariableReference">this.keyName</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ] ; [ &quot;aud&quot; ; &quot;fmsadminapi&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ] ; [ &quot;exp&quot; ; </Chunk>
+									<Chunk type="VariableReference">this.timestamp</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONNumber</Chunk>
+									<Chunk type="NoRef"> ] ) ;&#13;&#13;    </Chunk>
+									<Chunk type="VariableReference">$expiration_time</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">LiesAlsZeitstempel</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">this.currentUTC</Chunk>
+									<Chunk type="NoRef"> + </Chunk>
+									<Chunk type="VariableReference">this.lifespan</Chunk>
+									<Chunk type="NoRef"> );&#13;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.encodedHeader</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Austauschen</Chunk>
+									<Chunk type="NoRef"> ( &#13;        </Chunk>
+									<Chunk type="FunctionRef">Base64EncodeRFC</Chunk>
+									<Chunk type="NoRef"> ( 4648 ; </Chunk>
+									<Chunk type="VariableReference">this.header</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;        [ &quot;=&quot; ; &quot;&quot; ] ; [ &quot;+&quot; ; &quot;-&quot; ] ; [ &quot;/&quot; ; &quot;_&quot; ]&#13;    ) ;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.encodedPayload</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Austauschen</Chunk>
+									<Chunk type="NoRef"> ( &#13;        </Chunk>
+									<Chunk type="FunctionRef">Base64EncodeRFC</Chunk>
+									<Chunk type="NoRef"> ( 4648 ; </Chunk>
+									<Chunk type="VariableReference">this.payload</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;        [ &quot;=&quot; ; &quot;&quot; ] ; [ &quot;+&quot; ; &quot;-&quot; ] ; [ &quot;/&quot; ; &quot;_&quot; ]&#13;    ) ;&#13;&#13;    </Chunk>
+									<Chunk type="VariableReference">this.body</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="VariableReference">this.encodedHeader</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">this.encodedPayload</Chunk>
+									<Chunk type="NoRef"> ;&#13;    &#13;    </Chunk>
+									<Chunk type="VariableReference">this.signature</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Austauschen</Chunk>
+									<Chunk type="NoRef"> ( &#13;        </Chunk>
+									<Chunk type="FunctionRef">Base64EncodeRFC</Chunk>
+									<Chunk type="NoRef"> ( 4648 ;&#13;            </Chunk>
+									<Chunk type="FunctionRef">CryptGenerateSignature</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">this.body</Chunk>
+									<Chunk type="NoRef"> ; &quot;SHA256&quot; ; </Chunk>
+									<Chunk type="VariableReference">this.secret</Chunk>
+									<Chunk type="NoRef"> ; &quot;&quot; )&#13;        );&#13;        [ &quot;=&quot; ; &quot;&quot; ] ; [ &quot;+&quot; ; &quot;-&quot; ] ; [ &quot;/&quot; ; &quot;_&quot; ]&#13;    )&#13;&#13;    ];&#13;  </Chunk>
+									<Chunk type="VariableReference">this.body</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">this.signature</Chunk>
+									<Chunk type="NoRef">&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.jwt"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="17" name="jwt">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$this.jwt]]></Text>
+							<ChunkList hash="6DF38639EBB86BE47DBC46BFC4EC91A2">
+								<Chunk type="VariableReference">$this.jwt</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="18" name="Expires_m">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$expiration_time]]></Text>
+							<ChunkList hash="2DA2E0F6EEDB5A28F4109F93C16F5046">
+								<Chunk type="VariableReference">$expiration_time</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Wahr]]></Text>
+							<ChunkList hash="B15835F133FF2E27C7CB28117BFAE8F4">
+								<Chunk type="FunctionRef">Wahr</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

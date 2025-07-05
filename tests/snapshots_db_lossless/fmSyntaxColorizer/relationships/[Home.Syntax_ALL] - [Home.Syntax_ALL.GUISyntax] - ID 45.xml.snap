@@ -1,0 +1,42 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="45">
+	<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">DF13DAAA-2405-4377-B489-A8009DAF3DC2</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065147" name="Home.Syntax_ALL.GUISyntax" UUID="E0D8C79D-E5F6-46F0-8465-E9A2CA6BD397"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="2" name="Command_EN" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+					<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="7" name="Command_EN" UUID="D22BE1AC-B698-4986-A656-76383C8CF7DC">
+					<TableOccurrenceReference id="1065147" name="Home.Syntax_ALL.GUISyntax" UUID="E0D8C79D-E5F6-46F0-8465-E9A2CA6BD397"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="5" name="_gLanguage" UUID="E87D0A07-30F7-4681-A0FD-95A189B1C144">
+					<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="3" name="Language" UUID="A51CFB85-C505-4883-8F99-4A2F5FAD0BB8">
+					<TableOccurrenceReference id="1065147" name="Home.Syntax_ALL.GUISyntax" UUID="E0D8C79D-E5F6-46F0-8465-E9A2CA6BD397"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

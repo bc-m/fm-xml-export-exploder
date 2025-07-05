@@ -1,0 +1,94 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="243" name="Re-Login"></ScriptReference>
+	<ObjectList membercount="6">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="138" name="Erneut anmelden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Name">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Falls ( Hole ( Kontoname ) = "admin" ; "user" ; "admin" )]]></Text>
+							<ChunkList hash="FADAA57369027AF7594D1DDD01A0A5C7">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Kontoname</Chunk>
+								<Chunk type="NoRef"> ) = &quot;admin&quot; ; &quot;user&quot; ; &quot;admin&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Password">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls ( Hole ( Kontoname ) = "admin" ; "user" )]]></Text>
+							<ChunkList hash="25D3C4655323F54F63BBAA05159324BB">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Kontoname</Chunk>
+								<Chunk type="NoRef"> ) = &quot;admin&quot; ; &quot;user&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteFehlerNr ) = 0]]></Text>
+							<ChunkList hash="54FC8B91DE327952E1E920710D4432A7">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="37" name="Install Menus"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,0 +1,23 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="32" name="_IsFullAccessUser" UUID="7A79F18F-65DC-4C04-B638-5E1DB505A711"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/*_IsFullAccessUserReturns 1 if the user has full access, otherwise returns 020140423 MrW Version 1.0*/Hole ( KontoBerechtigungenName ) = "[Full Access]" ODER Hole ( KontoBerechtigungenName ) = "[Voller Zugriff]"]]></Text>
+		<ChunkList hash="661107113B42FEE035803C89C5A3A265">
+			<Chunk type="NoRef">/*_IsFullAccessUser&#13;&#13;Returns 1 if the user has full access, otherwise returns 0&#13;&#13;20140423 MrW Version 1.0&#13;*/&#13;</Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">KontoBerechtigungenName</Chunk>
+			<Chunk type="NoRef"> ) = &quot;[Full Access]&quot; </Chunk>
+			<Chunk type="FunctionRef">ODER</Chunk>
+			<Chunk type="NoRef"> </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef"> ( </Chunk>
+			<Chunk type="FunctionRef">KontoBerechtigungenName</Chunk>
+			<Chunk type="NoRef"> ) = &quot;[Voller Zugriff]&quot;</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

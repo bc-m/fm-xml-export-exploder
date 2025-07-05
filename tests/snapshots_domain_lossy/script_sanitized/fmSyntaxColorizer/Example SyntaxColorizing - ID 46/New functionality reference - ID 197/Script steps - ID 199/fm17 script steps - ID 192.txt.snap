@@ -1,0 +1,76 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# # Perform Script by Name
+
+# normal = "From list"
+Script ausführen [ Aus Liste ; "Hello::World" ]
+
+# new = "By Name" in the format "File::ScriptName"
+Script ausführen [ Nach Name ; "How much of a script name can be seen in various places if it is a really long script name up to 100" ; Parameter: 123 ]
+Variable setzen [ $Name ; "How much of a script name can be seen in various places if it is a really long script name up to 100" ]
+Script ausführen [ Nach Name ; $Name ; Parameter: 123 ]
+
+# from file…
+Script ausführen [ Aus Liste ; "A typical script" ; File: "Self" ; Parameter: 123 ]
+Script ausführen [ Aus Liste ; "Hello::World" ; Parameter: 123 ]
+Script ausführen [ Aus Liste ; "Hello::World" ; File: "Self" ; Parameter: 123 ]
+
+Script ausführen [ Nach Name ; "Self::A typical script" ; Parameter: 123 ]
+Script ausführen [ Nach Name ; "::Hello::World" ; Parameter: 123 ]
+Script ausführen [ Nach Name ; "Self::Hello::World" ; Parameter: 123 ]
+
+
+
+# Create directories
+
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: ON ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: ON ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+
+Exportiere alle Feldwerte [ Ordner erstellen: ON ; _Color::__ID ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Exportiere alle Feldwerte [ Ordner erstellen: ON ]
+Exportiere alle Feldwerte [ Ordner erstellen: OFF ]
+
+Variable setzen [ $path ; Hole( DesktopPfad ) & "Backups/" & FilterZeichen ( Hole( HostZeitstempel ) ; "1234567890 ") & "/" & Hole( DateiName ) & ".fmp12" ]
+Kopie speichern unter [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Kopie der aktuellen Datei ; Ordner erstellen: ON ]
+Kopie speichern unter [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Komprimierte Kopie (kleiner) ; Ordner erstellen: ON ]
+Kopie speichern unter [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Clone (ohne Datensätze) ; Ordner erstellen: ON ]
+Kopie speichern unter [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Eigenständige Kopie (einzelne Datei) ; Ordner erstellen: ON ]
+Kopie speichern unter [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Kopie der aktuellen Datei ; Ordner erstellen: OFF ]
+
+Datensätze als Excel speichern [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Mit Dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Ordner erstellen: ON ]
+Datensätze als PDF speichern [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; An vorhandene PDF anhängen: ON ; Mit Dialog: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Ordner erstellen: ON ]
+Datensätze als Snapshot-Link speichern [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Alle aufgerufenen Datensätze ; Ordner erstellen: ON ]
+
+# Send multiple attachments
+# 1 Attachment
+E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+# 2+ Attachments
+E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+
+
+
+# Open
+
+# 118 = Formerly Open Remote
+Hosts öffnen
+
+# 183 = Formerly Open Launch Center
+Favoriten öffnen
+
+# Miscellaneous
+
+# Show Custom Dialog with target variables
+Variable setzen [ $Title ; "Test" ]
+Variable setzen [ $Message ; "Test" ]
+# @var $Input1,$Input2,$Input3
+Eigenes Dialogfeld anzeigen [ Title: $Title ; Message: $Message ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field3" NOT PARSED ⚠️ ]
+
+# External steps
+
+# MBS [ Select ; Destination: $TargetVar ; Function: $Function ; P1: $P1 ; P2: $P2 ; P3: $P3 ; P4: $P4 ] 
+MBS [ $Function ; $P1 ; $P2 ; $P3 ; $P4 ]
+
+Lokale Benachrichtigung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]

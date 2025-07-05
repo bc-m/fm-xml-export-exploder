@@ -1,0 +1,1348 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<UUID modifications="125" userName="Rus Master" accountName="admin" timestamp="2021-11-05T14:37:51">43A0E7F3-6D98-41AA-9985-F99BDB938648</UUID>
+	<BaseTableReference id="136" name="_Home"></BaseTableReference>
+	<ObjectList membercount="51">
+		<Field DefaultStyle="" id="1" name="__ID" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">C8593591-24F4-49A8-85FE-8EC63AE0F987</UUID>
+			<AutoEnter type="SerialNumber" prohibitModification="False">
+				<SerialNumber increment="1" generate="OnCreation"></SerialNumber>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="2" name="_gHomeScreenInfo" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">F71E392E-CE5F-41DD-B193-6FE3420A2109</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="3" name="_kAppVersion" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">E6CFD073-2856-44F7-A3E5-43FCB0D1C2A9</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[WörterRechts( HoleWert( ScriptNamen ( Hole( DateiName ) ) ; 1 ) ; 1 )]]></Text>
+				<ChunkList hash="82D2D926A1DF9EFF22FC4AE03B3E4326">
+					<Chunk type="FunctionRef">WörterRechts</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">HoleWert</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">ScriptNamen</Chunk>
+					<Chunk type="NoRef"> ( </Chunk>
+					<Chunk type="FunctionRef">Hole</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">DateiName</Chunk>
+					<Chunk type="NoRef"> ) ) ; 1 ) ; 1 )</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="4" name="_kAppName" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">56401AFC-9F6C-4863-870F-7EA9082F0FFB</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA["fmSyntaxColorizer"]]></Text>
+				<ChunkList hash="293F258D43EE21E6BB4029DC29B7C1AF">
+					<Chunk type="NoRef">&quot;fmSyntaxColorizer&quot;</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="5" name="_k1" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">CBF607D7-D3B1-43EF-B523-8169ACD3C118</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="True" autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[1]]></Text>
+				<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+					<Chunk type="NoRef">1</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="6" name="_gInputText1" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2DF8988F-5022-4CE3-AFE5-51DAA46DE468</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="7" name="_gInputText2" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">1BF5BD41-0023-4A64-BA63-DF82794D8EB2</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="8" name="_gInputText3" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">CAD74694-3DB3-4F90-A634-20B538840473</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="9" name="_gEmptyField" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">35FEB2EA-EF99-4095-A184-823D0140E6BA</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[ZeichenLinks( Selbst ; 0 )]]></Text>
+						<ChunkList hash="1BC2A36EF3C7E55F6A2CFDDD7448BDCA">
+							<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> ; 0 )</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="18" name="_gHomeScreenPicture" fieldtype="Normal" datatype="Binary" comment="">
+			<UUID modifications="13" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B2E8D4E3-AB3D-4E82-B6CA-E79AD4272D64</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="2"></Storage>
+		</Field>
+		<Field DefaultStyle="" id="19" name="_gSyntaxColoringDisableAction" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B6423A0A-5BAE-4711-A9C1-960D07E5D3C4</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Falls(_gSyntaxColoringEnabled=1 ; "Disable" ;_gSyntaxColoringEnabled=0 ; "Enable" ;"Unavailable")]]></Text>
+						<ChunkList hash="9D097C12EB34BC2FD49F5DE9ACDEFF5D">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="20" name="_gSyntaxColoringEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef">=1 ; &quot;Disable&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="20" name="_gSyntaxColoringEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef">=0 ; &quot;Enable&quot; ;&#13;&quot;Unavailable&quot;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="20" name="_gSyntaxColoringEnabled" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">03A0DE26-7259-42F1-899D-45FC91F59889</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="21" name="_gSyntaxColoringEnDisableButton" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">475BFDA7-7BBA-495B-8C3B-A8F3CC070CED</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[_gSyntaxColoringDisableAction]]></Text>
+						<ChunkList hash="E1785A560406365C56C3C5422D5B9124">
+							<Chunk type="FieldRef">
+								<FieldReference id="19" name="_gSyntaxColoringDisableAction" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="22" name="_gSyntaxColoringStatusMessage" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="18" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">3287BCEE-88FD-4C56-A9B2-16B9C0CF0013</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Falls(_gSyntaxColoringEnabled = 1 ; "✅  SyntaxColorizing is enabled" ;_gSyntaxColoringEnabled = 0 ; "❌  SyntaxColorizing is disabled" ;                                                 "SyntaxColorizing needs MBS v3.0+")]]></Text>
+						<ChunkList hash="A76693353C086A2441EFB474B928EAAC">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="20" name="_gSyntaxColoringEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 1 ; &quot;✅  SyntaxColorizing is enabled&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="20" name="_gSyntaxColoringEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 0 ; &quot;❌  SyntaxColorizing is disabled&quot; ; &#13;                                                &quot;SyntaxColorizing needs MBS v3.0+&quot;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="23" name="_gLineNumberingEnabled" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">FEB59071-CB07-40E9-A8FB-5342F5D7178E</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="24" name="_gLineNumberingStatusMessage" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="21" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">DE6B4BB7-D51D-4F3D-A53C-29705CE29E86</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Falls(_gLineNumberingEnabled = 1 ; "✅  Line Numbers are enabled" ;_gLineNumberingEnabled = 0 ; "❌  Line Numbers are disabled" ;                                                  "Line Numbers needs MBS v3.5+")]]></Text>
+						<ChunkList hash="C74D5FBD7E7BD7257F23C45982FF8DA7">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="23" name="_gLineNumberingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 1 ; &quot;✅  Line Numbers are enabled&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="23" name="_gLineNumberingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 0 ; &quot;❌  Line Numbers are disabled&quot; ; &#13;                                                 &quot;Line Numbers needs MBS v3.5+&quot;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="25" name="_gLineNumberingDisableAction" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="10" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8FFD2B46-5A8B-4091-9EF5-B2186C14397D</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Falls(_gLineNumberingEnabled=1 ; "Disable" ;_gLineNumberingEnabled=0 ; "Enable" ;"Unavailable")]]></Text>
+						<ChunkList hash="79D197F751E9267AD16A7B2A055CB6DC">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="23" name="_gLineNumberingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef">=1 ; &quot;Disable&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="23" name="_gLineNumberingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef">=0 ; &quot;Enable&quot; ;&#13;&quot;Unavailable&quot;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="26" name="_gVariableCheckingDisableAction" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">8A20784A-CB9A-48F2-8A74-A6095BFAD78D</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Falls(_gVariableCheckingEnabled=1 ; "Disable" ;_gVariableCheckingEnabled=0 ; "Enable" ;"Unavailable")]]></Text>
+						<ChunkList hash="DA4E08CE2154F4C44721C2750BF1F2A3">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="27" name="_gVariableCheckingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef">=1 ; &quot;Disable&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="27" name="_gVariableCheckingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef">=0 ; &quot;Enable&quot; ;&#13;&quot;Unavailable&quot;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="27" name="_gVariableCheckingEnabled" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">9639ED2E-A808-47E4-A0F2-C41D2B0FF5A5</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="28" name="_gVariableCheckingStatusMessage" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">A14CEFFE-303B-418C-A879-EDE2793BA222</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Falls(_gVariableCheckingEnabled = 1 ; "✅  Variable Checking is enabled" ;_gVariableCheckingEnabled = 0 ; "❌  Variable Checking is disabled" ;                                                     "Variable Checking needs MBS v3.5.0.6+")]]></Text>
+						<ChunkList hash="9EBC3C86D2C5DD0838E2D2FDB3CAE50B">
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="27" name="_gVariableCheckingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 1 ; &quot;✅  Variable Checking is enabled&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="27" name="_gVariableCheckingEnabled" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 0 ; &quot;❌  Variable Checking is disabled&quot; ; &#13;                                                    &quot;Variable Checking needs MBS v3.5.0.6+&quot;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="29" name="_kMBSVersion" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2681F2CD-26A5-471C-BCEB-3B71A88BFE5E</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[MBS( "Version" )]]></Text>
+				<ChunkList hash="520F43275759CBB7937FD5B6D2A85E9C">
+					<Chunk type="FunctionRef">MBS</Chunk>
+					<Chunk type="NoRef">( &quot;Version&quot; )</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="30" name="zzz_UNUSED" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="8" userName="Rus Master" accountName="admin" timestamp="2021-10-10T12:08:37">83A57DF0-396C-4D57-B198-39C87EA19FCD</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="31" name="_kMBSVersionAutoupdate" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">5007A3D7-4F6C-401C-8340-B902F9C7EB54</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[MBS( "VersionAutoUpdate" )]]></Text>
+				<ChunkList hash="7D71CCD68DFBEE2EEF532CFF12357824">
+					<Chunk type="FunctionRef">MBS</Chunk>
+					<Chunk type="NoRef">( &quot;VersionAutoUpdate&quot; )</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="32" name="_gLineNumberColor" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B917DA83-BE81-4026-A9F4-0C167011713A</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[_FullBlockDropColor ( Selbst )]]></Text>
+						<ChunkList hash="F7E9240565028C01C953120E1F40A9D0">
+							<Chunk type="CustomFunctionRef">_FullBlockDropColor</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> )</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="33" name="_kLineNumberColor" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2BABD984-7D7B-4F63-A003-11407256A3BF</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[MBS( "SyntaxColoring.LineNumbers.GetColor" )]]></Text>
+				<ChunkList hash="8358841C0A30F313E1C976964F727E36">
+					<Chunk type="FunctionRef">MBS</Chunk>
+					<Chunk type="NoRef">( &quot;SyntaxColoring.LineNumbers.GetColor&quot; )</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="34" name="_gMBSPluginCheck" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">A7081AD3-9B33-49E0-B7A7-DF4CFD223D4A</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="35" name="_gMBSPluginCheckStatusMessage" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="20" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">1BFD706F-1A1A-42D7-83DE-63352C3B519B</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[Austauschen( Falls(_gMBSPluginCheck = "" ;"-->  Check your MBS Plugin Version here." ;_gMBSPluginCheck =-1 ; ":-(  Sorry, SyntaxColorizing needs a Mac" ; _gMBSPluginCheck = 0 ; "❌   You seem to have no MBS Plugin!" ; _gMBSPluginCheck = 1 ; "❓   Your MBS Plugin is disabled!" ;_gMBSPluginCheck = 2 ; "⛔   Woah! MBS Plugin is way too old!" ;_gMBSPluginCheck = 3 ; "❎   MBS Plugin lacks LineNrs/Vars" ;_gMBSPluginCheck = 4 ; "❎   MBS Plugin lacks VarChecking" ;_gMBSPluginCheck = 5 ; "❎   MBS Plugin lacks $VarCheck… " ;_gMBSPluginCheck = 6 ; "✅   MBS Plugin is ready and able." ;) ; "MBS Plugin" ; TextFarbe ( "MBS Plugin" ; RGB ( 51 ; 102 ; 255 ) ) )]]></Text>
+						<ChunkList hash="E1C64611D5529470044E1E6FD87CDA58">
+							<Chunk type="FunctionRef">Austauschen</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">(&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = &quot;&quot; ;&quot;--&gt;  Check your MBS Plugin Version here.&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> =-1 ; &quot;:-(  Sorry, SyntaxColorizing needs a Mac&quot; ; &#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 0 ; &quot;❌   You seem to have no MBS Plugin!&quot; ; &#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 1 ; &quot;❓   Your MBS Plugin is disabled!&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 2 ; &quot;⛔   Woah! MBS Plugin is way too old!&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 3 ; &quot;❎   MBS Plugin lacks LineNrs/Vars&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 4 ; &quot;❎   MBS Plugin lacks VarChecking&quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 5 ; &quot;❎   MBS Plugin lacks $VarCheck… &quot; ;&#13;</Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="34" name="_gMBSPluginCheck" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> = 6 ; &quot;✅   MBS Plugin is ready and able.&quot; ;&#13;) ; &quot;MBS Plugin&quot; ; </Chunk>
+							<Chunk type="FunctionRef">TextFarbe</Chunk>
+							<Chunk type="NoRef"> ( &quot;MBS Plugin&quot; ; </Chunk>
+							<Chunk type="FunctionRef">RGB</Chunk>
+							<Chunk type="NoRef"> ( 51 ; 102 ; 255 ) ) )</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="36" name="_kSyntaxStats" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="21" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">9200DA59-F839-46AC-88A3-478B3858935B</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[SetzeVar([vN = Summe( Home.Syntax_ALL::_k1 ) ;vTitles = Summe( Home.Syntax_ALL::_kIsGroupTitle ) ;vKeywords = Summe( Home.Syntax_ALL::_kIsWildcard ) ;vFunctions = Summe( Home.Syntax_ALL::_kIsFunction ) ;vFormula = Summe( Home.Syntax_ALL::_kIsFormula ) ;vVars = Summe( Home.Syntax_ALL::_kIsVariable ) ;vCalculations = vFunctions + vFormula + vVars ;vScriptSteps =  Summe( Home.Syntax_ALL::_kIsScriptStep ) - vTitles ;vCommands =  vScriptSteps - vKeywords;vSyntax = vN - vTitles ;vOn =  Summe( Home.Syntax_ALL::On ) ;vOff = vSyntax - vOn ; vGUISyntax = Summe( Home.Syntax_ALL.GUISyntax::_kDifferent )];Liste( Falls( vOff ; vOn & " / " )  & vSyntax & " fmSyntaxColorizer syntax definitions:";"  " & vScriptSteps & " script steps ( " & vCommands & " commands and " & vKeywords & " *keywords* )" ; "  " & vCalculations & " calculations ( " & vFormula & " symbols, " & vFunctions & " functions, " & vVars & " variables )" ; Falls( vGUISyntax ; "Plus " & vGUISyntax & " definitions in " & Home.Syntax_ALL::_gLanguage )))]]></Text>
+				<ChunkList hash="677B72A4E3384F55F39317B8F5649921">
+					<Chunk type="FunctionRef">SetzeVar</Chunk>
+					<Chunk type="NoRef">([&#13;</Chunk>
+					<Chunk type="VariableReference">vN</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="17" name="_k1" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;&#13;</Chunk>
+					<Chunk type="VariableReference">vTitles</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="8" name="_kIsGroupTitle" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;</Chunk>
+					<Chunk type="VariableReference">vKeywords</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="21" name="_kIsWildcard" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;&#13;</Chunk>
+					<Chunk type="VariableReference">vFunctions</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="32" name="_kIsFunction" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;</Chunk>
+					<Chunk type="VariableReference">vFormula</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="33" name="_kIsFormula" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;</Chunk>
+					<Chunk type="VariableReference">vVars</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="34" name="_kIsVariable" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;&#13;</Chunk>
+					<Chunk type="VariableReference">vCalculations</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="VariableReference">vFunctions</Chunk>
+					<Chunk type="NoRef"> + </Chunk>
+					<Chunk type="VariableReference">vFormula</Chunk>
+					<Chunk type="NoRef"> + </Chunk>
+					<Chunk type="VariableReference">vVars</Chunk>
+					<Chunk type="NoRef"> ;&#13;&#13;</Chunk>
+					<Chunk type="VariableReference">vScriptSteps</Chunk>
+					<Chunk type="NoRef"> =  </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="31" name="_kIsScriptStep" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) - </Chunk>
+					<Chunk type="VariableReference">vTitles</Chunk>
+					<Chunk type="NoRef"> ;&#13;</Chunk>
+					<Chunk type="VariableReference">vCommands</Chunk>
+					<Chunk type="NoRef"> =  </Chunk>
+					<Chunk type="VariableReference">vScriptSteps</Chunk>
+					<Chunk type="NoRef"> - </Chunk>
+					<Chunk type="VariableReference">vKeywords</Chunk>
+					<Chunk type="NoRef">;&#13;</Chunk>
+					<Chunk type="VariableReference">vSyntax</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="VariableReference">vN</Chunk>
+					<Chunk type="NoRef"> - </Chunk>
+					<Chunk type="VariableReference">vTitles</Chunk>
+					<Chunk type="NoRef"> ;&#13;&#13;</Chunk>
+					<Chunk type="VariableReference">vOn</Chunk>
+					<Chunk type="NoRef"> =  </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="6" name="On" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) ;&#13;</Chunk>
+					<Chunk type="VariableReference">vOff</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="VariableReference">vSyntax</Chunk>
+					<Chunk type="NoRef"> - </Chunk>
+					<Chunk type="VariableReference">vOn</Chunk>
+					<Chunk type="NoRef"> ; &#13;</Chunk>
+					<Chunk type="VariableReference">vGUISyntax</Chunk>
+					<Chunk type="NoRef"> = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="10" name="_kDifferent" repetition="1">
+							<TableOccurrenceReference id="1065147" name="Home.Syntax_ALL.GUISyntax"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> )&#13;&#13;];&#13;&#13;</Chunk>
+					<Chunk type="FunctionRef">Liste</Chunk>
+					<Chunk type="NoRef">( &#13;</Chunk>
+					<Chunk type="FunctionRef">Falls</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="VariableReference">vOff</Chunk>
+					<Chunk type="NoRef"> ; </Chunk>
+					<Chunk type="VariableReference">vOn</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; / &quot; )  &amp; </Chunk>
+					<Chunk type="VariableReference">vSyntax</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; fmSyntaxColorizer syntax definitions:&quot;;&#13;&quot;  &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vScriptSteps</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; script steps ( &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vCommands</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; commands and &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vKeywords</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; *keywords* )&quot; ; &#13;&quot;  &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vCalculations</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; calculations ( &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vFormula</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; symbols, &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vFunctions</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; functions, &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vVars</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; variables )&quot; ; &#13;</Chunk>
+					<Chunk type="FunctionRef">Falls</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="VariableReference">vGUISyntax</Chunk>
+					<Chunk type="NoRef"> ; &quot;Plus &quot; &amp; </Chunk>
+					<Chunk type="VariableReference">vGUISyntax</Chunk>
+					<Chunk type="NoRef"> &amp; &quot; definitions in &quot; &amp; </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="5" name="_gLanguage" repetition="1">
+							<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> )&#13;)&#13;&#13;)</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="37" name="_kAppCopyright" fieldtype="Calculated" datatype="Text" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B30AEB99-4ED0-4E36-99DB-458BE433950D</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA["© " & Jahreszahl( Hole( SystemDatum ) ) & " MrWatson, russell@mrwatson.de"]]></Text>
+				<ChunkList hash="5D28F3734D1528E3DF70033F4DF8508F">
+					<Chunk type="NoRef">&quot;© &quot; &amp; </Chunk>
+					<Chunk type="FunctionRef">Jahreszahl</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">Hole</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FunctionRef">SystemDatum</Chunk>
+					<Chunk type="NoRef"> ) ) &amp; &quot; MrWatson, russell@mrwatson.de&quot;</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="38" name="_gMBSDeveloperOptions" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">56915214-4F05-4A7E-BC2E-67BDD9D2B1E5</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="39" name="_kAllMbsDeveloperOptions" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">4ABB90E4-D5AD-47E9-B7DA-01A1570A7F10</UUID>
+			<AutoEnter alwaysEvaluate="False"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[Summe( Home.MBS_DeveloperOptions::On ) = Summe( Home.MBS_DeveloperOptions::_k1 )]]></Text>
+				<ChunkList hash="F0070E9CDAC3E24C0B85B427FDAFEAD8">
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="6" name="On" repetition="1">
+							<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> ) = </Chunk>
+					<Chunk type="FunctionRef">Summe</Chunk>
+					<Chunk type="NoRef">( </Chunk>
+					<Chunk type="FieldRef">
+						<FieldReference id="8" name="_k1" repetition="1">
+							<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+						</FieldReference>
+					</Chunk>
+					<Chunk type="NoRef"> )</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="40" name="_gDynamic1Comment" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="11" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">0D287D4B-2522-4A30-A1C9-A4142C4238AC</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA["This is dynamic entry #1"]]></Text>
+						<ChunkList hash="CEE1E57659A5559286391471C2C0CD59">
+							<Chunk type="NoRef">&quot;This is dynamic entry #1&quot;</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="41" name="_gDynamic2Comment" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="13" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">BCB229D3-0FDA-495B-9B8C-930F560984DF</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA["This is dynamic entry #2"]]></Text>
+						<ChunkList hash="E18151A48B226F35C18B08A7093C6322">
+							<Chunk type="NoRef">&quot;This is dynamic entry #2&quot;</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="42" name="_gDynamic3Comment" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">536F8B4A-436B-49A4-AEDD-CAC28E1501BE</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA["This is dynamic entry #3"]]></Text>
+						<ChunkList hash="15219D6D498ECC04592122B60F842779">
+							<Chunk type="NoRef">&quot;This is dynamic entry #3&quot;</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="43" name="_gDynamic4Comment" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="12" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">0031826A-16FD-4483-AAA5-A709EF84420D</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="False">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA["This is dynamic entry #4"]]></Text>
+						<ChunkList hash="D07F6C48C1D408190F195E007F007F24">
+							<Chunk type="NoRef">&quot;This is dynamic entry #4&quot;</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="44" name="_gMBSOpt_MinCalcFontSize" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">A921DE84-1727-4D8B-907B-1BB5FC220323</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vSize = Selbst ;r = MBS("SyntaxColoring.SetMinCalcFontSize"; Falls( _gMBSOpt_MinCalcFontSizeEnable ; vSize ) )];vSize)]]></Text>
+						<ChunkList hash="89DF2CE46345D8A3104328556CC716D3">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vSize</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.SetMinCalcFontSize&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="54" name="_gMBSOpt_MinCalcFontSizeEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vSize</Chunk>
+							<Chunk type="NoRef"> ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vSize</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="45" name="_gMBSOpt_RelationGraphSearchBoxPreferredSize" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="9" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">DAFF309A-1FA2-4484-AD4B-CBF6B754DCB5</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vSize = Selbst ;r = MBS("SyntaxColoring.SetRelationGraphSearchBoxPreferredSize"; Falls ( _gMBSOpt_RelationGraphSearchBoxPreferredSizeEnable ; vSize ) )];vSize)]]></Text>
+						<ChunkList hash="A2F190CF6CDD0E684D7F37997A674B4A">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vSize</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.SetRelationGraphSearchBoxPreferredSize&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="55" name="_gMBSOpt_RelationGraphSearchBoxPreferredSizeEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vSize</Chunk>
+							<Chunk type="NoRef"> ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vSize</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="46" name="_gMBSOpt_ScriptHighlightColor" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="10" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">9EC17ABC-9426-498C-B497-47BFD3C75535</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vText = _FullBlockDropColor ( Selbst );vRGB = "#" & _TextGetRRGGBB ( vText );r = MBS("SyntaxColoring.SetScriptHighlightColor"; Falls( _gMBSOpt_ScriptHighlightColorEnable ; vRGB ) )];vText)]]></Text>
+						<ChunkList hash="E932D8C1A9BDDE7118D777DCA8BD5AFA">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="CustomFunctionRef">_FullBlockDropColor</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> = &quot;#&quot; &amp; </Chunk>
+							<Chunk type="CustomFunctionRef">_TextGetRRGGBB</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.SetScriptHighlightColor&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="50" name="_gMBSOpt_ScriptHighlightColorEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="47" name="_gMBSOpt_ScriptIfColor" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">37DAEFC5-3DD0-4FA4-A55E-E041EC909C72</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vText = _FullBlockDropColor ( Selbst );vRGB = "#" & _TextGetRRGGBB ( vText );r = MBS("SyntaxColoring.SetScriptIfColor"; Falls( _gMBSOpt_ScriptIfColorEnable ; vRGB ) )];vText)]]></Text>
+						<ChunkList hash="FB00624C7AA11D76815F0D0E12D807F6">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="CustomFunctionRef">_FullBlockDropColor</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> = &quot;#&quot; &amp; </Chunk>
+							<Chunk type="CustomFunctionRef">_TextGetRRGGBB</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.SetScriptIfColor&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="51" name="_gMBSOpt_ScriptIfColorEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="48" name="_gMBSOpt_ScriptLoopColor" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">7F093F23-1223-4ED2-846B-6AFD2BBFA187</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vText = _FullBlockDropColor ( Selbst );vRGB = "#" & _TextGetRRGGBB ( vText );r = MBS("SyntaxColoring.SetScriptLoopColor"; Falls( _gMBSOpt_ScriptLoopColorEnable ; vRGB ) )];vText)]]></Text>
+						<ChunkList hash="008A618A0623CBABC4DFB4BD3997441A">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="CustomFunctionRef">_FullBlockDropColor</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> = &quot;#&quot; &amp; </Chunk>
+							<Chunk type="CustomFunctionRef">_TextGetRRGGBB</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.SetScriptLoopColor&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="52" name="_gMBSOpt_ScriptLoopColorEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="49" name="_gMBSOpt_ScriptSearchColor" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">711340DA-AF21-4F19-B97C-43B9D07094D7</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vText = _FullBlockDropColor ( Selbst );vRGB = "#" & _TextGetRRGGBB ( vText );r = MBS("SyntaxColoring.SetScriptSearchColor"; Falls( _gMBSOpt_ScriptSearchColorEnable ; vRGB ) )];vText)]]></Text>
+						<ChunkList hash="2A0F564C0022CAF5E9C88F8316A02EE4">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="CustomFunctionRef">_FullBlockDropColor</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> = &quot;#&quot; &amp; </Chunk>
+							<Chunk type="CustomFunctionRef">_TextGetRRGGBB</Chunk>
+							<Chunk type="NoRef"> ( </Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef"> );&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.SetScriptSearchColor&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="53" name="_gMBSOpt_ScriptSearchColorEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vRGB</Chunk>
+							<Chunk type="NoRef"> ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="VariableReference">vText</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="50" name="_gMBSOpt_ScriptHighlightColorEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">EB165A7E-1519-4EA3-94FD-06AB3753F643</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="51" name="_gMBSOpt_ScriptIfColorEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">FA0E8F51-2B6E-4CFD-87C2-278D50BCE684</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="52" name="_gMBSOpt_ScriptLoopColorEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="7" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">61C4FCA4-9B25-4277-9FBE-C49FFA29D368</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="53" name="_gMBSOpt_ScriptSearchColorEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="8" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">7DBD980A-15D1-4756-A4D5-449D6E37DFE8</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="54" name="_gMBSOpt_MinCalcFontSizeEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">2239DADA-678C-40D7-B09E-38CB6B22DB87</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="55" name="_gMBSOpt_RelationGraphSearchBoxPreferredSizeEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="6" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">F6EDA555-F34C-4C34-BF7E-E872267D6CB9</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="56" name="_kIsDarkMode" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2021-09-24T09:44:03">A3A7AA0F-E505-4F67-83D8-6D9232A2087E</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				<Text><![CDATA[Position ( Hole (SystemDarstellung) ; "Dark" ; 1 ; 1 )>0]]></Text>
+				<ChunkList hash="FB90DDC20A00B58AA0D706166A1D5075">
+					<Chunk type="FunctionRef">Position</Chunk>
+					<Chunk type="NoRef"> ( </Chunk>
+					<Chunk type="FunctionRef">Hole</Chunk>
+					<Chunk type="NoRef"> (</Chunk>
+					<Chunk type="FunctionRef">SystemDarstellung</Chunk>
+					<Chunk type="NoRef">) ; &quot;Dark&quot; ; 1 ; 1 )&gt;0</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="57" name="_gMBSOpt_VarCheckLimitScanLines" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="13" userName="Rus Master" accountName="admin" timestamp="2021-11-05T14:37:49">4A0FB990-60F1-4393-8FEC-D78898C89FEF</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vLines = _gMBSOpt_VarCheckLimitScanLines ;vMax   = _gMBSOpt_VarCheckLimitLines ;r = MBS("SyntaxColoring.CheckVariableDeclaration.SetLimits"; Falls( _gMBSOpt_VarCheckLimitEnable ; vLines ; 500 ) ; Falls( _gMBSOpt_VarCheckLimitEnable ; vMax ; 2000 ) )];Selbst)]]></Text>
+						<ChunkList hash="834BA85EF578CF236FD254282BBE8DD4">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vLines</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="57" name="_gMBSOpt_VarCheckLimitScanLines" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vMax</Chunk>
+							<Chunk type="NoRef">   = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="59" name="_gMBSOpt_VarCheckLimitLines" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.CheckVariableDeclaration.SetLimits&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="58" name="_gMBSOpt_VarCheckLimitEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vLines</Chunk>
+							<Chunk type="NoRef"> ; 500 ) ; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="58" name="_gMBSOpt_VarCheckLimitEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vMax</Chunk>
+							<Chunk type="NoRef"> ; 2000 ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="58" name="_gMBSOpt_VarCheckLimitEnable" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="8" userName="Rus Master" accountName="admin" timestamp="2021-11-04T15:19:31">B280D3EA-A992-43FA-939E-B4196F45E24B</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="59" name="_gMBSOpt_VarCheckLimitLines" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="14" userName="Rus Master" accountName="admin" timestamp="2021-11-05T14:37:31">D4AA0B53-0C77-430A-AFA5-4F0A15CF9DB9</UUID>
+			<AutoEnter type="Calculated" prohibitModification="False" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated>
+					<Calculation>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+						<Text><![CDATA[SetzeVar([vTrigger = _gEmptyField ;vLines = _gMBSOpt_VarCheckLimitScanLines ;vMax   = _gMBSOpt_VarCheckLimitLines ;r = MBS("SyntaxColoring.CheckVariableDeclaration.SetLimits"; Falls( _gMBSOpt_VarCheckLimitEnable ; vLines ; 500 ) ; Falls( _gMBSOpt_VarCheckLimitEnable ; vMax ; 2000 ) )];Selbst)]]></Text>
+						<ChunkList hash="834BA85EF578CF236FD254282BBE8DD4">
+							<Chunk type="FunctionRef">SetzeVar</Chunk>
+							<Chunk type="NoRef">(&#13;[&#13;</Chunk>
+							<Chunk type="VariableReference">vTrigger</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="9" name="_gEmptyField" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vLines</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="57" name="_gMBSOpt_VarCheckLimitScanLines" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">vMax</Chunk>
+							<Chunk type="NoRef">   = </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="59" name="_gMBSOpt_VarCheckLimitLines" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ;&#13;</Chunk>
+							<Chunk type="VariableReference">r</Chunk>
+							<Chunk type="NoRef"> = </Chunk>
+							<Chunk type="FunctionRef">MBS</Chunk>
+							<Chunk type="NoRef">(&quot;SyntaxColoring.CheckVariableDeclaration.SetLimits&quot;; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="58" name="_gMBSOpt_VarCheckLimitEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vLines</Chunk>
+							<Chunk type="NoRef"> ; 500 ) ; </Chunk>
+							<Chunk type="FunctionRef">Falls</Chunk>
+							<Chunk type="NoRef">( </Chunk>
+							<Chunk type="FieldRef">
+								<FieldReference id="58" name="_gMBSOpt_VarCheckLimitEnable" repetition="1">
+									<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+								</FieldReference>
+							</Chunk>
+							<Chunk type="NoRef"> ; </Chunk>
+							<Chunk type="VariableReference">vMax</Chunk>
+							<Chunk type="NoRef"> ; 2000 ) )&#13;&#13;];&#13;&#13;</Chunk>
+							<Chunk type="FunctionRef">Selbst</Chunk>
+							<Chunk type="NoRef">&#13;&#13;)</Chunk>
+						</ChunkList>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="True" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

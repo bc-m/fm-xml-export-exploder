@@ -1,11 +1,0 @@
----
-source: src/main.rs
-expression: output_content
----
-<CustomFunctionCalc>
-	<CustomFunctionReference id="4" name="GetFileMakerVersionMajor"></CustomFunctionReference>
-	<Calculation>
-		<DDRREF kind="ChunkList" hash="4FE7C0467933B4A568B8E02078CBA803">_B346B342-C393-4502-A4CE-BADBFE5BA1C2</DDRREF>
-		<Text><![CDATA[// Signature:// GetFileMakerVersionMajor// Purpose:// Detects major component of current FileMaker application version// Parameters:// None// Result:// Returns major component of current FileMaker application version// For example, if FileMaker application version is 19.2.1, this custom function will return 19// Dependencies:// None// History:// Created: Mislav Kos <mkos@soliantconsulting.com>GetAsNumber ( GetValue ( Substitute ( RightWords ( Get ( ApplicationVersion ) ; 1 ) ; "." ; ¶ ) ; 1 ) )]]></Text>
-	</Calculation>
-</CustomFunctionCalc>

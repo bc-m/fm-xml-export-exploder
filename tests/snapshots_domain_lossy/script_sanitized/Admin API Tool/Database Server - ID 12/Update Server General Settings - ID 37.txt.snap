@@ -1,0 +1,58 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Update Server General Configuration
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2019-04-23 by Mike Duncan, update to v2 admin api
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/server/config/general" ]
+Variable setzen [ $json ; JSONSetElement ( "" 
+				 ; [ "cacheSize"; FMS__fmserver::cacheSize ; JSONNumber ]
+				 ; [ "maxFiles"; FMS__fmserver::maxFiles ; JSONNumber ]
+				 ; [ "maxProConnections"; FMS__fmserver::maxProConnections ; JSONNumber ]
+				 ; [ "maxPSOS"; FMS__fmserver::maxPSOS ; JSONNumber ]
+				 ; [ "openDatabasesOnStart"; FMS__fmserver::openDatabasesOnStart ; JSONBoolean ]
+				 ; [ "useSchedules"; FMS__fmserver::useSchedules ; JSONBoolean ]
+				 ; [ "autostartDBS"; FMS__fmserver::autostartDBS ; JSONBoolean ]
+				 ; [ "autostartWPE"; FMS__fmserver::autostartWPE ; JSONBoolean ]
+				 ) ]
+Wenn [ NICHT IstLeer ( FMS__fmserver::startupRestorationEnabled ) UND NICHT IstLeer ( FMS__fmserver::startupRestorationLogPath ) ]
+	# only set startupRestoration elements if they were returned or specified.
+	Variable setzen [ $json ; JSONSetElement ( $json 
+					 ; [ "startupRestorationEnabled"; FMS__fmserver::startupRestorationEnabled ; JSONBoolean ]
+					 ;  [ "startupRestorationLogPath"; FMS__fmserver::startupRestorationLogPath ; JSONString ]
+					) ]
+Ende (wenn)
+Variable setzen [ $curloptions ; " --request PATCH" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --data @$json" &
+				" --dump-header $$my.headers" ]
+# set api update variable
+Variable setzen [ $$API.UPDATE ; "1" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

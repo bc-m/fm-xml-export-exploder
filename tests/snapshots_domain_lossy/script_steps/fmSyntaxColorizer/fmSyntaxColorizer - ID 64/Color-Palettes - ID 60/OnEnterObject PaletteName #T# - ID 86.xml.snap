@@ -1,0 +1,143 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="86" name="OnEnterObject PaletteName #T#"></ScriptReference>
+	<ObjectList membercount="10">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW From Script trigger"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LayoutAnzeigeAlsStatus ) = 2]]></Text>
+							<ChunkList hash="44DCED1D58DE6FA675304FCBE90FF800">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LayoutAnzeigeAlsStatus</Chunk>
+								<Chunk type="NoRef"> ) = 2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole ( AktiveTextAuswahlStart )]]></Text>
+								<ChunkList hash="450755F490532A26BC9C2342DBEE80D3">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">AktiveTextAuswahlStart</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Start"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole ( AktiveTextAuswahlGröße )]]></Text>
+								<ChunkList hash="2714F735DB8137C58C954E8C5FFF2EDF">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">AktiveTextAuswahlGröße</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Len"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="30" name="Datensätze zeigen als" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Als Formular anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="130" name="Auswahl festlegen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="PaletteName">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Select">
+					<Start>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$Start]]></Text>
+								<ChunkList hash="D7F65FEE61609FF86F17F39FE222CC43">
+									<Chunk type="VariableReference">$Start</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Start>
+					<End>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$Len]]></Text>
+								<ChunkList hash="FDD7C8567173D80DCB4087D6837E52D2">
+									<Chunk type="VariableReference">$Len</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</End>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

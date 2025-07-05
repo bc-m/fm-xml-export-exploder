@@ -1,0 +1,177 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="33" name="_Plugin" UUID="E9F073BA-2C3B-4087-BF31-6C21A12DF0D0"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/* _Plugin( pPluginName ; pInfoNameVersionTextState_IsPresentIsEnabledIsDisabled_Version_MajMinNr_MajorMinorRevisionBuild )Gets information about the plugin.20140425 MrW Version 1.0*/SetzeVar([vPluginName = pPluginName ; vGet = pInfoNameVersionTextState_IsPresentIsEnabledIsDisabled_Version_MajMinNr_MajorMinorRevisionBuild ;vPlugins = "¶" & Berechne( "Get ( InstalledFMPlugins )" ) & "¶" ; vLineNr = ElementeAnzahl( ZeichenLinks( vPlugins ; Position( vPlugins ; vPluginName ; 1 ; 1 ) ) ) ; vLine = Falls( vLineNr ≥ 1 ; HoleWert( vPlugins ; vLineNr ) ) ;vPluginInfo = Austauschen( vLine ; ";" ; "¶" ) ;vPluginNameFull = HoleWert( vPluginInfo ; 1 ) ;vPluginVersionFull = HoleWert( vPluginInfo ; 2 ) ;vPluginVersionNr = FilterZeichen( vPluginVersionFull ; "1234567890." ) ;vPluginVersionNrList = Austauschen( vPluginVersionNr ; "." ; "¶" ) ;vPluginState = HoleWert( vPluginInfo ; 3 )];Falls(vGet = "State" ; vPluginState ;vGet = "IsPresent" ; vLineNr > 0 ;vGet = "IsDisabled" ; Falls( vLineNr > 0 ; vPluginState = "Disabled" ) ;vGet = "IsEnabled" ; Falls( vLineNr > 0 ; vPluginState = "Enabled" ) ;vGet = "VersionText" ; vPluginVersionFull ;vGet = "Version" ; vPluginVersionNr  ;vGet = "Major" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 1 ) ) ;vGet = "Minor" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 2 ) ) ; vGet = "Revision" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 3 ) ) ; vGet = "Build" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 4 ) ) ; vGet = "MajMinNr" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 1 ) & ZeichenLinks( ,5 ; 1 ) & HoleWert( vPluginVersionNrList ; 2 ) )  ;vGet = "Name" ; vPluginNameFull ;vGet = "Info" ; vLine ;""))]]></Text>
+		<ChunkList hash="932AB16BBE750170BA97C1CA2006A572">
+			<Chunk type="NoRef">/* _Plugin( pPluginName ; pInfoNameVersionTextState_IsPresentIsEnabledIsDisabled_Version_MajMinNr_MajorMinorRevisionBuild )&#13;&#13;Gets information about the plugin.&#13;&#13;20140425 MrW Version 1.0&#13;*/&#13;</Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">([&#13;&#13;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginName</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="VariableReference">pPluginName</Chunk>
+			<Chunk type="NoRef"> ; &#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="VariableReference">pInfoNameVersionTextState_IsPresentIsEnabledIsDisabled_Version_MajMinNr_MajorMinorRevisionBuild</Chunk>
+			<Chunk type="NoRef"> ;&#13;&#13;&#13;</Chunk>
+			<Chunk type="VariableReference">vPlugins</Chunk>
+			<Chunk type="NoRef"> = &quot;¶&quot; &amp; </Chunk>
+			<Chunk type="FunctionRef">Berechne</Chunk>
+			<Chunk type="NoRef">( &quot;Get ( InstalledFMPlugins )&quot; ) &amp; &quot;¶&quot; ; &#13;&#13;</Chunk>
+			<Chunk type="VariableReference">vLineNr</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">ElementeAnzahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPlugins</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">Position</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPlugins</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vPluginName</Chunk>
+			<Chunk type="NoRef"> ; 1 ; 1 ) ) ) ; &#13;</Chunk>
+			<Chunk type="VariableReference">vLine</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vLineNr</Chunk>
+			<Chunk type="NoRef"> ≥ 1 ; </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPlugins</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vLineNr</Chunk>
+			<Chunk type="NoRef"> ) ) ;&#13;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginInfo</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vLine</Chunk>
+			<Chunk type="NoRef"> ; &quot;;&quot; ; &quot;¶&quot; ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginNameFull</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginInfo</Chunk>
+			<Chunk type="NoRef"> ; 1 ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginVersionFull</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginInfo</Chunk>
+			<Chunk type="NoRef"> ; 2 ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginVersionNr</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">FilterZeichen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionFull</Chunk>
+			<Chunk type="NoRef"> ; &quot;1234567890.&quot; ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNr</Chunk>
+			<Chunk type="NoRef"> ; &quot;.&quot; ; &quot;¶&quot; ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vPluginState</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginInfo</Chunk>
+			<Chunk type="NoRef"> ; 3 )&#13;&#13;];&#13;&#13;</Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">(&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;State&quot; ; </Chunk>
+			<Chunk type="VariableReference">vPluginState</Chunk>
+			<Chunk type="NoRef"> ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;IsPresent&quot; ; </Chunk>
+			<Chunk type="VariableReference">vLineNr</Chunk>
+			<Chunk type="NoRef"> &gt; 0 ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;IsDisabled&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vLineNr</Chunk>
+			<Chunk type="NoRef"> &gt; 0 ; </Chunk>
+			<Chunk type="VariableReference">vPluginState</Chunk>
+			<Chunk type="NoRef"> = &quot;Disabled&quot; ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;IsEnabled&quot; ; </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vLineNr</Chunk>
+			<Chunk type="NoRef"> &gt; 0 ; </Chunk>
+			<Chunk type="VariableReference">vPluginState</Chunk>
+			<Chunk type="NoRef"> = &quot;Enabled&quot; ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;VersionText&quot; ; </Chunk>
+			<Chunk type="VariableReference">vPluginVersionFull</Chunk>
+			<Chunk type="NoRef"> ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Version&quot; ; </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNr</Chunk>
+			<Chunk type="NoRef">  ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Major&quot; ; </Chunk>
+			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> ; 1 ) ) ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Minor&quot; ; </Chunk>
+			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> ; 2 ) ) ; &#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Revision&quot; ; </Chunk>
+			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> ; 3 ) ) ; &#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Build&quot; ; </Chunk>
+			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> ; 4 ) ) ; &#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;MajMinNr&quot; ; </Chunk>
+			<Chunk type="FunctionRef">LiesAlsZahl</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> ; 1 ) &amp; </Chunk>
+			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+			<Chunk type="NoRef">( ,5 ; 1 ) &amp; </Chunk>
+			<Chunk type="FunctionRef">HoleWert</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPluginVersionNrList</Chunk>
+			<Chunk type="NoRef"> ; 2 ) )  ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Name&quot; ; </Chunk>
+			<Chunk type="VariableReference">vPluginNameFull</Chunk>
+			<Chunk type="NoRef"> ;&#13;</Chunk>
+			<Chunk type="VariableReference">vGet</Chunk>
+			<Chunk type="NoRef"> = &quot;Info&quot; ; </Chunk>
+			<Chunk type="VariableReference">vLine</Chunk>
+			<Chunk type="NoRef"> ;&#13;&quot;&quot;&#13;)&#13;&#13;)</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

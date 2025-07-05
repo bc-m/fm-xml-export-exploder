@@ -1,0 +1,248 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="163" name="Home_Midimised"></ScriptReference>
+	<ObjectList membercount="19">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW Neu"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( NICHT $$Midimised ; 1 )]]></Text>
+								<ChunkList hash="047A8DC3745CF5B0B2DF42D6542DD610">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="VariableReference">$$Midimised</Chunk>
+									<Chunk type="NoRef"> ; 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$$Midimised"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$$Midimised]]></Text>
+							<ChunkList hash="03129E8DAC2879812A868B63D6C1776E">
+								<Chunk type="VariableReference">$$Midimised</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="35" name="Home_Minimised"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="29" name="Werkzeugleisten ein-/ausblenden" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Fixieren" id="524288" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Datensatz-bearbeiten-Werkzeugleiste " id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="List">
+					<List name="Ausblenden" value="2"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="31" name="Fenster anpassen" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Alles anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="119" name="Fensterposition/-größe ändern" enable="True">
+			<Options>-2147467262</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top>
+								<Calculation datatype="1" position="3">
+									<Calculation>
+										<Text><![CDATA[Hole ( FensterSchreibtischHöhe ) - Hole ( Fensterhöhe ) - 60]]></Text>
+										<ChunkList hash="AFC2402D7B6576E2F5D07A202F936D65">
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">FensterSchreibtischHöhe</Chunk>
+											<Chunk type="NoRef"> ) - </Chunk>
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">Fensterhöhe</Chunk>
+											<Chunk type="NoRef"> ) - 60</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</top>
+							<left>
+								<Calculation datatype="1" position="4">
+									<Calculation>
+										<Text><![CDATA[Hole ( FensterSchreibtischBreite ) - Hole ( Fensterbreite ) - 20]]></Text>
+										<ChunkList hash="9C339E8361B95376CDE15A7FCAFFDA80">
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">FensterSchreibtischBreite</Chunk>
+											<Chunk type="NoRef"> ) - </Chunk>
+											<Chunk type="FunctionRef">Hole</Chunk>
+											<Chunk type="NoRef"> ( </Chunk>
+											<Chunk type="FunctionRef">Fensterbreite</Chunk>
+											<Chunk type="NoRef"> ) - 20</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</left>
+						</Bounds>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="69" name="Sonst" enable="True">
+		</Step>
+		<Step id="119" name="Fensterposition/-größe ändern" enable="True">
+			<Options>-2147467262</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top>
+								<Calculation datatype="1" position="3">
+									<Calculation>
+										<Text><![CDATA[0]]></Text>
+										<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+											<Chunk type="NoRef">0</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</top>
+							<left>
+								<Calculation datatype="1" position="4">
+									<Calculation>
+										<Text><![CDATA[0]]></Text>
+										<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+											<Chunk type="NoRef">0</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</left>
+						</Bounds>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="140" name="Go to Home Layout"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

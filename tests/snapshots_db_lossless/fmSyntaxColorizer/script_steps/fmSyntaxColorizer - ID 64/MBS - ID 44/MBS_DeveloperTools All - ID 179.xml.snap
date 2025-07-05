@@ -1,0 +1,248 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="179" name="MBS_DeveloperTools All" UUID="6C0F3022-B71E-48CD-B5A0-FD9539C7FD2B"></ScriptReference>
+	<ObjectList membercount="16">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E4938E5E-89BD-4407-AA5F-1F754B71E1D0</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>770CDEA0-1CAE-4D90-BFF9-3A038437A14A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20170518 MrW New"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>ED67C06A-18A6-4ACA-BCBB-60F994B3ABD9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>06247804-FA48-44E5-B7F4-D5A6D036EDD5</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>C9A2AB62-1588-4901-9C5D-2A3AD39FE84B</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>74B763BB-714B-4454-8AF3-0CC424C5CB6D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<UUID>00023928-6BD8-4864-A471-0488E74201D5</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1C15FEAB-F8FC-4540-8EF2-F2C59A31C75C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="141" name="Variable setzen" enable="True">
+			<UUID>35E8424F-1AC7-4915-AEC4-447AA52C6841</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Falls( NICHT _Home::_kAllMbsDeveloperOptions ; 1 )]]></Text>
+								<ChunkList hash="1FCAF77150E62B09164470EF69B597D9">
+									<Chunk type="FunctionRef">Falls</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="39" name="_kAllMbsDeveloperOptions" repetition="1" UUID="4ABB90E4-D5AD-47E9-B7DA-01A1570A7F10">
+											<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ; 1 )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$ChangeTo"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>18E89AFC-8E6B-4526-8AB6-4EF3E0590304</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="91" name="Ersetze alle Feldwerte" enable="True">
+			<UUID>BA121001-9FE3-4727-9A32-B93624A505BB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16517</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="6" name="On" UUID="EC392C8C-0133-42A9-B50F-E288F1A534C7">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions" UUID="D534749E-0046-488A-B348-834F70D376C4"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch Berechnung ersetzen: " value="3">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$ChangeTo]]></Text>
+								<ChunkList hash="428FEE717F5660FE1E7A2744A21F4160">
+									<Chunk type="VariableReference">$ChangeTo</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0AABEB30-C525-4BB2-8290-1B4E7A0E68CC</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="76" name="Feldwert setzen" enable="True">
+			<UUID>371E168D-89CB-40B8-A3F2-C5F5CFDD0538</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="9" name="_gEmptyField" UUID="35FEB2EA-EF99-4095-A184-823D0140E6BA">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[""]]></Text>
+							<ChunkList hash="26631CDF3EEB0CE74C7FC665903CAC32">
+								<Chunk type="NoRef">&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1B8EF9D2-872B-4FDA-BCDA-0181283EF1E8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="167" name="Objekt aktualisieren" enable="True">
+			<UUID>36CD8AC4-F496-4AFA-A7C7-3E4629308E5B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Object">
+					<Name>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["Preview"]]></Text>
+								<ChunkList hash="0DC97A5BF3DCE39FE9D5AF16BCBD3188">
+									<Chunk type="NoRef">&quot;Preview&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Name>
+					<repetition>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+								<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+									<Chunk type="NoRef">1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="80" name="Fenster aktualisieren" enable="True">
+			<UUID>20A1ACB0-8374-4109-9A16-EFBED9C949B1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Join-Ergebnisse im Cache löschen" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Externe Daten im Cache löschen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

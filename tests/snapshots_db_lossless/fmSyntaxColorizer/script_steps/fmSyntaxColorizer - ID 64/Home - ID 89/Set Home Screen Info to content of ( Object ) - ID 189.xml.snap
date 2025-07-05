@@ -1,0 +1,87 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )" UUID="8C8A6C72-D947-4D77-BB88-D12C62B698C8"></ScriptReference>
+	<ObjectList membercount="5">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C6AE82CC-47DD-4185-85B8-16EB91F0BFA3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9E645201-F33E-4DFB-89F9-CB3ED060217D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="141" name="Variable setzen" enable="True">
+			<UUID>070BE6C1-AAF8-4B58-B962-B1FDAEEBEADB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_SP(1)]]></Text>
+								<ChunkList hash="E80C756E03E3FE774270E581B01590AE">
+									<Chunk type="CustomFunctionRef">_SP</Chunk>
+									<Chunk type="NoRef">(1)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Object"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6E5DAABC-E8BD-43C9-8086-134F5ED28C55</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="76" name="Feldwert setzen" enable="True">
+			<UUID>445F55E7-A6CB-4C0F-85E8-0B3782D2C5D1</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo" UUID="F71E392E-CE5F-41DD-B193-6FE3420A2109">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[LiesLayoutobjektAttribut ( $Object ; "content" )]]></Text>
+							<ChunkList hash="E3CA1817A129734D47B0F787F67BB381">
+								<Chunk type="FunctionRef">LiesLayoutobjektAttribut</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$Object</Chunk>
+								<Chunk type="NoRef"> ; &quot;content&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

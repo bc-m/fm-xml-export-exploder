@@ -1,0 +1,29 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="21">
+	<UUID modifications="1" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">C97AE8BD-7813-4005-A4B8-9CA3AEF89EFF</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065120" name="Palette.Color_toDuplicate"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_ID_Palette">
+					<TableOccurrenceReference id="1065120" name="Palette.Color_toDuplicate"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="3" name="_gDuplicatePaletteFrom">
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

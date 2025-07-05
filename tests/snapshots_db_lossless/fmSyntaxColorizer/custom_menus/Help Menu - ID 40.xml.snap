@@ -1,0 +1,179 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomMenu name="Help Menu" id="40">
+	<UUID modifications="19" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">0C547506-C425-4901-8691-C2004CC13539</UUID>
+	<TagList></TagList>
+	<MenuItemList membercount="7">
+		<CustomMenuItem index="0" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>E0A6B6A0-D4C5-4DC9-8855-A92B279CE06C</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["fmSyntaxColorizer Help"]]></Calculation>
+				<ChunkList hash="CB91E90E2D4E82E8C2D4490394984D1C">
+					<Chunk type="NoRef">&quot;fmSyntaxColorizer Help&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Command name="FileMaker Pro Hilfe" id="57670"></Command>
+			<Override name="True" action="True" Shortcut="False"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “Application Help” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="68" name="Application Help" UUID="E976F9C0-642B-4281-89C6-CE6B9D9A0DF5"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+		<CustomMenuItem index="1" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>341223CB-7466-4F74-A9EB-4D597B45C3BA</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["Send Feedback"]]></Calculation>
+				<ChunkList hash="6A972E76965418B440C4FA84E0194639">
+					<Chunk type="NoRef">&quot;Send Feedback&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Command name="FileMaker Feedback senden" id="49317"></Command>
+			<Override name="True" action="True" Shortcut="False"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “Send Feedback” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="70" name="Send Feedback" UUID="30A19DBA-7539-438A-8B21-DCE746A2A597"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+		<CustomMenuItem index="2" isSubMenuItem="False" isSeparatorItem="True">
+			<UUID>DB726FDE-6B2F-4140-B9D7-4FB41BB14727</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Override name="False" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+		<CustomMenuItem index="3" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>A5D40A6E-96FC-446B-8666-3C083B1970F6</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["Monkeybread Software"]]></Calculation>
+				<ChunkList hash="EFE5D793EE77A50287EDB94703D49BB2">
+					<Chunk type="NoRef">&quot;Monkeybread Software&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Command id="0"></Command>
+			<Override name="True" action="True" Shortcut="False"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “MBS Logo BTN” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="35" name="MBS Logo BTN" UUID="72739632-B17D-46B8-804D-C373747B4696"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+		<CustomMenuItem index="4" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>6289C7D0-07EC-4F49-9135-5E7D48652176</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[1]]></Calculation>
+					<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+						<Chunk type="NoRef">1</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["MBS Plugin Documentation"]]></Calculation>
+				<ChunkList hash="21605BCF4FE8D2801B0D343B80831308">
+					<Chunk type="NoRef">&quot;MBS Plugin Documentation&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Command id="0"></Command>
+			<Override name="True" action="True" Shortcut="False"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “MBS Filemaker Plugin Documentation” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="38" name="MBS Filemaker Plugin Documentation" UUID="F905943B-CC86-4602-B084-4F860EF28CB5"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+		<CustomMenuItem index="5" isSubMenuItem="False" isSeparatorItem="True">
+			<UUID>83E634E9-19FC-4A31-94DE-2AF962EAC6EC</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[Wenn( Abs(Hole( SystemPlattform )) = 2; 1; 0 )]]></Calculation>
+					<ChunkList hash="E62B4F55AE0CC9EF21640EC028CAB70F">
+						<Chunk type="FunctionRef">Wenn</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Abs</Chunk>
+						<Chunk type="NoRef">(</Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">SystemPlattform</Chunk>
+						<Chunk type="NoRef"> )) = 2; 1; 0 )</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Override name="False" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+		<CustomMenuItem index="6" isSubMenuItem="False" isSeparatorItem="False">
+			<UUID>73280B38-A47E-45AA-BC1C-E063E61ABF5B</UUID>
+			<Conditions>
+				<Install>
+					<Calculation><![CDATA[Wenn( Abs(Hole( SystemPlattform )) = 2; 1; 0 )]]></Calculation>
+					<ChunkList hash="E62B4F55AE0CC9EF21640EC028CAB70F">
+						<Chunk type="FunctionRef">Wenn</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Abs</Chunk>
+						<Chunk type="NoRef">(</Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">SystemPlattform</Chunk>
+						<Chunk type="NoRef"> )) = 2; 1; 0 )</Chunk>
+					</ChunkList>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation><![CDATA["About fmSyntaxColorizer..."]]></Calculation>
+				<ChunkList hash="19248D17347D054BF5B52565B7DF271C">
+					<Chunk type="NoRef">&quot;About fmSyntaxColorizer...&quot;</Chunk>
+				</ChunkList>
+			</Name>
+			<Command id="0"></Command>
+			<Override name="True" action="True" Shortcut="False"></Override>
+			<Step enable="True" id="1" name="Script ausführen">
+				<StepText>Script ausführen [ “About this Application…” ]</StepText>
+				<CurrentScript value="Pause"></CurrentScript>
+				<ScriptReference id="72" name="About this Application…" UUID="8053770E-ACF7-488B-8FD4-8F34CEB21498"></ScriptReference>
+			</Step>
+		</CustomMenuItem>
+	</MenuItemList>
+	<Conditions>
+		<Install>
+			<Calculation><![CDATA[1]]></Calculation>
+			<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+				<Chunk type="NoRef">1</Chunk>
+			</ChunkList>
+		</Install>
+	</Conditions>
+	<Comment></Comment>
+	<Base name="Hilfe" value="51"></Base>
+	<Options browseMode="True" findMode="True" previewMode="True"></Options>
+</CustomMenu>

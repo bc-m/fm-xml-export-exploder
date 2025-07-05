@@ -1,0 +1,59 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Genterate JWT
+#  HISTORY:
+     - Created:   2023-01-23 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+# check required values
+Wenn [ IstLeer ( PUB__publickeys::name ) ODER IstLeer ( PUB__publickeys::privateKey ) ]
+	Eigenes Dialogfeld anzeigen [ Title: "Alert" ; Message: "Name or Private Key is missing." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen [  Wahr ]
+Ende (wenn)
+
+Variable setzen [ $this.jwt ; SetzeVar ([
+				    this.secret = PUB__publickeys::privateKey ;
+				    this.keyName = PUB__publickeys::name ;
+				    this.expDays = Falls ( IstLeer ( PUB__publickeys::Expires_days ) ; 365 ; PUB__publickeys::Expires_days ) ;
+				
+				    this.lifespan = this.expDays * 86400 ; // 86400 seconds in a day
+				    this.currentUTC = Runden ( Hole ( SystemUhrzeitUTCMillisekunden ) / 1000 ; 0 );
+				    this.epoch = LiesAlsZahl (ZeitStempel ("01/01/1970" ; "00:00:00"));
+				    this.timestamp = this.currentUTC - this.epoch + this.lifespan ;
+				
+				    this.header =  JSONSetElement ( "" ; [ "alg" ; "RS256" ; JSONString ] ; [ "typ" ; "JWT" ; JSONString ] ) ;
+				    this.payload = JSONSetElement ( "" ; [ "iss" ; this.keyName ; JSONString ] ; [ "aud" ; "fmsadminapi" ; JSONString ] ; [ "exp" ; this.timestamp ; JSONNumber ] ) ;
+				
+				    $expiration_time = LiesAlsZeitstempel ( this.currentUTC + this.lifespan );
+				
+				    this.encodedHeader = Austauschen ( 
+				        Base64EncodeRFC ( 4648 ; this.header ) ;
+				        [ "=" ; "" ] ; [ "+" ; "-" ] ; [ "/" ; "_" ]
+				    ) ;
+				    this.encodedPayload = Austauschen ( 
+				        Base64EncodeRFC ( 4648 ; this.payload ) ;
+				        [ "=" ; "" ] ; [ "+" ; "-" ] ; [ "/" ; "_" ]
+				    ) ;
+				
+				    this.body = this.encodedHeader & "." & this.encodedPayload ;
+				    
+				    this.signature = Austauschen ( 
+				        Base64EncodeRFC ( 4648 ;
+				            CryptGenerateSignature ( this.body ; "SHA256" ; this.secret ; "" )
+				        );
+				        [ "=" ; "" ] ; [ "+" ; "-" ] ; [ "/" ; "_" ]
+				    )
+				
+				    ];
+				  this.body & "." & this.signature
+				) ]
+
+Feldwert setzen [ PUB__publickeys::jwt ; $this.jwt ]
+Feldwert setzen [ PUB__publickeys::Expires_m ; $expiration_time ]
+
+Aktuelles Script verlassen [ Wahr ]

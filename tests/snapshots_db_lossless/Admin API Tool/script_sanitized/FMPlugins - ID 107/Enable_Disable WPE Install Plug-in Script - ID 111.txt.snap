@@ -1,0 +1,46 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Enable/Disable WPE Install Plug-in Script
+#  HISTORY:
+     - Created:   2020-01-12 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/plugins/WpeAllowInstallPluginScript" ]
+// Variable setzen [ $json ; JSONSetElement ( ""
+				 ; [ "iwpAllowInstallPlugins"; FMS__fmserver::iwpAllowInstallPlugins ; JSONString ]
+				) ]
+Variable setzen [ $json ; "iwpAllowInstallPlugins=" & LiesAlsBoolean ( FMS__fmserver::iwpAllowInstallPlugins ) ]
+Variable setzen [ $curloptions ; " --request POST" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/x-www-form-urlencoded\"" &
+				" --data @$json" &
+				" --dump-header $$my.headers" ]
+# set api update variable
+Variable setzen [ $$API.UPDATE ; "1" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Script ausführen [ Aus Liste ; "Get WPE Plug-in Configuration" ]
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]
