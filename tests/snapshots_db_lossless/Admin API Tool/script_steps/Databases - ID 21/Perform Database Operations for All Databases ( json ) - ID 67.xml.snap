@@ -1,0 +1,935 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="67" name="Perform Database Operations for All Databases ( json )" UUID="A7787A17-19BD-4189-AA40-7234C60218CF"></ScriptReference>
+	<ObjectList membercount="61">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>966A0E34-DDC4-4BD0-8BD1-05E96D67617B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" PURPOSE: Perform action on all Database"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1595C488-FBAB-4A90-84EB-7E89CC7E3DAD</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" HISTORY:&#13;   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-06-28 by FName LName"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7AA93CAF-89AD-4D5D-908D-F688B7FC9E03</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="JSON DOCUMENTATION:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A9542D22-EBF1-41A1-B6DC-CEB79F865317</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets &quot;[]&quot;."></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F98A4C1E-A425-4125-9257-B9A2F4D8DF1B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" status"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>993FA2CE-DFCB-4377-A88D-2372CA827D1C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F69D77A5-BB90-4142-8F11-9C0F4731A9B3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" JSON EXAMPLE:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F2CF38F9-AB47-4B0F-8AB4-44A6F3FDA9C3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="JSONSetElement ( &quot;&quot; &#13; ; [ &quot;status&quot; ; &quot;OPENED&quot; ; JSONString ]&#13;)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E69D1CA8-FECE-42F0-8BBF-0D5C258D946D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>20CB215B-03D7-4A04-8A3B-20A9278E8CEB</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>B0E09327-E80C-4046-BC81-29E03419E3F7</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="141" name="Variable setzen" enable="True">
+			<UUID>15AF0FCF-65EC-4C9E-A094-0974857C5330</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[0]]></Text>
+								<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+									<Chunk type="NoRef">0</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="89" name="# (Kommentar)" enable="True">
+			<UUID>607D788D-844D-448E-BA56-1D8FE544757E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>910F728F-82D3-4249-8A9B-620B98C34543</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" Validate json parameter and load it into local variables"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="68" name="Wenn" enable="True">
+			<UUID>A08A75AB-A960-4A7E-B5A9-187DBF856D0B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[JsonToVars ( Hole ( ScriptParameter ) ; "_" )]]></Text>
+							<ChunkList hash="7FA2D123E7C16EA06BC7AA1AD91C7776">
+								<Chunk type="CustomFunctionRef">JsonToVars</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">ScriptParameter</Chunk>
+								<Chunk type="NoRef"> ) ; &quot;_&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>E02BCD81-2917-416C-94D7-4DF5B2789AC6</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Error"]]></Text>
+							<ChunkList hash="F44200DB64CC5E44F7B9D3970A81E5A0">
+								<Chunk type="NoRef">&quot;Error&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["There was an error evaluating variables: " & JSONGetElement ( $json_debug ; "json" ) & " - " & GetErrorDesc_en ( JSONGetElement ( $json_debug ; "json" ) )]]></Text>
+							<ChunkList hash="8DFE731E1E432A1D9D27978B32E807FD">
+								<Chunk type="NoRef">&quot;There was an error evaluating variables: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$json_debug</Chunk>
+								<Chunk type="NoRef"> ; &quot;json&quot; ) &amp; &quot; - &quot; &amp; </Chunk>
+								<Chunk type="CustomFunctionRef">GetErrorDesc_en</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$json_debug</Chunk>
+								<Chunk type="NoRef"> ; &quot;json&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>6D396302-1AEC-4D9D-B626-EF0179706264</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[5 // command is invalid]]></Text>
+							<ChunkList hash="AC41216BFBC1D0E0407CDF907029BABE">
+								<Chunk type="NoRef">5 // command is invalid</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="70" name="Ende (wenn)" enable="True">
+			<UUID>D28644EE-079D-46C2-B1C0-17100F1F8BA3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="18" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8344A816-E12F-4737-B29F-18DE87AE620F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="19" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4128F084-AE60-46DF-B706-454C79CE23AF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="89" name="# (Kommentar)" enable="True">
+			<UUID>32449847-5FE9-4E56-A59A-0EE830C1BEAB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" SET-UP"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8554EDD7-17CD-4C0A-A154-A1223A14495B</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="1" name="Script ausführen" enable="True">
+			<UUID>BDC4787D-AE22-4A97-B49D-4E7620BC4BF3</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="35" name="Set Config" UUID="6E806D84-9200-44AE-B032-89A6016326FF"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="141" name="Variable setzen" enable="True">
+			<UUID>4283A835-E4D5-423E-8E2E-5548B9B99F1F</UUID>
+			<OwnerID></OwnerID>
+			<Options>1064964</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["/databases"]]></Text>
+								<ChunkList hash="F2C034DE0FBF5E3ED7A4B77CC1027264">
+									<Chunk type="NoRef">&quot;/databases&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$endpoint"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="68" name="Wenn" enable="True">
+			<UUID>A5E96FB5-82E2-4C14-8A93-374612E7C7C0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$_status = "OPENED"]]></Text>
+							<ChunkList hash="07B011367055B708F0DF8B4566973A4C">
+								<Chunk type="VariableReference">$_status</Chunk>
+								<Chunk type="NoRef"> = &quot;OPENED&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="141" name="Variable setzen" enable="True">
+			<UUID>19EA893A-6119-4EC1-99E2-1F775C9D692E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( "" ;   [ "status"; $_status ; JSONString ] )]]></Text>
+								<ChunkList hash="7CDA35F16CC5CB66EE88B62F65F4269F">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; ; &#13;  [ &quot;status&quot;; </Chunk>
+									<Chunk type="VariableReference">$_status</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$json"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="125" name="Sonst, wenn" enable="True">
+			<UUID>09A4BC21-642B-4F85-AC7B-2C49085556A0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$_status = "PAUSED"]]></Text>
+							<ChunkList hash="6614643CF4D0631E9B0C2E5D67AE3E56">
+								<Chunk type="VariableReference">$_status</Chunk>
+								<Chunk type="NoRef"> = &quot;PAUSED&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="141" name="Variable setzen" enable="True">
+			<UUID>F2EEB25E-4B7F-4379-B237-7919EF28352A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( "" ;   [ "status"; $_status ; JSONString ] )]]></Text>
+								<ChunkList hash="7CDA35F16CC5CB66EE88B62F65F4269F">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; ; &#13;  [ &quot;status&quot;; </Chunk>
+									<Chunk type="VariableReference">$_status</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$json"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="125" name="Sonst, wenn" enable="True">
+			<UUID>C5314687-8DF7-4609-946D-D3898002A40E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$_status = "RESUMED"]]></Text>
+							<ChunkList hash="9F0B5D53C4EDF8F72F7887D72C357D00">
+								<Chunk type="VariableReference">$_status</Chunk>
+								<Chunk type="NoRef"> = &quot;RESUMED&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="141" name="Variable setzen" enable="True">
+			<UUID>CF72C749-8448-4BC3-B010-69503B3D4654</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( "" ;   [ "status"; $_status ; JSONString ] )]]></Text>
+								<ChunkList hash="7CDA35F16CC5CB66EE88B62F65F4269F">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; ; &#13;  [ &quot;status&quot;; </Chunk>
+									<Chunk type="VariableReference">$_status</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$json"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="125" name="Sonst, wenn" enable="True">
+			<UUID>8CC71A51-C28B-4CD4-917B-0C131C9F81DC</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$_status = "CLOSED"]]></Text>
+							<ChunkList hash="F237D9C3C50DA95FE3DD6C1DF21DBBDB">
+								<Chunk type="VariableReference">$_status</Chunk>
+								<Chunk type="NoRef"> = &quot;CLOSED&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="141" name="Variable setzen" enable="True">
+			<UUID>892F7385-9233-4F4A-AD9D-280F32A23F60</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( $json ; "status"; $_status ; JSONString )]]></Text>
+								<ChunkList hash="67408C2165BF62C7D9E4241A3D298864">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">$json</Chunk>
+									<Chunk type="NoRef"> ; &quot;status&quot;; </Chunk>
+									<Chunk type="VariableReference">$_status</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$json"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="68" name="Wenn" enable="True">
+			<UUID>3EAFDE35-8D9C-4D1F-81EC-3139B0728106</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( FMS__fmserver::zz_msg_g )]]></Text>
+							<ChunkList hash="4DBDEBEED095367D4BA81B6F56F15AFB">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="29" name="zz_msg_g" repetition="1" UUID="FAFAA66E-9D93-4E84-9680-CB695BE7D3B3">
+										<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="33" id="141" name="Variable setzen" enable="True">
+			<UUID>FD707152-BE87-4384-A011-689181F389B4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( $json ; "messageText" ; FMS__fmserver::zz_msg_g ; JSONString )]]></Text>
+								<ChunkList hash="DE36FFBEAD7DEF4D96A0A8BC92678BFE">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">$json</Chunk>
+									<Chunk type="NoRef"> ; &quot;messageText&quot; ; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="29" name="zz_msg_g" repetition="1" UUID="FAFAA66E-9D93-4E84-9680-CB695BE7D3B3">
+											<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$json"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="70" name="Ende (wenn)" enable="True">
+			<UUID>C19E28AB-844C-494A-A0A6-B0CEBDC0F047</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="35" id="68" name="Wenn" enable="True">
+			<UUID>23FB88DB-70CF-4675-A00E-5D58AF71599C</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[FMS__fmserver::zz_force_g = 1]]></Text>
+							<ChunkList hash="F93473952F1E53DF96C44F2A952F6F1E">
+								<Chunk type="FieldRef">
+									<FieldReference id="44" name="zz_force_g" repetition="1" UUID="803D32DC-EF66-43FB-8FB7-876BA522C69A">
+										<TableOccurrenceReference id="1065089" name="FMS__fmserver" UUID="597569C5-24CD-486D-84D6-D79B9D3BDD5B"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="36" id="141" name="Variable setzen" enable="True">
+			<UUID>92E4359E-A2C6-46F2-9FF9-8C394DA0A3B0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( $json ; "force" ; "true" ; JSONBoolean )]]></Text>
+								<ChunkList hash="751CF5756E7593085DE9562B5372EF6C">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">$json</Chunk>
+									<Chunk type="NoRef"> ; &quot;force&quot; ; &quot;true&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONBoolean</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$json"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="37" id="70" name="Ende (wenn)" enable="True">
+			<UUID>9329DBCA-1F43-493A-A772-59954F5EAB7B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="38" id="70" name="Ende (wenn)" enable="True">
+			<UUID>B49DCAB1-1BDF-412F-9E17-BC86205FFA39</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="39" id="141" name="Variable setzen" enable="True">
+			<UUID>501F9A65-84A4-46C0-A80C-EFB8E9C99CC8</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[" --request PATCH" &" --header \"Authorization: Bearer " & $$my.token & "\"" &" --header \"Content-Type: application/json\"" &" --data @$json" &" --dump-header $$my.headers"]]></Text>
+								<ChunkList hash="6647F483744AACEB16B9320A2A818240">
+									<Chunk type="NoRef">&quot; --request PATCH&quot; &amp;&#13;&quot; --header \&quot;Authorization: Bearer &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$$my.token</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;\&quot;&quot; &amp;&#13;&quot; --header \&quot;Content-Type: application/json\&quot;&quot; &amp;&#13;&quot; --data @$json&quot; &amp;&#13;&quot; --dump-header $$my.headers&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$curloptions"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="40" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8609DEC1-3B7F-4DCB-A6D5-8E1E115E2B97</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="set api update variable"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="41" id="141" name="Variable setzen" enable="True">
+			<UUID>A195866F-F34C-40C2-86E8-A4A2F7C333CB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["1"]]></Text>
+								<ChunkList hash="E42599A078EF5CBB8E2C8EC3C24F3514">
+									<Chunk type="NoRef">&quot;1&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$$API.UPDATE"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="42" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3F63DC5B-41CD-4EB7-9651-355B73644A4F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="43" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8E99C709-D61E-4E08-A336-98DC7911FE8D</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="44" id="89" name="# (Kommentar)" enable="True">
+			<UUID>924D4446-58B5-49B2-93CE-F3EC26800FAD</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" PROCESS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="45" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3EA41C64-16CB-49B6-9FC6-860B05EC037F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="46" id="160" name="Aus URL einfügen" enable="True">
+			<UUID>83DF2C59-EBBD-40C8-B69F-D872EFDB1221</UUID>
+			<OwnerID></OwnerID>
+			<Options>20613</Options>
+			<ParameterValues membercount="6">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<Variable value="$$my.result">
+						<repetition value="1"></repetition>
+					</Variable>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$$server & $endpoint]]></Text>
+								<ChunkList hash="9EA92AEF077FA44AE68308694556F8CB">
+									<Chunk type="VariableReference">$$server</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="VariableReference">$endpoint</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$curloptions]]></Text>
+							<ChunkList hash="205B4DA1BAD160DEDA31FE70167BBA78">
+								<Chunk type="VariableReference">$curloptions</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="47" id="1" name="Script ausführen" enable="True">
+			<UUID>AB8FDDC4-DE97-4F8A-84CF-8D74E2ADD9C8</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="31" name="Handle response" UUID="44FA18ED-6DEA-4F32-BDDB-09F438F6D005"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="48" id="89" name="# (Kommentar)" enable="True">
+			<UUID>64CBC020-17C3-4CF4-8BF7-8FBD4ECE1F0E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="update database listing"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="49" id="1" name="Script ausführen" enable="True">
+			<UUID>697F1A99-75D2-45A7-8077-EB48F4A1EA4C</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="23" name="List Databases" UUID="4BF79E74-7B7F-49A8-A912-99F5B3E44278"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="50" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4513BB3F-CE3B-4694-86DF-4C61E97A5E31</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="51" id="89" name="# (Kommentar)" enable="True">
+			<UUID>92CCDF73-0C76-43DF-A8F5-2C9E80CEC588</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="52" id="89" name="# (Kommentar)" enable="True">
+			<UUID>22A6E414-568D-45F3-9D6D-8E749A7F11B2</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" CLEAN UP"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="53" id="89" name="# (Kommentar)" enable="True">
+			<UUID>91520ED1-9438-4A4F-9FE0-67CAA984E62E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="54" id="68" name="Wenn" enable="True">
+			<UUID>4410DBF2-DFAB-496A-B1D2-4C5165DD155A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$error = 0]]></Text>
+							<ChunkList hash="CE3C173E2CD2554CBB236CEE7C56CBB6">
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="55" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3B598B1A-E31D-4AAC-9607-923B2A2626CF</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" set to exit true if you do not need to pass an error"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="56" id="141" name="Variable setzen" enable="True">
+			<UUID>FF39089C-AE4D-4773-B22B-5E346CA577C0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[1 // exit true]]></Text>
+								<ChunkList hash="DC134DF247804ECF23193E2024A59A1B">
+									<Chunk type="NoRef">1 // exit true</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="57" id="70" name="Ende (wenn)" enable="True">
+			<UUID>13212659-ADD5-488F-8191-F9F77D22EB4E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="58" id="89" name="# (Kommentar)" enable="True">
+			<UUID>90C0A439-4EA0-4B78-8323-C3D705B1D2C4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="59" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>F8F5DFF0-D84F-4B2A-8A33-5DE9551F831B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$error]]></Text>
+							<ChunkList hash="926F59D0E89012933FB1C2137ABF78F1">
+								<Chunk type="VariableReference">$error</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="60" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4E42C5C0-05F2-455F-AC47-AAB477819BFA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

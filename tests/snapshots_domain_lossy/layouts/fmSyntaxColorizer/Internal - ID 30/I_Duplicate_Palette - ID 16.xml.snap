@@ -1,0 +1,286 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Layout id="16" name="I_Duplicate_Palette" width="590">
+	<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+	<LayoutThemeReference></LayoutThemeReference>
+	<PartsList membercount="1">
+		<Part type="Datenbereich" kind="4">
+			<Definition type="Datenbereich" kind="4" size="313" absolute="0" Options="1032">
+				<LocalCSS name=""><![CDATA[self:normal .self
+{
+	-fm-body-alt-background: true;
+}
+]]></LocalCSS>
+				<Alternate name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(93.3333%,93.3333%,93.3333%,1);
+}
+]]></Alternate>
+			</Definition>
+			<ObjectList membercount="2">
+				<LayoutObject id="79" type="Text" name="" kind="2">
+					<Bounds top="7" left="35" bottom="30" right="523"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Duplicate Color-Palette]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-family: -fm-font-family(Arial Rounded MT Bold,ArialRoundedMTBold);
+	font-weight: bold;
+	font-size: 18pt;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="80" type="Ausschnitt" name="" kind="9">
+					<Bounds top="40" left="38" bottom="296" right="471"></Bounds>
+					<Options>2952790016</Options>
+					<Portal>
+						<TableOccurrenceReference id="1065118" name="Palette.Color"></TableOccurrenceReference>
+						<Options show="15">5</Options>
+						<ObjectList membercount="5">
+							<LayoutObject id="81" type="Bearbeitungsfeld" name="" kind="1">
+								<Bounds top="1" left="33" bottom="15" right="214"></Bounds>
+								<Options>805306368</Options>
+								<Field>
+									<FieldReference id="2" name="ColorName" repetition="1">
+										<TableOccurrenceReference id="1065118" name="Palette.Color"></TableOccurrenceReference>
+									</FieldReference>
+									<Options>34</Options>
+									<Display Style="0" show="1"></Display>
+									<Usage inputMode="0" type="0"></Usage>
+								</Field>
+								<ExtendedAttributes>
+									<Formatting>
+										<Graphic>
+											<Options>5</Options>
+										</Graphic>
+										<Time>
+											<Options>159</Options>
+										</Time>
+										<Numeric>
+											<Options>256</Options>
+											<Style>
+												<Negative>
+													<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+												</Negative>
+											</Style>
+											<DecimalDigits>2</DecimalDigits>
+										</Numeric>
+									</Formatting>
+								</ExtendedAttributes>
+							</LayoutObject>
+							<LayoutObject id="82" type="Bearbeitungsfeld" name="" kind="1">
+								<Bounds top="-1" left="-1" bottom="17" right="17"></Bounds>
+								<Options>822083584</Options>
+								<Field>
+									<FieldReference id="5" name="ColorInput" repetition="1">
+										<TableOccurrenceReference id="1065118" name="Palette.Color"></TableOccurrenceReference>
+									</FieldReference>
+									<Options>34</Options>
+									<Display Style="0" show="1"></Display>
+									<Usage inputMode="0" type="0"></Usage>
+								</Field>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-size: 18pt;
+	text-align: center;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+								<ExtendedAttributes>
+									<Formatting>
+										<Graphic>
+											<Options>5</Options>
+										</Graphic>
+										<Time>
+											<Options>159</Options>
+										</Time>
+										<Numeric>
+											<Options>256</Options>
+											<Style>
+												<Negative>
+													<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+												</Negative>
+											</Style>
+											<DecimalDigits>2</DecimalDigits>
+										</Numeric>
+									</Formatting>
+								</ExtendedAttributes>
+							</LayoutObject>
+							<LayoutObject id="83" type="Bearbeitungsfeld" name="" kind="1">
+								<Bounds top="1" left="219" bottom="15" right="400"></Bounds>
+								<Options>805306368</Options>
+								<Field>
+									<FieldReference id="4" name="_kColorExample" repetition="1">
+										<TableOccurrenceReference id="1065118" name="Palette.Color"></TableOccurrenceReference>
+									</FieldReference>
+									<Options>34</Options>
+									<Display Style="0" show="1"></Display>
+									<Usage inputMode="0" type="0"></Usage>
+								</Field>
+								<ExtendedAttributes>
+									<Formatting>
+										<Graphic>
+											<Options>5</Options>
+										</Graphic>
+										<Time>
+											<Options>159</Options>
+										</Time>
+										<Numeric>
+											<Options>256</Options>
+											<Style>
+												<Negative>
+													<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+												</Negative>
+											</Style>
+											<DecimalDigits>2</DecimalDigits>
+										</Numeric>
+									</Formatting>
+								</ExtendedAttributes>
+							</LayoutObject>
+							<LayoutObject id="84" type="Gruppierte Taste" name="" kind="8">
+								<Bounds top="1" left="403" bottom="15" right="417"></Bounds>
+								<Options>805371904</Options>
+								<GroupedButton>
+									<action>
+										<Step id="104" name="Ausschnittreihe löschen" enable="True">
+											<ParameterValues membercount="1">
+												<Parameter type="Boolean">
+													<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+												</Parameter>
+											</ParameterValues>
+										</Step>
+									</action>
+									<ObjectList membercount="1">
+										<LayoutObject id="85" type="Text" name="" kind="2">
+											<Bounds top="0" left="0" bottom="14" right="14"></Bounds>
+											<Options>822083584</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[-]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(86.6667%,86.6667%,86.6667%,1);
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+	font-family: -fm-font-family(Verdana,Verdana);
+	font-weight: bold;
+	font-size: 10pt;
+	color: rgba(46.6667%,0%,0%,1);
+	text-align: center;
+	-fm-paragraph-margin-left: 2pt;
+	-fm-paragraph-margin-right: 2pt;
+	-fm-fill-effect: 1;
+	-fm-text-vertical-align: center;
+}
+self:normal .inner_border
+{
+	border-top-color: rgba(92%,92%,92%,1);
+	border-right-color: rgba(92%,92%,92%,1);
+	border-bottom-color: rgba(92%,92%,92%,1);
+	border-left-color: rgba(92%,92%,92%,1);
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+}
+]]></LocalCSS>
+										</LayoutObject>
+									</ObjectList>
+								</GroupedButton>
+							</LayoutObject>
+							<LayoutObject id="85" type="Text" name="" kind="2">
+								<Bounds top="0" left="0" bottom="14" right="14"></Bounds>
+								<Options>822083584</Options>
+								<Text>
+									<Options>2</Options>
+									<StyledText>
+										<Data><![CDATA[-]]></Data>
+									</StyledText>
+								</Text>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(86.6667%,86.6667%,86.6667%,1);
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+	font-family: -fm-font-family(Verdana,Verdana);
+	font-weight: bold;
+	font-size: 10pt;
+	color: rgba(46.6667%,0%,0%,1);
+	text-align: center;
+	-fm-paragraph-margin-left: 2pt;
+	-fm-paragraph-margin-right: 2pt;
+	-fm-fill-effect: 1;
+	-fm-text-vertical-align: center;
+}
+self:normal .inner_border
+{
+	border-top-color: rgba(92%,92%,92%,1);
+	border-right-color: rgba(92%,92%,92%,1);
+	border-bottom-color: rgba(92%,92%,92%,1);
+	border-left-color: rgba(92%,92%,92%,1);
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+}
+]]></LocalCSS>
+							</LayoutObject>
+						</ObjectList>
+					</Portal>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(73.3333%,73.3333%,73.3333%,1);
+	border-right-color: rgba(73.3333%,73.3333%,73.3333%,1);
+	border-bottom-color: rgba(73.3333%,73.3333%,73.3333%,1);
+	border-left-color: rgba(73.3333%,73.3333%,73.3333%,1);
+}
+self:normal .row
+{
+	border-bottom-color: rgba(73.3333%,73.3333%,73.3333%,1);
+}
+self:normal .row_alt
+{
+	border-bottom-color: rgba(73.3333%,73.3333%,73.3333%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+	</PartsList>
+	<UUID modifications="69" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-25T13:58:38">013E1B3D-7B31-42C7-B1C8-15736F1A38EA</UUID>
+	<ClientType>0</ClientType>
+	<Options hidden="True">15927336</Options>
+</Layout>

@@ -54,24 +54,24 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut parameters = vec![script_reference_type.to_string()];
 
     if script_reference_type_id.as_str() != "2" {
-        parameters.push(format!("\"{}\"", script_reference));
+        parameters.push(format!("\"{script_reference}\""));
     } else {
         parameters.push(script_reference.to_string());
     }
 
     if let Some(ref data_source_value) = data_source_reference {
-        parameters.push(format!("File: \"{}\"", data_source_value));
+        parameters.push(format!("File: \"{data_source_value}\""));
     }
 
     if !calculation.is_empty() {
-        parameters.push(format!("Parameter: {}", calculation));
+        parameters.push(format!("Parameter: {calculation}"));
     }
 
     if name.is_empty() {
         println!("empty primitive");
         None
     } else {
-        Some(format!("{} [ {} ]", name, parameters.join(" ; ")))
+        Some(format!("{name} [ {} ]", parameters.join(" ; ")))
     }
 }
 

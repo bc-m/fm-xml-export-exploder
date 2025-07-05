@@ -51,10 +51,10 @@ impl ScriptReference {
         let mut parameters = vec![];
 
         if let Some(script_name) = &self.script_name {
-            parameters.push(format!("\"{}\"", script_name));
+            parameters.push(format!("\"{script_name}\""));
         }
         if let Some(data_source_name) = &self.data_source_name {
-            parameters.push(format!("from file \"{}\"", data_source_name));
+            parameters.push(format!("from file \"{data_source_name}\""));
         }
 
         if !parameters.is_empty() {

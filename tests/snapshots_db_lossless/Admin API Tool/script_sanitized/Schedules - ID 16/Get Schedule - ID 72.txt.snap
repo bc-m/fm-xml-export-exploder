@@ -1,0 +1,173 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Get Schedule
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2018-MM-DD by FName LName
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+Wenn [ Hole ( DatensatzÄnderungenAnzahl ) > $$sched.RecordModificationCount ]
+	Eigenes Dialogfeld anzeigen [ Title: "Confirm Action" ; Message: "Reload schedule from server? Any changes made locally will be lost." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
+		Aktuelles Script verlassen [ Wahr ]
+	Ende (wenn)
+Ende (wenn)
+
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Fenster fixieren
+Gehe zu Layout [ Layout: "Admin API" ; Animation: Ohne ]
+Script ausführen [ Aus Liste ; "Set Config" ]
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+Variable setzen [ $endpoint ; "/schedules/" & SCH__schedules::id_schedule ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# parse json response
+	Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.id" ) ) ]
+		Feldwert setzen [ SCH__schedules::lastError ; JSONGetElement ( $$my.result ; "response.schedule.lastError" ) ]
+		Feldwert setzen [ SCH__schedules::name ; JSONGetElement ( $$my.result ; "response.schedule.name" ) ]
+		Feldwert setzen [ SCH__schedules::enabled ; JSONGetElement ( $$my.result ; "response.schedule.enabled" ) ]
+		Feldwert setzen [ SCH__schedules::status ; JSONGetElement ( $$my.result ; "response.schedule.status" ) ]
+		Feldwert setzen [ SCH__schedules::lastRun ; JSONGetElement ( $$my.result ; "response.schedule.lastRun" ) ]
+		Feldwert setzen [ SCH__schedules::sendEmail ; Falls ( 
+						  ZeichenLinks ( JSONGetElement ( $$my.result ; "response.schedule.sendEmail" ) ; 1 ) = "?";
+						  "";
+						
+						  IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.sendEmail" ) );
+						  "";
+						
+						  Austauschen ( JSONListValues ( JSONGetElement ( $$my.result ; "response.schedule.sendEmail" ) ; "" ) ; "¶" ; "," )
+						) ]
+		
+		# evaluate the type of script
+		Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.backupType.backupTarget" ) ) ]
+			# backupType
+			Feldwert setzen [ SCH__schedules::Type ; "Backup" ]
+			Feldwert setzen [ SCH__schedules::resourceType ; JSONGetElement ( $$my.result ; "response.schedule.backupType.resourceType" ) ]
+			Feldwert setzen [ SCH__schedules::resource ; JSONGetElement ( $$my.result ; "response.schedule.backupType.resource" ) ]
+			Feldwert setzen [ SCH__schedules::backupTarget ; JSONGetElement ( $$my.result ; "response.schedule.backupType.backupTarget" ) ]
+			Feldwert setzen [ SCH__schedules::clone ; JSONGetElement ( $$my.result ; "response.schedule.backupType.clone" ) ]
+			Feldwert setzen [ SCH__schedules::maxBackups ; JSONGetElement ( $$my.result ; "response.schedule.backupType.maxBackups" ) ]
+			Feldwert setzen [ SCH__schedules::verify ; JSONGetElement ( $$my.result ; "response.schedule.backupType.verify" ) ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.resource" ) ) ]
+			# filemakerScriptType
+			Feldwert setzen [ SCH__schedules::Type ; "FileMaker Script" ]
+			Feldwert setzen [ SCH__schedules::resource ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.resource" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptName ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptName" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptParam ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptParam" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptAccount ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptAccount" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptPassword ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptPassword" ) ]
+			Feldwert setzen [ SCH__schedules::autoAbort ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.autoAbort" ) ]
+			Feldwert setzen [ SCH__schedules::timeout ; JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.timeout" ) ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.messageType.resourceType" ) ) ]
+			# messageType
+			Feldwert setzen [ SCH__schedules::Type ; "Message" ]
+			Feldwert setzen [ SCH__schedules::resourceType ; JSONGetElement ( $$my.result ; "response.schedule.messageType.resourceType" ) ]
+			Feldwert setzen [ SCH__schedules::messageText ; JSONGetElement ( $$my.result ; "response.schedule.messageType.messageText" ) ]
+			Feldwert setzen [ SCH__schedules::resource ; JSONGetElement ( $$my.result ; "response.schedule.messageType.resource" ) ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.resource" ) ) ]
+			# scriptSequenceType
+			Feldwert setzen [ SCH__schedules::Type ; "Script Sequence" ]
+			Feldwert setzen [ SCH__schedules::resource ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.resource" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptName ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptName" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptParam ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptParam" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptAccount ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptAccount" ) ]
+			Feldwert setzen [ SCH__schedules::fmScriptPassword ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptPassword" ) ]
+			Feldwert setzen [ SCH__schedules::osScript ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScript" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptParam ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScriptParam" ) ]
+			Feldwert setzen [ SCH__schedules::osScript2 ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScript2" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptParam2 ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScriptParam2" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptAccount ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.runOSScriptsAsUser.osScriptAccount" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptPassword ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.runOSScriptsAsUser.osScriptPassword" ) ]
+			Feldwert setzen [ SCH__schedules::autoAbort ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.autoAbort" ) ]
+			Feldwert setzen [ SCH__schedules::timeout ; JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.timeout" ) ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.verifyType.resource" ) ) ]
+			# verifyType
+			Feldwert setzen [ SCH__schedules::Type ; "Verify" ]
+			Feldwert setzen [ SCH__schedules::resource ; JSONGetElement ( $$my.result ; "response.schedule.verifyType.resource" ) ]
+			Feldwert setzen [ SCH__schedules::resourceType ; JSONGetElement ( $$my.result ; "response.schedule.verifyType.resourceType" ) ]
+			Feldwert setzen [ SCH__schedules::messageText ; JSONGetElement ( $$my.result ; "response.schedule.verifyType.messageText" ) ]
+			Feldwert setzen [ SCH__schedules::timeDelay ; JSONGetElement ( $$my.result ; "response.schedule.verifyType.timeDelay" ) ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.osScript" ) ) ]
+			# systemScriptType
+			Feldwert setzen [ SCH__schedules::Type ; "System Script" ]
+			Feldwert setzen [ SCH__schedules::autoAbort ; JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.autoAbort" ) ]
+			Feldwert setzen [ SCH__schedules::osScript ; JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.osScript" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptParam ; JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.osScriptParam" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptAccount ; JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.runOSScriptsAsUser.osScriptAccount" ) ]
+			Feldwert setzen [ SCH__schedules::osScriptPassword ; JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.runOSScriptsAsUser.osScriptPassword" ) ]
+			Feldwert setzen [ SCH__schedules::timeout ; JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.timeout" ) ]
+			
+		Ende (wenn)
+		
+		# evaluate the repeat type
+		Wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.onceType.startTimeStamp" ) ) ]
+			# onceType
+			Feldwert setzen [ SCH__schedules::startTimeStamp ; JSONGetElement ( $$my.result ; "response.schedule.onceType.startTimeStamp" ) ]
+			Feldwert setzen [ SCH__schedules::Repeat ; "Once" ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.weeklyType.startTimeStamp" ) ) ]
+			# weeklyType
+			Feldwert setzen [ SCH__schedules::startTimeStamp ; JSONGetElement ( $$my.result ; "response.schedule.weeklyType.startTimeStamp" ) ]
+			Feldwert setzen [ SCH__schedules::daysOfTheWeek ; JSONListValues ( JSONGetElement ( $$my.result ; "response.schedule.weeklyType.daysOfTheWeek" ) ; "" ) ]
+			Feldwert setzen [ SCH__schedules::endDate ; JSONGetElement ( $$my.result ; "response.schedule.weeklyType.endDate" ) ]
+			Feldwert setzen [ SCH__schedules::endDate ; JSONGetElement ( $$my.result ; "response.schedule.weeklyType.endDate" ) ]
+			Feldwert setzen [ SCH__schedules::repeatInterval ; JSONGetElement ( $$my.result ; "response.schedule.weeklyType.repeatTask.repeatInterval" ) ]
+			Feldwert setzen [ SCH__schedules::repeatFrequency ; JSONGetElement ( $$my.result ; "response.schedule.weeklyType.repeatTask.repeatFrequency" ) ]
+			Feldwert setzen [ SCH__schedules::endTime ; JSONGetElement ( $$my.result ; "response.schedule.weeklyType.repeatTask.endTime" ) ]
+			Feldwert setzen [ SCH__schedules::Repeat ; "Weekly" ]
+			
+		Sonst, wenn [ NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.startTimeStamp" ) ) ]
+			# weeklyType
+			Feldwert setzen [ SCH__schedules::startTimeStamp ; JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.startTimeStamp" ) ]
+			Feldwert setzen [ SCH__schedules::dailyDays ; JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.dailyDays" ) ]
+			Feldwert setzen [ SCH__schedules::endDate ; JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.endDate" ) ]
+			Feldwert setzen [ SCH__schedules::repeatInterval ; JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.repeatTask.repeatInterval" ) ]
+			Feldwert setzen [ SCH__schedules::repeatFrequency ; JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.repeatTask.repeatFrequency" ) ]
+			Feldwert setzen [ SCH__schedules::endTime ; JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.repeatTask.endTime" ) ]
+			Feldwert setzen [ SCH__schedules::Repeat ; "Every N Days" ]
+			
+		Ende (wenn)
+		
+	Ende (wenn)
+	
+Ende (wenn)
+
+// Script ausführen [ Aus Liste ; "Navigation ( json )" ; Parameter: JSONSetElement ( "" 
+				 ; [ "param" ; "scheduleType" ; JSONString ]
+				) ]
+// Script ausführen [ Aus Liste ; "Navigation ( json )" ; Parameter: JSONSetElement ( "" 
+				 ; [ "param" ; "repeatTask" ; JSONString ]
+				) ]
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

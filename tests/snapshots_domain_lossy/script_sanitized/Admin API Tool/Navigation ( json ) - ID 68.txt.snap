@@ -1,0 +1,218 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: handle basic user interface navigation
+#  HISTORY:
+     - Created:   2019-06-11 by Mike Duncan (mduncan@soliantconsulting.com)
+
+# JSON DOCUMENTATION:
+# Notes: The following parameters are documented here. For each action, additional parameters are also listed, optional parameters are shown in square brackets "[]".
+#  param
+
+#  JSON EXAMPLE:
+# JSONSetElement ( "" 
+   ; [ "param" ; "create" ; JSONString ]
+  )
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# Script Triggers Disabled?
+Wenn [ $$SCRIPT_TRIGGERS_OFF = 1 ]
+	Aktuelles Script verlassen [ Wahr ]
+Ende (wenn)
+
+#  Validate json parameter and load it into local variables
+Wenn [ JsonToVars ( Hole ( ScriptParameter ) ; "_" ) ]
+	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "There was an error evaluating variables: " & JSONGetElement ( $json_debug ; "json" ) & " - " & GetErrorDesc_en ( JSONGetElement ( $json_debug ; "json" ) ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Aktuelles Script verlassen [ 5 // command is invalid ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Wenn [ MusterAnzahl ( $_param ; "panel_" ) ]
+	Gehe zu Objekt [ $_param ]
+	# refresh data shown in panel
+	Wenn [ $_param = "panel_database_server" ]
+		Script ausführen [ Aus Liste ; "Get Server Status" ]
+		Script ausführen [ Aus Liste ; "Get Server Security Settings" ]
+		Script ausführen [ Aus Liste ; "Get Server General Settings" ]
+		Wenn [ LiesAlsZahl ( ZeichenLinks ( FMS__fmserver::serverVersion ; 4 ) ) > "19.1" ]
+			Script ausführen [ Aus Liste ; "Get Server Metadata" ]
+			Script ausführen [ Aus Liste ; "Get Authenticated Stream Setting" ]
+			// Script ausführen [ Aus Liste ; "Get Allow certificate with unknown revocation status" ]
+		Ende (wenn)
+		Wenn [ LiesAlsZahl ( ZeichenLinks ( FMS__fmserver::serverVersion ; 4 ) ) > "20.0" ]
+			Script ausführen [ Aus Liste ; "Get Persistent Cache Settings" ]
+		Ende (wenn)
+		
+	Sonst, wenn [ $_param = "panel_files" ]
+		Script ausführen [ Aus Liste ; "List Clients" ]
+		Script ausführen [ Aus Liste ; "List Databases" ]
+	Sonst, wenn [ $_param = "panel_clients" ]
+		Script ausführen [ Aus Liste ; "List Clients" ]
+	Sonst, wenn [ $_param = "panel_schedules" ]
+		Script ausführen [ Aus Liste ; "List Schedules" ]
+	Sonst, wenn [ $_param = "panel_php_other" ]
+		# disable get php settings by default.
+		// Script ausführen [ Aus Liste ; "PHP Settings" ]
+		Script ausführen [ Aus Liste ; "XML Settings" ]
+		Script ausführen [ Aus Liste ; "ODBC/JDBC Settings" ]
+	Sonst, wenn [ $_param = "panel_dataapi" ]
+		Script ausführen [ Aus Liste ; "FileMaker Data API Settings" ]
+		Wenn [ LiesAlsZahl ( ZeichenLinks ( FMS__fmserver::serverVersion ; 4 ) ) > "19.1" ]
+			Script ausführen [ Aus Liste ; "FileMaker Data API Usage" ]
+		Ende (wenn)
+	Sonst, wenn [ $_param = "panel_wpe" ]
+		Script ausführen [ Aus Liste ; "FileMaker WebDirect Settings" ]
+		Script ausführen [ Aus Liste ; "WPE Settings for All Machines" ]
+		Wenn [ LiesAlsZahl ( ZeichenLinks ( FMS__fmserver::serverVersion ; 4 ) ) > "20.0" ]
+			Script ausführen [ Aus Liste ; "Get Nginx Load Balancer URL Setting" ]
+		Ende (wenn)
+	Sonst, wenn [ $_param = "panel_license" ]
+		Script ausführen [ Aus Liste ; "Get License Information" ]
+	Sonst, wenn [ $_param = "panel_notifications" ]
+		Script ausführen [ Aus Liste ; "Get Email Notification Settings" ]
+	Sonst, wenn [ $_param = "panel_certificate" ]
+		Script ausführen [ Aus Liste ; "Get Server Certificate Information" ]
+	Sonst, wenn [ $_param = "panel_plugins" ]
+		Script ausführen [ Aus Liste ; "Get Plug-in List" ]
+		Script ausführen [ Aus Liste ; "Get DBS Plug-in Configuration" ]
+		Script ausführen [ Aus Liste ; "Get WPE Plug-in Configuration" ]
+	Sonst, wenn [ $_param = "panel_publickey" ]
+		Script ausführen [ Aus Liste ; "Get FileMaker Admin API Public Keys Server Setting" ]
+	Ende (wenn)
+	
+Sonst, wenn [ $_param = "Admin API" ]
+	Gehe zu Layout [ Layout: "Admin API" ; Animation: Ohne ]
+	Script ausführen [ Aus Liste ; "Navigation ( json )" ; Parameter: JSONSetElement ( "" 
+					 ; [ "param" ; "panel_auth" ; JSONString ]
+					) ]
+	
+Sonst, wenn [ $_param = "Data API" ]
+	Gehe zu Layout [ Layout: "Data API" ; Animation: Ohne ]
+	Script ausführen [ Aus Liste ; "Navigation ( json )" ; Parameter: JSONSetElement ( "" 
+					 ; [ "param" ; "panel_databases" ; JSONString ]
+					) ]
+	
+Sonst, wenn [ $_param = "create schedule" ]
+	Variable setzen [ $this.fmsid ; FMS__fmserver::ID ]
+	Neues Fenster [ Style: Karte ; Name: "Schedule Detail" ; Layout: "Card - Schedule" ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+	Blätternmodus aktivieren [ Pause: OFF ]
+	Neuer Datensatz/Abfrage
+	Feldwert setzen [ SCH__schedules::ID_Server ; $this.fmsid ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+	
+	# set some default fields
+	Feldwert setzen [ SCH__schedules::Type ; "Backup" ]
+	Feldwert setzen [ SCH__schedules::resourceType ; "ALL_DB" ]
+	Wenn [ IstLeer ( HoleWert ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_folders" ) ; 1 ) ) ]
+		Feldwert setzen [ SCH__schedules::backupTarget ; "FileMaker Server/Data/" ]
+	Sonst
+		Feldwert setzen [ SCH__schedules::backupTarget ; Solange (
+						 [ 
+						  loop = 1;
+						  val = HoleWert ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_folders" ) ; loop );
+						  vals = Austauschen ( val ; "/" ; "¶" );
+						  valcount = ElementeAnzahl ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_folders" ) );
+						  out = 0
+						 ] ; 
+						 loop > valcount ODER out = 1 ODER IstLeer ( val ) ; 
+						 [ 
+						  out = MusterAnzahl ( HoleWert ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_folders" ) ; loop ) ; "FileMaker Server/Data/" );
+						  val = HoleWert ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_folders" ) ; loop );
+						  vals = Austauschen ( val ; "/" ; "¶" );
+						  loop = loop + 1
+						
+						 ] ; 
+						
+						 Austauschen ( ElementeLinks ( vals ; ElementeAnzahl ( vals ) - 1 ) ; ["¶Databases";""] ; ["¶" ; "/"] ) & "Backups/"
+						
+						) ]
+	Ende (wenn)
+	Feldwert setzen [ SCH__schedules::Repeat ; "Once" ]
+	Feldwert setzen [ SCH__schedules::startTimeStamp ; SetzeVar ([
+					  Ts = Hole ( SystemZeitstempel ) + 3600;
+					
+					  date_string = Jahreszahl(Ts) & "-" & FortlNrInTextÄndern ( "00" ; MonatZahl(Ts) ) & "-" & FortlNrInTextÄndern ( "00" ; KalendertagZahl(Ts) ) ;
+					  time_string = FortlNrInTextÄndern ( "00" ; Stunden ( Ts ) ) & ":" & FortlNrInTextÄndern ( "00" ; Minuten( Ts ) ) & ":" & FortlNrInTextÄndern ( "00" ; Sekunden( Ts ) )
+					
+					  ];
+					
+					 date_string & "T" & time_string & ""
+					
+					) ]
+	Feldwert setzen [ SCH__schedules::timeout ; "0" ]
+	
+Sonst, wenn [ $_param = "cancel schedule" ]
+	Fenster schließen [ Name: "Schedule Detail" ; Current file ]
+	Script ausführen [ Aus Liste ; "List Schedules" ]
+	
+Sonst, wenn [ $_param = "schedule" ]
+	Gehe zu Bezugsdatensatz [ Table: FMS_SCH__schedules ; Layout: "Card - Schedule" ; New window ; Layout: "Card - Schedule" ]
+	Variable setzen [ $$sched.RecordModificationCount ; Hole ( DatensatzÄnderungenAnzahl ) ]
+	
+Sonst, wenn [ $_param = "apikey" ]
+	Gehe zu Bezugsdatensatz [ Table: FMS_PUB__publickeys ; Layout: "Card - Public Keys" ; New window ; Layout: "Card - Public Keys" ]
+	Variable setzen [ $$sched.RecordModificationCount ; Hole ( DatensatzÄnderungenAnzahl ) ]
+	
+Sonst, wenn [ $_param = "create apikey" ]
+	Variable setzen [ $this.fmsid ; FMS__fmserver::ID ]
+	Neues Fenster [ Style: Karte ; Name: "API Key Detail" ; Layout: "Card - Public Keys" ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+	Blätternmodus aktivieren [ Pause: OFF ]
+	Neuer Datensatz/Abfrage
+	Feldwert setzen [ PUB__publickeys::ID_Server ; $this.fmsid ]
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+	
+Sonst, wenn [ $_param = "scheduleType" ]
+	Layoutobjekt-Animation festlegen [ OFF ]
+	Wenn [ SCH__schedules::Type = "Backup" ]
+		Gehe zu Objekt [ "panel_backup" ]
+	Sonst, wenn [ SCH__schedules::Type = "FileMaker Script" ]
+		Gehe zu Objekt [ "panel_fmscript" ]
+	Sonst, wenn [ SCH__schedules::Type = "Message" ]
+		Gehe zu Objekt [ "panel_message" ]
+	Sonst, wenn [ SCH__schedules::Type = "Script Sequence" ]
+		Gehe zu Objekt [ "panel_sequence" ]
+	Sonst, wenn [ SCH__schedules::Type = "Verify" ]
+		Gehe zu Objekt [ "panel_verify" ]
+	Sonst, wenn [ SCH__schedules::Type = "System Script" ]
+		Gehe zu Objekt [ "panel_system" ]
+	Sonst, wenn [ IstLeer ( SCH__schedules::Type ) ]
+		Gehe zu Objekt [ "panel_blanktype" ]
+	Ende (wenn)
+	
+Sonst, wenn [ $_param = "repeatTask" ]
+	Wenn [ SCH__schedules::Repeat = "Once" ]
+		Gehe zu Objekt [ "panel_once" ]
+	Sonst, wenn [ SCH__schedules::Repeat = "Weekly" ]
+		Gehe zu Objekt [ "panel_weekly" ]
+	Sonst, wenn [ SCH__schedules::Repeat = "Every N Days" ]
+		Gehe zu Objekt [ "panel_ndays" ]
+	Sonst, wenn [ IstLeer ( SCH__schedules::Repeat ) ]
+		Gehe zu Objekt [ "panel_blank" ]
+	Ende (wenn)
+	
+Sonst, wenn [ $_param = "resourceType" ]
+	Wenn [ SCH__schedules::resourceType = "ALL_DB" ]
+		Feldwert setzen [ SCH__schedules::resource ; "" ]
+	Sonst, wenn [ SCH__schedules::resourceType = "DB_IN_FOLDER" ]
+		Feldwert setzen [ SCH__schedules::resource ; HoleWert ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_folders" ) ; 1 ) ]
+	Sonst, wenn [ SCH__schedules::resourceType = "SINGLE_DB" ]
+		Feldwert setzen [ SCH__schedules::resource ; HoleWert ( WertelisteEinträge ( Hole ( DateiName ) ; "Schedule_resource_files" ) ; 1 ) ]
+	Ende (wenn)
+Ende (wenn)
+
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

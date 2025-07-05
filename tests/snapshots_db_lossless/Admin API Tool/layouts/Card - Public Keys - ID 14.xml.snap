@@ -1,0 +1,855 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Layout id="14" name="Card - Public Keys" width="615">
+	<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+	<LayoutThemeReference id="2" name="com.filemaker.theme.custom.A0ED6AD4_DD83_4D4B_97BA_F42453BB7F66" UUID="784E5AA5-9DC4-42B1-A2AD-1EC5518C995F" Display="Enlightened fmsadmin" Base="com.filemaker.theme.enlightened"></LayoutThemeReference>
+	<PartsList membercount="2">
+		<Part type="Kopfbereich" kind="1">
+			<Definition type="Kopfbereich" kind="1" size="10" absolute="0" Options="0"></Definition>
+			<ObjectList membercount="1">
+				<LayoutObject id="253" type="Rechteck" name="" kind="5">
+					<UUID>E4E65BF2-19C3-4D34-B518-38AFEAFC15C8</UUID>
+					<Bounds top="0" left="0" bottom="7" right="615"></Bounds>
+					<Options>805306628</Options>
+					<Rectangle renderFormat="0"></Rectangle>
+					<LocalCSS name="FM-D3474E3E-669E-4831-9980-E1E3EBE0D28B"><![CDATA[self.FM-D3474E3E-669E-4831-9980-E1E3EBE0D28B
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="True">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+								<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+									<Chunk type="NoRef">1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Datenbereich" kind="4">
+			<Definition type="Datenbereich" kind="4" size="458" absolute="10" Options="0">
+				<LocalCSS name="form_body"><![CDATA[self.form_body
+{
+}
+]]></LocalCSS>
+			</Definition>
+			<ObjectList membercount="32">
+				<LayoutObject id="6" type="Bearbeitungsfeld" name="" kind="1">
+					<UUID>5B155F12-1E76-47BD-9D2A-A37BD5CCA0DA</UUID>
+					<Bounds top="21" left="86" bottom="42" right="491"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="8" name="name" repetition="1" UUID="E5455803-EA33-4A56-A70E-DB220055B231">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>32</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>86</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="11" type="Text" name="" kind="2">
+					<UUID>1AECA929-7B8C-4B61-B4FA-433578AF4F41</UUID>
+					<Bounds top="10" left="1378" bottom="26" right="1440"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Number]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject id="12" type="Text" name="" kind="2">
+					<UUID>6A37D38D-3EFB-49AC-A405-146B0C79BFDD</UUID>
+					<Bounds top="31" left="1378" bottom="48" right="1440"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Number]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject id="16" type="Text" name="" kind="2">
+					<UUID>6C53D084-5BE7-48F8-A364-7F6E32F09674</UUID>
+					<Bounds top="56" left="1378" bottom="73" right="1440"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Number]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject id="34" type="Text" name="" kind="2">
+					<UUID>35D35154-48FE-4099-9016-7DFA528C7552</UUID>
+					<Bounds top="106" left="1378" bottom="123" right="1487"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Boolean]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="49" type="Text" name="" kind="2">
+					<UUID>68D83F5D-DDCA-4178-8881-B5BE66491A84</UUID>
+					<Bounds top="136" left="1378" bottom="153" right="1487"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Boolean]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="66" type="Text" name="" kind="2">
+					<UUID>30CEE8CC-EB38-4F0A-B655-A48EFF93E0DA</UUID>
+					<Bounds top="24" left="507" bottom="41" right="614"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[required]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	color: rgba(100%,15.2941%,7.05882%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="86" type="Text" name="" kind="2">
+					<UUID>7F1C2259-540E-4E4C-A620-DA7936FE8B16</UUID>
+					<Bounds top="24" left="38" bottom="41" right="78"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[name]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="375" type="Taste" name="" kind="10">
+					<UUID>CA09B16B-5B3F-4E1F-BB33-A4239F1FDD47</UUID>
+					<Bounds top="139" left="435" bottom="162" right="490"></Bounds>
+					<Options>805306372</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Post Schedule]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="175" name="Add FileMaker Admin API Public Keys Server Setting" UUID="2BCC9AFF-BFEF-435D-9710-02F7EFCDE5E4"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""   ; [ "name" ; PUB__publickeys::name ; JSONString ])]]></Text>
+								<ChunkList hash="E056C9714C91FD9A3A73AC516DD11C3D">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13;  ; [ &quot;name&quot; ; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="8" name="name" repetition="1" UUID="E5455803-EA33-4A56-A70E-DB220055B231">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32"><![CDATA[self.FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="False">
+							<Calculation>
+								<Text><![CDATA[NICHT ( IstLeer ( PUB__publickeys::dateAdded ) )]]></Text>
+								<ChunkList hash="703DDEFB431F55C91D68E7A3B2BB3FF2">
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="10" name="dateAdded" repetition="1" UUID="D6E69213-7D46-48F1-9F99-279B0CB71B1A">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ) )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="377" type="Text" name="" kind="2">
+					<UUID>D9F46FF0-3011-4EC2-AE04-9A390F3FD020</UUID>
+					<Bounds top="144" left="501" bottom="161" right="609"></Bounds>
+					<Options>805306372</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Create API Key]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,Arial-BoldMT);
+	font-weight: bold;
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="False">
+							<Calculation>
+								<Text><![CDATA[NICHT ( IstLeer ( PUB__publickeys::dateAdded ) )]]></Text>
+								<ChunkList hash="703DDEFB431F55C91D68E7A3B2BB3FF2">
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="10" name="dateAdded" repetition="1" UUID="D6E69213-7D46-48F1-9F99-279B0CB71B1A">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ) )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="439" type="Taste" name="" kind="10">
+					<UUID>5DC7DFB3-EB40-48BE-9786-10A742E74573</UUID>
+					<Bounds top="139" left="435" bottom="162" right="490"></Bounds>
+					<Options>805306372</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Patch]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="174" name="Update FileMaker Admin API Public Keys Server Setting" UUID="D7A48C2F-742D-4F71-8898-B7F370AB1BE8"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""   ; [ "name" ; PUB__publickeys::name ; JSONString ])]]></Text>
+								<ChunkList hash="E056C9714C91FD9A3A73AC516DD11C3D">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13;  ; [ &quot;name&quot; ; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="8" name="name" repetition="1" UUID="E5455803-EA33-4A56-A70E-DB220055B231">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-73208538-E9C6-4563-94E4-2229FDB52900"><![CDATA[self.FM-73208538-E9C6-4563-94E4-2229FDB52900
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="False">
+							<Calculation>
+								<Text><![CDATA[IstLeer ( PUB__publickeys::dateAdded )]]></Text>
+								<ChunkList hash="53F18CB20B4087B22B0E51CAA996B0B1">
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="10" name="dateAdded" repetition="1" UUID="D6E69213-7D46-48F1-9F99-279B0CB71B1A">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="440" type="Text" name="" kind="2">
+					<UUID>1AB9C04F-E471-4DDF-936A-AD64E3C6B9C5</UUID>
+					<Bounds top="144" left="501" bottom="161" right="609"></Bounds>
+					<Options>805306372</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Edit API Key]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,Arial-BoldMT);
+	font-weight: bold;
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="False">
+							<Calculation>
+								<Text><![CDATA[IstLeer ( PUB__publickeys::dateAdded )]]></Text>
+								<ChunkList hash="53F18CB20B4087B22B0E51CAA996B0B1">
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="10" name="dateAdded" repetition="1" UUID="D6E69213-7D46-48F1-9F99-279B0CB71B1A">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="645" type="Container" name="" kind="1">
+					<UUID>80750259-B17A-4AA9-8DEE-4312AD2FB2C8</UUID>
+					<Bounds top="24" left="725" bottom="83" right="804"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="14" name="privateKey_r" repetition="1" UUID="4B56F8C7-A529-4A87-88AD-E92F7948AC5C">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>646</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="646" type="Text" name="" kind="2">
+					<UUID>C0957C9C-D9A8-4855-B327-A955ACBDD59F</UUID>
+					<Bounds top="27" left="637" bottom="44" right="713"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[privateKey_r]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="647" type="Container" name="" kind="1">
+					<UUID>460C207F-543F-445C-B564-A89AE1CF3E15</UUID>
+					<Bounds top="95" left="725" bottom="154" right="804"></Bounds>
+					<Options>805306376</Options>
+					<Field>
+						<FieldReference id="15" name="publicKey_r" repetition="1" UUID="FEE16819-7149-4AEC-A0D5-3F09F47535F7">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>1048608</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>648</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="648" type="Text" name="" kind="2">
+					<UUID>6D6D9771-FAAC-4DA9-9E05-4F602EAF06CB</UUID>
+					<Bounds top="98" left="642" bottom="115" right="713"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[publicKey_r]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="649" type="Bearbeitungsfeld" name="" kind="1">
+					<UUID>CA44D847-7098-4667-9146-691BB5D6F032</UUID>
+					<Bounds top="43" left="86" bottom="136" right="491"></Bounds>
+					<Options>805306376</Options>
+					<Field>
+						<FieldReference id="9" name="publicKey" repetition="1" UUID="5489F4E7-997E-420B-9CC8-16BAB9FD37F7">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>290</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+				</LayoutObject>
+				<LayoutObject id="650" type="Text" name="" kind="2">
+					<UUID>D2A0479E-D9C4-494E-8B9F-223132373629</UUID>
+					<Bounds top="46" left="22" bottom="63" right="78"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[publicKey]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="651" type="Text" name="" kind="2">
+					<UUID>D4CDD31E-B9BE-446B-B0C0-0752FADCDA61</UUID>
+					<Bounds top="46" left="507" bottom="63" right="614"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[required]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	color: rgba(100%,15.2941%,7.05882%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="652" type="Bearbeitungsfeld" name="" kind="1">
+					<UUID>00A745E4-F367-489A-BBF1-9C8ECE3F367A</UUID>
+					<Bounds top="176" left="86" bottom="269" right="491"></Bounds>
+					<Options>805306376</Options>
+					<Field>
+						<FieldReference id="13" name="privateKey" repetition="1" UUID="8C505225-41E7-4966-B9E9-9764E452F4DE">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>290</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+				</LayoutObject>
+				<LayoutObject id="653" type="Text" name="" kind="2">
+					<UUID>ACFFB2A2-7AD7-444C-9445-314EBD2E6F0D</UUID>
+					<Bounds top="179" left="18" bottom="196" right="78"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[privateKey]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="654" type="Bearbeitungsfeld" name="" kind="1">
+					<UUID>9648076A-8E4E-488B-BC29-F0B84F4A2ADB</UUID>
+					<Bounds top="312" left="86" bottom="405" right="491"></Bounds>
+					<Options>805306376</Options>
+					<Field>
+						<FieldReference id="17" name="jwt" repetition="1" UUID="169CDAA9-9FB1-4851-9E58-9B6F77BE4960">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>290</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+				</LayoutObject>
+				<LayoutObject id="655" type="Text" name="" kind="2">
+					<UUID>95B061F2-F9AE-41F0-B73B-7B8089883911</UUID>
+					<Bounds top="315" left="60" bottom="332" right="78"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[jwt]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="656" type="Linie" name="" kind="4">
+					<UUID>BD45DF0E-7A1F-4098-A25A-EA6E6F296815</UUID>
+					<Bounds top="169" left="5" bottom="169" right="608"></Bounds>
+					<Options>805306368</Options>
+					<Line></Line>
+				</LayoutObject>
+				<LayoutObject id="657" type="Taste" name="" kind="10">
+					<UUID>A4DF6CAF-F1B7-4143-9F6B-5F4BC626E2A3</UUID>
+					<Bounds top="139" left="86" bottom="162" right="289"></Bounds>
+					<Options>805306380</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Generate Public/Private Keys]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="178" name="Generate SSH Keys" UUID="0364E358-2395-41DF-AC87-B2D8DA1C905B"></ScriptReference>
+						</action>
+					</Button>
+					<LocalCSS name="FM-EBD64279-059D-4A91-9C44-4A5756BD4421"><![CDATA[self.FM-EBD64279-059D-4A91-9C44-4A5756BD4421
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="False">
+							<Calculation>
+								<Text><![CDATA[NICHT IstLeer ( PUB__publickeys::publicKey )]]></Text>
+								<ChunkList hash="B037BA1922961586B3DC55BD26F8717B">
+									<Chunk type="FunctionRef">NICHT</Chunk>
+									<Chunk type="NoRef"> </Chunk>
+									<Chunk type="FunctionRef">IstLeer</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="9" name="publicKey" repetition="1" UUID="5489F4E7-997E-420B-9CC8-16BAB9FD37F7">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="659" type="Bearbeitungsfeld" name="" kind="1">
+					<UUID>96A4D0AD-A790-407D-A962-F552738799BF</UUID>
+					<Bounds top="283" left="183" bottom="306" right="272"></Bounds>
+					<Options>805306376</Options>
+					<Field>
+						<FieldReference id="16" name="Expires_days" repetition="1" UUID="4D7C1C8C-9FED-4267-B8C1-86C1C7FD3693">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>131104</Options>
+						<Display Style="0" show="1">
+							<Placeholder findMode="True">
+								<Calculation>
+									<Text><![CDATA["Default: 365"]]></Text>
+									<ChunkList hash="C98F485FD0DF51F01EC6F965FF7B6606">
+										<Chunk type="NoRef">&quot;Default: 365&quot;</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Placeholder>
+						</Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+				</LayoutObject>
+				<LayoutObject id="660" type="Bearbeitungsfeld" name="" kind="1">
+					<UUID>6D0FC851-558C-49DB-B0B3-FC2570EDA4DC</UUID>
+					<Bounds top="409" left="86" bottom="432" right="491"></Bounds>
+					<Options>805306376</Options>
+					<Field>
+						<FieldReference id="18" name="Expires_m" repetition="1" UUID="EF2C90F9-BD54-45F8-9808-6FE10283367C">
+							<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>32</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+				</LayoutObject>
+				<LayoutObject id="661" type="Text" name="" kind="2">
+					<UUID>CF6574FD-8354-49E0-BE19-E4653A87AEE6</UUID>
+					<Bounds top="412" left="0" bottom="429" right="78"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[expires (UTC)]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="662" type="Text" name="" kind="2">
+					<UUID>ECEF2F5B-DADB-4E2D-9F0C-82E7C6BB6461</UUID>
+					<Bounds top="286" left="86" bottom="303" right="173"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>0</Options>
+						<StyledText>
+							<Data><![CDATA[Expire (in days)]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="663" type="Taste" name="" kind="10">
+					<UUID>ED18DB96-5152-432B-AEFA-223209CE230E</UUID>
+					<Bounds top="283" left="289" bottom="306" right="492"></Bounds>
+					<Options>805306376</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Generate JWT]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="179" name="Generate JWT" UUID="569B2CCD-3F20-4F43-89C9-9F7C5CD06F51"></ScriptReference>
+						</action>
+					</Button>
+					<LocalCSS name="FM-EBD64279-059D-4A91-9C44-4A5756BD4421"><![CDATA[self.FM-EBD64279-059D-4A91-9C44-4A5756BD4421
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="665" type="Taste" name="" kind="10">
+					<UUID>17BE96C2-47C0-4B9D-A0B9-81BCA39F0D76</UUID>
+					<Bounds top="438" left="436" bottom="461" right="491"></Bounds>
+					<Options>805306376</Options>
+					<Button>
+						<Options>0</Options>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Delete]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="176" name="Delete FileMaker Admin API Public Keys" UUID="1542EA3E-E85D-46AE-9E6D-260F0FDE3E31"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "name" ; PUB__publickeys::name ; JSONString ])]]></Text>
+								<ChunkList hash="DC12C8E3F2B8A5DAC5B1A23BF570FAE8">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;name&quot; ; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="8" name="name" repetition="1" UUID="E5455803-EA33-4A56-A70E-DB220055B231">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys" UUID="C529DC6D-E6EF-41A3-8B5E-065BBD3CF374"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-765516D0-37FD-4A82-90BF-B2D152033D8F"><![CDATA[self.FM-765516D0-37FD-4A82-90BF-B2D152033D8F
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="666" type="Linie" name="" kind="4">
+					<UUID>69014570-B950-4748-A4B6-095CD95154F4</UUID>
+					<Bounds top="275" left="5" bottom="275" right="608"></Bounds>
+					<Options>805306368</Options>
+					<Line></Line>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+	</PartsList>
+	<UUID modifications="193" userName="Mike Duncan" accountName="Admin" timestamp="2023-01-25T10:18:15">6C9AC143-1DAB-41F0-83DD-BE2206EF3AE1</UUID>
+	<TagList></TagList>
+	<ClientType>0</ClientType>
+	<Options hidden="True">284395532</Options>
+</Layout>

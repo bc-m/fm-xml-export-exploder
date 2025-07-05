@@ -32,9 +32,9 @@ pub fn sanitize(step: &str) -> Option<String> {
     if name.is_empty() {
         None
     } else if calculation.is_empty() {
-        Some(format!("{} []", name))
+        Some(format!("{name} []"))
     } else {
-        Some(format!("{} [ {} ]", name, calculation))
+        Some(format!("{name} [ {calculation} ]"))
     }
 }
 

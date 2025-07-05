@@ -1,0 +1,745 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="43" name="Change Palette"></ScriptReference>
+	<ObjectList membercount="61">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210924 MrW Use internal palette layout to stop screen wiggle (due to ruler)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121101 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="79" name="Fenster fixieren" enable="True">
+		</Step>
+		<Step id="55" name="Blätternmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Inputvar"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_Syntax::_gID_ActivePalette]]></Text>
+								<ChunkList hash="F2845CDA99DE551CC9C55ABBE97D28A6">
+									<Chunk type="FieldRef">
+										<FieldReference id="11" name="_gID_ActivePalette" repetition="1">
+											<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Palette_ID"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Make sure the active palette is selected in the palettes list"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="6" name="Syntax"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="74" name="Gehe zu Bezugsdatensatz" enable="True">
+			<Options>10</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Related">
+					<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active"></TableOccurrenceReference>
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="37" name="I_Palette"></LayoutReference>
+					</LayoutReferenceContainer>
+					<Animation name="Ohne" value="0"></Animation>
+					<Options></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="FIXME"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_Palette::DisableVariableChecking]]></Text>
+							<ChunkList hash="616DC0F989CC130B2A092081428EE023">
+								<Chunk type="FieldRef">
+									<FieldReference id="14" name="DisableVariableChecking" repetition="1">
+										<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Disable VariableChecking for this palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[MBS( "SyntaxColoring.CheckVariableDeclaration.Disable" )]]></Text>
+								<ChunkList hash="CEE048ECFBEB6088985402F4FCD3D83F">
+									<Chunk type="FunctionRef">MBS</Chunk>
+									<Chunk type="NoRef">( &quot;SyntaxColoring.CheckVariableDeclaration.Disable&quot; )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$MBS"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="125" name="Sonst, wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[_Home::_gVariableCheckingEnabled]]></Text>
+							<ChunkList hash="5D89DA26EC904A8A3C14ACF144620BF7">
+								<Chunk type="FieldRef">
+									<FieldReference id="27" name="_gVariableCheckingEnabled" repetition="1">
+										<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="41" name="MBS_SyntaxColoring( Action )"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["CheckVariableDeclaration.Enable"]]></Text>
+								<ChunkList hash="C8B78715A32F9B4CCEB015001A5CCA0C">
+									<Chunk type="NoRef">&quot;CheckVariableDeclaration.Enable&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="If there are any missing palette-specific syntax entries, add them"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Anzahl( Palette.Color_OnlyPaletteSpecificColors::_k1 )]]></Text>
+								<ChunkList hash="0AFE266525DEB2CD83D6F8E41E204EA0">
+									<Chunk type="FunctionRef">Anzahl</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="17" name="_k1" repetition="1">
+											<TableOccurrenceReference id="1065145" name="Palette.Color_OnlyPaletteSpecificColors"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$CountSpecificColors"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Anzahl( Palette.Color_OnlyPaletteSpecificColors::_kHasSpecificSyntax )]]></Text>
+								<ChunkList hash="6DBF3C87FD702E9C719CFFC7B3E0DB99">
+									<Chunk type="FunctionRef">Anzahl</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="27" name="_kHasSpecificSyntax" repetition="1">
+											<TableOccurrenceReference id="1065145" name="Palette.Color_OnlyPaletteSpecificColors"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$CountSpecificSyntax"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$CountSpecificColors - $CountSpecificSyntax]]></Text>
+								<ChunkList hash="A5832FC17AA2B74FF0866CF21679C7DC">
+									<Chunk type="VariableReference">$CountSpecificColors</Chunk>
+									<Chunk type="NoRef"> - </Chunk>
+									<Chunk type="VariableReference">$CountSpecificSyntax</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$CountOfSyntaxToCreate"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$CountOfSyntaxToCreate > 0]]></Text>
+							<ChunkList hash="C30FC6E1448713E7B569172E6B0EC060">
+								<Chunk type="VariableReference">$CountOfSyntaxToCreate</Chunk>
+								<Chunk type="NoRef"> &gt; 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[_Palette::PaletteName]]></Text>
+								<ChunkList hash="4AAABB247B64341942F4C7850482B5BD">
+									<Chunk type="FieldRef">
+										<FieldReference id="2" name="PaletteName" repetition="1">
+											<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$PaletteName"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16389</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Palette '" & $PaletteName & "' needs " & $CountOfSyntaxToCreate & " syntax " & Falls( $CountOfSyntaxToCreate = 1 ; "entry" ; "entries" ) & "!¶Should they be created?"]]></Text>
+							<ChunkList hash="35DDC271F61A49DBF0F9F1E2A86A2509">
+								<Chunk type="NoRef">&quot;Palette &apos;&quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$PaletteName</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;&apos; needs &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$CountOfSyntaxToCreate</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; syntax &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$CountOfSyntaxToCreate</Chunk>
+								<Chunk type="NoRef"> = 1 ; &quot;entry&quot; ; &quot;entries&quot; ) &amp; &quot;!¶Should they be created?&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="Create">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Skip">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( LetzteMeldungswahl ) = 1]]></Text>
+							<ChunkList hash="E4D712690E8A3522DE4F176CDFCB904A">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="74" name="Gehe zu Bezugsdatensatz" enable="True">
+			<Options>33554440</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Related">
+					<TableOccurrenceReference id="1065145" name="Palette.Color_OnlyPaletteSpecificColors"></TableOccurrenceReference>
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="5" name="Colors"></LayoutReference>
+					</LayoutReferenceContainer>
+					<Animation name="Ohne" value="0"></Animation>
+					<Options ShowRelated="True"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="FOR EACH Color"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="39" name="Sortieren" enable="True">
+			<Options>33587328</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Restore">
+					<Restore value="True"></Restore>
+				</Parameter>
+				<Parameter type="SortSpecification">
+					<SortSpecification value="True" maintain="True">
+						<SortList membercount="1">
+							<Sort type="Ascending">
+								<PrimaryField>
+									<FieldReference id="27" name="_kHasSpecificSyntax">
+										<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+									</FieldReference>
+								</PrimaryField>
+							</Sort>
+						</SortList>
+					</SortSpecification>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="16" name="Gehe zu Datens./Abfrage/Seite" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Records">
+					<List name="Erste(r)" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="71" name="Schleife (Anfang)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Immer" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="72" name="Verlasse Schleife wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Color.Syntax_byCommand::_k1]]></Text>
+							<ChunkList hash="E08F0090D390FDAEE4FCB86DDFD88531">
+								<Chunk type="FieldRef">
+									<FieldReference id="17" name="_k1" repetition="1">
+										<TableOccurrenceReference id="1065142" name="Color.Syntax_byCommand"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Add command"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="6" name="On">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065142" name="Color.Syntax_byCommand"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[1]]></Text>
+							<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+								<Chunk type="NoRef">1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="18" name="Comment">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065142" name="Color.Syntax_byCommand"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["This syntax was created for palette '" & $PaletteName & "'"]]></Text>
+							<ChunkList hash="38C2ADC0107489922770A1480F372848">
+								<Chunk type="NoRef">&quot;This syntax was created for palette &apos;&quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$PaletteName</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;&apos;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="NEXT Color"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="16" name="Gehe zu Datens./Abfrage/Seite" enable="True">
+			<Options>8194</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Records">
+					<List name="Nächste(r)" value="4">
+						<Boolean type="Nach letztem beenden" position="184" value="True"></Boolean>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="73" name="Schleife (Ende)" enable="True">
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Always set the palette for ALL commands"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="9" name="Home"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="91" name="Ersetze alle Feldwerte" enable="True">
+			<Options>16517</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="FieldReference">
+					<FieldReference id="10" name="_ID_Palette">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch Berechnung ersetzen: " value="3">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$Palette_ID]]></Text>
+								<ChunkList hash="D52F06F1492D81B29E65F348020D4A7E">
+									<Chunk type="VariableReference">$Palette_ID</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>1065026</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="189" name="Set Home Screen Info to content of ( Object )"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["switchingDarkLight"]]></Text>
+								<ChunkList hash="087BE8894C5F72A32BD388DA37B11654">
+									<Chunk type="NoRef">&quot;switchingDarkLight&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Return to the original layout"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

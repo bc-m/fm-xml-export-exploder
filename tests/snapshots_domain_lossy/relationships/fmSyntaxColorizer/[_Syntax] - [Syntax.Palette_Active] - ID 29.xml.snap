@@ -1,0 +1,29 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="29">
+	<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">6FA04824-D721-440B-AB4C-EA580E6010AC</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_gID_ActivePalette">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="1" name="__ID">
+					<TableOccurrenceReference id="1065131" name="Syntax.Palette_Active"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

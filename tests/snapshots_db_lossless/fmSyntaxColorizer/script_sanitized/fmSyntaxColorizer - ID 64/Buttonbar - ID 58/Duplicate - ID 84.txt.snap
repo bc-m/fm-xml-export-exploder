@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20121101 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ Hole( Fenstermodus ) = 1 ]
+	# Find
+	Datensatz/Abfrage duplizieren
+	
+Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
+	# Not browse mode
+	Aktuelles Script verlassen []
+	
+Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
+	# Duplicate Palette
+	Script ausführen [ Aus Liste ; "Duplicate Palette" ]
+	
+Sonst, wenn [ _IsLayoutTableName ( _Syntax::__ID ) ]
+	# Duplicate Command
+	Script ausführen [ Aus Liste ; "Duplicate Syntax" ]
+	
+Sonst
+	# Duplicate record
+	Datensatz/Abfrage duplizieren
+	
+Ende (wenn)

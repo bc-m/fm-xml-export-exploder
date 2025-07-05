@@ -1,0 +1,805 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="166" name="fm15 changed script steps"></ScriptReference>
+	<ObjectList membercount="47">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Send Mail via E-Mail Client (MAPI) mit/ohne Dialog"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="63" name="E-Mail senden" enable="True">
+			<Options>16416</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Email">
+					<Boolean type="Mit Dialog" position="156" value="True"></Boolean>
+					<Send OAuthAuthentication="False" SMTP="False">
+						<Multiple value="False"></Multiple>
+						<To>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$To]]></Text>
+									<ChunkList hash="0271AE98C34751CC4A2670AE3B1470B6">
+										<Chunk type="VariableReference">$To</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</To>
+						<CC>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="1">
+								<Calculation>
+									<Text><![CDATA[$CC]]></Text>
+									<ChunkList hash="530AB843F7B85238A8BD99497AD63F1D">
+										<Chunk type="VariableReference">$CC</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</CC>
+						<BCC>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="2">
+								<Calculation>
+									<Text><![CDATA[$BCC]]></Text>
+									<ChunkList hash="B4DBEC529069D944FE1B01400E1AB0C5">
+										<Chunk type="VariableReference">$BCC</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</BCC>
+						<Subject>
+							<Calculation datatype="1" position="3">
+								<Calculation>
+									<Text><![CDATA[$Subject]]></Text>
+									<ChunkList hash="353A1BCE5C914A0BEFEC3FB8511DF50A">
+										<Chunk type="VariableReference">$Subject</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Subject>
+						<Message>
+							<Calculation datatype="1" position="4">
+								<Calculation>
+									<Text><![CDATA[$Message]]></Text>
+									<ChunkList hash="2C009C346321EF6F03259BFD277B7929">
+										<Chunk type="VariableReference">$Message</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Message>
+					</Send>
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$FilePath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="63" name="E-Mail senden" enable="True">
+			<Options>16544</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Email">
+					<Boolean type="Mit Dialog" position="156" value="False"></Boolean>
+					<Send OAuthAuthentication="False" SMTP="False">
+						<Multiple value="False"></Multiple>
+						<To>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$To]]></Text>
+									<ChunkList hash="0271AE98C34751CC4A2670AE3B1470B6">
+										<Chunk type="VariableReference">$To</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</To>
+						<CC>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="1">
+								<Calculation>
+									<Text><![CDATA[$CC]]></Text>
+									<ChunkList hash="530AB843F7B85238A8BD99497AD63F1D">
+										<Chunk type="VariableReference">$CC</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</CC>
+						<BCC>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="2">
+								<Calculation>
+									<Text><![CDATA[$BCC]]></Text>
+									<ChunkList hash="B4DBEC529069D944FE1B01400E1AB0C5">
+										<Chunk type="VariableReference">$BCC</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</BCC>
+						<Subject>
+							<Calculation datatype="1" position="3">
+								<Calculation>
+									<Text><![CDATA[$Subject]]></Text>
+									<ChunkList hash="353A1BCE5C914A0BEFEC3FB8511DF50A">
+										<Chunk type="VariableReference">$Subject</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Subject>
+						<Message>
+							<Calculation datatype="1" position="4">
+								<Calculation>
+									<Text><![CDATA[$Message]]></Text>
+									<ChunkList hash="2C009C346321EF6F03259BFD277B7929">
+										<Chunk type="VariableReference">$Message</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Message>
+					</Send>
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$FilePath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="63" name="E-Mail senden" enable="True">
+			<Options>16416</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Email">
+					<Boolean type="Ohne Dialogfeld" value="True"></Boolean>
+					<SMTP>
+						<Name>
+							<Calculation datatype="1" position="5">
+								<Calculation>
+									<Text><![CDATA[$User]]></Text>
+									<ChunkList hash="900977899D5BEE2A8A1E79065605C09B">
+										<Chunk type="VariableReference">$User</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Name>
+						<Email>
+							<Calculation datatype="1" position="6">
+								<Calculation>
+									<Text><![CDATA[$UserMail]]></Text>
+									<ChunkList hash="A9528CF6D56E47527433D257D681BEDA">
+										<Chunk type="VariableReference">$UserMail</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Email>
+						<ReplyTo></ReplyTo>
+						<Server>
+							<Calculation datatype="1" position="8">
+								<Calculation>
+									<Text><![CDATA[$SMTPServer]]></Text>
+									<ChunkList hash="794A20C21EFEB3EA6FDF796AF569514D">
+										<Chunk type="VariableReference">$SMTPServer</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Server>
+						<Port>
+							<Calculation datatype="1" position="9">
+								<Calculation>
+									<Text><![CDATA[25]]></Text>
+									<ChunkList hash="E30B891FCBFFFFB5DB0BACEEF3FA2378">
+										<Chunk type="NoRef">25</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Port>
+						<Encryption name="SSL" value="1"></Encryption>
+						<Authentication name="Passwort (Klartext)" value="2"></Authentication>
+						<UserName>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[$User]]></Text>
+									<ChunkList hash="900977899D5BEE2A8A1E79065605C09B">
+										<Chunk type="VariableReference">$User</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</UserName>
+						<Password>
+							<Calculation datatype="1" position="11">
+								<Calculation>
+									<Text><![CDATA[$Password]]></Text>
+									<ChunkList hash="28F50C36EFC1E87B2860881B396B1C87">
+										<Chunk type="VariableReference">$Password</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Password>
+					</SMTP>
+					<Send OAuthAuthentication="False" SMTP="True">
+						<Multiple value="False"></Multiple>
+						<To>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$To]]></Text>
+									<ChunkList hash="0271AE98C34751CC4A2670AE3B1470B6">
+										<Chunk type="VariableReference">$To</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</To>
+						<CC>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="1">
+								<Calculation>
+									<Text><![CDATA[$CC]]></Text>
+									<ChunkList hash="530AB843F7B85238A8BD99497AD63F1D">
+										<Chunk type="VariableReference">$CC</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</CC>
+						<BCC>
+							<CollectAddresses value="False"></CollectAddresses>
+							<Calculation datatype="1" position="2">
+								<Calculation>
+									<Text><![CDATA[$BCC]]></Text>
+									<ChunkList hash="B4DBEC529069D944FE1B01400E1AB0C5">
+										<Chunk type="VariableReference">$BCC</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</BCC>
+						<Subject>
+							<Calculation datatype="1" position="3">
+								<Calculation>
+									<Text><![CDATA[$Subject]]></Text>
+									<ChunkList hash="353A1BCE5C914A0BEFEC3FB8511DF50A">
+										<Chunk type="VariableReference">$Subject</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Subject>
+						<Message>
+							<Calculation datatype="1" position="4">
+								<Calculation>
+									<Text><![CDATA[$Message]]></Text>
+									<ChunkList hash="2C009C346321EF6F03259BFD277B7929">
+										<Chunk type="VariableReference">$Message</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Message>
+					</Send>
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$FilePath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="On/Off Optionen jetzt als Toggle direct im Script:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Pause On/Off"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="55" name="Blätternmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="22" name="Suchenmodus aktivieren" enable="True">
+			<Options>16777216</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="41" name="Seitenansichtsmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="With Dialog On/Off"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="128" name="Suchen/Ersetzen ausführen" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="9">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="perform">
+					<List name="Weitersuchen" value="0"></List>
+				</Parameter>
+				<Parameter type="find"></Parameter>
+				<Parameter type="replace"></Parameter>
+				<Parameter type="direction">
+					<List name="Vorwärts" value="0"></List>
+				</Parameter>
+				<Parameter type="case">
+					<Boolean type="Groß-/Kleinschreibung" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="whole">
+					<Boolean type="Nur ganzes Wort suchen" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="across">
+					<List name="Alle Datensätze/Abfragen" value="0"></List>
+				</Parameter>
+				<Parameter type="within">
+					<List name="Alle Felder" value="0"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="16" name="Gehe zu Datens./Abfrage/Seite" enable="True">
+			<Options>16514</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Records">
+					<List name="Nach Formel…" value="5">
+						<Boolean type="Mit Dialog" position="156" value="False"></Boolean>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[1+1]]></Text>
+								<ChunkList hash="05F177F64C3FB5E811788E2F4C760798">
+									<Chunk type="NoRef">1+1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="99" name="Gehe zu Ausschnittreihe" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Portal">
+					<List name="Nach Formel…" value="5">
+						<Boolean type="Mit Dialog" position="156" value="True"></Boolean>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$abc]]></Text>
+								<ChunkList hash="D01541160C17134497F805C02B1023E3">
+									<Chunk type="VariableReference">$abc</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="91" name="Ersetze alle Feldwerte" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="replace">
+					<List name="Durch Berechnung ersetzen: " value="3">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[123456]]></Text>
+								<ChunkList hash="BA8D9958B4673D27E78D4DB3506BD4CB">
+									<Chunk type="NoRef">123456</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="9" name="Datensatz/Abfrage löschen" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="104" name="Ausschnittreihe löschen" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="10" name="Alle Datensätze löschen" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="51" name="Verwerfe Änderung Datens./Abfrage" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="35" name="Datensätze importieren" enable="True">
+			<Options>34</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="36" name="Datensätze exportieren" enable="True">
+			<Options>1610612896</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Ordner erstellen" id="512" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="UniversalPathList">
+					<UniversalPathList fileType="TABS" AutoOpen="True" CreateMail="True" membercount="1">
+						<ObjectList>
+							<Location><![CDATA[file:file.txt]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="143" name="Datensätze als Excel speichern" enable="True">
+			<ParameterValues membercount="4">
+				<Parameter type="Restore">
+					<Restore value="False"></Restore>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Options">
+					<Options></Options>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Ordner erstellen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="144" name="Datensätze als PDF speichern" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Restore">
+					<Restore value="False"></Restore>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="An vorhandene PDF anhängen" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Options">
+					<Options></Options>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Ordner erstellen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="26" name="Mehrere ausschließen" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="39" name="Sortieren" enable="True">
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Restore">
+					<Restore value="False"></Restore>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="139" name="Datei konvertieren" enable="True">
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Datei öffnen" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Indizes überspringen" id="512" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="42" name="Drucker einrichten" enable="True">
+			<Options>33587328</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Restore">
+					<Restore value="True"></Restore>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="PageSetup">
+					<PageSetup>
+						<Orientation name="Hochformat" value="0"></Orientation>
+						<size height="1169,44" width="826,39"></size>
+						<scale value="100"></scale>
+					</PageSetup>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="43" name="Drucken" enable="True">
+			<Options>32768</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Restore">
+					<Restore value="False"></Restore>
+				</Parameter>
+				<Parameter type="Print"></Parameter>
+				<Parameter type="PageSetup"></Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="83" name="Passwort ändern" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Old">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$PasswortAlt]]></Text>
+							<ChunkList hash="9CBA23D110705571F8B80D8729575925">
+								<Chunk type="VariableReference">$PasswortAlt</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="New">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$PasswortNeu]]></Text>
+							<ChunkList hash="C8957848037A5FF234F8A0A81048B2DA">
+								<Chunk type="VariableReference">$PasswortNeu</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="138" name="Erneut anmelden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Name">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$Kontoname]]></Text>
+							<ChunkList hash="D72FF10B72F4C510ECE89027C65BC06C">
+								<Chunk type="VariableReference">$Kontoname</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Password">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$Passwort]]></Text>
+							<ChunkList hash="C1142F617D548DE3E5B0A9D19817CAB3">
+								<Chunk type="VariableReference">$Passwort</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="65" name="Telefonnummer wählen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[12345678]]></Text>
+							<ChunkList hash="90FED5D654901FA0ED9D5F797FE7CF66">
+								<Chunk type="NoRef">12345678</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="111" name="URL öffnen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA["http://db.de"]]></Text>
+								<ChunkList hash="42F8F61B8C0E9317CA9612877C2FCF91">
+									<Chunk type="NoRef">&quot;http://db.de&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="117" name="SQL ausführen" enable="True">
+			<Options>160</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Ordner erstellen" id="512" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="SQL">
+					<SQL suppress="False" Save="False" DSN="False" Script="False" import="False">
+						<DSN name="" UserName="" Password=""></DSN>
+						<Calculation>
+							<Text><![CDATA[SELECT * FROM orders]]></Text>
+							<ChunkList hash="CB471852663E7DC6BF8B28F777B6ECB5">
+								<Chunk type="VariableReference">SELECT</Chunk>
+								<Chunk type="NoRef"> * </Chunk>
+								<Chunk type="VariableReference">FROM orders</Chunk>
+							</ChunkList>
+						</Calculation>
+					</SQL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Purpose &amp; data type of Script Result clearer:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

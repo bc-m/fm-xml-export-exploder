@@ -53,7 +53,7 @@ impl VariableReference {
         if let Some(name) = &self.name {
             let repetition = self.repetition.unwrap_or(1);
             if repetition != 1 {
-                Some(format!("{}[{}]", name, repetition))
+                Some(format!("{name}[{repetition}]"))
             } else {
                 Some(name.clone())
             }

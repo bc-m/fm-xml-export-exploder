@@ -168,10 +168,8 @@ impl ParameterValues {
                             depth -= 1;
                         }
                         _ => {
-                            item.parameters.push(format!(
-                                r#"⚠️ PARAMETER "{}" NOT PARSED ⚠️"#,
-                                parameter_type
-                            ));
+                            item.parameters
+                                .push(format!(r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#));
                         }
                     }
                 }

@@ -46,7 +46,7 @@ pub fn sanitize(step: &str) -> Option<String> {
         None
     } else if option_type == "5" {
         if boolean_option_type.is_empty() {
-            Some(format!("{} [ {} ]", name, calculation))
+            Some(format!("{name} [ {calculation} ]"))
         } else {
             Some(format!(
                 "{} [ {}: {} ; {} ]",
@@ -60,7 +60,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             ))
         }
     } else if boolean_option_type.is_empty() {
-        Some(format!("{} [ {} ]", name, option))
+        Some(format!("{name} [ {option} ]"))
     } else {
         Some(format!(
             "{} [ {} ; {}: {} ]",

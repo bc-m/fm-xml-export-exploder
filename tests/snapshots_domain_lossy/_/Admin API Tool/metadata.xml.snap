@@ -1,0 +1,27 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Metadata membercount="1">
+	<AddAction membercount="5">
+		<Encryption type="0"></Encryption>
+		<Minimum version="18.0" value="1800"></Minimum>
+		<Login type="1">
+			<UserName>
+				<INSECURE_TEXT>Admin</INSECURE_TEXT>
+			</UserName>
+			<INSECURE_PASSWORD>
+				<INSECURE_TEXT></INSECURE_TEXT>
+			</INSECURE_PASSWORD>
+		</Login>
+		<ShowSignInFields enable="False"></ShowSignInFields>
+		<ScriptTriggers membercount="2">
+			<ScriptTrigger id="201" action="BeiErstemFensterÖffnen" browseMode="True">
+				<ScriptReference id="7" name="TRIGGER - onFirstWindowOpen"></ScriptReference>
+			</ScriptTrigger>
+			<ScriptTrigger id="202" action="BeiLetztemFensterSchließen" browseMode="True">
+				<ScriptReference id="8" name="TRIGGER - onLastWindowClose"></ScriptReference>
+			</ScriptTrigger>
+		</ScriptTriggers>
+	</AddAction>
+</Metadata>

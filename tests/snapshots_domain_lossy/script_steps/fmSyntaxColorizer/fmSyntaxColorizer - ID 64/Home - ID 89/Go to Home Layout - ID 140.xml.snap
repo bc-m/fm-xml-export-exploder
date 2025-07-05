@@ -1,0 +1,177 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="140" name="Go to Home Layout"></ScriptReference>
+	<ObjectList membercount="14">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121025 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="_gHomeScreenInfo">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[""]]></Text>
+							<ChunkList hash="26631CDF3EEB0CE74C7FC665903CAC32">
+								<Chunk type="NoRef">&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="9" name="Home"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="144" name="MBS_SetSyntaxColoringEnabledStatus"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="139" name="Allow Formatting Bar ( 0/1 )"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="31" name="Fenster anpassen" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Alles anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="119" name="Fensterposition/-größe ändern" enable="True">
+			<Options>-2147467262</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="WindowReference">
+					<WindowReference>
+						<Select kind="0" type="current"></Select>
+						<Bounds>
+							<height></height>
+							<width></width>
+							<top>
+								<Calculation datatype="1" position="3">
+									<Calculation>
+										<Text><![CDATA[0]]></Text>
+										<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+											<Chunk type="NoRef">0</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</top>
+							<left>
+								<Calculation datatype="1" position="4">
+									<Calculation>
+										<Text><![CDATA[0]]></Text>
+										<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+											<Chunk type="NoRef">0</Chunk>
+										</ChunkList>
+									</Calculation>
+								</Calculation>
+							</left>
+						</Bounds>
+					</WindowReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

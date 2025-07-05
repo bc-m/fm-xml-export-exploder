@@ -1,0 +1,72 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">B522B5AC-6A63-4F31-8DCB-A81F7300FA56</UUID>
+	<BaseTableReference id="137" name="_Language"></BaseTableReference>
+	<ObjectList membercount="6">
+		<Field DefaultStyle="" id="1" name="__ID" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="5" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">0431449E-0946-4FE4-A75D-55E0088ACCFB</UUID>
+			<AutoEnter type="SerialNumber" prohibitModification="False">
+				<SerialNumber increment="1" generate="OnCreation"></SerialNumber>
+			</AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="2" name="Language" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">A8F5C9E8-0686-4787-A32B-526E2A507704</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="3" name="LanguageNative" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="3" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">4EE959DF-D957-4016-BA3B-82DBAD2F7B82</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+		<Field DefaultStyle="" id="5" name="_kDS" fieldtype="Calculated" datatype="Text" comment="k_DS (T)//Standard Datensatznummer anzeige">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">ABA3F312-A90A-4B1B-81A4-CE36A21337F5</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="False" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065125" name="_Language"></TableOccurrenceReference>
+				<Text><![CDATA[_BookmarkStandard]]></Text>
+				<ChunkList hash="48A71BC49C3A25519F5D1CDFCBCB4257">
+					<Chunk type="CustomFunctionRef">_BookmarkStandard</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="6" name="_k1" fieldtype="Calculated" datatype="Number" comment="">
+			<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">3643C6AA-F215-4FD1-B712-8B8ABC37CD44</UUID>
+			<AutoEnter alwaysEvaluate="True"></AutoEnter>
+			<Storage storeCalculationResults="True" autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+			<Calculation>
+				<TableOccurrenceReference id="1065125" name="_Language"></TableOccurrenceReference>
+				<Text><![CDATA[1]]></Text>
+				<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+					<Chunk type="NoRef">1</Chunk>
+				</ChunkList>
+			</Calculation>
+		</Field>
+		<Field DefaultStyle="" id="7" name="Comment" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="1" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">23B77259-2E26-4038-8C99-3C8BCFD531E6</UUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" global="False" maxRepetitions="1">
+				<LanguageReference name="German" id="25"></LanguageReference>
+			</Storage>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

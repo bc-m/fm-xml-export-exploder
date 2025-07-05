@@ -1,0 +1,33 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20131217 MrW Close file instead of hiding - and open web
+# 20121025 MrW Aktualisiert
+# 20120111 MrW SHIFT -> close
+# 20081113 MrW 
+
+Fehleraufzeichnung setzen [ ON ]
+AnwenderAbbruchZulassen setzen [ OFF ]
+
+# Script settings
+Variable setzen [ $MasterDBWindowName ; "MrW__DB" ]
+Variable setzen [ $ToolsWindowName ; "fmWorkMate" ]
+Variable setzen [ $homeLayoutName ; "Home" ]
+
+# Output
+Variable setzen [ $$Midimised ; "" ]
+
+
+Wenn [ Hole( LayoutName ) <> $homeLayoutName ]
+	Script ausführen [ Aus Liste ; "Go to Home Layout" ]
+Sonst, wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $MasterDBWindowName ) ) ]
+	Fenster aktivieren [ Name: $MasterDBWindowName ]
+	Datei schließen [ Aktuelle Datei ]
+Sonst, wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $ToolsWindowName ) ) ]
+	Fenster aktivieren [ Name: $ToolsWindowName ]
+	Datei schließen [ Aktuelle Datei ]
+Sonst
+	Script ausführen [ Aus Liste ; "Logo open URL" ]
+	Datei schließen [ Aktuelle Datei ]
+Ende (wenn)

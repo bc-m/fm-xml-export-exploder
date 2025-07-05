@@ -1,0 +1,103 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="201" name="Hello::World" UUID="57251882-59CD-455B-8A2F-3DE70C6F6CE5"></ScriptReference>
+	<ObjectList membercount="5">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CB31F994-F9EC-424E-B75C-5E49DAABEB8C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="141" name="Variable setzen" enable="True">
+			<UUID>BF00F4C6-9718-411D-9D8D-D9C42141B83E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( ScriptParameter )]]></Text>
+								<ChunkList hash="503793A286E8F58CDFD462EDC42EE1BD">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">ScriptParameter</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$name"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3CE93585-166C-4CBC-9589-149F2F31C17E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>7B2D5AE8-AFCA-4FE3-8C8F-136532927C0E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Hello " & $name]]></Text>
+							<ChunkList hash="44415A61208D7EFC0DD4C69F825C6604">
+								<Chunk type="NoRef">&quot;Hello &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$name</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9AEDAF2C-788D-40E7-99F0-B7064156A60C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

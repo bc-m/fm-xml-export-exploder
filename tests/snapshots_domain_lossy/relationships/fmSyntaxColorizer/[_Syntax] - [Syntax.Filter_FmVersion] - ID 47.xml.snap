@@ -1,0 +1,53 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="47">
+	<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-07-07T11:03:15">E63A9E2B-C236-4B85-8CFE-756C189E18A4</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065151" name="Syntax.Filter_FmVersion"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="3">
+		<JoinPredicate type="GreaterOrEqual">
+			<LeftField>
+				<FieldReference id="37" name="_gFM_Version">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="35" name="_kFM_VersionFrom">
+					<TableOccurrenceReference id="1065151" name="Syntax.Filter_FmVersion"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Less">
+			<LeftField>
+				<FieldReference id="37" name="_gFM_Version">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="36" name="_kFM_VersionTo">
+					<TableOccurrenceReference id="1065151" name="Syntax.Filter_FmVersion"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="42" name="_gCollection">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="41" name="Collection">
+					<TableOccurrenceReference id="1065151" name="Syntax.Filter_FmVersion"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

@@ -1,0 +1,169 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="29" name="Files"></ScriptReference>
+	<ObjectList membercount="22">
+		<Step hash="D73D1A9FC7DC38CE48B82603ACAAD2C9" id="196" name="Close Data File" enable="True">
+			<DDRREF kind="StepText" hash="B778C758E5A235236DC3231ABCBF0E8A">_3C7588A9-BADD-41FC-95F6-C8131D7D9F75</DDRREF>
+		</Step>
+		<Step hash="6F176724DFB5725DFA24A85984CB6495" id="34" name="Close File" enable="True">
+			<DDRREF kind="StepText" hash="73618D360D239AFAC2BD06ABBFCA0A76">_DBF3E678-3B89-4135-A956-91F7F0205B35</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="DataSourceReference">
+					<DataSourceReference id="0" name="Current File"></DataSourceReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2F73E0B6182988E66692E656F17DF5CB" id="139" name="Convert File" enable="True">
+			<DDRREF kind="StepText" hash="8FAFC7088A0067C0ECAF33883BEB59FC">_24A236FD-A362-4976-BE82-E120BEF1DA77</DDRREF>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="Verify SSL Certificates" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Open File" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Skip Indexes" id="512" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1C23DDFE9B0768BD714DD798887E5E28" id="190" name="Create Data File" enable="True">
+			<Options>512</Options>
+			<DDRREF kind="StepText" hash="AD43C3C7A1F7D2AAF7FDF07F4C6CA49E">_9F670199-7100-4A2D-9E18-B0D7D8E246D3</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Create folders" id="512" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D66B5174D48CF273589C285165E4924F" id="197" name="Delete File" enable="True">
+			<DDRREF kind="StepText" hash="9FF2B3584EC35CC6752182F85DE64537">_23ABCDED-051D-4CC5-9B6B-062FDF8A4CF2</DDRREF>
+		</Step>
+		<Step hash="FE6C3B56788850F95618ED10697A2620" id="194" name="Get Data File Position" enable="True">
+			<DDRREF kind="StepText" hash="B729E5316469C865F1ED37F820923B46">_9A62BB84-50F2-432E-8CD2-77501D027423</DDRREF>
+		</Step>
+		<Step hash="9B39EAC4708737C07253B85327984E1C" id="188" name="Get File Exists" enable="True">
+			<DDRREF kind="StepText" hash="70548D88EC266FC4E7CDDE82B84C1EF8">_EC945657-FDA9-4894-9AD8-370BE7C10967</DDRREF>
+		</Step>
+		<Step hash="3474B555987D7D4991427CF8A83E0286" id="189" name="Get File Size" enable="True">
+			<DDRREF kind="StepText" hash="B2A72BF2894B923AACE20FFF693B4FBC">_119A1769-A743-42BC-81E0-01529BD5335C</DDRREF>
+		</Step>
+		<Step hash="00D461B60E6E59A0EB7EB2AAAED8697C" id="82" name="New File" enable="True">
+			<DDRREF kind="StepText" hash="53CF7EA2AA0A40E1895C5262904BED20">_8BFB45E6-9CB3-41FD-9090-62F5A1A3C045</DDRREF>
+		</Step>
+		<Step hash="FBE165D18A1E0B229E10A84E05FAD0CB" id="191" name="Open Data File" enable="True">
+			<DDRREF kind="StepText" hash="A963DB454CEB19987BD2439BD655B030">_D0AF6EA8-FD66-4CCA-A046-38D44E59ABD0</DDRREF>
+		</Step>
+		<Step hash="45334A89706DC1F6F224A8513D9C1F9B" id="33" name="Open File" enable="True">
+			<DDRREF kind="StepText" hash="01C23D85A6FE3917483D7C7D0F4D2F91">_DF9C31D2-5F4C-4A27-8234-A4693146244F</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Open hidden" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="DataSourceReference">
+					<DataSourceReference id="0" name="&lt;unknown&gt;"></DataSourceReference>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0A02A3F1FA2C8753A27B72D15DF61CC9" id="43" name="Print" enable="True">
+			<Options>128</Options>
+			<DDRREF kind="StepText" hash="B92D28F00B66DB4DD72E2450BF7F7F72">_88F1015B-38F5-4571-A4CC-87A560A46837</DDRREF>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Restore">
+					<Restore value="False"></Restore>
+				</Parameter>
+				<Parameter type="Print"></Parameter>
+				<Parameter type="PageSetup"></Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2BBE0781E4D86C057BCE6FE187E581C1" id="42" name="Print Setup" enable="True">
+			<Options>128</Options>
+			<DDRREF kind="StepText" hash="FD32FA673F2F7B233C8F5FAD95C16BCE">_7713B14D-B822-45B1-901B-EBEEFE254E83</DDRREF>
+			<ParameterValues membercount="3">
+				<Parameter type="Restore">
+					<Restore value="False"></Restore>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="PageSetup"></Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8CBF09CF39E104E58B22A3CDBC6C8CA1" id="193" name="Read from Data File" enable="True">
+			<Options>514</Options>
+			<DDRREF kind="StepText" hash="F120E727CBC2CEF020277017C900C9C0">_361BCF3A-E8AB-4036-9A92-E06F9FCB8157</DDRREF>
+		</Step>
+		<Step hash="69F603D2FE76AB6DCC942DD84C85AA57" id="95" name="Recover File" enable="True">
+			<Options>128</Options>
+			<DDRREF kind="StepText" hash="F73820A7FD3AFAC35EDE624F83776DB8">_8255F4BC-0CB6-4221-BB4B-E0985F97F988</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9ED052F4D3A771D396EFA7EDD0C4F821" id="199" name="Rename File" enable="True">
+			<DDRREF kind="StepText" hash="4995FA0D79EBBB8F7C4496AB1385C3B1">_1C745CE4-F8AF-4C3C-A0DB-91B3032F59F9</DDRREF>
+		</Step>
+		<Step hash="3C3C545A1DD40D53E4283A5B9C026472" id="37" name="Save a Copy as" enable="True">
+			<Options>512</Options>
+			<DDRREF kind="StepText" hash="F42053B0FE6513EFACEACE387D26A4D2">_3E9B12E3-C151-4EF0-B13A-8C907C418A9C</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="copy of current file" value="1"></List>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Create folders" id="512" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0E0F43A389690FF24631491E79CCFF88" id="3" name="Save a Copy as XML" enable="True">
+			<DDRREF kind="StepText" hash="96828C980498EABD772B94414CB1B3F7">_EE299B5F-0DE6-4B50-B916-A38B2C5FC039</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Include details for analysis tools" id="256" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="60D05C0253EC631A0CAAA3CC2BAAB568" id="195" name="Set Data File Position" enable="True">
+			<DDRREF kind="StepText" hash="AF24DF61EE27438C27C5D61FE67CF97F">_D501DBC7-F202-4F25-B696-9FB6089A0C2E</DDRREF>
+		</Step>
+		<Step hash="44729A0A2BB27A960CA4801BE4D28FD6" id="84" name="Set Multi-User" enable="True">
+			<Options>2</Options>
+			<DDRREF kind="StepText" hash="4CCD8D00FF1556EB0DD2FE69818BC48C">_4184B8C8-9699-4404-B3D0-47BA9AD7C320</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="On" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C75DBEB367217D41B0E46B76199C7E5B" id="94" name="Set Use System Formats" enable="True">
+			<Options>196608</Options>
+			<DDRREF kind="StepText" hash="F3BB1CF47044435549D34C28462CA6B3">_4C55A3D8-3D51-4AC5-A600-1958EA5E14DA</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AC61DCA30FECA993B624066884E34A88" id="192" name="Write to Data File" enable="True">
+			<Options>514</Options>
+			<DDRREF kind="StepText" hash="08FB649257702FA0FE8C36DEA1831BAE">_0FBCD7CE-10DF-4056-9B68-026D2344E929</DDRREF>
+			<ParameterValues membercount="1">
+				<Encoding type="1" name="UTF-16"></Encoding>
+				<Parameter type="Boolean">
+					<Boolean type="Append line feed" id="512" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

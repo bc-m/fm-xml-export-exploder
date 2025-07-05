@@ -1,0 +1,7 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+Set Field [ TestTable::ContainerField1 ; Base64Decode ( TestTable::TextField1 ; "image.svg" ) ]
+
+Perform Script [ From list ; "noop" ; Parameter: "These aren't the droids you're looking for" ]

@@ -1,0 +1,3619 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Layout id="9" name="Data API" width="1024">
+	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+	<LayoutThemeReference id="2" name="com.filemaker.theme.custom.A0ED6AD4_DD83_4D4B_97BA_F42453BB7F66" Display="Enlightened fmsadmin" Base="com.filemaker.theme.enlightened"></LayoutThemeReference>
+	<PartsList membercount="3">
+		<Part type="Kopfbereich" kind="1">
+			<Definition type="Kopfbereich" kind="1" size="30" absolute="0" Options="1024"></Definition>
+			<ObjectList membercount="5">
+				<LayoutObject id="71" type="Text" name="" kind="2">
+					<Bounds top="3" left="15" bottom="27" right="293"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[FileMaker Data API Client]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="FM-E9D15B89-CFFA-43A8-B1D4-0557F3AFA68D"><![CDATA[self.FM-E9D15B89-CFFA-43A8-B1D4-0557F3AFA68D:normal .self
+{
+	font-family: -fm-font-family(Helvetica Neue,HelveticaNeue-UltraLight);
+	font-size: 18pt;
+	color: rgba(47.451%,47.451%,47.451%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="137" type="Rechteck" name="" kind="5">
+					<Bounds top="0" left="0" bottom="7" right="1024"></Bounds>
+					<Options>805306628</Options>
+					<Rectangle renderFormat="0"></Rectangle>
+					<LocalCSS name="FM-D3474E3E-669E-4831-9980-E1E3EBE0D28B"><![CDATA[self.FM-D3474E3E-669E-4831-9980-E1E3EBE0D28B
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="True">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+								<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+									<Chunk type="NoRef">1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="333" type="Popover-Taste" name="" kind="14">
+					<Bounds top="7" left="1065" bottom="28" right="1208"></Bounds>
+					<Options>260</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<PopoverButton>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[sched msgbox]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<PopoverPanel id="334" type="PopoverPanel" name="" kind="15" position="1" Options="2">
+							<Bounds top="39" left="776" bottom="637" right="1498"></Bounds>
+							<Options>805306368</Options>
+							<Title>
+								<Text><![CDATA["Popover"]]></Text>
+								<ChunkList hash="72C38415F1FD4D2B19DFE1AAF488EC8D">
+									<Chunk type="NoRef">&quot;Popover&quot;</Chunk>
+								</ChunkList>
+							</Title>
+							<ObjectList membercount="1">
+								<LayoutObject id="335" type="Seitensteuerelement" name="" kind="16">
+									<Bounds top="9" left="11" bottom="594" right="711"></Bounds>
+									<Options>805306368</Options>
+									<TabOrder membercount="1">
+										<Location id="0">3</Location>
+									</TabOrder>
+									<SlideControl>
+										<Options>3</Options>
+										<ObjectList membercount="1">
+											<LayoutObject id="346" type="Bereich" name="panel_sched_detail" kind="17">
+												<Bounds top="0" left="0" bottom="585" right="700"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="59">
+														<LayoutObject id="347" type="Rechteck" name="" kind="5">
+															<Bounds top="12" left="5" bottom="571" right="685"></Bounds>
+															<Options>805306368</Options>
+															<Rectangle renderFormat="0"></Rectangle>
+															<LocalCSS name="FM-494DD3FA-4352-46EB-8463-2B93EA76C77D"><![CDATA[self.FM-494DD3FA-4352-46EB-8463-2B93EA76C77D
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="323" type="Taste" name="" kind="10">
+															<Bounds top="531" left="13" bottom="561" right="177"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">55</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Get]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																	<Calculation>
+																		<Text><![CDATA[<Funktion NICHT vorhanden> ( "get" )]]></Text>
+																		<ChunkList hash="E5960798EF8B8A3DA39BEEA4837C87A3">
+																			<Chunk type="NoRef">&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( &quot;get&quot; )</Chunk>
+																		</ChunkList>
+																	</Calculation>
+																</action>
+															</Button>
+															<LocalCSS name="FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32"><![CDATA[self.FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="310" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="23" left="142" bottom="44" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">4</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="19" name="taskType" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>324</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="311" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="48" left="142" bottom="69" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">5</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="12" name="name" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>315</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="315" type="Text" name="" kind="2">
+															<Bounds top="51" left="27" bottom="68" right="61"></Bounds>
+															<Options>2415919104</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[name]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="324" type="Text" name="" kind="2">
+															<Bounds top="26" left="27" bottom="43" right="84"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[taskType]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="328" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="73" left="142" bottom="94" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">10</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="8" name="freqType" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>331</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="331" type="Text" name="" kind="2">
+															<Bounds top="76" left="27" bottom="93" right="83"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[freqType]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="322" type="Text" name="" kind="2">
+															<Bounds top="26" left="563" bottom="42" right="625"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Number]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="329" type="Text" name="" kind="2">
+															<Bounds top="76" left="563" bottom="93" right="625"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Number]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="364" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="98" left="142" bottom="119" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">13</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="17" name="startTimeStamp" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>367</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="367" type="Text" name="" kind="2">
+															<Bounds top="101" left="27" bottom="117" right="115"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[startTimeStamp]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="368" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="123" left="142" bottom="144" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">16</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="24" name="target" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>372</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="370" type="Text" name="" kind="2">
+															<Bounds top="126" left="563" bottom="143" right="625"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Number]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="372" type="Text" name="" kind="2">
+															<Bounds top="126" left="27" bottom="143" right="66"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[target]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="373" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="148" left="142" bottom="169" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">23</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="20" name="backupTarget" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>374</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="374" type="Text" name="" kind="2">
+															<Bounds top="151" left="27" bottom="168" right="109"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[backupTarget]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="378" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="173" left="142" bottom="194" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">27</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="23" name="maxBackups" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>380</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="379" type="Text" name="" kind="2">
+															<Bounds top="176" left="563" bottom="193" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Number]]></Data>
+																	<CharacterStyleList membercount="1">
+																		<CharacterStyle Start="0" End="11">
+																			<Text><![CDATA[Optional - ]]></Text>
+																			<Style>
+																				<FontStyle mask="1"></FontStyle>
+																			</Style>
+																		</CharacterStyle>
+																	</CharacterStyleList>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="380" type="Text" name="" kind="2">
+															<Bounds top="176" left="27" bottom="193" right="99"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[maxBackups]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="381" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="198" left="142" bottom="219" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">29</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="22" name="fromTarget" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>383</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="383" type="Text" name="" kind="2">
+															<Bounds top="201" left="27" bottom="218" right="89"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[fromTarget]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="384" type="Text" name="" kind="2">
+															<Bounds top="201" left="563" bottom="218" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="385" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="223" left="142" bottom="244" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">31</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="21" name="clone" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>386</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="386" type="Text" name="" kind="2">
+															<Bounds top="226" left="27" bottom="243" right="59"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[clone]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="387" type="Text" name="" kind="2">
+															<Bounds top="226" left="563" bottom="243" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Boolean]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="388" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="248" left="142" bottom="269" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">34</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="25" name="verify" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>389</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="389" type="Text" name="" kind="2">
+															<Bounds top="251" left="27" bottom="268" right="59"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[verify]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="390" type="Text" name="" kind="2">
+															<Bounds top="251" left="563" bottom="268" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Boolean]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="391" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="273" left="142" bottom="294" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">37</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="15" name="Repeat" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>392</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="392" type="Text" name="" kind="2">
+															<Bounds top="276" left="27" bottom="292" right="69"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[Repeat]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="393" type="Text" name="" kind="2">
+															<Bounds top="276" left="563" bottom="293" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Boolean]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="394" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="298" left="142" bottom="319" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">43</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="14" name="repeatInterval" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>395</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="395" type="Text" name="" kind="2">
+															<Bounds top="301" left="27" bottom="318" right="104"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[repeatInterval]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="396" type="Text" name="" kind="2">
+															<Bounds top="301" left="563" bottom="318" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Number]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="397" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="323" left="142" bottom="344" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">44</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="13" name="repeatFrequency" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>398</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="398" type="Text" name="" kind="2">
+															<Bounds top="326" left="27" bottom="343" right="121"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[repeatFrequency]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="399" type="Text" name="" kind="2">
+															<Bounds top="326" left="563" bottom="343" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Number]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="400" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="348" left="142" bottom="369" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">45</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="3" name="daysOfTheWeek" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>401</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="401" type="Text" name="" kind="2">
+															<Bounds top="351" left="27" bottom="368" right="120"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[daysOfTheWeek]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="402" type="Text" name="" kind="2">
+															<Bounds top="351" left="563" bottom="368" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="403" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="373" left="142" bottom="394" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">47</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="2" name="dailyDays" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>404</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="404" type="Text" name="" kind="2">
+															<Bounds top="376" left="27" bottom="393" right="83"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[dailyDays]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="405" type="Text" name="" kind="2">
+															<Bounds top="376" left="563" bottom="393" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Number]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="406" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="398" left="142" bottom="419" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">49</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="6" name="enableEndDate" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>407</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="407" type="Text" name="" kind="2">
+															<Bounds top="401" left="27" bottom="418" right="113"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[enableEndDate]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="408" type="Text" name="" kind="2">
+															<Bounds top="401" left="563" bottom="418" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Boolean]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="409" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="423" left="142" bottom="444" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">50</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="28" name="endDate" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>410</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="410" type="Text" name="" kind="2">
+															<Bounds top="426" left="27" bottom="443" right="76"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[endDate]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="411" type="Text" name="" kind="2">
+															<Bounds top="426" left="563" bottom="443" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="412" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="448" left="142" bottom="469" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">51</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="16" name="sendEmail" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>413</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="413" type="Text" name="" kind="2">
+															<Bounds top="451" left="27" bottom="468" right="87"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[sendEmail]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="414" type="Text" name="" kind="2">
+															<Bounds top="451" left="563" bottom="468" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Boolean]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="417" type="Text" name="" kind="2">
+															<Bounds top="476" left="563" bottom="493" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="418" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="498" left="142" bottom="519" right="547"></Bounds>
+															<Options>2415919104</Options>
+															<TabOrder membercount="1">
+																<Location id="0">53</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="7" name="enabled" repetition="1">
+																	<TableOccurrenceReference id="1065104" name="FMS_SCH__schedules_selected"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>419</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="419" type="Text" name="" kind="2">
+															<Bounds top="501" left="27" bottom="518" right="73"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[enabled]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="420" type="Text" name="" kind="2">
+															<Bounds top="501" left="563" bottom="518" right="672"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Boolean]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="421" type="Taste" name="" kind="10">
+															<Bounds top="531" left="185" bottom="561" right="349"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">56</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Enable]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																</action>
+															</Button>
+															<LocalCSS name="FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32"><![CDATA[self.FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="422" type="Taste" name="" kind="10">
+															<Bounds top="531" left="357" bottom="561" right="521"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">57</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Disable]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																</action>
+															</Button>
+															<LocalCSS name="FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32"><![CDATA[self.FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+													</ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+										</ObjectList>
+									</SlideControl>
+									<LocalCSS name="FM-15B7BB24-EF60-476A-88A3-B8F13758279A"><![CDATA[self.FM-15B7BB24-EF60-476A-88A3-B8F13758279A
+{
+}
+]]></LocalCSS>
+								</LayoutObject>
+							</ObjectList>
+							<LocalCSS name="FM-F8F63C55-2B80-4150-9967-4FF5646B7F26"><![CDATA[self.FM-F8F63C55-2B80-4150-9967-4FF5646B7F26:normal .self
+{
+	box-shadow: none;
+	-fm-box-shadow-persist: 1pt 1pt 3pt 0pt rgba(0%,0%,0%,0.2);
+}
+self.FM-F8F63C55-2B80-4150-9967-4FF5646B7F26:normal .text
+{
+	height: 12pt;
+	top: 0pt;
+	right: 0pt;
+	left: 0pt;
+}
+self.FM-F8F63C55-2B80-4150-9967-4FF5646B7F26:normal .contents
+{
+	top: 12pt;
+	right: 0pt;
+	bottom: 0pt;
+	left: 0pt;
+}
+]]></LocalCSS>
+						</PopoverPanel>
+					</PopoverButton>
+					<LocalCSS name="FM-3848487C-D113-49BE-8914-F92316015533"><![CDATA[self.FM-3848487C-D113-49BE-8914-F92316015533
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="True">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+								<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+									<Chunk type="NoRef">1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="1271" type="Taste" name="" kind="10">
+					<Bounds top="3" left="246" bottom="26" right="326"></Bounds>
+					<Options>805306368</Options>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[admin api]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="68" name="Navigation ( json )"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "Admin API" ; JSONString ])]]></Text>
+								<ChunkList hash="F7BD9935FA88A0D81ED92E70263694C4">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;Admin API&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B"><![CDATA[self.FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B:normal .self
+{
+	border-top-right-radius: 0pt 0pt;
+	border-bottom-right-radius: 0pt 0pt;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="1272" type="Taste" name="" kind="10">
+					<Bounds top="3" left="325" bottom="26" right="405"></Bounds>
+					<Options>805306368</Options>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[data api]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Step id="0" name="&lt;Unbekannt&gt; [0]" enable="True">
+							</Step>
+						</action>
+					</Button>
+					<LocalCSS name="FM-BD0D3B55-2773-4EB1-AA76-57C05CA86F2A"><![CDATA[self.FM-BD0D3B55-2773-4EB1-AA76-57C05CA86F2A:normal .self
+{
+	border-top-right-radius: 2pt 2pt;
+	border-bottom-right-radius: 2pt 2pt;
+	border-bottom-left-radius: 0pt 0pt;
+	border-top-left-radius: 0pt 0pt;
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Datenbereich" kind="4">
+			<Definition type="Datenbereich" kind="4" size="575" absolute="30" Options="1024">
+				<LocalCSS name="form_body"><![CDATA[self.form_body
+{
+}
+]]></LocalCSS>
+			</Definition>
+			<ObjectList membercount="11">
+				<LayoutObject id="1" type="Text" name="" kind="2">
+					<Bounds top="575" left="6" bottom="592" right="23"></Bounds>
+					<Options>2415919104</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[ID]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+	-fm-text-vertical-align: center;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="2" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="572" left="33" bottom="593" right="210"></Bounds>
+					<Options>2415919104</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<Field>
+						<FieldReference id="1" name="ID" repetition="1">
+							<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>32</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>1</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="3" type="Bearbeitungsfeld" name="" kind="1">
+					<Bounds top="32" left="11" bottom="56" right="1015"></Bounds>
+					<Options>1879048192</Options>
+					<TabOrder membercount="1">
+						<Location id="0">1</Location>
+					</TabOrder>
+					<Field>
+						<FieldReference id="5" name="server_address" repetition="1">
+							<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>196640</Options>
+						<Display Style="0" show="1">
+							<Placeholder findMode="False">
+								<Calculation>
+									<Text><![CDATA["host name only, no \"https://\" or \":16000\" or trailing \"/\""]]></Text>
+									<ChunkList hash="7670F285FC59F728C6176FED985612E2">
+										<Chunk type="NoRef">&quot;host name only, no \&quot;https://\&quot; or \&quot;:16000\&quot; or trailing \&quot;/\&quot;&quot;</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Placeholder>
+						</Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-size: 14pt;
+}
+]]></LocalCSS>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>4</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject id="4" type="Text" name="" kind="2">
+					<Bounds top="57" left="11" bottom="74" right="66"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[server url]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject id="87" type="Seitensteuerelement" name="" kind="16">
+					<Bounds top="80" left="220" bottom="593" right="1015"></Bounds>
+					<Options>4026531842</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<SlideControl>
+						<Options>3</Options>
+						<ObjectList membercount="4">
+							<LayoutObject id="1140" type="Bereich" name="panel_auth" kind="17">
+								<Bounds top="0" left="0" bottom="513" right="795"></Bounds>
+								<Options>4026531842</Options>
+								<SlidePanel>
+									<ObjectList membercount="15">
+										<LayoutObject id="1141" type="Einblendliste" name="" kind="1">
+											<Bounds top="27" left="240" bottom="48" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">6</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="45" name="dapi_filename" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="1" show="1">
+													<ValueListReference id="11" name="databases"></ValueListReference>
+												</Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+											<Accessibility>
+												<Label>1142</Label>
+											</Accessibility>
+										</LayoutObject>
+										<LayoutObject id="1142" type="Text" name="" kind="2">
+											<Bounds top="30" left="180" bottom="47" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[filename]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1143" type="Verschlüsseltes Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="79" left="240" bottom="100" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">14</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="57" name="dapi_password" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>2138146</Options>
+												<Display Style="7" show="1"></Display>
+												<Usage inputMode="130" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2049</Options>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+											<Accessibility>
+												<Label>1144</Label>
+											</Accessibility>
+										</LayoutObject>
+										<LayoutObject id="1144" type="Text" name="" kind="2">
+											<Bounds top="83" left="168" bottom="100" right="228"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[password]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1147" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="140" left="240" bottom="161" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">25</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="55" name="dapi_token_expires" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1148" type="Text" name="" kind="2">
+											<Bounds top="143" left="187" bottom="160" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[expires]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1150" type="Text" name="" kind="2">
+											<Bounds top="111" left="240" bottom="128" right="383"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Request Access Token]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+										<LayoutObject id="1151" type="Text" name="" kind="2">
+											<Bounds top="211" left="240" bottom="228" right="383"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Invalidate Access Token]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+										<LayoutObject id="1154" type="Text" name="" kind="2">
+											<Bounds top="14" left="14" bottom="31" right="246"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Authentication]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,Arial-BoldMT);
+	font-weight: bold;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1158" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="166" left="240" bottom="203" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">28</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="54" name="dapi_token" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1159" type="Text" name="" kind="2">
+											<Bounds top="169" left="196" bottom="186" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[token]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1219" type="Taste" name="" kind="10">
+											<Bounds top="108" left="534" bottom="131" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">21</Location>
+											</TabOrder>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[Post]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="73" name="Request Data API Access Token"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32"><![CDATA[self.FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1220" type="Taste" name="" kind="10">
+											<Bounds top="208" left="534" bottom="231" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">33</Location>
+											</TabOrder>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[Del]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="74" name="Invalidate Data API Access Token"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-765516D0-37FD-4A82-90BF-B2D152033D8F"><![CDATA[self.FM-765516D0-37FD-4A82-90BF-B2D152033D8F
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1221" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="53" left="240" bottom="74" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">11</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="56" name="dapi_username" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1222" type="Text" name="" kind="2">
+											<Bounds top="56" left="172" bottom="73" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[username]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+									</ObjectList>
+								</SlidePanel>
+							</LayoutObject>
+							<LayoutObject id="1242" type="Bereich" name="panel_databases" kind="17">
+								<Bounds top="0" left="0" bottom="513" right="795"></Bounds>
+								<Options>4026531842</Options>
+								<SlidePanel>
+									<ObjectList membercount="9">
+										<LayoutObject id="1243" type="Text" name="" kind="2">
+											<Bounds top="14" left="14" bottom="31" right="246"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Info & Databases]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,Arial-BoldMT);
+	font-weight: bold;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1244" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="27" left="240" bottom="217" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">7</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="52" name="dapi_productInfo" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1245" type="Text" name="" kind="2">
+											<Bounds top="30" left="164" bottom="47" right="228"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[productInfo]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1246" type="Taste" name="" kind="10">
+											<Bounds top="226" left="534" bottom="249" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">36</Location>
+											</TabOrder>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[Get]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="82" name="Get Product Info"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-5F865DA8-AF59-4753-9715-D76E4D08B247"><![CDATA[self.FM-5F865DA8-AF59-4753-9715-D76E4D08B247
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1248" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="263" left="240" bottom="453" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">42</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="50" name="dapi_databases" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1249" type="Text" name="" kind="2">
+											<Bounds top="266" left="169" bottom="283" right="228"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[databases]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1250" type="Taste" name="" kind="10">
+											<Bounds top="462" left="534" bottom="485" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">52</Location>
+											</TabOrder>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[Get]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="80" name="Get Databases"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-5F865DA8-AF59-4753-9715-D76E4D08B247"><![CDATA[self.FM-5F865DA8-AF59-4753-9715-D76E4D08B247
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1256" type="Text" name="" kind="2">
+											<Bounds top="229" left="240" bottom="246" right="383"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Get Product Info]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+										<LayoutObject id="1257" type="Text" name="" kind="2">
+											<Bounds top="465" left="240" bottom="482" right="383"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Get Databases]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+									</ObjectList>
+								</SlidePanel>
+							</LayoutObject>
+							<LayoutObject id="1258" type="Bereich" name="panel_layouts" kind="17">
+								<Bounds top="0" left="0" bottom="513" right="795"></Bounds>
+								<Options>4026531842</Options>
+								<SlidePanel>
+									<ObjectList membercount="9">
+										<LayoutObject id="1259" type="Text" name="" kind="2">
+											<Bounds top="14" left="14" bottom="31" right="246"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Layouts & Scripts]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,Arial-BoldMT);
+	font-weight: bold;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1260" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="27" left="240" bottom="217" right="590"></Bounds>
+											<Options>805306368</Options>
+											<Field>
+												<FieldReference id="51" name="dapi_layouts" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1261" type="Text" name="" kind="2">
+											<Bounds top="30" left="186" bottom="47" right="228"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[layouts]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1262" type="Taste" name="" kind="10">
+											<Bounds top="226" left="534" bottom="249" right="590"></Bounds>
+											<Options>805306368</Options>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[Get]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="81" name="Get Layouts"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-5F865DA8-AF59-4753-9715-D76E4D08B247"><![CDATA[self.FM-5F865DA8-AF59-4753-9715-D76E4D08B247
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1263" type="Text" name="" kind="2">
+											<Bounds top="229" left="240" bottom="246" right="383"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Get Layouts]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+										<LayoutObject id="1266" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="263" left="240" bottom="453" right="590"></Bounds>
+											<Options>805306368</Options>
+											<Field>
+												<FieldReference id="53" name="dapi_scripts" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1267" type="Text" name="" kind="2">
+											<Bounds top="266" left="190" bottom="283" right="228"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[scripts]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1268" type="Taste" name="" kind="10">
+											<Bounds top="462" left="534" bottom="485" right="590"></Bounds>
+											<Options>805306368</Options>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[Get]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="83" name="Get Scripts"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-5F865DA8-AF59-4753-9715-D76E4D08B247"><![CDATA[self.FM-5F865DA8-AF59-4753-9715-D76E4D08B247
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1269" type="Text" name="" kind="2">
+											<Bounds top="465" left="240" bottom="482" right="383"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Get Scripts]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+									</ObjectList>
+								</SlidePanel>
+							</LayoutObject>
+							<LayoutObject id="1224" type="Bereich" name="panel_records" kind="17">
+								<Bounds top="0" left="0" bottom="513" right="795"></Bounds>
+								<Options>4026531842</Options>
+								<SlidePanel>
+									<ObjectList membercount="10">
+										<LayoutObject id="1225" type="Text" name="" kind="2">
+											<Bounds top="14" left="14" bottom="31" right="246"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<Options>2</Options>
+												<StyledText>
+													<Data><![CDATA[Records]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,Arial-BoldMT);
+	font-weight: bold;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1227" type="Einblendliste" name="" kind="1">
+											<Bounds top="27" left="240" bottom="48" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">8</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="46" name="dapi_layout" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="1" show="1">
+													<ValueListReference id="12" name="layouts"></ValueListReference>
+												</Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+											<Accessibility>
+												<Label>1228</Label>
+											</Accessibility>
+										</LayoutObject>
+										<LayoutObject id="1228" type="Text" name="" kind="2">
+											<Bounds top="30" left="193" bottom="47" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[layout]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1229" type="Taste" name="" kind="10">
+											<Bounds top="109" left="535" bottom="132" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">22</Location>
+											</TabOrder>
+											<Button>
+												<Label>
+													<Text>
+														<Options>2</Options>
+														<StyledText>
+															<Data><![CDATA[GET]]></Data>
+														</StyledText>
+													</Text>
+												</Label>
+												<IconData type="0" size="12"></IconData>
+												<action>
+													<Options>4</Options>
+													<ScriptReference id="77" name="Get Records"></ScriptReference>
+												</action>
+											</Button>
+											<LocalCSS name="FM-5F865DA8-AF59-4753-9715-D76E4D08B247"><![CDATA[self.FM-5F865DA8-AF59-4753-9715-D76E4D08B247
+{
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1232" type="Text" name="" kind="2">
+											<Bounds top="112" left="240" bottom="129" right="311"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[Get Records]]></Data>
+												</StyledText>
+											</Text>
+										</LayoutObject>
+										<LayoutObject id="1233" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="141" left="18" bottom="499" right="590"></Bounds>
+											<Options>4026531840</Options>
+											<TabOrder membercount="1">
+												<Location id="0">26</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="47" name="dapi_records" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>270624</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1234" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="54" left="240" bottom="75" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">12</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="49" name="dapi_limit" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>196640</Options>
+												<Display Style="0" show="1">
+													<Placeholder findMode="False">
+														<Calculation>
+															<Text><![CDATA["100 (default)"]]></Text>
+															<ChunkList hash="CEE5E35D7CDC527B6FD725E3D86B813C">
+																<Chunk type="NoRef">&quot;100 (default)&quot;</Chunk>
+															</ChunkList>
+														</Calculation>
+													</Placeholder>
+												</Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1235" type="Bearbeitungsfeld" name="" kind="1">
+											<Bounds top="81" left="240" bottom="102" right="590"></Bounds>
+											<Options>805306368</Options>
+											<TabOrder membercount="1">
+												<Location id="0">15</Location>
+											</TabOrder>
+											<Field>
+												<FieldReference id="48" name="dapi_offset" repetition="1">
+													<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+												</FieldReference>
+												<Options>32</Options>
+												<Display Style="0" show="1"></Display>
+												<Usage inputMode="0" type="1"></Usage>
+											</Field>
+											<ExtendedAttributes>
+												<Formatting>
+													<Graphic>
+														<Options>5</Options>
+													</Graphic>
+													<Time>
+														<Options>143</Options>
+													</Time>
+													<Numeric>
+														<Options>2304</Options>
+														<Style>
+															<Negative>
+																<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+															</Negative>
+														</Style>
+														<DecimalDigits>2</DecimalDigits>
+													</Numeric>
+												</Formatting>
+											</ExtendedAttributes>
+										</LayoutObject>
+										<LayoutObject id="1236" type="Text" name="" kind="2">
+											<Bounds top="57" left="204" bottom="74" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[limit]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+										<LayoutObject id="1237" type="Text" name="" kind="2">
+											<Bounds top="84" left="196" bottom="101" right="229"></Bounds>
+											<Options>805306368</Options>
+											<Text>
+												<StyledText>
+													<Data><![CDATA[offset]]></Data>
+												</StyledText>
+											</Text>
+											<LocalCSS name=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+										</LayoutObject>
+									</ObjectList>
+								</SlidePanel>
+							</LayoutObject>
+						</ObjectList>
+					</SlideControl>
+				</LayoutObject>
+				<LayoutObject id="112" type="Popover-Taste" name="" kind="14">
+					<Bounds top="57" left="469" bottom="78" right="555"></Bounds>
+					<Options>260</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<PopoverButton>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[msgbox]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<PopoverPanel id="113" type="PopoverPanel" name="" kind="15" position="1" Options="2">
+							<Bounds top="89" left="333" bottom="411" right="691"></Bounds>
+							<Options>805306368</Options>
+							<Title>
+								<Text><![CDATA["Popover"]]></Text>
+								<ChunkList hash="72C38415F1FD4D2B19DFE1AAF488EC8D">
+									<Chunk type="NoRef">&quot;Popover&quot;</Chunk>
+								</ChunkList>
+							</Title>
+							<ObjectList membercount="1">
+								<LayoutObject id="114" type="Seitensteuerelement" name="" kind="16">
+									<Bounds top="20" left="13" bottom="302" right="346"></Bounds>
+									<Options>805306368</Options>
+									<TabOrder membercount="1">
+										<Location id="0">9</Location>
+									</TabOrder>
+									<SlideControl>
+										<Options>3</Options>
+										<ObjectList membercount="7">
+											<LayoutObject id="115" type="Bereich" name="stage_left" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="0"></ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+											<LayoutObject id="116" type="Bereich" name="stage_center" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="2">
+														<LayoutObject id="119" type="Rechteck" name="" kind="5">
+															<Bounds top="113" left="48" bottom="170" right="285"></Bounds>
+															<Options>805306368</Options>
+															<Rectangle renderFormat="0"></Rectangle>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-image: none;
+	background-color: rgba(88.654%,88.654%,88.654%,0.5);
+	border-top-color: rgba(67.9216%,67.9216%,67.9216%,0.752087);
+	border-right-color: rgba(67.9216%,67.9216%,67.9216%,0.752087);
+	border-bottom-color: rgba(67.9216%,67.9216%,67.9216%,0.752087);
+	border-left-color: rgba(67.9216%,67.9216%,67.9216%,0.752087);
+	border-top-width: 2pt;
+	border-right-width: 2pt;
+	border-bottom-width: 2pt;
+	border-left-width: 2pt;
+	border-top-right-radius: 10pt 10pt;
+	border-bottom-right-radius: 10pt 10pt;
+	border-bottom-left-radius: 10pt 10pt;
+	border-top-left-radius: 10pt 10pt;
+	border-image-source: none;
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="118" type="Text" name="" kind="2">
+															<Bounds top="117" left="56" bottom="165" right="277"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>10</Options>
+																<StyledText>
+																	<Data><![CDATA[<<$$UI.MESSAGE>>]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Verdana,Verdana);
+	color: rgba(18.8235%,18.8235%,18.8235%,1);
+	text-align: center;
+	-fm-text-vertical-align: center;
+}
+self:normal .icon
+{
+	background-position: center center;
+}
+]]></LocalCSS>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<FieldList></FieldList>
+														</LayoutObject>
+													</ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+											<LayoutObject id="117" type="Bereich" name="stage_right" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="0"></ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+											<LayoutObject id="140" type="Bereich" name="panel_msg" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="7">
+														<LayoutObject id="143" type="Rechteck" name="" kind="5">
+															<Bounds top="21" left="18" bottom="261" right="314"></Bounds>
+															<Options>805306368</Options>
+															<Rectangle renderFormat="0"></Rectangle>
+															<LocalCSS name="FM-494DD3FA-4352-46EB-8463-2B93EA76C77D"><![CDATA[self.FM-494DD3FA-4352-46EB-8463-2B93EA76C77D
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="141" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="66" left="31" bottom="181" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">17</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="29" name="zz_msg_g" repetition="1">
+																	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+														</LayoutObject>
+														<LayoutObject id="144" type="Taste" name="" kind="10">
+															<Bounds top="221" left="244" bottom="244" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">39</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Patch]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																	<ScriptReference id="43" name="Perform Database Operations for a Database ( json )"></ScriptReference>
+																	<Calculation>
+																		<Text><![CDATA[<Funktion NICHT vorhanden> ( $$this.id_databases ) &<Funktion NICHT vorhanden> ( "CLOSED" )]]></Text>
+																		<ChunkList hash="777A5314853A23C72C3B9D689B93923D">
+																			<Chunk type="NoRef">&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( </Chunk>
+																			<Chunk type="VariableReference">$$this.id_databases</Chunk>
+																			<Chunk type="NoRef"> ) &amp;&#13;&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( &quot;CLOSED&quot; )</Chunk>
+																		</ChunkList>
+																	</Calculation>
+																</action>
+															</Button>
+															<LocalCSS name="FM-73208538-E9C6-4563-94E4-2229FDB52900"><![CDATA[self.FM-73208538-E9C6-4563-94E4-2229FDB52900
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="145" type="Text" name="" kind="2">
+															<Bounds top="29" left="31" bottom="60" right="302"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - The text message to send to the clients being disconnected. Size range: 0-200]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="474" type="Markierungsfelder" name="" kind="1">
+															<Bounds top="188" left="106" bottom="206" right="121"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">35</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="44" name="zz_force_g" repetition="1">
+																	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="3" show="1">
+																	<ValueListReference id="5" name="One"></ValueListReference>
+																</Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>475</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="475" type="Text" name="" kind="2">
+															<Bounds top="188" left="31" bottom="205" right="100"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[Force Close]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="1200" type="Text" name="" kind="2">
+															<Bounds top="225" left="31" bottom="242" right="231"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[Perform Database Operations: Close]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+													</ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+											<LayoutObject id="205" type="Bereich" name="panel_msg_client_disconnect" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="8">
+														<LayoutObject id="201" type="Rechteck" name="" kind="5">
+															<Bounds top="21" left="18" bottom="261" right="314"></Bounds>
+															<Options>805306368</Options>
+															<Rectangle renderFormat="0"></Rectangle>
+															<LocalCSS name="FM-494DD3FA-4352-46EB-8463-2B93EA76C77D"><![CDATA[self.FM-494DD3FA-4352-46EB-8463-2B93EA76C77D
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="202" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="66" left="31" bottom="155" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">18</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="29" name="zz_msg_g" repetition="1">
+																	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+														</LayoutObject>
+														<LayoutObject id="203" type="Taste" name="" kind="10">
+															<Bounds top="221" left="244" bottom="244" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">40</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Del]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																	<ScriptReference id="47" name="Disconnect Client ( json )"></ScriptReference>
+																	<Calculation>
+																		<Text><![CDATA[<Funktion NICHT vorhanden> ( "disconnect" )]]></Text>
+																		<ChunkList hash="D3FA2AAB49389B4A50F7AB7A5AA367A4">
+																			<Chunk type="NoRef">&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( &quot;disconnect&quot; )</Chunk>
+																		</ChunkList>
+																	</Calculation>
+																</action>
+															</Button>
+															<LocalCSS name="FM-765516D0-37FD-4A82-90BF-B2D152033D8F"><![CDATA[self.FM-765516D0-37FD-4A82-90BF-B2D152033D8F
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="204" type="Text" name="" kind="2">
+															<Bounds top="29" left="31" bottom="60" right="302"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - The text message to send to the clients being disconnected. Size range: 0-200]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="211" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="158" left="102" bottom="179" right="176"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">30</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="30" name="zz_gracetime_g" repetition="1">
+																	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+															<Accessibility>
+																<Label>212</Label>
+															</Accessibility>
+														</LayoutObject>
+														<LayoutObject id="212" type="Text" name="" kind="2">
+															<Bounds top="161" left="31" bottom="178" right="97"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[gracetime]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="213" type="Text" name="" kind="2">
+															<Bounds top="182" left="31" bottom="213" right="302"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - The number of seconds to wait before disconnecting the client. Size range: 0-3600]]></Data>
+																</StyledText>
+															</Text>
+															<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-family: -fm-font-family(Arial,ArialMT);
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="1201" type="Text" name="" kind="2">
+															<Bounds top="225" left="31" bottom="242" right="128"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[Disconnect Client]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+													</ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+											<LayoutObject id="206" type="Bereich" name="panel_msg_client" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="5">
+														<LayoutObject id="207" type="Rechteck" name="" kind="5">
+															<Bounds top="21" left="18" bottom="261" right="314"></Bounds>
+															<Options>805306368</Options>
+															<Rectangle renderFormat="0"></Rectangle>
+															<LocalCSS name="FM-494DD3FA-4352-46EB-8463-2B93EA76C77D"><![CDATA[self.FM-494DD3FA-4352-46EB-8463-2B93EA76C77D
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="208" type="Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="66" left="31" bottom="206" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">19</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="29" name="zz_msg_g" repetition="1">
+																	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>32</Options>
+																<Display Style="0" show="1"></Display>
+																<Usage inputMode="0" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2304</Options>
+																		<Style>
+																			<Negative>
+																				<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+																			</Negative>
+																		</Style>
+																		<DecimalDigits>2</DecimalDigits>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+														</LayoutObject>
+														<LayoutObject id="209" type="Taste" name="" kind="10">
+															<Bounds top="221" left="244" bottom="244" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">41</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Post]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																	<ScriptReference id="48" name="Send Message to Client ( json )"></ScriptReference>
+																	<Calculation>
+																		<Text><![CDATA[<Funktion NICHT vorhanden> ( "send" )]]></Text>
+																		<ChunkList hash="5D53A8407D3B77957449F90DAB05D07C">
+																			<Chunk type="NoRef">&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( &quot;send&quot; )</Chunk>
+																		</ChunkList>
+																	</Calculation>
+																</action>
+															</Button>
+															<LocalCSS name="FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32"><![CDATA[self.FM-B8AD8310-7AAB-4A1D-8AEB-E8A158D04A32
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="210" type="Text" name="" kind="2">
+															<Bounds top="29" left="31" bottom="60" right="302"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[The text message to send to the client.Size range: 0-200]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="1197" type="Text" name="" kind="2">
+															<Bounds top="225" left="31" bottom="242" right="162"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[Send Message to Client]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+													</ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+											<LayoutObject id="147" type="Bereich" name="panel_passwd" kind="17">
+												<Bounds top="0" left="0" bottom="282" right="333"></Bounds>
+												<Options>805306368</Options>
+												<SlidePanel>
+													<ObjectList membercount="5">
+														<LayoutObject id="156" type="Rechteck" name="" kind="5">
+															<Bounds top="21" left="19" bottom="137" right="315"></Bounds>
+															<Options>805306368</Options>
+															<Rectangle renderFormat="0"></Rectangle>
+															<LocalCSS name="FM-494DD3FA-4352-46EB-8463-2B93EA76C77D"><![CDATA[self.FM-494DD3FA-4352-46EB-8463-2B93EA76C77D
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="157" type="Verschlüsseltes Bearbeitungsfeld" name="" kind="1">
+															<Bounds top="66" left="31" bottom="87" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">20</Location>
+															</TabOrder>
+															<Field>
+																<FieldReference id="29" name="zz_msg_g" repetition="1">
+																	<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+																</FieldReference>
+																<Options>2138146</Options>
+																<Display Style="7" show="1"></Display>
+																<Usage inputMode="130" type="1"></Usage>
+															</Field>
+															<ExtendedAttributes>
+																<Formatting>
+																	<Graphic>
+																		<Options>5</Options>
+																	</Graphic>
+																	<Time>
+																		<Options>143</Options>
+																	</Time>
+																	<Numeric>
+																		<Options>2049</Options>
+																	</Numeric>
+																</Formatting>
+															</ExtendedAttributes>
+														</LayoutObject>
+														<LayoutObject id="158" type="Taste" name="" kind="10">
+															<Bounds top="98" left="244" bottom="121" right="299"></Bounds>
+															<Options>805306368</Options>
+															<TabOrder membercount="1">
+																<Location id="0">24</Location>
+															</TabOrder>
+															<Button>
+																<Label>
+																	<Text>
+																		<Options>2</Options>
+																		<StyledText>
+																			<Data><![CDATA[Patch]]></Data>
+																		</StyledText>
+																	</Text>
+																</Label>
+																<IconData type="0" size="12"></IconData>
+																<action>
+																	<Options>4</Options>
+																	<ScriptReference id="43" name="Perform Database Operations for a Database ( json )"></ScriptReference>
+																	<Calculation>
+																		<Text><![CDATA[<Funktion NICHT vorhanden> ( $$this.id_databases ) &<Funktion NICHT vorhanden> ( "OPENED" )]]></Text>
+																		<ChunkList hash="46408F817A18A9AE645DBB22483E6243">
+																			<Chunk type="NoRef">&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( </Chunk>
+																			<Chunk type="VariableReference">$$this.id_databases</Chunk>
+																			<Chunk type="NoRef"> ) &amp;&#13;&lt;</Chunk>
+																			<Chunk type="VariableReference">Funktion</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="FunctionRef">NICHT</Chunk>
+																			<Chunk type="NoRef"> </Chunk>
+																			<Chunk type="VariableReference">vorhanden</Chunk>
+																			<Chunk type="NoRef">&gt; ( &quot;OPENED&quot; )</Chunk>
+																		</ChunkList>
+																	</Calculation>
+																</action>
+															</Button>
+															<LocalCSS name="FM-73208538-E9C6-4563-94E4-2229FDB52900"><![CDATA[self.FM-73208538-E9C6-4563-94E4-2229FDB52900
+{
+}
+]]></LocalCSS>
+														</LayoutObject>
+														<LayoutObject id="159" type="Text" name="" kind="2">
+															<Bounds top="29" left="31" bottom="60" right="302"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<Options>2</Options>
+																<StyledText>
+																	<Data><![CDATA[Optional - Enter the encryption password for the database to open, if used.]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+														<LayoutObject id="1198" type="Text" name="" kind="2">
+															<Bounds top="102" left="31" bottom="119" right="230"></Bounds>
+															<Options>805306368</Options>
+															<Text>
+																<StyledText>
+																	<Data><![CDATA[Perform Database Operations: Open]]></Data>
+																</StyledText>
+															</Text>
+														</LayoutObject>
+													</ObjectList>
+												</SlidePanel>
+											</LayoutObject>
+										</ObjectList>
+									</SlideControl>
+									<LocalCSS name="FM-15B7BB24-EF60-476A-88A3-B8F13758279A"><![CDATA[self.FM-15B7BB24-EF60-476A-88A3-B8F13758279A
+{
+}
+]]></LocalCSS>
+								</LayoutObject>
+							</ObjectList>
+							<LocalCSS name="FM-F8F63C55-2B80-4150-9967-4FF5646B7F26"><![CDATA[self.FM-F8F63C55-2B80-4150-9967-4FF5646B7F26:normal .self
+{
+	box-shadow: none;
+	-fm-box-shadow-persist: 1pt 1pt 3pt 0pt rgba(0%,0%,0%,0.2);
+}
+self.FM-F8F63C55-2B80-4150-9967-4FF5646B7F26:normal .text
+{
+	height: 12pt;
+	top: 0pt;
+	right: 0pt;
+	left: 0pt;
+}
+self.FM-F8F63C55-2B80-4150-9967-4FF5646B7F26:normal .contents
+{
+	top: 12pt;
+	right: 0pt;
+	bottom: 0pt;
+	left: 0pt;
+}
+]]></LocalCSS>
+						</PopoverPanel>
+					</PopoverButton>
+					<LocalCSS name="FM-3848487C-D113-49BE-8914-F92316015533"><![CDATA[self.FM-3848487C-D113-49BE-8914-F92316015533
+{
+}
+]]></LocalCSS>
+					<Conditions>
+						<Hide findMode="True">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+								<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+									<Chunk type="NoRef">1</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Hide>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="139" type="Taste" name="" kind="10">
+					<Bounds top="57" left="947" bottom="74" right="1015"></Bounds>
+					<Options>1610612736</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[view docs]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="12"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="79" name="View Docs FMDAPI"></ScriptReference>
+						</action>
+					</Button>
+					<LocalCSS name="FM-1777E62E-1A4E-46B4-AF29-7DF96D7F9E0E"><![CDATA[self.FM-1777E62E-1A4E-46B4-AF29-7DF96D7F9E0E
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="1149" type="Taste" name="" kind="10">
+					<Bounds top="118" left="10" bottom="148" right="210"></Bounds>
+					<Options>805306368</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Authentication]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="5" size="12">
+							<BinaryData>
+								<LibraryReference id="12" key="5CC05063452FFDAEF8E8CD5A50ACCABD"></LibraryReference>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="323">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCjxnIGNsYXNzPSJmbV9maWxsIj4NCjxwYXRoIGQ9Ik04LjAyNSwyNEw0Ljg2LDIwLjg2OWw4Ljk2OC04Ljg3TDQuODYsMy4xM0w4LjAyNSwwbDEyLjEzNCwxMkw4LjAyNSwyNCIvPg0KPC9nPg0KPC9zdmc+DQo=</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="32">000000010533373B3D3F00143B696F0528333D322E19323F2C28353474292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="68" name="Navigation ( json )"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "panel_auth" ; JSONString ])]]></Text>
+								<ChunkList hash="FECDBAE912B3E2002E567218C6EFA473">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;panel_auth&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B"><![CDATA[self.FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="1223" type="Taste" name="" kind="10">
+					<Bounds top="153" left="10" bottom="183" right="210"></Bounds>
+					<Options>805306368</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Layouts & Scripts]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="5" size="12">
+							<BinaryData>
+								<LibraryReference id="12" key="5CC05063452FFDAEF8E8CD5A50ACCABD"></LibraryReference>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="323">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCjxnIGNsYXNzPSJmbV9maWxsIj4NCjxwYXRoIGQ9Ik04LjAyNSwyNEw0Ljg2LDIwLjg2OWw4Ljk2OC04Ljg3TDQuODYsMy4xM0w4LjAyNSwwbDEyLjEzNCwxMkw4LjAyNSwyNCIvPg0KPC9nPg0KPC9zdmc+DQo=</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="32">000000010533373B3D3F00143B696F0528333D322E19323F2C28353474292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="68" name="Navigation ( json )"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "panel_layouts" ; JSONString ])]]></Text>
+								<ChunkList hash="CD71147C99FBB5516E0356550C614533">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;panel_layouts&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B"><![CDATA[self.FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="1241" type="Taste" name="" kind="10">
+					<Bounds top="83" left="11" bottom="113" right="211"></Bounds>
+					<Options>805306368</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Info & Databases]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="5" size="12">
+							<BinaryData>
+								<LibraryReference id="12" key="5CC05063452FFDAEF8E8CD5A50ACCABD"></LibraryReference>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="323">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCjxnIGNsYXNzPSJmbV9maWxsIj4NCjxwYXRoIGQ9Ik04LjAyNSwyNEw0Ljg2LDIwLjg2OWw4Ljk2OC04Ljg3TDQuODYsMy4xM0w4LjAyNSwwbDEyLjEzNCwxMkw4LjAyNSwyNCIvPg0KPC9nPg0KPC9zdmc+DQo=</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="32">000000010533373B3D3F00143B696F0528333D322E19323F2C28353474292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="68" name="Navigation ( json )"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "panel_databases" ; JSONString ])]]></Text>
+								<ChunkList hash="87FB1B3030D2F785D9FA52CEBB8CCDE6">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;panel_databases&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B"><![CDATA[self.FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="1265" type="Taste" name="" kind="10">
+					<Bounds top="189" left="10" bottom="219" right="210"></Bounds>
+					<Options>805306368</Options>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Records]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="5" size="12">
+							<BinaryData>
+								<LibraryReference id="12" key="5CC05063452FFDAEF8E8CD5A50ACCABD"></LibraryReference>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="323">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCjxnIGNsYXNzPSJmbV9maWxsIj4NCjxwYXRoIGQ9Ik04LjAyNSwyNEw0Ljg2LDIwLjg2OWw4Ljk2OC04Ljg3TDQuODYsMy4xM0w4LjAyNSwwbDEyLjEzNCwxMkw4LjAyNSwyNCIvPg0KPC9nPg0KPC9zdmc+DQo=</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="32">000000010533373B3D3F00143B696F0528333D322E19323F2C28353474292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="68" name="Navigation ( json )"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "panel_records" ; JSONString ])]]></Text>
+								<ChunkList hash="590DB1AA54661E3AC6E62277D3A446F9">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;panel_records&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+					</Button>
+					<LocalCSS name="FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B"><![CDATA[self.FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Fußbereich" kind="7">
+			<Definition type="Fußbereich" kind="7" size="24" absolute="605" Options="0"></Definition>
+			<ObjectList membercount="2">
+				<LayoutObject id="18" type="Popover-Taste" name="" kind="14">
+					<Bounds top="607" left="929" bottom="627" right="1015"></Bounds>
+					<Options>1610612736</Options>
+					<TabOrder membercount="1">
+						<Location id="0">0</Location>
+					</TabOrder>
+					<PopoverButton>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Debug Info]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="4" size="12">
+							<BinaryData>
+								<LibraryReference id="20" key="FD5DC6D2C3D1A1565CC12F39CF902DF2"></LibraryReference>
+								<StreamList>
+									<Stream name="MAIN" type="id" size="4">SVG </Stream>
+									<Stream name="SVG " type="Base64" size="828">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCjxnIGNsYXNzPSJmbV9maWxsIj4NCjxwYXRoIGQ9Ik05LjIyNSwxOC42Mjh2LTAuNjk0YzEuMjU3LTAuMTUyLDEuMzg4LTAuMjQsMS4zODgtMS43Nzh2LTQuMjkzYzAtMS40MzEtMC4xNTItMS40OTYtMS4xOTMtMS42NjlWOS41NjMNCgkJYzEuMy0wLjE1MiwyLjczMi0wLjQzNCwzLjk0Ni0wLjc4MXY3LjM3M2MwLDEuNDk2LDAuMTA4LDEuNjA0LDEuNDA5LDEuNzc4djAuNjk0SDkuMjI1eiBNMTAuMjg3LDUuODk4DQoJCWMwLTAuODY3LDAuNzE2LTEuNTE4LDEuNTQtMS41MThjMC44NjgsMCwxLjU0LDAuNjUxLDEuNTQsMS41MThjMCwwLjgyNS0wLjY3MiwxLjUxOS0xLjU2MSwxLjUxOQ0KCQlDMTEuMDAzLDcuNDE3LDEwLjI4Nyw2LjcyMywxMC4yODcsNS44OTh6Ii8+DQo8cGF0aCBkPSJNMTIuMDAxLDI0QzUuMzg0LDI0LDAsMTguNjE3LDAsMTJDMCw1LjM4Myw1LjM4NCwwLDEyLjAwMSwwQzE4LjYxNywwLDI0LDUuMzgzLDI0LDEyDQoJCUMyNCwxOC42MTcsMTguNjE3LDI0LDEyLjAwMSwyNHogTTEyLjAwMSwxQzUuOTM1LDEsMSw1LjkzNSwxLDEyczQuOTM1LDExLDExLjAwMSwxMUMxOC4wNjUsMjMsMjMsMTguMDY1LDIzLDEyUzE4LjA2NSwxLDEyLjAwMSwxeg0KCQkiLz4NCjwvZz4NCjwvc3ZnPg0K</Stream>
+									<Stream name="GLPH" type="Hex" size="1">01</Stream>
+									<Stream name="FNAM" type="Hex" size="31">000000010533373B3D3F00133B6F6E0533343C35152F2E3633343F74292C3D</Stream>
+								</StreamList>
+							</BinaryData>
+						</IconData>
+						<PopoverPanel id="19" type="PopoverPanel" name="" kind="15" position="3" Options="2">
+							<Bounds top="18" left="539" bottom="596" right="1406"></Bounds>
+							<Options>4026531840</Options>
+							<Title>
+								<Text><![CDATA["Popover"]]></Text>
+								<ChunkList hash="72C38415F1FD4D2B19DFE1AAF488EC8D">
+									<Chunk type="NoRef">&quot;Popover&quot;</Chunk>
+								</ChunkList>
+							</Title>
+							<ObjectList membercount="4">
+								<LayoutObject id="11" type="Bearbeitungsfeld" name="" kind="1">
+									<Bounds top="29" left="13" bottom="244" right="854"></Bounds>
+									<Options>1879048192</Options>
+									<TabOrder membercount="1">
+										<Location id="0">2</Location>
+									</TabOrder>
+									<Field>
+										<FieldReference id="3" name="zz_headers_g" repetition="1">
+											<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+										</FieldReference>
+										<Options>270624</Options>
+										<Display Style="0" show="1"></Display>
+										<Usage inputMode="0" type="1"></Usage>
+									</Field>
+									<LocalCSS name="FM-8C134380-E948-4B0A-AC41-1C6738548057"><![CDATA[self.FM-8C134380-E948-4B0A-AC41-1C6738548057
+{
+}
+]]></LocalCSS>
+									<ExtendedAttributes>
+										<Formatting>
+											<Graphic>
+												<Options>5</Options>
+											</Graphic>
+											<Time>
+												<Options>143</Options>
+											</Time>
+											<Numeric>
+												<Options>2304</Options>
+												<Style>
+													<Negative>
+														<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+													</Negative>
+												</Style>
+												<DecimalDigits>2</DecimalDigits>
+											</Numeric>
+										</Formatting>
+									</ExtendedAttributes>
+									<Accessibility>
+										<Label>12</Label>
+									</Accessibility>
+								</LayoutObject>
+								<LayoutObject id="12" type="Text" name="" kind="2">
+									<Bounds top="11" left="13" bottom="27" right="94"></Bounds>
+									<Options>805306368</Options>
+									<Text>
+										<StyledText>
+											<Data><![CDATA[HTTP Headers]]></Data>
+										</StyledText>
+									</Text>
+									<LocalCSS name="FM-23C3B098-0367-42CD-9A1F-DA09D02D7B24"><![CDATA[self.FM-23C3B098-0367-42CD-9A1F-DA09D02D7B24
+{
+}
+]]></LocalCSS>
+								</LayoutObject>
+								<LayoutObject id="20" type="Bearbeitungsfeld" name="" kind="1">
+									<Bounds top="269" left="13" bottom="565" right="854"></Bounds>
+									<Options>4026531840</Options>
+									<TabOrder membercount="1">
+										<Location id="0">32</Location>
+									</TabOrder>
+									<Field>
+										<FieldReference id="2" name="zz_result_g" repetition="1">
+											<TableOccurrenceReference id="1065089" name="FMS__fmserver"></TableOccurrenceReference>
+										</FieldReference>
+										<Options>270624</Options>
+										<Display Style="0" show="1"></Display>
+										<Usage inputMode="0" type="1"></Usage>
+									</Field>
+									<LocalCSS name="FM-8C134380-E948-4B0A-AC41-1C6738548057"><![CDATA[self.FM-8C134380-E948-4B0A-AC41-1C6738548057
+{
+}
+]]></LocalCSS>
+									<ExtendedAttributes>
+										<Formatting>
+											<Graphic>
+												<Options>5</Options>
+											</Graphic>
+											<Time>
+												<Options>143</Options>
+											</Time>
+											<Numeric>
+												<Options>2304</Options>
+												<Style>
+													<Negative>
+														<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+													</Negative>
+												</Style>
+												<DecimalDigits>2</DecimalDigits>
+											</Numeric>
+										</Formatting>
+									</ExtendedAttributes>
+								</LayoutObject>
+								<LayoutObject id="22" type="Text" name="" kind="2">
+									<Bounds top="251" left="13" bottom="267" right="161"></Bounds>
+									<Options>805306368</Options>
+									<Text>
+										<StyledText>
+											<Data><![CDATA[application/json Response]]></Data>
+										</StyledText>
+									</Text>
+									<LocalCSS name="FM-23C3B098-0367-42CD-9A1F-DA09D02D7B24"><![CDATA[self.FM-23C3B098-0367-42CD-9A1F-DA09D02D7B24
+{
+}
+]]></LocalCSS>
+								</LayoutObject>
+							</ObjectList>
+							<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-image: none;
+	background-color: rgba(0%,0%,0%,0.848352);
+	border-top-right-radius: 7pt 7pt;
+	border-bottom-right-radius: 7pt 7pt;
+	border-bottom-left-radius: 7pt 7pt;
+	border-top-left-radius: 7pt 7pt;
+	border-image-source: none;
+}
+]]></LocalCSS>
+						</PopoverPanel>
+					</PopoverButton>
+					<LocalCSS name="FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B"><![CDATA[self.FM-4A1B752E-713C-4815-A3C6-9D9D0CEBA64B:normal .self
+{
+	font-size: 10pt;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="1217" type="Text" name="" kind="2">
+					<Bounds top="611" left="7" bottom="625" right="564"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<Options>2</Options>
+						<StyledText>
+							<Data><![CDATA[Tool for working with Data API, updated 2019-06-13 by Mike Duncan, Soliant Consulting]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="footer_text"><![CDATA[self.footer_text:normal .self
+{
+	font-family: -fm-font-family(Trebuchet MS,TrebuchetMS);
+	color: rgba(47.451%,47.451%,47.451%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+	</PartsList>
+	<UUID modifications="481" userName="Mike Duncan" accountName="Admin" timestamp="2021-07-08T16:03:27">A96B566C-EE06-4AD5-BC35-B35F07CFEA6F</UUID>
+	<ClientType>0</ClientType>
+	<Options hidden="False">284395520</Options>
+</Layout>

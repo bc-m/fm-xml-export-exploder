@@ -1,0 +1,715 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Layout id="32" name="A Import Palettes" width="1104">
+	<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+	<LayoutThemeReference></LayoutThemeReference>
+	<PartsList membercount="3">
+		<Part type="Kopfbereich" kind="1">
+			<Definition type="Kopfbereich" kind="1" size="187" absolute="0" Options="0"></Definition>
+			<ObjectList membercount="9">
+				<LayoutObject id="76" type="Gruppierte Taste" name="" kind="8">
+					<Bounds top="0" left="0" bottom="51" right="100"></Bounds>
+					<Options>805306368</Options>
+					<GroupedButton>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="20" name="Logo BTN"></ScriptReference>
+						</action>
+						<ObjectList membercount="1">
+							<LayoutObject id="77" type="Grafik" name="" kind="3">
+								<Bounds top="0" left="0" bottom="51" right="100"></Bounds>
+								<Options>805306368</Options>
+								<Graphic>
+									<Formatting>
+										<Options>3</Options>
+									</Formatting>
+									<BinaryData>
+										<LibraryReference id="8" key="15D8D7264303F619283CA204AD5577F1"></LibraryReference>
+										<StreamList>
+											<Stream name="MAIN" type="id" size="4">PNGf</Stream>
+											<Stream name="SIZE" type="Hex" size="4">01A100D6</Stream>
+											<Stream name="PNGf" type="Base64" size="15744">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</Stream>
+											<Stream name="FNAM" type="Hex" size="48">000000010533373B3D3F00243B2A2A7437282D3B2E293534743E3F05343F353405696A6A0536353D35052937742A343D</Stream>
+										</StreamList>
+									</BinaryData>
+								</Graphic>
+							</LayoutObject>
+						</ObjectList>
+					</GroupedButton>
+				</LayoutObject>
+				<LayoutObject id="71" type="Rechteck" name="" kind="5">
+					<Bounds top="0" left="0" bottom="103" right="1100"></Bounds>
+					<Options>1879048192</Options>
+					<Rectangle renderFormat="0"></Rectangle>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="20" type="Text" name="" kind="2">
+					<Bounds top="41" left="99" bottom="64" right="587"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[fmSyntaxColorizer Import Palettes]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-family: -fm-font-family(Arial Rounded MT Bold,ArialRoundedMTBold);
+	font-weight: bold;
+	font-size: 18pt;
+	direction: ;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="24" type="Text" name="" kind="2">
+					<Bounds top="166" left="99" bottom="178" right="180"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Palette to import]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-weight: bold;
+	font-size: 10pt;
+	direction: ;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="28" type="Text" name="" kind="2">
+					<Bounds top="61" left="99" bottom="74" right="181"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[See what you mean!]]></Data>
+							<CharacterStyleList membercount="4">
+								<CharacterStyle Start="0" End="3">
+									<Text><![CDATA[See]]></Text>
+									<Style>
+										<FontStyle mask="4">
+											<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+										</FontStyle>
+									</Style>
+								</CharacterStyle>
+								<CharacterStyle Start="4" End="9">
+									<Text><![CDATA[what ]]></Text>
+									<Style>
+										<FontStyle mask="4">
+											<Color red="255" green="51" blue="0" alpha="1.00"></Color>
+										</FontStyle>
+									</Style>
+								</CharacterStyle>
+								<CharacterStyle Start="9" End="12">
+									<Text><![CDATA[you]]></Text>
+									<Style>
+										<FontStyle mask="4">
+											<Color red="0" green="152" blue="0" alpha="1.00"></Color>
+										</FontStyle>
+									</Style>
+								</CharacterStyle>
+								<CharacterStyle Start="13" End="4294967295">
+									<Text><![CDATA[mean!]]></Text>
+									<Style>
+										<FontStyle mask="4">
+											<Color red="51" green="153" blue="255" alpha="1.00"></Color>
+										</FontStyle>
+									</Style>
+								</CharacterStyle>
+							</CharacterStyleList>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-family: -fm-font-family(Helvetica Neue Light,HelveticaNeue-Light);
+	font-weight: bold;
+	font-size: 9pt;
+	color: rgba(26.6667%,26.6667%,26.6667%,1);
+	direction: ;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="29" type="Text" name="" kind="2">
+					<Bounds top="166" left="375" bottom="178" right="410"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Import]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-weight: bold;
+	font-size: 10pt;
+	direction: ;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="63" type="Text" name="" kind="2">
+					<Bounds top="107" left="99" bottom="120" right="323"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Please select the palettes you wish to import.]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-size: 11pt;
+	direction: ;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="65" type="Text" name="" kind="2">
+					<Bounds top="166" left="315" bottom="178" right="366"></Bounds>
+					<Options>838877184</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Exists]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-weight: bold;
+	font-size: 10pt;
+	direction: ;
+	text-align: center;
+	-fm-text-vertical-align: bottom;
+}
+]]></LocalCSS>
+					<Tooltip>
+						<Text><![CDATA["[X] = A palette with this name already exists in fmSyntaxColorizer"]]></Text>
+						<ChunkList hash="E1C11A4C53536F328683263823602B54">
+							<Chunk type="NoRef">&quot;[X] = A palette with this name already exists in fmSyntaxColorizer&quot;</Chunk>
+						</ChunkList>
+					</Tooltip>
+				</LayoutObject>
+				<LayoutObject id="68" type="Linie" name="" kind="4">
+					<Bounds top="186" left="0" bottom="186" right="1103"></Bounds>
+					<Options>1879060482</Options>
+					<Line></Line>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(80%,80%,80%,1);
+	border-right-color: rgba(80%,80%,80%,1);
+	border-bottom-color: rgba(80%,80%,80%,1);
+	border-left-color: rgba(80%,80%,80%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Datenbereich" kind="4">
+			<Definition type="Datenbereich" kind="4" size="22" absolute="187" Options="8">
+				<LocalCSS name=""><![CDATA[self:normal .self
+{
+	-fm-body-alt-background: true;
+}
+]]></LocalCSS>
+				<Alternate name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(93.3333%,93.3333%,93.3333%,1);
+}
+]]></Alternate>
+			</Definition>
+			<ObjectList membercount="4">
+				<LayoutObject id="25" type="Einblendmenü" name="" kind="1">
+					<Bounds top="187" left="99" bottom="209" right="307"></Bounds>
+					<Options>822083585</Options>
+					<Field>
+						<FieldReference id="15" name="PaletteName" repetition="1">
+							<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>54</Options>
+						<Display Style="2" show="1">
+							<ValueListReference id="3" name="Palettes"></ValueListReference>
+						</Display>
+						<Usage inputMode="0" type="0"></Usage>
+					</Field>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-width: 0pt;
+	border-right-width: 0pt;
+	border-bottom-width: 0pt;
+	border-left-width: 0pt;
+	direction: ;
+	box-shadow: none;
+	-fm-fill-effect: 0;
+	-fm-text-vertical-align: center;
+	-fm-borders-between-reps: true;
+}
+self:normal .repeat_border
+{
+	border-bottom-color: rgba(0%,0%,0%,1);
+	border-bottom-style: solid;
+}
+]]></LocalCSS>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>159</Options>
+							</Time>
+							<Numeric>
+								<Options>256</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Conditions>
+						<Formatting membercount="1">
+							<Condition type="0" id="0">
+								<Options>1</Options>
+								<Calculation>
+									<Text><![CDATA[_Color::Temp]]></Text>
+									<ChunkList hash="50310136EA683E10B4C562FD0DFD8392">
+										<Chunk type="FieldRef">
+											<FieldReference id="23" name="Temp" repetition="1">
+												<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+											</FieldReference>
+										</Chunk>
+									</ChunkList>
+								</Calculation>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-weight: bold;
+	box-shadow: none;
+}
+]]></LocalCSS>
+							</Condition>
+						</Formatting>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="30" type="Markierungsfelder" name="" kind="1">
+					<Bounds top="192" left="386" bottom="206" right="400"></Bounds>
+					<Options>805306369</Options>
+					<Field>
+						<FieldReference id="23" name="Temp" repetition="1">
+							<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>50</Options>
+						<Display Style="3" show="1">
+							<ValueListReference id="2" name="1"></ValueListReference>
+						</Display>
+						<Usage inputMode="0" type="0"></Usage>
+					</Field>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	color: rgba(53.3333%,53.3333%,53.3333%,1);
+	direction: ;
+}
+]]></LocalCSS>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>159</Options>
+							</Time>
+							<Numeric>
+								<Options>256</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Conditions>
+						<Formatting membercount="1">
+							<Condition type="0" id="0">
+								<Options>1</Options>
+								<Calculation>
+									<Text><![CDATA[_Color::Temp]]></Text>
+									<ChunkList hash="50310136EA683E10B4C562FD0DFD8392">
+										<Chunk type="FieldRef">
+											<FieldReference id="23" name="Temp" repetition="1">
+												<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+											</FieldReference>
+										</Chunk>
+									</ChunkList>
+								</Calculation>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-weight: bold;
+	box-shadow: none;
+}
+]]></LocalCSS>
+							</Condition>
+						</Formatting>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="62" type="Einblendmenü" name="" kind="1">
+					<Bounds top="187" left="422" bottom="209" right="858"></Bounds>
+					<Options>822083585</Options>
+					<Field>
+						<FieldReference id="24" name="_kGUI_PaletteImportMergeWarning" repetition="1">
+							<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>54</Options>
+						<Display Style="2" show="1">
+							<ValueListReference id="3" name="Palettes"></ValueListReference>
+						</Display>
+						<Usage inputMode="0" type="0"></Usage>
+					</Field>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-width: 0pt;
+	border-right-width: 0pt;
+	border-bottom-width: 0pt;
+	border-left-width: 0pt;
+	direction: ;
+	box-shadow: none;
+	-fm-fill-effect: 0;
+	-fm-text-vertical-align: center;
+	-fm-borders-between-reps: true;
+}
+self:normal .repeat_border
+{
+	border-bottom-color: rgba(0%,0%,0%,1);
+	border-bottom-style: solid;
+}
+]]></LocalCSS>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>159</Options>
+							</Time>
+							<Numeric>
+								<Options>256</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Conditions>
+						<Formatting membercount="1">
+							<Condition type="0" id="0">
+								<Options>1</Options>
+								<Calculation>
+									<Text><![CDATA[_Color::Temp]]></Text>
+									<ChunkList hash="50310136EA683E10B4C562FD0DFD8392">
+										<Chunk type="FieldRef">
+											<FieldReference id="23" name="Temp" repetition="1">
+												<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+											</FieldReference>
+										</Chunk>
+									</ChunkList>
+								</Calculation>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-weight: bold;
+	box-shadow: none;
+}
+]]></LocalCSS>
+							</Condition>
+						</Formatting>
+					</Conditions>
+				</LayoutObject>
+				<LayoutObject id="66" type="Markierungsfelder" name="" kind="1">
+					<Bounds top="192" left="333" bottom="206" right="347"></Bounds>
+					<Options>805306369</Options>
+					<Field>
+						<FieldReference id="11" name="_k1" repetition="1">
+							<TableOccurrenceReference id="1065130" name="Color.Palette_byName"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>54</Options>
+						<Display Style="3" show="1">
+							<ValueListReference id="2" name="1"></ValueListReference>
+						</Display>
+						<Usage inputMode="0" type="0"></Usage>
+					</Field>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	color: rgba(53.3333%,53.3333%,53.3333%,1);
+	direction: ;
+}
+]]></LocalCSS>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>159</Options>
+							</Time>
+							<Numeric>
+								<Options>256</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Conditions>
+						<Formatting membercount="1">
+							<Condition type="0" id="0">
+								<Options>1</Options>
+								<Calculation>
+									<Text><![CDATA[_Color::Temp]]></Text>
+									<ChunkList hash="50310136EA683E10B4C562FD0DFD8392">
+										<Chunk type="FieldRef">
+											<FieldReference id="23" name="Temp" repetition="1">
+												<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+											</FieldReference>
+										</Chunk>
+									</ChunkList>
+								</Calculation>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	font-weight: bold;
+	box-shadow: none;
+}
+]]></LocalCSS>
+							</Condition>
+						</Formatting>
+					</Conditions>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+		<Part type="Nachgestelltes Gesamtergebnis" kind="6">
+			<Definition type="Nachgestelltes Gesamtergebnis" kind="6" size="237" absolute="209" Options="0"></Definition>
+			<ObjectList membercount="5">
+				<LayoutObject id="52" type="Gruppierte Taste" name="" kind="8">
+					<Bounds top="246" left="684" bottom="276" right="792"></Bounds>
+					<Options>1610678784</Options>
+					<GroupedButton>
+						<action>
+							<Step id="62" name="Scriptpause setzen" enable="True">
+								<ParameterValues membercount="1">
+									<Parameter type="Options">
+										<Options type="Unbegrenzt"></Options>
+									</Parameter>
+								</ParameterValues>
+							</Step>
+						</action>
+						<ObjectList membercount="1">
+							<LayoutObject id="38" type="Text" name="Button Copy10 Kopie3" kind="2">
+								<Bounds top="0" left="0" bottom="30" right="108"></Bounds>
+								<Options>1627390464</Options>
+								<Text>
+									<Options>2</Options>
+									<StyledText>
+										<Data><![CDATA[Import]]></Data>
+									</StyledText>
+								</Text>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(86.6667%,86.6667%,86.6667%,1);
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+	font-family: -fm-font-family(Verdana,Verdana);
+	font-weight: bold;
+	font-size: 10pt;
+	color: rgba(0%,53.3333%,0%,1);
+	direction: ;
+	text-align: center;
+	-fm-paragraph-margin-left: 2pt;
+	-fm-paragraph-margin-right: 2pt;
+	-fm-fill-effect: 1;
+	-fm-text-vertical-align: center;
+}
+self:normal .inner_border
+{
+	border-top-color: rgba(92%,92%,92%,1);
+	border-right-color: rgba(92%,92%,92%,1);
+	border-bottom-color: rgba(92%,92%,92%,1);
+	border-left-color: rgba(92%,92%,92%,1);
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+}
+]]></LocalCSS>
+							</LayoutObject>
+						</ObjectList>
+					</GroupedButton>
+				</LayoutObject>
+				<LayoutObject id="55" type="Gruppierte Taste" name="" kind="8">
+					<Bounds top="246" left="546" bottom="276" right="654"></Bounds>
+					<Options>1610678784</Options>
+					<GroupedButton>
+						<action>
+							<Options>3</Options>
+							<ScriptReference id="148" name="Set LastMessageChoice( Nr )"></ScriptReference>
+							<Calculation>
+								<Text><![CDATA[2]]></Text>
+								<ChunkList hash="34108238C823509F293F7FC877DB5DF6">
+									<Chunk type="NoRef">2</Chunk>
+								</ChunkList>
+							</Calculation>
+						</action>
+						<ObjectList membercount="1">
+							<LayoutObject id="54" type="Text" name="Button Copy10 Kopie3 Copy" kind="2">
+								<Bounds top="0" left="0" bottom="30" right="108"></Bounds>
+								<Options>1627390464</Options>
+								<Text>
+									<Options>2</Options>
+									<StyledText>
+										<Data><![CDATA[Cancel]]></Data>
+									</StyledText>
+								</Text>
+								<LocalCSS name=""><![CDATA[self:normal .self
+{
+	background-color: rgba(86.6667%,86.6667%,86.6667%,1);
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+	font-family: -fm-font-family(Verdana,Verdana);
+	font-size: 10pt;
+	color: rgba(0%,53.3333%,0%,1);
+	direction: ;
+	text-align: center;
+	-fm-paragraph-margin-left: 2pt;
+	-fm-paragraph-margin-right: 2pt;
+	-fm-fill-effect: 1;
+	-fm-text-vertical-align: center;
+}
+self:normal .inner_border
+{
+	border-top-color: rgba(92%,92%,92%,1);
+	border-right-color: rgba(92%,92%,92%,1);
+	border-bottom-color: rgba(92%,92%,92%,1);
+	border-left-color: rgba(92%,92%,92%,1);
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-bottom-width: 1pt;
+	border-left-width: 1pt;
+}
+]]></LocalCSS>
+							</LayoutObject>
+						</ObjectList>
+					</GroupedButton>
+				</LayoutObject>
+				<LayoutObject id="67" type="Text" name="" kind="2">
+					<Bounds top="311" left="99" bottom="413" right="439"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Note about merging palettesIf palettes already exist in fmSyntaxColorizer you may wish to rename them.Otherwise the palettes will be merged together in the following fashion:    1 Colors with the same name will be overwritten,    2 Old colors with unique names will be kept,    3 New colors will be added.]]></Data>
+							<CharacterStyleList membercount="1">
+								<CharacterStyle Start="1" End="30">
+									<Text><![CDATA[Note about merging palettes]]></Text>
+									<Style>
+										<FontStyle face="1024" mask="256"></FontStyle>
+									</Style>
+								</CharacterStyle>
+							</CharacterStyleList>
+						</StyledText>
+					</Text>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(100%,100%,100%,1);
+	border-right-color: rgba(100%,100%,100%,1);
+	border-bottom-color: rgba(100%,100%,100%,1);
+	border-left-color: rgba(100%,100%,100%,1);
+	font-size: 10pt;
+	color: rgba(53.3333%,53.3333%,53.3333%,1);
+	direction: ;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="75" type="Linie" name="" kind="4">
+					<Bounds top="209" left="1" bottom="209" right="1104"></Bounds>
+					<Options>1879060482</Options>
+					<Line></Line>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(80%,80%,80%,1);
+	border-right-color: rgba(80%,80%,80%,1);
+	border-bottom-color: rgba(80%,80%,80%,1);
+	border-left-color: rgba(80%,80%,80%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject id="70" type="Linie" name="" kind="4">
+					<Bounds top="311" left="1" bottom="311" right="1104"></Bounds>
+					<Options>1879060482</Options>
+					<Line></Line>
+					<LocalCSS name=""><![CDATA[self:normal .self
+{
+	border-top-color: rgba(80%,80%,80%,1);
+	border-right-color: rgba(80%,80%,80%,1);
+	border-bottom-color: rgba(80%,80%,80%,1);
+	border-left-color: rgba(80%,80%,80%,1);
+}
+]]></LocalCSS>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+	</PartsList>
+	<UUID modifications="144" userName="R.Watson Laptop" accountName="admin" timestamp="2023-02-15T14:53:58">A4BC8F65-7467-42AE-8845-FD7F67E671C5</UUID>
+	<ClientType>0</ClientType>
+	<Options hidden="True">15927850</Options>
+</Layout>

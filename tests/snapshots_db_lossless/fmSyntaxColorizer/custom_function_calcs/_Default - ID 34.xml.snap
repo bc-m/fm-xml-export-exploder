@@ -1,0 +1,24 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="34" name="_Default" UUID="568CE75A-F7E3-4AF5-9A3D-4FDEF1391786"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[Falls( NICHT IstLeer( pValue ) ; pValue ; pDefault )]]></Text>
+		<ChunkList hash="5231ED9E4E101A1505DE3EA7AB056A06">
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">NICHT</Chunk>
+			<Chunk type="NoRef"> </Chunk>
+			<Chunk type="FunctionRef">IstLeer</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pValue</Chunk>
+			<Chunk type="NoRef"> ) ; </Chunk>
+			<Chunk type="VariableReference">pValue</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">pDefault</Chunk>
+			<Chunk type="NoRef"> )</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

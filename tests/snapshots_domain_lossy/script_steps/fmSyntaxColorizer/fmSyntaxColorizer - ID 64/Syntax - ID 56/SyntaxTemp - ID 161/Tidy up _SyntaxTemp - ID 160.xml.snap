@@ -1,0 +1,116 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="160" name="Tidy up _SyntaxTemp"></ScriptReference>
+	<ObjectList membercount="13">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>10</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="34" name="I_SyntaxTemp ADMIN"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( AnzahlDatensätzeGesamt )]]></Text>
+							<ChunkList hash="E3B822173EF236B9DB7369F9A7159941">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="23" name="Alle Datensätze anzeigen" enable="True">
+		</Step>
+		<Step id="10" name="Alle Datensätze löschen" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

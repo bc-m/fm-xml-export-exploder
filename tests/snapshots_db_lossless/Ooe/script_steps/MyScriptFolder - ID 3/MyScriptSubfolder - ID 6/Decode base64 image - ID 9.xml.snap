@@ -1,0 +1,94 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="9" name="Decode base64 image" UUID="6B3E4942-979B-4200-AEE0-A4103DD28CEC"></ScriptReference>
+	<ObjectList membercount="5">
+		<Step hash="A32BD88395DBCD0C41ECBA9C04914D17" index="0" id="89" name="# (comment)" enable="True">
+			<UUID>AF932B35-E2B7-492C-8E5E-504D1FED0AB6</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<DDRREF kind="StepText" hash="F2528CB0863A60B45C3C91693604B187">_AF932B35-E2B7-492C-8E5E-504D1FED0AB6</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D86E8BF5CF1D56F80CF260E8507A52CC" index="1" id="76" name="Set Field" enable="True">
+			<UUID>CA4F7156-0000-4953-B9CE-1E7E9C571DC3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<DDRREF kind="StepText" hash="AE8E77872201FCEB0FF181524F5E74AB">_CA4F7156-0000-4953-B9CE-1E7E9C571DC3</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="11" name="ContainerField1" UUID="DE290E12-7D1F-4140-9835-620EC8219D6A">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_CA4F7156-0000-4953-B9CE-1E7E9C571DC3_10</DDRREF>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065089" name="TestTable" UUID="4908496C-B0B9-4840-9BFC-6C2D42719F0C"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<DDRREF kind="ChunkList" hash="9EE36C384268188CCB94556E57682758">_CA4F7156-0000-4953-B9CE-1E7E9C571DC3_0</DDRREF>
+							<Text><![CDATA[Base64Decode ( TestTable::TextField1 ; "image.svg" )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D20F19D49556C094718B4F2AE1D37334" index="2" id="89" name="# (comment)" enable="True">
+			<UUID>8C16EA52-775F-4E27-B39B-5B0FCB83E8D3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<DDRREF kind="StepText" hash="DEDCE8EF88153AE7D2749170315AC098">_8C16EA52-775F-4E27-B39B-5B0FCB83E8D3</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D8A1D711B4B2C7FB64CC93B9DC8F7DB2" index="3" id="1" name="Perform Script" enable="True">
+			<UUID>3E7C8709-2FC2-4647-88BD-1D7134E1855A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<DDRREF kind="StepText" hash="EA06FCB5BFFE51F52A6A9F21E2C9B26A">_3E7C8709-2FC2-4647-88BD-1D7134E1855A</DDRREF>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="From list" value="1">
+						<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<DDRREF kind="ChunkList" hash="950A86C4F039F7E50DF8CC2A84046EAF">_3E7C8709-2FC2-4647-88BD-1D7134E1855A_0</DDRREF>
+								<Text><![CDATA["These aren't the droids you're looking for"]]></Text>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="78FF2BA737D1C9468E1EDF2268E16158" index="4" id="89" name="# (comment)" enable="True">
+			<UUID>0BD3F7E0-5662-402D-BA0C-FCBE4A905137</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<DDRREF kind="StepText" hash="2B2AAFC920A4A98E1474D6C39BD8C1DA">_0BD3F7E0-5662-402D-BA0C-FCBE4A905137</DDRREF>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

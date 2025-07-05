@@ -47,7 +47,7 @@ impl DataSourceReference {
             if self.id == Some(String::from("0")) {
                 Some(name.clone())
             } else {
-                Some(format!("\"{}\"", name))
+                Some(format!("\"{name}\""))
             }
         } else {
             None

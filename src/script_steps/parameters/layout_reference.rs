@@ -90,13 +90,13 @@ impl LayoutReferenceContainer {
             .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
 
         if self.reference_type == "1" {
-            Some(format!("Layout: <{}>", layout_reference))
+            Some(format!("Layout: <{layout_reference}>"))
         } else if self.reference_type == "3" {
-            Some(format!("{}: {}", "Layoutname", layout_reference))
+            Some(format!("Layoutname: {layout_reference}"))
         } else if self.reference_type == "4" {
-            Some(format!("{}: {}", "Layoutnr.", layout_reference))
+            Some(format!("Layoutnr.: {layout_reference}"))
         } else if self.reference_type == "5" {
-            Some(format!("{}: \"{}\"", "Layout", layout_reference))
+            Some(format!("Layout: \"{layout_reference}\""))
         } else {
             None
         }

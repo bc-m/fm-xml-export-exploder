@@ -1,0 +1,149 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="160" name="Tidy up _SyntaxTemp" UUID="89054EFF-387A-49C9-A857-8FA76AAE5A1B"></ScriptReference>
+	<ObjectList membercount="13">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DC952CCC-8EFB-4B26-BFE8-D250C1D7C1A2</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6CB114CB-C79E-490B-A203-0DA0323FADDB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140429 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3DEAF4F8-E254-4180-9FEA-9EA3A8EBF60A</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>6A5D886E-544F-4329-AB7A-7C21D8C3AB17</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>A5F9FD6E-6341-4E15-AED9-EF5312C11716</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>59D07869-6B4C-48F7-92F6-7B6D0021E5EB</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>B73DBF0C-B187-47C1-98AF-BD3E3A7ACA8E</UUID>
+			<OwnerID></OwnerID>
+			<Options>10</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="34" name="I_SyntaxTemp ADMIN" UUID="43B6FBCD-008B-44BE-8EA0-DE3339F94E6A"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="68" name="Wenn" enable="True">
+			<UUID>1AA1A43B-0896-4D1D-B540-C268FA18061B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( AnzahlDatensätzeGesamt )]]></Text>
+							<ChunkList hash="E3B822173EF236B9DB7369F9A7159941">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">AnzahlDatensätzeGesamt</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="23" name="Alle Datensätze anzeigen" enable="True">
+			<UUID>096F89B9-A51E-4A6D-AD8F-6FDB2835085D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="9" id="10" name="Alle Datensätze löschen" enable="True">
+			<UUID>69228250-6089-4623-AEDF-BF45AF6C49F7</UUID>
+			<OwnerID></OwnerID>
+			<Options>128</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="70" name="Ende (wenn)" enable="True">
+			<UUID>1E093BA0-8E7E-4AB2-A96D-B699E36D3E69</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="11" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>1040E897-1F3E-4D67-B015-76C85A8C3D72</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4568EAA4-2003-43B1-BF2A-26C740BDD0F5</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

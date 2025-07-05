@@ -1,0 +1,187 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="225" name="Open repo BTN" UUID="6207B574-4F00-4530-A3BA-65690E12835D"></ScriptReference>
+	<ObjectList membercount="13">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6AF70511-75F6-4CBE-9617-2220F11C9BD0</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>945E8593-6743-4D54-AD34-35B2D59EAE2F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20200706 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BB310D14-2ACB-4881-86FF-C56C58A1004F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>03C710F5-21DA-42AC-B186-6F9FC0329997</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>DB335A16-04FF-4693-A5DC-451B6930BE5A</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="89" name="# (Kommentar)" enable="True">
+			<UUID>698DA663-6869-4C34-97F9-4A8C235C34FC</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9F455E28-FD21-4E1B-A07F-8F11634F7F9A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="141" name="Variable setzen" enable="True">
+			<UUID>23F050ED-8C3C-4776-B081-DFD93A120B7A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["mrwatson-de"]]></Text>
+								<ChunkList hash="DEEC2111FBD9A3A3B78D8D89AE90B04A">
+									<Chunk type="NoRef">&quot;mrwatson-de&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$RepoUser"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="141" name="Variable setzen" enable="True">
+			<UUID>0088CDC2-310C-4C56-A1CC-59338407E7CA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["fmSyntaxColorizer"]]></Text>
+								<ChunkList hash="293F258D43EE21E6BB4029DC29B7C1AF">
+									<Chunk type="NoRef">&quot;fmSyntaxColorizer&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$RepoName"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B56E4228-D229-4E4D-ABD6-258003083F07</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="141" name="Variable setzen" enable="True">
+			<UUID>ED7E7F59-903A-4658-94EC-5B52AD23E2A9</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["https://github.com/" & $RepoUser & "/" & $RepoName]]></Text>
+								<ChunkList hash="BB2061B2875D3D45FA99C9C0D55116E3">
+									<Chunk type="NoRef">&quot;https://github.com/&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$RepoUser</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;/&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$RepoName</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$URL"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="111" name="URL öffnen" enable="True">
+			<UUID>71159CC8-FC51-4003-940C-0F7C3B5D859B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16512</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$URL]]></Text>
+								<ChunkList hash="52F796AC3074FB9DCCBCD23CA7EBD7F3">
+									<Chunk type="VariableReference">$URL</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BCE05809-0955-46C0-89BC-E0375481EDFE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

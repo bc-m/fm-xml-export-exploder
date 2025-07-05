@@ -1,0 +1,25 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20210916 MrW Removed lingering pesky German :D
+# 20121102 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ Hole( Fenstermodus ) = 1 ]
+	Eigenes Dialogfeld anzeigen [ Title: "Search Comments" ; Message: "Please enter your search criterium." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
+Sonst
+	Schleife (Anfang) [ Flush: Immer ]
+		Wenn [ NICHT IstLeer( _Syntax::Comment ) ]
+			# Read
+			Eigenes Dialogfeld anzeigen [ Title: _Syntax::Command_EN ; Message: Austauschen( _Syntax::Comment ; "\¶" ; "¶" ) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Verlasse Schleife wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
+		Ende (wenn)
+		# Edit
+		Variable setzen [ $Comment ; _Syntax::Comment ]
+		Eigenes Dialogfeld anzeigen [ Title: "\"" & _Syntax::Command_EN & "\"" ; Message: "You may enter a comment to explain what this entry is about." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Field1" NOT PARSED ⚠️ ]
+		Verlasse Schleife wenn [ IstLeer( _Syntax::Comment ) ODER _Syntax::Comment = $Comment ]
+	Schleife (Ende)
+Ende (wenn)

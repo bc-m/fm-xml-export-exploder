@@ -1,0 +1,27 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="19" name="_kSwitchDarkLight" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					<Text><![CDATA[DarkModePaletteBool ≠ _IsDarkMode]]></Text>
+					<ChunkList hash="24421F1730D4CEC7BB3C14A8B9E2363B">
+						<Chunk type="FieldRef">
+							<FieldReference id="15" name="DarkModePaletteBool" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ </Chunk>
+						<Chunk type="CustomFunctionRef">_IsDarkMode</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

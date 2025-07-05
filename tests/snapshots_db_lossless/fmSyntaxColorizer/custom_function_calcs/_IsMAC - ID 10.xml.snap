@@ -1,0 +1,18 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="10" name="_IsMAC" UUID="677B3AC5-A294-4BCE-A828-F2581C34EBCD"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[Abs( Hole( SystemPlattform ) ) <> 2]]></Text>
+		<ChunkList hash="1AACE0BAB2D58305DD48D4BD6B6359DF">
+			<Chunk type="FunctionRef">Abs</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">SystemPlattform</Chunk>
+			<Chunk type="NoRef"> ) ) &lt;&gt; 2</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

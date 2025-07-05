@@ -1,0 +1,54 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="38">
+	<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">9CCE6339-5E0E-41E5-B75C-FD38DC0AA311</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065140" name="Syntax.Color_InActivePaletteByCommand" UUID="1AF1DFBE-D2C1-462E-8393-69C7CE00CD40"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="3">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="22" name="_kPaletteType" UUID="F3E7B306-A4D9-48B7-8C89-1B74DAA03AEC">
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+					<TableOccurrenceReference id="1065140" name="Syntax.Color_InActivePaletteByCommand" UUID="1AF1DFBE-D2C1-462E-8393-69C7CE00CD40"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="27" name="_kColorNamePaletteSpecific" UUID="14C3BEAE-C20A-4D45-93E9-5F63848E82E5">
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+					<TableOccurrenceReference id="1065140" name="Syntax.Color_InActivePaletteByCommand" UUID="1AF1DFBE-D2C1-462E-8393-69C7CE00CD40"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="11" name="_gID_ActivePalette" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+					<TableOccurrenceReference id="1065140" name="Syntax.Color_InActivePaletteByCommand" UUID="1AF1DFBE-D2C1-462E-8393-69C7CE00CD40"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

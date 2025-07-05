@@ -1,0 +1,123 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="202" name="Import Column 5 from en fmXRaySelf" UUID="9E68046F-9001-4110-936F-BC596DAFC0B2"></ScriptReference>
+	<ObjectList membercount="3">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2C64C15B-E5CE-4187-80C3-512822A02A24</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9EDDA6E4-66F0-4C80-87D6-352DAFE4BDD1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="35" name="Datensätze importieren" enable="True">
+			<UUID>E5461C10-AF36-4887-98D4-5D3DAAAAE3B8</UUID>
+			<OwnerID></OwnerID>
+			<Options>33587360</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="DataSourceReference">
+					<DataSourceReference fileType="FMPR" isPredefined="False" delimiter="1" value="1">
+						<UniversalPathList fileType="FMPR" membercount="1">
+							<ObjectList>
+								<Location><![CDATA[file:../fmWorkMate_dev/fmXRaySelf/fmXRaySelf.fmp12]]></Location>
+							</ObjectList>
+						</UniversalPathList>
+					</DataSourceReference>
+				</Parameter>
+				<Parameter type="ImportField">
+					<ImportField addasnew="True" isPredefined="False" delimiter="0" fieldNameRow="0">
+						<Options copyContainersAsIs="False" matchFieldNames="False" doAutoEntry="True" splitRepetitions="False"></Options>
+						<Target>
+							<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+						</Target>
+						<Field membercount="12">
+							<Map New="False" name="Quellfeld 1 abgleichen mit " index="1" id="7" kind="2" Options="0">
+								<FieldReference id="7" name="Command_EN" UUID="D22BE1AC-B698-4986-A656-76383C8CF7DC">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 2 nicht importiert in" index="2" id="2" kind="1" Options="0">
+								<FieldReference id="2" name="Command" UUID="B373644E-0DD0-47E5-BDD6-18162D8AA773">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 3 nicht importiert in" index="3" id="3" kind="1" Options="0">
+								<FieldReference id="3" name="Language" UUID="A51CFB85-C505-4883-8F99-4A2F5FAD0BB8">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 4 nicht importiert in" index="4" id="5" kind="1" Options="0">
+								<FieldReference id="5" name="_kDS" UUID="0BA1BC3B-2F53-45F8-842B-1A1D71211DC1">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 5 importieren in " index="5" id="12" kind="0" Options="0">
+								<FieldReference id="12" name="Column 5" UUID="2A240F7F-4EF7-4075-8711-10870718A293">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 6 nicht importiert in" index="6" id="1" kind="1" Options="0">
+								<FieldReference id="1" name="_kSort" UUID="D8202FBC-8A57-4DFB-9875-11FD693930CC">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 7 nicht importiert in" index="7" id="8" kind="1" Options="0">
+								<FieldReference id="8" name="_k1" UUID="E73AE72B-9839-46C7-98DF-8BA8534C3BC3">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 8 nicht importiert in" index="8" id="6" kind="1" Options="2">
+								<FieldReference id="6" name="__ID" UUID="3BB730F8-E3BC-4D1D-93FE-7E45D968B98B">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 9 nicht importiert in" index="9" id="10" kind="1" Options="0">
+								<FieldReference id="10" name="_kDifferent" UUID="EAF7555B-8A18-4244-BA29-E327E3816057">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 10 nicht importiert in" index="10" id="11" kind="1" Options="0">
+								<FieldReference id="11" name="_s1" UUID="8AB7ADDE-59C3-4F65-BED8-F3D3179B7B28">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 11 nicht importiert in" index="11" id="9" kind="1" Options="0">
+								<FieldReference id="9" name="Command_ID" UUID="07D7CD1F-B2E5-45E5-B10F-D6D95C891591">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 12 nicht importiert in" index="12" id="13" kind="1" Options="0">
+								<FieldReference id="13" name="_kIsEnglish" UUID="692265C8-5EFD-43D4-86DA-78B2A2BB678B">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax" UUID="2A4577E4-4DED-4AD5-8F75-B7C642B8463D"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+						</Field>
+						<CharacterSet name="UTF-8" value="5"></CharacterSet>
+						<action name="Aktualisieren" value="2"></action>
+					</ImportField>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

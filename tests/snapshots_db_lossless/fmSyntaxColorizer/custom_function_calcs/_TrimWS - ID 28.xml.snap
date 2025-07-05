@@ -1,0 +1,71 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="28" name="_TrimWS" UUID="E13E2128-3895-4935-A36B-C785C236BA1E"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[/* _TrimWS( pText )Removes all white space* from the ends of the string. * Currently only white space with UTF <= U+00A0.20130924 MrW: Version 1.0 */SetzeVar(  [    vText = Austauschen( pText; [ " "; "" ]; [ Char(9) /* TAB */; "" ]; [ Char(10) /* LF */; "" ]; [ Char(11) /* VT */; "" ]; [ Char(12) /* FF */; "" ]; [ "¶"; "" ]; [ Char( 133 ) /* NEL next-line */; "" ]; [ Char( 160 ) /* no-break-space */; "" ] );    vPosFirstChar = Position( pText ; ZeichenLinks( vText; 1 ) ; 1 ; 1 );    vPosLastChar = Position( pText ; ZeichenRechts( vText; 1 ) ; Länge( pText ) ; -1 )  ];    Falls( vPosFirstChar > 0 ; ZeichenMitte( pText ; vPosFirstChar ; vPosLastChar - vPosFirstChar + 1 ) ))]]></Text>
+		<ChunkList hash="7E2B30121580F9BE60EDD88F5645208B">
+			<Chunk type="NoRef">/* _TrimWS( pText )&#13;&#13;Removes all white space* from the ends of the string. &#13;&#13;* Currently only white space with UTF &lt;= U+00A0.&#13;&#13;20130924 MrW: Version 1.0 &#13;*/&#13;&#13;</Chunk>
+			<Chunk type="FunctionRef">SetzeVar</Chunk>
+			<Chunk type="NoRef">(&#13;  [&#13;    </Chunk>
+			<Chunk type="VariableReference">vText</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Austauschen</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef">; [ &quot; &quot;; &quot;&quot; ]; [ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">(9) /* TAB */; &quot;&quot; ]; [ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">(10) /* LF */; &quot;&quot; ]; [ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">(11) /* VT */; &quot;&quot; ]; [ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">(12) /* FF */; &quot;&quot; ]; [ &quot;¶&quot;; &quot;&quot; ]; [ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 133 ) /* NEL next-line */; &quot;&quot; ]; [ </Chunk>
+			<Chunk type="FunctionRef">Char</Chunk>
+			<Chunk type="NoRef">( 160 ) /* no-break-space */; &quot;&quot; ] );&#13;    </Chunk>
+			<Chunk type="VariableReference">vPosFirstChar</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Position</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vText</Chunk>
+			<Chunk type="NoRef">; 1 ) ; 1 ; 1 );&#13;    </Chunk>
+			<Chunk type="VariableReference">vPosLastChar</Chunk>
+			<Chunk type="NoRef"> = </Chunk>
+			<Chunk type="FunctionRef">Position</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vText</Chunk>
+			<Chunk type="NoRef">; 1 ) ; </Chunk>
+			<Chunk type="FunctionRef">Länge</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ) ; -1 )&#13;  ];&#13;  &#13;  </Chunk>
+			<Chunk type="FunctionRef">Falls</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">vPosFirstChar</Chunk>
+			<Chunk type="NoRef"> &gt; 0 ; </Chunk>
+			<Chunk type="FunctionRef">ZeichenMitte</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="VariableReference">pText</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vPosFirstChar</Chunk>
+			<Chunk type="NoRef"> ; </Chunk>
+			<Chunk type="VariableReference">vPosLastChar</Chunk>
+			<Chunk type="NoRef"> - </Chunk>
+			<Chunk type="VariableReference">vPosFirstChar</Chunk>
+			<Chunk type="NoRef"> + 1 ) )&#13;)</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

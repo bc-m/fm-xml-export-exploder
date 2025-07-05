@@ -1,0 +1,2939 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="72" name="Get Schedule" UUID="B0783260-4419-4CB7-BECC-851AD7F35F2A"></ScriptReference>
+	<ObjectList membercount="153">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>08ED1759-94C9-4271-8565-73EB6AE52B66</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" PURPOSE: Get Schedule"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>FB5A1702-C4F7-4E19-BEF3-C9641FD0F164</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" HISTORY:&#13;   - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  2018-MM-DD by FName LName"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>423F6B98-C626-4E16-B202-576BB09E8A65</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>02420A13-8D44-40B2-B8C1-E1894D881517</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>348269F6-AC7F-4F3E-9AD4-D476C87ED34A</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="141" name="Variable setzen" enable="True">
+			<UUID>ABB7BDA8-FBD7-49A7-BD0F-2930A67100D4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[0]]></Text>
+								<ChunkList hash="9BF55A5D51230A8EA20D4BAA0F468EEC">
+									<Chunk type="NoRef">0</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>06A64F34-8E01-4611-B9DE-37D7AD449E7F</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="68" name="Wenn" enable="True">
+			<UUID>59D52155-6A9F-47FD-ACD6-38D124DDE69C</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( DatensatzÄnderungenAnzahl ) > $$sched.RecordModificationCount]]></Text>
+							<ChunkList hash="5D2DAF56EA81D0802009C74F97226A99">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">DatensatzÄnderungenAnzahl</Chunk>
+								<Chunk type="NoRef"> ) &gt; </Chunk>
+								<Chunk type="VariableReference">$$sched.RecordModificationCount</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>1E316E51-2964-4701-AE77-BFB3D88FB147</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Confirm Action"]]></Text>
+							<ChunkList hash="B327EC9A52B7A9A0B4F52E4749646A93">
+								<Chunk type="NoRef">&quot;Confirm Action&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Reload schedule from server? Any changes made locally will be lost."]]></Text>
+							<ChunkList hash="2FC4B7695513B31AEA01D06E23847381">
+								<Chunk type="NoRef">&quot;Reload schedule from server? Any changes made locally will be lost.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="68" name="Wenn" enable="True">
+			<UUID>F5D028A3-AE2B-4E15-B255-F1DACDABC64B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteMeldungswahl ) = 2]]></Text>
+							<ChunkList hash="FEADCA2DC2561FEF13C93ED425E9D74A">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 2</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>EA7F5CAE-3B9F-463B-81F7-92D2C513FBEB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Wahr]]></Text>
+							<ChunkList hash="B15835F133FF2E27C7CB28117BFAE8F4">
+								<Chunk type="FunctionRef">Wahr</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="70" name="Ende (wenn)" enable="True">
+			<UUID>B1F0EE70-0C96-43C8-A28C-D79A38AD1FD0</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="12" id="70" name="Ende (wenn)" enable="True">
+			<UUID>18BF45B7-76F5-45E9-B95A-D62D5285F284</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>24DD7964-41F1-4EAF-9A36-3BDCEA64FC0D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>97FB05AC-85C9-4772-AF37-C8DB0F68CA45</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="89" name="# (Kommentar)" enable="True">
+			<UUID>689E499A-0945-4875-BAE3-20FAF9B43158</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7E1831C2-EA69-4A1A-AA86-254DD5592310</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" SET-UP"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C70B75B0-A1C2-413B-A956-B87C25C36BC3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="79" name="Fenster fixieren" enable="True">
+			<UUID>4E763F96-4377-4F42-B025-B751D7C1B315</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="19" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>7A259F79-A67B-483A-80C3-3D5A2FCD269E</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="1" name="Admin API" UUID="600ADD5F-9D7D-4DCB-BFA1-A196AB05C0E0"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="1" name="Script ausführen" enable="True">
+			<UUID>025D6DFB-E526-48A0-B235-BE7C2AE3894A</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="35" name="Set Config" UUID="6E806D84-9200-44AE-B032-89A6016326FF"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>FCD311C4-15BA-461B-AC40-3BDFE19D9D3F</UUID>
+			<OwnerID></OwnerID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="22" id="141" name="Variable setzen" enable="True">
+			<UUID>95B2A677-55B2-4FAA-A8AD-C82774F5AE7C</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["/schedules/" & SCH__schedules::id_schedule]]></Text>
+								<ChunkList hash="89B369840B0F0C2DADDB8EB74D66A44F">
+									<Chunk type="NoRef">&quot;/schedules/&quot; &amp; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="10" name="id_schedule" repetition="1" UUID="5EA7FE69-5D49-49E2-B38B-7BEA19AD4456">
+											<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$endpoint"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="141" name="Variable setzen" enable="True">
+			<UUID>1E17AA21-8C85-4414-9CAC-B7FB51B19D7B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[" --request GET" &" --header \"Authorization: Bearer " & $$my.token & "\"" &" --header \"Content-Type: application/json\"" &" --dump-header $$my.headers"]]></Text>
+								<ChunkList hash="73E91CCB3C96E1EE23F539872E85DAF1">
+									<Chunk type="NoRef">&quot; --request GET&quot; &amp;&#13;&quot; --header \&quot;Authorization: Bearer &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$$my.token</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;\&quot;&quot; &amp;&#13;&quot; --header \&quot;Content-Type: application/json\&quot;&quot; &amp;&#13;&quot; --dump-header $$my.headers&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$curloptions"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="24" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2424EDB9-468F-48A4-8F3A-3BF923002191</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F443B9D0-2BEC-459B-BD50-9AA5435128CA</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B02C4757-C1DD-4F76-8A62-6A743C912FD5</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" PROCESS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B10EB3A3-1C16-43E3-914C-6AD925D4C959</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="160" name="Aus URL einfügen" enable="True">
+			<UUID>B638E76D-E1EA-46EC-A69C-55259C8F65BA</UUID>
+			<OwnerID></OwnerID>
+			<Options>20613</Options>
+			<ParameterValues membercount="6">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<Variable value="$$my.result">
+						<repetition value="1"></repetition>
+					</Variable>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$$server & $endpoint]]></Text>
+								<ChunkList hash="9EA92AEF077FA44AE68308694556F8CB">
+									<Chunk type="VariableReference">$$server</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="VariableReference">$endpoint</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$curloptions]]></Text>
+							<ChunkList hash="205B4DA1BAD160DEDA31FE70167BBA78">
+								<Chunk type="VariableReference">$curloptions</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="1" name="Script ausführen" enable="True">
+			<UUID>6861A7B9-1F75-4CC8-91A4-C95A11F52C63</UUID>
+			<OwnerID></OwnerID>
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="31" name="Handle response" UUID="44FA18ED-6DEA-4F32-BDDB-09F438F6D005"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AFEC94D9-C9C2-4C01-B528-71B6EB90DF18</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="68" name="Wenn" enable="True">
+			<UUID>0E6F45EB-A7CD-410B-9B58-194FB6C3024B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( ScriptErgebnis ) = "1"]]></Text>
+							<ChunkList hash="8C6CBCB21CCFFBA5E461DF278EC4FA0D">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">ScriptErgebnis</Chunk>
+								<Chunk type="NoRef"> ) = &quot;1&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AA648A1D-3106-4FBC-9218-D8C9F09DD197</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="parse json response"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="33" id="68" name="Wenn" enable="True">
+			<UUID>ACFE7CCC-9D3A-4DFA-AEA7-D257ABC531ED</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.id" ) )]]></Text>
+							<ChunkList hash="672A248C1E332C9FB75375B123D7E80C">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.id&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="76" name="Feldwert setzen" enable="True">
+			<UUID>C6B9897B-57E0-423A-978E-E548BDC2F136</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="11" name="lastError" UUID="12C3F439-29FA-4CFE-84B2-C789F7D750EF">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.lastError" )]]></Text>
+							<ChunkList hash="8440E530A9204A9ECE0FC55398D54837">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.lastError&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="35" id="76" name="Feldwert setzen" enable="True">
+			<UUID>A52B2B63-5D70-4843-A736-B635AA437D11</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="12" name="name" UUID="E5CFDE02-AF21-4335-B493-F95D321B5C89">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.name" )]]></Text>
+							<ChunkList hash="FD758E790EE53A6326C4CFEF73545A3D">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.name&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="36" id="76" name="Feldwert setzen" enable="True">
+			<UUID>1CA1ED2A-0381-4782-9C05-1C2385BDDC25</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="7" name="enabled" UUID="ED5747D7-A6A9-4D13-87B1-08C4AE85443B">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.enabled" )]]></Text>
+							<ChunkList hash="67AFF2B462FC4B2E09FBB7BB2BA54D26">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.enabled&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="37" id="76" name="Feldwert setzen" enable="True">
+			<UUID>246A10D8-56D0-4E3F-9FB3-82166F4490D5</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="18" name="status" UUID="2DB71FE3-AAE9-469E-895D-FC1E0AF971E9">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.status" )]]></Text>
+							<ChunkList hash="FD7D2CDAA936BC0EB712901F8E5A6D76">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.status&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="38" id="76" name="Feldwert setzen" enable="True">
+			<UUID>64B9B9E4-0B35-4414-9E2F-0F12FCEFC8F8</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="27" name="lastRun" UUID="4B076BC5-490E-4766-9CA7-C208BBB7DEC5">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.lastRun" )]]></Text>
+							<ChunkList hash="B4F90DFC7DE46E81E9A537C2A0641C86">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.lastRun&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="39" id="76" name="Feldwert setzen" enable="True">
+			<UUID>F3E514D2-039D-413E-B570-1214D2BC3F1B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="16" name="sendEmail" UUID="ED6F6B63-89EF-4429-9480-B761CCB215DD">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Falls (   ZeichenLinks ( JSONGetElement ( $$my.result ; "response.schedule.sendEmail" ) ; 1 ) = "?";  "";  IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.sendEmail" ) );  "";  Austauschen ( JSONListValues ( JSONGetElement ( $$my.result ; "response.schedule.sendEmail" ) ; "" ) ; "¶" ; "," ))]]></Text>
+							<ChunkList hash="562079AB1B29E43B4F65EE443E05A3E9">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef"> ( &#13;  </Chunk>
+								<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.sendEmail&quot; ) ; 1 ) = &quot;?&quot;;&#13;  &quot;&quot;;&#13;&#13;  </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.sendEmail&quot; ) );&#13;  &quot;&quot;;&#13;&#13;  </Chunk>
+								<Chunk type="FunctionRef">Austauschen</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONListValues</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.sendEmail&quot; ) ; &quot;&quot; ) ; &quot;¶&quot; ; &quot;,&quot; )&#13;)</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="40" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E423CA0E-9B69-4496-A47A-5144E9315215</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="41" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1FA6C0AD-660D-4098-BE62-4AE859000CF3</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="evaluate the type of script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="42" id="68" name="Wenn" enable="True">
+			<UUID>8E26A6C1-D767-4E63-895E-4D5F03416A8F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.backupType.backupTarget" ) )]]></Text>
+							<ChunkList hash="338BE83FEE4B904EE76D4F95793564B2">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.backupTarget&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="43" id="89" name="# (Kommentar)" enable="True">
+			<UUID>18258BE0-B884-4A06-937F-B923DE11BFDE</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="backupType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="44" id="76" name="Feldwert setzen" enable="True">
+			<UUID>EE5A8470-0329-42E3-8D2A-64185A124F2D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="42" name="Type" UUID="5A3425C1-DF1F-4EEC-9694-A5DD6540993D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Backup"]]></Text>
+							<ChunkList hash="C76C9EEEF7B762976331C1D41C8F497E">
+								<Chunk type="NoRef">&quot;Backup&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="45" id="76" name="Feldwert setzen" enable="True">
+			<UUID>9C3EF3E6-23C8-41DC-8A97-EB294458032D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="29" name="resourceType" UUID="B36AE9EE-03D4-46B5-BB1E-DCFC734E828E">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.backupType.resourceType" )]]></Text>
+							<ChunkList hash="00FED67EB5492C3D34970F66F8118B09">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.resourceType&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="46" id="76" name="Feldwert setzen" enable="True">
+			<UUID>36959F08-A63A-46CA-AA69-407840BF6A02</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="resource" UUID="4DA1D634-A8A0-447C-B85C-947A365A6F55">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.backupType.resource" )]]></Text>
+							<ChunkList hash="11456B7FCE3BC06261F0D01E75AEB10A">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.resource&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="47" id="76" name="Feldwert setzen" enable="True">
+			<UUID>017EACF1-8CD2-480E-808D-729FD96030FD</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="20" name="backupTarget" UUID="AC8545DE-C281-44B7-825E-35FFEEBE7120">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.backupType.backupTarget" )]]></Text>
+							<ChunkList hash="7D26B80BB9B7A55B1FF1045A991EEA4F">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.backupTarget&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="48" id="76" name="Feldwert setzen" enable="True">
+			<UUID>5362A484-9F02-449C-B13C-1125990521C9</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="21" name="clone" UUID="CCB1FC1F-EA5C-477D-8578-3113F113B101">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.backupType.clone" )]]></Text>
+							<ChunkList hash="2F1F447FB13D9FBA4A33512F9A3024FF">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.clone&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="49" id="76" name="Feldwert setzen" enable="True">
+			<UUID>3DC1C6C2-6B14-4D53-B774-57870B41B634</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="23" name="maxBackups" UUID="C8715174-0B0A-4C9A-A815-EA9F4D73EB0A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.backupType.maxBackups" )]]></Text>
+							<ChunkList hash="633EE92029D0CE72CDBC9CB9587109B3">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.maxBackups&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="50" id="76" name="Feldwert setzen" enable="True">
+			<UUID>B175DA56-F69A-43A9-BD8E-3EA7148701EC</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="25" name="verify" UUID="55A7DE9C-4066-432D-92A8-DE4813164EE4">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.backupType.verify" )]]></Text>
+							<ChunkList hash="E6CB980FC13A6B794C9E570ABD675F06">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.backupType.verify&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="51" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4BE5FF03-E303-4F3A-9F29-5B79A0F660F8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="52" id="125" name="Sonst, wenn" enable="True">
+			<UUID>D75CD15C-EC62-464B-9302-A02479FD6FFC</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.resource" ) )]]></Text>
+							<ChunkList hash="AAEA7720A10CB98337750839600880E2">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.resource&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="53" id="89" name="# (Kommentar)" enable="True">
+			<UUID>63FD8DCD-73AC-4205-BAF7-DA9F1FE75259</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="filemakerScriptType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="54" id="76" name="Feldwert setzen" enable="True">
+			<UUID>70AE3BFB-F7E6-47BD-86A8-F988D91E2E19</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="42" name="Type" UUID="5A3425C1-DF1F-4EEC-9694-A5DD6540993D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["FileMaker Script"]]></Text>
+							<ChunkList hash="422718AE2066F5E36D52C7BC1B75C75F">
+								<Chunk type="NoRef">&quot;FileMaker Script&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="55" id="76" name="Feldwert setzen" enable="True">
+			<UUID>863C4327-4357-42B8-8535-05E8057C4256</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="resource" UUID="4DA1D634-A8A0-447C-B85C-947A365A6F55">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.resource" )]]></Text>
+							<ChunkList hash="BE895AAF3D8E23B483943CB0FF7E717C">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.resource&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="56" id="76" name="Feldwert setzen" enable="True">
+			<UUID>31CA4A81-C228-4E65-8F05-34E4898CD081</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="33" name="fmScriptName" UUID="D078A297-10DD-477D-A5C9-7395FAC5C686">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptName" )]]></Text>
+							<ChunkList hash="E5C950A417DEE257E0D40CC8FDE1D018">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.fmScriptName&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="57" id="76" name="Feldwert setzen" enable="True">
+			<UUID>4C5864D5-778E-4846-985E-A051A00B75A0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="34" name="fmScriptParam" UUID="4C997465-3DA7-475C-8B2A-46119E5F9CE7">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptParam" )]]></Text>
+							<ChunkList hash="4CBD8F6F787042D1F2214132BC218003">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.fmScriptParam&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="58" id="76" name="Feldwert setzen" enable="True">
+			<UUID>718C7CC6-86F1-472E-AC83-031AD8FCE29D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="35" name="fmScriptAccount" UUID="FCDF9099-2C88-486C-8E07-DBD70B898F89">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptAccount" )]]></Text>
+							<ChunkList hash="AC486F469AD6F5F80A12DCBB6C0CB1DC">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.fmScriptAccount&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="59" id="76" name="Feldwert setzen" enable="True">
+			<UUID>A93AF030-AE1B-4BFA-87E5-9ED02A0F3B99</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="36" name="fmScriptPassword" UUID="E7A1C487-B67D-4EFA-A7C5-08CE2E553AEA">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.fmScriptPassword" )]]></Text>
+							<ChunkList hash="9B28A15F64398CD29271CFE5B150A2A1">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.fmScriptPassword&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="60" id="76" name="Feldwert setzen" enable="True">
+			<UUID>00FD9893-CC7D-4B06-9FEA-0F975636FF61</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="43" name="autoAbort" UUID="224FE8CD-39E8-4D57-842B-4EC16092226A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.autoAbort" )]]></Text>
+							<ChunkList hash="658B5409D686664237033FCF440ED674">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.autoAbort&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="61" id="76" name="Feldwert setzen" enable="True">
+			<UUID>8D10F791-4B17-440C-AA8D-431903CF7282</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="37" name="timeout" UUID="02DC1D25-E45D-44C0-9EF4-31E026E8BE0D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.filemakerScriptType.timeout" )]]></Text>
+							<ChunkList hash="7392085D52AC2603848853329E530FD9">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.filemakerScriptType.timeout&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="62" id="89" name="# (Kommentar)" enable="True">
+			<UUID>44DBC2D2-9419-4F47-8A36-CDC0E1098C91</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="63" id="125" name="Sonst, wenn" enable="True">
+			<UUID>E7E11C14-3D08-466F-A0D8-D10C24714740</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.messageType.resourceType" ) )]]></Text>
+							<ChunkList hash="C168472B646868F49A463B8909A5BC42">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.messageType.resourceType&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="64" id="89" name="# (Kommentar)" enable="True">
+			<UUID>12E59372-1738-421D-858D-8863A8F55A90</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="messageType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="65" id="76" name="Feldwert setzen" enable="True">
+			<UUID>4485A3EF-E5C9-427F-9B87-FD6D4C97EBC7</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="42" name="Type" UUID="5A3425C1-DF1F-4EEC-9694-A5DD6540993D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Message"]]></Text>
+							<ChunkList hash="C9485CF1D0FAC40956B37FB15B23BB91">
+								<Chunk type="NoRef">&quot;Message&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="66" id="76" name="Feldwert setzen" enable="True">
+			<UUID>0DB8CDE7-FBDF-4497-A84F-A91580C12DCA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="29" name="resourceType" UUID="B36AE9EE-03D4-46B5-BB1E-DCFC734E828E">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.messageType.resourceType" )]]></Text>
+							<ChunkList hash="761870B18AA3C8FAA58EF6E8EEA1A970">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.messageType.resourceType&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="67" id="76" name="Feldwert setzen" enable="True">
+			<UUID>672836F8-20D5-43C4-B301-3EB3B07C8E2A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="32" name="messageText" UUID="02D26702-C91C-4980-A0DF-7EF11701C954">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.messageType.messageText" )]]></Text>
+							<ChunkList hash="414FF32BFDE94AA6C12C4493818CD049">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.messageType.messageText&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="68" id="76" name="Feldwert setzen" enable="True">
+			<UUID>338594D9-F106-4794-BB9D-09A72331AB3C</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="resource" UUID="4DA1D634-A8A0-447C-B85C-947A365A6F55">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.messageType.resource" )]]></Text>
+							<ChunkList hash="3C7EFDB92EDEA9228FC60E96DE05132C">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.messageType.resource&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="69" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0453C894-D706-4AC7-BFD6-C7EE29BED9FA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="70" id="125" name="Sonst, wenn" enable="True">
+			<UUID>F2EED8CE-DAFF-4E17-BE72-A936A05FBB38</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.resource" ) )]]></Text>
+							<ChunkList hash="DE058E28545F636BF4B36BFF4E6C8543">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.resource&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="71" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B65DA904-A890-4CFD-9F4B-1637FE8660FC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="scriptSequenceType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="72" id="76" name="Feldwert setzen" enable="True">
+			<UUID>0F927E5D-ED58-41C0-A9D2-AEFA13888B69</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="42" name="Type" UUID="5A3425C1-DF1F-4EEC-9694-A5DD6540993D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Script Sequence"]]></Text>
+							<ChunkList hash="0AB200B5BAE8AF3D6AD2394C32D9B002">
+								<Chunk type="NoRef">&quot;Script Sequence&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="73" id="76" name="Feldwert setzen" enable="True">
+			<UUID>051BF959-2F6C-46EE-8E67-21C191239BC8</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="resource" UUID="4DA1D634-A8A0-447C-B85C-947A365A6F55">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.resource" )]]></Text>
+							<ChunkList hash="1228AD85F6BE08FBF211EEE762BD96C8">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.resource&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="74" id="76" name="Feldwert setzen" enable="True">
+			<UUID>35B9CEB3-EACE-48F7-AEA6-DE110FE63A9D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="33" name="fmScriptName" UUID="D078A297-10DD-477D-A5C9-7395FAC5C686">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptName" )]]></Text>
+							<ChunkList hash="3CA6CE48A061007651BA10FB8C3405F8">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.fmScriptName&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="75" id="76" name="Feldwert setzen" enable="True">
+			<UUID>4310EC3B-D941-4A75-8EB6-A999BD0B47E4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="34" name="fmScriptParam" UUID="4C997465-3DA7-475C-8B2A-46119E5F9CE7">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptParam" )]]></Text>
+							<ChunkList hash="B356503775126022A4246B5C03082261">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.fmScriptParam&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="76" id="76" name="Feldwert setzen" enable="True">
+			<UUID>A366CC84-0321-41BE-81FB-143C193B5776</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="35" name="fmScriptAccount" UUID="FCDF9099-2C88-486C-8E07-DBD70B898F89">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptAccount" )]]></Text>
+							<ChunkList hash="E6FCA4030C8F556636DA740942CCA7A1">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.fmScriptAccount&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="77" id="76" name="Feldwert setzen" enable="True">
+			<UUID>BE04B287-8E54-4F4B-ACC3-6210E5BFE81C</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="36" name="fmScriptPassword" UUID="E7A1C487-B67D-4EFA-A7C5-08CE2E553AEA">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.fmScriptPassword" )]]></Text>
+							<ChunkList hash="8E1C7A0D003B942626FCFB8610F22686">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.fmScriptPassword&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="78" id="76" name="Feldwert setzen" enable="True">
+			<UUID>690A4A61-0D47-43F7-8EFD-188F5F38A4D5</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="38" name="osScript" UUID="81BE487C-0937-4B52-B90E-AD661EC813B3">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScript" )]]></Text>
+							<ChunkList hash="796011CA2AC37FF5D4203A8676E760E9">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.osScript&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="79" id="76" name="Feldwert setzen" enable="True">
+			<UUID>5C331595-6E42-422A-A3D7-EA979C8C9D37</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="39" name="osScriptParam" UUID="7A5D8CAA-C78D-4D56-9B3B-2B81773CB306">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScriptParam" )]]></Text>
+							<ChunkList hash="BABB1B506C24D68D6DBBACB983D5A193">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.osScriptParam&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="80" id="76" name="Feldwert setzen" enable="True">
+			<UUID>1DF4C5EF-34D6-4DB8-8A6F-51ACEB067A11</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="40" name="osScript2" UUID="717ED8A0-B5B1-441C-8B63-12E39BE2FCFF">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScript2" )]]></Text>
+							<ChunkList hash="8F0FC42ED99BD99B9DF1D591555AD6EF">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.osScript2&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="81" id="76" name="Feldwert setzen" enable="True">
+			<UUID>14A625AA-AFC2-4B77-A4F7-7E60E92435D6</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="41" name="osScriptParam2" UUID="9334874E-167C-4CC6-8BF1-8DAD0FB63DB2">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.osScriptParam2" )]]></Text>
+							<ChunkList hash="C26F6050A83C16FD01204C91AAC53B91">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.osScriptParam2&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="82" id="76" name="Feldwert setzen" enable="True">
+			<UUID>FFFF278B-F9BE-41F4-A34C-B02A93A0BC67</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="46" name="osScriptAccount" UUID="9C31E4D4-0643-4F28-AA8A-513CC9D6A370">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.runOSScriptsAsUser.osScriptAccount" )]]></Text>
+							<ChunkList hash="D0188F20ED406CD72FF4E245E7CBBADB">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.runOSScriptsAsUser.osScriptAccount&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="83" id="76" name="Feldwert setzen" enable="True">
+			<UUID>8ABF7318-3290-4335-87CD-ACC617E125AA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="47" name="osScriptPassword" UUID="D19E1BE9-B139-4B5D-B3B7-8570CF84DF5D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.runOSScriptsAsUser.osScriptPassword" )]]></Text>
+							<ChunkList hash="871EA16EA380889E2C3C4671A7CAD757">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.runOSScriptsAsUser.osScriptPassword&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="84" id="76" name="Feldwert setzen" enable="True">
+			<UUID>F9A07A73-4564-4787-A18D-B2986C6CB6FB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="43" name="autoAbort" UUID="224FE8CD-39E8-4D57-842B-4EC16092226A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.autoAbort" )]]></Text>
+							<ChunkList hash="289CB30716EDDEE47F89562F9ECD92CD">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.autoAbort&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="85" id="76" name="Feldwert setzen" enable="True">
+			<UUID>4CD337EF-94DF-468A-B1FE-BB79C9B1D86A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="37" name="timeout" UUID="02DC1D25-E45D-44C0-9EF4-31E026E8BE0D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.scriptSequenceType.timeout" )]]></Text>
+							<ChunkList hash="0F9420F76D7A78755A99C12E1C8433F3">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.scriptSequenceType.timeout&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="86" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2D8D8247-A8A1-4419-A506-7B5BC277F389</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="87" id="125" name="Sonst, wenn" enable="True">
+			<UUID>98935E40-E7AF-44F1-B3DE-B81E047F15A7</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.verifyType.resource" ) )]]></Text>
+							<ChunkList hash="24C57E4DC52EFF14B34471813902B384">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.verifyType.resource&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="88" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E088B576-5515-4866-813E-4FF57211AB95</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="verifyType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="89" id="76" name="Feldwert setzen" enable="True">
+			<UUID>9F562980-8369-4846-A2E7-38DC66E291FE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="42" name="Type" UUID="5A3425C1-DF1F-4EEC-9694-A5DD6540993D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Verify"]]></Text>
+							<ChunkList hash="082EA6F09396CC972C88AAAD6E886FB2">
+								<Chunk type="NoRef">&quot;Verify&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="90" id="76" name="Feldwert setzen" enable="True">
+			<UUID>F529E3C7-A674-4807-872F-C77D6DBEE58D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="30" name="resource" UUID="4DA1D634-A8A0-447C-B85C-947A365A6F55">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.verifyType.resource" )]]></Text>
+							<ChunkList hash="4BE1B72703B38CDF27F4D2C76506FBC7">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.verifyType.resource&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="91" id="76" name="Feldwert setzen" enable="True">
+			<UUID>51E6679A-9E29-4AB7-9F7F-61ACDA19F39E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="29" name="resourceType" UUID="B36AE9EE-03D4-46B5-BB1E-DCFC734E828E">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.verifyType.resourceType" )]]></Text>
+							<ChunkList hash="C3B16508860932D73577BAC06A085216">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.verifyType.resourceType&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="92" id="76" name="Feldwert setzen" enable="True">
+			<UUID>A2DDFFA0-5392-47DB-9AD5-A9D6ABA186D2</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="32" name="messageText" UUID="02D26702-C91C-4980-A0DF-7EF11701C954">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.verifyType.messageText" )]]></Text>
+							<ChunkList hash="0B6DECABCDE4E19C8F59D47BEA0CD231">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.verifyType.messageText&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="93" id="76" name="Feldwert setzen" enable="True">
+			<UUID>E215833A-A7AC-4599-A0FA-4DD15D2CC6A8</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="45" name="timeDelay" UUID="5DBC6EA3-5172-4160-B15C-2625B0D69A38">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.verifyType.timeDelay" )]]></Text>
+							<ChunkList hash="097F8D9F01314E6765035AEB9E31E827">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.verifyType.timeDelay&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="94" id="89" name="# (Kommentar)" enable="True">
+			<UUID>79350C61-B6B0-49C3-9178-B1A2849AD8C1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="95" id="125" name="Sonst, wenn" enable="True">
+			<UUID>924D0DF3-3F96-422D-A792-64B2033D461F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.osScript" ) )]]></Text>
+							<ChunkList hash="EDFCC9080C7A55FA9DF6B509FDEEFE15">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.osScript&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="96" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BAF0C6FB-E8EC-40A1-A4B7-92E461328A88</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="systemScriptType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="97" id="76" name="Feldwert setzen" enable="True">
+			<UUID>F21222AB-D2CA-42E4-B83C-5394A55A83BA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="42" name="Type" UUID="5A3425C1-DF1F-4EEC-9694-A5DD6540993D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["System Script"]]></Text>
+							<ChunkList hash="C44C511BD12DA59123AE8E1410AA0D0A">
+								<Chunk type="NoRef">&quot;System Script&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="98" id="76" name="Feldwert setzen" enable="True">
+			<UUID>FEDD2DE8-3D8B-4999-9B54-71D7986A8F57</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="43" name="autoAbort" UUID="224FE8CD-39E8-4D57-842B-4EC16092226A">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.autoAbort" )]]></Text>
+							<ChunkList hash="CFB0011C3320ACFFE6044AB3AC702E96">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.autoAbort&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="99" id="76" name="Feldwert setzen" enable="True">
+			<UUID>7A2D50B1-89D0-4086-B067-F4FC603093EA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="38" name="osScript" UUID="81BE487C-0937-4B52-B90E-AD661EC813B3">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.osScript" )]]></Text>
+							<ChunkList hash="5675B572DB5726DB6F37E79008161E74">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.osScript&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="100" id="76" name="Feldwert setzen" enable="True">
+			<UUID>2ED25C64-EC35-4990-B3E1-9103B56FA0F8</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="39" name="osScriptParam" UUID="7A5D8CAA-C78D-4D56-9B3B-2B81773CB306">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.osScriptParam" )]]></Text>
+							<ChunkList hash="07B649AD8AE12A269335902D712E9FD5">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.osScriptParam&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="101" id="76" name="Feldwert setzen" enable="True">
+			<UUID>E74AE869-E33D-4218-B9B5-B1EDBBCA5B6A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="46" name="osScriptAccount" UUID="9C31E4D4-0643-4F28-AA8A-513CC9D6A370">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.runOSScriptsAsUser.osScriptAccount" )]]></Text>
+							<ChunkList hash="2DFD1BCBABA44662D079BCDD4B81910A">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.runOSScriptsAsUser.osScriptAccount&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="102" id="76" name="Feldwert setzen" enable="True">
+			<UUID>57D1A815-381B-48B8-B2CC-DDF975074A11</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="47" name="osScriptPassword" UUID="D19E1BE9-B139-4B5D-B3B7-8570CF84DF5D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.runOSScriptsAsUser.osScriptPassword" )]]></Text>
+							<ChunkList hash="C3E9B4907234C7E5A0167CE9752E8AF5">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.runOSScriptsAsUser.osScriptPassword&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="103" id="76" name="Feldwert setzen" enable="True">
+			<UUID>874604CC-1617-44A3-BEF8-BD3A3C68A442</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="37" name="timeout" UUID="02DC1D25-E45D-44C0-9EF4-31E026E8BE0D">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.systemScriptType.timeout" )]]></Text>
+							<ChunkList hash="73C294A5D0FCE35FCA918D9C8FE9BBEF">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.systemScriptType.timeout&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="104" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5CA5CEFC-4B14-4785-A0A2-1B677EDEF5D3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="105" id="70" name="Ende (wenn)" enable="True">
+			<UUID>D00C0999-3FEE-4EB2-BD2A-53ECF76128C8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="106" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B74CD943-8B06-46CA-9F8A-04AB84A4DDFE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="107" id="89" name="# (Kommentar)" enable="True">
+			<UUID>C1285219-1A23-44DF-8E7E-BCFE5815B482</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="evaluate the repeat type"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="108" id="68" name="Wenn" enable="True">
+			<UUID>65B6871F-3811-463C-9618-5D60581ABB12</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.onceType.startTimeStamp" ) )]]></Text>
+							<ChunkList hash="A7B5F1693217940288DC32045475DE74">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.onceType.startTimeStamp&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="109" id="89" name="# (Kommentar)" enable="True">
+			<UUID>32184FDA-8BFC-4DD9-933D-D822D38E98B4</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="onceType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="110" id="76" name="Feldwert setzen" enable="True">
+			<UUID>033C35D8-7A8D-4B66-8025-DBFA26F0F4A0</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="17" name="startTimeStamp" UUID="FF0EF7C2-48B3-40AA-9497-3BD509A135D3">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.onceType.startTimeStamp" )]]></Text>
+							<ChunkList hash="3B273264A1F380BA420F17486B4ECB29">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.onceType.startTimeStamp&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="111" id="76" name="Feldwert setzen" enable="True">
+			<UUID>3403AEA7-8951-45AE-A2FA-61CD55C6594B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="Repeat" UUID="169D1D45-B86F-48AB-8590-0CBC540C857C">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Once"]]></Text>
+							<ChunkList hash="F914F183E584D397FE088F67C9F093E2">
+								<Chunk type="NoRef">&quot;Once&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="112" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7C423EDF-DD5B-4025-A415-67DF73FCE6D4</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="113" id="125" name="Sonst, wenn" enable="True">
+			<UUID>5668105A-AD87-4318-97CF-2BDCD81BA846</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.weeklyType.startTimeStamp" ) )]]></Text>
+							<ChunkList hash="020F9DA2FBB1B9995F74FE253175FA69">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.startTimeStamp&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="114" id="89" name="# (Kommentar)" enable="True">
+			<UUID>032E891F-5E93-4425-950B-DB905B6EC2C4</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="weeklyType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="115" id="76" name="Feldwert setzen" enable="True">
+			<UUID>6BA906E2-3C1E-445A-BAB2-B413B1B76D50</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="17" name="startTimeStamp" UUID="FF0EF7C2-48B3-40AA-9497-3BD509A135D3">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.weeklyType.startTimeStamp" )]]></Text>
+							<ChunkList hash="A94E5E506B3388E502FC95B90C60ABA6">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.startTimeStamp&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="116" id="76" name="Feldwert setzen" enable="True">
+			<UUID>619B35A7-1942-404E-9623-84C48E07B793</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="3" name="daysOfTheWeek" UUID="E416B5A6-2366-46BB-9C90-BEE64E3C201B">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONListValues ( JSONGetElement ( $$my.result ; "response.schedule.weeklyType.daysOfTheWeek" ) ; "" )]]></Text>
+							<ChunkList hash="961E285DDFBDB0991EB94A66C29FA70A">
+								<Chunk type="FunctionRef">JSONListValues</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.daysOfTheWeek&quot; ) ; &quot;&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="117" id="76" name="Feldwert setzen" enable="True">
+			<UUID>DB6864DB-B610-4B26-9C75-A0B55B12015A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="28" name="endDate" UUID="5456BED7-54A7-42BB-8576-43E358AA1A52">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.weeklyType.endDate" )]]></Text>
+							<ChunkList hash="9296F433EE49AA9906E1BEB239012128">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.endDate&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="118" id="76" name="Feldwert setzen" enable="True">
+			<UUID>A400B6DE-3EC3-481F-808C-A9416D28E1C4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="28" name="endDate" UUID="5456BED7-54A7-42BB-8576-43E358AA1A52">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.weeklyType.endDate" )]]></Text>
+							<ChunkList hash="9296F433EE49AA9906E1BEB239012128">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.endDate&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="119" id="76" name="Feldwert setzen" enable="True">
+			<UUID>7BC7A2ED-A151-48D8-87F8-BA20DA41BDA5</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="14" name="repeatInterval" UUID="38BD37E7-24EA-4ED3-AC5F-A0B4114F0120">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.weeklyType.repeatTask.repeatInterval" )]]></Text>
+							<ChunkList hash="5C46F0ADE02A416A7A3D4FF973640F7E">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.repeatTask.repeatInterval&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="120" id="76" name="Feldwert setzen" enable="True">
+			<UUID>D77D679B-26B3-48EE-89CE-1D6F2C026C57</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="13" name="repeatFrequency" UUID="2CC0CF41-F4F1-4E2E-96B9-BD0812926227">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.weeklyType.repeatTask.repeatFrequency" )]]></Text>
+							<ChunkList hash="99685E69D8511BF9F9D3BB7E1430D0DA">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.repeatTask.repeatFrequency&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="121" id="76" name="Feldwert setzen" enable="True">
+			<UUID>6BC7EA60-EE19-4663-B647-C2A3B8690A52</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="31" name="endTime" UUID="C9E2273B-EB96-45D3-A536-ABAB3522DF5C">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.weeklyType.repeatTask.endTime" )]]></Text>
+							<ChunkList hash="01E6262CEC0BD040191B3DBCE2361922">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.weeklyType.repeatTask.endTime&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="122" id="76" name="Feldwert setzen" enable="True">
+			<UUID>3C759DA0-1CA7-4EEC-AFB1-775DF211909A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="Repeat" UUID="169D1D45-B86F-48AB-8590-0CBC540C857C">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Weekly"]]></Text>
+							<ChunkList hash="16432262425041BA02DD428C584CA315">
+								<Chunk type="NoRef">&quot;Weekly&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="123" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CEA63AED-1A20-49B1-BA5A-281EDAE85D00</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="124" id="125" name="Sonst, wenn" enable="True">
+			<UUID>7222A05A-5B16-478C-B345-328FD975395F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer ( JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.startTimeStamp" ) )]]></Text>
+							<ChunkList hash="832B5D0F471CC21B02891A40865BA8B7">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.startTimeStamp&quot; ) )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="125" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BDCFA847-5553-43B6-910C-351848A97749</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="weeklyType"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="126" id="76" name="Feldwert setzen" enable="True">
+			<UUID>BF7067CB-AC58-4B90-848F-0F6F321003D4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="17" name="startTimeStamp" UUID="FF0EF7C2-48B3-40AA-9497-3BD509A135D3">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.startTimeStamp" )]]></Text>
+							<ChunkList hash="8239B76A95CA4CEC00EC39D11C2F0B40">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.startTimeStamp&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="127" id="76" name="Feldwert setzen" enable="True">
+			<UUID>8020F879-E7D1-49A4-A6B2-A6BFD61B4BBB</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="2" name="dailyDays" UUID="09165AF2-280E-479C-B31A-48564A084676">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.dailyDays" )]]></Text>
+							<ChunkList hash="254C41992E9B427B5A659A4795188F88">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.dailyDays&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="128" id="76" name="Feldwert setzen" enable="True">
+			<UUID>9FE47C7E-D9FF-4A7D-AAB5-3E01303D2F80</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="28" name="endDate" UUID="5456BED7-54A7-42BB-8576-43E358AA1A52">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.endDate" )]]></Text>
+							<ChunkList hash="B831D3150F5B20607083C7ADC9F4140A">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.endDate&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="129" id="76" name="Feldwert setzen" enable="True">
+			<UUID>143DC535-ED0C-4072-AA79-E53A3183E1C2</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="14" name="repeatInterval" UUID="38BD37E7-24EA-4ED3-AC5F-A0B4114F0120">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.repeatTask.repeatInterval" )]]></Text>
+							<ChunkList hash="BF95410574C5EFFD64F521D5402D44D9">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.repeatTask.repeatInterval&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="130" id="76" name="Feldwert setzen" enable="True">
+			<UUID>E77CA1D7-CC92-4066-BF44-7D79F01E6835</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="13" name="repeatFrequency" UUID="2CC0CF41-F4F1-4E2E-96B9-BD0812926227">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.repeatTask.repeatFrequency" )]]></Text>
+							<ChunkList hash="1B19F7F3DF913A6366934AB86A0F2756">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.repeatTask.repeatFrequency&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="131" id="76" name="Feldwert setzen" enable="True">
+			<UUID>CD92D07B-5E1D-4503-90D7-92DEEE0ACDF4</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="31" name="endTime" UUID="C9E2273B-EB96-45D3-A536-ABAB3522DF5C">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONGetElement ( $$my.result ; "response.schedule.everyndaysType.repeatTask.endTime" )]]></Text>
+							<ChunkList hash="425FF9B939FDC7B95CC0D2086CD1213B">
+								<Chunk type="FunctionRef">JSONGetElement</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="VariableReference">$$my.result</Chunk>
+								<Chunk type="NoRef"> ; &quot;response.schedule.everyndaysType.repeatTask.endTime&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="132" id="76" name="Feldwert setzen" enable="True">
+			<UUID>FBD8C02C-7971-4E23-975D-06A0031F1E72</UUID>
+			<OwnerID></OwnerID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="Repeat" UUID="169D1D45-B86F-48AB-8590-0CBC540C857C">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065090" name="SCH__schedules" UUID="3024C5C8-A7CC-4A36-8183-9C7FD817F785"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Every N Days"]]></Text>
+							<ChunkList hash="9A3EE89A737AD0993429DD34BA1CB562">
+								<Chunk type="NoRef">&quot;Every N Days&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="133" id="89" name="# (Kommentar)" enable="True">
+			<UUID>777B7951-1F66-44FE-A3CD-EBCB4F6FC17E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="134" id="70" name="Ende (wenn)" enable="True">
+			<UUID>EC562F6B-7F1D-451A-813D-33FE4B59D3B1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="135" id="89" name="# (Kommentar)" enable="True">
+			<UUID>159A327D-6B46-47C5-BE49-7DBF1D555141</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="136" id="70" name="Ende (wenn)" enable="True">
+			<UUID>821EEA3B-CCF8-4B0F-A955-02D8F98A10FE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="137" id="89" name="# (Kommentar)" enable="True">
+			<UUID>9F47D923-984B-4CC9-9815-EC81B8A89B38</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="138" id="70" name="Ende (wenn)" enable="True">
+			<UUID>087C756E-60FD-43B0-BD81-59307E5DE1AF</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="139" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A65D5BA1-4502-428C-8B67-B32DC33299CD</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="140" id="1" name="Script ausführen" enable="False">
+			<UUID>7F91DD7E-4687-44EC-BA60-86133D27940D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="68" name="Navigation ( json )" UUID="2323A7B3-DD07-4BA6-8896-6567A550376F"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "scheduleType" ; JSONString ])]]></Text>
+								<ChunkList hash="99DCB3B1867A60135368896AE4EE9E5C">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;scheduleType&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="141" id="1" name="Script ausführen" enable="False">
+			<UUID>26B6B3FD-514B-4159-97B4-A7F6978896AA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16448</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="68" name="Navigation ( json )" UUID="2323A7B3-DD07-4BA6-8896-6567A550376F"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( ""  ; [ "param" ; "repeatTask" ; JSONString ])]]></Text>
+								<ChunkList hash="5481309D0820377E4F7EAC520BF4262F">
+									<Chunk type="FunctionRef">JSONSetElement</Chunk>
+									<Chunk type="NoRef"> ( &quot;&quot; &#13; ; [ &quot;param&quot; ; &quot;repeatTask&quot; ; </Chunk>
+									<Chunk type="FunctionRef">JSONString</Chunk>
+									<Chunk type="NoRef"> ]&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="142" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BB55F1D0-86FC-45F2-A283-42091084E2EE</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="143" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3A14ACD5-EFC0-48DB-B51D-E13418F58FAD</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="144" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F80B7775-D17A-4D08-80B0-D51432EA1133</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" CLEAN UP"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="145" id="89" name="# (Kommentar)" enable="True">
+			<UUID>CAE61EC5-E814-45A6-B12A-100E3062BA7F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="-------------------------------------------------------------"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="146" id="68" name="Wenn" enable="True">
+			<UUID>A338D863-1E15-4D4D-8000-4575A74C677F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$error = 0]]></Text>
+							<ChunkList hash="CE3C173E2CD2554CBB236CEE7C56CBB6">
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="147" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BA0DAF67-48DB-4B52-9523-85F49BB4F874</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" set to exit true if you do not need to pass an error"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="148" id="141" name="Variable setzen" enable="True">
+			<UUID>7BB52A3F-89C5-4391-B9CC-09B7EDC51C9F</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[1 // exit true]]></Text>
+								<ChunkList hash="DC134DF247804ECF23193E2024A59A1B">
+									<Chunk type="NoRef">1 // exit true</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="149" id="70" name="Ende (wenn)" enable="True">
+			<UUID>3610C3A7-5C29-4CE6-B5FF-6D60C49A7D69</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="150" id="89" name="# (Kommentar)" enable="True">
+			<UUID>2ED49333-4E5A-4000-8EE0-F96F90329986</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="151" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>34AA1BBF-9529-451B-A772-30B7D660DA61</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$error]]></Text>
+							<ChunkList hash="926F59D0E89012933FB1C2137ABF78F1">
+								<Chunk type="VariableReference">$error</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="152" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7EF75C0D-F374-4C36-ACB9-A75AF584AC37</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

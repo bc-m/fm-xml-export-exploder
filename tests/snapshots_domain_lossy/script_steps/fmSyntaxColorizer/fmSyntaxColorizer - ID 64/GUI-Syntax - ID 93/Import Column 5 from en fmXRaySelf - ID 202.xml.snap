@@ -1,0 +1,115 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="202" name="Import Column 5 from en fmXRaySelf"></ScriptReference>
+	<ObjectList membercount="3">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="35" name="Datensätze importieren" enable="True">
+			<Options>33587360</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="DataSourceReference">
+					<DataSourceReference fileType="FMPR" isPredefined="False" delimiter="1" value="1">
+						<UniversalPathList fileType="FMPR" membercount="1">
+							<ObjectList>
+								<Location><![CDATA[file:../fmWorkMate_dev/fmXRaySelf/fmXRaySelf.fmp12]]></Location>
+							</ObjectList>
+						</UniversalPathList>
+					</DataSourceReference>
+				</Parameter>
+				<Parameter type="ImportField">
+					<ImportField addasnew="True" isPredefined="False" delimiter="0" fieldNameRow="0">
+						<Options copyContainersAsIs="False" matchFieldNames="False" doAutoEntry="True" splitRepetitions="False"></Options>
+						<Target>
+							<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+						</Target>
+						<Field membercount="12">
+							<Map New="False" name="Quellfeld 1 abgleichen mit " id="7" kind="2" Options="0">
+								<FieldReference id="7" name="Command_EN">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 2 nicht importiert in" id="2" kind="1" Options="0">
+								<FieldReference id="2" name="Command">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 3 nicht importiert in" id="3" kind="1" Options="0">
+								<FieldReference id="3" name="Language">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 4 nicht importiert in" id="5" kind="1" Options="0">
+								<FieldReference id="5" name="_kDS">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 5 importieren in " id="12" kind="0" Options="0">
+								<FieldReference id="12" name="Column 5">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 6 nicht importiert in" id="1" kind="1" Options="0">
+								<FieldReference id="1" name="_kSort">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 7 nicht importiert in" id="8" kind="1" Options="0">
+								<FieldReference id="8" name="_k1">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 8 nicht importiert in" id="6" kind="1" Options="2">
+								<FieldReference id="6" name="__ID">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 9 nicht importiert in" id="10" kind="1" Options="0">
+								<FieldReference id="10" name="_kDifferent">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 10 nicht importiert in" id="11" kind="1" Options="0">
+								<FieldReference id="11" name="_s1">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 11 nicht importiert in" id="9" kind="1" Options="0">
+								<FieldReference id="9" name="Command_ID">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 12 nicht importiert in" id="13" kind="1" Options="0">
+								<FieldReference id="13" name="_kIsEnglish">
+									<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+						</Field>
+						<CharacterSet name="UTF-8" value="5"></CharacterSet>
+						<action name="Aktualisieren" value="2"></action>
+					</ImportField>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

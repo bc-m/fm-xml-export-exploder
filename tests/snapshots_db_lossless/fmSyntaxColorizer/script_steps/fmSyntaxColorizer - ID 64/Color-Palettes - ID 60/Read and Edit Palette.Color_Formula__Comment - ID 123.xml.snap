@@ -1,0 +1,341 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="123" name="Read and Edit Palette.Color_Formula::Comment" UUID="E1775495-D5B7-4750-BB74-AB6CAB4BB482"></ScriptReference>
+	<ObjectList membercount="19">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5961B214-8413-4A02-8133-3CEB3EA17D3C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3051A8F3-1BBA-41F8-B3EA-B97249169F44</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20210916 MrW Removed lingering pesky German :D"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>85E11925-0637-4AB6-BD0C-328916D7FDE8</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121102 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6ECA69E0-07CE-4690-BB07-FD14265BC4A7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>E65D1BE8-BB31-4E90-9A77-3B5D101B580A</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>4B9DD461-3FCE-4AD0-9497-1551727D4647</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>8D8A0B4B-4A6A-449B-91F7-421C9475819A</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="71" name="Schleife (Anfang)" enable="True">
+			<UUID>19436614-5D40-4AE7-9873-1978C8224FC7</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Immer" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="68" name="Wenn" enable="True">
+			<UUID>2CD2ECAB-9F04-4918-9FCD-B8F7DE58B5CE</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT IstLeer( Palette.Color_Formula::Comment )]]></Text>
+							<ChunkList hash="A9C2EFAB076888AA0CCA5A6F6CA3373C">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+										<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="89" name="# (Kommentar)" enable="True">
+			<UUID>F6E9EC6D-694D-4CFF-B91B-754B821CECEB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Read"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>683D3B78-65B2-421F-946E-8F0C78E3E73E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Palette.Color_Formula::ColorName]]></Text>
+							<ChunkList hash="404B1615D4545E0823090DD25AE895DA">
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+										<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Austauschen( Palette.Color_Formula::Comment ; "\¶" ; "¶" )]]></Text>
+							<ChunkList hash="FCAE4671916973CB690DB6437C443623">
+								<Chunk type="FunctionRef">Austauschen</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+										<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ; &quot;\¶&quot; ; &quot;¶&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Edit">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="72" name="Verlasse Schleife wenn" enable="True">
+			<UUID>6270A055-2853-4E9D-9E43-BEFD4888BE62</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteMeldungswahl ) = 1]]></Text>
+							<ChunkList hash="8C579970D437A4505D25C8DA36467E6A">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="70" name="Ende (wenn)" enable="True">
+			<UUID>386E596B-6F01-4AD8-ADBC-F6FD025463CC</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0B653BB3-E1AF-42A5-B7FE-8753F3DCDBEC</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Edit"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="141" name="Variable setzen" enable="True">
+			<UUID>061343DE-8FD7-4636-AF8C-39C329F013CD</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Palette.Color_Formula::Comment]]></Text>
+								<ChunkList hash="DAC48E99FB4DE14075911F45F2E0B82C">
+									<Chunk type="FieldRef">
+										<FieldReference id="19" name="Comment" repetition="1" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+											<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$Comment"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>9B652F95-1F68-4E35-AC16-D4D5CDB48F86</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="6">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["\"" & Palette.Color_Formula::ColorName & "\""]]></Text>
+							<ChunkList hash="ECB335246C527CD95C803F4FCB92E1EB">
+								<Chunk type="NoRef">&quot;\&quot;&quot; &amp; </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+										<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;\&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["You may enter a comment to explain what this entry is about."]]></Text>
+							<ChunkList hash="3BF7D0ABDF9253F6BAC3502AB9056A70">
+								<Chunk type="NoRef">&quot;You may enter a comment to explain what this entry is about.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Field1">
+					<Parameter type="Target">
+						<FieldReference id="19" name="Comment" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+							<repetition value="1"></repetition>
+							<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+						</FieldReference>
+					</Parameter>
+					<Boolean type="Passwort" value="False"></Boolean>
+					<Parameter type="Label">
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA["Comment"]]></Text>
+								<ChunkList hash="26B16D9CEE8EB7A643A9BB508F2E0546">
+									<Chunk type="NoRef">&quot;Comment&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="72" name="Verlasse Schleife wenn" enable="True">
+			<UUID>51C83A48-A4BA-4338-9A4B-2EF370C3703A</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer( Palette.Color_Formula::Comment ) ODER Palette.Color_Formula::Comment = $Comment]]></Text>
+							<ChunkList hash="AB6E600F5ACCF726B3B46C84B71F13DD">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+										<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) </Chunk>
+								<Chunk type="FunctionRef">ODER</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="19" name="Comment" repetition="1" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+										<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="VariableReference">$Comment</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="17" id="73" name="Schleife (Ende)" enable="True">
+			<UUID>6DF5F057-1231-4E2E-97F1-0A5F0C60E349</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="18" id="89" name="# (Kommentar)" enable="True">
+			<UUID>10D8E901-4ABF-42F9-B475-753317706030</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

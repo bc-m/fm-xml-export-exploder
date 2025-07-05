@@ -34,7 +34,7 @@ pub fn sanitize(step: &str) -> Option<String> {
         None
     } else {
         match restore {
-            true => Some(format!("{} [ ⚠️ RESTORE ⚠️ ]", name)),
+            true => Some(format!("{name} [ ⚠️ RESTORE ⚠️ ]")),
             false => Some(name),
         }
     }

@@ -1,0 +1,53 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="39">
+	<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">196A45DA-5B6E-4BE8-AF50-CFB64B4BB16A</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065141" name="Syntax.Color_active"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="3">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="10" name="_ID_Palette">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="_ID_Palette">
+					<TableOccurrenceReference id="1065141" name="Syntax.Color_active"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="22" name="_kPaletteType">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="14" name="PaletteType">
+					<TableOccurrenceReference id="1065141" name="Syntax.Color_active"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="28" name="_kColorNameActive">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="2" name="ColorName">
+					<TableOccurrenceReference id="1065141" name="Syntax.Color_active"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

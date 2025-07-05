@@ -1,0 +1,18 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="5" name="_IsKeyALT"></CustomFunctionReference>
+	<Calculation>
+		<Text><![CDATA[Mod( Hole( SonderTastenGedrückt) ; 8*2 )  >= 8]]></Text>
+		<ChunkList hash="7AFB5B8808DF2B7703103C316B30209A">
+			<Chunk type="FunctionRef">Mod</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">Hole</Chunk>
+			<Chunk type="NoRef">( </Chunk>
+			<Chunk type="FunctionRef">SonderTastenGedrückt</Chunk>
+			<Chunk type="NoRef">) ; 8*2 )  &gt;= 8</Chunk>
+		</ChunkList>
+	</Calculation>
+</CustomFunctionCalc>

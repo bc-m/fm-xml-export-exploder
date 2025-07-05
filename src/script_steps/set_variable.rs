@@ -45,11 +45,10 @@ pub fn sanitize(step: &str) -> Option<String> {
     if name.is_empty() {
         None
     } else if repetition.is_empty() {
-        Some(format!("{} [ {} ; {} ]", name, variable_name, value))
+        Some(format!("{name} [ {variable_name} ; {value} ]"))
     } else {
         Some(format!(
-            "{} [ {}[{}] ; {} ]",
-            name, variable_name, repetition, value
+            "{name} [ {variable_name}[{repetition}] ; {value} ]"
         ))
     }
 }

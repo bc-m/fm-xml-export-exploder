@@ -1,0 +1,53 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Get Server Status
+#  HISTORY:
+     - Created:   2018-05-09 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2019-04-23 by Mike Duncan, update to v2 admin api
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+// Script ausführen [ Aus Liste ; "Set Config FMDAPI" ]
+Variable setzen [ $$server ; "https://" & FMS__fmserver::server_address & "/fmi/data/vLatest" ]
+Variable setzen [ $endpoint ; "/databases" ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+
+Variable setzen [ $my.response ; Austauschen ( HoleWert ( $$my.headers ; 1 ) ; "HTTP/1.1 " ; "" ) ]
+Wenn [ $my.response = "200 OK" ]
+	# parse json response
+	Feldwert setzen [ FMS__fmserver::dapi_databases ; "" ]
+	Variable setzen [ $json ; $$my.result ]
+	Variable setzen [ $count ; 0 ]
+	Schleife (Anfang) [ Flush: Immer ]
+		Feldwert setzen [ FMS__fmserver::dapi_databases ; Falls ( NICHT IstLeer ( FMS__fmserver::dapi_databases ); FMS__fmserver::dapi_databases & "¶"  )
+						&
+						JSONGetElement ( $json ; "response.databases[" & $count & "].name" ) ]
+		Variable setzen [ $count ; $count + 1 ]
+		Verlasse Schleife wenn [ IstLeer ( JSONGetElement ( $json ; "response.databases[" & $count & "].name" ) ) ]
+	Schleife (Ende)
+	Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

@@ -1,0 +1,26 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomMenu name="[Objekt]" id="21">
+	<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">16690827-E8DF-42AE-849F-4503F32AC2A8</UUID>
+	<MenuItemList membercount="0"></MenuItemList>
+	<Conditions>
+		<Install>
+			<Calculation><![CDATA[Wenn( Abs(Hole( SystemPlattform )) = 2; 1; 0 )]]></Calculation>
+			<ChunkList hash="E62B4F55AE0CC9EF21640EC028CAB70F">
+				<Chunk type="FunctionRef">Wenn</Chunk>
+				<Chunk type="NoRef">( </Chunk>
+				<Chunk type="FunctionRef">Abs</Chunk>
+				<Chunk type="NoRef">(</Chunk>
+				<Chunk type="FunctionRef">Hole</Chunk>
+				<Chunk type="NoRef">( </Chunk>
+				<Chunk type="FunctionRef">SystemPlattform</Chunk>
+				<Chunk type="NoRef"> )) = 2; 1; 0 )</Chunk>
+			</ChunkList>
+		</Install>
+	</Conditions>
+	<Comment></Comment>
+	<Base name="Objekt" value="25"></Base>
+	<Options browseMode="True" findMode="True" previewMode="True"></Options>
+</CustomMenu>

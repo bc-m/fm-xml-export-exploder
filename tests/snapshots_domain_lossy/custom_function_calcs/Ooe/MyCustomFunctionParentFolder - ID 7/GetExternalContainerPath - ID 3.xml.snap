@@ -1,0 +1,11 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunctionCalc>
+	<CustomFunctionReference id="3" name="GetExternalContainerPath"></CustomFunctionReference>
+	<Calculation>
+		<DDRREF kind="ChunkList" hash="28B84303919EA2DDDD1C0D631980D04A">_DA97387F-1407-48F2-B7C1-0DED6CF007EF</DDRREF>
+		<Text><![CDATA[// Purpose:// Utility function used to fragment external container storage into multiple subfolders based on record creation date// History:// 10/2/19 Mislav: Created custom function.// Notes:// Use this custom function in Field options > Storage > Container > Open storage// Do NOT use Self for the table and/or field name CF parameters. The external storage calculation doesn't seem to reference Self correctly.Let ( 	_date = If ( 		IsEmpty ( creationDate ) ; 		"0000-00" ; 		Let ( 			_date = GetAsDate ( creationDate ) ; 			Year ( _date ) & "-" & Right ( 0 & Month ( _date ) ; 2 ) 		)	) ; 	tableName & "/" & fieldName & "/" & _date & "/")]]></Text>
+	</Calculation>
+</CustomFunctionCalc>

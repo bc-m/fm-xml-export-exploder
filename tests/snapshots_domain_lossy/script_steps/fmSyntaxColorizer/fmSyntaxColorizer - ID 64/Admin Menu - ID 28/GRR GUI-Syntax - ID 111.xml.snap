@@ -1,0 +1,125 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="111" name="GRR GUI-Syntax"></ScriptReference>
+	<ObjectList membercount="14">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20140423 MrW  Corrected"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20120706 MrW "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="74" name="Gehe zu Bezugsdatensatz" enable="True">
+			<Options>33554440</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Related">
+					<TableOccurrenceReference id="1065117" name="Syntax.GUISyntax"></TableOccurrenceReference>
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="7" name="GUISyntax"></LayoutReference>
+					</LayoutReferenceContainer>
+					<Animation name="Ohne" value="0"></Animation>
+					<Options ShowRelated="True"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[NICHT _IsLayoutTableName( _GUISyntax::__ID )]]></Text>
+							<ChunkList hash="3F1F7C201D2AD4749271EFB21A740264">
+								<Chunk type="FunctionRef">NICHT</Chunk>
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="CustomFunctionRef">_IsLayoutTableName</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="6" name="__ID" repetition="1">
+										<TableOccurrenceReference id="1065114" name="_GUISyntax"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="7" name="GUISyntax"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="23" name="Alle Datensätze anzeigen" enable="True">
+		</Step>
+		<Step id="27" name="Nur Ausgeschlossene anzeigen" enable="True">
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

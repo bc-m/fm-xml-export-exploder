@@ -1,0 +1,176 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="224" name="Show Current Palette"></ScriptReference>
+	<ObjectList membercount="20">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20200528 MrW"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="55" name="Blätternmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="6" name="Gehe zu Layout" enable="True">
+			<Options>10</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="8" name="Palettes"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="30" name="Datensätze zeigen als" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Als Formular anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Find active palette"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="22" name="Suchenmodus aktivieren" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="10" name="_kIsActivePalette">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[1]]></Text>
+							<ChunkList hash="A93F17BC54CA1958073B692697D5ED21">
+								<Chunk type="NoRef">1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="28" name="Ergebnismenge suchen" enable="True">
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( AnzahlGefundeneDatensätze ) = 0]]></Text>
+							<ChunkList hash="E29DBC6914FAA8A724AE7C0480F7F1D7">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="23" name="Alle Datensätze anzeigen" enable="True">
+		</Step>
+		<Step id="16" name="Gehe zu Datens./Abfrage/Seite" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Records">
+					<List name="Erste(r)" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="1" name="Script ausführen" enable="True">
+			<Options>64</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="List">
+					<List name="Aus Liste" value="1">
+						<ScriptReference id="40" name="All"></ScriptReference>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter></Parameter>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="30" name="Datensätze zeigen als" enable="True">
+			<Options>2</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="List">
+					<List name="Als Formular anzeigen" value="1"></List>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

@@ -1,0 +1,1586 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="178" name="Generate SSH Keys"></ScriptReference>
+	<ObjectList membercount="92">
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" PURPOSE: Generate SSH keys"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value=" HISTORY:&#13;   - Created:   2023-01-23 by Mike Duncan (mduncan@soliantconsulting.com)&#13;   - Modified:  "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="check name"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IstLeer ( PUB__publickeys::name )]]></Text>
+							<ChunkList hash="D5985E6382627AE3C6568B4B617259CA">
+								<Chunk type="FunctionRef">IstLeer</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="8" name="name" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Alert"]]></Text>
+							<ChunkList hash="A7C4DFE9F6C28272D4CE32E101DE7174">
+								<Chunk type="NoRef">&quot;Alert&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Enter a name for this key."]]></Text>
+							<ChunkList hash="FA09EE2B8F287CC1065EB4DAAE472E23">
+								<Chunk type="NoRef">&quot;Enter a name for this key.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[ Wahr]]></Text>
+							<ChunkList hash="C0EC5F4A1162B7DB676B2D6FED7B9E8A">
+								<Chunk type="NoRef"> </Chunk>
+								<Chunk type="FunctionRef">Wahr</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Abs ( Hole ( SystemPlattform ) ) = "1"]]></Text>
+							<ChunkList hash="4158364AC332A1E305DC40FD5B88AC7A">
+								<Chunk type="FunctionRef">Abs</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">SystemPlattform</Chunk>
+								<Chunk type="NoRef"> ) ) = &quot;1&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="mac"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="set vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[SetzeVar ([  my.docpath = Hole ( DokumentenPfad );  my.docpathright = ZeichenRechts ( my.docpath ; Länge ( my.docpath ) - 1 );  my.array = Austauschen ( my.docpathright ; "/" ; "¶" );  my.first = HoleWert ( my.array ; 1 );  Dn = Hole ( SystemDatum ) ;  date_string = Jahreszahl(Dn)*10^4 + MonatZahl(Dn)*100 + KalendertagZahl(Dn) ;  Hr = Hole ( SystemUhrzeit ) ;  time_string = Stunden ( Hr )*10^4 + Minuten( Hr )*100 + Sekunden( Hr );  my.path = Austauschen ( my.docpathright ; my.first ; "" ) & "d" & date_string & "t" & time_string & "_";  my.end = "" ];my.path )]]></Text>
+								<ChunkList hash="02F902D2B7302B29F297921B2842E2A7">
+									<Chunk type="FunctionRef">SetzeVar</Chunk>
+									<Chunk type="NoRef"> ([&#13;  </Chunk>
+									<Chunk type="VariableReference">my.docpath</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">DokumentenPfad</Chunk>
+									<Chunk type="NoRef"> );&#13;  </Chunk>
+									<Chunk type="VariableReference">my.docpathright</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.docpath</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Länge</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.docpath</Chunk>
+									<Chunk type="NoRef"> ) - 1 );&#13;  </Chunk>
+									<Chunk type="VariableReference">my.array</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Austauschen</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.docpathright</Chunk>
+									<Chunk type="NoRef"> ; &quot;/&quot; ; &quot;¶&quot; );&#13;  </Chunk>
+									<Chunk type="VariableReference">my.first</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">HoleWert</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.array</Chunk>
+									<Chunk type="NoRef"> ; 1 );&#13;  </Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">SystemDatum</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;  </Chunk>
+									<Chunk type="VariableReference">date_string</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Jahreszahl</Chunk>
+									<Chunk type="NoRef">(</Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef">)*10^4 + </Chunk>
+									<Chunk type="FunctionRef">MonatZahl</Chunk>
+									<Chunk type="NoRef">(</Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef">)*100 + </Chunk>
+									<Chunk type="FunctionRef">KalendertagZahl</Chunk>
+									<Chunk type="NoRef">(</Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef">) ;&#13;  </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">SystemUhrzeit</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;  </Chunk>
+									<Chunk type="VariableReference">time_string</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Stunden</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> )*10^4 + </Chunk>
+									<Chunk type="FunctionRef">Minuten</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> )*100 + </Chunk>
+									<Chunk type="FunctionRef">Sekunden</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> );&#13;&#13;  </Chunk>
+									<Chunk type="VariableReference">my.path</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Austauschen</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.docpathright</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="VariableReference">my.first</Chunk>
+									<Chunk type="NoRef"> ; &quot;&quot; ) &amp; &quot;d&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">date_string</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;t&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">time_string</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;_&quot;;&#13;  </Chunk>
+									<Chunk type="VariableReference">my.end</Chunk>
+									<Chunk type="NoRef"> = &quot;&quot;&#13; ];&#13;&#13;</Chunk>
+									<Chunk type="VariableReference">my.path</Chunk>
+									<Chunk type="NoRef"> &#13;&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.path"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$this.path & PUB__publickeys::name]]></Text>
+								<ChunkList hash="2BFFCD9F666F57A2B2C78B527DAA587D">
+									<Chunk type="VariableReference">$this.path</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="8" name="name" repetition="1">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.file"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="generate keys"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["do shell script \"" & "ssh-keygen -t rsa -b 4096 -m PEM -f " & $this.file & ".key -N " & "\\\"\\\"" & "\""]]></Text>
+								<ChunkList hash="8B5F85136AE85ED00B6B5918DB91E68F">
+									<Chunk type="NoRef">&quot;do shell script \&quot;&quot; &amp; &quot;ssh-keygen -t rsa -b 4096 -m PEM -f &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key -N &quot; &amp; &quot;\\\&quot;\\\&quot;&quot; &amp; &quot;\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.applescript"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="67" name="AppleScript ausführen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Calculation">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$my.applescript]]></Text>
+								<ChunkList hash="112D8EDA2A8125ED1CF87F35FA11D89E">
+									<Chunk type="VariableReference">$my.applescript</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["do shell script \"" & "openssl rsa -in " & $this.file & ".key -pubout -outform PEM -out " & $this.file & ".key.pem\""]]></Text>
+								<ChunkList hash="B4DD23D7379822F77B9DEB5ECD47164F">
+									<Chunk type="NoRef">&quot;do shell script \&quot;&quot; &amp; &quot;openssl rsa -in &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key -pubout -outform PEM -out &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pem\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.applescript"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="67" name="AppleScript ausführen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Calculation">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$my.applescript]]></Text>
+								<ChunkList hash="112D8EDA2A8125ED1CF87F35FA11D89E">
+									<Chunk type="VariableReference">$my.applescript</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="62" name="Scriptpause setzen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Dauer (Sekunden): ">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[.5]]></Text>
+								<ChunkList hash="77B768B4B30FB5F908F56AF11742AC5A">
+									<Chunk type="VariableReference">.5</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteFehlerNr ) = 0]]></Text>
+							<ChunkList hash="54FC8B91DE327952E1E920710D4432A7">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="get files"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["file://" & $this.file & ".key"]]></Text>
+								<ChunkList hash="48E42564E437051ECB2C8963402DCBBD">
+									<Chunk type="NoRef">&quot;file://&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.url"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="160" name="Aus URL einfügen" enable="True">
+			<Options>20865</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="14" name="privateKey_r">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="False">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$this.url]]></Text>
+								<ChunkList hash="40717649757E4E12FDD2F736F334B9D5">
+									<Chunk type="VariableReference">$this.url</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["file://" & $this.file & ".key.pem"]]></Text>
+								<ChunkList hash="B698A5763DBB53D99A3BBD86FA8D9368">
+									<Chunk type="NoRef">&quot;file://&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pem&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.url"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="160" name="Aus URL einfügen" enable="True">
+			<Options>20865</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="15" name="publicKey_r">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="False">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$this.url]]></Text>
+								<ChunkList hash="40717649757E4E12FDD2F736F334B9D5">
+									<Chunk type="VariableReference">$this.url</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="get text from files"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="13" name="privateKey">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[TextDecode ( PUB__publickeys::privateKey_r ; "utf-8" )]]></Text>
+							<ChunkList hash="AF260AD4ED90A6050FA0143117175077">
+								<Chunk type="FunctionRef">TextDecode</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="14" name="privateKey_r" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ; &quot;utf-8&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="9" name="publicKey">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Austauschen (   TextDecode ( PUB__publickeys::publicKey_r ; "utf-8" ) ;  "¶" ;   "" )]]></Text>
+							<ChunkList hash="57567721B7F9C63685074EEF1BECAC7B">
+								<Chunk type="FunctionRef">Austauschen</Chunk>
+								<Chunk type="NoRef"> ( &#13;  </Chunk>
+								<Chunk type="FunctionRef">TextDecode</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="15" name="publicKey_r" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ; &quot;utf-8&quot; ) ;&#13;  &quot;¶&quot; ; &#13;  &quot;&quot; &#13;)</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="do cleanup"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["do shell script \"" & "rm " & $this.file & ".key\""]]></Text>
+								<ChunkList hash="9BE5C582965C49B745C283B75AEFBB1A">
+									<Chunk type="NoRef">&quot;do shell script \&quot;&quot; &amp; &quot;rm &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.applescript"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="67" name="AppleScript ausführen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Calculation">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$my.applescript]]></Text>
+								<ChunkList hash="112D8EDA2A8125ED1CF87F35FA11D89E">
+									<Chunk type="VariableReference">$my.applescript</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["do shell script \"" & "rm " & $this.file & ".key.pub\""]]></Text>
+								<ChunkList hash="0ECFB3779631B712D8D1DDBDC42CB659">
+									<Chunk type="NoRef">&quot;do shell script \&quot;&quot; &amp; &quot;rm &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pub\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.applescript"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="67" name="AppleScript ausführen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Calculation">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$my.applescript]]></Text>
+								<ChunkList hash="112D8EDA2A8125ED1CF87F35FA11D89E">
+									<Chunk type="VariableReference">$my.applescript</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["do shell script \"" & "rm " & $this.file & ".key.pem\""]]></Text>
+								<ChunkList hash="A5D700E6690AF741FC2C5B9C8161539D">
+									<Chunk type="NoRef">&quot;do shell script \&quot;&quot; &amp; &quot;rm &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pem\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.applescript"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="67" name="AppleScript ausführen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Calculation">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$my.applescript]]></Text>
+								<ChunkList hash="112D8EDA2A8125ED1CF87F35FA11D89E">
+									<Chunk type="VariableReference">$my.applescript</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="125" name="Sonst, wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Abs ( Hole ( SystemPlattform ) ) = "2"]]></Text>
+							<ChunkList hash="05266A65E93EB280567854EFCD6B6943">
+								<Chunk type="FunctionRef">Abs</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">SystemPlattform</Chunk>
+								<Chunk type="NoRef"> ) ) = &quot;2&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="win"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="set vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[SetzeVar ([  my.docpath = Hole ( DokumentenPfad );  my.docpathright = ZeichenRechts ( my.docpath ; Länge ( my.docpath ) - 1 );  Dn = Hole ( SystemDatum ) ;  date_string = Jahreszahl(Dn)*10^4 + MonatZahl(Dn)*100 + KalendertagZahl(Dn) ;  Hr = Hole ( SystemUhrzeit ) ;  time_string = Stunden ( Hr )*10^4 + Minuten( Hr )*100 + Sekunden( Hr );  my.path = my.docpathright & "d" & date_string & "t" & time_string & "_";  my.end = "" ];my.path )]]></Text>
+								<ChunkList hash="52ADD577AC65A8261C7ECC73E609E8B9">
+									<Chunk type="FunctionRef">SetzeVar</Chunk>
+									<Chunk type="NoRef"> ([&#13;  </Chunk>
+									<Chunk type="VariableReference">my.docpath</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">DokumentenPfad</Chunk>
+									<Chunk type="NoRef"> );&#13;  </Chunk>
+									<Chunk type="VariableReference">my.docpathright</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.docpath</Chunk>
+									<Chunk type="NoRef"> ; </Chunk>
+									<Chunk type="FunctionRef">Länge</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">my.docpath</Chunk>
+									<Chunk type="NoRef"> ) - 1 );&#13;&#13;  </Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">SystemDatum</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;  </Chunk>
+									<Chunk type="VariableReference">date_string</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Jahreszahl</Chunk>
+									<Chunk type="NoRef">(</Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef">)*10^4 + </Chunk>
+									<Chunk type="FunctionRef">MonatZahl</Chunk>
+									<Chunk type="NoRef">(</Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef">)*100 + </Chunk>
+									<Chunk type="FunctionRef">KalendertagZahl</Chunk>
+									<Chunk type="NoRef">(</Chunk>
+									<Chunk type="VariableReference">Dn</Chunk>
+									<Chunk type="NoRef">) ;&#13;  </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="FunctionRef">SystemUhrzeit</Chunk>
+									<Chunk type="NoRef"> ) ;&#13;  </Chunk>
+									<Chunk type="VariableReference">time_string</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="FunctionRef">Stunden</Chunk>
+									<Chunk type="NoRef"> ( </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> )*10^4 + </Chunk>
+									<Chunk type="FunctionRef">Minuten</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> )*100 + </Chunk>
+									<Chunk type="FunctionRef">Sekunden</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="VariableReference">Hr</Chunk>
+									<Chunk type="NoRef"> );&#13;&#13;  </Chunk>
+									<Chunk type="VariableReference">my.path</Chunk>
+									<Chunk type="NoRef"> = </Chunk>
+									<Chunk type="VariableReference">my.docpathright</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;d&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">date_string</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;t&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">time_string</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;_&quot;;&#13;&#13;  </Chunk>
+									<Chunk type="VariableReference">my.end</Chunk>
+									<Chunk type="NoRef"> = &quot;&quot;&#13; ];&#13;&#13;</Chunk>
+									<Chunk type="VariableReference">my.path</Chunk>
+									<Chunk type="NoRef"> &#13;&#13;)</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.path"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$this.path & PUB__publickeys::name]]></Text>
+								<ChunkList hash="2BFFCD9F666F57A2B2C78B527DAA587D">
+									<Chunk type="VariableReference">$this.path</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="FieldRef">
+										<FieldReference id="8" name="name" repetition="1">
+											<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+										</FieldReference>
+									</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.file"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="generate keys"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["powershell.exe -Command \"ssh-keygen -t rsa -b 4096 -m PEM -f \"" & $this.file & ".key\" -N " & "'\"\"'" & "\""]]></Text>
+								<ChunkList hash="1DF3375B248EC85E8C159AF9737611F7">
+									<Chunk type="NoRef">&quot;powershell.exe -Command \&quot;ssh-keygen -t rsa -b 4096 -m PEM -f \&quot;&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key\&quot; -N &quot; &amp; &quot;&apos;\&quot;\&quot;&apos;&quot; &amp; &quot;\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.powershell"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="57" name="Event senden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter>
+					<Target value=""></Target>
+					<Send name="Dokument öffnen" classString="aevt" idString="odoc" class="1634039412" id="1868853091"></Send>
+					<Source type="Calculation">
+						<Calculation>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$my.powershell]]></Text>
+									<ChunkList hash="0895191D34439E1D2CA3F2E5D71DA875">
+										<Chunk type="VariableReference">$my.powershell</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Calculation>
+					</Source>
+					<Options Foreground="False" Wait="False" Copy="False"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="62" name="Scriptpause setzen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Dauer (Sekunden): ">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[5]]></Text>
+								<ChunkList hash="DB13236966D5269AC0EFDE76C7ED6B37">
+									<Chunk type="NoRef">5</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["powershell.exe -Command \"openssl rsa -in \"" & $this.file & ".key\" -pubout -outform PEM -out " & $this.file & ".key.pem\""]]></Text>
+								<ChunkList hash="F06691C4457EA8FFD4BD3560BD6F267E">
+									<Chunk type="NoRef">&quot;powershell.exe -Command \&quot;openssl rsa -in \&quot;&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key\&quot; -pubout -outform PEM -out &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pem\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.powershell"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="57" name="Event senden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter>
+					<Target value=""></Target>
+					<Send name="Dokument öffnen" classString="aevt" idString="odoc" class="1634039412" id="1868853091"></Send>
+					<Source type="Calculation">
+						<Calculation>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$my.powershell]]></Text>
+									<ChunkList hash="0895191D34439E1D2CA3F2E5D71DA875">
+										<Chunk type="VariableReference">$my.powershell</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Calculation>
+					</Source>
+					<Options Foreground="False" Wait="False" Copy="False"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="62" name="Scriptpause setzen" enable="True">
+			<Options>16386</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Options">
+					<Options type="Dauer (Sekunden): ">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[5]]></Text>
+								<ChunkList hash="DB13236966D5269AC0EFDE76C7ED6B37">
+									<Chunk type="NoRef">5</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="68" name="Wenn" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole ( LetzteFehlerNr ) = 0]]></Text>
+							<ChunkList hash="54FC8B91DE327952E1E920710D4432A7">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+								<Chunk type="NoRef"> ) = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="get files"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["file:///" & $this.file & ".key"]]></Text>
+								<ChunkList hash="41A0DBDA05B6C65DEEC46240EE9B94F1">
+									<Chunk type="NoRef">&quot;file:///&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.url"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="160" name="Aus URL einfügen" enable="True">
+			<Options>20865</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="14" name="privateKey_r">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="False">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$this.url]]></Text>
+								<ChunkList hash="40717649757E4E12FDD2F736F334B9D5">
+									<Chunk type="VariableReference">$this.url</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["file:///" & $this.file & ".key.pem"]]></Text>
+								<ChunkList hash="F7EFC7D31CB9C9C5808160A2AB3D29BE">
+									<Chunk type="NoRef">&quot;file:///&quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pem&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$this.url"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="160" name="Aus URL einfügen" enable="True">
+			<Options>20865</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Auswahl" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="15" name="publicKey_r">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="False">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$this.url]]></Text>
+								<ChunkList hash="40717649757E4E12FDD2F736F334B9D5">
+									<Chunk type="VariableReference">$this.url</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="get text from files"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="13" name="privateKey">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[TextDecode ( PUB__publickeys::privateKey_r ; "utf-8" )]]></Text>
+							<ChunkList hash="AF260AD4ED90A6050FA0143117175077">
+								<Chunk type="FunctionRef">TextDecode</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="14" name="privateKey_r" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ; &quot;utf-8&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="9" name="publicKey">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[TextDecode ( PUB__publickeys::publicKey_r ; "utf-8" )]]></Text>
+							<ChunkList hash="D0B2E94D91B89535E903BA6A3D6897F7">
+								<Chunk type="FunctionRef">TextDecode</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="15" name="publicKey_r" repetition="1">
+										<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ; &quot;utf-8&quot; )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="75" name="Schreibe Änderung Datens./Abfrage" enable="True">
+			<Options>128</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Dateneingabeüberprüfung unterdrücken" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Schreiben erzwingen" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="do cleanup"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["powershell.exe -Command \"Remove-Item " & $this.file & ".key\""]]></Text>
+								<ChunkList hash="F82F431D6F0E5A7D94518C98CBB15416">
+									<Chunk type="NoRef">&quot;powershell.exe -Command \&quot;Remove-Item &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.powershell"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="57" name="Event senden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter>
+					<Target value=""></Target>
+					<Send name="Dokument öffnen" classString="aevt" idString="odoc" class="1634039412" id="1868853091"></Send>
+					<Source type="Calculation">
+						<Calculation>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$my.powershell]]></Text>
+									<ChunkList hash="0895191D34439E1D2CA3F2E5D71DA875">
+										<Chunk type="VariableReference">$my.powershell</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Calculation>
+					</Source>
+					<Options Foreground="False" Wait="False" Copy="False"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["powershell.exe -Command \"Remove-Item " & $this.file & ".key.pub\""]]></Text>
+								<ChunkList hash="53EEC87BE7A8A81A544607F03C56BF1D">
+									<Chunk type="NoRef">&quot;powershell.exe -Command \&quot;Remove-Item &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pub\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.powershell"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="57" name="Event senden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter>
+					<Target value=""></Target>
+					<Send name="Dokument öffnen" classString="aevt" idString="odoc" class="1634039412" id="1868853091"></Send>
+					<Source type="Calculation">
+						<Calculation>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$my.powershell]]></Text>
+									<ChunkList hash="0895191D34439E1D2CA3F2E5D71DA875">
+										<Chunk type="VariableReference">$my.powershell</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Calculation>
+					</Source>
+					<Options Foreground="False" Wait="False" Copy="False"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="141" name="Variable setzen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["powershell.exe -Command \"Remove-Item " & $this.file & ".key.pem\""]]></Text>
+								<ChunkList hash="C9FA32F1A378A04F8F2C9CE960FE8F99">
+									<Chunk type="NoRef">&quot;powershell.exe -Command \&quot;Remove-Item &quot; &amp; </Chunk>
+									<Chunk type="VariableReference">$this.file</Chunk>
+									<Chunk type="NoRef"> &amp; &quot;.key.pem\&quot;&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$my.powershell"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="57" name="Event senden" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter>
+					<Target value=""></Target>
+					<Send name="Dokument öffnen" classString="aevt" idString="odoc" class="1634039412" id="1868853091"></Send>
+					<Source type="Calculation">
+						<Calculation>
+							<Calculation datatype="1" position="0">
+								<Calculation>
+									<Text><![CDATA[$my.powershell]]></Text>
+									<ChunkList hash="0895191D34439E1D2CA3F2E5D71DA875">
+										<Chunk type="VariableReference">$my.powershell</Chunk>
+									</ChunkList>
+								</Calculation>
+							</Calculation>
+						</Calculation>
+					</Source>
+					<Options Foreground="False" Wait="False" Copy="False"></Options>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="69" name="Sonst" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="not supported"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Not Supported"]]></Text>
+							<ChunkList hash="DF05630F81E1BB717013F78767B2E3D8">
+								<Chunk type="NoRef">&quot;Not Supported&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["This platform is not supported"]]></Text>
+							<ChunkList hash="B3340A489DADF233CFBBAB87692DAEEB">
+								<Chunk type="NoRef">&quot;This platform is not supported&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Wahr]]></Text>
+							<ChunkList hash="B15835F133FF2E27C7CB28117BFAE8F4">
+								<Chunk type="FunctionRef">Wahr</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="70" name="Ende (wenn)" enable="True">
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="clear container fields"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="14" name="privateKey_r">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[""]]></Text>
+							<ChunkList hash="26631CDF3EEB0CE74C7FC665903CAC32">
+								<Chunk type="NoRef">&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="76" name="Feldwert setzen" enable="True">
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="15" name="publicKey_r">
+						<repetition value="1"></repetition>
+						<TableOccurrenceReference id="1065117" name="PUB__publickeys"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[""]]></Text>
+							<ChunkList hash="26631CDF3EEB0CE74C7FC665903CAC32">
+								<Chunk type="NoRef">&quot;&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="103" name="Aktuelles Script verlassen" enable="True">
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Wahr]]></Text>
+							<ChunkList hash="B15835F133FF2E27C7CB28117BFAE8F4">
+								<Chunk type="FunctionRef">Wahr</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step id="89" name="# (Kommentar)" enable="True">
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

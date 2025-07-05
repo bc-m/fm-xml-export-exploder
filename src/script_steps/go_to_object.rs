@@ -42,15 +42,14 @@ pub fn sanitize(step: &str) -> Option<String> {
         None
     } else if !calculation.is_empty() && !repetition.is_empty() {
         Some(format!(
-            "{} [ {} ; Repetition: {} ]",
-            name, calculation, repetition
+            "{name} [ {calculation} ; Repetition: {repetition} ]"
         ))
     } else if !calculation.is_empty() {
-        Some(format!("{} [ {} ]", name, calculation))
+        Some(format!("{name} [ {calculation} ]"))
     } else if !repetition.is_empty() {
-        Some(format!("{} [ ; Repetition: {} ]", name, repetition))
+        Some(format!("{name} [ ; Repetition: {repetition} ]"))
     } else {
-        Some(format!("{} []", name))
+        Some(format!("{name} []"))
     }
 }
 

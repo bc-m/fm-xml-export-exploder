@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# 20121101 MrW 
+
+AnwenderAbbruchZulassen setzen [ OFF ]
+Fehleraufzeichnung setzen [ ON ]
+
+Wenn [ Hole( Fenstermodus ) = 1 ]
+	# Find mode
+	Neuer Datensatz/Abfrage
+	
+Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
+	# Not browse mode
+	Aktuelles Script verlassen []
+	
+Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
+	# New Palette => Duplicate Palette
+	Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
+		Suchenmodus aktivieren [ Pause: OFF ]
+		Feldwert setzen [ _Palette::__ID ; 1 ]
+		Ergebnismenge suchen
+	Ende (wenn)
+	Script ausführen [ Aus Liste ; "Duplicate Palette" ]
+	
+Sonst, wenn [ _IsLayoutTableName ( _Home::__ID ) UND Hole ( AnzahlDatensätzeGesamt ) > 0 ]
+	Fehlerton
+	
+Sonst
+	# New Record
+	Neuer Datensatz/Abfrage
+	
+Ende (wenn)

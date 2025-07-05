@@ -1,0 +1,29 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="49">
+	<UUID modifications="2" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">C87CD22A-F8F6-4BD6-84E6-325B307631C9</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065154" name="Syntax.Syntax_CommandStub"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="39" name="_kCommandStub">
+					<TableOccurrenceReference id="1065154" name="Syntax.Syntax_CommandStub"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="39" name="_kCommandStub">
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

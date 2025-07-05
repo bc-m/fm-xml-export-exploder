@@ -1,0 +1,46 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="48">
+	<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">3EEFF1DC-861B-4BE3-901E-1AD53075A267</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+		<SortSpecification value="True" maintain="True">
+			<SortList membercount="2">
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="15" name="Prio">
+							<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="4" name="OptionName">
+							<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+			</SortList>
+		</SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="1">
+		<JoinPredicate type="CartesianProduct">
+			<LeftField>
+				<FieldReference id="5" name="_k1">
+					<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="8" name="_k1">
+					<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+</Relationship>

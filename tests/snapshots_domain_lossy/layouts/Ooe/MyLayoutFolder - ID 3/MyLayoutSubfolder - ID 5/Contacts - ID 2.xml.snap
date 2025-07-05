@@ -1,0 +1,241 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Layout id="2" name="Contacts" width="1024">
+	<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
+	<LayoutThemeReference id="1" name="com.filemaker.theme.custom.A2E1567C_3C83_4902_AE0C_8DF012467D56" Display="Apex Blue" Base="com.filemaker.theme.apex_blue"></LayoutThemeReference>
+	<PartsList membercount="2">
+		<Part type="Top Navigation" kind="12">
+			<Definition type="Top Navigation" kind="12" size="110" absolute="0" Options="0"></Definition>
+		</Part>
+		<Part type="Body" kind="4">
+			<Definition type="Body" kind="4" size="658" absolute="110" Options="0"></Definition>
+			<ObjectList membercount="11">
+				<LayoutObject hash="522868D4D2D968DB05FD565B0A47B4FB" id="1" type="Text" name="" kind="2">
+					<Bounds top="120" left="31" bottom="141" right="127"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[ID_TestTable]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="" displayName=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="BF389D4A98BD571D0742E9E4F6B607FD" id="2" type="Edit Box" name="" kind="1">
+					<Bounds top="114" left="138" bottom="145" right="391"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="7" name="ID_TestTable" repetition="1">
+							<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>32</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>1</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="BC93939ED0013F7CE728B9EDA266C52C" id="3" type="Text" name="" kind="2">
+					<Bounds top="155" left="79" bottom="176" right="127"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[Name]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="" displayName=""><![CDATA[self:normal .self
+{
+	text-align: right;
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="0203EC44E4F767309763896CA99B8C66" id="4" type="Edit Box" name="" kind="1">
+					<Bounds top="149" left="138" bottom="180" right="391"></Bounds>
+					<Options>805306368</Options>
+					<Field>
+						<FieldReference id="6" name="Name" repetition="1">
+							<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
+						</FieldReference>
+						<Options>32</Options>
+						<Display Style="0" show="1"></Display>
+						<Usage inputMode="0" type="1"></Usage>
+					</Field>
+					<ExtendedAttributes>
+						<Formatting>
+							<Graphic>
+								<Options>5</Options>
+							</Graphic>
+							<Time>
+								<Options>143</Options>
+							</Time>
+							<Numeric>
+								<Options>2304</Options>
+								<Style>
+									<Negative>
+										<Color red="221" green="0" blue="0" alpha="1.00"></Color>
+									</Negative>
+								</Style>
+								<DecimalDigits>2</DecimalDigits>
+							</Numeric>
+						</Formatting>
+					</ExtendedAttributes>
+					<Accessibility>
+						<Label>3</Label>
+					</Accessibility>
+				</LayoutObject>
+				<LayoutObject hash="A490B2091F308167963E26BCD72A1072" id="5" type="Button" name="" kind="10">
+					<Bounds top="371" left="138" bottom="399" right="317"></Bounds>
+					<Options>805371912</Options>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Circular Reference]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="16"></IconData>
+						<action>
+							<Options>4</Options>
+							<ScriptReference id="5" name="Circular Reference"></ScriptReference>
+						</action>
+					</Button>
+				</LayoutObject>
+				<LayoutObject hash="AC49B4EDD781DCD7A0751DBC1F71AF1E" id="6" type="Text" name="" kind="2">
+					<Bounds top="343" left="138" bottom="365" right="664"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[It's set up this way, so that we can see how SaXML handles this situation]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="920F0AA7F6FBD960C090F93ACCDC60CB" id="7" type="Text" name="" kind="2">
+					<Bounds top="314" left="138" bottom="336" right="630"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[This script is called from a layout that is also referenced in this script]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="F642AD89DCAA070C1D2A5C8BA852E16E" id="8" type="Button" name="" kind="10">
+					<Bounds top="479" left="138" bottom="525" right="317"></Bounds>
+					<Options>805371912</Options>
+					<Button>
+						<Label>
+							<Text>
+								<Options>2</Options>
+								<StyledText>
+									<Data><![CDATA[Go to this layout (single script step)]]></Data>
+								</StyledText>
+							</Text>
+						</Label>
+						<IconData type="0" size="16"></IconData>
+						<action>
+							<Step hash="0DE82D577D9E70A434D39C50F8D4A16D" id="6" name="Go to Layout" enable="True">
+								<Options>8</Options>
+								<DDRREF kind="StepText" hash="92BDFAF1D2F6AF8AFCD267E488AE3A86">_DE5BF757-03D2-4750-9B78-C693AAEC4DD4</DDRREF>
+								<ParameterValues membercount="2">
+									<Parameter type="LayoutReferenceContainer">
+										<LayoutReferenceContainer value="5">
+											<LayoutReference id="2" name="Contacts"></LayoutReference>
+										</LayoutReferenceContainer>
+									</Parameter>
+									<Parameter type="Animation">
+										<Animation name="None" value="0"></Animation>
+									</Parameter>
+								</ParameterValues>
+							</Step>
+						</action>
+					</Button>
+				</LayoutObject>
+				<LayoutObject hash="C569167F3918F3F7E163F953C1498AC4" id="9" type="Text" name="" kind="2">
+					<Bounds top="610" left="127" bottom="633" right="654"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[This text object is using the MyCustomStyleInApexBlue custom style]]></Data>
+						</StyledText>
+					</Text>
+					<LocalCSS name="FM-413A4E13-09BF-4799-B66D-27BE078F05E7" displayName="MyCustomStyleInApexBlue"><![CDATA[self.FM-413A4E13-09BF-4799-B66D-27BE078F05E7
+{
+}
+]]></LocalCSS>
+				</LayoutObject>
+				<LayoutObject hash="406F41182FD0DDD3AE5B2A901D7C87B6" id="10" type="Text" name="label_test1 Copy2" kind="2">
+					<Bounds top="217" left="127" bottom="239" right="451"></Bounds>
+					<Options>805306368</Options>
+					<Text>
+						<StyledText>
+							<Data><![CDATA[This same image also exists on other layouts]]></Data>
+						</StyledText>
+					</Text>
+				</LayoutObject>
+				<LayoutObject hash="12047B8CC4F04C6527A83F9799475A63" id="11" type="Graphic" name="img_test2 Copy" kind="3">
+					<Bounds top="244" left="127" bottom="264" right="171"></Bounds>
+					<Options>805306368</Options>
+					<Graphic>
+						<Formatting>
+							<Options>3</Options>
+						</Formatting>
+						<BinaryData>
+							<StreamList>
+								<Stream name="MAIN" type="id" size="4">PNGf</Stream>
+								<Stream name="SIZE" type="Hex" size="4">00580028</Stream>
+								<Stream name="PNGf" type="Base64" size="6741">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</Stream>
+								<Stream name="FNAM" type="Hex" size="28">000000010533373B3D3F00102E3F292E7733373B3D3F7768742A343D</Stream>
+								<Stream name="DPI_" type="Hex" size="4">00900090</Stream>
+							</StreamList>
+						</BinaryData>
+					</Graphic>
+				</LayoutObject>
+			</ObjectList>
+		</Part>
+	</PartsList>
+	<UUID modifications="13" userName="Mislav" accountName="admin" timestamp="2025-06-11T17:15:37">106933CF-DEC7-43FD-AB82-68A6CB8D219E</UUID>
+	<GridStyle>
+		<Color red="0.500000" green="0.500000" blue="0.500000" alpha="1.000000"></Color>
+		<Style>5</Style>
+	</GridStyle>
+	<ClientType>0</ClientType>
+	<Options hidden="False">64440436737</Options>
+	<ScriptTriggers membercount="1">
+		<ScriptTrigger id="103" action="OnRecordLoad" browseMode="True">
+			<ScriptReference id="2" name="noop">
+				<Calculation>
+					<DDRREF kind="ChunkList" hash="D41D8CD98F00B204E9800998ECF8427E">_106933CF-DEC7-43FD-AB82-68A6CB8D219E_ScriptTrigger_103</DDRREF>
+				</Calculation>
+			</ScriptReference>
+		</ScriptTrigger>
+	</ScriptTriggers>
+	<MenuSet>
+		<CustomMenuSetReference id="0" name="[File Default]"></CustomMenuSetReference>
+	</MenuSet>
+</Layout>

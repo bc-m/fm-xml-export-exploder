@@ -1,0 +1,234 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="167" name="fm14 functions" UUID="D4E307B1-21DB-4D8C-9E56-764A2310ADF8"></ScriptReference>
+	<ObjectList membercount="4">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E0814952-0C7E-4ED0-921E-D9A9EFBBEACB</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Design function - FieldStyle"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>6CE6C84A-F246-4D8A-BCAE-05687BD6BEC1</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Liste(SetzeVar( vFieldname = HoleFeldname( _Home::_gHomeScreenInfo ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;SetzeVar( vFieldname = HoleFeldname( _Syntax::Command_EN ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;SetzeVar( vFieldname = HoleFeldname( _Syntax::ColorName ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;SetzeVar( vFieldname = HoleFeldname( _Syntax::On ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;SetzeVar( vFieldname = HoleFeldname( _Syntax::_gID_ActivePalette ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;SetzeVar( vFieldname = HoleFeldname( _Syntax::Sort ) ; vFieldname & ": " & Zitat ( FeldLayoutStil ( Hole( DateiName ) ; Hole( LayoutName ) ; vFieldname ) ) ) ;)]]></Text>
+							<ChunkList hash="FBAED74A53488DB150F14E2FA232B7CC">
+								<Chunk type="FunctionRef">Liste</Chunk>
+								<Chunk type="NoRef">(&#13;</Chunk>
+								<Chunk type="FunctionRef">SetzeVar</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="FunctionRef">HoleFeldname</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="_gHomeScreenInfo" repetition="1" UUID="F71E392E-CE5F-41DD-B193-6FE3420A2109">
+										<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">FeldLayoutStil</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LayoutName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> ) ) ) ;&#13;</Chunk>
+								<Chunk type="FunctionRef">SetzeVar</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="FunctionRef">HoleFeldname</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">FeldLayoutStil</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LayoutName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> ) ) ) ;&#13;</Chunk>
+								<Chunk type="FunctionRef">SetzeVar</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="FunctionRef">HoleFeldname</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">FeldLayoutStil</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LayoutName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> ) ) ) ;&#13;</Chunk>
+								<Chunk type="FunctionRef">SetzeVar</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="FunctionRef">HoleFeldname</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="6" name="On" repetition="1" UUID="E291E88D-75CB-4CE9-92E8-C58C91F07F4C">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">FeldLayoutStil</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LayoutName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> ) ) ) ;&#13;</Chunk>
+								<Chunk type="FunctionRef">SetzeVar</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="FunctionRef">HoleFeldname</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">FeldLayoutStil</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LayoutName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> ) ) ) ;&#13;</Chunk>
+								<Chunk type="FunctionRef">SetzeVar</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> = </Chunk>
+								<Chunk type="FunctionRef">HoleFeldname</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FieldRef">
+									<FieldReference id="1" name="Sort" repetition="1" UUID="335B603A-68A6-44A6-B5F1-D3BC0F18A5F0">
+										<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+									</FieldReference>
+								</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> &amp; &quot;: &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">FeldLayoutStil</Chunk>
+								<Chunk type="NoRef"> ( </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">DateiName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LayoutName</Chunk>
+								<Chunk type="NoRef"> ) ; </Chunk>
+								<Chunk type="VariableReference">vFieldname</Chunk>
+								<Chunk type="NoRef"> ) ) ) ;&#13;)</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B5585449-89B1-4538-9C8D-78B979207AF9</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7FB28085-C64A-4BB4-A051-AA0F4DFE319A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="TODO"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

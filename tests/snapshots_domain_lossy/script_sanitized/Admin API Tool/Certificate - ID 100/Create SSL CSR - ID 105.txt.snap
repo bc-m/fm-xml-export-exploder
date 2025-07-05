@@ -1,0 +1,50 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Create SSL CSR
+#  HISTORY:
+     - Created:   2020-01-12 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/server/certificate/csr" ]
+Variable setzen [ $json ; JSONSetElement ( ""
+				 ; [ "subject"; Base64EncodeRFC ( "4648" ; FMS__fmserver::ssl_subject ) ; JSONString ]
+				 ; [ "password"; FMS__fmserver::ssl_password ; JSONString ]
+				) ]
+Variable setzen [ $curloptions ; " --request PATCH" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --data @$json" &
+				" --dump-header $$my.headers" ]
+# set api update variable
+Variable setzen [ $$API.UPDATE ; "1" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Variable setzen [ $my.certpath ; JSONGetElement ( $$my.result ; "response.csrFilePath" ) ]
+Wenn [ NICHT IstLeer ( $my.certpath ) UND ZeichenLinks ( $my.certpath ; 1 ) ≠ "?" ]
+	Eigenes Dialogfeld anzeigen [ Title: "Certificate Request Created" ; Message: "CSR located at " & $my.certpath ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

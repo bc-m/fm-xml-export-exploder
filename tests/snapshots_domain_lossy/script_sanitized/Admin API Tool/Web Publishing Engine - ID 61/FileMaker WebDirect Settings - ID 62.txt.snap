@@ -1,0 +1,44 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+#  PURPOSE: Get ODBC Settings
+#  HISTORY:
+     - Created:   2019-04-23 by Mike Duncan (mduncan@soliantconsulting.com)
+     - Modified:  2019-04-23 by Mike Duncan, update to v2 admin api
+
+AnwenderAbbruchZulassen setzen [ ON ]
+Fehleraufzeichnung setzen [ ON ]
+Variable setzen [ $error ; 0 ]
+
+# -------------------------------------------------------------
+#  SET-UP
+# -------------------------------------------------------------
+Script ausführen [ Aus Liste ; "Set Config" ]
+Variable setzen [ $endpoint ; "/webdirect/config" ]
+Variable setzen [ $curloptions ; " --request GET" &
+				" --header \"Authorization: Bearer " & $$my.token & "\"" &
+				" --header \"Content-Type: application/json\"" &
+				" --dump-header $$my.headers" ]
+
+# -------------------------------------------------------------
+#  PROCESS
+# -------------------------------------------------------------
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Script ausführen [ Aus Liste ; "Handle response" ]
+
+Wenn [ Hole ( ScriptErgebnis ) = "1" ]
+	# parse json response
+	Feldwert setzen [ FMS__fmserver::wpe_enabled ; JSONGetElement ( $$my.result ; "response.enabled" ) ]
+	
+Ende (wenn)
+
+# -------------------------------------------------------------
+#  CLEAN UP
+# -------------------------------------------------------------
+Wenn [ $error = 0 ]
+	#  set to exit true if you do not need to pass an error
+	Variable setzen [ $error ; 1 // exit true ]
+Ende (wenn)
+
+Aktuelles Script verlassen [ $error ]

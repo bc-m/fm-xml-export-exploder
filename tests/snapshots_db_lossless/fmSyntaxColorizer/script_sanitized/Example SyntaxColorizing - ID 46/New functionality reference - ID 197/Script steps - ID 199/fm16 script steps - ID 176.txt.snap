@@ -1,0 +1,48 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+# Changed: TARGET VARIABLE
+Text einfügen [ Select ; Target: $Code ; "A
+				B
+				C" ]
+Berechneten Wert einfügen [ Auswahl: ON ; Target: $UseSetVariable ; "Value" ]
+Systemdatum einfügen [ Auswahl: ON ; Target: $UseSetVariable ]
+Systemuhrzeit einfügen [ Auswahl: ON ; Target: $UseSetVariable ]
+Benutzernamen einfügen [ Auswahl: ON ; Target: $UseSetVariable ]
+Datei einfügen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $FileContents ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $WebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+
+# FYI: *NOT* Changed: 
+Audio/Video einfügen [ Nur Verweis speichern: OFF ]
+Von Gerät einfügen [ Original ]
+Aus Index einfügen [ Auswahl: ON ]
+Aus zuletzt geöffnetem Satz einfügen [ Auswahl: OFF ]
+PDF einfügen [ Nur Verweis speichern: OFF ]
+Bild einfügen [ Nur Verweis speichern: OFF ]
+Ausschneiden [ Auswahl: ON ]
+Kopieren [ Auswahl: ON ]
+Einfügen [ Auswahl: ON ; Ohne Stil: OFF ]
+Löschen [ Auswahl: ON ]
+
+# Changed: cURL Options
+Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "-X PUT" ]
+
+# New Script step:
+Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Major" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Minor" NOT PARSED ⚠️ ]
+Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; ⚠️ PARAMETER "Latitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Longitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Radius" NOT PARSED ⚠️ ]
+
+# Changed: Layout animations
+Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
+Gehe zu Bezugsdatensatz [ Layout: <Originallayout> ]
+Neues Fenster [ Style: Dokument ; Layout: <Originallayout> ]
+
+
+# Changed: New Option: Card Window
+Neues Fenster [ Style: Dokument ; Name: "Simplest" ; Layout: <Originallayout> ; Close: OFF ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+Neues Fenster [ Style: Karte ; Name: "Simplest" ; Layout: <Originallayout> ; Close: OFF ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+Neues Fenster [ Style: Karte ; Name: "Dimmed" ; Layout: <Originallayout> ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+Neues Fenster [ Style: Karte ; Name: "Undiimmed" ; Layout: <Originallayout> ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]
+
+# New functions:
+Variable setzen [ $r ;  ]

@@ -1,0 +1,853 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="142" name="Import Syntax-Tags" UUID="144342C9-2F46-47D7-8EF3-5114859F3EBD"></ScriptReference>
+	<ObjectList membercount="48">
+		<Step index="0" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1D5E9983-4A92-4D83-BC1B-BDAD73446109</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="1" id="89" name="# (Kommentar)" enable="True">
+			<UUID>84205DBB-355E-4E32-BF22-3B320ACB6686</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20131104 MrW Kleine Korrektur"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="2" id="89" name="# (Kommentar)" enable="True">
+			<UUID>63DE80D9-2D9B-47B1-8321-85F483150609</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="20121126 MrW Nice!"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="3" id="89" name="# (Kommentar)" enable="True">
+			<UUID>A5431DC1-7DFC-4ABB-928D-1BBEF28237D3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="4" id="85" name="AnwenderAbbruchZulassen setzen" enable="True">
+			<UUID>31F6589E-272C-40DC-B2E6-482DDA861AE0</UUID>
+			<OwnerID></OwnerID>
+			<Options>65536</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="5" id="86" name="Fehleraufzeichnung setzen" enable="True">
+			<UUID>A1238C3D-D143-461E-AB13-B93D73F7A28A</UUID>
+			<OwnerID></OwnerID>
+			<Options>196608</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="6" id="89" name="# (Kommentar)" enable="True">
+			<UUID>AE34D5BA-C2B0-4518-B75E-FAD7B79DEC6C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="7" id="89" name="# (Kommentar)" enable="True">
+			<UUID>B6B74B78-C192-4489-BA33-BA04D320F16F</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Script settings"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="8" id="141" name="Variable setzen" enable="True">
+			<UUID>396A7011-13B1-4AC7-8667-553379D828CA</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( DesktopPfad )]]></Text>
+								<ChunkList hash="AF56F6DD82F93BA8CAF61ABD29F9DEDB">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">DesktopPfad</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FolderPath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="9" id="141" name="Variable setzen" enable="True">
+			<UUID>2C7EEF1C-D9A6-4798-B589-F723770DAE9E</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["fmSyntaxColorizer-Commands.fp7"]]></Text>
+								<ChunkList hash="CDA7678C509100087B6F1476AC930333">
+									<Chunk type="NoRef">&quot;fmSyntaxColorizer-Commands.fp7&quot;</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FileName"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="10" id="89" name="# (Kommentar)" enable="True">
+			<UUID>096912E6-C081-43B3-8BA3-5A86932150D8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="11" id="89" name="# (Kommentar)" enable="True">
+			<UUID>BFCB1570-ACD6-4E35-8D09-868A6BF7009A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Var"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="12" id="141" name="Variable setzen" enable="True">
+			<UUID>B8A033BD-8873-4143-BB13-D30688F825C3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$FolderPath & $FileName]]></Text>
+								<ChunkList hash="1386CD25493DBBA837F63C5173FEC010">
+									<Chunk type="VariableReference">$FolderPath</Chunk>
+									<Chunk type="NoRef"> &amp; </Chunk>
+									<Chunk type="VariableReference">$FileName</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$FilePath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="13" id="89" name="# (Kommentar)" enable="True">
+			<UUID>00A00F48-47C2-4E69-812E-783E31EBF902</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="14" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6CE987A0-B2AC-42DA-9BE7-392998297073</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="15" id="55" name="Blätternmodus aktivieren" enable="True">
+			<UUID>80149362-45FD-4EED-81BB-3D484DD807DA</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="16" id="79" name="Fenster fixieren" enable="True">
+			<UUID>AD056EF7-4B14-4432-84BA-8D135B86B0BD</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="17" id="89" name="# (Kommentar)" enable="True">
+			<UUID>6D469313-DD38-4986-AB6F-06FF0592C60D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="18" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>AA049BD2-ABF8-4B3F-8FB7-6FA80ABD6FF7</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Do you wish to import syntax-tags from file " & Zitat( $FileName ) & " on the desktop?¶" & "IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten."]]></Text>
+							<ChunkList hash="E9428BDEF9DD75737F1822DEACDA0E7B">
+								<Chunk type="NoRef">&quot;Do you wish to import syntax-tags from file &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$FileName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; on the desktop?¶&quot; &amp; &#13;&quot;IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="Cancel">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Import">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="19" id="68" name="Wenn" enable="True">
+			<UUID>16641300-B1DB-459B-90B2-045D3B4C905B</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( LetzteMeldungswahl ) = 1]]></Text>
+							<ChunkList hash="E4D712690E8A3522DE4F176CDFCB904A">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">LetzteMeldungswahl</Chunk>
+								<Chunk type="NoRef"> ) = 1</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="20" id="89" name="# (Kommentar)" enable="True">
+			<UUID>3FFE7C7B-5254-496F-8FF9-B919C0275955</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Cancel"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="21" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>B68AEB3E-5814-4FE1-BAA4-330006287FF1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="22" id="89" name="# (Kommentar)" enable="True">
+			<UUID>4982057B-41F4-46FA-9AAF-E9C3D6E2DA8A</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="23" id="70" name="Ende (wenn)" enable="True">
+			<UUID>3C1B10FC-F883-468F-8988-EC3E00216FA3</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="24" id="89" name="# (Kommentar)" enable="True">
+			<UUID>ED335DF4-B838-4F02-BBFB-346D2DF2DC88</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="25" id="23" name="Alle Datensätze anzeigen" enable="True">
+			<UUID>A2693022-D76C-4CE4-80FB-074584DE484B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="26" id="89" name="# (Kommentar)" enable="True">
+			<UUID>E2869F5D-C8ED-4015-B161-6501BA25914D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="27" id="89" name="# (Kommentar)" enable="True">
+			<UUID>04EF1A2B-C893-4286-A752-C2B9F3C5F7E8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="28" id="89" name="# (Kommentar)" enable="True">
+			<UUID>7465D5C0-22A0-40B2-BE6F-D39005A62F4C</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Import SyntaxTags(Match + add, with automatic)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="29" id="35" name="Datensätze importieren" enable="True">
+			<UUID>A9F519C4-A5DB-4E88-855D-1F9A8860D019</UUID>
+			<OwnerID></OwnerID>
+			<Options>33587360</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Boolean">
+					<Boolean type="SSL-Zertifikate verifizieren" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="DataSourceReference">
+					<DataSourceReference fileType="FMPR" isPredefined="False" delimiter="1" value="1">
+						<UniversalPathList fileType="FMPR" membercount="1">
+							<ObjectList>
+								<Location><![CDATA[file:$FilePath]]></Location>
+							</ObjectList>
+						</UniversalPathList>
+					</DataSourceReference>
+				</Parameter>
+				<Parameter type="ImportField">
+					<ImportField addasnew="True" isPredefined="False" delimiter="0" fieldNameRow="0">
+						<Options copyContainersAsIs="False" matchFieldNames="False" doAutoEntry="True" splitRepetitions="False"></Options>
+						<Target>
+							<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+						</Target>
+						<Field membercount="29">
+							<Map New="False" name="Quellfeld 1 abgleichen mit " index="1" id="15" kind="2" Options="0">
+								<FieldReference id="15" name="PaletteName" UUID="2506F191-5D9F-4DB2-9E63-1D66ADD0E489">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 2 abgleichen mit " index="2" id="14" kind="2" Options="0">
+								<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 3 abgleichen mit " index="3" id="2" kind="2" Options="0">
+								<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 4 importieren in " index="4" id="5" kind="0" Options="2">
+								<FieldReference id="5" name="ColorInput" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 5 importieren in " index="5" id="19" kind="0" Options="0">
+								<FieldReference id="19" name="Comment" UUID="4848CD9B-FD39-4647-8A30-BA5BCD6F95F7">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 6 importieren in " index="6" id="11" kind="0" Options="0">
+								<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 7 nicht importiert in" index="7" id="7" kind="1" Options="0">
+								<FieldReference id="7" name="_kColorRed" UUID="1EC3AEB7-7EB3-4D92-80E7-06A0A80CF420">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 8 nicht importiert in" index="8" id="8" kind="1" Options="0">
+								<FieldReference id="8" name="_kColorGreen" UUID="4E150CEB-7E95-495D-8876-59A0C066C502">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 9 nicht importiert in" index="9" id="9" kind="1" Options="0">
+								<FieldReference id="9" name="_kColorBlue" UUID="19A7C587-88AE-4514-A2AF-A14A83F86429">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 10 nicht importiert in" index="10" id="10" kind="1" Options="0">
+								<FieldReference id="10" name="_kkFullBlock" UUID="777CBF9C-9987-45A7-B503-3E493ABA6470">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 11 nicht importiert in" index="11" id="4" kind="1" Options="0">
+								<FieldReference id="4" name="_kColorExample" UUID="64D9C4A3-4BF3-4B13-8CA6-F6AAF6141B4A">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 12 nicht importiert in" index="12" id="12" kind="1" Options="0">
+								<FieldReference id="12" name="_kDS" UUID="B4F3388E-70CA-48D6-AA5C-D1564BB8E3B0">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 13 nicht importiert in" index="13" id="13" kind="1" Options="0">
+								<FieldReference id="13" name="_kFormulaChars" UUID="6677530F-4AC8-4224-B619-E4D299521651">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 14 nicht importiert in" index="14" id="6" kind="1" Options="0">
+								<FieldReference id="6" name="_kColorHex" UUID="D61AAB61-B5AB-4C22-9C0F-8BCF3D8538DA">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 15 nicht importiert in" index="15" id="1" kind="1" Options="2">
+								<FieldReference id="1" name="__ID" UUID="8E4231AC-90A6-461C-B7BE-BB8F195B84F0">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 16 nicht importiert in" index="16" id="16" kind="1" Options="0">
+								<FieldReference id="16" name="_kCountSyntaxUsage" UUID="B86FD4CB-70C9-4E40-9B93-1DD57EB3B9A0">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 17 nicht importiert in" index="17" id="17" kind="1" Options="0">
+								<FieldReference id="17" name="_k1" UUID="2C3A58E5-CCDD-4CA7-BFE2-580E67E07CEB">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 18 nicht importiert in" index="18" id="18" kind="1" Options="0">
+								<FieldReference id="18" name="_kCountPaletteUsage" UUID="4827987B-D285-4D6E-AAE9-E87F14D5A31F">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 19 nicht importiert in" index="19" id="3" kind="1" Options="0">
+								<FieldReference id="3" name="_kColorR_G_B" UUID="D67E9827-41A0-4C10-836E-6D7444997922">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 20 nicht importiert in" index="20" id="20" kind="1" Options="0">
+								<FieldReference id="20" name="_kIsColor" UUID="B653B8CE-EF6B-4FBC-817F-14700F5954C2">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 21 nicht importiert in" index="21" id="21" kind="1" Options="0">
+								<FieldReference id="21" name="Selector" UUID="49033225-5125-469E-B029-C81DB3CD0154">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 22 nicht importiert in" index="22" id="22" kind="1" Options="0">
+								<FieldReference id="22" name="_kCountActiveSyntaxUsage" UUID="F2844A1C-5D9C-4579-8967-B8D80B5CA333">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 23 nicht importiert in" index="23" id="23" kind="1" Options="0">
+								<FieldReference id="23" name="Temp" UUID="5335F64B-0ADD-4F3E-B1E8-0B1F8F4C387D">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 24 nicht importiert in" index="24" id="24" kind="1" Options="0">
+								<FieldReference id="24" name="_kGUI_PaletteImportMergeWarning" UUID="7491EA68-F2C5-498F-BEB1-65CDA2BBDBB8">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 25 nicht importiert in" index="25" id="25" kind="1" Options="0">
+								<FieldReference id="25" name="_kColorRGB" UUID="9A78DE3F-088F-4AD1-9EF4-7B48E554590F">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 26 nicht importiert in" index="26" id="26" kind="1" Options="0">
+								<FieldReference id="26" name="_kIsPaletteSpecificColor" UUID="2BFD2EE4-41A2-4D28-8684-691D1F07CF03">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 27 nicht importiert in" index="27" id="27" kind="1" Options="0">
+								<FieldReference id="27" name="_kHasSpecificSyntax" UUID="D3560715-27F0-4363-96A9-C93EB327C7EE">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 28 nicht importiert in" index="28" id="28" kind="1" Options="0">
+								<FieldReference id="28" name="_kCommand_EN" UUID="FA7D50B4-9D05-49BD-BFEE-FE64B81B7996">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+							<Map New="False" name="Quellfeld 29 nicht importiert in" index="29" id="29" kind="1" Options="0">
+								<FieldReference id="29" name="_kPaletteName" UUID="8CA8B2A8-605C-4525-899E-D63C060F54BC">
+									<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+								</FieldReference>
+							</Map>
+						</Field>
+						<CharacterSet name="Mac Roman" value="2"></CharacterSet>
+						<action name="Aktualisieren" value="2"></action>
+					</ImportField>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="30" id="141" name="Variable setzen" enable="True">
+			<UUID>69F20CE7-DA50-452F-A0D1-FDD6C671D0A6</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( LetzteFehlerNr )]]></Text>
+								<ChunkList hash="16999957E05D9809F9F88FA70C794553">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">LetzteFehlerNr</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$error"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="31" id="68" name="Wenn" enable="True">
+			<UUID>5ABFEB83-F2B5-4407-A275-F5FC050C4AA3</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$error]]></Text>
+							<ChunkList hash="926F59D0E89012933FB1C2137ABF78F1">
+								<Chunk type="VariableReference">$error</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="32" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>7EF4D2FA-BFBE-4074-8529-B1163EBD2DC1</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="33" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>17DB6EA4-2D2F-4A94-890B-F4812CF1CC04</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls($error = 100 ; "File missing! Please first place file " & Zitat( $FileName ) & " on the desktop!" ;"Error " & $error & " during the import.")]]></Text>
+							<ChunkList hash="ED0543B89FA15046ED35C44F106435BF">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef">(&#13;</Chunk>
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> = 100 ; &quot;File missing! Please first place file &quot; &amp; </Chunk>
+								<Chunk type="FunctionRef">Zitat</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$FileName</Chunk>
+								<Chunk type="NoRef"> ) &amp; &quot; on the desktop!&quot; ;&#13;&quot;Error &quot; &amp; </Chunk>
+								<Chunk type="VariableReference">$error</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; during the import.&quot;&#13;)</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="34" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>F03527CA-2E93-494B-91F5-37BD1CCBF19C</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="35" id="89" name="# (Kommentar)" enable="True">
+			<UUID>1D3F0A3C-D535-49DA-A8CD-A141AE1AE62E</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="36" id="70" name="Ende (wenn)" enable="True">
+			<UUID>AEA5B562-B997-482E-B54E-A8699FF82D9D</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="37" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5F00744D-D4F8-4DAC-9DBA-5F4CC532A271</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="38" id="141" name="Variable setzen" enable="True">
+			<UUID>E17C0FFF-F94D-4B1E-9CEE-70AE9A844C07</UUID>
+			<OwnerID></OwnerID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Hole( AnzahlGefundeneDatensätze )]]></Text>
+								<ChunkList hash="13CC8C1C176B732BA9A23A2B6F64C48C">
+									<Chunk type="FunctionRef">Hole</Chunk>
+									<Chunk type="NoRef">( </Chunk>
+									<Chunk type="FunctionRef">AnzahlGefundeneDatensätze</Chunk>
+									<Chunk type="NoRef"> )</Chunk>
+								</ChunkList>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$n"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="39" id="68" name="Wenn" enable="True">
+			<UUID>DD7AEE5F-E3DA-45A0-A7FB-6B4D65DEA60D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$n = 0]]></Text>
+							<ChunkList hash="4B8C6EB74D3E76E993D67038723B7FA2">
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> = 0</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="40" id="6" name="Gehe zu Layout" enable="True">
+			<UUID>DB663B75-08C4-4773-9284-773CFE22989B</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="1">
+						<Label>Originallayout</Label>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="Ohne" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="41" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>D3B2DE63-C424-42A6-89A4-3E23C4C57FFD</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Nothing was imported! Better luck next time!"]]></Text>
+							<ChunkList hash="DC15F8351CAC79DEB474C66223AFFEBB">
+								<Chunk type="NoRef">&quot;Nothing was imported! Better luck next time!&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="42" id="103" name="Aktuelles Script verlassen" enable="True">
+			<UUID>E8B0C88E-FD20-4CD9-B57D-43FCA7DE2FF8</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="43" id="89" name="# (Kommentar)" enable="True">
+			<UUID>0F33A79F-7448-4B12-A3E3-CD64D42BB233</UUID>
+			<OwnerID></OwnerID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--&gt;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="44" id="70" name="Ende (wenn)" enable="True">
+			<UUID>726B2C33-3E89-4F32-8F47-35564ABB2526</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+		</Step>
+		<Step index="45" id="89" name="# (Kommentar)" enable="True">
+			<UUID>DA5D2A18-53DA-492F-8D29-C18915C2336E</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="46" id="87" name="Eigenes Dialogfeld anzeigen" enable="True">
+			<UUID>B4CFA755-A346-4E1E-BC40-6560DCD5A43D</UUID>
+			<OwnerID></OwnerID>
+			<Options>16389</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Hole( ScriptName )]]></Text>
+							<ChunkList hash="430D967617EB12B1B6539DD4AE2ADCBA">
+								<Chunk type="FunctionRef">Hole</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="FunctionRef">ScriptName</Chunk>
+								<Chunk type="NoRef"> )</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully imported."]]></Text>
+							<ChunkList hash="0118EC90454496C7A9FC623DBC4CCA56">
+								<Chunk type="FunctionRef">Falls</Chunk>
+								<Chunk type="NoRef">( </Chunk>
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> = 1 ; &quot;One syntax-tag has been&quot; ; </Chunk>
+								<Chunk type="VariableReference">$n</Chunk>
+								<Chunk type="NoRef"> &amp; &quot; syntax-tags have been&quot; ) &amp; &quot; successfully imported.&quot;</Chunk>
+							</ChunkList>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step index="47" id="89" name="# (Kommentar)" enable="True">
+			<UUID>5C7CD015-F70C-4E58-9F5C-317C3D32F1F0</UUID>
+			<OwnerID></OwnerID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

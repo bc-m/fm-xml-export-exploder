@@ -41,7 +41,7 @@ pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
         if parameters.trim().is_empty() {
             return Some("".to_string());
         } else {
-            return Some(format!("# {}", parameters));
+            return Some(format!("# {parameters}"));
         }
     }
 
@@ -54,13 +54,13 @@ pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
                 | ScriptStep::IfElse
                 | ScriptStep::ExitLoopIf
         ) {
-            return Some(format!("{} []", name));
+            return Some(format!("{name} []"));
         }
 
         return Some(name.to_string());
     };
 
-    Some(format!("{} [ {} ]", name, parameters))
+    Some(format!("{name} [ {parameters} ]"))
 }
 
 #[cfg(test)]

@@ -1,0 +1,59 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Relationship id="26">
+	<UUID modifications="4" userName="R.Watson" accountName="admin" timestamp="2020-08-04T09:52:12">FD469D67-F8AF-4489-B111-127EC364E046</UUID>
+	<LeftTable cascadeCreate="False" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+		<SortSpecification value="False" maintain="True"></SortSpecification>
+	</LeftTable>
+	<RightTable cascadeCreate="True" cascadeDelete="False" type="Local">
+		<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+		<SortSpecification value="True" maintain="True">
+			<SortList membercount="2">
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="21" name="Selector" UUID="49033225-5125-469E-B029-C81DB3CD0154">
+							<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="2" name="ColorName" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+							<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+			</SortList>
+		</SortSpecification>
+	</RightTable>
+	<JoinPredicateList membercount="2">
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="1" name="__ID" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="11" name="_ID_Palette" UUID="F2E00A14-C813-47E1-B7A9-0CD253B74DA4">
+					<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="6" name="_kkFormula" UUID="EE532B49-2022-4515-B6CA-B5C9B2A407BF">
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="14" name="PaletteType" UUID="212B8754-E335-43EC-88DB-8AAD6B19FD4B">
+					<TableOccurrenceReference id="1065127" name="Palette.Color_Formula" UUID="07876FDD-8F41-47E7-ACFD-98528FF129F2"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+	</JoinPredicateList>
+	<TagList></TagList>
+</Relationship>

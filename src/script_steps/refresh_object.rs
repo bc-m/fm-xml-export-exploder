@@ -44,7 +44,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 
     let mut params = Vec::new();
     if !object_name_calculation.is_empty() && object_name_calculation != "1" {
-        params.push(format!("Name: {}", object_name_calculation).clone());
+        params.push(format!("Name: {object_name_calculation}"));
     }
     if !repetition_calculation.is_empty() && repetition_calculation != "1" {
         params.push(repetition_calculation);
@@ -52,9 +52,9 @@ pub fn sanitize(step: &str) -> Option<String> {
 
     let params = params.join(" ; ");
     if params.is_empty() {
-        Some(format!("{} []", name))
+        Some(format!("{name} []"))
     } else {
-        Some(format!("{} [ {} ]", name, params))
+        Some(format!("{name} [ {params} ]"))
     }
 }
 
