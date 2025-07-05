@@ -1,0 +1,9 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+// Sample input:  	a field whose name is "Employee::Name"
+// Sample output: 	"Name"
+// Based on filemakerhacks.com CF
+
+GetValue ( Substitute ( GetFieldName ( field ) ; "::" ; ¶ ) ; 2 )

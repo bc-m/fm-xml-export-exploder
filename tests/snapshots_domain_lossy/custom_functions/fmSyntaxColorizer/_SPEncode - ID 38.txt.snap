@@ -1,0 +1,14 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+/* _SPEncode ( pText )
+Encodes CR and LF characters for passing parameters
+
+20160103 MrW Version 2 Encode CR as Division Pilcrow Division and LF as Division Lozenge Division
+20151222 MrW Version 1
+*/
+Austauschen( pText ;
+["¶" ; Char( 8725 ) & Char( 182 ) & Char( 8725 )]; /* ¶ -> ∕ ¶ ∕ = Division Pilcrow Division */
+[ Char(10) ; Char( 8725 ) & Char( 9674 ) & Char( 8725 )] /* LF -> ∕ ◊ ∕ = Division Lozenge Division */
+)

@@ -1,0 +1,7 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+SetzeVar( vPos = Position( pFieldName ; "::" ; 1 ; 1 ) ; 
+Falls( vPos ; ZeichenLinks( pFieldName ; vPos - 1 ) ; Hole ( LayoutTabellenname ) )
+)

@@ -1,0 +1,49 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+/* _Plugin( pPluginName ; pInfoNameVersionTextState_IsPresentIsEnabledIsDisabled_Version_MajMinNr_MajorMinorRevisionBuild )
+
+Gets information about the plugin.
+
+20140425 MrW Version 1.0
+*/
+SetzeVar([
+
+
+vPluginName = pPluginName ; 
+vGet = pInfoNameVersionTextState_IsPresentIsEnabledIsDisabled_Version_MajMinNr_MajorMinorRevisionBuild ;
+
+
+vPlugins = "¶" & Berechne( "Get ( InstalledFMPlugins )" ) & "¶" ; 
+
+vLineNr = ElementeAnzahl( ZeichenLinks( vPlugins ; Position( vPlugins ; vPluginName ; 1 ; 1 ) ) ) ; 
+vLine = Falls( vLineNr ≥ 1 ; HoleWert( vPlugins ; vLineNr ) ) ;
+
+vPluginInfo = Austauschen( vLine ; ";" ; "¶" ) ;
+vPluginNameFull = HoleWert( vPluginInfo ; 1 ) ;
+vPluginVersionFull = HoleWert( vPluginInfo ; 2 ) ;
+vPluginVersionNr = FilterZeichen( vPluginVersionFull ; "1234567890." ) ;
+vPluginVersionNrList = Austauschen( vPluginVersionNr ; "." ; "¶" ) ;
+vPluginState = HoleWert( vPluginInfo ; 3 )
+
+];
+
+Falls(
+vGet = "State" ; vPluginState ;
+vGet = "IsPresent" ; vLineNr > 0 ;
+vGet = "IsDisabled" ; Falls( vLineNr > 0 ; vPluginState = "Disabled" ) ;
+vGet = "IsEnabled" ; Falls( vLineNr > 0 ; vPluginState = "Enabled" ) ;
+vGet = "VersionText" ; vPluginVersionFull ;
+vGet = "Version" ; vPluginVersionNr  ;
+vGet = "Major" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 1 ) ) ;
+vGet = "Minor" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 2 ) ) ; 
+vGet = "Revision" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 3 ) ) ; 
+vGet = "Build" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 4 ) ) ; 
+vGet = "MajMinNr" ; LiesAlsZahl( HoleWert( vPluginVersionNrList ; 1 ) & ZeichenLinks( ,5 ; 1 ) & HoleWert( vPluginVersionNrList ; 2 ) )  ;
+vGet = "Name" ; vPluginNameFull ;
+vGet = "Info" ; vLine ;
+""
+)
+
+)

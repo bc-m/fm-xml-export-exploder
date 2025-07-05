@@ -1,0 +1,75 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+/*
+ * @SIGNATURE:
+ * #JsonToVars
+ * 
+ * @PARAMETERS:
+ * json
+ * namespace
+ * 
+ * @HISTORY:
+ * Created: 2020-04-13 by Mike Duncan
+ * 
+ * @PURPOSE:
+ * Handle setting variables from JSON automatically
+ * 
+ * @RESULT:
+ * Zero if no error, or an error code if there was an error setting a variable
+ * 
+ * @NOTES:
+ * This function requires JSON functions available in FileMaker 16+
+ * And also the WHILE function available in FileMaker 18+
+ * Usage example:
+ * JsonToVars ( Get ( ScriptParameter ) ; "_" )
+ * 
+ * then test for errors and show dialog in FM script.
+ * If [ JsonToVars ( Get ( ScriptParameter ) ; "_" ) ]
+ *   Show Custom Dialog [ "Error" ; "There was an error evaluating variables: " & JSONGetElement ( $json_debug ; "json" ) & " - " & GetErrorDesc_en ( JSONGetElement ( $json_debug ; "json" ) )]
+ *   Exit Script [ Text Result: 5 //invalid command ]
+ * End If
+ *  
+ * Example of setting a script parameter:
+ * JSONSetElement ( "" 
+ * 
+ *  ; [ "var1" ; "hello" ; JSONString ]
+ *  ; [ "var2" ; "world" ; JSONString ]
+ *  ; [ "var3" ; "ping" ; JSONString ]
+ * 
+ * )
+ * 
+ */
+ 
+ Falls (IstLeer ( json );
+ // required value missing, return an error
+ SetzeVar ( $json_debug = JSONSetElement ( "" ; "json" ; "10" ; JSONString ) ; "" )
+ & $json_debug
+ ;
+ 
+  Solange ( 
+   [
+    namespace = namespace;
+    json_keys = JSONListKeys ( json ; "" );
+    count = ElementeAnzahl ( json_keys );
+    json_err = "";
+    this_err = 0
+   ];
+  
+   ( count > 0 ) UND ( this_err = 0 );
+  
+   [
+    this_key = HoleWert ( json_keys ; count );
+    this_value = JSONGetElement ( json ; this_key );
+    this_evaluate = "Let ( $" & namespace & this_key & " = " & Zitat ( this_value ) & " ; \"\")";
+    this_err = BerechnungsFehler ( Berechne ( this_evaluate ) );
+    $json_debug = JSONSetElement ( json_err ; [ this_key ; this_err ; JSONString ] ; [ "json" ; this_err ; JSONString ] );
+    count = count - 1
+   ];
+
+  this_err
+
+ )
+
+)

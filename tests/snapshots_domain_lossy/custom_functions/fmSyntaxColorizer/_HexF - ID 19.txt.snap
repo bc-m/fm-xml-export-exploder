@@ -1,0 +1,17 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+/* _HexF( pFormat ; pNumber )
+
+returns the formatted hex representation of the number.
+
+20120511 MrW Version 1.0v0
+*/
+
+SetzeVar([
+vHex = _Hex( pNumber ); 
+vMin = Min( Länge( pFormat ) ; Länge( vHex ) ) 
+];
+ZeichenLinks( pFormat ; Länge( pFormat ) - vMin ) & ZeichenRechts( vHex ; vMin ) 
+)

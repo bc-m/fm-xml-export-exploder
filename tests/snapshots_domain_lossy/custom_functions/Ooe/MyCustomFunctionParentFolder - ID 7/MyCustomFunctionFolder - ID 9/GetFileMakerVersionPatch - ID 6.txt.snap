@@ -1,0 +1,25 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+// Signature:
+// GetFileMakerVersionPatch
+
+// Purpose:
+// Detects patch component of current FileMaker application version
+
+// Parameters:
+// None
+
+// Result:
+// Returns patch component of current FileMaker application version
+// For example, if FileMaker application version is 19.2.1, this custom function will return 1
+
+// Dependencies:
+// None
+
+// History:
+// Created: Mislav Kos <mkos@soliantconsulting.com>
+
+
+GetAsNumber ( GetValue ( Substitute ( RightWords ( Get ( ApplicationVersion ) ; 1 ) ; "." ; ¶ ) ; 3 ) )

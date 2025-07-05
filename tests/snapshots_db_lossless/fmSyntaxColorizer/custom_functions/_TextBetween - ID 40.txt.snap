@@ -1,0 +1,19 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+/* _TextBetween( pText; pPrefix; pSuffix ) 
+
+Returns the text between pPrefix and pSuffix. If either is not found then an empt string is returned. An empty pPrefix or pSuffix is interpreted as from the start/to the end of the string.
+
+20130617 MrW More useful function when prefix or suffix is empty
+20130201 MrW 
+*/
+
+SetzeVar([
+vPos1 = Falls( IstLeer( pPrefix ) ; 1 ; Position( pText ; pPrefix ; 1 ; 1 ) ) ;
+vPos2 = vPos1 + Länge( pPrefix ) ;
+vPos3 = Falls( vPos1=0 ; 0 ; IstLeer( pSuffix ) ; Länge( pText ) + 1 ; Position( pText ; pSuffix ; vPos2 ; 1 ) )
+];
+Falls( vPos3 ; ZeichenMitte( pText ; vPos2 ; vPos3-vPos2 ) )
+)

@@ -120,7 +120,7 @@ impl CatalogType {
             },
             Self::FieldsForTables => CatalogConfig {
                 catalog_item_name: b"FieldCatalog".to_vec(),
-                out_folder_name: "table_fields".to_string(),
+                out_folder_name: "tables".to_string(),
                 wrapped_in_object_list: false,
                 uses_folders: false,
                 id_path: "FieldCatalog/BaseTableReference/@id".to_string(),
@@ -148,7 +148,7 @@ impl CatalogType {
             },
             Self::OptionsForValueLists => CatalogConfig {
                 catalog_item_name: b"ValueList".to_vec(),
-                out_folder_name: "value_list_options".to_string(),
+                out_folder_name: "value_lists".to_string(),
                 wrapped_in_object_list: false,
                 uses_folders: false,
                 id_path: "ValueList/ValueListReference/@id".to_string(),
@@ -176,7 +176,7 @@ impl CatalogType {
             },
             Self::StepsForScripts => CatalogConfig {
                 catalog_item_name: b"Script".to_vec(),
-                out_folder_name: "script_steps".to_string(),
+                out_folder_name: "scripts".to_string(),
                 wrapped_in_object_list: false,
                 uses_folders: false,
                 id_path: "Script/ScriptReference/@id".to_string(),
