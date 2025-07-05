@@ -6,7 +6,7 @@ FileMaker XML-Export File Exploder is a fast Rust tool designed to parse XML fil
 
 Do you want to extract your FileMaker solution into text files (including scripts in a human-readable format like the FileMaker Script Workspace)? This tool does it for you!
 
-Example: From [these](./tests/xml) as XML exported FileMaker solutions you will get [this](./tests/snapshots). Scripts can easily be read like [here](./tests/snapshots/scripts_sanitized/fmSyntaxColorizer/Example%20SyntaxColorizing%20-%20ID%2046/All%20script%20steps%20and%20all%20options%20-%20ID%2011.txt.snap).
+Example: From [these](./tests/xml) as XML exported FileMaker solutions you will get [this](./tests/snapshots_db_lossless). Scripts can easily be read like [here](./tests/snapshots_db_lossless/fmSyntaxColorizer/scripts_sanitized/Example%20SyntaxColorizing%20-%20ID%2046/All%20script%20steps%20and%20all%20options%20-%20ID%2011.txt.snap).
 
 ## Features
 
@@ -15,11 +15,12 @@ Example: From [these](./tests/xml) as XML exported FileMaker solutions you will 
 - **Content Extraction:** Parses XML files and extracts relevant content into separate files and organizes them into directories mirroring the structure in FileMaker databases.
 - **Noise Reduction:** Removes unnecessary noise from XML to support efficient Git versioning and prevent unnecessary changes.
 - **Human-Readable Format:** Parses scripts and custom functions into a human-readable format for easy comprehension.
+- **Optional Output Tree:** Select between organize output by filemaker database name or by domain (eg. layouts, scripts, tables).
 
 ## Installation
 
-1. **Download Executable:** Download the latest executable for your operating system from the [releases page](https://github.com/BC-M/fm-xml-export-exploder/releases/latest).
-2. __macOS only:__ To allow execution in Terminal, right-click on the executable and choose "Open" to bypass the security warning. After this, you can run the CLI in Terminal or Bash scripts.
+1. **Download Executable:** Download the latest executable for your operating system from the [releases page](https://github.com/bc-m/fm-xml-export-exploder/releases/latest).
+2. __Allow execution (macOS only):__ To allow execution in Terminal, right-click on the executable and choose "Open" to bypass the security warning. After this, you can run the CLI in Terminal or Bash scripts.
 
 ## Usage
 
@@ -31,54 +32,61 @@ Example: From [these](./tests/xml) as XML exported FileMaker solutions you will 
 
 The extracted content is organized into directories based on the context of the XML elements:
 
+### Option 1: Starting with FileMaker database filename (default)
+
+Running with `-t db`.
+
 ```bash
-├── custom_functions
-│   └── [FileMaker database name]
-│       └── [CF name] - ID [CF ID].txt
-├── custom_menu_sets
-│   └── [FileMaker database name]
-│       └── [Set name] - ID [Set ID].txt
-├── custom_menus
-│   └── [FileMaker database name]
-│       └── [Menu name] - ID [Menu ID].txt
-├── extended_privileges
-│   └── [FileMaker database name]
-│       └── [Privileges name] - ID [Privileges ID].txt
-├── external_data_sources
-│   └── [FileMaker database name].xml
-├── layouts
-│   └── [FileMaker database name]
-│       └── [Directory name] - ID [Directory ID]
-│           └── [Layout name] - ID [Layout ID].xml
-├── privilege_sets
-│   └── [FileMaker database name]
-│       └── [Set name] - ID [Set ID].txt
-├── relationships
-│   └── [FileMaker database name]
-│       └── [Left Table name] - [Right Table name] - ID [Relationship ID].xml
-├── scripts
-│   └── [FileMaker database name]
-│       └── [Directory name] - ID [Directory ID]
-│           └── [Script name] - ID [Script ID].xml
-├── scripts_sanitized
-│   └── [FileMaker database name]
-│       └── [Directory name] - ID [Directory ID]
-│           └── [Script name] - ID [Script ID].txt
-├── tables
-│   └── [FileMaker database name]
-│       └── [Table name] - ID [Table ID].xml
-├── table_occurrences
-│   └── [FileMaker database name]
-│       └── [TO name] - ID [TO ID].xml
-├── themes
-│   └── [FileMaker database name]
-│       └── [Theme name] - ID [Theme ID].xml
-└── value_lists
-    └── [FileMaker database name]
+├── [FileMaker database name]/
+    └── [...]
+    └── scripts/
+        └── [Directory name] - ID [Directory ID]
+            └── [Script name] - ID [Script ID].xml
+    └── scripts_sanitized/
+        └── [Directory name] - ID [Directory ID]
+            └── [Script name] - ID [Script ID].txt
+    └── tables/
+        └── [Table name] - ID [Table ID].xml
+    └── table_occurrences/
+        └── [TO name] - ID [TO ID].xml
+    └── themes/
+        └── [Theme name] - ID [Theme ID].xml
+    └── value_lists/
         └── [Value list name] - ID [Value list ID].xml
+    └── [...]
 ```
 
-For multi-file solutions it can be helpful to create a separate Git repository for each of these directories (`custom_functions`, `layouts`, `scripts`, `tables` and so on) to manage version control and collaboration effectively.
+### Option 2: Starting with domain (catalog name)
+
+Running with `-t domain`.
+
+```bash
+├── [...]
+├── scripts/
+│   └── [FileMaker database name]/
+│       └── [Directory name] - ID [Directory ID]/
+│           └── [Script name] - ID [Script ID].xml
+├── scripts_sanitized/
+│   └── [FileMaker database name]/
+│       └── [Directory name] - ID [Directory ID]/
+│           └── [Script name] - ID [Script ID].txt
+├── tables/
+│   └── [FileMaker database name]/
+│       └── [Table name] - ID [Table ID].xml
+├── table_occurrences/
+│   └── [FileMaker database name]/
+│       └── [TO name] - ID [TO ID].xml
+├── themes/
+│   └── [FileMaker database name]/
+│       └── [Theme name] - ID [Theme ID].xml
+└── value_lists/
+    └── [FileMaker database name]/
+        └── [Value list name] - ID [Value list ID].xml
+└── [...]
+```
+
+_For multi-file solutions it can be helpful to create a separate Git repository for each of these directories (
+`custom_functions`, `layouts`, `scripts`, `tables` and so on) to manage version control and collaboration effectively._
 
 ## Why this structure?
 
@@ -98,6 +106,7 @@ The following open source FileMaker solutions were saved as XML and used for sna
 
 - [FM-Admin-API-Tool](https://github.com/SoliantMike/FM-Admin-API-Tool): A FileMaker tool for administering FileMaker Server using the Admin API.
 - [fmSyntaxColorizer](https://github.com/mrwatson-de/fmSyntaxColorizer): A FileMaker tool for customizing syntax highlighting for FileMaker scripts and calculations.
+- [ooe-fm](https://github.com/mislavkos/ooe-fm/): ooe-fm provies a sample FileMaker file with One Of Everything (Ooe).
 
 ## Dependencies
 
