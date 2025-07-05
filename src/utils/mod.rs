@@ -201,7 +201,7 @@ pub fn build_out_dir_path<R: Read + BufRead>(
     };
 
     let domain = match qualifier {
-        Some(Qualifier::SanitizedScripts) => "script_sanitized".to_string(),
+        Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
         _ => {
             match context.top_level_section {
                 Some(TopLevelSection::Structure) => {
