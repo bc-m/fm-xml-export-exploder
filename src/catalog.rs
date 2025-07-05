@@ -12,7 +12,7 @@ use crate::utils::xml_utils::{
     push_rest_of_element_to_skeleton, skip_rest_of_element, start_element_to_string, XmlEventType,
 };
 use crate::utils::{
-    build_out_dir_path, create_dir, debug, move_to_subfolder, write_rest_of_element_to_file,
+    build_out_dir_path, create_dir, move_to_subfolder, write_rest_of_element_to_file,
     FolderStructure,
 };
 use crate::utils::{push_line_to_skeleton, rename_file_if_necessary};
@@ -57,19 +57,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
         None
     };
 
-    let is_debug = match &context.flags.verbose {
-        Some(Some(filter)) => start_element_to_string(start_tag, context.flags).contains(filter),
-        Some(None) => true,
-        None => false, // silent
-    };
-    debug(
-        is_debug,
-        &format!(
-            "{}: {}",
-            rel_depth,
-            start_element_to_string(start_tag, context.flags)
-        ),
-    );
     loop {
         match context.reader.read_event_into(&mut buf) {
             Err(e) => {
@@ -80,20 +67,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
             Ok(Event::Start(e)) => {
                 rel_depth += 1;
                 let start_tag = start_element_to_string(&e, context.flags);
-
-                if is_debug {
-                    let emoji = if e.name().as_ref() == catalog_item_name {
-                        "🚩"
-                    } else {
-                        "  "
-                    };
-                    println!(
-                        "{}: {}{}",
-                        rel_depth,
-                        emoji.repeat(rel_depth - 1),
-                        start_tag
-                    );
-                }
 
                 // Add repeating catalog child items (e.g. <BaseDirectory>) and their siblings, if any, to the skeleton (e.g. <UUID>)
                 // If repeating catalog child items are wrapped in ObjectList (e.g. <Account>),
@@ -136,15 +109,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
 
                     if is_folder {
                         current_path.push(join_scope_id_and_name(&current_id, &current_name));
-                        if is_debug {
-                            println!(
-                                "{}: {}{}{}",
-                                rel_depth,
-                                "  ".repeat(rel_depth - 1),
-                                "• ".repeat(current_path.len()),
-                                &current_path.join("/")
-                            );
-                        };
                     }
                     if is_marker {
                         current_path.pop();
@@ -163,7 +127,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     indentation_level,
                     base_depth + rel_depth - 1,
                     id_path,
-                    is_debug,
                 );
                 rename_file_if_necessary(&file_path, context.path_stack, &catalog_item_name);
 
@@ -204,9 +167,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
             }
             Ok(Event::End(e)) => {
                 let end_tag = end_element_to_string(&e);
-                if is_debug {
-                    println!("{}:{} {}", rel_depth, "  ".repeat(rel_depth - 1), end_tag);
-                }
                 rel_depth -= 1;
 
                 // Add to skeleton only if it's a direct catalog child or the catalog end tag
@@ -223,7 +183,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
 
                 if rel_depth == 0 {
                     context.path_stack.pop();
-                    // println!("   path_stack: {:?}", std::str::from_utf8(context.path_stack.last().unwrap().as_ref()).unwrap());
                     break;
                 }
             }

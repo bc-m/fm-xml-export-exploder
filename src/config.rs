@@ -218,6 +218,5 @@ pub struct CatalogConfig {
 pub struct Flags {
     pub parse_all_lines: bool,
     pub lossless: bool,
-    pub verbose: Option<Option<String>>,
     pub output_tree: OutputTree,
 }

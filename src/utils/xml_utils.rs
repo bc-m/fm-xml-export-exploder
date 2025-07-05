@@ -145,9 +145,6 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
-                // if start_element_to_string(&e, flags).contains("<PasteIndexList") || start_element_to_string(&e, flags).contains("<Object ") {
-                //     println!("🤪 {}", start_element_to_string(&e, flags));
-                // }
                 push_line_to_skeleton(
                     skeleton,
                     base_depth,
@@ -160,9 +157,6 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
             }
             Ok(Event::End(e)) => {
                 depth -= 1;
-                // if end_element_to_string(&e).contains("</PasteIndexList>") || end_element_to_string(&e).contains("</Object>") {
-                //     println!("😱 {}", end_element_to_string(&e));
-                // }
                 push_line_to_skeleton(
                     skeleton,
                     base_depth,
@@ -186,7 +180,6 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                 );
             }
             Ok(Event::Text(e)) => {
-                // println!("💩 {}", text_element_to_string(&e, true).replace("\n", "\\n").replace("\t", "\\t"));
                 if text_element_to_string(&e, true).trim().is_empty() {
                     continue;
                 }

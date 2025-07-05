@@ -139,9 +139,6 @@ pub fn explode_xml(
                 context.path_stack.pop();
                 push_end_to_skeleton(&e, context.skeleton, context.path_stack, context.flags);
                 depth -= 1;
-                // if depth <= 4 {
-                //     println!("🚩 {}:{} {}", depth, "  ".repeat(depth), end_element_to_string(&e));
-                // }
             }
             _ => {}
         }
@@ -219,16 +216,10 @@ fn process_catalog_elements<R: Read + BufRead>(
     let catalog_type = match CatalogType::from_bytes(start_tag.name().as_ref()) {
         Some(catalog_type) => catalog_type,
         None => {
-            println!(
-                "⚠️ Skipping unsupported catalog: {}",
-                std::str::from_utf8(start_tag.name().as_ref()).unwrap()
-            );
-            return Ok(false); // is_supported_catalog
+            return Ok(false);
         }
     };
     context.catalog_type = Some(catalog_type);
-    // println!("             ✅ Processing catalog: {}, {}", start_element_to_string(e, flags), catalog_config.out_folder_name);
-
     // Handle special cases that need folder structures
     let folder_structure = match catalog_type {
         CatalogType::CalcsForCustomFunctions => cf_folder_structure.as_ref(),

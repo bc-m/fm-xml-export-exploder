@@ -42,12 +42,6 @@ pub struct Entity {
     pub content: String,
 }
 
-pub fn debug(is_debug: bool, debug_str: &str) {
-    if is_debug {
-        println!("{debug_str}");
-    }
-}
-
 /// Get the second to last element of a path
 /// For example, "CustomFunctionCalc/CustomFunctionReference/@id" -> "CustomFunctionReference"
 pub fn get_second_to_last(path: &str) -> Option<&str> {
@@ -85,9 +79,7 @@ impl Entity {
         start_tag: &BytesStart,
         _r_counter: usize,
         id_path: &str,
-        _is_debug: bool,
     ) {
-        // debug(_is_debug, &format!("{}{} 😱😱😱 {:?} 😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱😱", "...".repeat(_r_counter), _r_counter, std::str::from_utf8(e.name().as_ref()).unwrap_or("unknown")));
         self.parse_xml_attributes(start_tag);
         self.tag_name = std::str::from_utf8(start_tag.name().as_ref())
             .unwrap_or("unknown")
@@ -102,31 +94,21 @@ impl Entity {
                     self.element_with_id = element_string;
                 }
             }
-            // debug(_is_debug, &format!("{}{} ‼️   »  {}", "...".repeat(_r_counter), _r_counter, self.content.chars().take(200).collect::<String>().replace("\n", "\\n").replace("\t", "\\t")));
             return;
         }
 
         self.content += start_element_to_string(start_tag, context.flags).as_str();
-        // debug(_is_debug, &format!("{}{} R   »  {}", "...".repeat(_r_counter), _r_counter, self.content.chars().take(200).collect::<String>().replace("\n", "\\n").replace("\t", "\\t")));
         let mut buf = Vec::new();
-        // let mut l_counter = 0;
         loop {
-            // l_counter += 1;
             match context.reader.read_event_into(&mut buf) {
                 Ok(Event::Start(e)) => {
-                    // debug(_is_debug, &format!("{}{}.{}  ✅ (start) {}", "...".repeat(_r_counter), _r_counter, l_counter, start_element_to_string(&e, flags)));
-                    self.read_xml_element(context, &e, _r_counter + 1, id_path, _is_debug);
-                    // debug(_is_debug, &format!("{}{}.{} s »  {}", "...".repeat(_r_counter), _r_counter, l_counter, self.content.chars().take(200).collect::<String>().replace("\n", "\\n").replace("\t", "\\t")));
+                    self.read_xml_element(context, &e, _r_counter + 1, id_path);
                 }
                 Ok(Event::Text(e)) => {
-                    // debug(_is_debug, &format!("{}{}.{}  ✅ (text) {}", "...".repeat(_r_counter), _r_counter, l_counter, text_element_to_string(&e, false).as_str().replace("\n", "\\n").replace("\t", "\\t")));
                     self.content += text_element_to_string(&e, false).as_str();
-                    // debug(_is_debug, &format!("{}{}.{} t »  {}", "...".repeat(_r_counter), _r_counter, l_counter, self.content.chars().take(200).collect::<String>().replace("\n", "\\n").replace("\t", "\\t")));
                 }
                 Ok(Event::End(e)) => {
-                    // debug(_is_debug, &format!("{}{}.{}  ✅ (end)  {}", "...".repeat(_r_counter), _r_counter, l_counter, end_element_to_string(&e).as_str()));
                     self.content += end_element_to_string(&e).as_str();
-                    // debug(_is_debug, &format!("{}{}.{} e »  {}", "...".repeat(_r_counter), _r_counter, l_counter, self.content.chars().take(200).collect::<String>().replace("\n", "\\n").replace("\t", "\\t")));
                     break;
                 }
                 Ok(Event::Eof) => break,
@@ -165,10 +147,9 @@ pub fn write_rest_of_element_to_file<R: Read + BufRead>(
     remove_indent_count: usize,
     base_depth: usize,
     id_path: &str,
-    is_debug: bool,
 ) -> PathBuf {
     let mut entity = Entity::default();
-    entity.read_xml_element(context, start_tag, 1, id_path, is_debug);
+    entity.read_xml_element(context, start_tag, 1, id_path);
     if !entity.element_with_id.is_empty() {
         push_line_to_skeleton(
             context.skeleton,
@@ -218,8 +199,6 @@ pub fn build_out_dir_path<R: Read + BufRead>(
         Some(saxml_version) => saxml_version,
         None => return Err(anyhow::anyhow!("Missing saxml version")),
     };
-    let db_name_with_saxml_version =
-        format!("{db_name} - saxml_v_{}", saxml_version.replace('.', "_"));
 
     let domain = match qualifier {
         Some(Qualifier::SanitizedScripts) => "script_sanitized".to_string(),
@@ -258,8 +237,8 @@ pub fn build_out_dir_path<R: Read + BufRead>(
         .root_out_dir
         .clone()
         .join(match context.flags.output_tree {
-            OutputTree::Db => PathBuf::from(db_name_with_saxml_version).join(domain),
-            OutputTree::Domain => PathBuf::from(domain).join(db_name_with_saxml_version),
+            OutputTree::Db => PathBuf::from(db_name).join(domain),
+            OutputTree::Domain => PathBuf::from(domain).join(db_name),
         });
     Ok(full_path)
 }
@@ -359,18 +338,15 @@ pub fn push_line_to_skeleton(
 
     if current_event_type == XmlEventType::Start || current_event_type == XmlEventType::Other {
         if skeleton.previous_event_type == XmlEventType::Start {
-            // skeleton.content.push_str(format!("✅{}✅", skeleton.previous_line).as_str());
             skeleton.content.push_str(skeleton.previous_line.as_str());
             skeleton.content.push('\n');
         }
         skeleton.previous_line.clear();
         skeleton.previous_line.push_str(line.as_str());
-        // println!("push_line_to_skeleton: {}", str_to_push);
     } else {
         let mut do_trim = current_event_type == XmlEventType::End
             && skeleton.previous_event_type != XmlEventType::End;
         if !skeleton.previous_line.is_empty() {
-            // skeleton.content.push_str(format!("✅{}✅", skeleton.previous_line).as_str());
             skeleton.content.push_str(skeleton.previous_line.as_str());
             skeleton.previous_line.clear();
             if current_event_type == XmlEventType::End

@@ -68,7 +68,6 @@ mod tests {
         let flags = Flags {
             parse_all_lines: false,
             lossless: is_lossless,
-            verbose: None,
             output_tree,
         };
         let _ = fs::remove_dir_all(output_dir);
@@ -144,8 +143,6 @@ mod tests {
         snapshot_file_paths.sort();
 
         assert_eq!(snapshot_file_paths.join("\n"), output_file_paths.join("\n"));
-
-        // let _ = fs::remove_dir_all(output_dir);
     }
 
     fn read_file(file_path: &PathBuf) -> Vec<u8> {

@@ -48,11 +48,6 @@ struct Args {
     #[arg(short, long)]
     lossless: bool,
 
-    /// Enable debug/verbose output. Optionally filter by catalog name.
-    /// Example: --verbose "CustomFunctionsCatalog"
-    #[arg(short, long, value_name = "FILTER", num_args(0..=1))]
-    verbose: Option<Option<String>>,
-
     /// Specify the output tree root folder: domain or db (default)
     #[arg(short = 't', long = "output_tree", value_enum, default_value_t = OutputTree::Db)]
     output_tree: OutputTree,
@@ -74,14 +69,7 @@ fn main() -> Result<()> {
     let flags = Flags {
         parse_all_lines: args.all_lines,
         lossless: args.lossless,
-        verbose: args.verbose,
         output_tree: args.output_tree,
-    };
-
-    match &flags.verbose {
-        Some(Some(filter)) => println!("🔍 Verbose mode (filtered on {filter})"),
-        Some(None) => println!("🔊 Verbose mode (all)"),
-        None => (), // silent
     };
 
     valid_dir_or_throw(&in_dir)?;

@@ -59,7 +59,6 @@ fn process_directory_recursively(
         for entry in entries.flatten() {
             let path = entry.path();
             if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
-                // println!("                  ✅ Processing xml file: {}", path.display());
                 process_script_xml_file(
                     &path,
                     scripts_xml_out_dir_path,
@@ -67,7 +66,6 @@ fn process_directory_recursively(
                     flags,
                 );
             } else if path.is_dir() {
-                // println!("                  ‼️ Recursively processing subdirectory: {}", path.display());
                 // Recursively process subdirectories
                 process_directory_recursively(
                     &path,
@@ -97,10 +95,6 @@ fn process_script_xml_file(
 
     // Parse the script and create sanitized text
     let script_info = parse_script_xml(&xml_content, flags);
-    // if xml_file_path.display().to_string().contains("Ooe") {
-    //     println!("✅ Processing xml file: {}, script_info: {:?}", xml_file_path.display(), script_info);
-    // }
-
     if let Some(script_info) = script_info {
         // Determine the relative path from the XML file to maintain folder structure
         let relative_path = xml_file_path
