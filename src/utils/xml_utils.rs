@@ -329,7 +329,14 @@ pub fn extract_values_from_xml_paths(
                                     let value = attr
                                         .unescape_value()
                                         .map_err(|e| format!("Unescape error: {e}"))?;
-                                    results[i] = Some(value.to_string());
+                                    if path.starts_with(&["Relationship", "LeftTable"])
+                                        || path.starts_with(&["Relationship", "RightTable"])
+                                    {
+                                        results[i] = Some(format!("[{}]", value));
+                                    } else {
+                                        results[i] = Some(value.to_string());
+                                    }
+
                                     resolved_indices.insert(i);
                                 }
                             }
