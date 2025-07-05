@@ -334,7 +334,7 @@ pub fn extract_values_from_xml_paths(
                                     if path.starts_with(&["Relationship", "LeftTable"])
                                         || path.starts_with(&["Relationship", "RightTable"])
                                     {
-                                        results[i] = Some(format!("[{}]", value));
+                                        results[i] = Some(format!("[{value}]"));
                                     } else {
                                         results[i] = Some(value.to_string());
                                     }
