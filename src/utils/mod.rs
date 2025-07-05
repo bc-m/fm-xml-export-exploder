@@ -11,8 +11,8 @@ use crate::config::{CatalogType, Flags};
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
-    element_to_string, end_element_to_string, extract_values_from_xml_paths,
-    start_element_to_string, text_element_to_string, XmlEventType,
+    element_to_string, encode_xml_special_characters, end_element_to_string,
+    extract_values_from_xml_paths, start_element_to_string, text_element_to_string, XmlEventType,
 };
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
 use crate::{OutputTree, Skeleton};
@@ -64,10 +64,10 @@ impl Entity {
                 "id" => self.id = attr.1.to_string(),
                 "name" => {
                     if self.name.is_empty() {
-                        self.name = attr.1.to_string()
+                        self.name = encode_xml_special_characters(attr.1.to_string())
                     }
                 }
-                "Display" => self.name = attr.1.to_string(),
+                "Display" => self.name = encode_xml_special_characters(attr.1.to_string()),
                 _ => {}
             }
         }
@@ -548,7 +548,7 @@ mod tests {
     }
 }
 
-// Some catalog items derive their name diferently from the standard method which builds the name using id and name attributes in the catalog item tag
+// Some catalog items derive their name differently from the standard method which builds the name using id and name attributes in the catalog item tag
 pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_name: &[u8]) {
     // Check if path_stack has the required structure: second value should be "Structure" and third should be "AddAction"
     let has_structure_add_action = path_stack.len() >= 3

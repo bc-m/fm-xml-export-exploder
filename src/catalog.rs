@@ -109,7 +109,10 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     current_name = name;
 
                     if is_folder {
-                        current_path.push(join_scope_id_and_name(&current_id, &current_name));
+                        current_path.push(join_scope_id_and_name(
+                            &current_id,
+                            &current_name.replace("/", " "),
+                        ));
                     }
                     if is_marker {
                         current_path.pop();

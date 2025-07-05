@@ -99,6 +99,15 @@ pub fn cdata_to_string(e: &BytesCData) -> String {
     }
 }
 
+pub fn encode_xml_special_characters(input: String) -> String {
+    input
+        .replace("&amp;", "&")
+        .replace("&quot;", "\"")
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&apos;", "'")
+}
+
 fn decode_xml_special_characters(input: String) -> String {
     input
         .replace('&', "&amp;")
