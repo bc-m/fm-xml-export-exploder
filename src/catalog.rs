@@ -21,7 +21,7 @@ use crate::xml_processor::ProcessingContext;
 /// Parse and explode a generic catalog, handling both wrapped and unwrapped formats
 pub fn xml_explode_catalog<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
-    start_tag: &BytesStart,
+    _start_tag: &BytesStart,
     folder_structure: Option<&FolderStructure>,
     // catalog_config: &CatalogConfig,
 ) -> Result<Option<FolderStructure>, Error> {
@@ -103,7 +103,8 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 // Handle catalog items (e.g. <BaseDirectory>)
                 // Parse attributes needed for folder tracking
                 if uses_folders {
-                    let (id, name, is_folder, is_marker) = parse_folder_attributes(&e);
+                    let (id, name, is_folder, is_marker, is_separator) =
+                        parse_folder_attributes(&e);
                     current_id = id;
                     current_name = name;
 
@@ -112,6 +113,12 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     }
                     if is_marker {
                         current_path.pop();
+                    }
+
+                    if (is_folder || is_marker || is_separator) && !context.flags.lossless {
+                        skip_rest_of_element(context.reader, &e);
+                        rel_depth -= 1;
+                        continue;
                     }
                 } else {
                     // Reset folder tracking variables for each catalog item
@@ -227,11 +234,12 @@ fn add_start_tag_to_skeleton<R: Read + BufRead>(
 }
 
 /// Parse folder-related attributes from a catalog item
-fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool) {
+fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool, bool) {
     let mut current_id = String::new();
     let mut current_name = String::new();
     let mut is_folder = false;
     let mut is_marker = false;
+    let mut is_separator = false;
 
     for attr in get_attributes(e).unwrap() {
         match attr.0.as_str() {
@@ -242,11 +250,16 @@ fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool) {
                 "Marker" => is_marker = true,
                 _ => {}
             },
+            "isSeparatorItem" => {
+                if attr.1.as_str() == "True" {
+                    is_separator = true
+                }
+            }
             _ => {}
         }
     }
 
-    (current_id, current_name, is_folder, is_marker)
+    (current_id, current_name, is_folder, is_marker, is_separator)
 }
 
 /// Determine the subfolder path for a catalog item
