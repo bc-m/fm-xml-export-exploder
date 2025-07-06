@@ -9,11 +9,12 @@ use quick_xml::reader::Reader;
 
 use crate::catalog::xml_explode_catalog;
 use crate::config::{CatalogType, Flags};
+use crate::custom_function_sanitizer::create_sanitized_custom_functions;
 use crate::script_sanitizer::create_sanitized_scripts;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::{end_element_to_string, start_element_to_string, XmlEventType};
-use crate::utils::{build_out_dir_path, write_xml_file, FolderStructure};
+use crate::utils::{build_out_dir_path, delete_output_directory, write_xml_file, FolderStructure};
 use crate::utils::{create_dir, push_line_to_skeleton};
 use crate::Skeleton;
 
@@ -32,6 +33,7 @@ pub enum Action {
 
 pub enum Qualifier {
     SanitizedScripts,
+    SanitizedCustomFunctions,
 }
 
 /// Context for XML catalog processing
@@ -103,6 +105,7 @@ pub fn explode_xml(
                     0 => {
                         process_root_element(&mut context, &start_tag)?;
                         create_dir(&context.root_out_dir);
+                        delete_output_directory(&context)?;
                     }
                     1 => {
                         let was_xml_element_consumed =
@@ -251,9 +254,14 @@ fn process_catalog_elements<R: Read + BufRead>(
         create_sanitized_scripts(
             &xml_out_dir_path,
             &sanitized_scripts_dir_path,
-            script_folder_structure.as_ref(),
             context.flags,
         );
+    }
+
+    if catalog_type == CatalogType::CalcsForCustomFunctions {
+        let sanitized_cf_dir_path =
+            build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
+        create_sanitized_custom_functions(&xml_out_dir_path, &sanitized_cf_dir_path);
     }
     Ok(true) // is_supported_catalog
 }

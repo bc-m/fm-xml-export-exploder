@@ -34,10 +34,6 @@ struct ScriptStepInfo {
 pub fn create_sanitized_scripts(
     scripts_xml_out_dir_path: &Path,
     scripts_text_out_dir_path: &Path,
-    // out_dir_path: &Path,
-    // fm_file_name: &str,
-    // saxml_version: &str,
-    _script_folder_structure: Option<&crate::utils::FolderStructure>,
     flags: &Flags,
 ) {
     // Recursively process all XML files in the script_steps directory
@@ -141,11 +137,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
                         match attr.0.as_str() {
                             "id" => script_info.id = attr.1.to_string(),
-                            "name" => {
-                                script_info.name = quick_xml::escape::unescape(attr.1.as_str())
-                                    .unwrap()
-                                    .to_string()
-                            }
+                            "name" => script_info.name = attr.1.to_string(),
                             _ => {}
                         }
                     }

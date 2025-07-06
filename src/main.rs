@@ -11,6 +11,7 @@ use crate::xml_processor::explode_xml;
 
 mod catalog;
 mod config;
+mod custom_function_sanitizer;
 mod script_sanitizer;
 mod script_steps;
 mod supporting;

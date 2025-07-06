@@ -176,6 +176,7 @@ pub fn write_entity_to_file(
 ) -> PathBuf {
     let filename = join_scope_id_and_name(entity.id.as_str(), entity.name.as_str());
     let filename = escape_filename(&filename);
+    let filename = filename.trim();
 
     let output_file_path = output_dir.join(format!("{filename}.xml"));
     write_xml_file(
@@ -202,6 +203,7 @@ pub fn build_out_dir_path<R: Read + BufRead>(
 
     let domain = match qualifier {
         Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
+        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions".to_string(),
         _ => {
             match context.top_level_section {
                 Some(TopLevelSection::Structure) => {
@@ -261,6 +263,38 @@ pub fn _delete_then_create_dir(out_dir_path: &Path) {
             err
         )
     });
+}
+
+pub fn delete_output_directory(
+    context: &ProcessingContext<'_, impl Read + BufRead>,
+) -> Result<(), Error> {
+    let db_name = context.db_name.as_ref().unwrap();
+
+    match context.flags.output_tree {
+        OutputTree::Db => {
+            // Delete ./db_name/
+            let dir_to_delete = context.root_out_dir.join(db_name);
+            if dir_to_delete.exists() {
+                fs::remove_dir_all(&dir_to_delete)?;
+            }
+        }
+        OutputTree::Domain => {
+            // Delete all directories matching pattern ./*/db_name/
+            if let Ok(entries) = fs::read_dir(&context.root_out_dir) {
+                for entry in entries.flatten() {
+                    let entry_path = entry.path();
+                    if entry_path.is_dir() {
+                        let target_dir = entry_path.join(db_name);
+                        if target_dir.exists() {
+                            fs::remove_dir_all(&target_dir)?;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Ok(())
 }
 
 pub fn create_dir(dir_path: &Path) {
