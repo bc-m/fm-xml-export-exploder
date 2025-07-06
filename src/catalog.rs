@@ -6,7 +6,7 @@ use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::attributes::get_attributes;
-use crate::utils::file_utils::join_scope_id_and_name;
+use crate::utils::file_utils::{escape_filename, join_scope_id_and_name};
 use crate::utils::xml_utils::{
     end_element_to_string, end_element_to_string_from_start_element, extract_values_from_xml_paths,
     push_rest_of_element_to_skeleton, skip_rest_of_element, start_element_to_string, XmlEventType,
@@ -111,7 +111,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     if is_folder {
                         current_path.push(join_scope_id_and_name(
                             &current_id,
-                            &current_name.replace("/", " "),
+                            &escape_filename(&current_name),
                         ));
                     }
                     if is_marker {

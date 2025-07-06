@@ -176,7 +176,6 @@ pub fn write_entity_to_file(
 ) -> PathBuf {
     let filename = join_scope_id_and_name(entity.id.as_str(), entity.name.as_str());
     let filename = escape_filename(&filename);
-    let filename = filename.trim();
 
     let output_file_path = output_dir.join(format!("{filename}.xml"));
     write_xml_file(
