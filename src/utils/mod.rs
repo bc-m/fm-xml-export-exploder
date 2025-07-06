@@ -211,7 +211,7 @@ pub fn build_out_dir_path<R: Read + BufRead>(
                             && version_string_to_number(saxml_version)
                                 < version_string_to_number("2.2.2.0")
                         {
-                            "value_list_options".to_string() // Handle ValueList version-specific behavior
+                            "value_lists".to_string() // Handle ValueList version-specific behavior
                         } else {
                             catalog_type.get_config().out_folder_name.clone()
                         }
@@ -264,9 +264,7 @@ pub fn _delete_then_create_dir(out_dir_path: &Path) {
     });
 }
 
-pub fn delete_output_directory(
-    context: &ProcessingContext<'_, impl Read + BufRead>,
-) -> Result<(), Error> {
+pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) -> Result<(), Error> {
     let db_name = context.db_name.as_ref().unwrap();
 
     match context.flags.output_tree {
