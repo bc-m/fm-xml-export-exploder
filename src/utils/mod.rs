@@ -12,7 +12,8 @@ use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
     element_to_string, encode_xml_special_characters, end_element_to_string,
-    extract_values_from_xml_paths, start_element_to_string, text_element_to_string, XmlEventType,
+    extract_values_from_xml_paths, general_ref_to_string, start_element_to_string,
+    text_element_to_string, XmlEventType,
 };
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
 use crate::{OutputTree, Skeleton};
@@ -107,14 +108,15 @@ impl Entity {
                 Ok(Event::Text(e)) => {
                     self.content += text_element_to_string(&e, false).as_str();
                 }
+                Ok(Event::GeneralRef(e)) => {
+                    self.content += general_ref_to_string(&e, false).as_str();
+                }
                 Ok(Event::End(e)) => {
                     self.content += end_element_to_string(&e).as_str();
                     break;
                 }
                 Ok(Event::Eof) => break,
-                unknown_event => {
-                    panic!("Wrong read event: {unknown_event:?}");
-                }
+                _ => {}
             };
             buf.clear();
         }

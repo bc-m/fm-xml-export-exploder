@@ -4,7 +4,7 @@ use std::io::{BufRead, BufReader, Read};
 use std::path::Path;
 
 use anyhow::Result;
-use quick_xml::events::{BytesCData, BytesEnd, BytesStart, BytesText, Event};
+use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, Event};
 use quick_xml::Reader;
 
 use crate::utils::attributes::get_attributes;
@@ -86,8 +86,10 @@ pub fn local_name_to_string(local_name: &[u8]) -> String {
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
-    match e.unescape() {
-        Ok(text) => text.to_string(),
+    // In quick-xml 0.39+, entity references are delivered as separate Event::GeneralRef,
+    // so Event::Text no longer contains entities and we just need to decode
+    match e.decode() {
+        Ok(decoded) => decoded.to_string(),
         Err(_) => String::new(),
     }
 }
@@ -96,6 +98,34 @@ pub fn cdata_to_string(e: &BytesCData) -> String {
     match std::str::from_utf8(e) {
         Ok(text) => text.to_string(),
         Err(_) => String::new(),
+    }
+}
+
+/// Convert a general entity reference back to its escaped XML form
+/// e.g., BytesRef containing "quot" -> "&quot;", BytesRef containing "#09" -> "&#09;"
+pub fn general_ref_to_string(e: &BytesRef, escape: bool) -> String {
+    if escape {
+        // Keep the reference in its escaped form (e.g., &quot;, &#09;)
+        match e.decode() {
+            Ok(entity_name) => format!("&{entity_name};"),
+            Err(_) => String::new(),
+        }
+    } else {
+        // Resolve the reference to its actual character
+        // First try character references (e.g., &#65; or &#x41;)
+        if let Ok(Some(ch)) = e.resolve_char_ref() {
+            return ch.to_string();
+        }
+        // For named entity references, resolve using unescape
+        match e.decode() {
+            Ok(entity_name) => {
+                let escaped = format!("&{entity_name};");
+                quick_xml::escape::unescape(&escaped)
+                    .map(|s| s.to_string())
+                    .unwrap_or(escaped)
+            }
+            Err(_) => String::new(),
+        }
     }
 }
 
@@ -201,6 +231,16 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     XmlEventType::Text,
                 );
             }
+            Ok(Event::GeneralRef(e)) => {
+                push_line_to_skeleton(
+                    skeleton,
+                    base_depth,
+                    depth,
+                    general_ref_to_string(&e, true).as_str(),
+                    false,
+                    XmlEventType::Text,
+                );
+            }
             Ok(Event::Comment(e)) => {
                 push_line_to_skeleton(
                     skeleton,
@@ -237,6 +277,9 @@ pub fn element_to_string<R: Read + BufRead>(
             }
             Ok(Event::Text(e)) | Ok(Event::Comment(e)) => {
                 content.push_str(&text_element_to_string(&e, true));
+            }
+            Ok(Event::GeneralRef(e)) => {
+                content.push_str(&general_ref_to_string(&e, true));
             }
             Ok(Event::End(e)) => {
                 content.push_str(&end_element_to_string(&e));
@@ -348,6 +391,21 @@ pub fn extract_values_from_xml_paths(
             }
 
             Ok(Event::End(_)) => {
+                // Mark paths as resolved if we collected text content for them
+                for (i, path) in parsed_paths.iter().enumerate() {
+                    if resolved_indices.contains(&i) {
+                        continue;
+                    }
+                    if let Some(last_segment) = path.last() {
+                        if !last_segment.starts_with('@')
+                            && path.len() == current_path.len()
+                            && path.iter().zip(&current_path).all(|(a, b)| *a == b)
+                            && results[i].is_some()
+                        {
+                            resolved_indices.insert(i);
+                        }
+                    }
+                }
                 current_path.pop();
             }
 
@@ -362,15 +420,36 @@ pub fn extract_values_from_xml_paths(
                             && path.len() == current_path.len()
                             && path.iter().zip(&current_path).all(|(a, b)| *a == b)
                         {
-                            match e.unescape() {
-                                Ok(text) => {
-                                    results[i] = Some(text.to_string());
-                                    resolved_indices.insert(i);
+                            match e.decode() {
+                                Ok(decoded) => {
+                                    // Append to existing result or create new one
+                                    let entry = results[i].get_or_insert_with(String::new);
+                                    entry.push_str(&decoded);
                                 }
                                 Err(err) => {
-                                    return Err(format!("Failed to unescape text: {err}"));
+                                    return Err(format!("Failed to decode text: {err}"));
                                 }
                             }
+                        }
+                    }
+                }
+            }
+
+            Ok(Event::GeneralRef(e)) => {
+                for (i, path) in parsed_paths.iter().enumerate() {
+                    if resolved_indices.contains(&i) {
+                        continue;
+                    }
+
+                    if let Some(last_segment) = path.last() {
+                        if !last_segment.starts_with('@')
+                            && path.len() == current_path.len()
+                            && path.iter().zip(&current_path).all(|(a, b)| *a == b)
+                        {
+                            // Resolve the entity reference to its character
+                            let resolved = general_ref_to_string(&e, false);
+                            let entry = results[i].get_or_insert_with(String::new);
+                            entry.push_str(&resolved);
                         }
                     }
                 }

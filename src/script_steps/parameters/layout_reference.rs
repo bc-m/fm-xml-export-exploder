@@ -3,7 +3,7 @@ use quick_xml::Reader;
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::get_attribute;
-use crate::utils::xml_utils::text_to_string;
+use crate::utils::xml_utils::{general_ref_to_string, text_to_string};
 
 #[derive(Debug, Default)]
 pub struct LayoutReferenceContainer {
@@ -20,7 +20,10 @@ impl LayoutReferenceContainer {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Text(e)) => {
-                    label = text_to_string(&e);
+                    label.push_str(&text_to_string(&e));
+                }
+                Ok(Event::GeneralRef(e)) => {
+                    label.push_str(&general_ref_to_string(&e, false));
                 }
                 Ok(Event::End(_)) => break,
                 _ => {}
