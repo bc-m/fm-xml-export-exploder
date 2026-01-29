@@ -3,7 +3,7 @@ use std::io::{BufRead, Read};
 use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::xml_utils::{
-    cdata_element_to_string, end_element_to_string, start_element_to_string,
+    cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
     text_element_to_string, XmlEventType,
 };
 use crate::utils::{build_out_dir_path, create_dir, push_line_to_skeleton, write_xml_file};
@@ -94,6 +94,9 @@ pub fn process_supporting_element<R: Read + BufRead>(
                     text_string = text_string.replace('\t', "&#09;");
                 }
                 result.push_str(text_string.as_str());
+            }
+            Ok(Event::GeneralRef(e)) => {
+                result.push_str(general_ref_to_string(&e, true).as_str());
             }
             Ok(Event::Comment(e)) => {
                 result.push_str(text_element_to_string(&e, false).as_str());

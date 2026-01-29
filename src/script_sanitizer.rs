@@ -10,8 +10,8 @@ use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
-    cdata_element_to_string, end_element_to_string, local_name_to_string, start_element_to_string,
-    text_element_to_string,
+    cdata_element_to_string, end_element_to_string, general_ref_to_string, local_name_to_string,
+    start_element_to_string, text_element_to_string,
 };
 
 #[derive(Debug, Default)]
@@ -222,6 +222,13 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     step_info
                         .content
                         .push_str(text_element_to_string(&e, true).as_str());
+                }
+            }
+            Ok(Event::GeneralRef(e)) => {
+                if in_step {
+                    step_info
+                        .content
+                        .push_str(general_ref_to_string(&e, true).as_str());
                 }
             }
             _ => {}
