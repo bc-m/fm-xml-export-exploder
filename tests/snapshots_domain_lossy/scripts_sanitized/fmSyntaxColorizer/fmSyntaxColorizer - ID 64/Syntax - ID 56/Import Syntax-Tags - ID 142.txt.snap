@@ -20,7 +20,7 @@ Blätternmodus aktivieren [ Pause: OFF ]
 Fenster fixieren
 
 Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Do you wish to import syntax-tags from file " & Zitat( $FileName ) & " on the desktop?¶" & 
-				"IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				"IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten." ; Default Button: Cancel ; Button 2: Import ]
 Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 	# Cancel
 	Aktuelles Script verlassen []
@@ -38,7 +38,7 @@ Wenn [ $error ]
 	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls(
 					$error = 100 ; "File missing! Please first place file " & Zitat( $FileName ) & " on the desktop!" ;
 					"Error " & $error & " during the import."
-					) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+					) ; Default Button: OK ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -46,9 +46,9 @@ Ende (wenn)
 Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
 Wenn [ $n = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; Default Button: OK ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully imported." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully imported." ; Default Button: OK ]

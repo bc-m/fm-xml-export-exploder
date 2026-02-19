@@ -490,7 +490,7 @@ End If
 If [ Collapsed: OFF ; not IsEmpty ( $message )
 and PatternCount ( Get ( ApplicationVersion ) ; "Data API Engine" ) = 0
 and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 ]
-	Show Custom Dialog [ Message: $message ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Show Custom Dialog [ Message: $message ; Default Button: OK ]
 End If
 
 # Build $data and $result

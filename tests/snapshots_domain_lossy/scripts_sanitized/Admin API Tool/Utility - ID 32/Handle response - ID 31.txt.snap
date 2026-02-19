@@ -34,7 +34,7 @@ Wenn [ $my.response = "200 OK" ]
 	
 Sonst, wenn [ $my.response = "401 Unauthorized" ]
 	# try to log in
-	Eigenes Dialogfeld anzeigen [ Title: "Authentication Error" ; Message: "Please Log In. Server Replied: " & $my.response ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: "Authentication Error" ; Message: "Please Log In. Server Replied: " & $my.response ; Default Button: OK ]
 	Variable setzen [ $error ; "401" ]
 	
 Sonst
@@ -43,7 +43,7 @@ Sonst
 		# clear api update variable
 		Variable setzen [ $$API.UPDATE ; "" ]
 		Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "Server Replied: " & $my.response & "¶" &
-						"Invalid JSON response." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+						"Invalid JSON response." ; Default Button: OK ]
 		Alle Scripts abbrechen
 	Ende (wenn)
 	Eigenes Dialogfeld anzeigen [ Title: "Error" ; Message: "Server Replied: " & $my.response & "¶" &
@@ -52,7 +52,7 @@ Sonst
 					 "Error: " & JSONGetElement ( $$my.result ; "messages[0]text" );
 					
 					 ""
-					) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+					) ; Default Button: OK ]
 	Variable setzen [ $error ; $my.response ]
 	
 Ende (wenn)

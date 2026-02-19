@@ -550,7 +550,7 @@ Wenn [ $fmide_debug ODER NICHT IstLeer ( FilterElemente ( $_JSP_Keys ; "fmide_de
 					
 					¢result
 					
-					) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+					) ; Default Button: OK ; Button 2: Pause ; Button 3: Halt ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 	Sonst, wenn [ Hole ( LetzteMeldungswahl ) = 3 ]
@@ -901,7 +901,7 @@ Wenn [ IstLeer ( $continuation ) ]
 	
 Sonst
 	# # Continuation start: read the current execution state back from the continuation
-	// Eigenes Dialogfeld anzeigen [ ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	// Eigenes Dialogfeld anzeigen
 	// Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 	
 	# First, free up the MBS Schedule used to trigger the continuation call
@@ -1666,7 +1666,7 @@ Schleife (Anfang) [ Flush: Immer ]
 		Sonst, wenn [ $action_name = "GoToOriginalWindow" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#go-to-original-window
 			Wenn [ $fmide_debug ]
-				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title & " DEBUG" ; Message: "original_window_name: " & $original_window_name ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title & " DEBUG" ; Message: "original_window_name: " & $original_window_name ; Default Button: OK ]
 			Ende (wenn)
 			Fenster aktivieren [ Name: $original_window_name ]
 			
@@ -1830,14 +1830,14 @@ Schleife (Anfang) [ Flush: Immer ]
 			# Mac-only
 			Wenn [ NICHT $is_mbs ]
 				# no MBS
-				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "ScriptWorkSpace GUI interaction needs MBS plugin." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "ScriptWorkSpace GUI interaction needs MBS plugin." ; Default Button: OK ]
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			# Make sure it is at the front
 			Variable setzen [ $r ; MBS("ScriptWorkspace.BringToFront") ]
 			Wenn [ MBS("IsError") ]
 				# Can't open ScriptWorkSpace
-				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Can't open ScriptWorkSpace.." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+				Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Can't open ScriptWorkSpace.." ; Default Button: OK ]
 				Aktuelles Script verlassen []
 			Ende (wenn)
 			
@@ -1858,7 +1858,7 @@ Schleife (Anfang) [ Flush: Immer ]
 					# Try again
 					Variable setzen [ $r ; MBS("ScriptWorkspace.OpenScript" ; $script_name ) ]
 					Wenn [ MBS("IsError") ]
-						Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Error " & $r & " - Couldn't find script \"" & $script_name & "\"" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+						Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Error " & $r & " - Couldn't find script \"" & $script_name & "\"" ; Default Button: OK ]
 						Aktuelles Script verlassen []
 					Ende (wenn)
 				Ende (wenn)
@@ -1994,7 +1994,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			
 		Sonst, wenn [ $action_name = "Hello" ]
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#hello
-			Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Hello" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Eigenes Dialogfeld anzeigen [ Title: $fmide_dialog_title ; Message: "Hello" ; Default Button: Hi ]
 			
 			
 		Sonst, wenn [ $action_name = "InsertFromUrl" ]
@@ -2443,7 +2443,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 							) ; Message: Falls(
 							NICHT IstLeer ( $message ) ; $message ;
 							NICHT IstLeer ( $message_value ) ; Berechne( $message_value )
-							) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+							) ; Default Button: HoleWert( $buttons_list ; 1 ) ; Button 2: HoleWert( $buttons_list ; 2 ) ; Button 3: HoleWert( $buttons_list ; 3 ) ]
 			
 			
 		Sonst, wenn [ $action_name = "StoreKeyboardBuffer" ]

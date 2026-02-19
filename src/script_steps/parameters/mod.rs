@@ -1,8 +1,10 @@
 pub(crate) mod animation;
 pub(crate) mod boolean;
 pub(crate) mod boolean_container;
+pub(crate) mod button;
 pub(crate) mod calculation;
 pub(crate) mod comment;
+pub(crate) mod dialog_field;
 pub(crate) mod constants;
 pub(crate) mod data_source_reference;
 pub(crate) mod field_reference;
