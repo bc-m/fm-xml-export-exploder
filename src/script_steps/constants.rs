@@ -54,6 +54,7 @@ pub enum ScriptStep {
     SetMultiUser = 84,
     AllowUserAbort = 85,
     SetErrorCapture = 86,
+    ShowCustomDialog = 87,
     OpenScriptWorkspace = 88,
     Comment = 89,
     HaltScript = 90,

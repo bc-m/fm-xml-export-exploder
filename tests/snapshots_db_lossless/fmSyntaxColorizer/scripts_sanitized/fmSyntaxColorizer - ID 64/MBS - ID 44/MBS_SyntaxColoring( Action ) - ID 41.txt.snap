@@ -2,6 +2,7 @@
 source: src/tests.rs
 expression: output_content
 ---
+
 # 20160923 MrW Reset + noDialog
 # 20131204 MrW VariableChecking
 # 20131021 MrW LineNumbers
@@ -35,7 +36,7 @@ Wenn [ $action = "Reset" ]
 	Wenn [ $noDialog ]
 		Variable setzen [ $btn ; 2 ]
 	Sonst
-		Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Do you want to clear ALL colors, or reset to the MBS-Plugin factory defaults?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Do you want to clear ALL colors, or reset to the MBS-Plugin factory defaults?" ; Default Button: "Cancel" ; Button 2: "Clear" ; Button 3: "Defaults" ]
 		Variable setzen [ $btn ; Hole( LetzteMeldungswahl ) ]
 	Ende (wenn)
 	Wenn [ $btn = 1 ]
@@ -83,7 +84,7 @@ Wenn [ ($action = "Clear" ODER
 				$action = "FactoryDefaults")
 				UND NICHT $noDialog ]
 	# Reset
-	Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Do you really want to " & $actionVerb & "?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Do you really want to " & $actionVerb & "?" ; Default Button: "No" ; Button 2: "Sure" ; Button 3: "Cancel" ]
 	Wenn [ Hole( LetzteMeldungswahl ) <> 2 ]
 		# Cancel
 		Feldwert setzen [ _Home::_gHomeScreenInfo ; "" ]

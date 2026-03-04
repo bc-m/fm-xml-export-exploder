@@ -90,7 +90,7 @@ End If
 # Confirm action
 If [ Collapsed: OFF ; $errorCode = 0 ]
 	If [ Collapsed: OFF ; not $_silent ]
-		Show Custom Dialog [ Message: "Run " & $repoName & " pipeline?" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Show Custom Dialog [ Message: "Run " & $repoName & " pipeline?" ; Default Button: "OK" ; Button 2: "Cancel" ]
 		If [ Collapsed: OFF ; Get ( LastMessageChoice ) ≠ 1 ]
 			Set Variable [ $errorCode[1] ; 1 ]
 		End If
@@ -734,17 +734,17 @@ and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 ]
 	If [ Collapsed: OFF ; $errorCode = 0 ]
 		If [ Collapsed: OFF ; $gitService = "Bitbucket" ]
 			Set Variable [ $message[1] ; "The " & Quote ( $repoName ) & " pipeline is running build # " & $buildNumber & ". View in browser?" ]
-			Show Custom Dialog [ Message: $message ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Show Custom Dialog [ Message: $message ; Default Button: "Dismiss" ; Button 2: "View" ]
 			If [ Collapsed: OFF ; Get ( LastMessageChoice ) = 2 ]
 				Set Variable [ $pipelineBuildUrl[1] ; $repoUrl & "/pipelines/results/" & $buildNumber ]
 				Open URL [ In external browser: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 			End If
 		Else [ Collapsed: OFF ; Collapsed: OFF ]
 			# GitHub
-			Show Custom Dialog [ Message: "The " & Quote ( $repoName ) & " pipeline is running." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+			Show Custom Dialog [ Message: "The " & Quote ( $repoName ) & " pipeline is running." ; Default Button: "OK" ]
 		End If
 	Else If [ Collapsed: OFF ; not IsEmpty ( $message ) ]
-		Show Custom Dialog [ Title: "Error" ; Message: $message ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+		Show Custom Dialog [ Title: "Error" ; Message: $message ; Default Button: "OK" ]
 	End If
 End If
 

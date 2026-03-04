@@ -2,6 +2,7 @@
 source: src/tests.rs
 expression: output_content
 ---
+
 # 20130926 MrW Layout Bugfix
 # 20130924 MrW A more user-friendly process, where the user is informed about what palettes will be imported, and which palettes will be merged
 # 20130924 MrW Data format changed to tab, so that palettes can be transferred between fp7 and fmp12 formats.
@@ -27,7 +28,7 @@ Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; 
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	# Error
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please first place a valid fmSyntaxColorizer export file " & Zitat( $FileName ) & " on the desktop!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please first place a valid fmSyntaxColorizer export file " & Zitat( $FileName ) & " on the desktop!" ; Default Button: "Cancel" ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 	Aktuelles Script verlassen []
 	# -->
@@ -122,14 +123,14 @@ Wenn [ $error ]
 	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls(
 					$error = 100 ; "File missing! Please first place file " & Zitat( $FileName ) & " on the desktop!" ;
 					"Error " & $error & " during the import."
-					) ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+					) ; Default Button: "OK" ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
 
 Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; Default Button: "OK" ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -149,7 +150,7 @@ Schleife (Ende)
 
 Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; Default Button: "OK" ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -186,4 +187,4 @@ Wenn [ $n = 1 ]
 Sonst
 	Datensätze zeigen als [ Als Tabelle anzeigen ]
 Ende (wenn)
-Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One color-palette has been" ; $n & " color-palettes have been" ) & " successfully imported." ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One color-palette has been" ; $n & " color-palettes have been" ) & " successfully imported." ; Default Button: "OK" ]
