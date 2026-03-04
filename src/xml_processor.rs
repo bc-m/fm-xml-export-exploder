@@ -15,8 +15,8 @@ use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::{end_element_to_string, start_element_to_string, XmlEventType};
 use crate::utils::{
-    build_out_dir_path, delete_output_directory, migrate_old_custom_functions_if_needed,
-    version_string_to_number, write_xml_file, FolderStructure,
+    build_out_dir_path, delete_output_directory, version_string_to_number, write_xml_file,
+    FolderStructure,
 };
 use crate::utils::{create_dir, push_line_to_skeleton};
 use crate::Skeleton;
@@ -110,7 +110,6 @@ pub fn explode_xml(
                     0 => {
                         process_root_element(&mut context, &start_tag)?;
                         create_dir(&context.root_out_dir);
-                        migrate_old_custom_functions_if_needed(&context)?;
                         delete_output_directory(&context)?;
                     }
                     1 => {

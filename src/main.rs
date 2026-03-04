@@ -6,6 +6,7 @@ use rayon::prelude::*;
 
 use crate::config::Flags;
 use crate::utils::file_utils::valid_dir_or_throw;
+use crate::utils::migrate_old_custom_functions_if_needed;
 use crate::utils::xml_utils::XmlEventType;
 use crate::xml_processor::explode_xml;
 
@@ -80,6 +81,8 @@ fn main() -> Result<()> {
         .filter_map(|entry| entry.ok().map(|e| e.path())) // Filter out directories and unwrap results
         .filter(|path| path.is_file() && path.extension().unwrap_or_default() == "xml") // Filter XML files
         .collect::<Vec<_>>(); // Collect paths into a vector
+
+    migrate_old_custom_functions_if_needed(&out_dir, &flags)?;
 
     println!("Start processing {} files...", paths.len());
 

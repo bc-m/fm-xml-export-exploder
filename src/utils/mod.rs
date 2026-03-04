@@ -306,15 +306,13 @@ pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) ->
 /// In Domain mode, migrate old-format `custom_functions/` output (pre-2.2.3.4 style)
 /// where it contained `.txt` files directly instead of `.xml` files.
 /// Renames the entire `custom_functions/` → `custom_functions_sanitized/` so git can track the rename.
-pub fn migrate_old_custom_functions_if_needed(
-    context: &ProcessingContext<'_, impl BufRead>,
-) -> Result<(), Error> {
-    if matches!(context.flags.output_tree, OutputTree::Db) {
+pub fn migrate_old_custom_functions_if_needed(out_dir: &Path, flags: &Flags) -> Result<(), Error> {
+    if matches!(flags.output_tree, OutputTree::Db) {
         return Ok(());
     }
 
-    let cf_dir = context.root_out_dir.join("custom_functions");
-    let cf_sanitized_dir = context.root_out_dir.join("custom_functions_sanitized");
+    let cf_dir = out_dir.join("custom_functions");
+    let cf_sanitized_dir = out_dir.join("custom_functions_sanitized");
 
     // Only migrate if old dir exists and new dir does not
     if !cf_dir.exists() || cf_sanitized_dir.exists() {
