@@ -47,8 +47,7 @@ impl DialogField {
                         b"Boolean" => {
                             let is_password =
                                 get_attribute(&inner, "type").as_deref() == Some("Password");
-                            let is_true =
-                                get_attribute(&inner, "value").as_deref() == Some("True");
+                            let is_true = get_attribute(&inner, "value").as_deref() == Some("True");
                             if is_password && is_true {
                                 item.password = true;
                             }

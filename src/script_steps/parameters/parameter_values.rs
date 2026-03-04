@@ -178,9 +178,7 @@ impl ParameterValues {
                         }
                         "Field1" | "Field2" | "Field3" => {
                             let field = DialogField::from_xml(reader, &e);
-                            if let Some(display) =
-                                field.display(parameter_type.as_str())
-                            {
+                            if let Some(display) = field.display(parameter_type.as_str()) {
                                 item.parameters.push(display);
                             }
                             depth -= 1;
