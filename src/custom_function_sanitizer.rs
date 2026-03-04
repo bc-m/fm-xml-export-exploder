@@ -123,9 +123,11 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 }
             }
             Ok(Event::CData(e)) => {
-                let is_calculation_text = path_stack.len() >= 2
-                    && path_stack[path_stack.len() - 2].as_slice() == b"Calculation"
-                    && path_stack[path_stack.len() - 1].as_slice() == b"Text";
+                let is_calculation_text = path_stack
+                    .iter()
+                    .rev()
+                    .zip(&[&b"Text"[..], &b"Calculation"[..]])
+                    .all(|(a, b)| a.as_slice() == *b);
                 if is_calculation_text {
                     cf_info.text = cdata_to_string(&e);
                     break;

@@ -12,7 +12,8 @@ use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
     element_to_string, encode_xml_special_characters, end_element_to_string,
-    extract_values_from_xml_paths, start_element_to_string, text_element_to_string, XmlEventType,
+    extract_values_from_xml_paths, general_ref_to_string, start_element_to_string,
+    text_element_to_string, XmlEventType,
 };
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
 use crate::{OutputTree, Skeleton};
@@ -107,14 +108,15 @@ impl Entity {
                 Ok(Event::Text(e)) => {
                     self.content += text_element_to_string(&e, false).as_str();
                 }
+                Ok(Event::GeneralRef(e)) => {
+                    self.content += general_ref_to_string(&e, true).as_str();
+                }
                 Ok(Event::End(e)) => {
                     self.content += end_element_to_string(&e).as_str();
                     break;
                 }
                 Ok(Event::Eof) => break,
-                unknown_event => {
-                    panic!("Wrong read event: {unknown_event:?}");
-                }
+                _ => {}
             };
             buf.clear();
         }
@@ -322,28 +324,32 @@ pub fn migrate_old_custom_functions_if_needed(
     // Check contents recursively: must have .txt files and NO .xml files
     let mut has_txt = false;
     let mut has_xml = false;
-    fn check_dir(dir: &Path, has_txt: &mut bool, has_xml: &mut bool) {
-        if let Ok(entries) = fs::read_dir(dir) {
-            for entry in entries.flatten() {
-                let path = entry.path();
-                if path.is_dir() {
-                    check_dir(&path, has_txt, has_xml);
-                } else if path.is_file() {
-                    match path.extension().and_then(|e| e.to_str()) {
-                        Some("txt") => *has_txt = true,
-                        Some("xml") => *has_xml = true,
-                        _ => {}
-                    }
+    fn check_dir(dir: &Path, has_txt: &mut bool, has_xml: &mut bool) -> Result<(), Error> {
+        for entry in fs::read_dir(dir)? {
+            let path = entry?.path();
+            if path.is_dir() {
+                check_dir(&path, has_txt, has_xml)?;
+            } else if path.is_file() {
+                match path.extension().and_then(|e| e.to_str()) {
+                    Some("txt") => *has_txt = true,
+                    Some("xml") => *has_xml = true,
+                    _ => {}
                 }
             }
         }
+        Ok(())
     }
-    check_dir(&cf_dir, &mut has_txt, &mut has_xml);
+    check_dir(&cf_dir, &mut has_txt, &mut has_xml)?;
 
     if !has_txt || has_xml {
         return Ok(());
     }
 
+    println!(
+        "Migrating {} → {}",
+        cf_dir.display(),
+        cf_sanitized_dir.display()
+    );
     fs::rename(&cf_dir, &cf_sanitized_dir)?;
     Ok(())
 }
