@@ -2,6 +2,7 @@
 source: src/tests.rs
 expression: output_content
 ---
+
 # 20211104 MrW Reset MBS VarCheck Options
 # 20210916 MrW Reset MBS Extra Options - including Calculation font size! No more massive calculation fonts!
 # 20200706 MrW Added Collections
@@ -41,7 +42,7 @@ Script ausführen [ Aus Liste ; "Apply Palette" ]
 Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
 Wenn [ Hole( AnzahlDatensätzeGesamt ) = 0 ]
 	Neuer Datensatz/Abfrage
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, home record was missing, please check!" ; Default Button: OK ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, home record was missing, please check!" ; Default Button: "OK" ]
 Sonst, wenn [ Hole( AnzahlDatensätzeGesamt ) = 1 ]
 	Alle Datensätze anzeigen
 Sonst
@@ -50,7 +51,7 @@ Sonst
 	Aktuellen Datens. ausschließen
 	Alle Datensätze löschen [ Mit Dialog: OFF ]
 	Alle Datensätze anzeigen
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, too many home records!¶Extra records deleted, please check." ; Default Button: OK ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) & " " & Hole( DateiName ) ; Message: "Warning, too many home records!¶Extra records deleted, please check." ; Default Button: "OK" ]
 Ende (wenn)
 
 # Clear globals
@@ -102,7 +103,7 @@ Werkzeugleisten ein-/ausblenden [ Fixieren: OFF ; Mit Datensatz-bearbeiten-Werkz
 
 Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Please remember to:¶" &
 				" 1. remove any private syntax coloring, and¶" &
-				" 2. tidy the scripts-folders away" ; Default Button: OK ; Button 2: HALT ]
+				" 2. tidy the scripts-folders away" ; Default Button: "OK" ; Button 2: "HALT" ]
 Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
 	# 2: HALT
 	Alle Scripts abbrechen

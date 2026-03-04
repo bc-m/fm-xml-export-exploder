@@ -36,7 +36,7 @@ Script ausführen [ Aus Liste ; "Handle response" ]
 
 Variable setzen [ $my.certpath ; JSONGetElement ( $$my.result ; "response.csrFilePath" ) ]
 Wenn [ NICHT IstLeer ( $my.certpath ) UND ZeichenLinks ( $my.certpath ; 1 ) ≠ "?" ]
-	Eigenes Dialogfeld anzeigen [ Title: "Certificate Request Created" ; Message: "CSR located at " & $my.certpath ; Default Button: OK ]
+	Eigenes Dialogfeld anzeigen [ Title: "Certificate Request Created" ; Message: "CSR located at " & $my.certpath ; Default Button: "OK" ]
 Ende (wenn)
 
 # -------------------------------------------------------------

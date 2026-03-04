@@ -12,7 +12,7 @@ Fehleraufzeichnung setzen [ ON ]
 
 # check required values
 Wenn [ IstLeer ( PUB__publickeys::name ) ODER IstLeer ( PUB__publickeys::privateKey ) ]
-	Eigenes Dialogfeld anzeigen [ Title: "Alert" ; Message: "Name or Private Key is missing." ; Default Button: OK ]
+	Eigenes Dialogfeld anzeigen [ Title: "Alert" ; Message: "Name or Private Key is missing." ; Default Button: "OK" ]
 	Aktuelles Script verlassen [  Wahr ]
 Ende (wenn)
 

@@ -2,6 +2,7 @@
 source: src/tests.rs
 expression: output_content
 ---
+
 # 20131104 MrW Kleine Korrektur
 # 20121126 MrW Nice!
 
@@ -20,7 +21,7 @@ Blätternmodus aktivieren [ Pause: OFF ]
 Fenster fixieren
 
 Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Do you wish to import syntax-tags from file " & Zitat( $FileName ) & " on the desktop?¶" & 
-				"IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten." ; Default Button: Cancel ; Button 2: Import ]
+				"IMPORTANT: Syntax-tags of the same name will be merged together and colors overwritten." ; Default Button: "Cancel" ; Button 2: "Import" ]
 Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 	# Cancel
 	Aktuelles Script verlassen []
@@ -38,7 +39,7 @@ Wenn [ $error ]
 	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls(
 					$error = 100 ; "File missing! Please first place file " & Zitat( $FileName ) & " on the desktop!" ;
 					"Error " & $error & " during the import."
-					) ; Default Button: OK ]
+					) ; Default Button: "OK" ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
@@ -46,9 +47,9 @@ Ende (wenn)
 Variable setzen [ $n ; Hole( AnzahlGefundeneDatensätze ) ]
 Wenn [ $n = 0 ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
-	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; Default Button: OK ]
+	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Nothing was imported! Better luck next time!" ; Default Button: "OK" ]
 	Aktuelles Script verlassen []
 	# -->
 Ende (wenn)
 
-Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully imported." ; Default Button: OK ]
+Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: Falls( $n = 1 ; "One syntax-tag has been" ; $n & " syntax-tags have been" ) & " successfully imported." ; Default Button: "OK" ]

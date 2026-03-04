@@ -7,6 +7,7 @@ use crate::utils::xml_utils::cdata_to_string;
 #[derive(Debug, Default)]
 pub struct Button {
     pub label: Option<String>,
+    pub label_from_cdata: bool,
     #[allow(dead_code)]
     pub commit: bool,
 }
@@ -14,6 +15,7 @@ pub struct Button {
 impl Button {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Button {
         let mut label = get_attribute(e, "value");
+        let mut label_from_cdata = false;
         let mut commit = false;
         let mut in_text = false;
         let mut depth = 1;
@@ -40,6 +42,7 @@ impl Button {
                         let text = cdata_to_string(&cdata);
                         if !text.is_empty() {
                             label = Some(text);
+                            label_from_cdata = true;
                         }
                     }
                 }
@@ -57,7 +60,11 @@ impl Button {
             buf.clear();
         }
 
-        Button { label, commit }
+        Button {
+            label,
+            label_from_cdata,
+            commit,
+        }
     }
 
     pub fn display(&self, button_type: &str) -> Option<String> {
@@ -73,7 +80,11 @@ impl Button {
             _ => button_type,
         };
 
-        Some(format!("{name}: {label}"))
+        if self.label_from_cdata {
+            Some(format!("{name}: {label}"))
+        } else {
+            Some(format!("{name}: \"{label}\""))
+        }
     }
 }
 
@@ -131,7 +142,7 @@ mod tests {
         assert!(button.commit);
         assert_eq!(
             button.display("Button2"),
-            Some("Button 2: Save".to_string())
+            Some(r#"Button 2: "Save""#.to_string())
         );
     }
 
@@ -172,7 +183,7 @@ mod tests {
         let button = Button::from_xml(&mut reader, &element);
         assert_eq!(
             button.display("Button3"),
-            Some("Button 3: Maybe".to_string())
+            Some(r#"Button 3: "Maybe""#.to_string())
         );
     }
 }

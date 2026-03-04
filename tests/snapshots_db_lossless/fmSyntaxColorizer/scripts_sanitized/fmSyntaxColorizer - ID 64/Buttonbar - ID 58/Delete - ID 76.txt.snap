@@ -2,6 +2,7 @@
 source: src/tests.rs
 expression: output_content
 ---
+
 # 20121101 MrW 
 
 AnwenderAbbruchZulassen setzen [ OFF ]
@@ -18,7 +19,7 @@ Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
 Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
 	# Delete color-palette
 	Wenn [ _Palette::__ID = 1 ]
-		Eigenes Dialogfeld anzeigen [ Title: "Delete" ; Message: "You may not delete the default colors palette!" ; Default Button: OK ]
+		Eigenes Dialogfeld anzeigen [ Title: "Delete" ; Message: "You may not delete the default colors palette!" ; Default Button: "OK" ]
 		Aktuelles Script verlassen []
 		# -->
 	Ende (wenn)

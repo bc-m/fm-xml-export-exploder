@@ -2,6 +2,8 @@
 source: src/tests.rs
 expression: output_content
 ---
+
+
 # # Perform Script by Name
 
 # normal = "From list"
@@ -66,7 +68,7 @@ Favoriten öffnen
 Variable setzen [ $Title ; "Test" ]
 Variable setzen [ $Message ; "Test" ]
 # @var $Input1,$Input2,$Input3
-Eigenes Dialogfeld anzeigen [ Title: $Title ; Message: $Message ; Default Button: OK ; Button 2: Cancel ; Input 1: $Input1 ; Label 1: "Var 1" ; Input 2: $Input2 ; Label 2: "Var 2" ; Input 3: $Input3 ]
+Eigenes Dialogfeld anzeigen [ Title: $Title ; Message: $Message ; Default Button: "OK" ; Button 2: "Cancel" ; Input 1: $Input1 ; Label 1: "Var 1" ; Input 2: $Input2 ; Label 2: "Var 2" ; Input 3: $Input3 ]
 
 # External steps
 

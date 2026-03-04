@@ -2,6 +2,7 @@
 source: src/tests.rs
 expression: output_content
 ---
+
 # 20210916 MrW Removed lingering pesky German :D
 # 20121030 MrW 
 
@@ -13,7 +14,7 @@ Ende (wenn)
 
 Wenn [ _Syntax::ColorName = "++New++" ]
 	Feldwert setzen [ _Syntax::ColorName ; _Syntax::Command_EN ]
-	Eigenes Dialogfeld anzeigen [ Title: "Define New Color" ; Message: "What name should the new color have?" ; Default Button: OK ; Button 2: Cancel ; Input 1: _Syntax::ColorName ; Label 1: "Color name" ]
+	Eigenes Dialogfeld anzeigen [ Title: "Define New Color" ; Message: "What name should the new color have?" ; Default Button: "OK" ; Button 2: "Cancel" ; Input 1: _Syntax::ColorName ; Label 1: "Color name" ]
 	Wenn [ Hole( LetzteMeldungswahl ) = 2 ]
 		# Cancel
 		Verwerfe Änderung Datens./Abfrage [ Mit Dialog: OFF ]
