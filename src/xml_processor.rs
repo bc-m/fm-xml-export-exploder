@@ -233,7 +233,7 @@ fn process_catalog_elements<R: Read + BufRead>(
     context.catalog_type = Some(catalog_type);
 
     let options_for_value_lists_deprecated = catalog_type == CatalogType::OptionsForValueLists
-        && context.saxml_version_num.unwrap_or(0) >= version_string_to_number("2.3.3.4");
+        && context.saxml_version_num.unwrap_or(0) >= version_string_to_number("2.2.3.4");
     if options_for_value_lists_deprecated {
         return Ok(true);
     }
