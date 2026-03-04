@@ -8,12 +8,13 @@ use quick_xml::events::{BytesStart, Event};
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name};
 use crate::utils::xml_utils::{
-    end_element_to_string, end_element_to_string_from_start_element, extract_values_from_xml_paths,
-    push_rest_of_element_to_skeleton, skip_rest_of_element, start_element_to_string, XmlEventType,
+    XmlEventType, end_element_to_string, end_element_to_string_from_start_element,
+    extract_values_from_xml_paths, push_rest_of_element_to_skeleton, skip_rest_of_element,
+    start_element_to_string,
 };
 use crate::utils::{
-    build_out_dir_path, create_dir, move_to_subfolder, write_rest_of_element_to_file,
-    FolderStructure,
+    FolderStructure, build_out_dir_path, create_dir, move_to_subfolder,
+    write_rest_of_element_to_file,
 };
 use crate::utils::{push_line_to_skeleton, rename_file_if_necessary};
 use crate::xml_processor::ProcessingContext;
@@ -336,7 +337,7 @@ fn update_folder_structure(
     current_id: &str,
     current_path: &[String],
 ) {
-    if let Some(ref mut folder_structure) = folder_structure_result {
+    if let Some(folder_structure) = folder_structure_result {
         folder_structure
             .item_paths
             .insert(current_id.to_string(), current_path.to_vec());
