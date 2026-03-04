@@ -7,6 +7,7 @@ use crate::utils::xml_utils::cdata_to_string;
 #[derive(Debug, Default)]
 pub struct Button {
     pub label: Option<String>,
+    #[allow(dead_code)]
     pub commit: bool,
 }
 
