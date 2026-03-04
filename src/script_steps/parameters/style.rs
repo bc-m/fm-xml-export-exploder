@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::attributes::get_attribute;
 
@@ -44,8 +44,8 @@ impl Style {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::style::Style;
 

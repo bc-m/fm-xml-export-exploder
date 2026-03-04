@@ -150,12 +150,11 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     uses_folders,
                     &current_path,
                 );
-                if let Some(subfolder_dir_path) = subfolder_dir_path {
-                    if subfolder_dir_path != out_dir_path_base
-                        && !subfolder_dir_path.to_string_lossy().is_empty()
-                    {
-                        let _ = move_to_subfolder(&file_path, &subfolder_dir_path);
-                    }
+                if let Some(subfolder_dir_path) = subfolder_dir_path
+                    && subfolder_dir_path != out_dir_path_base
+                    && !subfolder_dir_path.to_string_lossy().is_empty()
+                {
+                    let _ = move_to_subfolder(&file_path, &subfolder_dir_path);
                 }
 
                 update_folder_structure(&mut folder_structure_result, &current_id, &current_path);

@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
 
@@ -21,10 +21,10 @@ impl Select {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if e.name().as_ref() == b"Calculation" {
-                        if let Ok(param_value) = Calculation::from_xml(reader, &e) {
-                            if let Some(display) = param_value.display() {
-                                item.text = Some(format!("Name: {display}"));
-                            }
+                        if let Ok(param_value) = Calculation::from_xml(reader, &e)
+                            && let Some(display) = param_value.display()
+                        {
+                            item.text = Some(format!("Name: {display}"));
                         }
                         depth -= 1;
                     }
@@ -50,8 +50,8 @@ impl Select {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::select::Select;
 

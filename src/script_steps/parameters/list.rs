@@ -1,8 +1,8 @@
+use quick_xml::Reader;
 use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
-use quick_xml::Reader;
 
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
+use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]
@@ -26,14 +26,13 @@ impl List {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if let b"List" = e.name().as_ref() {
-                        if let Some(name) = get_attribute(&e, "name") {
-                            if let Ok(name) = unescape(name.as_str()) {
-                                item.name = match id_to_script_step(step_id) {
-                                    ScriptStep::LoopStart => Some(format!("Flush: {name}")),
-                                    _ => Some(name.to_string()),
-                                }
-                            }
+                    if let b"List" = e.name().as_ref()
+                        && let Some(name) = get_attribute(&e, "name")
+                        && let Ok(name) = unescape(name.as_str())
+                    {
+                        item.name = match id_to_script_step(step_id) {
+                            ScriptStep::LoopStart => Some(format!("Flush: {name}")),
+                            _ => Some(name.to_string()),
                         }
                     }
                 }
@@ -58,8 +57,8 @@ impl List {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::list::List;
 

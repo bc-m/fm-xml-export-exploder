@@ -43,8 +43,8 @@ pub fn get_attribute(element: &BytesStart, attribute_name: &str) -> Option<Strin
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::utils;
 

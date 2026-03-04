@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::cdata_to_string;
@@ -90,8 +90,8 @@ impl Button {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use super::Button;
 

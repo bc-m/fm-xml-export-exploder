@@ -1,6 +1,6 @@
 use crate::utils::attributes::parse_unescaped_attribute;
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 #[derive(Debug, Default)]
 pub struct DataSourceReference {

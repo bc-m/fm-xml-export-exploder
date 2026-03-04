@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::boolean_container::BooleanContainer;
 use crate::script_steps::parameters::calculation::Calculation;
@@ -39,10 +39,10 @@ impl WindowReference {
                     let element_name = e.name();
                     match element_name.as_ref() {
                         b"Style" => {
-                            if let Ok(param_value) = Style::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    window_reference.parameters.push(display);
-                                }
+                            if let Ok(param_value) = Style::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                window_reference.parameters.push(display);
                             }
                             depth -= 1;
                         }
@@ -56,29 +56,29 @@ impl WindowReference {
                             depth -= 1;
                         }
                         b"Select" => {
-                            if let Ok(param_value) = Select::from_xml(reader, &e) {
-                                if let Some(calc) = param_value.display() {
-                                    window_reference.parameters.push(calc);
-                                }
+                            if let Ok(param_value) = Select::from_xml(reader, &e)
+                                && let Some(calc) = param_value.display()
+                            {
+                                window_reference.parameters.push(calc);
                             }
                             depth -= 1;
                         }
                         b"Name" | b"height" | b"width" | b"top" | b"left" | b"Text" => {
-                            if let Ok(param_value) = Calculation::from_xml(reader, &e) {
-                                if let Some(calc) = param_value.display() {
-                                    let name = local_name_to_string(element_name.as_ref());
-                                    let name = first_char_uppercase(name.as_str());
-                                    window_reference.parameters.push(format!("{name}: {calc}"));
-                                }
+                            if let Ok(param_value) = Calculation::from_xml(reader, &e)
+                                && let Some(calc) = param_value.display()
+                            {
+                                let name = local_name_to_string(element_name.as_ref());
+                                let name = first_char_uppercase(name.as_str());
+                                window_reference.parameters.push(format!("{name}: {calc}"));
                             }
                             depth -= 1;
                         }
                         b"Close" | b"Minimize" | b"Maximize" | b"Resize" | b"MenuBar"
                         | b"Toolbar" | b"DimParentWindow" => {
-                            if let Ok(param_value) = BooleanContainer::from_xml(reader, &e) {
-                                if let Some(calc) = param_value.display() {
-                                    window_reference.parameters.push(calc);
-                                }
+                            if let Ok(param_value) = BooleanContainer::from_xml(reader, &e)
+                                && let Some(calc) = param_value.display()
+                            {
+                                window_reference.parameters.push(calc);
                             }
                             depth -= 1;
                         }
@@ -106,8 +106,8 @@ impl WindowReference {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::window_reference::WindowReference;
 

@@ -8,10 +8,10 @@ mod tests {
     use similar_asserts::assert_eq;
     use walkdir::WalkDir;
 
+    use crate::OutputTree;
     use crate::config::Flags;
     use crate::utils::file_utils::escape_filename;
     use crate::xml_processor::explode_xml;
-    use crate::OutputTree;
 
     #[test]
     fn test_escape_filename() {

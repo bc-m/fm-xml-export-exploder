@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::xml_utils::{local_name_to_string, text_to_string};
 
@@ -80,8 +80,8 @@ impl BooleanContainer {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::boolean_container::BooleanContainer;
 

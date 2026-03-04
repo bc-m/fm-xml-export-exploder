@@ -3,8 +3,8 @@ use std::io::{BufRead, Read};
 use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::xml_utils::{
-    cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
-    text_element_to_string, XmlEventType,
+    XmlEventType, cdata_element_to_string, end_element_to_string, general_ref_to_string,
+    start_element_to_string, text_element_to_string,
 };
 use crate::utils::{build_out_dir_path, create_dir, push_line_to_skeleton, write_xml_file};
 use crate::xml_processor::ProcessingContext;

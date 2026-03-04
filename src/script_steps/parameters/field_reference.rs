@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::{get_attribute, get_attributes};
@@ -116,8 +116,8 @@ impl FieldReference {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::field_reference::FieldReference;
 

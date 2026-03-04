@@ -1,7 +1,7 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
+use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::animation::Animation;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::button::Button;
@@ -58,76 +58,75 @@ impl ParameterValues {
                     let parameter_type = parameter_type.unwrap();
                     match parameter_type.as_str() {
                         "Animation" => {
-                            if let Ok(param_value) = Animation::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Ok(param_value) = Animation::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "Boolean" => {
-                            if let Ok(param_value) = Boolean::from_xml(reader, &e, step_id) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Ok(param_value) = Boolean::from_xml(reader, &e, step_id)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "List" => {
-                            if let Ok(param_value) = List::from_xml(reader, &e, step_id) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Ok(param_value) = List::from_xml(reader, &e, step_id)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "Target" => {
-                            if let Ok(param_value) = Target::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(format!(
-                                        "{}: {}",
-                                        parameter_type.as_str(),
-                                        display
-                                    ));
-                                }
+                            if let Ok(param_value) = Target::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(format!(
+                                    "{}: {}",
+                                    parameter_type.as_str(),
+                                    display
+                                ));
                             }
                             depth -= 1;
                         }
                         "Calculation" => {
-                            if let Ok(param_value) = Calculation::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Ok(param_value) = Calculation::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo"
                         | "Title" | "Message" => {
-                            if let Ok(param_value) = Calculation::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(format!(
-                                        "{}: {}",
-                                        parameter_type.as_str(),
-                                        display
-                                    ));
-                                }
+                            if let Ok(param_value) = Calculation::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(format!(
+                                    "{}: {}",
+                                    parameter_type.as_str(),
+                                    display
+                                ));
                             }
                             depth -= 1;
                         }
                         "LayoutReferenceContainer" => {
                             if let Ok(param_value) = LayoutReferenceContainer::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
                             {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "FieldReference" => {
-                            if let Ok(param_value) = FieldReference::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Ok(param_value) = FieldReference::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
@@ -138,34 +137,34 @@ impl ParameterValues {
                             depth -= 1;
                         }
                         "WindowReference" => {
-                            if let Some(param_value) = WindowReference::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Some(param_value) = WindowReference::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "Related" => {
-                            if let Some(param_value) = Related::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Some(param_value) = Related::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "ScriptReference" => {
-                            if let Some(param_value) = ScriptReference::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Some(param_value) = ScriptReference::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
                         "DataSourceReference" => {
-                            if let Some(param_value) = DataSourceReference::from_xml(reader, &e) {
-                                if let Some(display) = param_value.display() {
-                                    item.parameters.push(display);
-                                }
+                            if let Some(param_value) = DataSourceReference::from_xml(reader, &e)
+                                && let Some(display) = param_value.display()
+                            {
+                                item.parameters.push(display);
                             }
                             depth -= 1;
                         }
@@ -211,14 +210,12 @@ impl ParameterValues {
                     .retain(|param| !param.ends_with(": ON") && !param.ends_with(": OFF"));
 
                 let mut iter = modified_parameters.iter().rev();
-                if let Some(last) = iter.next() {
-                    if last.starts_with("ErrorMessage") {
-                        if let Some(second_last) = iter.next() {
-                            if !second_last.starts_with("ErrorCode") {
-                                modified_parameters.pop();
-                            }
-                        }
-                    }
+                if let Some(last) = iter.next()
+                    && last.starts_with("ErrorMessage")
+                    && let Some(second_last) = iter.next()
+                    && !second_last.starts_with("ErrorCode")
+                {
+                    modified_parameters.pop();
                 }
 
                 Some(modified_parameters.join(" ; "))
@@ -247,8 +244,8 @@ impl ParameterValues {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::parameter_values::ParameterValues;
 

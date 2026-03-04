@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::target::Target;
@@ -81,10 +81,10 @@ impl DialogField {
 
         let mut parts = vec![format!("Input {number}: {target}")];
 
-        if let Some(label) = &self.label {
-            if !label.is_empty() {
-                parts.push(format!("Label {number}: {label}"));
-            }
+        if let Some(label) = &self.label
+            && !label.is_empty()
+        {
+            parts.push(format!("Label {number}: {label}"));
         }
 
         if self.password {
@@ -97,8 +97,8 @@ impl DialogField {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use super::DialogField;
 

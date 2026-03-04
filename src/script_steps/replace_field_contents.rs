@@ -1,5 +1,5 @@
-use quick_xml::events::Event;
 use quick_xml::Reader;
+use quick_xml::events::Event;
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::field_reference::FieldReference;
@@ -53,11 +53,11 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"List" => {
                     if list_name_to_input_dialog_label {
-                        if get_attribute(&e, "value").unwrap() == "True" {
-                            if let Some(last_param) = params.last_mut() {
-                                last_param.0.clone_from(&last_param.1);
-                                last_param.1 = get_attribute(&e, "name").unwrap().to_string();
-                            }
+                        if get_attribute(&e, "value").unwrap() == "True"
+                            && let Some(last_param) = params.last_mut()
+                        {
+                            last_param.0.clone_from(&last_param.1);
+                            last_param.1 = get_attribute(&e, "name").unwrap().to_string();
                         }
                         continue;
                     }

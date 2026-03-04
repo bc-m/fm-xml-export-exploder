@@ -1,6 +1,6 @@
+use quick_xml::Reader;
 use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
-use quick_xml::Reader;
 
 use crate::utils::attributes::get_attribute;
 

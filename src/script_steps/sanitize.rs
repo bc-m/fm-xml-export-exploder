@@ -1,7 +1,7 @@
-use quick_xml::events::Event;
 use quick_xml::Reader;
+use quick_xml::events::Event;
 
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
+use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::parameter_values::ParameterValues;
 use crate::utils::attributes::get_attribute;
 

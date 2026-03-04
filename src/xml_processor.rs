@@ -2,24 +2,24 @@ use std::io::{BufRead, BufReader, Read};
 use std::path::{Path, PathBuf};
 use std::{fs::File, time::Instant};
 
-use anyhow::{bail, Context, Error, Result};
+use anyhow::{Context, Error, Result, bail};
 use encoding_rs_io::DecodeReaderBytes;
 use quick_xml::events::{BytesEnd, BytesStart, Event};
 use quick_xml::reader::Reader;
 
+use crate::Skeleton;
 use crate::catalog::xml_explode_catalog;
 use crate::config::{CatalogType, Flags};
 use crate::custom_function_sanitizer::create_sanitized_custom_functions;
 use crate::script_sanitizer::create_sanitized_scripts;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
-use crate::utils::xml_utils::{end_element_to_string, start_element_to_string, XmlEventType};
+use crate::utils::xml_utils::{XmlEventType, end_element_to_string, start_element_to_string};
 use crate::utils::{
-    build_out_dir_path, delete_output_directory, version_string_to_number, write_xml_file,
-    FolderStructure,
+    FolderStructure, build_out_dir_path, delete_output_directory, version_string_to_number,
+    write_xml_file,
 };
 use crate::utils::{create_dir, push_line_to_skeleton};
-use crate::Skeleton;
 
 pub enum TopLevelSection {
     Structure,

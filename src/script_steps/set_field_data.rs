@@ -1,5 +1,5 @@
-use quick_xml::events::Event;
 use quick_xml::Reader;
+use quick_xml::events::Event;
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::field_reference::FieldReference;

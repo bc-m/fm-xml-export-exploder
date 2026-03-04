@@ -11,9 +11,9 @@ use crate::config::{CatalogType, Flags};
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
-    element_to_string, encode_xml_special_characters, end_element_to_string,
+    XmlEventType, element_to_string, encode_xml_special_characters, end_element_to_string,
     extract_values_from_xml_paths, general_ref_to_string, start_element_to_string,
-    text_element_to_string, XmlEventType,
+    text_element_to_string,
 };
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
 use crate::{OutputTree, Skeleton};

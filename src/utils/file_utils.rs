@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Error, Result};
+use anyhow::{Error, Result, anyhow};
 use std::path::PathBuf;
 
 /// Validate that a path exists and is a directory

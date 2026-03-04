@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::utils::attributes::get_attribute;
@@ -45,15 +45,15 @@ impl Related {
                             depth -= 1;
                         }
                         b"Options" => {
-                            if let Some(show_related) = get_attribute(&e, "ShowRelated") {
-                                if show_related == "True" {
-                                    item.parameters.push("Show related".to_string())
-                                }
+                            if let Some(show_related) = get_attribute(&e, "ShowRelated")
+                                && show_related == "True"
+                            {
+                                item.parameters.push("Show related".to_string())
                             };
-                            if let Some(match_found_set) = get_attribute(&e, "matchFoundSet") {
-                                if match_found_set == "True" {
-                                    item.parameters.push("Match found set".to_string())
-                                }
+                            if let Some(match_found_set) = get_attribute(&e, "matchFoundSet")
+                                && match_found_set == "True"
+                            {
+                                item.parameters.push("Match found set".to_string())
                             };
                         }
                         _ => {}

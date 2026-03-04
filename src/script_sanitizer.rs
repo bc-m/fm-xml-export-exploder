@@ -5,7 +5,7 @@ use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
 use crate::config::Flags;
-use crate::script_steps::constants::{id_to_script_step, ScriptStep};
+use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
 use crate::utils::write_text_file;

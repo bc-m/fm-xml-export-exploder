@@ -4,8 +4,8 @@ use std::io::{BufRead, BufReader, Read};
 use std::path::Path;
 
 use anyhow::Result;
-use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, Event};
 
 use crate::utils::attributes::get_attributes;
 use crate::utils::push_line_to_skeleton;
@@ -358,33 +358,32 @@ pub fn extract_values_from_xml_paths(
                         continue;
                     }
 
-                    if let Some(last_segment) = path.last() {
-                        if last_segment.starts_with('@') && path.len() == current_path.len() + 1 {
-                            let attr_name = &last_segment[1..];
-                            if path[..path.len() - 1]
-                                .iter()
-                                .copied()
-                                .eq(current_path.iter().map(|s| s.as_str()))
+                    if let Some(last_segment) = path.last()
+                        && last_segment.starts_with('@')
+                        && path.len() == current_path.len() + 1
+                    {
+                        let attr_name = &last_segment[1..];
+                        if path[..path.len() - 1]
+                            .iter()
+                            .copied()
+                            .eq(current_path.iter().map(|s| s.as_str()))
+                            && let Some(attr) = e
+                                .attributes()
+                                .flatten()
+                                .find(|a| a.key.as_ref() == attr_name.as_bytes())
+                        {
+                            let value = attr
+                                .unescape_value()
+                                .map_err(|e| format!("Unescape error: {e}"))?;
+                            if path.starts_with(&["Relationship", "LeftTable"])
+                                || path.starts_with(&["Relationship", "RightTable"])
                             {
-                                if let Some(attr) = e
-                                    .attributes()
-                                    .flatten()
-                                    .find(|a| a.key.as_ref() == attr_name.as_bytes())
-                                {
-                                    let value = attr
-                                        .unescape_value()
-                                        .map_err(|e| format!("Unescape error: {e}"))?;
-                                    if path.starts_with(&["Relationship", "LeftTable"])
-                                        || path.starts_with(&["Relationship", "RightTable"])
-                                    {
-                                        results[i] = Some(format!("[{value}]"));
-                                    } else {
-                                        results[i] = Some(value.to_string());
-                                    }
-
-                                    resolved_indices.insert(i);
-                                }
+                                results[i] = Some(format!("[{value}]"));
+                            } else {
+                                results[i] = Some(value.to_string());
                             }
+
+                            resolved_indices.insert(i);
                         }
                     }
                 }
@@ -396,14 +395,13 @@ pub fn extract_values_from_xml_paths(
                     if resolved_indices.contains(&i) {
                         continue;
                     }
-                    if let Some(last_segment) = path.last() {
-                        if !last_segment.starts_with('@')
-                            && path.len() == current_path.len()
-                            && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                            && results[i].is_some()
-                        {
-                            resolved_indices.insert(i);
-                        }
+                    if let Some(last_segment) = path.last()
+                        && !last_segment.starts_with('@')
+                        && path.len() == current_path.len()
+                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
+                        && results[i].is_some()
+                    {
+                        resolved_indices.insert(i);
                     }
                 }
                 current_path.pop();
@@ -415,20 +413,19 @@ pub fn extract_values_from_xml_paths(
                         continue;
                     }
 
-                    if let Some(last_segment) = path.last() {
-                        if !last_segment.starts_with('@')
-                            && path.len() == current_path.len()
-                            && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                        {
-                            match e.decode() {
-                                Ok(decoded) => {
-                                    // Append to existing result or create new one
-                                    let entry = results[i].get_or_insert_with(String::new);
-                                    entry.push_str(&decoded);
-                                }
-                                Err(err) => {
-                                    return Err(format!("Failed to decode text: {err}"));
-                                }
+                    if let Some(last_segment) = path.last()
+                        && !last_segment.starts_with('@')
+                        && path.len() == current_path.len()
+                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
+                    {
+                        match e.decode() {
+                            Ok(decoded) => {
+                                // Append to existing result or create new one
+                                let entry = results[i].get_or_insert_with(String::new);
+                                entry.push_str(&decoded);
+                            }
+                            Err(err) => {
+                                return Err(format!("Failed to decode text: {err}"));
                             }
                         }
                     }
@@ -441,16 +438,15 @@ pub fn extract_values_from_xml_paths(
                         continue;
                     }
 
-                    if let Some(last_segment) = path.last() {
-                        if !last_segment.starts_with('@')
-                            && path.len() == current_path.len()
-                            && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                        {
-                            // Resolve the entity reference to its character
-                            let resolved = general_ref_to_string(&e, false);
-                            let entry = results[i].get_or_insert_with(String::new);
-                            entry.push_str(&resolved);
-                        }
+                    if let Some(last_segment) = path.last()
+                        && !last_segment.starts_with('@')
+                        && path.len() == current_path.len()
+                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
+                    {
+                        // Resolve the entity reference to its character
+                        let resolved = general_ref_to_string(&e, false);
+                        let entry = results[i].get_or_insert_with(String::new);
+                        entry.push_str(&resolved);
                     }
                 }
             }
@@ -461,15 +457,14 @@ pub fn extract_values_from_xml_paths(
                         continue;
                     }
 
-                    if let Some(last_segment) = path.last() {
-                        if !last_segment.starts_with('@')
-                            && path.len() == current_path.len()
-                            && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                        {
-                            let text = String::from_utf8_lossy(e.as_ref()).to_string();
-                            results[i] = Some(text);
-                            resolved_indices.insert(i);
-                        }
+                    if let Some(last_segment) = path.last()
+                        && !last_segment.starts_with('@')
+                        && path.len() == current_path.len()
+                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
+                    {
+                        let text = String::from_utf8_lossy(e.as_ref()).to_string();
+                        results[i] = Some(text);
+                        resolved_indices.insert(i);
                     }
                 }
             }

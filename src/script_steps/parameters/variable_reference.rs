@@ -1,5 +1,5 @@
-use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::attributes::get_attribute;
 
@@ -27,13 +27,12 @@ impl VariableReference {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"repetition" {
-                        if let Some(repetition) = get_attribute(&e, "value") {
-                            if let Ok(repetition) = repetition.parse::<i32>() {
-                                item.repetition = Some(repetition)
-                            }
-                        };
-                    }
+                    if e.name().as_ref() == b"repetition"
+                        && let Some(repetition) = get_attribute(&e, "value")
+                        && let Ok(repetition) = repetition.parse::<i32>()
+                    {
+                        item.repetition = Some(repetition)
+                    };
                 }
                 Ok(Event::End(_)) => {
                     depth -= 1;
@@ -65,8 +64,8 @@ impl VariableReference {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::events::Event;
     use quick_xml::Reader;
+    use quick_xml::events::Event;
 
     use crate::script_steps::parameters::variable_reference::VariableReference;
 
