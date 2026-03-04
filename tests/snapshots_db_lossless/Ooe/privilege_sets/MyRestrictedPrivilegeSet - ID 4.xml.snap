@@ -3,12 +3,12 @@ source: src/tests.rs
 expression: output_content
 ---
 <PrivilegeSet id="4" name="MyRestrictedPrivilegeSet">
-	<UUID modifications="0" userName="Mislav" accountName="Admin" timestamp="2025-05-04T09:23:45">0C57BEEB-9CDD-4995-8F4C-9146819D6806</UUID>
+	<UUID modifications="5" userName="Mislav" accountName="admin" timestamp="2025-07-24T23:48:33">0C57BEEB-9CDD-4995-8F4C-9146819D6806</UUID>
 	<Description>MyRestrictedPrivilegeSetDescription</Description>
 	<access>
 		<Records Custom="True">
 			<Custom>
-				<ObjectList membercount="4">
+				<ObjectList membercount="5">
 					<Table type="existing">
 						<BaseTableReference id="129" name="TestTable" UUID="471CCAC6-9046-4B2E-BD66-03EEAE88170B"></BaseTableReference>
 						<View access="ReadWrite"></View>
@@ -22,14 +22,12 @@ expression: output_content
 						<View access="Calculation">
 							<Calculation>
 								<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
-								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_1</DDRREF>
 								<Text><![CDATA[True]]></Text>
 							</Calculation>
 						</View>
 						<Edit access="Calculation">
 							<Calculation>
 								<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
-								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_2</DDRREF>
 								<Text><![CDATA[True]]></Text>
 							</Calculation>
 						</Edit>
@@ -37,8 +35,7 @@ expression: output_content
 						<Delete access="Calculation">
 							<Calculation>
 								<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
-								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_3</DDRREF>
-								<Text><![CDATA[True]]></Text>
+								<Text><![CDATA[Name = Contacts_TestTable::MyGlobal_g]]></Text>
 							</Calculation>
 						</Delete>
 						<Fields access="Custom">
@@ -93,6 +90,14 @@ expression: output_content
 						<Delete access="ReadWrite"></Delete>
 						<Fields access="ReadWrite"></Fields>
 					</Table>
+					<Table type="existing">
+						<BaseTableReference id="135" name="SaXMLDelivery" UUID="57D75FA9-D8E4-4A5B-AF62-BA42D6F899BB"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="ReadWrite"></Fields>
+					</Table>
 					<Table type="New">
 						<View access="ReadWrite"></View>
 						<Edit access="ReadWrite"></Edit>
@@ -105,7 +110,7 @@ expression: output_content
 		</Records>
 		<Layouts Custom="True">
 			<Custom Create="False">
-				<ObjectList membercount="11">
+				<ObjectList membercount="14">
 					<Layout type="existing" access="NoAccess" records="ReadWrite">
 						<LayoutReference id="1" name="My Layout for TestTable" UUID="7F4B6F16-A82A-4570-A5D5-CCA1FD293498"></LayoutReference>
 					</Layout>
@@ -136,6 +141,15 @@ expression: output_content
 					<Layout type="existing" access="ReadWrite" records="ReadWrite">
 						<LayoutReference id="11" name="File Open" UUID="227FE5E4-D9F1-474B-A744-4E5715FE5DDB"></LayoutReference>
 					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="18" name="SaXMLDelivery" UUID="BCE0B1F2-EF32-4CCE-811E-EBA6E435DA9E"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="19" name="SaXMLDeliveryExecutionContext" UUID="362D0FAA-5CE9-4818-A009-C0B4A58C447C"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="20" name="--" UUID="341AC142-6FD9-484B-899C-48AF423A30CA"></LayoutReference>
+					</Layout>
 					<Layout type="New" access="ReadWrite" records="ReadWrite"></Layout>
 				</ObjectList>
 			</Custom>
@@ -159,8 +173,137 @@ expression: output_content
 				</ObjectList>
 			</Custom>
 		</ValueLists>
-		<Scripts Create="True" Edit="True" Delete="True"></Scripts>
-		<Other value="61213" Print="True" Export="True" manageAccounts="True" manageExtPrivs="True" allowOverride="True" allowOpenQuickly="True" disconnectIdle="True" commands="All">
+		<Scripts Custom="True">
+			<Custom Create="True">
+				<ObjectList membercount="42">
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="1" name="Hello world" UUID="41D78F84-E8F2-4E2D-90F3-A3C380F22F7E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="2" name="noop" UUID="07F73D91-BCD7-4842-AEA8-93AE9D742C6F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="3" name="MyScriptFolder" UUID="20DCD875-4321-4E50-A032-BBB3CA9B8958"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="4" name="--" UUID="641CE32E-C3AA-4CF7-ABB5-9274B4863A85"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="5" name="Circular Reference" UUID="FCE13863-A635-4F4C-A0B8-AB7FC05ABC78"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="6" name="MyScriptSubfolder" UUID="4D3BA7A0-53F4-4023-A08B-F63B1FBDDC7A"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="7" name="--" UUID="85119086-9842-4292-959A-3A32ED207A66"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="8" name="-" UUID="3CDC3DF2-BD4C-4FC2-897B-5FFAAC930D42"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="9" name="Decode base64 image" UUID="6B3E4942-979B-4200-AEE0-A4103DD28CEC"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="10" name="EmptyScriptFolder" UUID="30F5FD8E-00DB-4BCC-A67E-ED6989334C93"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="11" name="--" UUID="33E67CDD-4303-4D79-B621-7BA15673508D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="12" name="Constrain without indexes" UUID="1066D7B7-EAE9-48FB-BB7A-525C83E91AD7"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="14" name="About" UUID="4FB8D085-23E1-4870-8710-FC6EAB83835C"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="16" name="LICENSE" UUID="9F31DEA0-145D-4400-8F59-9A312AD6FB6E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="17" name="Release Notes" UUID="C59FC9BA-BB08-4E8D-8A7F-1380F07D1E83"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="18" name="--" UUID="40DF4CE6-B970-4B11-A663-98FF828DB01E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="20" name="Control" UUID="85C09F94-BC0D-46BC-AE0F-BEE278F6FF4F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="21" name="Scripts With Everything" UUID="F4418354-45E7-45CD-B884-0AE04E19121D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="22" name="--" UUID="7FA52F63-E6BB-4C9A-8865-5403FE45403D"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="23" name="Navigation" UUID="ACEA98B7-0A1C-4657-93DF-64A820A03471"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="24" name="Editing" UUID="2AB37828-C884-483A-96D4-556CB1FF49D9"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="25" name="Fields" UUID="89BCD2CC-B945-4CA7-B1B2-D37B2EC74DD3"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="26" name="Records" UUID="6C16E55C-DCC8-44D8-B79D-8D79AA9D4973"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="27" name="Found Sets" UUID="857693FC-C65F-4362-817A-E914C60A35A5"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="28" name="Windows" UUID="EE73BC4A-A9EC-4054-AF58-AFAE5775AF4E"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="29" name="Files" UUID="163B7AA2-C6E2-4D85-B9AC-D73AF8A5D5F6"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="30" name="Accounts" UUID="5D8583E9-201F-4B93-9A84-4991B1A8A837"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="31" name="Artificial Intelligence" UUID="B4770AB5-E3B4-4906-A470-621423C1540F"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="32" name="Spelling" UUID="8035073C-2907-44CE-B1D3-766A5CFBBE8A"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="33" name="Open Menu Item" UUID="A81A544D-4EF5-47F6-8E5B-CAA965E78F87"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="34" name="Miscellaneous" UUID="B152F577-1246-4D19-A208-1028F505F3EE"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="35" name="IP" UUID="405E115A-D180-4AF7-AAEF-6CE9DAEDC7E8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="36" name="MBS Plug-In" UUID="903DFD53-07FD-4FF9-9E82-B29E209AEE03"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="37" name="Script from fmSyntaxColorizer" UUID="1F6975F7-D0A1-44AD-8B85-728FC0E611F0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="38" name="--" UUID="98082719-DA79-4ECC-9D4E-5BC973AA6411"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="39" name="All script steps and all options" UUID="FAA08335-C7A3-40E8-BC55-9861B70612E2"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="50" name="SaXMLDelivery" UUID="E79B8894-D72D-4474-B907-6870B15C0FD0"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="51" name="saxmlDelivery_createXml" UUID="4747B2C7-B9FD-4C78-A31F-11ED7C4D0DC8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="52" name="saxmlDelivery_readme" UUID="F1EFE93B-83F3-4732-BCA3-8C81540847A8"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="53" name="saxmlDelivery_runPipeline" UUID="FBD89D86-D657-4A48-A796-CB2D5C1FDC4A"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="54" name="--" UUID="45F7B92A-0665-4707-8C09-A99EB9E2AB6C"></ScriptReference>
+					</Script>
+					<Script type="New" access="ReadWrite"></Script>
+				</ObjectList>
+			</Custom>
+		</Scripts>
+		<Other value="61213" Print="True" Export="True" manageDatabase="False" manageCustomMenus="False" manageAccounts="True" manageExtPrivs="True" allowOverride="True" allowOpenQuickly="True" disconnectIdle="True" commands="All">
 			<Password prohibitModification="False" interval="30" Minimum="5"></Password>
 		</Other>
 	</access>

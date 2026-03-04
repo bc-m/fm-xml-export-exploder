@@ -109,7 +109,7 @@ impl Entity {
                     self.content += text_element_to_string(&e, false).as_str();
                 }
                 Ok(Event::GeneralRef(e)) => {
-                    self.content += general_ref_to_string(&e, false).as_str();
+                    self.content += general_ref_to_string(&e, true).as_str();
                 }
                 Ok(Event::End(e)) => {
                     self.content += end_element_to_string(&e).as_str();
@@ -204,16 +204,23 @@ pub fn build_out_dir_path<R: Read + BufRead>(
 
     let domain = match qualifier {
         Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
-        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions".to_string(),
+        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized".to_string(),
         _ => {
             match context.top_level_section {
                 Some(TopLevelSection::Structure) => {
                     let mut domain_base = if let Some(catalog_type) = &context.catalog_type {
                         if catalog_type == &CatalogType::ValueList
                             && version_string_to_number(saxml_version)
-                                < version_string_to_number("2.2.2.0")
+                                >= version_string_to_number("2.2.2.0")
+                            && version_string_to_number(saxml_version)
+                                < version_string_to_number("2.2.3.4")
                         {
-                            "value_lists".to_string() // Handle ValueList version-specific behavior
+                            "value_list_stubs".to_string()
+                        } else if catalog_type == &CatalogType::CustomFunctions
+                            && version_string_to_number(saxml_version)
+                                >= version_string_to_number("2.2.3.4")
+                        {
+                            "custom_functions".to_string()
                         } else {
                             catalog_type.get_config().out_folder_name.clone()
                         }
@@ -293,6 +300,57 @@ pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) ->
         }
     }
 
+    Ok(())
+}
+
+/// In Domain mode, migrate old-format `custom_functions/` output (pre-2.2.3.4 style)
+/// where it contained `.txt` files directly instead of `.xml` files.
+/// Renames the entire `custom_functions/` → `custom_functions_sanitized/` so git can track the rename.
+pub fn migrate_old_custom_functions_if_needed(
+    context: &ProcessingContext<'_, impl BufRead>,
+) -> Result<(), Error> {
+    if matches!(context.flags.output_tree, OutputTree::Db) {
+        return Ok(());
+    }
+
+    let cf_dir = context.root_out_dir.join("custom_functions");
+    let cf_sanitized_dir = context.root_out_dir.join("custom_functions_sanitized");
+
+    // Only migrate if old dir exists and new dir does not
+    if !cf_dir.exists() || cf_sanitized_dir.exists() {
+        return Ok(());
+    }
+
+    // Check contents recursively: must have .txt files and NO .xml files
+    let mut has_txt = false;
+    let mut has_xml = false;
+    fn check_dir(dir: &Path, has_txt: &mut bool, has_xml: &mut bool) -> Result<(), Error> {
+        for entry in fs::read_dir(dir)? {
+            let path = entry?.path();
+            if path.is_dir() {
+                check_dir(&path, has_txt, has_xml)?;
+            } else if path.is_file() {
+                match path.extension().and_then(|e| e.to_str()) {
+                    Some("txt") => *has_txt = true,
+                    Some("xml") => *has_xml = true,
+                    _ => {}
+                }
+            }
+        }
+        Ok(())
+    }
+    check_dir(&cf_dir, &mut has_txt, &mut has_xml)?;
+
+    if !has_txt || has_xml {
+        return Ok(());
+    }
+
+    println!(
+        "Migrating {} → {}",
+        cf_dir.display(),
+        cf_sanitized_dir.display()
+    );
+    fs::rename(&cf_dir, &cf_sanitized_dir)?;
     Ok(())
 }
 

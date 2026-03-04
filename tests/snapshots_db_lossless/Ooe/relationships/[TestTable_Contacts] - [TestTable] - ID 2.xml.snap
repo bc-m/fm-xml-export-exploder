@@ -3,14 +3,28 @@ source: src/tests.rs
 expression: output_content
 ---
 <Relationship id="2">
-	<UUID modifications="1" userName="Mislav" accountName="Admin" timestamp="2025-05-04T09:35:18">015D99E7-5FD8-430E-A593-9AF31C9FA308</UUID>
+	<UUID modifications="2" userName="Mislav" accountName="admin" timestamp="2025-07-24T16:09:21">015D99E7-5FD8-430E-A593-9AF31C9FA308</UUID>
 	<LeftTable cascadeCreate="True" cascadeDelete="True" type="Local">
 		<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
-		<SortSpecification value="True" maintain="True">
-			<SortList membercount="1">
+		<SortSpecification value="True" blanksLast="False" maintain="True">
+			<SortList membercount="3">
 				<Sort type="Ascending">
 					<PrimaryField>
 						<FieldReference id="6" name="Name" UUID="CDA37349-D2D9-4ACA-B58C-9F8272B51F9D">
+							<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="3" name="CreatedBy" UUID="1BF264AB-AF53-47EF-BA6B-8381FDA9D48F">
+							<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
+						</FieldReference>
+					</PrimaryField>
+				</Sort>
+				<Sort type="Ascending">
+					<PrimaryField>
+						<FieldReference id="5" name="ModifiedBy" UUID="26C9FA76-D53E-46E3-9E8A-5700074F5C6C">
 							<TableOccurrenceReference id="1065094" name="TestTable_Contacts" UUID="34F19F48-2BB3-48DB-8C03-44DD5FBF74F4"></TableOccurrenceReference>
 						</FieldReference>
 					</PrimaryField>

@@ -3,10 +3,10 @@ source: src/tests.rs
 expression: output_content
 ---
 <Relationship id="1">
-	<UUID modifications="1" userName="Mislav" accountName="Admin" timestamp="2025-05-04T09:16:24">5D85DEC9-B562-4723-BE4C-B4A93966377A</UUID>
+	<UUID modifications="2" userName="Mislav" accountName="admin" timestamp="2025-07-24T16:10:37">5D85DEC9-B562-4723-BE4C-B4A93966377A</UUID>
 	<LeftTable cascadeCreate="True" cascadeDelete="True" type="Local">
 		<TableOccurrenceReference id="1065093" name="Contacts_TestTable" UUID="82E7BFF7-DBDE-4FB4-BCD4-401A07C5AFF7"></TableOccurrenceReference>
-		<SortSpecification value="True" maintain="True">
+		<SortSpecification value="True" blanksLast="False" maintain="True">
 			<SortList membercount="1">
 				<Sort type="Ascending">
 					<PrimaryField>
@@ -21,7 +21,7 @@ expression: output_content
 	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
 		<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
 	</RightTable>
-	<JoinPredicateList membercount="1">
+	<JoinPredicateList membercount="2">
 		<JoinPredicate type="Equal">
 			<LeftField>
 				<FieldReference id="14" name="ID" UUID="3699B045-50A7-4EAE-B404-5C9A8564735B">
@@ -30,6 +30,18 @@ expression: output_content
 			</LeftField>
 			<RightField>
 				<FieldReference id="7" name="ID_TestTable" UUID="3BD38330-322C-4394-8A48-237811B70F90">
+					<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="12" name="CalcField1_c" UUID="3686EC6C-B572-4D52-A0E2-1C0C56F9360C">
+					<TableOccurrenceReference id="1065093" name="Contacts_TestTable" UUID="82E7BFF7-DBDE-4FB4-BCD4-401A07C5AFF7"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="6" name="Name" UUID="CDA37349-D2D9-4ACA-B58C-9F8272B51F9D">
 					<TableOccurrenceReference id="1065091" name="Contacts" UUID="E8E43577-C015-43EC-A455-99DD51B56BF2"></TableOccurrenceReference>
 				</FieldReference>
 			</RightField>

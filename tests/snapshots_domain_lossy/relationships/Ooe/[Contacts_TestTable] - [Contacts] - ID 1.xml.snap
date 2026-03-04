@@ -3,10 +3,10 @@ source: src/tests.rs
 expression: output_content
 ---
 <Relationship id="1">
-	<UUID modifications="1" userName="Mislav" accountName="Admin" timestamp="2025-05-04T09:16:24">5D85DEC9-B562-4723-BE4C-B4A93966377A</UUID>
+	<UUID modifications="2" userName="Mislav" accountName="admin" timestamp="2025-07-24T16:10:37">5D85DEC9-B562-4723-BE4C-B4A93966377A</UUID>
 	<LeftTable cascadeCreate="True" cascadeDelete="True" type="Local">
 		<TableOccurrenceReference id="1065093" name="Contacts_TestTable"></TableOccurrenceReference>
-		<SortSpecification value="True" maintain="True">
+		<SortSpecification value="True" blanksLast="False" maintain="True">
 			<SortList membercount="1">
 				<Sort type="Ascending">
 					<PrimaryField>
@@ -21,7 +21,7 @@ expression: output_content
 	<RightTable cascadeCreate="False" cascadeDelete="False" type="Local">
 		<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
 	</RightTable>
-	<JoinPredicateList membercount="1">
+	<JoinPredicateList membercount="2">
 		<JoinPredicate type="Equal">
 			<LeftField>
 				<FieldReference id="14" name="ID">
@@ -30,6 +30,18 @@ expression: output_content
 			</LeftField>
 			<RightField>
 				<FieldReference id="7" name="ID_TestTable">
+					<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
+				</FieldReference>
+			</RightField>
+		</JoinPredicate>
+		<JoinPredicate type="Equal">
+			<LeftField>
+				<FieldReference id="12" name="CalcField1_c">
+					<TableOccurrenceReference id="1065093" name="Contacts_TestTable"></TableOccurrenceReference>
+				</FieldReference>
+			</LeftField>
+			<RightField>
+				<FieldReference id="6" name="Name">
 					<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
 				</FieldReference>
 			</RightField>

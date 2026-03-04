@@ -8,32 +8,32 @@ expression: output_content
 
 # Calculation
 Set Variable [ $MBS_Command_Results[1] ; /*Let([ 
-				$Command_EN =_Syntax::Command_EN ;
-				$Command_Foreign = Syntax.GUISyntax::Command ;
-				$CommandColoringOn = _Syntax::On = 1;
-				$ColorExists = Syntax.Color::__ID > 0 and Syntax.Color::ColorName ≠ "--None--";
-				$ColorHex = Syntax.Color::_kColorHex ;
-				vStamp = Get( CurrentTime )
-				];
-				Case( 
-				
-				_Syntax::_kIsGroupTitle ; "" ;
-				
-				not $CommandColoringOn or not $ColorExists ;
-				vStamp & " Removed: English " & MBS( "SyntaxColoring.RemoveTag" ; $Command_EN ) & 
-				Case( _Syntax::_gLanguage <> "English" and not IsEmpty( $Command_Foreign ) ;
-				  ", " & _Syntax::_gLanguage & " " & MBS( "SyntaxColoring.RemoveTag" ; $Command_Foreign )
-				) ;
-				
-				$CommandColoringOn and $ColorExists ;
-				vStamp & " Added: English " & MBS( "SyntaxColoring.AddTag" ; $Command_EN ; $ColorHex ) & 
-				Case( _Syntax::_gLanguage ≠ "English" and not IsEmpty( $Command_Foreign ) ;
-				  ", " & _Syntax::_gLanguage & " " & MBS( "SyntaxColoring.AddTag" ; $Command_Foreign ; $ColorHex )
-				) ;
-				
-				"-"
-				
-				))*/ ]
+$Command_EN =_Syntax::Command_EN ;
+$Command_Foreign = Syntax.GUISyntax::Command ;
+$CommandColoringOn = _Syntax::On = 1;
+$ColorExists = Syntax.Color::__ID > 0 and Syntax.Color::ColorName ≠ "--None--";
+$ColorHex = Syntax.Color::_kColorHex ;
+vStamp = Get( CurrentTime )
+];
+Case( 
+
+_Syntax::_kIsGroupTitle ; "" ;
+
+not $CommandColoringOn or not $ColorExists ;
+vStamp & " Removed: English " & MBS( "SyntaxColoring.RemoveTag" ; $Command_EN ) & 
+Case( _Syntax::_gLanguage <> "English" and not IsEmpty( $Command_Foreign ) ;
+  ", " & _Syntax::_gLanguage & " " & MBS( "SyntaxColoring.RemoveTag" ; $Command_Foreign )
+) ;
+
+$CommandColoringOn and $ColorExists ;
+vStamp & " Added: English " & MBS( "SyntaxColoring.AddTag" ; $Command_EN ; $ColorHex ) & 
+Case( _Syntax::_gLanguage ≠ "English" and not IsEmpty( $Command_Foreign ) ;
+  ", " & _Syntax::_gLanguage & " " & MBS( "SyntaxColoring.AddTag" ; $Command_Foreign ; $ColorHex )
+) ;
+
+"-"
+
+))*/ ]
 
 # =============
 # CONTROL STEPS
@@ -382,9 +382,9 @@ Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF 
 Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: ON ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $cURL_Options ]
 # EGIT - in cURL options ist es GEMISCHT: MANCHE Vars sind  Target Vars, manche QUELL Vars
 Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "
-				--trace $TargetDump
-				--uploadOrWhatever $SourceFile
-				" ]
+--trace $TargetDump
+--uploadOrWhatever $SourceFile
+" ]
 
 Insert PDF [ Store only a reference: OFF ]
 Insert PDF [ Store only a reference: ON ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
@@ -438,8 +438,8 @@ Set Next Serial Value [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; 1 ]
 # OBSOLETE STEPS
 Insert Object
 Insert QuickTime
-Save a Copy as Add-on Package
-Save a Copy as Add-on Package
+Save a Copy as Add-on Package [ Replace UUIDs: OFF ]
+Save a Copy as Add-on Package [ $WindowName ; Replace UUIDs: ON ]
 
 # ============
 # RECORD STEPS
@@ -802,7 +802,7 @@ Delete Account [ $Kontoname ]
 Enable Account [ $Kontoname ; enable: ON ]
 Enable Account [ $Kontoname ; enable: OFF ]
 
-Re-Login [ With dialog: OFF ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
+Re-Login [ Current File ; With dialog: OFF ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
 
 Reset Account Password [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; Password: ON ]
 
@@ -980,7 +980,7 @@ Set Web Viewer [ "wv" ; ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
 
 Show Custom Dialog [ Title: $DlgTitle ; Message: $DlgMessage ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Show Custom Dialog [ Title: $DlgTitle ; Message: "Only Button 1 and 3¶" & 
-				"and input 2" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
+"and input 2" ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 Show Custom Dialog [ Title: $DlgTitle ; Message: $DlgMessage ; ⚠️ PARAMETER "Button1" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button2" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Button3" NOT PARSED ⚠️ ]
 
 Speak [ "Standard voice" ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
@@ -991,4 +991,4 @@ Speak [ "Albert" ; ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER
 # EXTERNAL SCRIPT STEPS
 # =====================
 
-MBS [ $Command ; $P1 ; $P2 ; $P3 ; $P4 ; $P5 ; $P6 ; $P7 ; $P8 ; $P9 ]
+&lt;Unknown external script step from missing plug-in ( MBSP 2 )&gt; [ $Command ; $P1 ; $P2 ; $P3 ; $P4 ; $P5 ; $P6 ; $P7 ; $P8 ; $P9 ]

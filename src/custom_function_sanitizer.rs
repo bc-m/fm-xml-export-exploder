@@ -85,6 +85,8 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
     let mut reader = Reader::from_str(xml_content);
     let mut buf = Vec::new();
     let mut depth = 0;
+    let mut path_stack: Vec<Vec<u8>> = Vec::new();
+    let mut saw_custom_function = false;
 
     loop {
         match reader.read_event_into(&mut buf) {
@@ -95,23 +97,45 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
                 depth += 1;
+                path_stack.push(e.name().as_ref().to_vec());
 
-                if depth == 2 && e.name().as_ref() == b"CustomFunctionReference" {
-                    for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
-                        match attr.0.as_str() {
-                            "id" => cf_info.id = attr.1.to_string(),
-                            "name" => cf_info.name = attr.1.to_string(),
-                            _ => {}
+                match e.name().as_ref() {
+                    b"CustomFunction" => {
+                        saw_custom_function = true;
+                        for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
+                            match attr.0.as_str() {
+                                "id" => cf_info.id = attr.1.to_string(),
+                                "name" => cf_info.name = attr.1.to_string(),
+                                _ => {}
+                            }
                         }
                     }
+                    b"CustomFunctionReference" if !saw_custom_function => {
+                        for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
+                            match attr.0.as_str() {
+                                "id" => cf_info.id = attr.1.to_string(),
+                                "name" => cf_info.name = attr.1.to_string(),
+                                _ => {}
+                            }
+                        }
+                    }
+                    _ => {}
                 }
             }
             Ok(Event::CData(e)) => {
-                cf_info.text = cdata_to_string(&e);
-                break;
+                let is_calculation_text = path_stack
+                    .iter()
+                    .rev()
+                    .zip(&[&b"Text"[..], &b"Calculation"[..]])
+                    .all(|(a, b)| a.as_slice() == *b);
+                if is_calculation_text {
+                    cf_info.text = cdata_to_string(&e);
+                    break;
+                }
             }
             Ok(Event::End(_e)) => {
                 depth -= 1;
+                path_stack.pop();
 
                 if depth == 0 {
                     break;

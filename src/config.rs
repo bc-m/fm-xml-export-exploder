@@ -197,7 +197,7 @@ impl CatalogType {
             },
             Self::ValueList => CatalogConfig {
                 catalog_item_name: b"ValueList".to_vec(),
-                out_folder_name: "value_list_stubs".to_string(),
+                out_folder_name: "value_lists".to_string(),
                 wrapped_in_object_list: false,
                 uses_folders: false,
                 id_path: "".to_string(),

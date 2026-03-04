@@ -1,0 +1,18 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunction id="11" name="GFN" access="All">
+	<UUID modifications="1" userName="Mislav" accountName="Admin" timestamp="2025-06-08T15:24:00">6868B921-7A89-4BDB-900A-B54A59D434F8</UUID>
+	<Calculation>
+		<Text><![CDATA[// Sample input:  	a field whose name is "Employee::Name"
+// Sample output: 	"Name"
+// Based on filemakerhacks.com CF
+
+GetValue ( Substitute ( GetFieldName ( field ) ; "::" ; ¶ ) ; 2 )]]></Text>
+	</Calculation>
+	<Display>GFN ( field )</Display>
+	<ObjectList membercount="1">
+		<Parameter name="field"></Parameter>
+	</ObjectList>
+</CustomFunction>

@@ -1,0 +1,2657 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="51" name="saxmlDelivery_createXml" UUID="4747B2C7-B9FD-4C78-A31F-11ED7C4D0DC8"></ScriptReference>
+	<ObjectList membercount="181">
+		<Step hash="287BC1AEF38D88D1AF01283834CAD55D" index="0" id="89" name="# (comment)" enable="True">
+			<UUID>C6C58B46-16E6-4B53-B296-D7A7DBE7F8C7</UUID>
+			<SourceUUID>EDCDC6CC-8C03-406D-BAE8-1E72D175A236</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C4EBA35B86FCFD35AC59641314134027" index="1" id="89" name="# (comment)" enable="True">
+			<UUID>04B7867C-8475-4CC6-A20F-02182A516BEE</UUID>
+			<SourceUUID>50D1331A-2169-4BDD-9A9C-42C8EEC65DCE</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="DESCRIPTION: "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8A6A3285ECEF122C66D636EBD755294E" index="2" id="89" name="# (comment)" enable="True">
+			<UUID>8155EF70-F4AE-42B7-B08B-75B43467007C</UUID>
+			<SourceUUID>03588FF0-DC29-4BA4-9EA8-C957E12B034C</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Generate a SaXML file and store it in a container field"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9CDB51418B4E5EECE277A891402172E7" index="3" id="89" name="# (comment)" enable="True">
+			<UUID>2F14FCE4-B5BE-4A6C-B918-D95271D86747</UUID>
+			<SourceUUID>64C7455B-9826-4512-A60E-60B9E2C3D42D</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="The context upon exit will be a SaXML layout with a record that has the xml file"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="62C9271BF05D11137ABB427E47352AB8" index="4" id="89" name="# (comment)" enable="True">
+			<UUID>E1BD700D-E978-4FE6-9E0E-99C53F97884C</UUID>
+			<SourceUUID>C3282861-50EF-48B7-A9A6-5D88FB638EEA</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="This script is intended to be run via the Data API by a Bitbucket pipeline or a GitHub action; see https://bitbucket.org/soliantconsulting/saxml-delivery/src/main/"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="4729BD288D1094B6713F0A36645C31D4" index="5" id="89" name="# (comment)" enable="True">
+			<UUID>1B384B68-9D71-482F-9628-0517769A4777</UUID>
+			<SourceUUID>A4FD6B7C-9695-4D3F-A0B9-03FF4A44C674</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="It can also be run directly by a full access user"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9E56DFF024714A190904D2D52614CCC5" index="6" id="89" name="# (comment)" enable="True">
+			<UUID>1A0DEC46-5EEF-4E66-BF74-FD5026C738EA</UUID>
+			<SourceUUID>DB1A182B-72D2-434B-A870-F27DCF597306</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5D2CDF1015C0B08A33A7743680F1452E" index="7" id="89" name="# (comment)" enable="True">
+			<UUID>FD5159E7-435A-4558-85D9-595D2A89D75D</UUID>
+			<SourceUUID>C34F9089-602A-45B8-9E49-E8C9C3ED12C4</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="PARAMETER:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="28D2D28C25E1AB2E6242C8D65B1856FF" index="8" id="89" name="# (comment)" enable="True">
+			<UUID>AB7A760A-68EF-4EFF-9E36-EDC26AE9CC3B</UUID>
+			<SourceUUID>F0017560-B79F-40A9-8581-41C1A5C1CD3C</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="JSONSetElement ( &quot;&quot; &#13;&#09;; [ &quot;includeDetailsForAnalysisTools&quot; ; True ; JSONBoolean ] // optional; defaults to true for supported versions of FileMaker, i.e. ≥21.1&#13;)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="45686FF56AD3DCE4EA6D1F26374FDC4D" index="9" id="89" name="# (comment)" enable="True">
+			<UUID>A6CEDE89-46DA-4ADB-9190-659C100B7166</UUID>
+			<SourceUUID>8135FB55-DF16-4789-972A-3AA5C72D88F8</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EE97003E9265E697B7DA98A7584361D5" index="10" id="89" name="# (comment)" enable="True">
+			<UUID>77007842-A742-4283-8A51-3EC549F6EC81</UUID>
+			<SourceUUID>916B3192-3233-4C27-8F9C-DF5E1E133AA6</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="RESULT:&#09;&#09;&#09;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2BC8AEB0224F91DDB7907954171E342D" index="11" id="89" name="# (comment)" enable="True">
+			<UUID>0D2D4DBF-54E3-45BE-A2F4-E0BBBE3D9612</UUID>
+			<SourceUUID>8F0F0564-2564-406F-8F30-A47897E51EA8</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="{ errorCode, message, data { recordId, xmlFieldName, timeToCreate, timeToUpload, addonVersion } }"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="34CDD6DAC170AF4CF69EDF138528973A" index="12" id="89" name="# (comment)" enable="True">
+			<UUID>B4F83233-D751-4CDF-824B-D000E550E106</UUID>
+			<SourceUUID>3E189C92-624B-4DE3-B6B2-050D06EE0310</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C06FF3E10072D41148EB92243E733B9A" index="13" id="89" name="# (comment)" enable="True">
+			<UUID>B0444BFA-E669-405B-B3AC-CB590EC4A93D</UUID>
+			<SourceUUID>B20F5021-1424-4269-8605-1449B79D5707</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="CONTEXT:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A35561881D95026EEA45496020162668" index="14" id="89" name="# (comment)" enable="True">
+			<UUID>E26004C2-E211-4B5A-A587-913B92423D92</UUID>
+			<SourceUUID>FDB86B53-29A7-4187-B2A4-475EA031EF72</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Any"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FA43D8B8ABD727044CD909F89A5CCD4A" index="15" id="89" name="# (comment)" enable="True">
+			<UUID>9320DA41-9CFD-47CE-8856-8407E0C0D081</UUID>
+			<SourceUUID>0E349780-D524-4DEE-B861-E187865D1C0F</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DDE187A3C84D9F8B8BCF99B94497E3AE" index="16" id="89" name="# (comment)" enable="True">
+			<UUID>ABDD42A0-F7BF-4D27-8D94-619F38122A79</UUID>
+			<SourceUUID>C9D82CCC-8EB8-49E0-9F15-FC55CE20B146</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="DEPENDENCIES:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1EC021F70D694ACE836A2C640A95C262" index="17" id="89" name="# (comment)" enable="True">
+			<UUID>4CB87835-FF67-4026-99B8-A6293FF3B23D</UUID>
+			<SourceUUID>E8D1A18C-593D-424D-BB31-E3DF5746ED53</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="The presence of the following solution elements in this database file:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="60FE45D8FBF96B9832E8286ABE1451F6" index="18" id="89" name="# (comment)" enable="True">
+			<UUID>6C7E2A53-99D9-420F-99B3-B725C4F6EE8F</UUID>
+			<SourceUUID>491D0025-C5EB-4664-892B-A958BDD7BB6E</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="&quot;SaXMLDelivery&quot; table"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7D35059F665B92130A5BA32596D92CB2" index="19" id="89" name="# (comment)" enable="True">
+			<UUID>9BDD2DBE-2457-4DDE-82B5-5EE7035B8A88</UUID>
+			<SourceUUID>BE3DBA1D-5178-45D1-8731-A086282C1725</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="&quot;SaXMLDeliveryExecutionContext&quot; layout"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3BFAFA0F0629987635CAFEC386A73F30" index="20" id="89" name="# (comment)" enable="True">
+			<UUID>D442E331-F46A-44BD-8CEB-904CA8188C44</UUID>
+			<SourceUUID>1A9C65CB-F1F6-4BAC-871A-5FD90D769429</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0868F15FF57B29D61000CA772B4DA7E3" index="21" id="89" name="# (comment)" enable="True">
+			<UUID>6744AFB6-E667-43C9-B16C-824A491727DE</UUID>
+			<SourceUUID>BD1D5223-16FC-4D44-BE44-F887C11A44D9</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="NOTES:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0AECA7EEA4426961D7C8E4A08075314F" index="22" id="89" name="# (comment)" enable="True">
+			<UUID>2053121B-90A9-475E-A507-3D25A2C2EA87</UUID>
+			<SourceUUID>9083BE96-7664-4779-B72F-9302C4C2D32B</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="There are a few places where custom functions would typically be used, but those were replaced with the bodies of those custom functions to maximize the portability of this script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="CE37A8456FE504E9E273C3C31E087CBB" index="23" id="89" name="# (comment)" enable="True">
+			<UUID>01301A44-8162-4013-B552-AEFE2A64BF95</UUID>
+			<SourceUUID>85718A5E-D5EA-4C76-801E-7780E2978B09</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B667255161F0F78D58A34AB7E6FAED73" index="24" id="89" name="# (comment)" enable="True">
+			<UUID>B2BD697A-DDF8-428A-A791-6B8E98C06DF0</UUID>
+			<SourceUUID>02E81749-55D2-48D1-80D5-EA6FB0ACA44D</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="HISTORY:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3AA4E02B5C2A076C755CFB666F2B8D37" index="25" id="89" name="# (comment)" enable="True">
+			<UUID>EFE0A25D-F6FD-410F-A171-E2CE5E2EEE05</UUID>
+			<SourceUUID>7FCE57E5-8D7D-46A3-9D67-EF3A819B9AD1</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="CLARIS-88 5/2/24 mkos: Created script based on bengert&apos;s POC script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DD0668CD0BC6D24FB2FBA9E37F3BC681" index="26" id="89" name="# (comment)" enable="True">
+			<UUID>1569476A-8F9B-4042-8FCE-27B70764BD80</UUID>
+			<SourceUUID>103DA707-0D7D-46FE-B863-859D1E2186AE</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2024-10-07 mkos: Added includeDetailsForAnalysisTools param"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8F6B11CFA50420D989424EA4A39C70BD" index="27" id="89" name="# (comment)" enable="True">
+			<UUID>7646BE78-4011-4106-BCF0-8F7A9953707A</UUID>
+			<SourceUUID>0AE74AEE-B4A6-4204-B9BB-AE1879BFA3A8</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2025-08-29 mkos: Delete xml file in temp folder after it&apos;s uploaded to the container field"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="742BB75D0D56A23F3E37E20505A65154" index="28" id="89" name="# (comment)" enable="True">
+			<UUID>768B7F77-78B4-4AA0-84C9-48860DBEACA5</UUID>
+			<SourceUUID>5CB6DA56-6C85-415F-BD1C-10956A795F34</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2025-08-30 mkos: Added addonVersion to script result"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="45C6C4C7D527CC2A0FB4CB102B232F17" index="29" id="89" name="# (comment)" enable="True">
+			<UUID>25E99305-17F0-4F8B-9407-AE6694BA6A61</UUID>
+			<SourceUUID>61503041-F476-4FB9-89C5-3AC3EB8EBE36</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3EDA7FF7C0698CD2080B192C58B1E91B" index="30" id="89" name="# (comment)" enable="True">
+			<UUID>BF1EAD7E-E5D5-4487-8DCA-9ACA4B2D247B</UUID>
+			<SourceUUID>56CE8E19-CD89-43E1-AB07-858756AE476B</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1597B72482C200ADD5285E5251391E5B" index="31" id="89" name="# (comment)" enable="True">
+			<UUID>66822158-3FA8-4E22-A3D1-063E6D004E49</UUID>
+			<SourceUUID>9926AA40-F710-4FB9-8847-0079F5B9EFA8</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ Add-on version"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="6A9CFBABF72B9B8C5B53FF8CC19857AC" index="32" id="141" name="Set Variable" enable="True">
+			<UUID>7B91C98C-DC97-4AC1-9919-43AB1E4CB564</UUID>
+			<SourceUUID>06D851BA-6B64-49F5-B162-91E55ACD6F14</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["0.1.9"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$addonVersion"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A13E13082C9C27EA0F10E88581FFABAD" index="33" id="89" name="# (comment)" enable="True">
+			<UUID>75F637B5-28E5-4E98-8049-745B0FBA27D3</UUID>
+			<SourceUUID>7BE421AB-1D77-423C-8146-70126BD4D33D</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D68B00DA403C39351E11C31C2B32AD7E" index="34" id="89" name="# (comment)" enable="True">
+			<UUID>085359FB-A0E9-4173-8CB7-B694FB0F891E</UUID>
+			<SourceUUID>66E16D5C-EC86-4C7F-87B5-EE26F8EA9B7E</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="•  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="72CEE537540C6BEE8B68452058B87BA9" index="35" id="89" name="# (comment)" enable="True">
+			<UUID>9578C143-B5CB-4ED9-B73C-DB5B0D4BCF93</UUID>
+			<SourceUUID>501E07B5-E480-48A8-A4A6-485622BF9D7A</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="CAUTION: This script runs with FULL ACCESS privileges"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="946E3264BEE876D69A428413277DFD61" index="36" id="89" name="# (comment)" enable="True">
+			<UUID>7726F430-3C05-42D8-A27A-3E2EF7105329</UUID>
+			<SourceUUID>5C5BDE25-9FB9-4533-A140-C2987E1433AC</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="This is needed, because the Save as XML script step requires full access"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="48EA2D953C8090E246F40E9F55D6610B" index="37" id="89" name="# (comment)" enable="True">
+			<UUID>444ED5C7-6CC4-4997-89EB-8F57F459C2EE</UUID>
+			<SourceUUID>A7AAF433-6AA0-4D7B-9062-E144E7C3C475</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="https://help.claris.com/en/pro-help/content/save-a-copy-as-xml.html"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DFD3E2C96BF2BFB246A7964931D411C3" index="38" id="89" name="# (comment)" enable="True">
+			<UUID>FF2F76FC-DDB0-4166-AAAE-4C16E820104F</UUID>
+			<SourceUUID>B1589D10-2A38-467B-A25A-BA5BAEC6767B</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="•  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •  •"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B422C445667222F975EA861C645C1BD9" index="39" id="89" name="# (comment)" enable="True">
+			<UUID>247DE380-9C1F-4B8A-97D7-EF807BC86542</UUID>
+			<SourceUUID>770F84FA-B81A-4536-A80A-CF93A841DE88</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="85D3727BCB3E6D8663A130BDDC4045A2" index="40" id="85" name="Allow User Abort" enable="True">
+			<UUID>9812EC65-E94B-4B2D-B1D8-77AA2A51559E</UUID>
+			<SourceUUID>4673ACE6-D3E9-477C-80A8-03D954895E57</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F788C2EB8560B8EC2D66141E83F7D6FC" index="41" id="89" name="# (comment)" enable="True">
+			<UUID>60A8C589-4DE9-4E6D-B317-916CDD906E59</UUID>
+			<SourceUUID>A7F7383E-B669-4224-B27D-2629F3CC2562</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="ED2A8B4C9ADB1662415D4B7F2584702E" index="42" id="89" name="# (comment)" enable="True">
+			<UUID>C71B0033-AB6F-4F1B-8DF3-93572369AE65</UUID>
+			<SourceUUID>9E01CE18-2480-450F-A625-3FCA92A1A201</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Initialize vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="477CD99EABC209A1EAE17EA7A30A96B9" index="43" id="141" name="Set Variable" enable="True">
+			<UUID>98554D63-BA5E-4DF7-A011-FB183CF09228</UUID>
+			<SourceUUID>71E9A6F7-D82A-42E2-9A71-73D69050E6EB</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[0]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="969D4CC85082B75000A18CA2E5B05908" index="44" id="141" name="Set Variable" enable="True">
+			<UUID>FF93046E-09C2-4FEF-9764-60DF07D51CAB</UUID>
+			<SourceUUID>A4050A6D-3157-441B-9E69-B72F1AD22CEE</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="840B3704824C1B089B18EADFC0397256" index="45" id="141" name="Set Variable" enable="True">
+			<UUID>F3EA1DD8-68D3-41FB-A4DF-4F5CA7D542F9</UUID>
+			<SourceUUID>EBA2AC2A-BD44-47DD-B211-99EC05C934F0</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["{}"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$data"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5343865762892464393FE585B914CC8B" index="46" id="89" name="# (comment)" enable="True">
+			<UUID>5B6D7E82-C1A7-40F4-9769-3E3074CE9B83</UUID>
+			<SourceUUID>F38ECD82-3FB6-407E-8FB0-F02D82901678</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E22442D39E28351EA8072385F7BA47F9" index="47" id="89" name="# (comment)" enable="True">
+			<UUID>16EBF1BF-CA7D-4547-A609-5002E2DF9856</UUID>
+			<SourceUUID>B4286F04-FA3C-4027-9523-0CEB9487F600</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Send script to server via PSoS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D2FC515769D9E514D5BE36FC303C108C" index="48" id="68" name="If" enable="True">
+			<UUID>21F7A336-46E1-4891-9B14-A30EF6814EF2</UUID>
+			<SourceUUID>71C63B39-AEB0-433E-8692-414C1C0DC8E5</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 // if not already running on fmse]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9A443A6814392519BB28BE7C1D39A1B5" index="49" id="89" name="# (comment)" enable="True">
+			<UUID>06F49E1C-881D-4FC0-B3AC-D07BBBB8CFB8</UUID>
+			<SourceUUID>D7283A01-7E49-45E1-A032-5F35AC92C52F</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Only try to do this if file is hosted"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BFC0836F2C2C595B38BE18CB910B169D" index="50" id="68" name="If" enable="True">
+			<UUID>ECF57722-7E8A-498A-B18C-FF7615274558</UUID>
+			<SourceUUID>40C56AF0-A0B8-4E5C-976D-76557B399C19</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( ConnectionState ) ≠ 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E081E31BD726D09CF9A681F90CA76894" index="51" id="164" name="Perform Script on Server" breakpoint="True" enable="True">
+			<UUID>DA9F6CE0-1027-49AB-A31E-E941DEC3F6BC</UUID>
+			<SourceUUID>3770C5DA-43DA-4D90-A443-7DFC4FE71B4B</SourceUUID>
+			<Options>34621442</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="List">
+					<List name="By name" value="2">
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[Get ( ScriptName )]]></Text>
+							</Calculation>
+						</Calculation>
+					</List>
+				</Parameter>
+				<Parameter type="Parameter">
+					<Parameter>
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[Get ( ScriptParameter )]]></Text>
+							</Calculation>
+						</Calculation>
+					</Parameter>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Wait for completion" id="256" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C6EA78A495F6D4CD32F9DBCF755CF27A" index="52" id="141" name="Set Variable" enable="True">
+			<UUID>CFCCD035-CB5B-4D27-BD47-BF73B4EBA4A3</UUID>
+			<SourceUUID>D0B5D45B-F165-4EB1-AC6D-FFF1A72E09A4</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7C2C71730F9239C6D819E0C8E83DF671" index="53" id="141" name="Set Variable" enable="True">
+			<UUID>72437F4C-00EF-4EB6-9ECA-2913D9C7B741</UUID>
+			<SourceUUID>C6B2B508-6F2A-43E9-968D-CE35CB7210AD</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONGetElement ( Get ( ScriptResult ) ; "data.recordId" )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$recordId"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C4F737AC3E7B13EB54882DCA3DEBC1CD" index="54" id="68" name="If" enable="True">
+			<UUID>DE98014B-A1E0-4CAC-AA8E-686CC8A82568</UUID>
+			<SourceUUID>3B4E4DDD-566D-4339-A5CF-403FFB83B939</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0 and not IsEmpty ( $recordId )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C08F2E2973721E24ED4A196EE41C1843" index="55" id="22" name="Enter Find Mode" enable="True">
+			<UUID>829C2DA0-1AF6-4FD7-94DF-0E4783D973EC</UUID>
+			<SourceUUID>3BC4D843-526E-488E-84E1-1935A26444D3</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FB0C67F32F531BE8532C8DB5C2813D9C" index="56" id="6" name="Go to Layout" enable="True">
+			<UUID>F5EA140A-D533-4A2D-967D-9225C511310B</UUID>
+			<SourceUUID>77946EA0-5E5F-4028-B16D-80526D0EAC65</SourceUUID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="19" name="SaXMLDeliveryExecutionContext" UUID="362D0FAA-5CE9-4818-A009-C0B4A58C447C"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="None" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="87C9AE9A0D4F6FF48AC6CB314A115FB6" index="57" id="76" name="Set Field" enable="True">
+			<UUID>412AECAE-883B-4554-9722-3FAFC07C254A</UUID>
+			<SourceUUID>2A3BF04B-DF28-4AE4-80C2-9BE6A11BFB99</SourceUUID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="1" name="recordId" UUID="335CEFDF-0C4F-4104-9EE2-28DDB93024F8">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$recordId]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B1F2967A5DFE4A0E31DDE566D088DDA3" index="58" id="28" name="Perform Find" enable="True">
+			<UUID>20D16D16-BAC0-4C36-878A-F587F197520C</UUID>
+			<SourceUUID>C6F252C0-07B0-478D-A155-EC3333E13BC7</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="07FD8F037694482336D6CE3CE6220E79" index="59" id="69" name="Else" enable="True">
+			<UUID>1126ED9E-4C4E-4D1F-8A42-0D0438CFDCEB</UUID>
+			<SourceUUID>1DDB2A33-1B8A-44FF-8B75-A2A0ACE0D05D</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9E89EFA109549A197F112C2712B6646B" index="60" id="6" name="Go to Layout" enable="True">
+			<UUID>CB98B20F-AD8F-4BC4-9ED0-E4B2DC822084</UUID>
+			<SourceUUID>09CEA308-BCCE-47F2-B7B3-8844BFF4FEC6</SourceUUID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="19" name="SaXMLDeliveryExecutionContext" UUID="362D0FAA-5CE9-4818-A009-C0B4A58C447C"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="None" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C994D28653CA82E2A6ACE13EF0D2CC9D" index="61" id="23" name="Show All Records" enable="True">
+			<UUID>35179E98-A5CC-4714-B933-6621786A18E1</UUID>
+			<SourceUUID>6D1EF2BF-B621-4A70-A2BC-515C8A7A7E6A</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="F7D477103B3B253BE5E0AECD6C400751" index="62" id="27" name="Show Omitted Only" enable="True">
+			<UUID>41B3E6CC-DDAC-4FEE-A8A2-37A7079CBF78</UUID>
+			<SourceUUID>DA5BCCA5-D009-478B-A4CB-EF5CA2C0A256</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="948851FBD0AE8299A8D53D75A5643F4E" index="63" id="70" name="End If" enable="True">
+			<UUID>94E4FE3C-6D82-447A-9BA9-4794CBD4E55F</UUID>
+			<SourceUUID>FCBE588A-0582-44EC-BA73-E7CC2859F625</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="1D7538BDEF3B497896D68EE814629FC2" index="64" id="103" name="Exit Script" enable="True">
+			<UUID>3938F742-69A7-4443-A809-26BCC37F53E1</UUID>
+			<SourceUUID>CD901CC8-E8E3-4E0C-B417-20E8236A3B57</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( ScriptResult )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C79DFDBD770806D209FBD70401902ED4" index="65" id="70" name="End If" enable="True">
+			<UUID>658A7A38-E871-4231-A9EE-3968E262B8DE</UUID>
+			<SourceUUID>EEDA4CF0-7E6B-400B-AF28-68C06D57A9EF</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="4A1BC8EF25E1723D395CD98AF8DCA479" index="66" id="70" name="End If" enable="True">
+			<UUID>AA924C99-B646-45B5-94B5-ED851AD4EB25</UUID>
+			<SourceUUID>84065808-3580-49F6-9571-47083E8B645F</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="4482E0701C5C17CDD16BF6CD30BF22E9" index="67" id="89" name="# (comment)" enable="True">
+			<UUID>26AAD06B-B7D8-4721-A78D-B07E0FA27897</UUID>
+			<SourceUUID>A167E8AC-7419-495A-A363-D0636015983D</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="ABD0EA285DA6DE1FF1F1BA425B9BCBFA" index="68" id="89" name="# (comment)" enable="True">
+			<UUID>47228031-F2A2-4F80-9C0E-DB726D4CBEC8</UUID>
+			<SourceUUID>4A537C4C-4562-4516-9B9B-F70B08007069</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Validate privilege set - must be full access or must have access via the Data API"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="89A71ABF30960F9A004993C99EB7EB4C" index="69" id="89" name="# (comment)" enable="True">
+			<UUID>88BD91F6-4452-4AB9-BB43-E18DE1F5CDFB</UUID>
+			<SourceUUID>E28F2EA0-87BA-493C-92A1-1D12057AD31E</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ CONFIGURATION STEP (optional): Customize restrictions to run this script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="860F592D86A3579DCFFC96D1C12E68C9" index="70" id="141" name="Set Variable" enable="True">
+			<UUID>7E699A60-18B2-48D0-AA30-1FA0E13BFA7D</UUID>
+			<SourceUUID>DE72CE36-6A92-42DD-B066-CEE893AF1CF0</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( AccountPrivilegeSetName ) = "[Full Access]" or not IsEmpty ( FilterValues ( Get ( AccountExtendedPrivileges ) ; "fmrest" ) )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$allowedPrivilegeSet"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3F9CF775DA7B7342AA502826E4A75E7D" index="71" id="68" name="If" enable="True">
+			<UUID>BEA78973-DC11-4571-98E2-91244D5A042B</UUID>
+			<SourceUUID>1D4360D5-557D-4CAC-81B3-1F6BB754261E</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[not $allowedPrivilegeSet]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EFE2DA0F05D18C554CCDC1EC966C9E12" index="72" id="103" name="Exit Script" enable="True">
+			<UUID>DC657469-9152-4A6A-9DA3-7ABDA5177AAC</UUID>
+			<SourceUUID>9809F3CF-583E-4418-BBF6-28700059DF10</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONSetElement ( "" ; [ "errorCode" ; 9 ; JSONNumber ] ; [ "message" ; "Insufficient privileges" ; JSONString ] )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8BE33BF5BBBF82DF820160A7E9E06B78" index="73" id="70" name="End If" enable="True">
+			<UUID>BE39EB8D-5146-47F2-B196-45533E68AAB0</UUID>
+			<SourceUUID>3C235744-069E-4E7D-8050-857C01187107</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="1169AA46100AEFBAD6A0BCD16DDF9A36" index="74" id="89" name="# (comment)" enable="True">
+			<UUID>3B1CE1A8-C0EA-4E61-88F5-3B1AA81429AE</UUID>
+			<SourceUUID>887F600C-6780-4EF8-879D-64CE307CB40F</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7F887E603C907CE3FC1E8AFD51E7D153" index="75" id="89" name="# (comment)" enable="True">
+			<UUID>C9B403BF-3E8B-4876-B219-E52ACB7496E6</UUID>
+			<SourceUUID>26E0054A-9A84-4926-9EF1-A50B174B9B0D</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Load optional param includeDetailsForAnalysisTools param into local variable"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9ED2D06CEDF2EA93541208965591F512" index="76" id="141" name="Set Variable" enable="True">
+			<UUID>CDC94019-5335-4EA3-BC94-1F75A6926781</UUID>
+			<SourceUUID>E26C097F-6A19-44DB-A9F5-9B395A546434</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Let ( [ 
+	includeDetailsForAnalysisTools = JSONGetElement ( Get ( ScriptParameter ) ; "includeDetailsForAnalysisTools" ) ; 
+
+	// isUndefined will be true if includeDetailsForAnalysisTools was not specified in the parameter (or the parameter is not valid json)
+	isUndefined = IsEmpty ( includeDetailsForAnalysisTools ) or Left ( includeDetailsForAnalysisTools ; 3 ) = "? *" ; 
+
+	split = Substitute ( RightWords ( Get ( ApplicationVersion ) ; 1 ) ; "." ; ¶ ) ; 
+	majorFileMakerVersion = GetAsNumber ( GetValue ( split ; 1 ) ) ; 
+	minorFileMakerVersion = GetAsNumber ( GetValue ( split ; 2 ) ) ; 
+
+	// "Include details for analysis tools" became available in FM 21.1
+	isSupported = $majorFileMakerVersion > 21 or ( $majorFileMakerVersion = 21 and $minorFileMakerVersion ≥ 1 )
+
+] ; 
+	Case ( 
+		isUndefined ; // if includeDetailsForAnalysisTools wasn't specified in the parameter
+		isSupported ; // default to true, but only if the fm version supports it
+		not isSupported ; // otherwise, if it's not a supported feature
+		False ; // default to false
+		includeDetailsForAnalysisTools // if it was specified in the parameter, and it's a supported feature, use the value from the parameter
+	)
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$_includeDetailsForAnalysisTools"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B70DFA934310B903FA254DA0F59E0473" index="77" id="89" name="# (comment)" enable="True">
+			<UUID>C945C375-2450-43FE-B50D-680DE1C92179</UUID>
+			<SourceUUID>5D560D27-F587-47CA-A0B7-33F7C16C4B6A</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="85F350A99D633B12824FC8CFFFEF5D06" index="78" id="89" name="# (comment)" enable="True">
+			<UUID>3C02BE98-8203-4ED7-9E40-42FB8199DE83</UUID>
+			<SourceUUID>A4DE11EE-6412-41C9-9802-8C1670B645D2</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Remember parent script&apos;s error capture state"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D0EF9787D103E41DF7F8D4372444DEDF" index="79" id="141" name="Set Variable" enable="True">
+			<UUID>2468B4B4-C824-455F-9179-0185E40F67A0</UUID>
+			<SourceUUID>DC3DF0F0-016C-4BDB-BFCA-5F0BDA8A085C</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( ErrorCaptureState )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$parentScriptErrorCaptureState"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E7701B5EE08F88BC4104CBC0FDAB0020" index="80" id="86" name="Set Error Capture" enable="True">
+			<UUID>EAC01316-D90E-458A-999C-F924081684DE</UUID>
+			<SourceUUID>87A93689-E0E6-4BEE-B34F-749D8C16C733</SourceUUID>
+			<Options>131072</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3488F11BF960346AAD74253DCF3E8F6A" index="81" id="89" name="# (comment)" enable="True">
+			<UUID>3CB792D6-7BBC-47D6-8CAB-64E1D4D87F51</UUID>
+			<SourceUUID>7A4411E0-94F8-4619-B086-989BB4029533</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8CFA1985817AAA6F8643456C59399869" index="82" id="89" name="# (comment)" enable="True">
+			<UUID>55BD306F-2060-44E5-8534-5C14DBBC5FF0</UUID>
+			<SourceUUID>49AC287E-5203-4C4E-918E-985F2C46139C</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1CD51AC2537809E197E82E04D69451F2" index="83" id="89" name="# (comment)" enable="True">
+			<UUID>B2B3F990-C7C2-402A-86B7-26087C671C62</UUID>
+			<SourceUUID>3C966823-BE54-43A3-834C-FE5A3A101F95</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="PROCESS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="976AA033CA292BE7AD92865DFA677ACA" index="84" id="89" name="# (comment)" enable="True">
+			<UUID>84860144-EE4B-4D9C-BE67-7914260DB7FD</UUID>
+			<SourceUUID>EFB53905-D080-431D-BC81-032A02F87484</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="83950355C5FEE2D713FB48CC86C83FC1" index="85" id="89" name="# (comment)" enable="True">
+			<UUID>C22E17FF-F84E-4010-94F2-A191E790D014</UUID>
+			<SourceUUID>4D4632AB-B756-49B8-AD95-E96DF4195DDE</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="03C24D5F624254DCB5502DC72D00BA68" index="86" id="89" name="# (comment)" enable="True">
+			<UUID>2A409A76-4E65-4369-AA8C-5D12A041EAEE</UUID>
+			<SourceUUID>FD8E89AB-9162-40FE-ABBD-10ABDF7865F2</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Set up context"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1C9DF6DD4B07072798CC942EDF3CDB09" index="87" id="68" name="If" enable="True">
+			<UUID>20182216-0830-4C8E-9F27-BBFE1A17CE66</UUID>
+			<SourceUUID>50BB3262-0053-46B4-B09D-96CEFE16BA62</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FF2D692EA92A6202FE8641397E1BCE92" index="88" id="6" name="Go to Layout" enable="True">
+			<UUID>ACEBA493-5C04-4BD7-B2F4-FF9AFC7E71B5</UUID>
+			<SourceUUID>32F3B92A-7152-42FA-9219-5E3B5CE36DDE</SourceUUID>
+			<Options>8</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="LayoutReferenceContainer">
+					<LayoutReferenceContainer value="5">
+						<LayoutReference id="19" name="SaXMLDeliveryExecutionContext" UUID="362D0FAA-5CE9-4818-A009-C0B4A58C447C"></LayoutReference>
+					</LayoutReferenceContainer>
+				</Parameter>
+				<Parameter type="Animation">
+					<Animation name="None" value="0"></Animation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8E10FDBFFA9CD14D4E903ADCE644866D" index="89" id="141" name="Set Variable" enable="True">
+			<UUID>7D64537D-7850-4BEB-8262-FCBF7AF63A7D</UUID>
+			<SourceUUID>60062FCA-2A75-4383-8742-FF9E37273E38</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="13E556E7F66D38AD91F98F15264FE50F" index="90" id="70" name="End If" enable="True">
+			<UUID>7E1ED152-F6E2-4B7F-BD23-566366D004C9</UUID>
+			<SourceUUID>E1856083-A959-4D14-9353-B8348362260E</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="E659D6EC7330B04AD93FC2F23F29A857" index="91" id="89" name="# (comment)" enable="True">
+			<UUID>10A5C189-F1E7-425D-8551-6D0FF8498027</UUID>
+			<SourceUUID>45120FA0-5526-4833-A76C-42AC03E30376</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F233E6D1344057C47F8C8372E1FF1582" index="92" id="89" name="# (comment)" enable="True">
+			<UUID>53E4CF04-C065-4633-881F-5A2F0383EC20</UUID>
+			<SourceUUID>EB8FD1B9-A84E-49A0-9B2A-7FB62F467106</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Purge old records"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="669945BEBB6D8C5E43B37CFFD202D8B5" index="93" id="68" name="If" enable="True">
+			<UUID>5B19F71C-65C7-42E5-AE37-4B500CD600E5</UUID>
+			<SourceUUID>B7C1E57F-F912-4389-9645-82388C2F1C8E</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1A0830763AE2D7472B5927FC0A38431F" index="94" id="89" name="# (comment)" enable="True">
+			<UUID>A37EE9FC-ECE8-4250-B9C4-EDBF55FE42FF</UUID>
+			<SourceUUID>E174F929-AEEA-43F9-AF00-896705076DC9</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Delete records older than 3 months"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1C07A17782A3D7A31149441869426EAA" index="95" id="141" name="Set Variable" enable="True">
+			<UUID>460A6693-998A-437B-B5B3-05EA89FA2B31</UUID>
+			<SourceUUID>FC1810EC-1C86-4C92-9D7E-50D6B11D88C0</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Let ( 
+	today = Get ( CurrentDate ) ; 
+	Date ( Month ( today ) - 3 ; Day ( today ) ; Year ( today ) ) 
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$purgeDate"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7B38DB6874B4EEAE61EF9085B1F11A04" index="96" id="22" name="Enter Find Mode" enable="True">
+			<UUID>6EDAEB24-C94C-4519-8524-7EA0E042CD33</UUID>
+			<SourceUUID>25589CCC-3986-4912-AA0B-B34C3D1A5A56</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="Pause" id="16777216" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="41683EB3573E4811106AE29D9A39F8DE" index="97" id="76" name="Set Field" enable="True">
+			<UUID>B6B3DC27-B017-4DF1-A193-CCA23216BBA3</UUID>
+			<SourceUUID>69DB32B3-BF92-4B82-91E4-DC461C547847</SourceUUID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="9" name="createTimestamp" UUID="3E9C89F1-3766-4CC2-A677-FDACD6F6ED9E">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["<" & $purgeDate]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="6D8BB794652AC6946D4331BEAB4415E5" index="98" id="28" name="Perform Find" enable="True">
+			<UUID>42037E6F-171F-4E0B-A66A-018724E0873B</UUID>
+			<SourceUUID>CEA09E34-5A9F-4C08-A1AC-4125437B4A05</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="3A5F73B40227DD009F79A4690722FD3B" index="99" id="68" name="If" enable="True">
+			<UUID>D82F1B2E-AD3F-404C-AC55-B8B1B182C375</UUID>
+			<SourceUUID>786A3E20-86DB-4D8C-BC4B-CE1751363689</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( FoundCount ) > 0 and Get ( LayoutTableName ) = GetValue ( Substitute ( GetFieldName ( SaXMLDelivery::xmlFile ) ; "::" ; ¶ ) ; 1 ) // belt and suspenders]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7C2FCB7A84E5C5D6F6B3C2CED459D1FA" index="100" id="10" name="Delete All Records" enable="True">
+			<UUID>6AE3AFA1-1F23-4A67-BB3D-A4183AEE7B09</UUID>
+			<SourceUUID>E10A1BA4-F323-4148-9D44-0364AF641EEA</SourceUUID>
+			<Options>128</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1E97CD7DE99B6CC30EE075B20C6568C0" index="101" id="70" name="End If" enable="True">
+			<UUID>2DE81D1F-073B-490A-B9B2-D9C5BE5690DA</UUID>
+			<SourceUUID>2D50875A-C444-4054-A0BA-5C7649D3C4FF</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="B739DE177C208BE1816059EC55585424" index="102" id="70" name="End If" enable="True">
+			<UUID>F93AFA28-F94F-48D9-AC17-7A0496FEE205</UUID>
+			<SourceUUID>B80A8FC1-A210-4930-84C1-E998816A1883</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="D3C38FF1750A4E89A9B93C18C7B4FF42" index="103" id="89" name="# (comment)" enable="True">
+			<UUID>A13897F4-849A-4926-B51A-33B6C215B6AA</UUID>
+			<SourceUUID>24C10931-546C-4C14-97B5-C9A4B3683464</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F0957F456E487146B7BC9231466C59FF" index="104" id="89" name="# (comment)" enable="True">
+			<UUID>5DA068E8-6876-4994-86A8-CE62E948D21E</UUID>
+			<SourceUUID>64424004-98D9-424D-8909-31F424288E2F</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Create new record"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8E97502F10442E341D4512E670DB94D6" index="105" id="68" name="If" enable="True">
+			<UUID>96822837-1360-4027-AD5D-8D3B53D62B98</UUID>
+			<SourceUUID>41CB0E2E-2250-4751-9A3D-D27F5D1D53E1</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FCC1646C30C2DE8720512543FF5797DD" index="106" id="7" name="New Record/Request" enable="True">
+			<UUID>8C154812-7BEF-488D-9927-FCDBE74E0961</UUID>
+			<SourceUUID>50B2BF4F-0A09-4F7C-9FCF-B30E5861FB53</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="BE4EEFA17C1C12232D55F7AE3089D419" index="107" id="141" name="Set Variable" enable="True">
+			<UUID>473CA8BA-A21A-4B0E-9B1E-C943FBB2D68E</UUID>
+			<SourceUUID>8F450B56-B3FF-43AA-8881-CC6EB191C87B</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="76AD3301CC1D7004D5C5E561348A2009" index="108" id="70" name="End If" enable="True">
+			<UUID>12D72559-02F6-4FBD-9223-B6C971012E31</UUID>
+			<SourceUUID>674B40B8-C2CE-4F6C-BF4E-E698C283A69F</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="3B7395BFBA7A6733820DB47FE27F2704" index="109" id="89" name="# (comment)" enable="True">
+			<UUID>2FF5386D-C5D5-4FEE-9720-25707083FD35</UUID>
+			<SourceUUID>F4F81011-4F78-409B-A776-82EFAE3520D4</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F778D79DA56443F4DA5AC8D241273C7D" index="110" id="89" name="# (comment)" enable="True">
+			<UUID>A41C4D65-DE62-4E92-BA0F-29574E48B348</UUID>
+			<SourceUUID>CFE29818-17D4-479D-B256-201FF1B0159A</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Create SaXML xml file on file system"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="479FD72F89D662B5588844965358C2C0" index="111" id="89" name="# (comment)" enable="True">
+			<UUID>1533B76F-7848-43ED-9B3E-43810AE2B71D</UUID>
+			<SourceUUID>3A5C534A-D115-4E90-82AD-EF0FE55C6EB0</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2024-10-07 mkos: Added support for $_includeDetailsForAnalysisTools"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="563A72B942B8D200102ADD2DE541F7C9" index="112" id="68" name="If" enable="True">
+			<UUID>E8BDB357-1D92-4E72-BDA9-625A9791716F</UUID>
+			<SourceUUID>81DD9DDC-D22D-4085-AE35-E90C198589C3</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="74744E6F9D23B0FDB1D0ED5FEEF8450A" index="113" id="141" name="Set Variable" enable="True">
+			<UUID>E57A1ED6-68E6-414A-B15B-A7791E4CF58B</UUID>
+			<SourceUUID>02E6634E-5094-452E-8EFB-35AC770C6487</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( TemporaryPath ) & Get ( FileName ) & ".xml"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$xmlPath"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="4B913849D6991E99DE9521F460C3348C" index="114" id="141" name="Set Variable" enable="True">
+			<UUID>260EE880-5E3C-4377-B1D1-7578AF064BC5</UUID>
+			<SourceUUID>20059F10-6237-4572-B92F-C172D3FC1A88</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( CurrentTimeUTCMilliseconds )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$start"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="69EB726DACFA56464D6596EBDED846EF" index="115" id="68" name="If" enable="True">
+			<UUID>899E9607-0B13-4B67-B7ED-1B6E8946CD76</UUID>
+			<SourceUUID>D7C1729E-EBA0-4B14-ADD9-B152C0938277</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$_includeDetailsForAnalysisTools]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2798C49AAB977F17E3CF03F7CB0FF5B5" index="116" id="3" name="Save a Copy as XML" enable="True">
+			<UUID>5F9ED85F-D6C6-43C5-8BAA-70E2E151DE96</UUID>
+			<SourceUUID>477A1935-6493-4D37-81C2-95F79D6014B7</SourceUUID>
+			<Options>16672</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( WindowName )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="UniversalPathList">
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$xmlPath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Include details for analysis tools" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Save each layout object&apos;s binary data under its node" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DB938FDAFA824FB105F25862B2C87B25" index="117" id="69" name="Else" enable="True">
+			<UUID>06DA4B74-D6F0-4C93-9A6A-955A5D91D340</UUID>
+			<SourceUUID>58D92EF0-C2FD-4246-B429-B92139E96A17</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="CC3DBDCAD14021790F7F40A74B20F3E6" index="118" id="3" name="Save a Copy as XML" enable="True">
+			<UUID>0611DB3F-2074-448E-B660-1E2DA4CC1D08</UUID>
+			<SourceUUID>29587A39-03CB-41EE-8E96-7CCE1DDC6D36</SourceUUID>
+			<Options>16416</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( WindowName )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="UniversalPathList">
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$xmlPath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Include details for analysis tools" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Save each layout object&apos;s binary data under its node" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7BC67E21EA66B58340E6B5344868398F" index="119" id="70" name="End If" enable="True">
+			<UUID>081A790B-398A-4223-B8B6-C4C1CE881003</UUID>
+			<SourceUUID>ABD1B93E-C6E1-419B-A86F-C146CF1C89BB</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="7022FDA840A24BA3514C6C0A025DC8EC" index="120" id="141" name="Set Variable" enable="True">
+			<UUID>7674754D-4D8C-4496-AABB-26C354E15AD6</UUID>
+			<SourceUUID>BC916FEC-43BE-47EC-A6CF-8B0C3094D5A0</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="43E8886107BA41E0A5AB74D654BD0F26" index="121" id="141" name="Set Variable" enable="True">
+			<UUID>8422B050-742C-4A7D-A41C-33BEA9BF0C6D</UUID>
+			<SourceUUID>25F5D5B8-D8FC-4A93-AC16-CEB5FF3C8664</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[GetAsTime ( ( Get ( CurrentTimeUTCMilliseconds ) - $start ) / 1000 )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$timeToCreate"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2BADE4D21B34997B13E53D033B4FDC07" index="122" id="70" name="End If" enable="True">
+			<UUID>3E254A75-96CE-4184-9D5E-1B0F8592DBBA</UUID>
+			<SourceUUID>23702F58-9AD9-4CFA-B468-1ED203126BCF</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="83AF731C7056032F1AF2AB5D1D36B43A" index="123" id="89" name="# (comment)" enable="True">
+			<UUID>D517EB46-C2D3-4BD5-B577-CF80DFCE17B4</UUID>
+			<SourceUUID>9112759C-A28D-4297-9D7C-C1EF21389E15</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="100D41A832A6E805F1C52275C8C219CA" index="124" id="89" name="# (comment)" enable="True">
+			<UUID>74BBC2AB-E0A5-4487-9452-57D53F02C12C</UUID>
+			<SourceUUID>2EC44B96-57D4-4728-A305-F5C927C239DF</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Upload xml file to container field"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5D5D5BD83BB9F347D73CF237BB77E057" index="125" id="89" name="# (comment)" enable="True">
+			<UUID>BF3A9CC9-7E14-425E-9251-0886ABBF2619</UUID>
+			<SourceUUID>D4B162BB-E58A-4404-A5DF-A10C69E137E1</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Note, we tried using the Read From Data File step, but it&apos;s not any faster, and it makes the code more complex, bc you have to read the file in chunks"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7E9D7F59CA79B059B3C9ACD605D58E01" index="126" id="89" name="# (comment)" enable="True">
+			<UUID>C6CE449C-A652-40C3-B3AE-209671ABF737</UUID>
+			<SourceUUID>BEE5C74D-CC91-40FD-BF92-614EEA1C3894</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2024-07-17 mkos: Don&apos;t automatically encode url since ConvertFromFileMakerPath will already do that for us"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BC77EBE6EA982B2FD5DF712FB7AB0A9C" index="127" id="68" name="If" enable="True">
+			<UUID>5D80F1E0-FF86-4FDC-8C68-849353871209</UUID>
+			<SourceUUID>678A97AD-3ED7-4BF1-835A-60C2A63A9D1C</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="050F2ED43F731D03B1E5EAB55A895070" index="128" id="141" name="Set Variable" enable="True">
+			<UUID>AC330085-3845-4F15-9193-0BCA40D1A4F5</UUID>
+			<SourceUUID>BAA024A5-9B0B-4551-A8A8-133FC38C4B43</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( CurrentTimeUTCMilliseconds )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$start"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="90414D6E2367E1DA25E7DBE5E32F96C6" index="129" id="160" name="Insert from URL" enable="True">
+			<UUID>A9675F6C-A121-4EC7-980F-B674FE65BF20</UUID>
+			<SourceUUID>9475D736-0B92-4CCE-BD6A-26C6742C36B4</SourceUUID>
+			<Options>20865</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Boolean">
+					<Boolean type="Verify SSL Certificates" id="268435456" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Select" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<FieldReference id="7" name="xmlFile" UUID="996F8093-79C6-48FF-A8C1-8546DAD1D2A5">
+						<repetition>
+							<Calculation datatype="1" position="32">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="False">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[ConvertFromFileMakerPath ( $xmlPath ; URLPath )]]></Text>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="CE1461C38337855DDB4C7633CFFCE7D9" index="130" id="141" name="Set Variable" enable="True">
+			<UUID>7479BBB0-3BB3-430D-8928-A3C3C9AE0838</UUID>
+			<SourceUUID>9B7C0EE2-22F6-4BB3-A8EC-A7DDEA70F706</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8A6C12A4DA60E42A01456034466D4D81" index="131" id="141" name="Set Variable" enable="True">
+			<UUID>A74DE2D9-0A3E-4730-B2A2-6DF68CFAE47D</UUID>
+			<SourceUUID>CE412EA2-BDB7-4BFA-BF45-FA39291048EC</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[GetAsTime ( ( Get ( CurrentTimeUTCMilliseconds ) - $start ) / 1000 )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$timeToUpload"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7F5890A82AEF2D18551896CE6525AE85" index="132" id="70" name="End If" enable="True">
+			<UUID>5D12F4B9-E561-41D3-8A1F-D127557F5CF4</UUID>
+			<SourceUUID>30ADA701-7175-4D0A-8D98-C07CB0833293</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="E15230B1AFC2FE561063CABEAD4766BF" index="133" id="68" name="If" enable="True">
+			<UUID>79A6112F-CD33-4EC0-82FB-ADC6F0BF49DE</UUID>
+			<SourceUUID>2CC52F7D-4219-432F-8AD9-A97229B3CAF2</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FAE0A5BA297375ABCE8FB40F5446F98F" index="134" id="76" name="Set Field" enable="True">
+			<UUID>9DD73070-97AC-4735-89EF-A35FA7225AEA</UUID>
+			<SourceUUID>39A80332-BFF2-489B-A06D-42D9AEF59AAC</SourceUUID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="6" name="timeToCreate" UUID="13849F74-EC2E-441D-BBFE-A3140D27BB87">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$timeToCreate]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8453A7A5D0D89E026F115B219BC8761B" index="135" id="76" name="Set Field" enable="True">
+			<UUID>B778D19D-7C80-43A4-8128-64B22F5A48A5</UUID>
+			<SourceUUID>07D6C069-DC34-4BF0-9175-5B42306B5F99</SourceUUID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="10" name="timeToUpload" UUID="305F0BC9-C278-4143-A33C-67B549740260">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$timeToUpload]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FF25EF8DB3FB3F63E7C17C47AFF00ECE" index="136" id="76" name="Set Field" enable="True">
+			<UUID>032C9F0C-8654-4638-A261-874CF4BF2F49</UUID>
+			<SourceUUID>0A17B951-F875-4DBF-99FB-C4F76640FC80</SourceUUID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="5" name="sizeInBytes" UUID="FD621866-6BB0-4D60-AE3F-39631B677152">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[GetContainerAttribute ( SaXMLDelivery::xmlFile ; "filesize" )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7F0704A2E2A6F47FB424D5A278C28F8C" index="137" id="75" name="Commit Records/Requests" enable="True">
+			<UUID>B04886EA-E07D-4D79-A292-DEEB3B5E4A98</UUID>
+			<SourceUUID>932947FE-8345-44B3-A045-C89C33ADC7BD</SourceUUID>
+			<Options>384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Skip data entry validation" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Force Commit" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A693BAF6C26670E4AB0A42D5959D32F7" index="138" id="141" name="Set Variable" enable="True">
+			<UUID>4FDD39F0-6281-4237-9A9B-87F20EDB3059</UUID>
+			<SourceUUID>F08BBD19-F2FA-4FAB-B20F-DF5847B3F140</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="27AA01E679097AE8125A60F354444A2E" index="139" id="141" name="Set Variable" enable="True">
+			<UUID>E99BAA93-8212-4A11-B41B-8D465E971CBA</UUID>
+			<SourceUUID>F239CC8E-35FA-457D-A17B-8AB0BA417958</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[SaXMLDelivery::recordId]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$recordId"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="423EEAC0C1738AE5DADBE319661D5D80" index="140" id="70" name="End If" enable="True">
+			<UUID>0A363061-6FDF-41FA-B70B-93012293CA57</UUID>
+			<SourceUUID>249F6E49-E54B-40EF-8699-98D709C57417</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="D313EE1CC802A4A6B65C5EAE6B4255F1" index="141" id="89" name="# (comment)" enable="True">
+			<UUID>0E3A0EA0-6D88-4CB6-B83C-571A4AD4C2A6</UUID>
+			<SourceUUID>343AE76B-C8DE-46D8-8EB5-A661C8929454</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D6ED8779E89C0749090821722D88041D" index="142" id="89" name="# (comment)" enable="True">
+			<UUID>FC01BEFB-A115-4187-BBAA-DC97F0141E2A</UUID>
+			<SourceUUID>9DF29B90-6A7C-4BB1-9314-A1BF89E55EB1</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Delete xml file in temp folder"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="715EA86BD7CD193E983863D9D7D2218B" index="143" id="68" name="If" enable="True">
+			<UUID>0B8613B0-7982-4E6C-A98D-1778DCBFADF9</UUID>
+			<SourceUUID>326C1A41-8E0A-442B-A89A-6BDA67CA33D2</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="78BD90684493401CE72BC2107D1985D8" index="144" id="197" name="Delete File" enable="True">
+			<UUID>5278D1BD-E047-4F85-9A37-7D6950E1F6E5</UUID>
+			<SourceUUID>FB6810BA-9F76-4057-B558-8E91BBCBACCC</SourceUUID>
+			<Options>32</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="UniversalPathList">
+					<UniversalPathList membercount="1">
+						<ObjectList>
+							<Location><![CDATA[$xmlPath]]></Location>
+						</ObjectList>
+					</UniversalPathList>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="DF49272D23EA4788E5C3AFDCEBF23626" index="145" id="141" name="Set Variable" enable="True">
+			<UUID>3787346F-EB0F-4AD9-A5AF-1AB48A78008C</UUID>
+			<SourceUUID>12CB9FEB-C559-41E1-B1C9-AC7CF54598EF</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A3F004A44272AC33064920CCCA7AF833" index="146" id="70" name="End If" enable="True">
+			<UUID>A97A1317-2160-4AA8-97B9-AFB23FAAF7F9</UUID>
+			<SourceUUID>6F4B9691-B7EE-440F-8EAB-F4AC339B8F91</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="2DD6FA18BC6599C57C93E94C1D316BB7" index="147" id="89" name="# (comment)" enable="True">
+			<UUID>8D757095-E348-42C3-B858-487120893EE2</UUID>
+			<SourceUUID>BA3603D2-9DA3-461F-AA15-EC9B9BBD5871</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0C610FCD39D35EE6983114B60EBC0647" index="148" id="89" name="# (comment)" enable="True">
+			<UUID>20AEA968-13F5-46D3-B685-5DF75F79B2DF</UUID>
+			<SourceUUID>5A372477-300A-4273-8454-3041EE5460ED</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Handle error"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C59E9C30B788009A38DF9707F7182F82" index="149" id="68" name="If" enable="True">
+			<UUID>9D9A6B6E-5016-4E1E-8019-1D6579AB5E8D</UUID>
+			<SourceUUID>30C143E7-E077-4B23-BD37-007C63224101</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode > 1 and IsEmpty ( $message )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A93954EED7E928977C838DC0B3393214" index="150" id="141" name="Set Variable" enable="True">
+			<UUID>779E3693-F05A-42F4-B57B-C041616DC9E7</UUID>
+			<SourceUUID>0E7F924E-65FE-4E1E-9E17-B3C59EA61D1F</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[// We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
+/**
+ * @SIGNATURE:
+ * ErrorMessage ( errorCode )
+ * 
+ * @PARAMETERS:
+ * errorCode	:	Number corresponding to the error code. For example, from Get ( LastError ).
+ * 
+ * @HISTORY:
+ *     Created	:	yyyy-MMM-dd by Jeremiah Small (?) , Soliant Consulting
+ * 			  	posted on http://www.briandunning.com/cf/124
+ *    Modified	:	2011-08-07 by Mislav Kos, Soliant Consulting
+ *    Modified	:	2017-12-16 by Mislav Kos, Soliant Consulting - now current through FileMaker 16
+ *    Modified	:	2022-10-17 by Mislav Kos, Soliant Consulting - now current through FileMaker 19.5
+ * 
+ * @PURPOSE:
+ * Return error descriptions for codes from FileMaker help text (see https://help.claris.com/en/pro-help/content/error-codes.html)
+ * 
+ * @RESULT:
+ * Error description text.
+ * 
+ * @ERRORS:
+ * N/A
+ */
+
+Let ( [  
+		errorCode = $errorCode ; 
+		errorMessage = Case (
+			errorCode =   -1 ; 			"Unknown error" ; 
+			errorCode =   0 ; 			"No error" ; 
+			errorCode =   1 ; 			"User canceled action" ; 
+			errorCode =   2 ; 			"Memory error" ; 
+			errorCode =   3 ; 			"Command is unavailable (for example, wrong operating system or mode)" ; 
+			errorCode =   4 ; 			"Command is unknown" ; 
+			errorCode =   5 ; 			"Command is invalid (for example, a Set Field script step does not have a calculation specified)" ; 
+			errorCode =   6 ; 			"File is read-only" ; 
+			errorCode =   7 ; 			"Running out of memory" ; 
+			errorCode =   9 ; 			"Insufficient privileges" ; 
+			errorCode =   10 ; 			"Requested data is missing" ; 
+			errorCode =   11 ; 			"Name is not valid" ; 
+			errorCode =   12 ; 			"Name already exists" ; 
+			errorCode =   13 ; 			"File or object is in use" ; 
+			errorCode =   14 ; 			"Out of range" ; 
+			errorCode =   15 ; 			"Can't divide by zero" ; 
+			errorCode =   16 ; 			"Operation failed; request retry (for example, a user query)" ; 
+			errorCode =   17 ; 			"Attempt to convert foreign character set to UTF-16 failed" ; 
+			errorCode =   18 ; 			"Client must provide account information to proceed" ; 
+			errorCode =   19 ; 			"String contains characters other than A-Z, a-z, 0-9 (ASCII)" ; 
+			errorCode =   20 ; 			"Command/operation canceled by triggered script" ; 
+			errorCode =   21 ; 			"Request not supported (for example, when creating a hard link on a file system that does not support hard links)" ; 
+			errorCode =   100 ; 			"File is missing" ; 
+			errorCode =   101 ; 			"Record is missing" ; 
+			errorCode =   102 ; 			"Field is missing" ; 
+			errorCode =   103 ; 			"Relationship is missing" ; 
+			errorCode =   104 ; 			"Script is missing" ; 
+			errorCode =   105 ; 			"Layout is missing" ; 
+			errorCode =   106 ; 			"Table is missing" ; 
+			errorCode =   107 ; 			"Index is missing" ; 
+			errorCode =   108 ; 			"Value list is missing" ; 
+			errorCode =   109 ; 			"Privilege set is missing" ; 
+			errorCode =   110 ; 			"Related tables are missing" ; 
+			errorCode =   111 ; 			"Field repetition is invalid" ; 
+			errorCode =   112 ; 			"Window is missing" ; 
+			errorCode =   113 ; 			"Function is missing" ; 
+			errorCode =   114 ; 			"File reference is missing" ; 
+			errorCode =   115 ; 			"Menu set is missing" ; 
+			errorCode =   116 ; 			"Layout object is missing" ; 
+			errorCode =   117 ; 			"Data source is missing" ; 
+			errorCode =   118 ; 			"Theme is missing" ; 
+			errorCode =   130 ; 			"Files are damaged or missing and must be reinstalled" ; 
+			errorCode =   131 ; 			"Language pack files are missing" ; 
+			errorCode =   200 ; 			"Record access is denied" ; 
+			errorCode =   201 ; 			"Field cannot be modified" ; 
+			errorCode =   202 ; 			"Field access is denied" ; 
+			errorCode =   203 ; 			"No records in file to print, or password doesn't allow print access" ; 
+			errorCode =   204 ; 			"No access to field(s) in sort order" ; 
+			errorCode =   205 ; 			"User does not have access privileges to create new records; import will overwrite existing data" ; 
+			errorCode =   206 ; 			"User does not have password change privileges, or file is not modifiable" ; 
+			errorCode =   207 ; 			"User does not have privileges to change database schema, or file is not modifiable" ; 
+			errorCode =   208 ; 			"Password does not contain enough characters" ; 
+			errorCode =   209 ; 			"New password must be different from existing one" ; 
+			errorCode =   210 ; 			"User account is inactive" ; 
+			errorCode =   211 ; 			"Password has expired" ; 
+			errorCode =   212 ; 			"Invalid user account or password" ; 
+			errorCode =   214 ; 			"Too many login attempts" ; 
+			errorCode =   215 ; 			"Administrator privileges cannot be duplicated" ; 
+			errorCode =   216 ; 			"Guest account cannot be duplicated" ; 
+			errorCode =   217 ; 			"User does not have sufficient privileges to modify administrator account" ; 
+			errorCode =   218 ; 			"Password and verify password do not match" ; 
+			errorCode =   219 ; 			"Cannot open file; must be licensed user; contact team manager" ; 
+			errorCode =   300 ; 			"File is locked or in use" ; 
+			errorCode =   301 ; 			"Record is in use by another user" ; 
+			errorCode =   302 ; 			"Table is in use by another user" ; 
+			errorCode =   303 ; 			"Database schema is in use by another user" ; 
+			errorCode =   304 ; 			"Layout is in use by another user" ; 
+			errorCode =   306 ; 			"Record modification ID does not match" ; 
+			errorCode =   307 ; 			"Transaction could not be locked because of a communication error with the host" ; 
+			errorCode =   308 ; 			"Theme is locked and in use by another user" ; 
+			errorCode =   400 ; 			"Find criteria are empty" ; 
+			errorCode =   401 ; 			"No records match the request" ; 
+			errorCode =   402 ; 			"Selected field is not a match field for a lookup" ; 
+			errorCode =   404 ; 			"Sort order is invalid" ; 
+			errorCode =   405 ; 			"Number of records specified exceeds number of records that can be omitted" ; 
+			errorCode =   406 ; 			"Replace/reserialize criteria are invalid" ; 
+			errorCode =   407 ; 			"One or both match fields are missing (invalid relationship)" ; 
+			errorCode =   408 ; 			"Specified field has inappropriate data type for this operation" ; 
+			errorCode =   409 ; 			"Import order is invalid" ; 
+			errorCode =   410 ; 			"Export order is invalid" ; 
+			errorCode =   412 ; 			"Wrong version of FileMaker Pro used to recover file" ; 
+			errorCode =   413 ; 			"Specified field has inappropriate field type" ; 
+			errorCode =   414 ; 			"Layout cannot display the result" ; 
+			errorCode =   415 ; 			"One or more required related records are not available" ; 
+			errorCode =   416 ; 			"A primary key is required from the data source table" ; 
+			errorCode =   417 ; 			"File is not a supported data source" ; 
+			errorCode =   418 ; 			"Internal failure in INSERT operation into a field" ; 
+			errorCode =   500 ; 			"Date value does not meet validation entry options" ; 
+			errorCode =   501 ; 			"Time value does not meet validation entry options" ; 
+			errorCode =   502 ; 			"Number value does not meet validation entry options" ; 
+			errorCode =   503 ; 			"Value in field is not within the range specified in validation entry options" ; 
+			errorCode =   504 ; 			"Value in field is not unique, as required in validation entry options" ; 
+			errorCode =   505 ; 			"Value in field is not an existing value in the file, as required in validation entry options" ; 
+			errorCode =   506 ; 			"Value in field is not listed in the value list specified in validation entry option" ; 
+			errorCode =   507 ; 			"Value in field failed calculation test of validation entry option" ; 
+			errorCode =   508 ; 			"Invalid value entered in Find mode" ; 
+			errorCode =   509 ; 			"Field requires a valid value" ; 
+			errorCode =   510 ; 			"Related value is empty or unavailable" ; 
+			errorCode =   511 ; 			"Value in field exceeds maximum field size" ; 
+			errorCode =   512 ; 			"Record was already modified by another user" ; 
+			errorCode =   513 ; 			"No validation was specified but data cannot fit into the field" ; 
+			errorCode =   600 ; 			"Print error has occurred" ; 
+			errorCode =   601 ; 			"Combined header and footer exceed one page" ; 
+			errorCode =   602 ; 			"Body doesn't fit on a page for current column setup" ; 
+			errorCode =   603 ; 			"Print connection lost" ; 
+			errorCode =   700 ; 			"File is of the wrong file type for import" ; 
+			errorCode =   706 ; 			"EPS file has no preview image" ; 
+			errorCode =   707 ; 			"Graphic translator cannot be found" ; 
+			errorCode =   708 ; 			"Can't import the file, or need color monitor support to import file" ; 
+			errorCode =   711 ; 			"Import translator cannot be found" ; 
+			errorCode =   714 ; 			"Password privileges do not allow the operation" ; 
+			errorCode =   715 ; 			"Specified Excel worksheet or named range is missing" ; 
+			errorCode =   716 ; 			"A SQL query using DELETE, INSERT, or UPDATE is not allowed for ODBC import" ; 
+			errorCode =   717 ; 			"There is not enough XML/XSL information to proceed with the import or export" ; 
+			errorCode =   718 ; 			"Error in parsing XML file (from Xerces)" ; 
+			errorCode =   719 ; 			"Error in transforming XML using XSL (from Xalan)" ; 
+			errorCode =   720 ; 			"Error when exporting; intended format does not support repeating fields" ; 
+			errorCode =   721 ; 			"Unknown error occurred in the parser or the transformer" ; 
+			errorCode =   722 ; 			"Cannot import data into a file that has no fields" ; 
+			errorCode =   723 ; 			"You do not have permission to add records to or modify records in the target table" ; 
+			errorCode =   724 ; 			"You do not have permission to add records to the target table" ; 
+			errorCode =   725 ; 			"You do not have permission to modify records in the target table" ; 
+			errorCode =   726 ; 			"Source file has more records than the target table; not all records were imported" ; 
+			errorCode =   727 ; 			"Target table has more records than the source file; not all records were updated" ; 
+			errorCode =   729 ; 			"Errors occurred during import; records could not be imported" ; 
+			errorCode =   730 ; 			"Unsupported Excel version; convert file to the current Excel format and try again" ; 
+			errorCode =   731 ; 			"File you are importing from contains no data" ; 
+			errorCode =   732 ; 			"This file cannot be inserted because it contains other files" ; 
+			errorCode =   733 ; 			"A table cannot be imported into itself" ; 
+			errorCode =   734 ; 			"This file type cannot be displayed as a picture" ; 
+			errorCode =   735 ; 			"This file type cannot be displayed as a picture; it will be inserted and displayed as a file" ; 
+			errorCode =   736 ; 			"Too much data to export to this format; data will be truncated" ; 
+			errorCode =   738 ; 			"The theme you are importing already exists" ; 
+			errorCode =   800 ; 			"Unable to create file on disk" ; 
+			errorCode =   801 ; 			"Unable to create temporary file on System disk" ; 
+			errorCode =   802 ; 			"Unable to open file" ; 
+			errorCode =   803 ; 			"File is single-user, or host cannot be found" ; 
+			errorCode =   804 ; 			"File cannot be opened as read-only in its current state" ; 
+			errorCode =   805 ; 			"File is damaged; use Recover command" ; 
+			errorCode =   806 ; 			"File cannot be opened with this version of a FileMaker client" ; 
+			errorCode =   807 ; 			"File is not a FileMaker Pro file or is severely damaged" ; 
+			errorCode =   808 ; 			"Cannot open file because access privileges are damaged" ; 
+			errorCode =   809 ; 			"Disk/volume is full" ; 
+			errorCode =   810 ; 			"Disk/volume is locked" ; 
+			errorCode =   811 ; 			"Temporary file cannot be opened as FileMaker Pro file" ; 
+			errorCode =   812 ; 			"Exceeded host's capacity" ; 
+			errorCode =   813 ; 			"Record synchronization error on network" ; 
+			errorCode =   814 ; 			"File(s) cannot be opened because maximum number is open" ; 
+			errorCode =   815 ; 			"Couldn't open lookup file" ; 
+			errorCode =   816 ; 			"Unable to convert file" ; 
+			errorCode =   817 ; 			"Unable to open file because it does not belong to this solution" ; 
+			errorCode =   819 ; 			"Cannot save a local copy of a remote file" ; 
+			errorCode =   820 ; 			"File is being closed" ; 
+			errorCode =   821 ; 			"Host forced a disconnect" ; 
+			errorCode =   822 ; 			"FileMaker Pro files not found; reinstall missing files" ; 
+			errorCode =   823 ; 			"Cannot set file to single-user; guests are connected" ; 
+			errorCode =   824 ; 			"File is damaged or not a FileMaker Pro file" ; 
+			errorCode =   825 ; 			"File is not authorized to reference the protected file" ; 
+			errorCode =   826 ; 			"File path specified is not a valid file path" ; 
+			errorCode =   827 ; 			"File was not created because the source contained no data or is a reference" ; 
+			errorCode =   850 ; 			"Path is not valid for the operating system" ; 
+			errorCode =   851 ; 			"Cannot delete an external file from disk" ; 
+			errorCode =   852 ; 			"Cannot write a file to the external storage" ; 
+			errorCode =   853 ; 			"One or more containers failed to transfer" ; 
+			errorCode =   870 ; 			"Cannot modify file because another user is modifying it" ; 
+			errorCode =   871 ; 			"Error occurred loading Core ML model" ; 
+			errorCode =   872 ; 			"Core ML model was not loaded because it contained an unsupported input or output parameter" ; 
+			errorCode =   900 ; 			"General spelling engine error" ; 
+			errorCode =   901 ; 			"Main spelling dictionary not installed" ; 
+			errorCode =   903 ; 			"Command cannot be used in a shared file" ; 
+			errorCode =   905 ; 			"Command requires a field to be active" ; 
+			errorCode =   906 ; 			"Current file is not shared; command can be used only if the file is shared" ; 
+			errorCode =   920 ; 			"Cannot initialize the spelling engine" ; 
+			errorCode =   921 ; 			"User dictionary cannot be loaded for editing" ; 
+			errorCode =   922 ; 			"User dictionary cannot be found" ; 
+			errorCode =   923 ; 			"User dictionary is read-only" ; 
+			errorCode =   951 ; 			"An unexpected error occurred" ; 
+			errorCode =   952 ; 			"Invalid FileMaker Data API token" ; 
+			errorCode =   953 ; 			"Exceeded limit on data the FileMaker Data API and OData can transmit" ; 
+			errorCode =   954 ; 			"Unsupported XML grammar" ; 
+			errorCode =   955 ; 			"No database name" ; 
+			errorCode =   956 ; 			"Maximum number of database or Admin API sessions exceeded" ; 
+			errorCode =   957 ; 			"Conflicting commands" ; 
+			errorCode =   958 ; 			"Parameter missing" ; 
+			errorCode =   959 ; 			"Custom Web Publishing technology is disabled" ; 
+			errorCode =   960 ; 			"Parameter is invalid" ; 
+			errorCode =   1200 ; 			"Generic calculation error" ; 
+			errorCode =   1201 ; 			"Too few parameters in the function" ; 
+			errorCode =   1202 ; 			"Too many parameters in the function" ; 
+			errorCode =   1203 ; 			"Unexpected end of calculation" ; 
+			errorCode =   1204 ; 			"Number, text constant, field name, or \"(\" expected" ; 
+			errorCode =   1205 ; 			"Comment is not terminated with \"*/\"" ; 
+			errorCode =   1206 ; 			"Text constant must end with a quotation mark" ; 
+			errorCode =   1207 ; 			"Unbalanced parenthesis" ; 
+			errorCode =   1208 ; 			"Operator missing, function not found, or \"(\" not expected" ; 
+			errorCode =   1209 ; 			"Name (such as field name or layout name) is missing" ; 
+			errorCode =   1210 ; 			"Plug-in function or script step has already been registered" ; 
+			errorCode =   1211 ; 			"List usage is not allowed in this function" ; 
+			errorCode =   1212 ; 			"An operator (for example, +, -, *) is expected here" ; 
+			errorCode =   1213 ; 			"This variable has already been defined in the Let function" ; 
+			errorCode =   1214 ; 			"A function parameter contains an expression where a field is required" ; 
+			errorCode =   1215 ; 			"This parameter is an invalid Get function parameter" ; 
+			errorCode =   1216 ; 			"Only summary fields are allowed as first argument in GetSummary" ; 
+			errorCode =   1217 ; 			"Break field is invalid" ; 
+			errorCode =   1218 ; 			"Cannot evaluate the number" ; 
+			errorCode =   1219 ; 			"A field cannot be used in its own formula" ; 
+			errorCode =   1220 ; 			"Field type must be normal or calculated" ; 
+			errorCode =   1221 ; 			"Data type must be number, date, time, or timestamp" ; 
+			errorCode =   1222 ; 			"Calculation cannot be stored" ; 
+			errorCode =   1223 ; 			"Function referred to is not yet implemented" ; 
+			errorCode =   1224 ; 			"Function referred to does not exist" ; 
+			errorCode =   1225 ; 			"Function referred to is not supported in this context" ; 
+			errorCode =   1300 ; 			"The specified name can't be used" ; 
+			errorCode =   1301 ; 			"A parameter of the imported or pasted function has the same name as a function in the file" ; 
+			errorCode =   1400 ; 			"ODBC client driver initialization failed; make sure ODBC client drivers are properly installed" ; 
+			errorCode =   1401 ; 			"Failed to allocate environment (ODBC)" ; 
+			errorCode =   1402 ; 			"Failed to free environment (ODBC)" ; 
+			errorCode =   1403 ; 			"Failed to disconnect (ODBC)" ; 
+			errorCode =   1404 ; 			"Failed to allocate connection (ODBC)" ; 
+			errorCode =   1405 ; 			"Failed to free connection (ODBC)" ; 
+			errorCode =   1406 ; 			"Failed check for SQL API (ODBC)" ; 
+			errorCode =   1407 ; 			"Failed to allocate statement (ODBC)" ; 
+			errorCode =   1408 ; 			"Extended error (ODBC)" ; 
+			errorCode =   1409 ; 			"Error (ODBC)" ; 
+			errorCode =   1413 ; 			"Failed communication link (ODBC)" ; 
+			errorCode =   1414 ; 			"SQL statement is too long" ; 
+			errorCode =   1415 ; 			"Connection is being disconnected (ODBC)" ; 
+			errorCode =   1450 ; 			"Action requires PHP privilege extension" ; 
+			errorCode =   1451 ; 			"Action requires that current file be remote" ; 
+			errorCode =   1501 ; 			"SMTP authentication failed" ; 
+			errorCode =   1502 ; 			"Connection refused by SMTP server" ; 
+			errorCode =   1503 ; 			"Error with SSL" ; 
+			errorCode =   1504 ; 			"SMTP server requires the connection to be encrypted" ; 
+			errorCode =   1505 ; 			"Specified authentication is not supported by SMTP server" ; 
+			errorCode =   1506 ; 			"Email message(s) could not be sent successfully" ; 
+			errorCode =   1507 ; 			"Unable to log in to the SMTP server" ; 
+			errorCode =   1550 ; 			"Cannot load the plug-in, or the plug-in is not a valid plug-in" ; 
+			errorCode =   1551 ; 			"Cannot install the plug-in; cannot delete an existing plug-in or write to the folder or disk" ; 
+			errorCode =   1552 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1553 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1554 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1555 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1556 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1557 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1558 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1559 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1626 ; 			"Protocol is not supported" ; 
+			errorCode =   1627 ; 			"Authentication failed" ; 
+			errorCode =   1628 ; 			"There was an error with SSL" ; 
+			errorCode =   1629 ; 			"Connection timed out; the timeout value is 60 seconds" ; 
+			errorCode =   1630 ; 			"URL format is incorrect" ; 
+			errorCode =   1631 ; 			"Connection failed" ; 
+			errorCode =   1632 ; 			"The certificate has expired" ; 
+			errorCode =   1633 ; 			"The certificate is self-signed" ; 
+			errorCode =   1634 ; 			"A certificate verification error occurred" ; 
+			errorCode =   1635 ; 			"Connection is unencrypted" ; 
+			errorCode =   1700 ; 			"Resource doesn’t exist" ; 
+			errorCode =   1701 ; 			"Host is currently unable to receive requests" ; 
+			errorCode =   1702 ; 			"Authentication information wasn’t provided in the correct format; verify the value of the Authorization header" ; 
+			errorCode =   1703 ; 			"Invalid username or password, or JSON Web Token" ; 
+			errorCode =   1704 ; 			"Resource doesn’t support the specified HTTP verb" ; 
+			errorCode =   1705 ; 			"Required HTTP header wasn’t specified" ; 
+			errorCode =   1706 ; 			"Parameter isn’t supported" ; 
+			errorCode =   1707 ; 			"Required parameter wasn’t specified in the request" ; 
+			errorCode =   1708 ; 			"Parameter value is invalid" ; 
+			errorCode =   1709 ; 			"Operation is invalid for the resource’s current status" ; 
+			errorCode =   1710 ; 			"JSON input isn’t syntactically valid" ; 
+			errorCode =   1711 ; 			"Host’s license has expired" ; 
+			errorCode =   1712 ; 			"Private key file already exists; remove it and run the command again" ; 
+			errorCode =   1713 ; 			"The API request is not supported for this operating system" ; 
+			errorCode =   1714 ; 			"External group name is invalid" ; 
+			errorCode =   1715 ; 			"External server account sign-in is not enabled" ; 
+
+			"UNKNOWN ERROR CODE" 
+		) 
+	] ; 
+	
+	"(" & errorCode & ") " & errorMessage 
+	
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7AC3ABA32C0FA924AF28875D1742CC14" index="151" id="70" name="End If" enable="True">
+			<UUID>50D60157-E68E-40AA-9D8B-8FF75403BA41</UUID>
+			<SourceUUID>DD3DAF1E-58D9-4816-ADEE-4D02185D2671</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="0F7D0E08C5C845B158FBD7C4428015DA" index="152" id="68" name="If" enable="True">
+			<UUID>0A9DD1AE-2EF7-47B0-9839-BCDEFDE9EDB3</UUID>
+			<SourceUUID>7091E278-F725-4E47-ABCC-C8F43B1B8FB5</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[not IsEmpty ( $message )
+and PatternCount ( Get ( ApplicationVersion ) ; "Data API Engine" ) = 0
+and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="08FD3B675D6AA3B23DE18D23FED2BB6B" index="153" id="87" name="Show Custom Dialog" enable="True">
+			<UUID>0AB7701B-EE85-4237-83F9-35364F6379C4</UUID>
+			<SourceUUID>328126BE-8FD2-4044-9C54-7366F31A6F8C</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$message]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="73326FEA169567BA9F4DF702773EDA77" index="154" id="70" name="End If" enable="True">
+			<UUID>FD0C86FD-C27D-4DE7-B402-4BABDB087EEF</UUID>
+			<SourceUUID>F724AB80-A506-4CF2-A9C0-C845BE86BA8F</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="BE8B50E706F7796F8F56689987B32821" index="155" id="89" name="# (comment)" enable="True">
+			<UUID>5503B372-7E32-409D-B13B-400AAAA99184</UUID>
+			<SourceUUID>442DEC2D-6AF8-45F3-A575-2CB4115BB5AA</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7531428D23923A6C1FB47CE7AFCA1DF7" index="156" id="89" name="# (comment)" enable="True">
+			<UUID>E6F26809-AACB-4BC6-9EEB-EB3C00A7B3F2</UUID>
+			<SourceUUID>91037762-D067-46C8-B289-F2BD0E9BF85C</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Build $data and $result"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="21DEE4CEB74729FE49F65B6F40BB6365" index="157" id="141" name="Set Variable" enable="True">
+			<UUID>972D22CE-BC27-46C8-9AAF-D5E09D719B8A</UUID>
+			<SourceUUID>30C88ACB-FCFD-41F7-BE05-8656EF1542C1</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( $data 
+	; [ "recordId" ; $recordId ; JSONString ] 
+	; [ "xmlFieldName" ; GetFieldName ( SaXMLDelivery::xmlFile ) ; JSONString ] 
+	; [ "timeToCreate" ; $timeToCreate ; JSONString ] 
+	; [ "timeToUpload" ; $timeToUpload ; JSONString ] 
+	; [ "addonVersion" ; $addonVersion ; JSONString ] 
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$data"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="6449DBD4866D83F9D9F8FAE8A5FA0399" index="158" id="141" name="Set Variable" enable="True">
+			<UUID>3AD0FD03-B437-4C5C-B3BC-CD5F94B584A4</UUID>
+			<SourceUUID>51174892-4C55-4967-B938-8E5735C18E5C</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( "" ; [ "errorCode" ; $errorCode ; JSONNumber ] ; [ "message" ; $message ; JSONString ] ; [ "data" ; $data ; JSONObject ] )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$result"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="850DDA5D9C953D51009A10DC7B005C5F" index="159" id="89" name="# (comment)" enable="True">
+			<UUID>C8F79771-BFFD-49A8-AF31-939F18A9FB07</UUID>
+			<SourceUUID>275D0DA4-A130-4F3E-A06D-07E38B192F94</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8DEE12FB7D843AEF051129C3429D219C" index="160" id="89" name="# (comment)" enable="True">
+			<UUID>993D064D-688B-4E91-B5DB-BEB0CFA22495</UUID>
+			<SourceUUID>59DD99EC-2023-40DC-94E9-657B83AF6C47</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="In case of error, if we were able to get to the layout and create a new record, store $result in the record"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="11170D853A958C5C9A16FA39397DF161" index="161" id="68" name="If" enable="True">
+			<UUID>EF329C69-DF5C-4BEF-AC6C-CB87594DF50E</UUID>
+			<SourceUUID>92A73E5E-0E7C-45E9-AD00-EB8CA68B4DAE</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode > 1]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F0DB5A099DD73E4813160228EE326139" index="162" id="68" name="If" enable="True">
+			<UUID>F7A86C03-A211-492D-A16A-7E71415C0B91</UUID>
+			<SourceUUID>EB414DD7-4D12-4345-A241-30A27C29FE53</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( LayoutTableName ) = GetValue ( Substitute ( GetFieldName ( SaXMLDelivery::xmlFile ) ; "::" ; ¶ ) ; 1 ) and not IsEmpty ( $recordId )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AD31A88D34C60DEFC8B2701534D3660D" index="163" id="76" name="Set Field" enable="True">
+			<UUID>FB28E066-E90F-412A-931A-E376D147AD2F</UUID>
+			<SourceUUID>9CB7100F-3C89-41D3-AF32-FE1309E6B2FD</SourceUUID>
+			<Options>16385</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="FieldReference">
+					<FieldReference id="4" name="notes" UUID="285A144F-045E-4710-8EDE-F9AE8DCAEE7C">
+						<repetition>
+							<Calculation datatype="1" position="10">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+					</FieldReference>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( ScriptName ) & " script result:¶" & JSONFormatElements ( $result )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F01C12155275CCD62303509A4816FEB2" index="164" id="75" name="Commit Records/Requests" enable="True">
+			<UUID>D8D0F1C9-20E8-4191-88E4-986B5C9D2952</UUID>
+			<SourceUUID>9D8067E6-93B3-40D0-A430-89283032B198</SourceUUID>
+			<Options>384</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="Skip data entry validation" id="256" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Force Commit" id="512" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="95FD4EAB1BC0457828583119DFD270C7" index="165" id="70" name="End If" enable="True">
+			<UUID>4ABD38E3-CF98-435B-BE43-CD7027659EE9</UUID>
+			<SourceUUID>4EB245C2-F62A-4CDC-8B3A-7F6287B843F2</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="E866F20A32873E0FF8CB0B7BA9A0C331" index="166" id="70" name="End If" enable="True">
+			<UUID>E8AFC722-8788-40DA-BB57-F61514B55838</UUID>
+			<SourceUUID>342BD79C-B89B-444D-87B7-6DBF790726FC</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="9370CE13D4848686BC1ECE9BE8070349" index="167" id="89" name="# (comment)" enable="True">
+			<UUID>5DC36761-DC8B-4A99-9531-9AE553D4BC31</UUID>
+			<SourceUUID>C465C0D5-7BFA-4994-906D-01C433FF4E50</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EB07DED011C949B5C27F7AC431626F89" index="168" id="89" name="# (comment)" enable="True">
+			<UUID>CCE4F80E-B7E8-49FD-BA5E-BA0A8298BA84</UUID>
+			<SourceUUID>8B7EF8F1-8924-4EB0-A474-0B48E429A40A</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="27ADCC1F184BFB429AC93D1C5AB9F67E" index="169" id="89" name="# (comment)" enable="True">
+			<UUID>F44C51AB-97A7-4136-8B15-444B306A7335</UUID>
+			<SourceUUID>CD33E25F-5105-4275-8432-1F394E330EEB</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="END"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AF08D538D58A1D97A168B0E186F40719" index="170" id="89" name="# (comment)" enable="True">
+			<UUID>DED9131F-39BD-4DE0-873D-486B9DBCFC3F</UUID>
+			<SourceUUID>E12086B3-9B6F-49AD-91DA-37F7F225B4AD</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="471F22115188A043A5EC459A4CC35AAE" index="171" id="89" name="# (comment)" enable="True">
+			<UUID>8DAD880D-DABF-4CD3-88F5-F29607261AE0</UUID>
+			<SourceUUID>2B6B54C0-4DE7-4D26-9FBF-79F6323DD1D9</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="943A08991E6F3C2B243912FF3F5321B7" index="172" id="68" name="If" enable="True">
+			<UUID>A0C6B604-83AD-4289-B4E0-8BA84CD7D386</UUID>
+			<SourceUUID>5905053E-4536-4EEF-BAE9-DE90D6E84AC9</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$parentScriptErrorCaptureState]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BFAA1E597A86F772F057A4AD7CB63426" index="173" id="86" name="Set Error Capture" enable="True">
+			<UUID>B5F628A6-01BC-407E-A6E8-A7D192D1CCE0</UUID>
+			<SourceUUID>CEA1115D-ED3C-4BFB-88A8-BA7A6FCD9F03</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9BAB7683C37A27A2409EDDCA5A02C27E" index="174" id="69" name="Else" enable="True">
+			<UUID>E19D2AE8-2685-4371-8172-8A1AA94B0AE7</UUID>
+			<SourceUUID>592369F8-DD4B-4D1B-9306-460021DDF86B</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9CE75DCE587E5A665E471147EDB9798D" index="175" id="86" name="Set Error Capture" enable="True">
+			<UUID>3D3B3970-CD8B-4219-BD7E-99A50379527A</UUID>
+			<SourceUUID>99C0E240-8A3D-406F-89C4-87C9C95D7FF6</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7BACF42217C47CB6AAA1ACBB41CB9B02" index="176" id="70" name="End If" enable="True">
+			<UUID>1C40482F-BEFD-4416-AC61-072592619734</UUID>
+			<SourceUUID>3E7DED2A-3548-49E4-A55E-2A96CDA7178F</SourceUUID>
+			<Options>0</Options>
+		</Step>
+		<Step hash="FF257994EE7C6992B67D3EB6B3143944" index="177" id="89" name="# (comment)" enable="True">
+			<UUID>B41103BD-6635-4007-A12F-3C9B7EED3154</UUID>
+			<SourceUUID>699F03C2-A7E0-4213-AAC9-5A709893123F</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8FDD1B9A36A76362B07F7A5D999F8F67" index="178" id="103" name="Exit Script" enable="True">
+			<UUID>C3D8DA07-4382-43FC-9F20-31259E56F7A7</UUID>
+			<SourceUUID>A2E0DF5A-5B73-49CD-9221-80039A05756E</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$result]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9F2C1756C5ECE8A1C2CC4679C12B7EAB" index="179" id="89" name="# (comment)" enable="True">
+			<UUID>BFED4F7E-848B-4541-BB3C-6CB8DCAC102C</UUID>
+			<SourceUUID>DE32A59C-3A6B-4DB8-A5AA-5AA57BC2ED0D</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A3285B7FFF508486CBF0442C297A51D3" index="180" id="89" name="# (comment)" enable="True">
+			<UUID>02537663-B838-45F1-832F-30ECED94D37B</UUID>
+			<SourceUUID>687E2D6F-E5D1-43E5-8F1F-0F28C0959549</SourceUUID>
+			<Options>0</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

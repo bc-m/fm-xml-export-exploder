@@ -1,0 +1,235 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<PrivilegeSet id="7" name="restapi">
+	<UUID modifications="2" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:56:31">313697DC-316B-4DD5-8BC4-3A3417383116</UUID>
+	<Description>Intended for use by Data API and OData</Description>
+	<access>
+		<Records Custom="True">
+			<Custom>
+				<ObjectList membercount="5">
+					<Table type="existing">
+						<BaseTableReference id="129" name="TestTable"></BaseTableReference>
+						<View access="NoAccess"></View>
+						<Edit access="NoAccess"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="NoAccess"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="131" name="Contacts"></BaseTableReference>
+						<View access="NoAccess"></View>
+						<Edit access="NoAccess"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="NoAccess"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="132" name="blank"></BaseTableReference>
+						<View access="NoAccess"></View>
+						<Edit access="NoAccess"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="NoAccess"></Fields>
+					</Table>
+					<Table type="existing">
+						<BaseTableReference id="135" name="SaXMLDelivery"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="ReadWrite"></Fields>
+					</Table>
+					<Table type="New">
+						<View access="NoAccess"></View>
+						<Edit access="NoAccess"></Edit>
+						<Create access="NoAccess"></Create>
+						<Delete access="NoAccess"></Delete>
+						<Fields access="NoAccess"></Fields>
+					</Table>
+				</ObjectList>
+			</Custom>
+		</Records>
+		<Layouts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="14">
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="1" name="My Layout for TestTable"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="2" name="Contacts"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="3" name="MyLayoutFolder"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="4" name="--"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="5" name="MyLayoutSubfolder"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="6" name="--"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="7" name="-"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="8" name="EmptyLayoutFolder"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="9" name="--"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="11" name="File Open"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="18" name="SaXMLDelivery"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadOnly" records="ReadWrite">
+						<LayoutReference id="19" name="SaXMLDeliveryExecutionContext"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="NoAccess" records="ReadWrite">
+						<LayoutReference id="20" name="--"></LayoutReference>
+					</Layout>
+					<Layout type="New" access="NoAccess" records="ReadWrite"></Layout>
+				</ObjectList>
+			</Custom>
+		</Layouts>
+		<ValueLists Create="True" Edit="True" Delete="True"></ValueLists>
+		<Scripts Custom="True">
+			<Custom Create="False">
+				<ObjectList membercount="42">
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="1" name="Hello world"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="2" name="noop"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="3" name="MyScriptFolder"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="4" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="5" name="Circular Reference"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="6" name="MyScriptSubfolder"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="7" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="8" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="9" name="Decode base64 image"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="10" name="EmptyScriptFolder"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="11" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="12" name="Constrain without indexes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="14" name="About"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="16" name="LICENSE"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="17" name="Release Notes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="18" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="20" name="Control"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="21" name="Scripts With Everything"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="22" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="23" name="Navigation"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="24" name="Editing"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="25" name="Fields"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="26" name="Records"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="27" name="Found Sets"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="28" name="Windows"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="29" name="Files"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="30" name="Accounts"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="31" name="Artificial Intelligence"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="32" name="Spelling"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="33" name="Open Menu Item"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="34" name="Miscellaneous"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="35" name="IP"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="36" name="MBS Plug-In"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="37" name="Script from fmSyntaxColorizer"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="38" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="39" name="All script steps and all options"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="50" name="SaXMLDelivery"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="51" name="saxmlDelivery_createXml"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="52" name="saxmlDelivery_readme"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="53" name="saxmlDelivery_runPipeline"></ScriptReference>
+					</Script>
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="54" name="--"></ScriptReference>
+					</Script>
+					<Script type="New" access="NoAccess"></Script>
+				</ObjectList>
+			</Custom>
+		</Scripts>
+		<Other value="24577" Print="False" Export="False" manageDatabase="False" manageCustomMenus="False" manageAccounts="False" manageExtPrivs="False" allowOverride="False" allowOpenQuickly="False" disconnectIdle="True" commands="All">
+			<Password prohibitModification="True"></Password>
+		</Other>
+	</access>
+</PrivilegeSet>

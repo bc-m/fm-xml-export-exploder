@@ -1,0 +1,32 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunction id="5" name="GetFileMakerVersionMinor" access="All">
+	<UUID modifications="1" userName="Mislav" accountName="Admin" timestamp="2025-06-08T15:22:25">3A2BFA28-E9ED-4F25-ABB9-BDDF17665139</UUID>
+	<TagList></TagList>
+	<Calculation>
+		<Text><![CDATA[// Signature:
+// GetFileMakerVersionMinor
+
+// Purpose:
+// Detects minor component of current FileMaker application version
+
+// Parameters:
+// None
+
+// Result:
+// Returns minor component of current FileMaker application version
+// For example, if FileMaker application version is 19.2.1, this custom function will return 2
+
+// Dependencies:
+// None
+
+// History:
+// Created: Mislav Kos <mkos@soliantconsulting.com>
+
+
+GetAsNumber ( GetValue ( Substitute ( RightWords ( Get ( ApplicationVersion ) ; 1 ) ; "." ; ¶ ) ; 2 ) )]]></Text>
+	</Calculation>
+	<Display>GetFileMakerVersionMinor</Display>
+</CustomFunction>

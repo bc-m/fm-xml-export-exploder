@@ -3,12 +3,12 @@ source: src/tests.rs
 expression: output_content
 ---
 <PrivilegeSet id="4" name="MyRestrictedPrivilegeSet">
-	<UUID modifications="0" userName="Mislav" accountName="Admin" timestamp="2025-05-04T09:23:45">0C57BEEB-9CDD-4995-8F4C-9146819D6806</UUID>
+	<UUID modifications="5" userName="Mislav" accountName="admin" timestamp="2025-07-24T23:48:33">0C57BEEB-9CDD-4995-8F4C-9146819D6806</UUID>
 	<Description>MyRestrictedPrivilegeSetDescription</Description>
 	<access>
 		<Records Custom="True">
 			<Custom>
-				<ObjectList membercount="4">
+				<ObjectList membercount="5">
 					<Table type="existing">
 						<BaseTableReference id="129" name="TestTable"></BaseTableReference>
 						<View access="ReadWrite"></View>
@@ -22,14 +22,12 @@ expression: output_content
 						<View access="Calculation">
 							<Calculation>
 								<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
-								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_1</DDRREF>
 								<Text><![CDATA[True]]></Text>
 							</Calculation>
 						</View>
 						<Edit access="Calculation">
 							<Calculation>
 								<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
-								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_2</DDRREF>
 								<Text><![CDATA[True]]></Text>
 							</Calculation>
 						</Edit>
@@ -37,8 +35,7 @@ expression: output_content
 						<Delete access="Calculation">
 							<Calculation>
 								<TableOccurrenceReference id="1065091" name="Contacts"></TableOccurrenceReference>
-								<DDRREF kind="ChunkList" hash="B15835F133FF2E27C7CB28117BFAE8F4">_0C57BEEB-9CDD-4995-8F4C-9146819D6806_131_3</DDRREF>
-								<Text><![CDATA[True]]></Text>
+								<Text><![CDATA[Name = Contacts_TestTable::MyGlobal_g]]></Text>
 							</Calculation>
 						</Delete>
 						<Fields access="Custom">
@@ -93,6 +90,14 @@ expression: output_content
 						<Delete access="ReadWrite"></Delete>
 						<Fields access="ReadWrite"></Fields>
 					</Table>
+					<Table type="existing">
+						<BaseTableReference id="135" name="SaXMLDelivery"></BaseTableReference>
+						<View access="ReadWrite"></View>
+						<Edit access="ReadWrite"></Edit>
+						<Create access="ReadWrite"></Create>
+						<Delete access="ReadWrite"></Delete>
+						<Fields access="ReadWrite"></Fields>
+					</Table>
 					<Table type="New">
 						<View access="ReadWrite"></View>
 						<Edit access="ReadWrite"></Edit>
@@ -105,7 +110,7 @@ expression: output_content
 		</Records>
 		<Layouts Custom="True">
 			<Custom Create="False">
-				<ObjectList membercount="11">
+				<ObjectList membercount="14">
 					<Layout type="existing" access="NoAccess" records="ReadWrite">
 						<LayoutReference id="1" name="My Layout for TestTable"></LayoutReference>
 					</Layout>
@@ -136,6 +141,15 @@ expression: output_content
 					<Layout type="existing" access="ReadWrite" records="ReadWrite">
 						<LayoutReference id="11" name="File Open"></LayoutReference>
 					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="18" name="SaXMLDelivery"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="19" name="SaXMLDeliveryExecutionContext"></LayoutReference>
+					</Layout>
+					<Layout type="existing" access="ReadWrite" records="ReadWrite">
+						<LayoutReference id="20" name="--"></LayoutReference>
+					</Layout>
 					<Layout type="New" access="ReadWrite" records="ReadWrite"></Layout>
 				</ObjectList>
 			</Custom>
@@ -159,8 +173,137 @@ expression: output_content
 				</ObjectList>
 			</Custom>
 		</ValueLists>
-		<Scripts Create="True" Edit="True" Delete="True"></Scripts>
-		<Other value="61213" Print="True" Export="True" manageAccounts="True" manageExtPrivs="True" allowOverride="True" allowOpenQuickly="True" disconnectIdle="True" commands="All">
+		<Scripts Custom="True">
+			<Custom Create="True">
+				<ObjectList membercount="42">
+					<Script type="existing" access="NoAccess">
+						<ScriptReference id="1" name="Hello world"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="2" name="noop"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="3" name="MyScriptFolder"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="4" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="5" name="Circular Reference"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="6" name="MyScriptSubfolder"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="7" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="8" name="-"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="9" name="Decode base64 image"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="10" name="EmptyScriptFolder"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="11" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="12" name="Constrain without indexes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="14" name="About"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadOnly">
+						<ScriptReference id="16" name="LICENSE"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="17" name="Release Notes"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="18" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="20" name="Control"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="21" name="Scripts With Everything"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="22" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="23" name="Navigation"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="24" name="Editing"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="25" name="Fields"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="26" name="Records"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="27" name="Found Sets"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="28" name="Windows"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="29" name="Files"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="30" name="Accounts"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="31" name="Artificial Intelligence"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="32" name="Spelling"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="33" name="Open Menu Item"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="34" name="Miscellaneous"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="35" name="IP"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="36" name="MBS Plug-In"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="37" name="Script from fmSyntaxColorizer"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="38" name="--"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="39" name="All script steps and all options"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="50" name="SaXMLDelivery"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="51" name="saxmlDelivery_createXml"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="52" name="saxmlDelivery_readme"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="53" name="saxmlDelivery_runPipeline"></ScriptReference>
+					</Script>
+					<Script type="existing" access="ReadWrite">
+						<ScriptReference id="54" name="--"></ScriptReference>
+					</Script>
+					<Script type="New" access="ReadWrite"></Script>
+				</ObjectList>
+			</Custom>
+		</Scripts>
+		<Other value="61213" Print="True" Export="True" manageDatabase="False" manageCustomMenus="False" manageAccounts="True" manageExtPrivs="True" allowOverride="True" allowOpenQuickly="True" disconnectIdle="True" commands="All">
 			<Password prohibitModification="False" interval="30" Minimum="5"></Password>
 		</Other>
 	</access>
