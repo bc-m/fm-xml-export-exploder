@@ -1,7 +1,7 @@
 #!/bin/bash
 
 folders=(
-    "custom_functions"
+    "custom_functions_sanitized"
     "custom_menu_sets"
     "custom_menus"
     "extended_privileges"

@@ -1,0 +1,2640 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<Script>
+	<ScriptReference id="53" name="saxmlDelivery_runPipeline"></ScriptReference>
+	<ObjectList membercount="176">
+		<Step hash="9010BDBE41244C4060BEF9E533F5C14E" id="89" name="# (comment)" enable="True">
+			<SourceUUID>C758F897-E29E-4DC6-8946-2CDCE4D53638</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C1EAEB1F5A722458B2AFEE465114E299" id="89" name="# (comment)" enable="True">
+			<SourceUUID>088617B0-7809-48C7-B9E3-1693E0E24B63</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="DESCRIPTION: "></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3BFB2ECF002F676FB092E5388C0C6130" id="89" name="# (comment)" enable="True">
+			<SourceUUID>8F4B8DFF-CFBC-4C6E-A3F0-D1BEA390821F</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Trigger a BitBucket pipeline or GitHub run"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="66A2C21881A0FF72BEF1F3D4823F6C96" id="89" name="# (comment)" enable="True">
+			<SourceUUID>07681C1D-C78B-4497-9FA9-E5B57D9F2E98</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="07F724CAAEEAF327FA65218FE8B05A50" id="89" name="# (comment)" enable="True">
+			<SourceUUID>70889609-7015-49F1-9D93-538D4BDB04DA</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="PARAMETER:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C4049CABC8CFB394DE8AA8BD08B14770" id="89" name="# (comment)" enable="True">
+			<SourceUUID>90F6E4BC-561A-4DCB-81BA-08F9E1C9F1D8</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="JSONSetElement ( &quot;&quot; &#13;&#09;; [ &quot;silent&quot; ; True ; JSONBoolean ] // optional; defaults to false&#13;)"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="310CA9BC2D1B9F2216D23D86539757EA" id="89" name="# (comment)" enable="True">
+			<SourceUUID>E2FF36A5-7D1B-4218-A9B4-B9DAF0FC7F5B</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="14CDAAA862B2C2BB9DA022A7C2C34ACD" id="89" name="# (comment)" enable="True">
+			<SourceUUID>76F2B658-54C1-4EE9-AF6D-8A44D9B266CC</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="RESULT:&#09;&#09;&#09;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="072CD07428913E36BAA03C15CA974DF2" id="89" name="# (comment)" enable="True">
+			<SourceUUID>A2E071C0-07B4-476E-9E01-654AE4A3B8D0</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="{ errorCode, message, data }"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3A4F71EA526D53E1808CDCA492BE6969" id="89" name="# (comment)" enable="True">
+			<SourceUUID>31ABD089-F53B-47A3-9F5C-4B54DCD2B80B</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="if $gitService = &quot;Bitbucket&quot;, data = { buildNumber, createdOn, repoUrl, pipelineBuildUrl }"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="802704DAD0FABE1D3230DBCB97FC0C88" id="89" name="# (comment)" enable="True">
+			<SourceUUID>36EC3B31-3519-42AD-BE41-0915FDF35450</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5AAE86A728017617F7FFCC466D877B55" id="89" name="# (comment)" enable="True">
+			<SourceUUID>2D5805E5-24E1-44C8-919F-105165E66F50</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="CONTEXT:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B105C62904D4A61613E6005790AA3E76" id="89" name="# (comment)" enable="True">
+			<SourceUUID>8E60E689-F287-4AA9-969F-230E76425F1D</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Any"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="322A9B5ED56098A671218C600A5356E7" id="89" name="# (comment)" enable="True">
+			<SourceUUID>1976286E-86D3-4454-856D-9E46E7D0243B</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BFA7039543B554F7DD08E4FF491654DA" id="89" name="# (comment)" enable="True">
+			<SourceUUID>DCDA0400-D5E4-4A06-80DD-41F50927B191</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="DEPENDENCIES:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AF24CE609339BBCD7C87B7189D8BF112" id="89" name="# (comment)" enable="True">
+			<SourceUUID>A5F398CA-5FBA-45B4-9F65-9A4EE6BB2661</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="None"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B8ADDD87FE31B30A5900FB62F91E2EB2" id="89" name="# (comment)" enable="True">
+			<SourceUUID>3DC242AD-A2A6-4C8D-AFC5-AF91C5B7D7CA</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5ADA2FC74DF911F5FD9E12A08845A816" id="89" name="# (comment)" enable="True">
+			<SourceUUID>38A41709-37FF-4D50-9FD8-2ABBDDEB7102</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="NOTES:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3E96B34F12416E10C7A5623573030C65" id="89" name="# (comment)" enable="True">
+			<SourceUUID>15D4C137-4CEA-4FD6-93E1-03F65CECADE4</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="There are a few places where custom functions would typically be used, but those were replaced with the bodies of those custom functions to maximize the portability of this script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AAD390F3674761E626B66966594D78FD" id="89" name="# (comment)" enable="True">
+			<SourceUUID>32F645CB-B086-483C-B66C-1D14A9CE2DA5</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="065E4512CA42FAF47AD73A82DF30E133" id="89" name="# (comment)" enable="True">
+			<SourceUUID>BAF2CB33-6137-4873-9294-75871C060AB3</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="HISTORY:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="820C41B6A401DED19CC9145236BFAA09" id="89" name="# (comment)" enable="True">
+			<SourceUUID>1685C2A5-B841-4B25-ACD6-F431225F45F8</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="CLARIS-88 6/12/24 mkos: Created script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2BE5D596670DAEBF8BE22F5A033B299D" id="89" name="# (comment)" enable="True">
+			<SourceUUID>9A99F78B-0243-464A-B556-D5FF622251E3</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2025-08-29 mkos: Added support for triggering GitHub action to run"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E1FDAB0921773EA3871DFE8AC1F3D125" id="89" name="# (comment)" enable="True">
+			<SourceUUID>C94412C7-BE0B-406D-A2C2-E69581547837</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F79038DB81AB1FDEFA8679A5D799FAEF" id="89" name="# (comment)" enable="True">
+			<SourceUUID>D946043D-08E3-4C25-8509-3E79332F0816</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3203385922176117AFD17B7DD6066D79" id="85" name="Allow User Abort" enable="True">
+			<SourceUUID>872E3509-97B8-4D86-A2B6-993EF0506BB8</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E5B925DA49BB237C375F516DF63F5B4E" id="89" name="# (comment)" enable="True">
+			<SourceUUID>8F9901BD-5C27-42C0-A421-F1B2DD1599E9</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="47601223A599A133091A7A1E4D9058B0" id="89" name="# (comment)" enable="True">
+			<SourceUUID>16E76AAB-6BB8-4F25-9EF7-E6A2B51AB3F1</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Initialize vars"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F4696E2B79BEAAEA307CB109FD6A5D56" id="141" name="Set Variable" enable="True">
+			<SourceUUID>D7E3D15F-4ABD-42A0-A123-CC085E77DA41</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[0]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FF2CD4EC509FE4A6A5E43155AF7607C9" id="141" name="Set Variable" enable="True">
+			<SourceUUID>43BDB8CC-AC07-4148-BAD7-8C6D3FE7F44E</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0B93983C3C1A402186943C74C91E84E7" id="141" name="Set Variable" enable="True">
+			<SourceUUID>729F645C-08ED-4061-8395-4033C93E95DF</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["{}"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$data"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="4E9A772D04CFA9C1AF123F5E4FBED906" id="89" name="# (comment)" enable="True">
+			<SourceUUID>194D14C8-DCCF-41EE-957A-05BC178DAE08</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A7F1FDE41AF2AB56C8FBDD1F7D88EFAC" id="89" name="# (comment)" enable="True">
+			<SourceUUID>999124A9-8EC6-4492-A043-D6481B049573</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Load optional params &apos;silent&apos; and &apos;includeDetailsForAnalysisTools&apos; into local variables"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="56DF1D07D6476575FED169EF5AC392C4" id="141" name="Set Variable" enable="True">
+			<SourceUUID>5D851D46-67C0-492B-8D52-28729B78245A</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[If ( 
+	Left ( JSONGetElement ( Get ( ScriptParameter )  ; "isValidJson" ) ; 3 ) ≠ "? *" ; 
+	JSONGetElement ( Get ( ScriptParameter ) ; "silent" )
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$_silent"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FFF5D528085264FDA3EE6ACF659D4D3B" id="89" name="# (comment)" enable="True">
+			<SourceUUID>981497D1-9AAC-4C6E-921A-DEA3E85F5777</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="FDD013D237061E2150B7983B46DCC59E" id="89" name="# (comment)" enable="True">
+			<SourceUUID>2A236B9C-EC00-40FE-8616-60CA4F9083CA</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Validate privilege set - must be full access"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="29D689656D8127899A45200761F4AE68" id="89" name="# (comment)" enable="True">
+			<SourceUUID>8E6FBD11-70D9-49E9-B6D0-69E20557B363</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ CONFIGURATION STEP (optional): Customize restrictions to run this script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5D5F9B518636E2217BB9D72EF65118B8" id="68" name="If" enable="True">
+			<SourceUUID>AA013AD5-C094-46D9-AA23-C8AC4A574687</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( AccountPrivilegeSetName ) ≠ "[Full Access]"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="07FA09DCA1A99005B4DD2769F2A9D601" id="103" name="Exit Script" enable="True">
+			<SourceUUID>66E87386-6698-4FE2-A34A-4A85520211DF</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[JSONSetElement ( "" ; [ "errorCode" ; 9 ; JSONNumber ] ; [ "message" ; "Insufficient privileges" ; JSONString ] )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="6AD39A6AC31307CE1CB070556555A8FC" id="70" name="End If" enable="True">
+			<SourceUUID>625231DB-E1EA-4AD6-9A5E-0838EFD9356B</SourceUUID>
+		</Step>
+		<Step hash="F3B9461BD8BAA74AF49298302DDBC604" id="89" name="# (comment)" enable="True">
+			<SourceUUID>D1A34563-1452-4E86-ABA9-5D9F7DAA2744</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="03ED75D857804AB0116C69A5A7924A30" id="89" name="# (comment)" enable="True">
+			<SourceUUID>E791A1FF-455D-4692-AC28-9AA0CCC486D6</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ CONFIGURATION STEP: Specify repo name"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EE94FA2249DEC8AD2476905F83AE7C80" id="89" name="# (comment)" enable="True">
+			<SourceUUID>24D679CC-64F9-4E45-B907-74A8E025E106</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="For $repoName:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9AEA00D0CF1EE6EB1F3ABCD0EB514128" id="89" name="# (comment)" enable="True">
+			<SourceUUID>3003902D-21AB-45B5-82FF-5FC922FE78FA</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="  Add conditional logic to select correct name depending on which environment the solution is running in"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="532402CE0EC36413069B414DE699F2F1" id="89" name="# (comment)" enable="True">
+			<SourceUUID>FEBEC1A3-A6F8-45FF-94F2-E52C85FEEFEE</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="  For example: If ( GetEnvironment ( &quot;&quot; ) = &quot;prod&quot; ; &quot;amps-prod-saxml-delivery&quot; ; &quot;amps-dev-saxml-delivery&quot; )"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="47B4D06B0E8A3CFF97D3900D2281B709" id="141" name="Set Variable" enable="True">
+			<SourceUUID>E937A7D8-1491-4428-BD09-84B8C3DF287D</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$repoName"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EFED271086CB178072937A39B0892C48" id="89" name="# (comment)" enable="True">
+			<SourceUUID>934BFFDF-D702-4CFD-BD64-A9C00A0AD868</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7C20431EC4F4E2B9A4A8597F017E7FB5" id="89" name="# (comment)" enable="True">
+			<SourceUUID>E74E9221-3F47-4897-A950-DCF2B8091D7E</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ CONFIGURATION STEP: Specify repo api token"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="EE22C8181A4EF90C7D56A74F96690F87" id="89" name="# (comment)" enable="True">
+			<SourceUUID>7940DFC0-E824-47CC-A2B1-A87EF410DEF4</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="For $accessToken:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="03C7A249C942EF8856EA987BF0CC0643" id="89" name="# (comment)" enable="True">
+			<SourceUUID>FA430E1C-F5F8-46B4-A2D5-7FB1CCDDAC07</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="  To set up an access token, go to:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="CAC04EF0D6C6A76DC465F54EA0827CAC" id="89" name="# (comment)" enable="True">
+			<SourceUUID>F92D8557-FECB-48F7-9DB0-AFA0BF6360F1</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="  Bitbucket → Repository settings → Security → Access tokens → Create repository access token → Create &quot;saxml-delivery&quot; with pipelines &apos;read&apos; scope"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="59B825CB5C2D188B28E2AFBACCB4A2DF" id="89" name="# (comment)" enable="True">
+			<SourceUUID>D415B4A1-0868-4FC7-A7FC-E4368835B921</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="  GitHub → Settings → Developer settings → Personal access tokens → Create fine-grained token with contents: read &amp; write permissions for the target repository"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7B426A6E6F24D6694D1D887B752066B7" id="89" name="# (comment)" enable="True">
+			<SourceUUID>B2728A55-EC44-4F9B-80A8-733B9FCDBC80</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="  @todo store the access token in a more secure place instead of hard-coding it in this script"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="577AE174C4380C2FA78217C817972150" id="141" name="Set Variable" enable="True">
+			<SourceUUID>79003165-6249-4EDF-B516-6419ABA1F52C</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$accessToken"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B837B812F52D78111612C437D7F9AB57" id="89" name="# (comment)" enable="True">
+			<SourceUUID>0F75E5E8-6162-4835-BD44-164A77F2E5B7</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="73ACB4F99345441BF04DBB8948CB3CEC" id="89" name="# (comment)" enable="True">
+			<SourceUUID>705B4055-A1FB-4104-88F3-CCE6F54F3CEF</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ CONFIGURATION STEP: Specify git account owner, e.g. &quot;soliantconsulting&quot;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="21A930EFC78758AB8B63A64BEE7B17FF" id="141" name="Set Variable" enable="True">
+			<SourceUUID>4814A6A4-45DB-4262-B71E-A7194167AB9E</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$owner"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="63ACC8ABD6E0A51764690F3FC34EB18E" id="89" name="# (comment)" enable="True">
+			<SourceUUID>14B98C08-37DC-436E-82CF-FEACBED03E00</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="01CCB38CA313DBF5648A029807E7F813" id="89" name="# (comment)" enable="True">
+			<SourceUUID>C6B1D3D5-2823-4911-BDBE-5EBFBBDCACA0</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="■■■■■■■■■■ CONFIGURATION STEP: Specify git hosting service (supported: &quot;GitHub&quot;, &quot;Bitbucket&quot;"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3EFC6B275F8F51A08AD74F2D4BFF4F1C" id="141" name="Set Variable" enable="True">
+			<SourceUUID>37CE891E-D43F-4DE0-8DC0-2691B584CD18</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[""]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$gitService"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="20D3C22546EA3203156A1CD4A93FB960" id="89" name="# (comment)" enable="True">
+			<SourceUUID>C62997F0-360C-4215-9DCC-617059D29671</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C12B5701F3DF66AEF77B79A34B433070" id="89" name="# (comment)" enable="True">
+			<SourceUUID>ADF20B5D-BF51-45A5-92B2-624B3143C40F</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Remember parent script&apos;s error capture state"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E9097B753D09D2B332B19D0EC7C20FF7" id="141" name="Set Variable" enable="True">
+			<SourceUUID>585271D3-404E-4C1B-8FE4-EB4B07D541F6</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( ErrorCaptureState )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$parentScriptErrorCaptureState"></Name>
+					<repetition></repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BCFE2FDD89A8AB573E24F93D39470B76" id="86" name="Set Error Capture" enable="True">
+			<SourceUUID>25AAE778-1D4C-419A-9332-ED3042F18CDD</SourceUUID>
+			<Options>131072</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="True"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B67F7B472107812511C8AA070512417F" id="89" name="# (comment)" enable="True">
+			<SourceUUID>2B4767BF-745D-4AFC-8FC1-25E4650C4AB7</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F70EB85E18746326D19B686C4D9CD4CE" id="89" name="# (comment)" enable="True">
+			<SourceUUID>E97DC48F-684A-4A3D-A6D7-E8C1DA901381</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="443A648887108E2BC7976A0D888EA4E8" id="89" name="# (comment)" enable="True">
+			<SourceUUID>6C7C715D-E586-4F08-8632-AAF9B67BCCC5</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="PROCESS"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8312836FE807F4570B0D33EB2EA93ACE" id="89" name="# (comment)" enable="True">
+			<SourceUUID>88518148-A8ED-42B5-B294-79F674FE753B</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="CC554C00D949C8C99FCF34E18B5A045D" id="89" name="# (comment)" enable="True">
+			<SourceUUID>81559913-22D7-4113-AA08-ED3442F3DE51</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="54E252B2DC68E9557B07CA715BB88C19" id="141" name="Set Variable" enable="True">
+			<SourceUUID>04D64310-8DC8-4159-BC29-B06B7B8C657D</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[List ( 
+	If ( IsEmpty ( $repoName ) ; "repo name" ) ; 
+	If ( IsEmpty ( $accessToken ) ; "access token" ) ; 
+	If ( IsEmpty ( $owner ) ; "git account owner" ) ; 
+	If ( IsEmpty ( FilterValues ( $gitService ; "Bitbucket¶GitHub" ) ) ; "git hosting service" ) ; 
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$missingRequired"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1B7D2D858C15FBBFF19D3A7C5994C7C9" id="68" name="If" enable="True">
+			<SourceUUID>9005FAC6-91F5-482A-815E-EB95D503C1D6</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[not IsEmpty ( $missingRequired )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="4F3183E41A9EF9352780EAA5AF1578F9" id="141" name="Set Variable" enable="True">
+			<SourceUUID>98AE697A-E589-45D5-AF4A-D377BBD202E5</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[5]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="593540046EA12B73A6FF8436F06C5FE5" id="141" name="Set Variable" enable="True">
+			<SourceUUID>74672F6B-21D4-449A-9F99-69B9F01EA999</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["Missing config: " & Substitute ( $missingRequired ; ¶ ; ", " ) & "."]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AB81DE082D913ECF8CAE15F54F03A089" id="70" name="End If" enable="True">
+			<SourceUUID>CD7D24F8-D1FC-4D3B-87EC-D98129B5C459</SourceUUID>
+		</Step>
+		<Step hash="77C501BA7CF63649037DF098CEE4299D" id="89" name="# (comment)" enable="True">
+			<SourceUUID>F318AFAA-8806-4F30-9CE9-C87DBC444E2E</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C7F4C5DBD4263FA7472F26AB40B7CFC7" id="89" name="# (comment)" enable="True">
+			<SourceUUID>757CF28F-1652-4B0E-B37A-63EC7B119074</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Confirm action"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B6811D6EC00190815B1E9723515FD0B7" id="68" name="If" enable="True">
+			<SourceUUID>64FE397E-BA62-498D-9DE8-FCCE4A953F8C</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="653744299106BD70C4448B6440B35825" id="68" name="If" enable="True">
+			<SourceUUID>EEB703C2-90F4-45A8-8255-3007A73658CA</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[not $_silent]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="48123CE720FAC9CBF1AECCC7E64C8627" id="87" name="Show Custom Dialog" enable="True">
+			<SourceUUID>16FCD912-DBCD-4997-B340-978F46D32EB3</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["Run " & $repoName & " pipeline?"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="Cancel">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="84B2C1D42500C89938574B14B92F23BA" id="68" name="If" enable="True">
+			<SourceUUID>03AB6965-D77D-487D-B8AB-A31B7D48CC38</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( LastMessageChoice ) ≠ 1]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BE47688A438558AB8E5AC36BFC087738" id="141" name="Set Variable" enable="True">
+			<SourceUUID>C8815ADC-B11C-41E3-963A-40192E9E46A4</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="1ABF4BE7F14C7DC2960598DD74FA5452" id="70" name="End If" enable="True">
+			<SourceUUID>FB2B0066-54AD-426F-9A4A-AA1D5DE52399</SourceUUID>
+		</Step>
+		<Step hash="A7842DAAF3F40DDCEDAD44F5CDF32BFF" id="70" name="End If" enable="True">
+			<SourceUUID>C501B810-281C-4096-87B2-C5815D0C54EF</SourceUUID>
+		</Step>
+		<Step hash="66CCFB67EC838B1F5DD17481AA328154" id="70" name="End If" enable="True">
+			<SourceUUID>AE3DBA6C-3182-473A-ACAE-F8A1CC4A29CF</SourceUUID>
+		</Step>
+		<Step hash="A5DAC180BBE719EA71B85B7351D4FEEC" id="89" name="# (comment)" enable="True">
+			<SourceUUID>7AEF6E42-321E-4387-966A-C01496494B53</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="36EE377B78CD49C64199FE539FD590C1" id="89" name="# (comment)" enable="True">
+			<SourceUUID>5F35095B-E233-4617-AE81-E7936C6F8E86</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Prep api call"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9375E369ACFE91D4E5BC5FE6D6B95300" id="89" name="# (comment)" enable="True">
+			<SourceUUID>D49B0665-287C-41C8-A042-B8822C340A78</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="2024-10-07 mkos: @todo add support for an &apos;includeDetailsForAnalysisTools&apos; parameter by forwarding it to the bitbucket api"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B94CFD466797F23BA701D16F868899AE" id="68" name="If" enable="True">
+			<SourceUUID>597BCD68-F982-4C38-9705-A7678971A141</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="33031417B54BA06E2E0EA44588D2B541" id="68" name="If" enable="True">
+			<SourceUUID>3B6351E3-EAE8-45AB-B1F2-6D07977D4C46</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$gitService = "Bitbucket"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="613B55B07479340516E49ED3AF9B370E" id="89" name="# (comment)" enable="True">
+			<SourceUUID>3CB42490-CED7-43AE-A3F9-A26D510FF43A</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="ref: https://developer.atlassian.com/cloud/bitbucket/rest/api-group-pipelines/#api-repositories-workspace-repo-slug-pipelines-post"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E94EFE4349A063C776A17A9619EFC308" id="141" name="Set Variable" enable="True">
+			<SourceUUID>551D1FA8-57F7-4B97-9A7A-32AD0AC8AB9E</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["https://api.bitbucket.org/2.0/repositories/" & $owner & "/" & $repoName & "/pipelines"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$url"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8B83200079DC6F061A003990170FAF8A" id="141" name="Set Variable" enable="True">
+			<SourceUUID>F9DE8684-97BA-4BFF-B9C1-464107815339</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( "" 
+	; [ "target.ref_type" ; "branch" ; JSONString ]
+	; [ "target.type" ; "pipeline_ref_target" ; JSONString ]
+	; [ "target.ref_name" ; "main" ; JSONString ] // branch name
+	; [ "target.selector.type" ; "custom" ; JSONString ] // pipeline type
+	; [ "target.selector.pattern" ; "pull-xml" ; JSONString ] // pipeline name
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$requestBody"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A059771E36DE41B726445041008DB0D1" id="141" name="Set Variable" enable="True">
+			<SourceUUID>E7DCE356-FD2E-4CA4-BE5C-0ADAF694BFAF</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[  " --request POST "
+& " --url " & $url 
+& " --header " & Quote ( "Authorization: Bearer " & $accessToken ) 
+& " --header " & Quote ( "Content-Type: application/json" ) 
+& " --data @$requestBody"
+& " --dump-header $responseHeaders"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$curlOptions"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="951A14462A273DC909B8753B1B5B46EB" id="69" name="Else" enable="True">
+			<SourceUUID>7CDF9C5F-F886-455D-835E-EDF66CE52346</SourceUUID>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F22D4805016851277A0618EC21AD800A" id="89" name="# (comment)" enable="True">
+			<SourceUUID>04E8F5FE-C913-4883-AA88-CAAEA1249C97</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="GitHub"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D1059C117A818985A55E2FD4317A993F" id="141" name="Set Variable" enable="True">
+			<SourceUUID>4ECFD36F-430C-44D4-823F-58D26E58FC6E</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["https://api.github.com/repos/" & $owner & "/" & $repoName & "/dispatches"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$url"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="136E2236069A8E28D039D4E7791CE7B9" id="141" name="Set Variable" enable="True">
+			<SourceUUID>00E53F07-436A-4088-8767-63C96E38981B</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( "" 
+	; [ "event_type" ; "saxml-delivery" ; JSONString ] 
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$requestBody"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2E8D1DB20CB6895E860E5274C501414C" id="141" name="Set Variable" enable="True">
+			<SourceUUID>8E7C4EF1-08E5-4A30-AAC1-7679874C0802</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[  " --request POST "
+& " --url " & $url 
+& " --header " & Quote ( "Authorization: token " & $accessToken ) 
+& " --header " & Quote ( "Accept: application/vnd.github.v3+json" ) 
+& " --header " & Quote ( "Content-Type: application/json" ) 
+& " --data @$requestBody"
+& " --dump-header $responseHeaders"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$curlOptions"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="A6BAE4C1651686D1D24CF1C9C54A594E" id="70" name="End If" enable="True">
+			<SourceUUID>8A131B95-E725-4D65-8D3B-AEC5FB40AD82</SourceUUID>
+		</Step>
+		<Step hash="146B322874279CD4FC5617393C0E946C" id="70" name="End If" enable="True">
+			<SourceUUID>CB8E2E71-3164-4347-A0D0-3A53083AE8CE</SourceUUID>
+		</Step>
+		<Step hash="CA9AC17DE2CC47999B55C23677C27C5D" id="89" name="# (comment)" enable="True">
+			<SourceUUID>0510D1FD-0C70-436A-9DF6-D546D127D40F</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="15031B6D190165CACFE501D57E896293" id="89" name="# (comment)" enable="True">
+			<SourceUUID>D475A39F-0D7B-488E-A293-F3A255F2C54A</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Make api call to trigger pipeline"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="27F26DC909B387ECE30CA2C94AE8CC52" id="68" name="If" enable="True">
+			<SourceUUID>3388D50E-537C-4E18-BE8A-6B4431817C84</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="71699FB6333442A105E80F9DC31B2A90" id="160" name="Insert from URL" enable="True">
+			<SourceUUID>C56E3B01-2C47-4574-BE3E-2E4EDCA2E673</SourceUUID>
+			<Options>268456069</Options>
+			<ParameterValues membercount="6">
+				<Parameter type="Boolean">
+					<Boolean type="Verify SSL Certificates" id="268435456" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Select" id="4096" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Target">
+					<Variable value="$response">
+						<repetition>
+							<Calculation datatype="1" position="32">
+								<Calculation>
+									<Text><![CDATA[1]]></Text>
+								</Calculation>
+							</Calculation>
+						</repetition>
+					</Variable>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$url]]></Text>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$curlOptions]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="00CA9583603125E568D284A16C15B00D" id="141" name="Set Variable" enable="True">
+			<SourceUUID>CCA399AA-7D4A-40D4-A0CF-823A39B505CD</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[Get ( LastError )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="4487B75CF3559ECADF83B39BD0DB91D5" id="141" name="Set Variable" enable="True">
+			<SourceUUID>B3B8BE6C-22ED-4536-BD95-950EB8B81FEF</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[// We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
+// Signature:
+// GetHttpResponseStatusCode ( responseHeaders )
+// Purpose:
+// Return the last status code from the response headers
+// See https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+// For example, if the last status line was "HTTP/1.1 200 OK", this function will return 200
+// Parameters:
+// responseHeaders
+// Result:
+// Response status code
+// Dependencies:
+// None
+// History:
+// Mislav Kos <mkos@soliantconsulting.com>: Created custom function.
+
+Let ( [ 
+	responseHeaders = $responseHeaders ; 
+
+	searchString = "HTTP/1.1 " ; 
+	searchStringCount = PatternCount ( responseHeaders ; searchString ) ; 
+	start = Position ( responseHeaders ; searchString ; 1 ; searchStringCount ) ; 
+	start = start + If ( start > 0 ; Length ( searchString ) ) ; 
+	end = Position ( responseHeaders ; ¶ ; start ; 1 ) ; 
+	end = If ( end > 0 ; end ; Length ( responseHeaders ) + 1 ) ; 
+	numberOfCharacters = end - start ; 
+	codeWithMessage = Middle ( responseHeaders ; start ; numberOfCharacters ) ; 
+	code = LeftWords ( codeWithMessage ; 1 ) ; 
+	~ = ""
+] ; 
+	GetAsNumber ( code )
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$responseStatusCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="742F3A416F6AC199E1582DE2BCF5D9D2" id="141" name="Set Variable" enable="True">
+			<SourceUUID>86AE3C8B-9C59-486D-B645-3B9993AC7868</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[not IsEmpty ( $responseStatusCode ) and ( $responseStatusCode < 200 or $responseStatusCode > 299 )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$isErrorResponseStatusCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="436E6D08278FE5956F6D63FBD2EF3944" id="68" name="If" enable="True">
+			<SourceUUID>35AB0A82-A2BB-4B50-9C19-F56021BD5B61</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$gitService = "GitHub" and $errorCode = 10 and not $isErrorResponseStatusCode]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="AB38A2F94427E5D0DBCEF57966A31DA4" id="89" name="# (comment)" enable="True">
+			<SourceUUID>3E4BCA54-6A75-4346-B0C4-0007858D19C2</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="(10) Requested data is missing is expected with GitHub because they do not return a response body"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D62BC253EE1AD6D649ABD3220DAEB73C" id="141" name="Set Variable" enable="True">
+			<SourceUUID>D8DA0F6A-981F-4EE2-B94C-41AAA3A4203F</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[0 // reset]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D458D0706E9A6F1842D2EC9314371330" id="70" name="End If" enable="True">
+			<SourceUUID>19073FE7-D2FA-4299-9AD3-858DFC955AC0</SourceUUID>
+		</Step>
+		<Step hash="24A22F22F9A1B299EE3E8B2C6922571F" id="89" name="# (comment)" enable="True">
+			<SourceUUID>845B776A-BA70-45CF-804C-ECF896E05856</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Sample success response from GitHub:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2E803E0FF137727E3FF955E015846C08" id="89" name="# (comment)" enable="True">
+			<SourceUUID>82611F5A-A7D0-4946-9D15-628E17EA13F9</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="--no response body--"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9012B1C85565725F155AD7A23EC898D2" id="89" name="# (comment)" enable="True">
+			<SourceUUID>C9C75AA8-7A15-4006-8060-7B6A245FA314</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Sample success response from Bitbucket:"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="604AFDCE5C13D2A90601830052C595DC" id="89" name="# (comment)" enable="True">
+			<SourceUUID>E684607A-D027-4AEB-8F21-82DAC4590654</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="{&#13;&#09;&quot;build_number&quot; : 25,&#13;&#09;&quot;build_seconds_used&quot; : 0,&#13;&#09;&quot;created_on&quot; : &quot;2024-06-13T01:20:39.897981756Z&quot;,&#13;&#09;&quot;creator&quot; : &#13;&#09;{&#13;&#09;&#09;&quot;account_id&quot; : &quot;712020:9549c975-1a39-4880-b24c-&lt;&lt;removed&gt;&gt;&quot;,&#13;&#09;&#09;&quot;account_status&quot; : &quot;active&quot;,&#13;&#09;&#09;&quot;created_on&quot; : &quot;2024-06-13T00:30:39.257307+00:00&quot;,&#13;&#09;&#09;&quot;display_name&quot; : &quot;saxml-delivery&quot;,&#13;&#09;&#09;&quot;kind&quot; : &quot;repository_access_token&quot;,&#13;&#09;&#09;&quot;links&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;avatar&quot; : &#13;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&quot;href&quot; : &quot;https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/&lt;&lt;removed&gt;&gt;&quot;&#13;&#09;&#09;&#09;}&#13;&#09;&#09;},&#13;&#09;&#09;&quot;type&quot; : &quot;app_user&quot;,&#13;&#09;&#09;&quot;uuid&quot; : &quot;{9d6f6dca-22a0-4777-96e7-&lt;&lt;removed&gt;&gt;}&quot;&#13;&#09;},&#13;&#09;&quot;duration_in_seconds&quot; : 0,&#13;&#09;&quot;expired&quot; : false,&#13;&#09;&quot;first_successful&quot; : false,&#13;&#09;&quot;has_variables&quot; : false,&#13;&#09;&quot;labels&quot; : {},&#13;&#09;&quot;links&quot; : &#13;&#09;{&#13;&#09;&#09;&quot;self&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;href&quot; : &quot;http://bitbucket-pipelines.prod.public.atl-paas.net/rest/1.0/accounts/%7B&lt;&lt;removed&gt;&gt;%7D/repositories/%7B&lt;&lt;removed&gt;&gt;%7D/pipelines/%7B&lt;&lt;removed&gt;&gt;%7D&quot;&#13;&#09;&#09;},&#13;&#09;&#09;&quot;steps&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;href&quot; : &quot;http://bitbucket-pipelines.prod.public.atl-paas.net/rest/1.0/accounts/%7B&lt;&lt;removed&gt;&gt;%7D/repositories/%7&lt;&lt;removed&gt;&gt;%7D/pipelines/%7B&lt;&lt;removed&gt;&gt;%7D/steps&quot;&#13;&#09;&#09;}&#13;&#09;},&#13;&#09;&quot;repository&quot; : &#13;&#09;{&#13;&#09;&#09;&quot;full_name&quot; : &quot;soliantconsulting/&lt;&lt;repo-name-removed&gt;&gt;&quot;,&#13;&#09;&#09;&quot;links&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;avatar&quot; : &#13;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&quot;href&quot; : &quot;https://bytebucket.org/ravatar/%7B&lt;&lt;removed&gt;&gt;2%7D?ts=default&quot;&#13;&#09;&#09;&#09;},&#13;&#09;&#09;&#09;&quot;html&quot; : &#13;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&quot;href&quot; : &quot;https://bitbucket.org/soliantconsulting/&lt;&lt;repo-name-removed&gt;&gt;&quot;&#13;&#09;&#09;&#09;},&#13;&#09;&#09;&#09;&quot;self&quot; : &#13;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&quot;href&quot; : &quot;https://api.bitbucket.org/2.0/repositories/soliantconsulting/&lt;&lt;repo-name-removed&gt;&gt;&quot;&#13;&#09;&#09;&#09;}&#13;&#09;&#09;},&#13;&#09;&#09;&quot;name&quot; : &quot;&lt;&lt;repo-name-removed&gt;&gt;&quot;,&#13;&#09;&#09;&quot;type&quot; : &quot;repository&quot;,&#13;&#09;&#09;&quot;uuid&quot; : &quot;{2d72112b-c2a6-4486-9b64-&lt;&lt;removed&gt;&gt;}&quot;&#13;&#09;},&#13;&#09;&quot;run_number&quot; : 1,&#13;&#09;&quot;state&quot; : &#13;&#09;{&#13;&#09;&#09;&quot;name&quot; : &quot;PARSING&quot;,&#13;&#09;&#09;&quot;stage&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;name&quot; : &quot;PARSING&quot;,&#13;&#09;&#09;&#09;&quot;type&quot; : &quot;pipeline_state_parsing_parsing&quot;&#13;&#09;&#09;},&#13;&#09;&#09;&quot;type&quot; : &quot;pipeline_state_parsing&quot;&#13;&#09;},&#13;&#09;&quot;target&quot; : &#13;&#09;{&#13;&#09;&#09;&quot;commit&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;hash&quot; : &quot;a40ca872ea7cc9e3de7ce878c&lt;&lt;removed&gt;&gt;&quot;,&#13;&#09;&#09;&#09;&quot;links&quot; : &#13;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&quot;html&quot; : &#13;&#09;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&#09;&quot;href&quot; : &quot;https://bitbucket.org/soliantconsulting/&lt;&lt;repo-name-removed&gt;&gt;/commits/a40ca872ea7cc9e3de7ce878c&lt;&lt;removed&gt;&gt;&quot;&#13;&#09;&#09;&#09;&#09;},&#13;&#09;&#09;&#09;&#09;&quot;self&quot; : &#13;&#09;&#09;&#09;&#09;{&#13;&#09;&#09;&#09;&#09;&#09;&quot;href&quot; : &quot;https://api.bitbucket.org/2.0/repositories/soliantconsulting/&lt;&lt;repo-name-removed&gt;&gt;/commit/a40ca872ea7cc9e3de7ce878c&lt;&lt;removed&gt;&gt;&quot;&#13;&#09;&#09;&#09;&#09;}&#13;&#09;&#09;&#09;},&#13;&#09;&#09;&#09;&quot;type&quot; : &quot;commit&quot;&#13;&#09;&#09;},&#13;&#09;&#09;&quot;ref_name&quot; : &quot;main&quot;,&#13;&#09;&#09;&quot;ref_type&quot; : &quot;branch&quot;,&#13;&#09;&#09;&quot;selector&quot; : &#13;&#09;&#09;{&#13;&#09;&#09;&#09;&quot;pattern&quot; : &quot;pull-xml&quot;,&#13;&#09;&#09;&#09;&quot;type&quot; : &quot;custom&quot;&#13;&#09;&#09;},&#13;&#09;&#09;&quot;type&quot; : &quot;pipeline_ref_target&quot;&#13;&#09;},&#13;&#09;&quot;trigger&quot; : &#13;&#09;{&#13;&#09;&#09;&quot;name&quot; : &quot;MANUAL&quot;,&#13;&#09;&#09;&quot;type&quot; : &quot;pipeline_trigger_manual&quot;&#13;&#09;},&#13;&#09;&quot;type&quot; : &quot;pipeline&quot;,&#13;&#09;&quot;uuid&quot; : &quot;{f1f8cc0f-cd15-4594-9ca4-&lt;&lt;removed&gt;&gt;}&quot;&#13;}"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="195074489A05F5F9120C9FA8E4C1A8D9" id="70" name="End If" enable="True">
+			<SourceUUID>5FD21A72-FB8A-4AE8-8A34-847E45433190</SourceUUID>
+		</Step>
+		<Step hash="30C8C5F7DFA1CBE3EA9DC1005BCFECAC" id="89" name="# (comment)" enable="True">
+			<SourceUUID>93670B02-D955-4384-A86B-735BB6FDB5E3</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="215C72226BA8A611267C1430B1AFF4E7" id="89" name="# (comment)" enable="True">
+			<SourceUUID>F4A3B532-5148-4E27-A0FE-6F71C5175731</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Extract info from success response"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="7EDB782589CECB6FCF9FFCDA4883A215" id="68" name="If" enable="True">
+			<SourceUUID>43585012-12EB-4B9A-9B57-82EF37ED6B24</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0 and not $isErrorResponseStatusCode]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="ADD6BB0DAC3DA59A6F98B033FCA2E7E1" id="68" name="If" enable="True">
+			<SourceUUID>E6BBED5C-2605-4544-9BE4-0F6A8B78F28C</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$gitService = "Bitbucket"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="CDD4D23040679095003486AD1FD6644A" id="141" name="Set Variable" enable="True">
+			<SourceUUID>BA1EC594-D8AD-498C-87B7-E58398BDEB00</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONGetElement ( $response ; "build_number" )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$buildNumber"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="120A8B8EEC8DE30121C3F81BFD071F23" id="141" name="Set Variable" enable="True">
+			<SourceUUID>0BCA0F97-E4A8-4F9C-8473-97FCB0D9E201</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONGetElement ( $response ; "created_on" )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$createdOn"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F50158B1A6248F17407D0FDD007C0773" id="141" name="Set Variable" enable="True">
+			<SourceUUID>C23BFB4A-016E-44D7-A7DD-00EC11F43BCA</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONGetElement ( $response ; "repository.links.html.href" )]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$repoUrl"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9B06C4BB3E5CCF0251AB3E5B49EB4FB8" id="70" name="End If" enable="True">
+			<SourceUUID>6061193A-1071-49AD-9581-BA9C723C9993</SourceUUID>
+		</Step>
+		<Step hash="E5C2C80DFD085DEF1D03A49545B06F95" id="70" name="End If" enable="True">
+			<SourceUUID>0918CAB5-A87B-49FF-B9D5-EC229D323F6D</SourceUUID>
+		</Step>
+		<Step hash="E736552E1BA965EA8B3FFE143EB09A64" id="89" name="# (comment)" enable="True">
+			<SourceUUID>80F3260F-00EB-4F06-A476-B5F00E8374F1</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="321D5F6DAC61CB5FBD5A25B8B9004E04" id="89" name="# (comment)" enable="True">
+			<SourceUUID>D0E1ADE1-EED5-426F-A2A0-90982A7E00BC</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Build error $message"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="4C672D92A97C036A4F567C06A5D4E136" id="68" name="If" enable="True">
+			<SourceUUID>89C76D33-D39D-4897-81CA-34F51EA383C5</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[IsEmpty ( $message )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="57E4A08BFD3A096BCBBD63E543B01474" id="68" name="If" enable="True">
+			<SourceUUID>6E405498-E1E7-4AD6-863F-8C415FEEB192</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode > 1]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="8698B9EA70FA06F7AE2E9E54692569E8" id="141" name="Set Variable" enable="True">
+			<SourceUUID>AC959B70-145F-4F00-98D6-B44CF2820DB4</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[// We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
+/**
+ * @SIGNATURE:
+ * ErrorMessage ( errorCode )
+ * 
+ * @PARAMETERS:
+ * errorCode	:	Number corresponding to the error code. For example, from Get ( LastError ).
+ * 
+ * @HISTORY:
+ *     Created	:	yyyy-MMM-dd by Jeremiah Small (?) , Soliant Consulting
+ * 			  	posted on http://www.briandunning.com/cf/124
+ *    Modified	:	2011-08-07 by Mislav Kos, Soliant Consulting
+ *    Modified	:	2017-12-16 by Mislav Kos, Soliant Consulting - now current through FileMaker 16
+ *    Modified	:	2022-10-17 by Mislav Kos, Soliant Consulting - now current through FileMaker 19.5
+ * 
+ * @PURPOSE:
+ * Return error descriptions for codes from FileMaker help text (see https://help.claris.com/en/pro-help/content/error-codes.html)
+ * 
+ * @RESULT:
+ * Error description text.
+ * 
+ * @ERRORS:
+ * N/A
+ */
+
+Let ( [  
+		errorCode = $errorCode ; 
+		errorMessage = Case (
+			errorCode =   -1 ; 			"Unknown error" ; 
+			errorCode =   0 ; 			"No error" ; 
+			errorCode =   1 ; 			"User canceled action" ; 
+			errorCode =   2 ; 			"Memory error" ; 
+			errorCode =   3 ; 			"Command is unavailable (for example, wrong operating system or mode)" ; 
+			errorCode =   4 ; 			"Command is unknown" ; 
+			errorCode =   5 ; 			"Command is invalid (for example, a Set Field script step does not have a calculation specified)" ; 
+			errorCode =   6 ; 			"File is read-only" ; 
+			errorCode =   7 ; 			"Running out of memory" ; 
+			errorCode =   9 ; 			"Insufficient privileges" ; 
+			errorCode =   10 ; 			"Requested data is missing" ; 
+			errorCode =   11 ; 			"Name is not valid" ; 
+			errorCode =   12 ; 			"Name already exists" ; 
+			errorCode =   13 ; 			"File or object is in use" ; 
+			errorCode =   14 ; 			"Out of range" ; 
+			errorCode =   15 ; 			"Can't divide by zero" ; 
+			errorCode =   16 ; 			"Operation failed; request retry (for example, a user query)" ; 
+			errorCode =   17 ; 			"Attempt to convert foreign character set to UTF-16 failed" ; 
+			errorCode =   18 ; 			"Client must provide account information to proceed" ; 
+			errorCode =   19 ; 			"String contains characters other than A-Z, a-z, 0-9 (ASCII)" ; 
+			errorCode =   20 ; 			"Command/operation canceled by triggered script" ; 
+			errorCode =   21 ; 			"Request not supported (for example, when creating a hard link on a file system that does not support hard links)" ; 
+			errorCode =   100 ; 			"File is missing" ; 
+			errorCode =   101 ; 			"Record is missing" ; 
+			errorCode =   102 ; 			"Field is missing" ; 
+			errorCode =   103 ; 			"Relationship is missing" ; 
+			errorCode =   104 ; 			"Script is missing" ; 
+			errorCode =   105 ; 			"Layout is missing" ; 
+			errorCode =   106 ; 			"Table is missing" ; 
+			errorCode =   107 ; 			"Index is missing" ; 
+			errorCode =   108 ; 			"Value list is missing" ; 
+			errorCode =   109 ; 			"Privilege set is missing" ; 
+			errorCode =   110 ; 			"Related tables are missing" ; 
+			errorCode =   111 ; 			"Field repetition is invalid" ; 
+			errorCode =   112 ; 			"Window is missing" ; 
+			errorCode =   113 ; 			"Function is missing" ; 
+			errorCode =   114 ; 			"File reference is missing" ; 
+			errorCode =   115 ; 			"Menu set is missing" ; 
+			errorCode =   116 ; 			"Layout object is missing" ; 
+			errorCode =   117 ; 			"Data source is missing" ; 
+			errorCode =   118 ; 			"Theme is missing" ; 
+			errorCode =   130 ; 			"Files are damaged or missing and must be reinstalled" ; 
+			errorCode =   131 ; 			"Language pack files are missing" ; 
+			errorCode =   200 ; 			"Record access is denied" ; 
+			errorCode =   201 ; 			"Field cannot be modified" ; 
+			errorCode =   202 ; 			"Field access is denied" ; 
+			errorCode =   203 ; 			"No records in file to print, or password doesn't allow print access" ; 
+			errorCode =   204 ; 			"No access to field(s) in sort order" ; 
+			errorCode =   205 ; 			"User does not have access privileges to create new records; import will overwrite existing data" ; 
+			errorCode =   206 ; 			"User does not have password change privileges, or file is not modifiable" ; 
+			errorCode =   207 ; 			"User does not have privileges to change database schema, or file is not modifiable" ; 
+			errorCode =   208 ; 			"Password does not contain enough characters" ; 
+			errorCode =   209 ; 			"New password must be different from existing one" ; 
+			errorCode =   210 ; 			"User account is inactive" ; 
+			errorCode =   211 ; 			"Password has expired" ; 
+			errorCode =   212 ; 			"Invalid user account or password" ; 
+			errorCode =   214 ; 			"Too many login attempts" ; 
+			errorCode =   215 ; 			"Administrator privileges cannot be duplicated" ; 
+			errorCode =   216 ; 			"Guest account cannot be duplicated" ; 
+			errorCode =   217 ; 			"User does not have sufficient privileges to modify administrator account" ; 
+			errorCode =   218 ; 			"Password and verify password do not match" ; 
+			errorCode =   219 ; 			"Cannot open file; must be licensed user; contact team manager" ; 
+			errorCode =   300 ; 			"File is locked or in use" ; 
+			errorCode =   301 ; 			"Record is in use by another user" ; 
+			errorCode =   302 ; 			"Table is in use by another user" ; 
+			errorCode =   303 ; 			"Database schema is in use by another user" ; 
+			errorCode =   304 ; 			"Layout is in use by another user" ; 
+			errorCode =   306 ; 			"Record modification ID does not match" ; 
+			errorCode =   307 ; 			"Transaction could not be locked because of a communication error with the host" ; 
+			errorCode =   308 ; 			"Theme is locked and in use by another user" ; 
+			errorCode =   400 ; 			"Find criteria are empty" ; 
+			errorCode =   401 ; 			"No records match the request" ; 
+			errorCode =   402 ; 			"Selected field is not a match field for a lookup" ; 
+			errorCode =   404 ; 			"Sort order is invalid" ; 
+			errorCode =   405 ; 			"Number of records specified exceeds number of records that can be omitted" ; 
+			errorCode =   406 ; 			"Replace/reserialize criteria are invalid" ; 
+			errorCode =   407 ; 			"One or both match fields are missing (invalid relationship)" ; 
+			errorCode =   408 ; 			"Specified field has inappropriate data type for this operation" ; 
+			errorCode =   409 ; 			"Import order is invalid" ; 
+			errorCode =   410 ; 			"Export order is invalid" ; 
+			errorCode =   412 ; 			"Wrong version of FileMaker Pro used to recover file" ; 
+			errorCode =   413 ; 			"Specified field has inappropriate field type" ; 
+			errorCode =   414 ; 			"Layout cannot display the result" ; 
+			errorCode =   415 ; 			"One or more required related records are not available" ; 
+			errorCode =   416 ; 			"A primary key is required from the data source table" ; 
+			errorCode =   417 ; 			"File is not a supported data source" ; 
+			errorCode =   418 ; 			"Internal failure in INSERT operation into a field" ; 
+			errorCode =   500 ; 			"Date value does not meet validation entry options" ; 
+			errorCode =   501 ; 			"Time value does not meet validation entry options" ; 
+			errorCode =   502 ; 			"Number value does not meet validation entry options" ; 
+			errorCode =   503 ; 			"Value in field is not within the range specified in validation entry options" ; 
+			errorCode =   504 ; 			"Value in field is not unique, as required in validation entry options" ; 
+			errorCode =   505 ; 			"Value in field is not an existing value in the file, as required in validation entry options" ; 
+			errorCode =   506 ; 			"Value in field is not listed in the value list specified in validation entry option" ; 
+			errorCode =   507 ; 			"Value in field failed calculation test of validation entry option" ; 
+			errorCode =   508 ; 			"Invalid value entered in Find mode" ; 
+			errorCode =   509 ; 			"Field requires a valid value" ; 
+			errorCode =   510 ; 			"Related value is empty or unavailable" ; 
+			errorCode =   511 ; 			"Value in field exceeds maximum field size" ; 
+			errorCode =   512 ; 			"Record was already modified by another user" ; 
+			errorCode =   513 ; 			"No validation was specified but data cannot fit into the field" ; 
+			errorCode =   600 ; 			"Print error has occurred" ; 
+			errorCode =   601 ; 			"Combined header and footer exceed one page" ; 
+			errorCode =   602 ; 			"Body doesn't fit on a page for current column setup" ; 
+			errorCode =   603 ; 			"Print connection lost" ; 
+			errorCode =   700 ; 			"File is of the wrong file type for import" ; 
+			errorCode =   706 ; 			"EPS file has no preview image" ; 
+			errorCode =   707 ; 			"Graphic translator cannot be found" ; 
+			errorCode =   708 ; 			"Can't import the file, or need color monitor support to import file" ; 
+			errorCode =   711 ; 			"Import translator cannot be found" ; 
+			errorCode =   714 ; 			"Password privileges do not allow the operation" ; 
+			errorCode =   715 ; 			"Specified Excel worksheet or named range is missing" ; 
+			errorCode =   716 ; 			"A SQL query using DELETE, INSERT, or UPDATE is not allowed for ODBC import" ; 
+			errorCode =   717 ; 			"There is not enough XML/XSL information to proceed with the import or export" ; 
+			errorCode =   718 ; 			"Error in parsing XML file (from Xerces)" ; 
+			errorCode =   719 ; 			"Error in transforming XML using XSL (from Xalan)" ; 
+			errorCode =   720 ; 			"Error when exporting; intended format does not support repeating fields" ; 
+			errorCode =   721 ; 			"Unknown error occurred in the parser or the transformer" ; 
+			errorCode =   722 ; 			"Cannot import data into a file that has no fields" ; 
+			errorCode =   723 ; 			"You do not have permission to add records to or modify records in the target table" ; 
+			errorCode =   724 ; 			"You do not have permission to add records to the target table" ; 
+			errorCode =   725 ; 			"You do not have permission to modify records in the target table" ; 
+			errorCode =   726 ; 			"Source file has more records than the target table; not all records were imported" ; 
+			errorCode =   727 ; 			"Target table has more records than the source file; not all records were updated" ; 
+			errorCode =   729 ; 			"Errors occurred during import; records could not be imported" ; 
+			errorCode =   730 ; 			"Unsupported Excel version; convert file to the current Excel format and try again" ; 
+			errorCode =   731 ; 			"File you are importing from contains no data" ; 
+			errorCode =   732 ; 			"This file cannot be inserted because it contains other files" ; 
+			errorCode =   733 ; 			"A table cannot be imported into itself" ; 
+			errorCode =   734 ; 			"This file type cannot be displayed as a picture" ; 
+			errorCode =   735 ; 			"This file type cannot be displayed as a picture; it will be inserted and displayed as a file" ; 
+			errorCode =   736 ; 			"Too much data to export to this format; data will be truncated" ; 
+			errorCode =   738 ; 			"The theme you are importing already exists" ; 
+			errorCode =   800 ; 			"Unable to create file on disk" ; 
+			errorCode =   801 ; 			"Unable to create temporary file on System disk" ; 
+			errorCode =   802 ; 			"Unable to open file" ; 
+			errorCode =   803 ; 			"File is single-user, or host cannot be found" ; 
+			errorCode =   804 ; 			"File cannot be opened as read-only in its current state" ; 
+			errorCode =   805 ; 			"File is damaged; use Recover command" ; 
+			errorCode =   806 ; 			"File cannot be opened with this version of a FileMaker client" ; 
+			errorCode =   807 ; 			"File is not a FileMaker Pro file or is severely damaged" ; 
+			errorCode =   808 ; 			"Cannot open file because access privileges are damaged" ; 
+			errorCode =   809 ; 			"Disk/volume is full" ; 
+			errorCode =   810 ; 			"Disk/volume is locked" ; 
+			errorCode =   811 ; 			"Temporary file cannot be opened as FileMaker Pro file" ; 
+			errorCode =   812 ; 			"Exceeded host's capacity" ; 
+			errorCode =   813 ; 			"Record synchronization error on network" ; 
+			errorCode =   814 ; 			"File(s) cannot be opened because maximum number is open" ; 
+			errorCode =   815 ; 			"Couldn't open lookup file" ; 
+			errorCode =   816 ; 			"Unable to convert file" ; 
+			errorCode =   817 ; 			"Unable to open file because it does not belong to this solution" ; 
+			errorCode =   819 ; 			"Cannot save a local copy of a remote file" ; 
+			errorCode =   820 ; 			"File is being closed" ; 
+			errorCode =   821 ; 			"Host forced a disconnect" ; 
+			errorCode =   822 ; 			"FileMaker Pro files not found; reinstall missing files" ; 
+			errorCode =   823 ; 			"Cannot set file to single-user; guests are connected" ; 
+			errorCode =   824 ; 			"File is damaged or not a FileMaker Pro file" ; 
+			errorCode =   825 ; 			"File is not authorized to reference the protected file" ; 
+			errorCode =   826 ; 			"File path specified is not a valid file path" ; 
+			errorCode =   827 ; 			"File was not created because the source contained no data or is a reference" ; 
+			errorCode =   850 ; 			"Path is not valid for the operating system" ; 
+			errorCode =   851 ; 			"Cannot delete an external file from disk" ; 
+			errorCode =   852 ; 			"Cannot write a file to the external storage" ; 
+			errorCode =   853 ; 			"One or more containers failed to transfer" ; 
+			errorCode =   870 ; 			"Cannot modify file because another user is modifying it" ; 
+			errorCode =   871 ; 			"Error occurred loading Core ML model" ; 
+			errorCode =   872 ; 			"Core ML model was not loaded because it contained an unsupported input or output parameter" ; 
+			errorCode =   900 ; 			"General spelling engine error" ; 
+			errorCode =   901 ; 			"Main spelling dictionary not installed" ; 
+			errorCode =   903 ; 			"Command cannot be used in a shared file" ; 
+			errorCode =   905 ; 			"Command requires a field to be active" ; 
+			errorCode =   906 ; 			"Current file is not shared; command can be used only if the file is shared" ; 
+			errorCode =   920 ; 			"Cannot initialize the spelling engine" ; 
+			errorCode =   921 ; 			"User dictionary cannot be loaded for editing" ; 
+			errorCode =   922 ; 			"User dictionary cannot be found" ; 
+			errorCode =   923 ; 			"User dictionary is read-only" ; 
+			errorCode =   951 ; 			"An unexpected error occurred" ; 
+			errorCode =   952 ; 			"Invalid FileMaker Data API token" ; 
+			errorCode =   953 ; 			"Exceeded limit on data the FileMaker Data API and OData can transmit" ; 
+			errorCode =   954 ; 			"Unsupported XML grammar" ; 
+			errorCode =   955 ; 			"No database name" ; 
+			errorCode =   956 ; 			"Maximum number of database or Admin API sessions exceeded" ; 
+			errorCode =   957 ; 			"Conflicting commands" ; 
+			errorCode =   958 ; 			"Parameter missing" ; 
+			errorCode =   959 ; 			"Custom Web Publishing technology is disabled" ; 
+			errorCode =   960 ; 			"Parameter is invalid" ; 
+			errorCode =   1200 ; 			"Generic calculation error" ; 
+			errorCode =   1201 ; 			"Too few parameters in the function" ; 
+			errorCode =   1202 ; 			"Too many parameters in the function" ; 
+			errorCode =   1203 ; 			"Unexpected end of calculation" ; 
+			errorCode =   1204 ; 			"Number, text constant, field name, or \"(\" expected" ; 
+			errorCode =   1205 ; 			"Comment is not terminated with \"*/\"" ; 
+			errorCode =   1206 ; 			"Text constant must end with a quotation mark" ; 
+			errorCode =   1207 ; 			"Unbalanced parenthesis" ; 
+			errorCode =   1208 ; 			"Operator missing, function not found, or \"(\" not expected" ; 
+			errorCode =   1209 ; 			"Name (such as field name or layout name) is missing" ; 
+			errorCode =   1210 ; 			"Plug-in function or script step has already been registered" ; 
+			errorCode =   1211 ; 			"List usage is not allowed in this function" ; 
+			errorCode =   1212 ; 			"An operator (for example, +, -, *) is expected here" ; 
+			errorCode =   1213 ; 			"This variable has already been defined in the Let function" ; 
+			errorCode =   1214 ; 			"A function parameter contains an expression where a field is required" ; 
+			errorCode =   1215 ; 			"This parameter is an invalid Get function parameter" ; 
+			errorCode =   1216 ; 			"Only summary fields are allowed as first argument in GetSummary" ; 
+			errorCode =   1217 ; 			"Break field is invalid" ; 
+			errorCode =   1218 ; 			"Cannot evaluate the number" ; 
+			errorCode =   1219 ; 			"A field cannot be used in its own formula" ; 
+			errorCode =   1220 ; 			"Field type must be normal or calculated" ; 
+			errorCode =   1221 ; 			"Data type must be number, date, time, or timestamp" ; 
+			errorCode =   1222 ; 			"Calculation cannot be stored" ; 
+			errorCode =   1223 ; 			"Function referred to is not yet implemented" ; 
+			errorCode =   1224 ; 			"Function referred to does not exist" ; 
+			errorCode =   1225 ; 			"Function referred to is not supported in this context" ; 
+			errorCode =   1300 ; 			"The specified name can't be used" ; 
+			errorCode =   1301 ; 			"A parameter of the imported or pasted function has the same name as a function in the file" ; 
+			errorCode =   1400 ; 			"ODBC client driver initialization failed; make sure ODBC client drivers are properly installed" ; 
+			errorCode =   1401 ; 			"Failed to allocate environment (ODBC)" ; 
+			errorCode =   1402 ; 			"Failed to free environment (ODBC)" ; 
+			errorCode =   1403 ; 			"Failed to disconnect (ODBC)" ; 
+			errorCode =   1404 ; 			"Failed to allocate connection (ODBC)" ; 
+			errorCode =   1405 ; 			"Failed to free connection (ODBC)" ; 
+			errorCode =   1406 ; 			"Failed check for SQL API (ODBC)" ; 
+			errorCode =   1407 ; 			"Failed to allocate statement (ODBC)" ; 
+			errorCode =   1408 ; 			"Extended error (ODBC)" ; 
+			errorCode =   1409 ; 			"Error (ODBC)" ; 
+			errorCode =   1413 ; 			"Failed communication link (ODBC)" ; 
+			errorCode =   1414 ; 			"SQL statement is too long" ; 
+			errorCode =   1415 ; 			"Connection is being disconnected (ODBC)" ; 
+			errorCode =   1450 ; 			"Action requires PHP privilege extension" ; 
+			errorCode =   1451 ; 			"Action requires that current file be remote" ; 
+			errorCode =   1501 ; 			"SMTP authentication failed" ; 
+			errorCode =   1502 ; 			"Connection refused by SMTP server" ; 
+			errorCode =   1503 ; 			"Error with SSL" ; 
+			errorCode =   1504 ; 			"SMTP server requires the connection to be encrypted" ; 
+			errorCode =   1505 ; 			"Specified authentication is not supported by SMTP server" ; 
+			errorCode =   1506 ; 			"Email message(s) could not be sent successfully" ; 
+			errorCode =   1507 ; 			"Unable to log in to the SMTP server" ; 
+			errorCode =   1550 ; 			"Cannot load the plug-in, or the plug-in is not a valid plug-in" ; 
+			errorCode =   1551 ; 			"Cannot install the plug-in; cannot delete an existing plug-in or write to the folder or disk" ; 
+			errorCode =   1552 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1553 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1554 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1555 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1556 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1557 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1558 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1559 ; 			"Plug-in error (see the documentation that came with the plug-in)" ; 
+			errorCode =   1626 ; 			"Protocol is not supported" ; 
+			errorCode =   1627 ; 			"Authentication failed" ; 
+			errorCode =   1628 ; 			"There was an error with SSL" ; 
+			errorCode =   1629 ; 			"Connection timed out; the timeout value is 60 seconds" ; 
+			errorCode =   1630 ; 			"URL format is incorrect" ; 
+			errorCode =   1631 ; 			"Connection failed" ; 
+			errorCode =   1632 ; 			"The certificate has expired" ; 
+			errorCode =   1633 ; 			"The certificate is self-signed" ; 
+			errorCode =   1634 ; 			"A certificate verification error occurred" ; 
+			errorCode =   1635 ; 			"Connection is unencrypted" ; 
+			errorCode =   1700 ; 			"Resource doesn’t exist" ; 
+			errorCode =   1701 ; 			"Host is currently unable to receive requests" ; 
+			errorCode =   1702 ; 			"Authentication information wasn’t provided in the correct format; verify the value of the Authorization header" ; 
+			errorCode =   1703 ; 			"Invalid username or password, or JSON Web Token" ; 
+			errorCode =   1704 ; 			"Resource doesn’t support the specified HTTP verb" ; 
+			errorCode =   1705 ; 			"Required HTTP header wasn’t specified" ; 
+			errorCode =   1706 ; 			"Parameter isn’t supported" ; 
+			errorCode =   1707 ; 			"Required parameter wasn’t specified in the request" ; 
+			errorCode =   1708 ; 			"Parameter value is invalid" ; 
+			errorCode =   1709 ; 			"Operation is invalid for the resource’s current status" ; 
+			errorCode =   1710 ; 			"JSON input isn’t syntactically valid" ; 
+			errorCode =   1711 ; 			"Host’s license has expired" ; 
+			errorCode =   1712 ; 			"Private key file already exists; remove it and run the command again" ; 
+			errorCode =   1713 ; 			"The API request is not supported for this operating system" ; 
+			errorCode =   1714 ; 			"External group name is invalid" ; 
+			errorCode =   1715 ; 			"External server account sign-in is not enabled" ; 
+
+			"UNKNOWN ERROR CODE" 
+		) 
+	] ; 
+	
+	"(" & errorCode & ") " & errorMessage 
+	
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="2891FB7E5A9340142207DBF936EBFD6B" id="125" name="Else If" enable="True">
+			<SourceUUID>F7F221FC-491C-43AD-89D6-5A9FD6DAF58E</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$isErrorResponseStatusCode]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="237BC24D25146FF4A05E63D27BCAFDC0" id="141" name="Set Variable" enable="True">
+			<SourceUUID>F7EBB621-CF69-4E33-B214-BADC9325DA05</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[999 & $responseStatusCode]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$errorCode"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="087BF7CA91D18AC715A632FEBE9DB42F" id="141" name="Set Variable" enable="True">
+			<SourceUUID>990FEB98-24F6-4489-B303-B464094EEEF2</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["(" & $responseStatusCode & ") " & Let ( 
+
+	statusCode = $responseStatusCode ; 
+
+
+	// We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
+	// Signature:
+	// GetHttpResponseStatusMessage ( statusCode )
+	
+	// Purpose:
+	// Return HTTP response status code message
+	
+	// Parameters:
+	// statusCode: the http response status code for which we want to return the message
+	
+	// Result:
+	// HTTP response status code message
+	
+	// Dependencies:
+	// None
+	
+	// History:
+	// 2023-05-03 Mislav Kos <mkos@soliantconsulting.com>: Created custom function.
+	
+	Case ( 
+	
+		statusCode = 100 ; "Continue" ; 
+		statusCode = 101 ; "Switching Protocols" ; 
+		statusCode = 102 ; "Processing (WebDAV; RFC 2518)" ; 
+		statusCode = 103 ; "Early Hints (RFC 8297)" ; 
+		statusCode = 200 ; "OK" ; 
+		statusCode = 201 ; "Created" ; 
+		statusCode = 202 ; "Accepted" ; 
+		statusCode = 203 ; "Non-Authoritative Information (since HTTP/1.1)" ; 
+		statusCode = 204 ; "No Content" ; 
+		statusCode = 205 ; "Reset Content" ; 
+		statusCode = 206 ; "Partial Content (RFC 7233)" ; 
+		statusCode = 207 ; "Multi-Status (WebDAV; RFC 4918)" ; 
+		statusCode = 208 ; "Already Reported (WebDAV; RFC 5842)" ; 
+		statusCode = 218 ; "This is fine (Apache Web Server)" ; 
+		statusCode = 226 ; "IM Used (RFC 3229)" ; 
+		statusCode = 300 ; "Multiple Choices" ; 
+		statusCode = 301 ; "Moved Permanently" ; 
+		statusCode = 302 ; "Found (Previously 'Moved temporarily')" ; 
+		statusCode = 303 ; "See Other (since HTTP/1.1)" ; 
+		statusCode = 304 ; "Not Modified (RFC 7232)" ; 
+		statusCode = 305 ; "Use Proxy (since HTTP/1.1)" ; 
+		statusCode = 306 ; "Switch Proxy" ; 
+		statusCode = 307 ; "Temporary Redirect (since HTTP/1.1)" ; 
+		statusCode = 308 ; "Permanent Redirect (RFC 7538)" ; 
+		statusCode = 400 ; "Bad Request" ; 
+		statusCode = 401 ; "Unauthorized (RFC 7235)" ; 
+		statusCode = 402 ; "Payment Required" ; 
+		statusCode = 403 ; "Forbidden" ; 
+		statusCode = 404 ; "Not Found" ; 
+		statusCode = 405 ; "Method Not Allowed" ; 
+		statusCode = 406 ; "Not Acceptable" ; 
+		statusCode = 407 ; "Proxy Authentication Required (RFC 7235)" ; 
+		statusCode = 408 ; "Request Timeout" ; 
+		statusCode = 409 ; "Conflict" ; 
+		statusCode = 410 ; "Gone" ; 
+		statusCode = 411 ; "Length Required" ; 
+		statusCode = 412 ; "Precondition Failed (RFC 7232)" ; 
+		statusCode = 413 ; "Payload Too Large (RFC 7231)" ; 
+		statusCode = 414 ; "URI Too Long (RFC 7231)" ; 
+		statusCode = 415 ; "Unsupported Media Type" ; 
+		statusCode = 416 ; "Range Not Satisfiable (RFC 7233)" ; 
+		statusCode = 417 ; "Expectation Failed" ; 
+		statusCode = 418 ; "I'm a teapot (RFC 2324, RFC 7168)" ; 
+		statusCode = 419 ; "Page Expired (Laravel Framework)" ; 
+		statusCode = 420 ; "Method Failure (Spring Framework) or Enhance Your Calm (Twitter)" ; 
+		statusCode = 421 ; "Misdirected Request (RFC 7540)" ; 
+		statusCode = 422 ; "Unprocessable Entity (WebDAV; RFC 4918)" ; 
+		statusCode = 423 ; "Locked (WebDAV; RFC 4918)" ; 
+		statusCode = 424 ; "Failed Dependency (WebDAV; RFC 4918)" ; 
+		statusCode = 426 ; "Upgrade Required" ; 
+		statusCode = 428 ; "Precondition Required (RFC 6585)" ; 
+		statusCode = 429 ; "Too Many Requests (RFC 6585)" ; 
+		statusCode = 431 ; "Request Header Fields Too Large (RFC 6585)" ; 
+		statusCode = 440 ; "Login Time-out" ; 
+		statusCode = 444 ; "No Response" ; 
+		statusCode = 449 ; "Retry With or Client Closed Request" ; 
+		statusCode = 450 ; "Blocked by Windows Parental Controls (Microsoft)" ; 
+		statusCode = 451 ; "Unavailable For Legal Reasons (RFC 7725)" ; 
+		statusCode = 494 ; "Request header too large" ; 
+		statusCode = 495 ; "SSL Certificate Error" ; 
+		statusCode = 496 ; "SSL Certificate Required" ; 
+		statusCode = 497 ; "HTTP Request Sent to HTTPS Port" ; 
+		statusCode = 498 ; "Invalid Token (Esri)" ; 
+		statusCode = 499 ; "Token Required (Esri)" ; 
+		statusCode = 500 ; "Internal Server Error" ; 
+		statusCode = 501 ; "Not Implemented" ; 
+		statusCode = 502 ; "Bad Gateway" ; 
+		statusCode = 503 ; "Service Unavailable" ; 
+		statusCode = 504 ; "Gateway Timeout" ; 
+		statusCode = 505 ; "HTTP Version Not Supported" ; 
+		statusCode = 506 ; "Variant Also Negotiates (RFC 2295)" ; 
+		statusCode = 507 ; "Insufficient Storage (WebDAV; RFC 4918)" ; 
+		statusCode = 508 ; "Loop Detected (WebDAV; RFC 5842)" ; 
+		statusCode = 509 ; "Bandwidth Limit Exceeded (Apache Web Server/cPanel)" ; 
+		statusCode = 510 ; "Not Extended (RFC 2774)" ; 
+		statusCode = 511 ; "Network Authentication Required (RFC 6585)" ; 
+		statusCode = 520 ; "Unknown Error" ; 
+		statusCode = 521 ; "Web Server Is Down" ; 
+		statusCode = 522 ; "Connection Timed Out" ; 
+		statusCode = 523 ; "Origin Is Unreachable" ; 
+		statusCode = 524 ; "A Timeout Occurred" ; 
+		statusCode = 525 ; "SSL Handshake Failed" ; 
+		statusCode = 526 ; "Invalid SSL Certificate" ; 
+		statusCode = 527 ; "Railgun Error" ; 
+		statusCode = 530 ; "Site is frozen or Origin DNS Error" ; 
+		statusCode = 598 ; "(Informal convention) Network read timeout error" ; 	
+	)
+
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$responseStatusMessage"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="07B1AB917873E9F5747E6BA5A69FFCBC" id="141" name="Set Variable" enable="True">
+			<SourceUUID>06ED9BF0-2621-4683-B6D7-9F67C571C014</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$responseStatusMessage & If ( 
+	Left ( JSONGetElement ( $response ; "doesnotmatterwhatishere" ) ; 3 ) ≠ "? *" ; 
+	". " & JSONGetElement ( $response ; "error.message" )
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="49E8FFBBD8779E11AEEF83E48AEFA873" id="70" name="End If" enable="True">
+			<SourceUUID>986989AE-9935-4135-9BCB-11477267D840</SourceUUID>
+		</Step>
+		<Step hash="FDE38A794E3FE7EEBA73C03A72FD0887" id="70" name="End If" enable="True">
+			<SourceUUID>A2362FA9-D1AF-48FB-815C-8EF6470AB7A5</SourceUUID>
+		</Step>
+		<Step hash="90B5F319665710E7D2C75E8BEC7C0A15" id="89" name="# (comment)" enable="True">
+			<SourceUUID>ED721B50-CF8F-4269-89B8-8B15BE819D9B</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D16F21E1415E112F2E5C16B2007E12A3" id="89" name="# (comment)" enable="True">
+			<SourceUUID>A78A61BB-1F3B-4FD3-AC7D-8F8337A51137</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Display $message"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C835648384F720242E58D5D05DB30996" id="68" name="If" enable="True">
+			<SourceUUID>8B4BCB42-CF90-4D83-A213-891BE7C7A736</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[not $_silent 
+and PatternCount ( Get ( ApplicationVersion ) ; "Data API Engine" ) = 0 
+and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B7043F6E5F2C90FCAAA8AD80AB95522C" id="68" name="If" enable="True">
+			<SourceUUID>877AAFC0-F77A-4CE6-AE83-FA79BCC11861</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="21005E8C661C1ACC7B28176F7C5EDAF0" id="68" name="If" enable="True">
+			<SourceUUID>D3BE1FAB-C553-4B01-98AD-1446462F1764</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$gitService = "Bitbucket"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="06ED139E27E50D162C1D6C8444E7FBE8" id="141" name="Set Variable" enable="True">
+			<SourceUUID>BFA34AF9-19EA-4A20-AD83-B0D7DE460525</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA["The " & Quote ( $repoName ) & " pipeline is running build # " & $buildNumber & ". View in browser?"]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$message"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D316B5A1DDAA7B9E69E32EABD9E1C3DD" id="87" name="Show Custom Dialog" enable="True">
+			<SourceUUID>A572C1C5-4DC1-4742-91B9-4895BB548EDF</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$message]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="Dismiss">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2" value="View">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="BC101F3298391A368284294B4561F59C" id="68" name="If" enable="True">
+			<SourceUUID>AF66FA52-1345-4975-BA47-0EA2248255AD</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[Get ( LastMessageChoice ) = 2]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="9CF85FE34CBFA08AF8763526175EDE58" id="141" name="Set Variable" enable="True">
+			<SourceUUID>953B8E5C-0D07-4CA9-B9E0-23E0BBEB2BCB</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[$repoUrl & "/pipelines/results/" & $buildNumber]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$pipelineBuildUrl"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0F51672B2593CA58816075B806D556DF" id="111" name="Open URL" enable="True">
+			<SourceUUID>E5F57C30-E16F-4F70-9512-BC58D4AC811A</SourceUUID>
+			<Options>16512</Options>
+			<ParameterValues membercount="3">
+				<Parameter type="Boolean">
+					<Boolean type="In external browser" id="256" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="With dialog" id="128" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="URL">
+					<URL autoEncode="True">
+						<Calculation datatype="1" position="0">
+							<Calculation>
+								<Text><![CDATA[$pipelineBuildUrl]]></Text>
+							</Calculation>
+						</Calculation>
+					</URL>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="5845627B8C6CF6671CA2F281B2F58AF4" id="70" name="End If" enable="True">
+			<SourceUUID>ACEC90B7-C98A-46BD-8CCD-D6D1FC9B46B6</SourceUUID>
+		</Step>
+		<Step hash="CD9791486000DA298452B33D82B821B2" id="69" name="Else" enable="True">
+			<SourceUUID>B1847040-AAF3-4F40-B7F2-3CB6076BC8E5</SourceUUID>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="967A45B8E1E122CEF09642C49FEACE1B" id="89" name="# (comment)" enable="True">
+			<SourceUUID>594FC5D5-85B4-4A20-81AE-88E754D016D7</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="GitHub"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3E86E986156DD0B24B0DF341311BA240" id="87" name="Show Custom Dialog" enable="True">
+			<SourceUUID>A7886D5A-3122-4341-AC9A-F4C744B1F511</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="4">
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA["The " & Quote ( $repoName ) & " pipeline is running."]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="85B762DCE89B20BB3B766C561B6EAAE9" id="70" name="End If" enable="True">
+			<SourceUUID>2179B448-553A-498F-A636-C2F4C2A93D94</SourceUUID>
+		</Step>
+		<Step hash="F4E54BE9278056CEDD0A04816EFB3759" id="125" name="Else If" enable="True">
+			<SourceUUID>06F355D7-79C3-473D-9AA1-E06F9AA54EC8</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[not IsEmpty ( $message )]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="D9D8DF279C489061B6EED60410BA29BE" id="87" name="Show Custom Dialog" enable="True">
+			<SourceUUID>BECC5152-9602-435D-93B1-E3F1C75D9C6E</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="5">
+				<Parameter type="Title">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA["Error"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Message">
+					<Calculation datatype="1" position="1">
+						<Calculation>
+							<Text><![CDATA[$message]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+				<Parameter type="Button1" value="OK">
+					<Boolean type="Commit" value="True"></Boolean>
+				</Parameter>
+				<Parameter type="Button2">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Button3">
+					<Boolean type="Commit" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3EC66D38EA8548B1F31D711E8A744E78" id="70" name="End If" enable="True">
+			<SourceUUID>4863CE19-2260-4C63-A905-0F16A934C1E9</SourceUUID>
+		</Step>
+		<Step hash="4858FA5115C4A4E6B7D3AB2C4496A8B7" id="70" name="End If" enable="True">
+			<SourceUUID>250A2F3B-88B3-43F5-81B5-8736056AFC56</SourceUUID>
+		</Step>
+		<Step hash="133635A62762B629015A573E9298CA03" id="89" name="# (comment)" enable="True">
+			<SourceUUID>BA46F931-20A0-419F-B31C-BE34654D848E</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="55993AA470A9F38B14E980564A0C4048" id="89" name="# (comment)" enable="True">
+			<SourceUUID>88221AB5-10D1-4484-A1CE-D8C808089C47</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="Build $data"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="657D377CD10F7549929BA603C4393F88" id="68" name="If" enable="True">
+			<SourceUUID>663A2DA6-3DCF-45BD-880A-991A4FA883BB</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$errorCode = 0]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F1BC81BF296627114708B6446EDFA3FA" id="68" name="If" enable="True">
+			<SourceUUID>85AD25DD-CE93-41E3-8FC1-157BF68C1FBE</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$gitService = "Bitbucket"]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="E87FDC84C5DF85D9FD0E785A7EC6F052" id="141" name="Set Variable" enable="True">
+			<SourceUUID>7CF1E61D-C511-4C2A-9A43-0DF3CDD7C03D</SourceUUID>
+			<Options>16388</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Variable">
+					<value>
+						<Calculation datatype="1" position="1">
+							<Calculation>
+								<Text><![CDATA[JSONSetElement ( $data 
+	; [ "buildNumber" ; $buildNumber ; JSONString ] 
+	; [ "createdOn" ; $createdOn ; JSONString ] 
+	; [ "pipelineBuildUrl" ; $pipelineBuildUrl ; JSONString ] 
+	; [ "repoUrl" ; $repoUrl ; JSONString ] 
+)]]></Text>
+							</Calculation>
+						</Calculation>
+					</value>
+					<Name value="$data"></Name>
+					<repetition>
+						<Calculation datatype="1" position="2">
+							<Calculation>
+								<Text><![CDATA[1]]></Text>
+							</Calculation>
+						</Calculation>
+					</repetition>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="F83484BCB8FDA8D55A948C6965E53C62" id="70" name="End If" enable="True">
+			<SourceUUID>35BC7CE3-EEA4-4587-BFA3-87A650117840</SourceUUID>
+		</Step>
+		<Step hash="873A40D3E2ABFE93CE7FBC8D0387E71F" id="70" name="End If" enable="True">
+			<SourceUUID>4CA11210-56FB-43D8-8FED-A636DD68EF7C</SourceUUID>
+		</Step>
+		<Step hash="56A715C4D63254AF566905F0DC4AE570" id="89" name="# (comment)" enable="True">
+			<SourceUUID>0CE43B10-B7F3-4290-91AE-AFDCD1F0C42C</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="639EC4FB6540A8E09103CB6C9C130EF0" id="89" name="# (comment)" enable="True">
+			<SourceUUID>141CEAA1-42D0-4B91-99E3-05054A9E10D0</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="09F0730DFF728BD1F93A1AF8B0EE97D2" id="89" name="# (comment)" enable="True">
+			<SourceUUID>711FC64E-7733-4F8E-9B33-EA22F2C663C9</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="END"></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="927558457D2C255F14F5861A09FE37CF" id="89" name="# (comment)" enable="True">
+			<SourceUUID>00281942-8696-44B4-B19A-EFC9B44C921E</SourceUUID>
+			<Options>4</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment value="===================================================================================================="></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="3128B1C16DD939E23B999C8916A82B7E" id="89" name="# (comment)" enable="True">
+			<SourceUUID>F12E5F04-DDB2-4AB8-A98F-93B3DD0EFCE0</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="0878E65780EBC310BBF581D224242C52" id="68" name="If" enable="True">
+			<SourceUUID>CEE61187-7044-428A-A829-1EF46E158483</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Calculation">
+					<Calculation datatype="7" position="0">
+						<Calculation>
+							<Text><![CDATA[$parentScriptErrorCaptureState]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="14A6A21884F7EEFC8D287D7D425C6041" id="86" name="Set Error Capture" enable="True">
+			<SourceUUID>798A9327-2ACA-4766-9FF5-624C3FDA037B</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="79B2AE49B8F57652D2C3D2C6C5239CDD" id="69" name="Else" enable="True">
+			<SourceUUID>A491E4C9-1877-4B5A-B9FE-51644EBB891E</SourceUUID>
+			<ParameterValues membercount="2">
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+				<Parameter type="Boolean">
+					<Boolean type="Collapsed" id="33554432" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="B776B3665205F4BE09E109DF144ECEA8" id="86" name="Set Error Capture" enable="True">
+			<SourceUUID>78E3383B-A084-4CDE-A0F6-C2928EAD52D6</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Boolean">
+					<Boolean id="131072" value="False"></Boolean>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="048E3D08E2E7A38E6E254EE668B68F22" id="70" name="End If" enable="True">
+			<SourceUUID>B9734CCC-E7C0-42E0-8A94-5BB71849B7A0</SourceUUID>
+		</Step>
+		<Step hash="3362AA9786411C2F7BD18EF35EFC6BF3" id="89" name="# (comment)" enable="True">
+			<SourceUUID>4235B095-FDA3-4592-A9C7-30B343D40EFA</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="C923BA68EBC8CFD593BD7BD146A8FF60" id="103" name="Exit Script" enable="True">
+			<SourceUUID>0AAE1625-CF8C-4F42-9A5B-BBDE898F185F</SourceUUID>
+			<Options>16384</Options>
+			<ParameterValues membercount="1">
+				<Parameter type="Calculation">
+					<Calculation datatype="1" position="0">
+						<Calculation>
+							<Text><![CDATA[$result]]></Text>
+						</Calculation>
+					</Calculation>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="88A157FA445F08CA81CDEE147DC3DABB" id="89" name="# (comment)" enable="True">
+			<SourceUUID>DE1BF95B-0702-479E-929C-1416ADB540E2</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+		<Step hash="510A4443936252FD30B0E069300B25DA" id="89" name="# (comment)" enable="True">
+			<SourceUUID>F2008AB7-79F9-42EE-8393-84772EB5F1D4</SourceUUID>
+			<ParameterValues membercount="1">
+				<Parameter type="Comment">
+					<Comment></Comment>
+				</Parameter>
+			</ParameterValues>
+		</Step>
+	</ObjectList>
+</Script>

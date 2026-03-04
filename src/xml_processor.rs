@@ -14,7 +14,10 @@ use crate::script_sanitizer::create_sanitized_scripts;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::{end_element_to_string, start_element_to_string, XmlEventType};
-use crate::utils::{build_out_dir_path, delete_output_directory, write_xml_file, FolderStructure};
+use crate::utils::{
+    build_out_dir_path, delete_output_directory, migrate_old_custom_functions_if_needed,
+    version_string_to_number, write_xml_file, FolderStructure,
+};
 use crate::utils::{create_dir, push_line_to_skeleton};
 use crate::Skeleton;
 
@@ -42,6 +45,7 @@ pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub path_stack: &'a mut Vec<Vec<u8>>,
     pub root_out_dir: PathBuf,
     pub saxml_version: Option<String>,
+    pub saxml_version_num: Option<u64>,
     pub db_name: Option<String>,
     pub top_level_section: Option<TopLevelSection>,
     pub action: Option<Action>,
@@ -76,6 +80,7 @@ pub fn explode_xml(
         path_stack: &mut Vec::new(),
         root_out_dir: root_out_dir.to_path_buf(),
         saxml_version: None,
+        saxml_version_num: None,
         db_name: None,
         top_level_section: None,
         action: None,
@@ -105,6 +110,7 @@ pub fn explode_xml(
                     0 => {
                         process_root_element(&mut context, &start_tag)?;
                         create_dir(&context.root_out_dir);
+                        migrate_old_custom_functions_if_needed(&context)?;
                         delete_output_directory(&context)?;
                     }
                     1 => {
@@ -175,7 +181,9 @@ fn process_root_element<R: Read + BufRead>(
                     .unwrap()
                     .to_string(),
             );
-            context.saxml_version = Some(get_attribute(e, "version").unwrap().to_string());
+            let saxml_version = get_attribute(e, "version").unwrap();
+            context.saxml_version_num = Some(version_string_to_number(&saxml_version));
+            context.saxml_version = Some(saxml_version);
         }
         _ => {
             bail!("Unsupported XML-format");
@@ -223,6 +231,12 @@ fn process_catalog_elements<R: Read + BufRead>(
         }
     };
     context.catalog_type = Some(catalog_type);
+
+    let options_for_value_lists_deprecated = catalog_type == CatalogType::OptionsForValueLists
+        && context.saxml_version_num.unwrap_or(0) >= version_string_to_number("2.3.3.4");
+    if options_for_value_lists_deprecated {
+        return Ok(true);
+    }
     // Handle special cases that need folder structures
     let folder_structure = match catalog_type {
         CatalogType::CalcsForCustomFunctions => cf_folder_structure.as_ref(),
@@ -258,7 +272,12 @@ fn process_catalog_elements<R: Read + BufRead>(
         );
     }
 
-    if catalog_type == CatalogType::CalcsForCustomFunctions {
+    let custom_functions_catalog_contains_calc = catalog_type == CatalogType::CustomFunctions
+        && context.saxml_version_num.unwrap_or(0) >= version_string_to_number("2.2.3.4");
+
+    if catalog_type == CatalogType::CalcsForCustomFunctions
+        || custom_functions_catalog_contains_calc
+    {
         let sanitized_cf_dir_path =
             build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
         create_sanitized_custom_functions(&xml_out_dir_path, &sanitized_cf_dir_path);

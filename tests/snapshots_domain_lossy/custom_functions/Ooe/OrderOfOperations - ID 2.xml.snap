@@ -1,0 +1,18 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<CustomFunction id="2" name="OrderOfOperations" access="All">
+	<UUID modifications="7" userName="Mislav" accountName="admin" timestamp="2025-07-24T16:14:14">D87A5E62-C8CF-4959-8B25-4E70EAF7BE87</UUID>
+	<Calculation>
+		<Text><![CDATA[// The custom function references a field
+// It's set up this way, so that we can see how SaXML handles this situation
+
+Contacts::OrderOfOperationsTest_u
+
+& If ( Random > .5 ; " " & Contacts::Name )
+
+// 2025-07-14 mkos: Added comment]]></Text>
+	</Calculation>
+	<Display>OrderOfOperations</Display>
+</CustomFunction>

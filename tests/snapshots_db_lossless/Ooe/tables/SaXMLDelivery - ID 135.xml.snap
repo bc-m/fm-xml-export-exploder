@@ -1,0 +1,165 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<SortOrder>2</SortOrder>
+	<CustomOrderList>
+		<key>1</key>
+		<key>2</key>
+		<key>3</key>
+		<key>4</key>
+		<key>5</key>
+		<key>6</key>
+		<key>7</key>
+		<key>8</key>
+		<key>9</key>
+		<key>10</key>
+	</CustomOrderList>
+	<UUID modifications="1" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:31">3BC06E92-3962-4441-95FB-44C029FB4B25</UUID>
+	<TagList></TagList>
+	<BaseTableReference id="135" name="SaXMLDelivery" UUID="57D75FA9-D8E4-4A5B-AF62-BA42D6F899BB"></BaseTableReference>
+	<ObjectList membercount="10">
+		<Field id="1" name="recordId" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:30">335CEFDF-0C4F-4104-9EE2-28DDB93024F8</UUID>
+			<SourceUUID>5F02B44C-BCCD-4CEB-9341-A0D0CD584C09</SourceUUID>
+			<AutoEnter type="Calculated" prohibitModification="True" overwriteExisting="True" alwaysEvaluate="True">
+				<Calculated enable="True">
+					<Calculation>
+						<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+						<Text><![CDATA[Let ( trigger = Self ; Get ( RecordID ) )]]></Text>
+					</Calculation>
+				</Calculated>
+			</AutoEnter>
+			<Validation alwaysValidate="False" type="Always" allowOverride="False" notEmpty="True" unique="False" existing="False"></Validation>
+			<Storage index="All" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="2" name="modAccount" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:30">66DFCF30-1A16-4080-9C7C-9B1C7AD58D14</UUID>
+			<SourceUUID>50A58E52-8600-4D8E-AEB7-5BD020EF9435</SourceUUID>
+			<AutoEnter type="ModificationAccountName" prohibitModification="True"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="Minimal" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="3" name="modTimestamp" fieldtype="Normal" datatype="Timestamp" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:30">BACCA06A-4A2B-4988-8789-D3F1C88D9AC9</UUID>
+			<SourceUUID>55AD4F58-E44C-40A9-B30A-06626C6F83BD</SourceUUID>
+			<AutoEnter type="ModificationTimestamp" prohibitModification="True"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="4" name="notes" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:30">285A144F-045E-4710-8EDE-F9AE8DCAEE7C</UUID>
+			<SourceUUID>A21022F1-F419-494E-A6F0-17A4FAFF35D8</SourceUUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="5" name="sizeInBytes" fieldtype="Normal" datatype="Number" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:30">FD621866-6BB0-4D60-AE3F-39631B677152</UUID>
+			<SourceUUID>2B23A2DE-E057-4438-A77F-0183177AA5E2</SourceUUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="6" name="timeToCreate" fieldtype="Normal" datatype="Time" comment="How long did it take to create the xml file?">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:30">13849F74-EC2E-441D-BBFE-A3140D27BB87</UUID>
+			<SourceUUID>FB8F17B1-0727-4653-9C5E-037768C337AB</SourceUUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="7" name="xmlFile" fieldtype="Normal" datatype="Binary" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:31">996F8093-79C6-48FF-A8C1-8546DAD1D2A5</UUID>
+			<SourceUUID>0AAD2AD9-C564-4BDF-BF92-935A6016C359</SourceUUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage global="False" maxRepetitions="1">
+				<Remote type="Open">
+					<BaseDirectoryReference id="4" name="SaXMLDelivery/" absolute="False" UUID="FE22B95B-16DA-4226-B0E2-A26C4D5EE298"></BaseDirectoryReference>
+					<Location>
+						<Calculation>
+							<TableOccurrenceReference id="1065099" name="SaXMLDelivery" UUID="2F00C240-BDBE-417A-9129-A4374426928A"></TableOccurrenceReference>
+							<Text><![CDATA[/* Let ( [ 
+	split = Substitute ( GetFieldName ( xmlFile ) ; "::" ; ¶ ) ; 
+	tableName = GetValue ( split ; 1 ) ; 
+	fieldName = GetValue ( split ; 2 ) 
+] ; 
+	tableName & "/" & fieldName & "/" 
+) */]]></Text>
+						</Calculation>
+					</Location>
+				</Remote>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="8" name="createAccount" fieldtype="Normal" datatype="Text" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:31">4FD20819-2490-49CF-B0F3-6F4C360FDEE3</UUID>
+			<SourceUUID>6CFFFC4C-58F5-4900-8200-0E7A0DA623F0</SourceUUID>
+			<AutoEnter type="CreationAccountName" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="9" name="createTimestamp" fieldtype="Normal" datatype="Timestamp" comment="">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:31">3E9C89F1-3766-4CC2-A677-FDACD6F6ED9E</UUID>
+			<SourceUUID>908D5F3C-4BD5-4F35-912B-7AE6AA59A544</SourceUUID>
+			<AutoEnter type="CreationTimestamp" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+		<Field id="10" name="timeToUpload" fieldtype="Normal" datatype="Time" comment="How long did it take to upload the xml file to the container field?">
+			<UUID modifications="0" userName="Mislav" accountName="admin" timestamp="2025-10-18T23:47:31">305F0BC9-C278-4143-A33C-67B549740260</UUID>
+			<SourceUUID>276EDEFC-1D9A-4BDA-B190-FE71DD35FC0D</SourceUUID>
+			<AutoEnter type="" prohibitModification="False"></AutoEnter>
+			<Validation alwaysValidate="False" type="OnlyDuringDataEntry" allowOverride="True" notEmpty="False" unique="False" existing="False"></Validation>
+			<Storage autoIndex="True" index="None" global="False" maxRepetitions="1">
+				<LanguageReference name="English" id="21"></LanguageReference>
+			</Storage>
+			<TagList></TagList>
+			<Annotation></Annotation>
+			<DisplayNames enable="False"></DisplayNames>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

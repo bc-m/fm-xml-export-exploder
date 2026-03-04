@@ -3,13 +3,12 @@ source: src/tests.rs
 expression: output_content
 ---
 <CustomMenu name="MyCustomMenu" id="26">
-	<UUID modifications="3" userName="Mislav" accountName="Admin" timestamp="2025-06-08T15:09:17">01A30526-B3F6-4834-8333-9C61558697B3</UUID>
-	<MenuItemList membercount="3">
-		<CustomMenuItem hash="979FD7676911B4CF4F5279DB7FCC7D50" isSubMenuItem="False" isSeparatorItem="False">
+	<UUID modifications="5" userName="Mislav" accountName="admin" timestamp="2025-07-24T16:25:04">01A30526-B3F6-4834-8333-9C61558697B3</UUID>
+	<MenuItemList membercount="5">
+		<CustomMenuItem hash="C388239250CB870A1E54B4721BC8010B" isSubMenuItem="False" isSeparatorItem="False">
 			<Conditions>
 				<Install>
 					<Calculation>
-						<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_002866B8-9121-46E8-BD82-ECE1A774440A_Install</DDRREF>
 						<Text><![CDATA[1]]></Text>
 					</Calculation>
 				</Install>
@@ -17,11 +16,10 @@ expression: output_content
 			<Command name="View as Form" id="50197"></Command>
 			<Override name="False" action="False" Shortcut="False"></Override>
 		</CustomMenuItem>
-		<CustomMenuItem hash="D7FB6F62AB3A4933C39CF220CC1BB1FB" isSubMenuItem="False" isSeparatorItem="False">
+		<CustomMenuItem hash="CB12E13458CCCD1AABB8380062222064" isSubMenuItem="False" isSeparatorItem="False">
 			<action>
-				<Step hash="FEA3A241DAE2FE6ADECAFDE08673EF28" id="1" name="Perform Script" enable="True">
+				<Step hash="E6F54CAE2CF8654DE427FFA05F08E7C6" id="1" name="Perform Script" enable="True">
 					<Options>64</Options>
-					<DDRREF kind="StepText" hash="05768D7E544BE7685D88104FF1F57F1B">_238E76B6-CC5B-4D71-9F59-7807D4B2A6C9</DDRREF>
 					<ParameterValues membercount="2">
 						<Parameter type="List">
 							<List name="From list" value="1">
@@ -37,14 +35,12 @@ expression: output_content
 			<Conditions>
 				<Install>
 					<Calculation>
-						<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_238E76B6-CC5B-4D71-9F59-7807D4B2A6C9_Install</DDRREF>
 						<Text><![CDATA[1]]></Text>
 					</Calculation>
 				</Install>
 			</Conditions>
 			<Name>
 				<Calculation>
-					<DDRREF kind="ChunkList" hash="D5A2AD84D1BA413ED79D399C1332113E">_238E76B6-CC5B-4D71-9F59-7807D4B2A6C9_Name</DDRREF>
 					<Text><![CDATA["Hello world"]]></Text>
 				</Calculation>
 			</Name>
@@ -52,16 +48,14 @@ expression: output_content
 			<Command id="0"></Command>
 			<Override name="True" action="True" Shortcut="True"></Override>
 		</CustomMenuItem>
-		<CustomMenuItem hash="A7BDE0581652BFF58E561E6D3AD78C86" isSubMenuItem="False" isSeparatorItem="False">
+		<CustomMenuItem hash="F9B2A7F856CE86591A17ED94F80454A5" isSubMenuItem="False" isSeparatorItem="False">
 			<action>
-				<Step hash="85510B85DBCBDF68B3FF7559A96FEB7A" id="87" name="Show Custom Dialog" enable="True">
+				<Step hash="879E9BBB62A0856F9DF82720CB3F69A0" id="87" name="Show Custom Dialog" enable="True">
 					<Options>16389</Options>
-					<DDRREF kind="StepText" hash="6F9A81D963CD7E0517D3403E4230D34F">_81AEA5CE-E14F-43D1-AC2B-62BA1347CF83</DDRREF>
 					<ParameterValues membercount="5">
 						<Parameter type="Message">
 							<Calculation datatype="1" position="1">
 								<Calculation>
-									<DDRREF kind="ChunkList" hash="9B459BED873716461B4E33D14F087148">_81AEA5CE-E14F-43D1-AC2B-62BA1347CF83_1</DDRREF>
 									<Text><![CDATA["Hi"]]></Text>
 								</Calculation>
 							</Calculation>
@@ -81,7 +75,6 @@ expression: output_content
 									<repetition>
 										<Calculation datatype="1" position="32">
 											<Calculation>
-												<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_81AEA5CE-E14F-43D1-AC2B-62BA1347CF83_32</DDRREF>
 												<Text><![CDATA[1]]></Text>
 											</Calculation>
 										</Calculation>
@@ -93,7 +86,6 @@ expression: output_content
 							<Parameter type="Label">
 								<Calculation datatype="1" position="2">
 									<Calculation>
-										<DDRREF kind="ChunkList" hash="F7F8FE631B58F04FD678C54E7349D82F">_81AEA5CE-E14F-43D1-AC2B-62BA1347CF83_2</DDRREF>
 										<Text><![CDATA["Global field"]]></Text>
 									</Calculation>
 								</Calculation>
@@ -105,25 +97,48 @@ expression: output_content
 			<Conditions>
 				<Install>
 					<Calculation>
-						<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_81AEA5CE-E14F-43D1-AC2B-62BA1347CF83_Install</DDRREF>
 						<Text><![CDATA[1]]></Text>
 					</Calculation>
 				</Install>
 			</Conditions>
 			<Name>
 				<Calculation>
-					<DDRREF kind="ChunkList" hash="D4A2C4B301DB80637BF91C3D919C3A99">_81AEA5CE-E14F-43D1-AC2B-62BA1347CF83_Name</DDRREF>
 					<Text><![CDATA["Say hi"]]></Text>
 				</Calculation>
 			</Name>
 			<Command id="0"></Command>
 			<Override name="True" action="True" Shortcut="False"></Override>
 		</CustomMenuItem>
+		<CustomMenuItem hash="8FC61588198C30E5542E0244BF531DD2" isSubMenuItem="False" isSeparatorItem="True">
+			<Conditions>
+				<Install>
+					<Calculation>
+						<Text><![CDATA[1]]></Text>
+					</Calculation>
+				</Install>
+			</Conditions>
+			<Override name="False" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
+		<CustomMenuItem hash="214D8F4F0F3715B85FA37A54EF75A9DF" isSubMenuItem="True" isSeparatorItem="False">
+			<CustomMenuReference id="9" name="[Manage]"></CustomMenuReference>
+			<Conditions>
+				<Install>
+					<Calculation>
+						<Text><![CDATA[Random > .5]]></Text>
+					</Calculation>
+				</Install>
+			</Conditions>
+			<Name>
+				<Calculation>
+					<Text><![CDATA["Manage (submenu)"]]></Text>
+				</Calculation>
+			</Name>
+			<Override name="True" action="False" Shortcut="False"></Override>
+		</CustomMenuItem>
 	</MenuItemList>
 	<Conditions>
 		<Install>
 			<Calculation>
-				<DDRREF kind="ChunkList" hash="A93F17BC54CA1958073B692697D5ED21">_01A30526-B3F6-4834-8333-9C61558697B3_Install</DDRREF>
 				<Text><![CDATA[1]]></Text>
 			</Calculation>
 		</Install>
@@ -133,7 +148,6 @@ expression: output_content
 		<Override>
 			<Title>
 				<Calculation>
-					<DDRREF kind="ChunkList" hash="4A3438A93AA53800D7BCF07C50AD2C13">_01A30526-B3F6-4834-8333-9C61558697B3_Title</DDRREF>
 					<Text><![CDATA["MyCustomMenuTitle"]]></Text>
 				</Calculation>
 			</Title>
