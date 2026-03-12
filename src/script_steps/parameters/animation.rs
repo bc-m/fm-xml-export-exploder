@@ -40,7 +40,7 @@ impl Animation {
 
     pub fn display(&self) -> Option<String> {
         self.value
-            .clone()
+            .as_ref()
             .map(|value| format!("Animation: {value}"))
     }
 }

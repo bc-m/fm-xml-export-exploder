@@ -20,11 +20,11 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"List" => {
-                    script_reference_type_id = get_attribute(&e, "value").unwrap().to_string();
-                    script_reference_type = get_attribute(&e, "name").unwrap().to_string();
+                    script_reference_type_id = get_attribute(&e, "value").unwrap();
+                    script_reference_type = get_attribute(&e, "name").unwrap();
                     if script_reference_type_id.as_str() == "2" {
                         script_reference = Calculation::from_xml(&mut reader, &e)
                             .unwrap()
@@ -51,12 +51,12 @@ pub fn sanitize(step: &str) -> Option<String> {
         buf.clear()
     }
 
-    let mut parameters = vec![script_reference_type.to_string()];
+    let mut parameters = vec![script_reference_type];
 
     if script_reference_type_id.as_str() != "2" {
         parameters.push(format!("\"{script_reference}\""));
     } else {
-        parameters.push(script_reference.to_string());
+        parameters.push(script_reference);
     }
 
     if let Some(ref data_source_value) = data_source_reference {

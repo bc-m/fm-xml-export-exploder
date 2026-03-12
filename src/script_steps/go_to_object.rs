@@ -17,7 +17,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(ref e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(e, "name").unwrap().to_string();
+                    name = get_attribute(e, "name").unwrap();
                 }
                 b"Name" => {
                     calculation = Calculation::from_xml(&mut reader, e)

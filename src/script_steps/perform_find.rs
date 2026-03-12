@@ -16,7 +16,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"ParameterValues" => {
                     restore = true;

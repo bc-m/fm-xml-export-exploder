@@ -20,13 +20,13 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"List" => {
-                    option = get_attribute(&e, "name").unwrap().to_string();
-                    option_type = get_attribute(&e, "value").unwrap().to_string();
+                    option = get_attribute(&e, "name").unwrap();
+                    option_type = get_attribute(&e, "value").unwrap();
                 }
                 b"Boolean" => {
-                    boolean_option_type = get_attribute(&e, "type").unwrap().to_string();
+                    boolean_option_type = get_attribute(&e, "type").unwrap();
                     boolean_option_value = get_attribute(&e, "value").unwrap() == "True";
                 }
                 b"Calculation" => {

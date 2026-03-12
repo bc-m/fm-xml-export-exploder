@@ -4,8 +4,7 @@ use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::attributes::get_attribute;
 
-#[derive(Debug, Default)]
-pub struct Comment {}
+pub struct Comment;
 
 impl Comment {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<String, String> {

@@ -315,7 +315,7 @@ fn push_start_to_skeleton(
             skeleton,
             path_stack.len(),
             1,
-            start_element_to_string(e, flags).as_str(),
+            &start_element_to_string(e, flags),
             true,
             XmlEventType::Start,
         );
@@ -344,7 +344,7 @@ fn push_end_to_skeleton(
             skeleton,
             path_stack.len(),
             1,
-            end_element_to_string(e).as_str(),
+            &end_element_to_string(e),
             false,
             XmlEventType::End,
         );

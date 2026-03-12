@@ -18,17 +18,18 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Name" => in_object_name_calculation = true,
                 b"repetition" => in_repetition_calculation = true,
                 _ => {}
             },
             Ok(Event::CData(e)) => {
+                let text = xml_utils::cdata_to_string(&e);
                 if in_object_name_calculation {
-                    object_name_calculation.push_str(xml_utils::cdata_to_string(&e).as_str());
+                    object_name_calculation.push_str(&text);
                 }
                 if in_repetition_calculation {
-                    repetition_calculation.push_str(xml_utils::cdata_to_string(&e).as_str());
+                    repetition_calculation.push_str(&text);
                 }
             }
             Ok(Event::End(e)) => {

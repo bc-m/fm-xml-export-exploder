@@ -16,7 +16,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Name" => {
                     only_current_file =
                         get_attribute(&e, "current").unwrap().as_str() == "True";
@@ -37,7 +37,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     if name.is_empty() {
         None
     } else if calculation.is_empty() {
-        Some(name.to_string())
+        Some(name)
     } else if only_current_file {
         Some(format!("{name} [ Name: {calculation} ; Current file ]"))
     } else {

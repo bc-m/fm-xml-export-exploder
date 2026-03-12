@@ -23,7 +23,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Boolean" => {
                     option_name = get_attribute(&e, "type").unwrap_or_default();
-                    state = get_attribute(&e, "value").unwrap() == "True";
+                    state = get_attribute(&e, "value").is_some_and(|v| v == "True");
                     continue;
                 }
                 b"Calculation" => {

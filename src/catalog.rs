@@ -246,8 +246,8 @@ fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool, bool)
 
     for attr in get_attributes(e) {
         match attr.0.as_str() {
-            "id" => current_id = attr.1.to_string(),
-            "name" => current_name = unescape(attr.1.as_str()).unwrap().to_string(),
+            "id" => current_id = attr.1,
+            "name" => current_name = unescape(&attr.1).unwrap().to_string(),
             "isFolder" => match attr.1.as_str() {
                 "True" => is_folder = true,
                 "Marker" => is_marker = true,

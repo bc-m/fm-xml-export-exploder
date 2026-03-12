@@ -23,8 +23,6 @@ pub enum XmlEventType {
     CData,
 }
 
-// pub fn event_type_of(event: &Event) -> XmlEventType {
-
 pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     let mut complete_tag = String::with_capacity(128); // Pre-allocate
     complete_tag.push('<');
@@ -208,14 +206,15 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                 );
             }
             Ok(Event::Text(e)) => {
-                if text_element_to_string(&e, true).trim().is_empty() {
+                let text = text_element_to_string(&e, true);
+                if text.trim().is_empty() {
                     continue;
                 }
                 push_line_to_skeleton(
                     skeleton,
                     base_depth,
                     depth,
-                    text_element_to_string(&e, true).as_str(),
+                    &text,
                     false,
                     XmlEventType::Text,
                 );

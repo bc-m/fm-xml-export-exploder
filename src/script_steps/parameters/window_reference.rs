@@ -51,7 +51,7 @@ impl WindowReference {
                                 LayoutReferenceContainer::from_xml(reader, &e)
                                     .unwrap()
                                     .display()
-                                    .unwrap_or("".to_string()),
+                                    .unwrap_or_default(),
                             );
                             depth -= 1;
                         }

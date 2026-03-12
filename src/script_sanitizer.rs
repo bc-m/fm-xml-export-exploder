@@ -136,8 +136,8 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     // Extract script ID and name from ScriptReference
                     for attr in crate::utils::attributes::get_attributes(&e) {
                         match attr.0.as_str() {
-                            "id" => script_info.id = attr.1.to_string(),
-                            "name" => script_info.name = attr.1.to_string(),
+                            "id" => script_info.id = attr.1,
+                            "name" => script_info.name = attr.1,
                             _ => {}
                         }
                     }
@@ -166,7 +166,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 if in_step {
                     step_info
                         .content
-                        .push_str(start_element_to_string(&e, flags).as_str());
+                        .push_str(&start_element_to_string(&e, flags));
                 }
             }
             Ok(Event::End(e)) => {
@@ -179,7 +179,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 if in_step {
                     step_info
                         .content
-                        .push_str(end_element_to_string(&e).as_str());
+                        .push_str(&end_element_to_string(&e));
                 }
 
                 if depth == 2 && local_name_to_string(e.name().as_ref()) == "Step" {
@@ -211,21 +211,21 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 if in_step {
                     step_info
                         .content
-                        .push_str(cdata_element_to_string(&e).as_str());
+                        .push_str(&cdata_element_to_string(&e));
                 }
             }
             Ok(Event::Comment(e)) | Ok(Event::Text(e)) => {
                 if in_step {
                     step_info
                         .content
-                        .push_str(text_element_to_string(&e, true).as_str());
+                        .push_str(&text_element_to_string(&e, true));
                 }
             }
             Ok(Event::GeneralRef(e)) => {
                 if in_step {
                     step_info
                         .content
-                        .push_str(general_ref_to_string(&e, true).as_str());
+                        .push_str(&general_ref_to_string(&e, true));
                 }
             }
             _ => {}

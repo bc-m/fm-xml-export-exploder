@@ -51,24 +51,16 @@ pub fn get_second_to_last(path: &str) -> Option<&str> {
 }
 
 impl Entity {
-    pub fn _clear(&mut self) {
-        self.id.clear();
-        self.name.clear();
-        self.tag_name.clear();
-        self.element_with_id.clear();
-        self.content.clear();
-    }
-
     fn parse_xml_attributes(&mut self, e: &BytesStart) {
         for attr in get_attributes(e) {
             match attr.0.as_str() {
-                "id" => self.id = attr.1.to_string(),
+                "id" => self.id = attr.1,
                 "name" => {
                     if self.name.is_empty() {
-                        self.name = encode_xml_special_characters(attr.1.to_string())
+                        self.name = encode_xml_special_characters(attr.1)
                     }
                 }
-                "Display" => self.name = encode_xml_special_characters(attr.1.to_string()),
+                "Display" => self.name = encode_xml_special_characters(attr.1),
                 _ => {}
             }
         }
@@ -88,7 +80,7 @@ impl Entity {
 
         if !self.id.is_empty() {
             let element_string = element_to_string(context, start_tag);
-            self.content += element_string.as_str();
+            self.content.push_str(&element_string);
             if !id_path.is_empty() {
                 let second_to_last = get_second_to_last(id_path).unwrap_or("unknown");
                 if second_to_last == self.tag_name {
@@ -98,7 +90,7 @@ impl Entity {
             return;
         }
 
-        self.content += start_element_to_string(start_tag, context.flags).as_str();
+        self.content.push_str(&start_element_to_string(start_tag, context.flags));
         let mut buf = Vec::new();
         loop {
             match context.reader.read_event_into(&mut buf) {
@@ -106,13 +98,13 @@ impl Entity {
                     self.read_xml_element(context, &e, _r_counter + 1, id_path);
                 }
                 Ok(Event::Text(e)) => {
-                    self.content += text_element_to_string(&e, false).as_str();
+                    self.content.push_str(&text_element_to_string(&e, false));
                 }
                 Ok(Event::GeneralRef(e)) => {
-                    self.content += general_ref_to_string(&e, true).as_str();
+                    self.content.push_str(&general_ref_to_string(&e, true));
                 }
                 Ok(Event::End(e)) => {
-                    self.content += end_element_to_string(&e).as_str();
+                    self.content.push_str(&end_element_to_string(&e));
                     break;
                 }
                 Ok(Event::Eof) => break,
@@ -157,7 +149,7 @@ pub fn write_rest_of_element_to_file<R: Read + BufRead>(
             context.skeleton,
             base_depth,
             1,
-            entity.element_with_id.as_str(),
+            &entity.element_with_id,
             false,
             XmlEventType::Other,
         );
@@ -176,7 +168,7 @@ pub fn write_entity_to_file(
     remove_indent_count: usize,
     flags: &Flags,
 ) -> PathBuf {
-    let filename = join_scope_id_and_name(entity.id.as_str(), entity.name.as_str());
+    let filename = join_scope_id_and_name(&entity.id, &entity.name);
     let filename = escape_filename(&filename);
 
     let output_file_path = output_dir.join(format!("{filename}.xml"));
@@ -207,13 +199,13 @@ pub fn build_out_dir_path<R: Read + BufRead>(
             match context.top_level_section {
                 Some(TopLevelSection::Structure) => {
                     let ver = version_string_to_number(saxml_version);
-                    let mut domain_base = if let Some(catalog_type) = &context.catalog_type {
-                        if catalog_type == &CatalogType::ValueList
+                    let mut domain_base = if let Some(catalog_type) = context.catalog_type {
+                        if catalog_type == CatalogType::ValueList
                             && ver >= version_string_to_number("2.2.2.0")
                             && ver < version_string_to_number("2.2.3.4")
                         {
                             "value_list_stubs".to_string()
-                        } else if catalog_type == &CatalogType::CustomFunctions
+                        } else if catalog_type == CatalogType::CustomFunctions
                             && ver >= version_string_to_number("2.2.3.4")
                         {
                             "custom_functions".to_string()
@@ -239,13 +231,10 @@ pub fn build_out_dir_path<R: Read + BufRead>(
         }
     };
 
-    let full_path = context
-        .root_out_dir
-        .clone()
-        .join(match context.flags.output_tree {
-            OutputTree::Db => PathBuf::from(db_name).join(domain),
-            OutputTree::Domain => PathBuf::from(domain).join(db_name),
-        });
+    let full_path = context.root_out_dir.join(match context.flags.output_tree {
+        OutputTree::Db => PathBuf::from(db_name).join(domain),
+        OutputTree::Domain => PathBuf::from(domain).join(db_name),
+    });
     Ok(full_path)
 }
 
@@ -425,16 +414,16 @@ pub fn push_line_to_skeleton(
 
     if matches!(current_event_type, XmlEventType::Start | XmlEventType::Other) {
         if skeleton.previous_event_type == XmlEventType::Start {
-            skeleton.content.push_str(skeleton.previous_line.as_str());
+            skeleton.content.push_str(&skeleton.previous_line);
             skeleton.content.push('\n');
         }
         skeleton.previous_line.clear();
-        skeleton.previous_line.push_str(line.as_str());
+        skeleton.previous_line.push_str(&line);
     } else {
         let mut do_trim = current_event_type == XmlEventType::End
             && skeleton.previous_event_type != XmlEventType::End;
         if !skeleton.previous_line.is_empty() {
-            skeleton.content.push_str(skeleton.previous_line.as_str());
+            skeleton.content.push_str(&skeleton.previous_line);
             skeleton.previous_line.clear();
             if current_event_type == XmlEventType::End
                 && skeleton.previous_event_type == XmlEventType::Other
@@ -446,9 +435,9 @@ pub fn push_line_to_skeleton(
             }
         }
         if do_trim {
-            skeleton.content.push_str(line.as_str().trim());
+            skeleton.content.push_str(line.trim());
         } else {
-            skeleton.content.push_str(line.as_str());
+            skeleton.content.push_str(&line);
         }
         if current_event_type == XmlEventType::End {
             skeleton.content.push('\n');
@@ -461,17 +450,12 @@ pub fn push_line_to_skeleton(
 /// For example, "20.3.1.2" -> 20003001002
 /// "21" -> 21000000000
 pub fn version_string_to_number(version: &str) -> u64 {
-    let parts: Vec<u64> = version
+    let multipliers = [1_000_000_000, 1_000_000, 1_000, 1];
+    version
         .split('.')
-        .map(|s| s.parse::<u64>().unwrap_or(0))
-        .collect();
-
-    let major = parts.first().copied().unwrap_or(0);
-    let minor = parts.get(1).copied().unwrap_or(0);
-    let patch = parts.get(2).copied().unwrap_or(0);
-    let build = parts.get(3).copied().unwrap_or(0);
-
-    major * 1_000_000_000 + minor * 1_000_000 + patch * 1_000 + build
+        .zip(multipliers)
+        .map(|(s, m)| s.parse::<u64>().unwrap_or(0) * m)
+        .sum()
 }
 
 #[cfg(test)]

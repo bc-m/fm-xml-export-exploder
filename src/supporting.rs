@@ -23,7 +23,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
     let out_file_path = out_dir_path.join(format!("{out_file_name}.xml"));
 
     let mut result = String::new();
-    result.push_str(start_element_to_string(start_tag, context.flags).as_str());
+    result.push_str(&start_element_to_string(start_tag, context.flags));
 
     let mut depth = 1; // 1 means DDR_INFO or Metadata
     let base_depth = context.path_stack.len();
@@ -86,20 +86,20 @@ pub fn process_supporting_element<R: Read + BufRead>(
                 }
             }
             Ok(Event::CData(e)) => {
-                result.push_str(cdata_element_to_string(&e).as_str());
+                result.push_str(&cdata_element_to_string(&e));
             }
             Ok(Event::Text(e)) => {
                 let mut text_string = text_element_to_string(&e, true);
                 if in_chunk && !text_string.trim().is_empty() {
                     text_string = text_string.replace('\t', "&#09;");
                 }
-                result.push_str(text_string.as_str());
+                result.push_str(&text_string);
             }
             Ok(Event::GeneralRef(e)) => {
-                result.push_str(general_ref_to_string(&e, true).as_str());
+                result.push_str(&general_ref_to_string(&e, true));
             }
             Ok(Event::Comment(e)) => {
-                result.push_str(text_element_to_string(&e, false).as_str());
+                result.push_str(&text_element_to_string(&e, false));
             }
             _ => {}
         }

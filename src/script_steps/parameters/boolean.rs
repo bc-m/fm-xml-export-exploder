@@ -91,8 +91,8 @@ impl Boolean {
         )
     }
 
-    pub fn bool_to_string(value: bool) -> String {
-        if value { "ON" } else { "OFF" }.to_string()
+    pub fn bool_to_string(value: bool) -> &'static str {
+        if value { "ON" } else { "OFF" }
     }
 
     pub fn display(&self) -> Option<String> {
@@ -108,7 +108,9 @@ impl Boolean {
             Some(name) => self
                 .value
                 .map(|v| format!("{}: {}", name, Self::bool_to_string(v))),
-            None => self.value.map(Self::bool_to_string),
+            None => self
+                .value
+                .map(|v| Self::bool_to_string(v).to_string()),
         }
     }
 }

@@ -23,7 +23,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Boolean" => {
                     if get_attribute(&e, "value").unwrap().as_str() != "True" {
                         continue;
@@ -50,7 +50,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                             && let Some(last_param) = params.last_mut()
                         {
                             last_param.0.clone_from(&last_param.1);
-                            last_param.1 = get_attribute(&e, "name").unwrap().to_string();
+                            last_param.1 = get_attribute(&e, "name").unwrap();
                         }
                         continue;
                     }

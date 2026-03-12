@@ -18,10 +18,10 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"Name" => {
-                    variable_name = get_attribute(&e, "value").unwrap().to_string();
+                    variable_name = get_attribute(&e, "value").unwrap();
                 }
                 b"value" => {
                     value = Calculation::from_xml(&mut reader, &e)

@@ -38,11 +38,11 @@ pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
     let parameters = parameters.join(" ; ");
 
     if id_to_script_step(step_id) == ScriptStep::Comment {
-        if parameters.trim().is_empty() {
-            return Some("".to_string());
+        return if parameters.trim().is_empty() {
+            Some(String::new())
         } else {
-            return Some(format!("# {parameters}"));
-        }
+            Some(format!("# {parameters}"))
+        };
     }
 
     let parameters = parameters.trim();
@@ -57,7 +57,7 @@ pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
             return Some(format!("{name} []"));
         }
 
-        return Some(name.to_string());
+        return Some(name);
     };
 
     Some(format!("{name} [ {parameters} ]"))

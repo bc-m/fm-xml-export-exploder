@@ -38,7 +38,7 @@ impl Style {
     }
 
     pub fn display(&self) -> Option<String> {
-        Some(format!("Style: {}", self.style.clone().unwrap()))
+        self.style.as_ref().map(|s| format!("Style: {s}"))
     }
 }
 

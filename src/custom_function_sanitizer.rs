@@ -102,8 +102,8 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                         saw_custom_function = true;
                         for attr in crate::utils::attributes::get_attributes(&e) {
                             match attr.0.as_str() {
-                                "id" => cf_info.id = attr.1.to_string(),
-                                "name" => cf_info.name = attr.1.to_string(),
+                                "id" => cf_info.id = attr.1,
+                                "name" => cf_info.name = attr.1,
                                 _ => {}
                             }
                         }
@@ -111,8 +111,8 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                     b"CustomFunctionReference" if !saw_custom_function => {
                         for attr in crate::utils::attributes::get_attributes(&e) {
                             match attr.0.as_str() {
-                                "id" => cf_info.id = attr.1.to_string(),
-                                "name" => cf_info.name = attr.1.to_string(),
+                                "id" => cf_info.id = attr.1,
+                                "name" => cf_info.name = attr.1,
                                 _ => {}
                             }
                         }
