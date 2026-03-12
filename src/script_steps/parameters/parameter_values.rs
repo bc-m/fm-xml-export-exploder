@@ -195,37 +195,39 @@ impl ParameterValues {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(self) -> Option<String> {
         match id_to_script_step(self.step_id) {
             ScriptStep::RevertTransaction => {
-                let mut modified_parameters = self.parameters.clone();
-                modified_parameters
-                    .retain(|param| !param.ends_with(": ON") && !param.ends_with(": OFF"));
+                let mut params: Vec<_> = self
+                    .parameters
+                    .into_iter()
+                    .filter(|p| !p.ends_with(": ON") && !p.ends_with(": OFF"))
+                    .collect();
 
-                let mut iter = modified_parameters.iter().rev();
-                if let Some(last) = iter.next()
-                    && last.starts_with("ErrorMessage")
-                    && let Some(second_last) = iter.next()
-                    && !second_last.starts_with("ErrorCode")
+                // Remove trailing ErrorMessage if not preceded by ErrorCode
+                let len = params.len();
+                if len >= 2
+                    && params[len - 1].starts_with("ErrorMessage")
+                    && !params[len - 2].starts_with("ErrorCode")
                 {
-                    modified_parameters.pop();
+                    params.pop();
                 }
 
-                Some(modified_parameters.join(" ; "))
+                Some(params.join(" ; "))
             }
             ScriptStep::SetErrorLogging => {
-                let mut modified_parameters = Vec::new();
+                let mut result = Vec::new();
+                let mut iter = self.parameters.into_iter();
 
-                let mut iter = self.parameters.iter();
                 if let Some(first) = iter.next() {
                     let on_off = if first.ends_with(": ON") { "ON" } else { "OFF" };
-                    modified_parameters.push(on_off.to_string());
+                    result.push(on_off.to_string());
                 }
                 if let Some(second) = iter.next() {
-                    modified_parameters.push(second.clone());
+                    result.push(second);
                 }
 
-                Some(modified_parameters.join(" ; "))
+                Some(result.join(" ; "))
             }
             _ => Some(self.parameters.join(" ; ")),
         }

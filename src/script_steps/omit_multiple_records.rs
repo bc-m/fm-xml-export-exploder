@@ -44,14 +44,11 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     let on_off = if state { "ON" } else { "OFF" };
-
+    let mut params = format!("{option_name}: {on_off}");
     if !calculation.is_empty() {
-        Some(format!(
-            "{name} [ {option_name}: {on_off} ; {calculation} ]"
-        ))
-    } else {
-        Some(format!("{name} [ {option_name}: {on_off} ]"))
+        params.push_str(&format!(" ; {calculation}"));
     }
+    Some(format!("{name} [ {params} ]"))
 }
 
 #[cfg(test)]

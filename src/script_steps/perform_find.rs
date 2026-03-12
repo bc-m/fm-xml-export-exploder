@@ -5,8 +5,7 @@ use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
-
-    let mut restore = false;
+    let mut has_parameters = false;
 
     let mut reader = Reader::from_str(step);
     let mut buf = Vec::new();
@@ -15,11 +14,9 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
-                    name = get_attribute(&e, "name").unwrap();
-                }
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"ParameterValues" => {
-                    restore = true;
+                    has_parameters = true;
                     break;
                 }
                 _ => {}
@@ -30,8 +27,9 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else if restore {
+        return None;
+    }
+    if has_parameters {
         Some(format!("{name} [ ⚠️ RESTORE ⚠️ ]"))
     } else {
         Some(name)

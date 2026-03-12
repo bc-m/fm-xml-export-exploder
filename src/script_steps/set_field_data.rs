@@ -38,10 +38,9 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else {
-        Some(format!("{name} [ {field_reference} ; {calculation} ]"))
+        return None;
     }
+    Some(format!("{name} [ {field_reference} ; {calculation} ]"))
 }
 
 #[cfg(test)]

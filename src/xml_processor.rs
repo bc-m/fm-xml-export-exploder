@@ -173,11 +173,11 @@ fn process_root_element<R: Read + BufRead>(
 ) -> Result<(), Error> {
     match e.name().as_ref() {
         b"FMDynamicTemplate" | b"FMSaveAsXML" => {
+            let file_attr = get_attribute(e, "File").unwrap();
             context.db_name = Some(
-                get_attribute(e, "File")
-                    .unwrap()
+                file_attr
                     .strip_suffix(".fmp12")
-                    .unwrap()
+                    .unwrap_or(&file_attr)
                     .to_string(),
             );
             let saxml_version = get_attribute(e, "version").unwrap();
@@ -230,9 +230,11 @@ fn process_catalog_elements<R: Read + BufRead>(
     };
     context.catalog_type = Some(catalog_type);
 
-    let options_for_value_lists_deprecated = catalog_type == CatalogType::OptionsForValueLists
-        && context.saxml_version_num.unwrap_or(0) >= version_string_to_number("2.2.3.4");
-    if options_for_value_lists_deprecated {
+    let ver = context.saxml_version_num.unwrap_or(0);
+
+    if catalog_type == CatalogType::OptionsForValueLists
+        && ver >= version_string_to_number("2.2.3.4")
+    {
         return Ok(true);
     }
     // Handle special cases that need folder structures
@@ -270,12 +272,11 @@ fn process_catalog_elements<R: Read + BufRead>(
         );
     }
 
-    let custom_functions_catalog_contains_calc = catalog_type == CatalogType::CustomFunctions
-        && context.saxml_version_num.unwrap_or(0) >= version_string_to_number("2.2.3.4");
+    let needs_sanitized_cf = catalog_type == CatalogType::CalcsForCustomFunctions
+        || (catalog_type == CatalogType::CustomFunctions
+            && ver >= version_string_to_number("2.2.3.4"));
 
-    if catalog_type == CatalogType::CalcsForCustomFunctions
-        || custom_functions_catalog_contains_calc
-    {
+    if needs_sanitized_cf {
         let sanitized_cf_dir_path =
             build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
         create_sanitized_custom_functions(&xml_out_dir_path, &sanitized_cf_dir_path);
@@ -305,10 +306,12 @@ fn push_start_to_skeleton(
         return;
     }
 
+    // After pushing, path_stack.len() is depth+1 (1-indexed).
+    // We want skeleton entries for depths 1-3 unconditionally,
+    // and depths 4-5 only under an AddAction/ModifyAction ancestor.
     let should_add = match path_stack.len() {
         1..=3 => true,
-        4 => is_ancestor_action(path_stack, 1),
-        5 => is_ancestor_action(path_stack, 2),
+        4 | 5 => is_action_ancestor(path_stack),
         _ => false,
     };
 
@@ -334,10 +337,12 @@ fn push_end_to_skeleton(
         return;
     }
 
+    // After popping, path_stack.len() is depth (0-indexed from root).
+    // We want skeleton entries for depths 0-2 unconditionally,
+    // and depths 3-4 only under an AddAction/ModifyAction ancestor.
     let should_add = match path_stack.len() {
         0..=2 => true,
-        3 => is_ancestor_action(path_stack, 0),
-        4 => is_ancestor_action(path_stack, 1),
+        3 | 4 => is_action_ancestor(path_stack),
         _ => false,
     };
 
@@ -353,11 +358,10 @@ fn push_end_to_skeleton(
     }
 }
 
-fn is_ancestor_action(path_stack: &[Vec<u8>], offset_from_end: usize) -> bool {
+/// Check whether the path_stack contains an AddAction or ModifyAction ancestor
+/// at position index 2 (the action level in the XML tree).
+fn is_action_ancestor(path_stack: &[Vec<u8>]) -> bool {
     path_stack
-        .iter()
-        .rev()
-        .nth(offset_from_end)
-        .and_then(|v| std::str::from_utf8(v).ok())
-        .is_some_and(|name| matches!(name, "AddAction" | "ModifyAction"))
+        .get(2)
+        .is_some_and(|v| matches!(v.as_slice(), b"AddAction" | b"ModifyAction"))
 }

@@ -44,8 +44,8 @@ impl Target {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.target.clone()
+    pub fn display(self) -> Option<String> {
+        self.target
     }
 }
 

@@ -47,11 +47,11 @@ impl BooleanContainer {
         Ok(item)
     }
 
-    fn bool_to_string(value: bool) -> &'static str {
+    fn on_off(value: bool) -> &'static str {
         if value { "ON" } else { "OFF" }
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(self) -> Option<String> {
         if self.name == "DimParentWindow" {
             return None;
         }
@@ -68,7 +68,7 @@ impl BooleanContainer {
             format!(
                 "{}: {}",
                 self.name.replace("MenuBar", "Menu"),
-                Self::bool_to_string(v)
+                Self::on_off(v)
             )
         })
     }

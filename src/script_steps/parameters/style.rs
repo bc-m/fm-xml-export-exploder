@@ -37,8 +37,8 @@ impl Style {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.style.as_ref().map(|s| format!("Style: {s}"))
+    pub fn display(self) -> Option<String> {
+        self.style.map(|s| format!("Style: {s}"))
     }
 }
 

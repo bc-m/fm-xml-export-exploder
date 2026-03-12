@@ -6,10 +6,16 @@ use crate::utils::xml_utils;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
-    let mut in_object_name_calculation = false;
-    let mut in_repetition_calculation = false;
     let mut object_name_calculation = String::new();
     let mut repetition_calculation = String::new();
+
+    #[derive(PartialEq)]
+    enum Section {
+        None,
+        Name,
+        Repetition,
+    }
+    let mut section = Section::None;
 
     let mut reader = Reader::from_str(step);
     let mut buf = Vec::new();
@@ -19,23 +25,21 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"Name" => in_object_name_calculation = true,
-                b"repetition" => in_repetition_calculation = true,
+                b"Name" => section = Section::Name,
+                b"repetition" => section = Section::Repetition,
                 _ => {}
             },
             Ok(Event::CData(e)) => {
                 let text = xml_utils::cdata_to_string(&e);
-                if in_object_name_calculation {
-                    object_name_calculation.push_str(&text);
-                }
-                if in_repetition_calculation {
-                    repetition_calculation.push_str(&text);
+                match section {
+                    Section::Name => object_name_calculation.push_str(&text),
+                    Section::Repetition => repetition_calculation.push_str(&text),
+                    Section::None => {}
                 }
             }
             Ok(Event::End(e)) => {
-                if e.name().as_ref() == b"Calculation" {
-                    in_object_name_calculation = false;
-                    in_repetition_calculation = false;
+                if matches!(e.name().as_ref(), b"Name" | b"repetition") {
+                    section = Section::None;
                 }
             }
             _ => {}

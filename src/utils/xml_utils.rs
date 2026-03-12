@@ -48,17 +48,24 @@ pub fn cdata_element_to_string(e: &BytesCData) -> String {
 
 pub fn text_element_to_string(e: &BytesText, escape: bool) -> String {
     let text = text_to_string(e);
-    if escape { decode_xml_special_characters(text) } else { text }
+    if escape {
+        decode_xml_special_characters(text)
+    } else {
+        text
+    }
 }
 
 pub fn end_element_to_string(e: &BytesEnd) -> String {
-    let element_name = local_name_to_string(e.name().as_ref());
-    format!("</{element_name}>")
+    format_end_tag(e.name().as_ref())
 }
 
 /// Derive end tag from start tag
 pub fn end_element_to_string_from_start_element(e: &BytesStart) -> String {
-    let element_name = local_name_to_string(e.name().as_ref());
+    format_end_tag(e.name().as_ref())
+}
+
+fn format_end_tag(name: &[u8]) -> String {
+    let element_name = local_name_to_string(name);
     format!("</{element_name}>")
 }
 
@@ -121,7 +128,7 @@ fn decode_xml_special_characters(input: String) -> String {
         .replace('\r', "&#13;")
 }
 
-pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _start_tag: &BytesStart) {
+pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>) {
     let mut depth = 1;
     let mut buf = Vec::new();
     loop {
@@ -143,7 +150,6 @@ pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _start_ta
 
 pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
     reader: &mut Reader<R>,
-    _start_tag: &BytesStart,
     skeleton: &mut Skeleton,
     base_depth: usize,
     flags: &Flags,
@@ -267,19 +273,6 @@ pub fn element_to_string<R: Read + BufRead>(
     content
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_decode_xml_special_characters() {
-        assert_eq!(
-            decode_xml_special_characters("This & that \"test\" <tag>".to_string()),
-            "This &amp; that &quot;test&quot; &lt;tag&gt;"
-        );
-    }
-}
-
 /// Extract content from XML file using multiple XPath-like expressions
 ///
 /// # Arguments
@@ -329,9 +322,7 @@ pub fn extract_values_from_xml_paths(
             .enumerate()
             .filter(|(i, path)| {
                 !resolved_indices.contains(i)
-                    && path
-                        .last()
-                        .is_some_and(|last| !last.starts_with('@'))
+                    && path.last().is_some_and(|last| !last.starts_with('@'))
                     && path.len() == current_path.len()
                     && path.iter().zip(current_path).all(|(a, b)| *a == b)
             })
@@ -390,15 +381,21 @@ pub fn extract_values_from_xml_paths(
 
             Ok(Event::Text(e)) => {
                 for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
-                    let decoded = e.decode().map_err(|err| format!("Failed to decode text: {err}"))?;
-                    results[i].get_or_insert_with(String::new).push_str(&decoded);
+                    let decoded = e
+                        .decode()
+                        .map_err(|err| format!("Failed to decode text: {err}"))?;
+                    results[i]
+                        .get_or_insert_with(String::new)
+                        .push_str(&decoded);
                 }
             }
 
             Ok(Event::GeneralRef(e)) => {
                 let resolved = general_ref_to_string(&e, false);
                 for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
-                    results[i].get_or_insert_with(String::new).push_str(&resolved);
+                    results[i]
+                        .get_or_insert_with(String::new)
+                        .push_str(&resolved);
                 }
             }
 
@@ -418,4 +415,17 @@ pub fn extract_values_from_xml_paths(
     }
 
     Ok(results)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_decode_xml_special_characters() {
+        assert_eq!(
+            decode_xml_special_characters("This & that \"test\" <tag>".to_string()),
+            "This &amp; that &quot;test&quot; &lt;tag&gt;"
+        );
+    }
 }

@@ -82,7 +82,7 @@ impl LayoutReferenceContainer {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(self) -> Option<String> {
         let layout_reference = self
             .layout_reference
             .as_deref()

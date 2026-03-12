@@ -14,7 +14,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 
     let mut auto_increment_initial_value = String::new();
     let mut auto_increment_interval_value = String::new();
-    let mut list_name_to_input_dialog_label = false;
+    let mut in_serial_number_section = false;
 
     let mut reader = Reader::from_str(step);
     let mut buf = Vec::new();
@@ -45,7 +45,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                         .unwrap_or_default();
                 }
                 b"List" => {
-                    if list_name_to_input_dialog_label {
+                    if in_serial_number_section {
                         if get_attribute(&e, "value").unwrap() == "True"
                             && let Some(last_param) = params.last_mut()
                         {
@@ -61,7 +61,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                         }
                         "2" => {
                             params.push((String::new(), get_attribute(&e, "name").unwrap()));
-                            list_name_to_input_dialog_label = true;
+                            in_serial_number_section = true;
                         }
                         "3" => calculation_label = get_attribute(&e, "name").unwrap(),
                         _ => {}
@@ -88,21 +88,21 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else {
-        let formatted_params: Vec<String> = params
-            .iter()
-            .map(|(key, value)| {
-                if key.is_empty() {
-                    value.replace(": ", "").to_string()
-                } else {
-                    format!("{}: {}", key.replace(": ", ""), value)
-                }
-            })
-            .collect();
-
-        Some(format!("{} [ {} ]", name, formatted_params.join(" ; ")))
+        return None;
     }
+
+    let formatted: Vec<String> = params
+        .iter()
+        .map(|(key, value)| {
+            if key.is_empty() {
+                value.replace(": ", "")
+            } else {
+                format!("{}: {}", key.replace(": ", ""), value)
+            }
+        })
+        .collect();
+
+    Some(format!("{} [ {} ]", name, formatted.join(" ; ")))
 }
 
 #[cfg(test)]

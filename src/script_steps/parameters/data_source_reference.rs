@@ -40,10 +40,10 @@ impl DataSourceReference {
         Some(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        let name = self.name.as_ref()?;
+    pub fn display(self) -> Option<String> {
+        let name = self.name?;
         if self.id.as_deref() == Some("0") {
-            Some(name.clone())
+            Some(name)
         } else {
             Some(format!("\"{name}\""))
         }

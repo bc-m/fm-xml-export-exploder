@@ -3,7 +3,7 @@ use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::constants::{
-    CommitRecordRequestsOptions, GoToFieldOptions, RefreshWindowOptions,
+    commit_record_requests, go_to_field, refresh_window,
 };
 use crate::utils::attributes::get_attributes;
 
@@ -75,38 +75,36 @@ impl Boolean {
             (step_id, param_id),
             (
                 ScriptStep::CommitRecordRequests,
-                CommitRecordRequestsOptions::SKIP_DATA_ENTRY_VALIDATION,
+                commit_record_requests::SKIP_DATA_ENTRY_VALIDATION
             ) | (
                 ScriptStep::CommitRecordRequests,
-                CommitRecordRequestsOptions::OVERRIDE_ESS_LOCKING_CONFLICTS,
+                commit_record_requests::OVERRIDE_ESS_LOCKING_CONFLICTS
             ) | (
                 ScriptStep::RefreshWindow,
-                RefreshWindowOptions::FLUSH_CACHED_JOIN_RESULTS,
+                refresh_window::FLUSH_CACHED_JOIN_RESULTS
             ) | (
                 ScriptStep::RefreshWindow,
-                RefreshWindowOptions::FLUSH_CACHED_EXTERNAL_DATA,
-            ) | (ScriptStep::GoToField, GoToFieldOptions::SELECT_PERFORM,)
+                refresh_window::FLUSH_CACHED_EXTERNAL_DATA
+            ) | (ScriptStep::GoToField, go_to_field::SELECT_PERFORM)
         )
     }
 
-    pub fn bool_to_string(value: bool) -> &'static str {
+    pub fn on_off(value: bool) -> &'static str {
         if value { "ON" } else { "OFF" }
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(self) -> Option<String> {
         if self.should_hide_bool() {
             return if self.value.unwrap_or(false) {
-                self.name.clone()
+                self.name
             } else {
                 None
             };
         }
 
-        match &self.name {
-            Some(name) => self
-                .value
-                .map(|v| format!("{}: {}", name, Self::bool_to_string(v))),
-            None => self.value.map(|v| Self::bool_to_string(v).to_string()),
+        match self.name {
+            Some(name) => self.value.map(|v| format!("{}: {}", name, Self::on_off(v))),
+            None => self.value.map(|v| Self::on_off(v).to_string()),
         }
     }
 }

@@ -42,19 +42,6 @@ pub fn process_supporting_element<R: Read + BufRead>(
                 if e.name().as_ref() == b"Chunk" {
                     in_chunk = true;
                 }
-
-                // Add to skeleton
-                if context.flags.lossless && depth == 1 {
-                    push_line_to_skeleton(
-                        context.skeleton,
-                        base_depth,
-                        depth,
-                        &start_tag,
-                        false,
-                        XmlEventType::Start,
-                    );
-                }
-
                 result.push_str(&start_tag);
             }
             Ok(Event::End(e)) => {
@@ -74,7 +61,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
 
                 result.push_str(&end_tag);
 
-                if in_chunk && e.name().as_ref() == b"Chunk" {
+                if e.name().as_ref() == b"Chunk" {
                     in_chunk = false;
                 }
 

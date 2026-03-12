@@ -34,11 +34,10 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else {
-        let on_off = if select { "ON" } else { "OFF" };
-        Some(format!("{name} [ {select_label}: {on_off} ; {position} ]"))
+        return None;
     }
+    let on_off = if select { "ON" } else { "OFF" };
+    Some(format!("{name} [ {select_label}: {on_off} ; {position} ]"))
 }
 
 #[cfg(test)]

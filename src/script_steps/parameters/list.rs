@@ -50,8 +50,8 @@ impl List {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.name.clone()
+    pub fn display(self) -> Option<String> {
+        self.name
     }
 }
 

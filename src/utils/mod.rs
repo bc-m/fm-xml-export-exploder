@@ -13,8 +13,8 @@ use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
     XmlEventType, element_to_string, encode_xml_special_characters, end_element_to_string,
-    extract_values_from_xml_paths, general_ref_to_string, start_element_to_string,
-    text_element_to_string,
+    extract_values_from_xml_paths, general_ref_to_string, local_name_to_string,
+    start_element_to_string, text_element_to_string,
 };
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
 use crate::{OutputTree, Skeleton};
@@ -67,9 +67,7 @@ impl Entity {
         id_path: &str,
     ) {
         self.parse_xml_attributes(start_tag);
-        self.tag_name = std::str::from_utf8(start_tag.name().as_ref())
-            .unwrap_or("unknown")
-            .to_string();
+        self.tag_name = local_name_to_string(start_tag.name().as_ref());
 
         if !self.id.is_empty() {
             let element_string = element_to_string(context, start_tag);
@@ -110,19 +108,13 @@ impl Entity {
 }
 
 /// Represents the folder structure for catalog items that utilize folders, e.g. custom functions, scripts, layouts
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct FolderStructure {
     /// Maps ID to the folder path where it should be placed
     pub item_paths: std::collections::HashMap<String, Vec<String>>,
 }
 
 impl FolderStructure {
-    pub fn new() -> Self {
-        Self {
-            item_paths: std::collections::HashMap::new(),
-        }
-    }
-
     /// Get the folder path for a specific ID
     pub fn get_path_for_id(&self, id: &str) -> &[String] {
         self.item_paths.get(id).map_or(&[], |v| v.as_slice())
@@ -192,32 +184,28 @@ pub fn build_out_dir_path<R: Read + BufRead>(
         None => match context.top_level_section {
             Some(TopLevelSection::Structure) => {
                 let ver = version_string_to_number(saxml_version);
-                let mut domain_base = match context.catalog_type {
-                    Some(catalog_type)
-                        if catalog_type == CatalogType::ValueList
-                            && ver >= version_string_to_number("2.2.2.0")
+                let folder_name = match context.catalog_type {
+                    Some(CatalogType::ValueList)
+                        if ver >= version_string_to_number("2.2.2.0")
                             && ver < version_string_to_number("2.2.3.4") =>
                     {
-                        "value_list_stubs".to_string()
+                        "value_list_stubs"
                     }
-                    Some(catalog_type)
-                        if catalog_type == CatalogType::CustomFunctions
-                            && ver >= version_string_to_number("2.2.3.4") =>
+                    Some(CatalogType::CustomFunctions)
+                        if ver >= version_string_to_number("2.2.3.4") =>
                     {
-                        "custom_functions".to_string()
+                        "custom_functions"
                     }
-                    Some(catalog_type) => catalog_type.get_config().out_folder_name.to_string(),
-                    None => "unknown_catalog".to_string(),
+                    Some(catalog_type) => catalog_type.get_config().out_folder_name,
+                    None => "unknown_catalog",
                 };
-                if let Some(action) = &context.action {
-                    domain_base.push_str(match action {
-                        Action::Add => "",
-                        Action::Modify => "__modify_action",
-                        Action::Replace => "__replace_action",
-                        Action::Delete => "__delete_action",
-                    });
-                }
-                domain_base
+                let action_suffix = match &context.action {
+                    Some(Action::Add) | None => "",
+                    Some(Action::Modify) => "__modify_action",
+                    Some(Action::Replace) => "__replace_action",
+                    Some(Action::Delete) => "__delete_action",
+                };
+                format!("{folder_name}{action_suffix}")
             }
             _ => "_".to_string(),
         },
@@ -321,9 +309,10 @@ pub fn write_xml_file(
     flags: &Flags,
 ) {
     let indent_prefix = "\t".repeat(remove_indent_count);
+    let skip_noise = !flags.parse_all_lines && !flags.lossless;
     let mut file_content = String::new();
     for line in content.lines() {
-        if !(flags.parse_all_lines || flags.lossless) && should_skip_line(line) {
+        if skip_noise && should_skip_line(line) {
             continue;
         }
         file_content.push_str(line.strip_prefix(&indent_prefix).unwrap_or(line));
@@ -347,18 +336,16 @@ pub fn write_text_file(output_file_path: &Path, content: &str) {
 }
 
 fn write_file(output_file_path: &Path, file_content: &str) {
-    match File::create(output_file_path) {
-        Ok(ref mut output_file) => {
-            write!(output_file, "{file_content}").expect("Failed to write to file");
-            output_file.flush().expect("Failed to flush output file");
-        }
-        Err(err) => {
-            eprintln!(
-                "Error creating file {}: {}",
-                output_file_path.display(),
-                err
-            );
-        }
+    let result = File::create(output_file_path).and_then(|mut f| {
+        write!(f, "{file_content}")?;
+        f.flush()
+    });
+    if let Err(err) = result {
+        eprintln!(
+            "Error writing file {}: {}",
+            output_file_path.display(),
+            err
+        );
     }
 }
 
@@ -380,7 +367,10 @@ pub fn push_line_to_skeleton(
     let indent = "\t".repeat(depth);
     let line = format!("{indent}{str_to_push}");
 
-    if matches!(current_event_type, XmlEventType::Start | XmlEventType::Other) {
+    if matches!(
+        current_event_type,
+        XmlEventType::Start | XmlEventType::Other
+    ) {
         if skeleton.previous_event_type == XmlEventType::Start {
             skeleton.content.push_str(&skeleton.previous_line);
             skeleton.content.push('\n');
@@ -388,18 +378,19 @@ pub fn push_line_to_skeleton(
         skeleton.previous_line.clear();
         skeleton.previous_line.push_str(&line);
     } else {
+        // For non-start events (End, Text, CData, Comment), flush any pending line and
+        // determine whether to inline (trim) the current content onto the same line.
+        // This enables compact output like `<tag>value</tag>` on a single line.
         let mut do_trim = current_event_type == XmlEventType::End
             && skeleton.previous_event_type != XmlEventType::End;
         if !skeleton.previous_line.is_empty() {
             skeleton.content.push_str(&skeleton.previous_line);
             skeleton.previous_line.clear();
-            if current_event_type == XmlEventType::End
-                && skeleton.previous_event_type == XmlEventType::Other
-            {
+            // After flushing a pending "Other" line followed by End, emit a newline instead of inlining
+            do_trim = !(current_event_type == XmlEventType::End
+                && skeleton.previous_event_type == XmlEventType::Other);
+            if !do_trim {
                 skeleton.content.push('\n');
-                do_trim = false;
-            } else {
-                do_trim = true;
             }
         }
         if do_trim {
@@ -424,6 +415,81 @@ pub fn version_string_to_number(version: &str) -> u64 {
         .zip(multipliers)
         .map(|(s, m)| s.parse::<u64>().unwrap_or(0) * m)
         .sum()
+}
+
+/// Some catalog items derive their name differently from the standard method
+/// which builds the name using id and name attributes in the catalog item tag.
+pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_name: &[u8]) {
+    let is_structure = path_stack.get(1).is_some_and(|v| v == b"Structure");
+    if !is_structure {
+        return;
+    }
+    let action = path_stack.get(2).map(|v| v.as_slice());
+    let has_structure_add_action = action == Some(b"AddAction");
+    let has_structure_modify_action = action == Some(b"ModifyAction");
+
+    let paths: &[&str] = match tag_name {
+        b"Account" if has_structure_add_action => {
+            &["Account/Authentication/AccountName", "Account/@id"]
+        }
+        b"Authorization" if has_structure_add_action => {
+            &["Authorization/Display", "Authorization/@id"]
+        }
+        b"BinaryData" if has_structure_add_action => &[
+            "BinaryData/LibraryReference/@key",
+            "BinaryData/LibraryReference/@id",
+        ],
+        b"Layout" if has_structure_modify_action => {
+            &["Layout/LayoutReference/@name", "Layout/LayoutReference/@id"]
+        }
+        b"Relationship" if has_structure_add_action => &[
+            "Relationship/LeftTable/TableOccurrenceReference/@name",
+            "Relationship/RightTable/TableOccurrenceReference/@name",
+            "Relationship/@id",
+        ],
+        _ => return,
+    };
+
+    let results = extract_values_from_xml_paths(file_path, paths);
+
+    if let Ok(results) = results
+        && let Some(Some(id)) = results.last()
+    {
+        let names: Vec<&str> = results[..results.len() - 1]
+            .iter()
+            .filter_map(|r| r.as_deref())
+            .collect();
+
+        let name_part = if names.is_empty() {
+            String::new()
+        } else {
+            format!("{} - ", names.join(" - "))
+        };
+
+        let new_name = format!("{name_part}ID {id}.xml");
+        let _ = rename_file(file_path, &new_name);
+    }
+}
+
+/// Move a file to a subfolder if the subfolder path is not empty
+pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<PathBuf, String> {
+    if subfolder_dir_path.as_os_str().is_empty() {
+        return Ok(file_path.to_path_buf());
+    }
+
+    fs::create_dir_all(subfolder_dir_path)
+        .map_err(|e| format!("Failed to create subfolder directory: {e}"))?;
+
+    let filename = file_path
+        .file_name()
+        .ok_or_else(|| "File path has no filename".to_string())?;
+
+    let new_path = subfolder_dir_path.join(filename);
+
+    fs::rename(file_path, &new_path)
+        .map_err(|e| format!("Failed to move file to subfolder: {e}"))?;
+
+    Ok(new_path)
 }
 
 #[cfg(test)]
@@ -585,89 +651,4 @@ mod tests {
         // Clean up
         fs::remove_file(&temp_file).unwrap();
     }
-}
-
-// Some catalog items derive their name differently from the standard method which builds the name using id and name attributes in the catalog item tag
-pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_name: &[u8]) {
-    let action = path_stack
-        .get(1)
-        .filter(|v| v.as_slice() == b"Structure")
-        .and_then(|_| path_stack.get(2))
-        .map(|v| v.as_slice());
-    let has_structure_add_action = action == Some(b"AddAction");
-    let has_structure_modify_action = action == Some(b"ModifyAction");
-
-    let results = match tag_name {
-        b"Account" if has_structure_add_action => {
-            let paths = vec!["Account/Authentication/AccountName", "Account/@id"];
-            Some(extract_values_from_xml_paths(file_path, &paths))
-        }
-        b"Authorization" if has_structure_add_action => {
-            let paths = vec!["Authorization/Display", "Authorization/@id"];
-            Some(extract_values_from_xml_paths(file_path, &paths))
-        }
-        b"BinaryData" if has_structure_add_action => {
-            let paths = vec![
-                "BinaryData/LibraryReference/@key",
-                "BinaryData/LibraryReference/@id",
-            ];
-            Some(extract_values_from_xml_paths(file_path, &paths))
-        }
-        b"Layout" if has_structure_modify_action => {
-            let paths = vec!["Layout/LayoutReference/@name", "Layout/LayoutReference/@id"];
-            Some(extract_values_from_xml_paths(file_path, &paths))
-        }
-        b"Relationship" if has_structure_add_action => {
-            let paths = vec![
-                "Relationship/LeftTable/TableOccurrenceReference/@name",
-                "Relationship/RightTable/TableOccurrenceReference/@name",
-                "Relationship/@id",
-            ];
-            Some(extract_values_from_xml_paths(file_path, &paths))
-        }
-        _ => None,
-    };
-
-    if let Some(Ok(results)) = results
-        && let Some(Some(id)) = results.last()
-    {
-        let names: Vec<&str> = results[..results.len() - 1]
-            .iter()
-            .filter_map(|r| r.as_deref())
-            .collect();
-
-        let name_part = if names.is_empty() {
-            String::new()
-        } else {
-            format!("{} - ", names.join(" - "))
-        };
-
-        let new_name = format!("{name_part}ID {id}.xml");
-        let _ = rename_file(file_path, &new_name);
-    }
-}
-
-/// Move a file to a subfolder if the subfolder path is not empty
-pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<PathBuf, String> {
-    if subfolder_dir_path.to_string_lossy().is_empty() {
-        return Ok(file_path.to_path_buf());
-    }
-
-    // Create the subfolder directory if it doesn't exist
-    fs::create_dir_all(subfolder_dir_path)
-        .map_err(|e| format!("Failed to create subfolder directory: {e}"))?;
-
-    // Get the filename from the original path
-    let filename = file_path
-        .file_name()
-        .ok_or_else(|| "File path has no filename".to_string())?;
-
-    // Create the new path in the subfolder
-    let new_path = subfolder_dir_path.join(filename);
-
-    // Move the file to the new location
-    fs::rename(file_path, &new_path)
-        .map_err(|e| format!("Failed to move file to subfolder: {e}"))?;
-
-    Ok(new_path)
 }

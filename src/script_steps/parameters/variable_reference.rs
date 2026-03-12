@@ -48,13 +48,13 @@ impl VariableReference {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.name.as_ref().map(|name| {
+    pub fn display(self) -> Option<String> {
+        self.name.map(|name| {
             let repetition = self.repetition.unwrap_or(1);
             if repetition != 1 {
                 format!("{name}[{repetition}]")
             } else {
-                name.clone()
+                name
             }
         })
     }

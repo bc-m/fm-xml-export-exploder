@@ -97,7 +97,7 @@ impl WindowReference {
         Some(window_reference)
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(self) -> Option<String> {
         Some(self.parameters.join(" ; "))
     }
 }

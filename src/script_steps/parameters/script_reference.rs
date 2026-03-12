@@ -45,20 +45,20 @@ impl ScriptReference {
         Some(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        let mut parameters = vec![];
+    pub fn display(self) -> Option<String> {
+        let mut parts = Vec::new();
 
-        if let Some(script_name) = &self.script_name {
-            parameters.push(format!("\"{script_name}\""));
+        if let Some(script_name) = self.script_name {
+            parts.push(format!("\"{script_name}\""));
         }
-        if let Some(data_source_name) = &self.data_source_name {
-            parameters.push(format!("from file \"{data_source_name}\""));
+        if let Some(data_source_name) = self.data_source_name {
+            parts.push(format!("from file \"{data_source_name}\""));
         }
 
-        if !parameters.is_empty() {
-            Some(parameters.join(" "))
-        } else {
+        if parts.is_empty() {
             None
+        } else {
+            Some(parts.join(" "))
         }
     }
 }

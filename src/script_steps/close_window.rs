@@ -34,14 +34,17 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else if calculation.is_empty() {
-        Some(name)
-    } else if only_current_file {
-        Some(format!("{name} [ Name: {calculation} ; Current file ]"))
-    } else {
-        Some(format!("{name} [ Name: {calculation} ]"))
+        return None;
     }
+    if calculation.is_empty() {
+        return Some(name);
+    }
+    let suffix = if only_current_file {
+        " ; Current file"
+    } else {
+        ""
+    };
+    Some(format!("{name} [ Name: {calculation}{suffix} ]"))
 }
 
 #[cfg(test)]

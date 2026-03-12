@@ -9,13 +9,12 @@ pub fn sanitize(step: &str) -> bool {
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
-            Ok(Event::Eof) => break,
+            Ok(Event::Eof) => return true,
             Ok(Event::Start(e)) if e.name().as_ref() == b"Step" => {
-                return get_attribute(&e, "enable").unwrap() != "False";
+                return get_attribute(&e, "enable").is_none_or(|v| v != "False");
             }
             _ => {}
         }
         buf.clear()
     }
-    true
 }

@@ -67,11 +67,8 @@ impl Button {
         }
     }
 
-    pub fn display(&self, button_type: &str) -> Option<String> {
-        let label = self.label.as_ref()?;
-        if label.is_empty() {
-            return None;
-        }
+    pub fn display(self, button_type: &str) -> Option<String> {
+        let label = self.label.filter(|l| !l.is_empty())?;
 
         let name = match button_type {
             "Button1" => "Default Button",

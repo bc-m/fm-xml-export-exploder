@@ -10,8 +10,8 @@ use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
-    cdata_element_to_string, end_element_to_string, general_ref_to_string,
-    start_element_to_string, text_element_to_string,
+    cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
+    text_element_to_string,
 };
 
 #[derive(Debug, Default)]
@@ -182,22 +182,14 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     in_step = false;
                     let is_comment = id_to_script_step(step_info.id) == ScriptStep::Comment;
                     if let Some(text) = sanitize(step_info.id, &step_info.content) {
-                        let mut first_line_done = false;
-                        let mut add_indent = 0;
-                        for line in text.split('\r') {
+                        for (i, line) in text.split('\r').enumerate() {
+                            let extra_indent = if i > 0 && !is_comment { 4 } else { 0 };
                             let mut indent =
-                                "\t".repeat(step_info.indent_level_current + add_indent);
-                            if is_comment && first_line_done {
+                                "\t".repeat(step_info.indent_level_current + extra_indent);
+                            if is_comment && i > 0 {
                                 indent.push_str("  ");
                             }
-
                             script_info.text.push_str(&format!("{indent}{line}\n"));
-                            if !first_line_done {
-                                first_line_done = true;
-                                if !is_comment {
-                                    add_indent = 4
-                                };
-                            }
                         }
                     }
                     step_info.content.clear()

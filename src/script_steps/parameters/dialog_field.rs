@@ -69,8 +69,8 @@ impl DialogField {
         item
     }
 
-    pub fn display(&self, field_type: &str) -> Option<String> {
-        let target = self.target.as_ref()?;
+    pub fn display(self, field_type: &str) -> Option<String> {
+        let target = self.target?;
 
         let number = match field_type {
             "Field1" => "1",
@@ -81,7 +81,7 @@ impl DialogField {
 
         let mut parts = vec![format!("Input {number}: {target}")];
 
-        if let Some(label) = &self.label
+        if let Some(label) = self.label
             && !label.is_empty()
         {
             parts.push(format!("Label {number}: {label}"));

@@ -84,8 +84,9 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
 
     let mut reader = Reader::from_str(xml_content);
     let mut buf = Vec::new();
-    let mut path_stack: Vec<Vec<u8>> = Vec::new();
     let mut saw_custom_function = false;
+    let mut in_calculation = false;
+    let mut in_text = false;
 
     loop {
         match reader.read_event_into(&mut buf) {
@@ -94,20 +95,26 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 break;
             }
             Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => {
-                path_stack.push(e.name().as_ref().to_vec());
-
+            Ok(Event::Start(ref e)) => {
                 let extract_attrs = match e.name().as_ref() {
                     b"CustomFunction" => {
                         saw_custom_function = true;
                         true
                     }
                     b"CustomFunctionReference" => !saw_custom_function,
+                    b"Calculation" => {
+                        in_calculation = true;
+                        false
+                    }
+                    b"Text" => {
+                        in_text = true;
+                        false
+                    }
                     _ => false,
                 };
 
                 if extract_attrs {
-                    for attr in crate::utils::attributes::get_attributes(&e) {
+                    for attr in crate::utils::attributes::get_attributes(e) {
                         match attr.0.as_str() {
                             "id" => cf_info.id = attr.1,
                             "name" => cf_info.name = attr.1,
@@ -116,20 +123,17 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                     }
                 }
             }
-            Ok(Event::CData(e)) => {
-                let len = path_stack.len();
-                let is_calculation_text = len >= 2
-                    && path_stack[len - 1] == b"Text"
-                    && path_stack[len - 2] == b"Calculation";
-                if is_calculation_text {
-                    cf_info.text = cdata_to_string(&e);
+            Ok(Event::CData(ref e)) => {
+                if in_text && in_calculation {
+                    cf_info.text = cdata_to_string(e);
                     break;
                 }
             }
-            Ok(Event::End(_)) => {
-                path_stack.pop();
-                if path_stack.is_empty() {
-                    break;
+            Ok(Event::End(ref e)) => {
+                match e.name().as_ref() {
+                    b"Calculation" => in_calculation = false,
+                    b"Text" => in_text = false,
+                    _ => {}
                 }
             }
             _ => {}

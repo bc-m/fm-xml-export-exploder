@@ -43,14 +43,14 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else if repetition.is_empty() {
-        Some(format!("{name} [ {variable_name} ; {value} ]"))
-    } else {
-        Some(format!(
-            "{name} [ {variable_name}[{repetition}] ; {value} ]"
-        ))
+        return None;
     }
+    let var = if repetition.is_empty() {
+        variable_name
+    } else {
+        format!("{variable_name}[{repetition}]")
+    };
+    Some(format!("{name} [ {var} ; {value} ]"))
 }
 
 #[cfg(test)]

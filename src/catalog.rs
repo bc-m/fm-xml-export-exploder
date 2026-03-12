@@ -51,7 +51,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
 
     // We'll build a folder structure for custom functions, layouts, scripts, etc.
     let mut folder_structure_result = if uses_folders {
-        Some(FolderStructure::new())
+        Some(FolderStructure::default())
     } else {
         None
     };
@@ -80,17 +80,16 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
 
                 // Is the current element an ancillary element?
                 // Ancillary elements are elements that are not catalog items or <ObjectList>, e.g., <UUID> or <TagList>
-                let is_ancillary_element = rel_depth == 2
-                    && (
-                        // Siblings of ObjectList wrapper at depth 2
-                        (wrapped_in_object_list && e.name().as_ref() != b"ObjectList")
-                        // When not wrapped in <ObjectList>, siblings of catalog items
-                        || (!wrapped_in_object_list && e.name().as_ref() != catalog_item_name)
-                    );
+                let expected_element = if wrapped_in_object_list {
+                    b"ObjectList".as_ref()
+                } else {
+                    catalog_item_name
+                };
+                let is_ancillary_element = rel_depth == 2 && e.name().as_ref() != expected_element;
 
                 // Handle ancillary elements like <UUID> and <TagList>
                 if is_ancillary_element {
-                    handle_ancillary_element(context, &e, base_depth, rel_depth);
+                    handle_ancillary_element(context, base_depth, rel_depth);
                     rel_depth -= 1;
                 }
 
@@ -118,7 +117,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     }
 
                     if (is_folder || is_marker || is_separator) && !context.flags.lossless {
-                        skip_rest_of_element(context.reader, &e);
+                        skip_rest_of_element(context.reader);
                         rel_depth -= 1;
                         continue;
                     }
@@ -150,7 +149,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 );
                 if let Some(subfolder_dir_path) = subfolder_dir_path
                     && subfolder_dir_path != out_dir_path_base
-                    && !subfolder_dir_path.to_string_lossy().is_empty()
+                    && !subfolder_dir_path.as_os_str().is_empty()
                 {
                     let _ = move_to_subfolder(&file_path, &subfolder_dir_path);
                 }
@@ -215,16 +214,14 @@ fn add_start_tag_to_skeleton<R: Read + BufRead>(
         return;
     }
 
-    let should_add_to_skeleton = rel_depth == 2 || (wrapped_in_object_list && rel_depth == 3);
-    if !should_add_to_skeleton {
+    let should_add = rel_depth == 2 || (wrapped_in_object_list && rel_depth == 3);
+    if !should_add {
         return;
     }
 
-    let is_child = if wrapped_in_object_list {
-        rel_depth >= 2
-    } else {
-        rel_depth == 2
-    };
+    // For wrapped catalogs, both depth 2 (ObjectList) and 3 (item) are children;
+    // for unwrapped, only depth 2 (the item itself) is a child
+    let is_child = wrapped_in_object_list || rel_depth == 2;
     push_line_to_skeleton(
         context.skeleton,
         base_depth,
@@ -264,7 +261,9 @@ fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool, bool)
     (current_id, current_name, is_folder, is_marker, is_separator)
 }
 
-/// Determine the subfolder path for a catalog item
+/// Determine the subfolder path for a catalog item.
+/// Uses `current_path` for catalogs that track their own folder hierarchy (scripts, custom functions, layouts),
+/// or looks up the path via `folder_structure` for dependent catalogs (steps, calcs).
 fn determine_subfolder_path(
     out_dir_path_base: &Path,
     folder_structure: Option<&FolderStructure>,
@@ -273,54 +272,45 @@ fn determine_subfolder_path(
     uses_folders: bool,
     current_path: &[String],
 ) -> Option<PathBuf> {
-    let Some(folder_structure) = folder_structure else {
+    // For catalogs with their own folder tracking
+    if folder_structure.is_none() {
         return if uses_folders && !current_path.is_empty() {
             Some(out_dir_path_base.join(current_path.join("/")))
         } else {
             None
         };
-    };
+    }
 
-    // If a folder structure was provided, use that
+    // For dependent catalogs that use a previously-built folder structure
+    let folder_structure = folder_structure?;
     if id_path.is_empty() {
         return None;
     }
 
-    let results = match extract_values_from_xml_paths(file_path, &[id_path]) {
-        Ok(results) => results,
-        Err(_) => return None,
-    };
-
-    let id = match results.first() {
-        Some(Some(id)) => id,
-        _ => return None,
-    };
-
-    let function_path = folder_structure.get_path_for_id(id);
-    if function_path.is_empty() {
+    let results = extract_values_from_xml_paths(file_path, &[id_path]).ok()?;
+    let id = results.first()?.as_ref()?;
+    let path = folder_structure.get_path_for_id(id);
+    if path.is_empty() {
         return None;
     }
-
-    Some(out_dir_path_base.join(function_path.join("/")))
+    Some(out_dir_path_base.join(path.join("/")))
 }
 
 /// Handle ancillary elements like <UUID> and <TagList>
 fn handle_ancillary_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
-    e: &BytesStart,
     base_depth: usize,
     rel_depth: usize,
 ) {
     if context.flags.lossless {
         push_rest_of_element_to_skeleton(
             context.reader,
-            e,
             context.skeleton,
             base_depth + rel_depth - 1,
             context.flags,
         );
     } else {
-        skip_rest_of_element(context.reader, e);
+        skip_rest_of_element(context.reader);
     }
 }
 

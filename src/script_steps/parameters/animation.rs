@@ -38,9 +38,7 @@ impl Animation {
         Ok(item)
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.value
-            .as_ref()
-            .map(|value| format!("Animation: {value}"))
+    pub fn display(self) -> Option<String> {
+        self.value.map(|value| format!("Animation: {value}"))
     }
 }
