@@ -20,7 +20,7 @@ impl Button {
         let mut in_text = false;
         let mut depth = 1;
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

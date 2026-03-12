@@ -10,7 +10,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut only_current_file = false;
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,

@@ -1,6 +1,6 @@
 use std::fs;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Read, Write};
+use std::io::{BufRead, Read, Write};
 use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
 
@@ -44,12 +44,6 @@ pub struct Entity {
     pub content: String,
 }
 
-/// Get the second to last element of a path
-/// For example, "CustomFunctionCalc/CustomFunctionReference/@id" -> "CustomFunctionReference"
-pub fn get_second_to_last(path: &str) -> Option<&str> {
-    path.rsplit('/').nth(1)
-}
-
 impl Entity {
     fn parse_xml_attributes(&mut self, e: &BytesStart) {
         for attr in get_attributes(e) {
@@ -70,7 +64,6 @@ impl Entity {
         &mut self,
         context: &mut ProcessingContext<'_, R>,
         start_tag: &BytesStart,
-        _r_counter: usize,
         id_path: &str,
     ) {
         self.parse_xml_attributes(start_tag);
@@ -82,7 +75,7 @@ impl Entity {
             let element_string = element_to_string(context, start_tag);
             self.content.push_str(&element_string);
             if !id_path.is_empty() {
-                let second_to_last = get_second_to_last(id_path).unwrap_or("unknown");
+                let second_to_last = id_path.rsplit('/').nth(1).unwrap_or("unknown");
                 if second_to_last == self.tag_name {
                     self.element_with_id = element_string;
                 }
@@ -96,7 +89,7 @@ impl Entity {
         loop {
             match context.reader.read_event_into(&mut buf) {
                 Ok(Event::Start(e)) => {
-                    self.read_xml_element(context, &e, _r_counter + 1, id_path);
+                    self.read_xml_element(context, &e, id_path);
                 }
                 Ok(Event::Text(e)) => {
                     self.content.push_str(&text_element_to_string(&e, false));
@@ -144,7 +137,7 @@ pub fn write_rest_of_element_to_file<R: Read + BufRead>(
     id_path: &str,
 ) -> PathBuf {
     let mut entity = Entity::default();
-    entity.read_xml_element(context, start_tag, 1, id_path);
+    entity.read_xml_element(context, start_tag, id_path);
     if !entity.element_with_id.is_empty() {
         push_line_to_skeleton(
             context.skeleton,
@@ -196,40 +189,38 @@ pub fn build_out_dir_path<R: Read + BufRead>(
     let domain = match qualifier {
         Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
         Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized".to_string(),
-        _ => {
-            match context.top_level_section {
-                Some(TopLevelSection::Structure) => {
-                    let ver = version_string_to_number(saxml_version);
-                    let mut domain_base = if let Some(catalog_type) = context.catalog_type {
+        None => match context.top_level_section {
+            Some(TopLevelSection::Structure) => {
+                let ver = version_string_to_number(saxml_version);
+                let mut domain_base = match context.catalog_type {
+                    Some(catalog_type)
                         if catalog_type == CatalogType::ValueList
                             && ver >= version_string_to_number("2.2.2.0")
-                            && ver < version_string_to_number("2.2.3.4")
-                        {
-                            "value_list_stubs".to_string()
-                        } else if catalog_type == CatalogType::CustomFunctions
-                            && ver >= version_string_to_number("2.2.3.4")
-                        {
-                            "custom_functions".to_string()
-                        } else {
-                            catalog_type.get_config().out_folder_name.to_string()
-                        }
-                    } else {
-                        "unknown_catalog".to_string()
-                    };
-                    // Add action suffix
-                    if let Some(action) = &context.action {
-                        domain_base.push_str(match action {
-                            Action::Add => "",
-                            Action::Modify => "__modify_action",
-                            Action::Replace => "__replace_action",
-                            Action::Delete => "__delete_action",
-                        });
+                            && ver < version_string_to_number("2.2.3.4") =>
+                    {
+                        "value_list_stubs".to_string()
                     }
-                    domain_base
+                    Some(catalog_type)
+                        if catalog_type == CatalogType::CustomFunctions
+                            && ver >= version_string_to_number("2.2.3.4") =>
+                    {
+                        "custom_functions".to_string()
+                    }
+                    Some(catalog_type) => catalog_type.get_config().out_folder_name.to_string(),
+                    None => "unknown_catalog".to_string(),
+                };
+                if let Some(action) = &context.action {
+                    domain_base.push_str(match action {
+                        Action::Add => "",
+                        Action::Modify => "__modify_action",
+                        Action::Replace => "__replace_action",
+                        Action::Delete => "__delete_action",
+                    });
                 }
-                _ => "_".to_string(),
+                domain_base
             }
-        }
+            _ => "_".to_string(),
+        },
     };
 
     let full_path = context.root_out_dir.join(match context.flags.output_tree {
@@ -329,17 +320,13 @@ pub fn write_xml_file(
     remove_indent_count: usize,
     flags: &Flags,
 ) {
+    let indent_prefix = "\t".repeat(remove_indent_count);
     let mut file_content = String::new();
-    let reader = BufReader::new(content.as_bytes());
-    for line in reader.lines() {
-        let line = line.expect("Failed to read line");
-        if !(flags.parse_all_lines || flags.lossless) && should_skip_line(&line) {
+    for line in content.lines() {
+        if !(flags.parse_all_lines || flags.lossless) && should_skip_line(line) {
             continue;
         }
-        file_content.push_str(
-            line.strip_prefix(&"\t".repeat(remove_indent_count))
-                .unwrap_or(&line),
-        );
+        file_content.push_str(line.strip_prefix(&indent_prefix).unwrap_or(line));
         file_content.push('\n');
     }
 
@@ -393,10 +380,7 @@ pub fn push_line_to_skeleton(
     let indent = "\t".repeat(depth);
     let line = format!("{indent}{str_to_push}");
 
-    if matches!(
-        current_event_type,
-        XmlEventType::Start | XmlEventType::Other
-    ) {
+    if matches!(current_event_type, XmlEventType::Start | XmlEventType::Other) {
         if skeleton.previous_event_type == XmlEventType::Start {
             skeleton.content.push_str(&skeleton.previous_line);
             skeleton.content.push('\n');
@@ -644,31 +628,22 @@ pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_na
         _ => None,
     };
 
-    if let Some(Ok(results)) = results {
-        // Get the ID from the last element
-        if let Some(Some(id)) = results.last() {
-            // Join all names (except the last element which is the ID)
-            let names: Vec<_> = results[..results.len() - 1]
-                .iter()
-                .filter_map(|r| r.as_ref())
-                .collect();
+    if let Some(Ok(results)) = results
+        && let Some(Some(id)) = results.last()
+    {
+        let names: Vec<&str> = results[..results.len() - 1]
+            .iter()
+            .filter_map(|r| r.as_deref())
+            .collect();
 
-            let name_part = if names.is_empty() {
-                String::new()
-            } else {
-                format!(
-                    "{} - ",
-                    names
-                        .iter()
-                        .map(|s| s.as_str())
-                        .collect::<Vec<_>>()
-                        .join(" - ")
-                )
-            };
+        let name_part = if names.is_empty() {
+            String::new()
+        } else {
+            format!("{} - ", names.join(" - "))
+        };
 
-            let new_name = format!("{name_part}ID {id}.xml");
-            let _ = rename_file(file_path, &new_name);
-        }
+        let new_name = format!("{name_part}ID {id}.xml");
+        let _ = rename_file(file_path, &new_name);
     }
 }
 

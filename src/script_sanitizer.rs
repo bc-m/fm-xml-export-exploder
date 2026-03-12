@@ -10,7 +10,7 @@ use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
-    cdata_element_to_string, end_element_to_string, general_ref_to_string, local_name_to_string,
+    cdata_element_to_string, end_element_to_string, general_ref_to_string,
     start_element_to_string, text_element_to_string,
 };
 
@@ -139,13 +139,13 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                             _ => {}
                         }
                     }
-                } else if depth == 3 && local_name_to_string(e.name().as_ref()) == "Step" {
+                } else if depth == 3 && e.name().as_ref() == b"Step" {
                     in_step = true;
                     step_info.indent_level_current = step_info.indent_level_next;
                     step_info.id = get_attribute(&e, "id").unwrap().parse::<u32>().unwrap();
 
                     if get_attribute(&e, "enable").is_none_or(|v| v == "True") {
-                        match id_to_script_step(&step_info.id) {
+                        match id_to_script_step(step_info.id) {
                             ScriptStep::IfStart | ScriptStep::LoopStart => {
                                 step_info.indent_level_next += 1
                             }
@@ -178,16 +178,17 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     step_info.content.push_str(&end_element_to_string(&e));
                 }
 
-                if depth == 2 && local_name_to_string(e.name().as_ref()) == "Step" {
-                    let is_comment = id_to_script_step(&step_info.id) == ScriptStep::Comment;
-                    if let Some(text) = sanitize(&step_info.id, &step_info.content) {
+                if depth == 2 && e.name().as_ref() == b"Step" {
+                    in_step = false;
+                    let is_comment = id_to_script_step(step_info.id) == ScriptStep::Comment;
+                    if let Some(text) = sanitize(step_info.id, &step_info.content) {
                         let mut first_line_done = false;
                         let mut add_indent = 0;
                         for line in text.split('\r') {
                             let mut indent =
                                 "\t".repeat(step_info.indent_level_current + add_indent);
                             if is_comment && first_line_done {
-                                indent.push_str(&" ".repeat(2));
+                                indent.push_str("  ");
                             }
 
                             script_info.text.push_str(&format!("{indent}{line}\n"));

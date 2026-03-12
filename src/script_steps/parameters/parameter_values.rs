@@ -26,16 +26,16 @@ pub struct ParameterValues {
 impl ParameterValues {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
-        _e: &BytesStart,
-        step_id: &u32,
+        _: &BytesStart,
+        step_id: u32,
     ) -> Result<ParameterValues, String> {
         let mut depth = 1;
         let mut item = ParameterValues {
-            step_id: *step_id,
+            step_id,
             parameters: Vec::new(),
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -196,7 +196,7 @@ impl ParameterValues {
     }
 
     pub fn display(&self) -> Option<String> {
-        match id_to_script_step(&self.step_id) {
+        match id_to_script_step(self.step_id) {
             ScriptStep::RevertTransaction => {
                 let mut modified_parameters = self.parameters.clone();
                 modified_parameters
@@ -256,9 +256,8 @@ mod tests {
         };
 
         let expected_output = "Pause: OFF".to_string();
-        let script_id: u32 = 0;
         assert_eq!(
-            ParameterValues::from_xml(&mut reader, &element, &script_id)
+            ParameterValues::from_xml(&mut reader, &element, 0)
                 .unwrap()
                 .display()
                 .unwrap(),

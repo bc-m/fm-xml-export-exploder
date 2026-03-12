@@ -10,11 +10,11 @@ pub struct Target {
 }
 
 impl Target {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Result<Target, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Target, String> {
         let mut depth = 1;
-        let mut item = Target { target: None };
+        let mut item = Target::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

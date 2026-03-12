@@ -24,11 +24,9 @@ pub fn first_char_uppercase(s: &str) -> String {
 impl WindowReference {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<WindowReference> {
         let mut depth = 1;
-        let mut window_reference = WindowReference {
-            parameters: Vec::new(),
-        };
+        let mut window_reference = WindowReference::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

@@ -17,10 +17,10 @@ impl BooleanContainer {
         let mut depth = 1;
         let mut item = BooleanContainer {
             name: local_name_to_string(e.name().as_ref()),
-            value: None,
+            ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

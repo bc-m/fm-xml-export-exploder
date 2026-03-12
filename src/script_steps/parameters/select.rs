@@ -11,9 +11,9 @@ pub struct Select {
 impl Select {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Select, String> {
         let mut depth = 1;
-        let mut item = Select { text: None };
+        let mut item = Select::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

@@ -1,7 +1,7 @@
 use crate::script_steps;
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 
-pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
+pub fn sanitize(step_id: u32, step_xml: &str) -> Option<String> {
     let is_enabled = script_steps::is_enabled::sanitize(step_xml);
 
     let step_sanitized = match id_to_script_step(step_id) {

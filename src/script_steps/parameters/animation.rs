@@ -11,9 +11,9 @@ pub struct Animation {
 impl Animation {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Animation, String> {
         let mut depth = 1;
-        let mut item = Animation { value: None };
+        let mut item = Animation::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

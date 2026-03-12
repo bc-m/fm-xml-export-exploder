@@ -10,14 +10,11 @@ pub struct ScriptReference {
 }
 
 impl ScriptReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Option<ScriptReference> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<ScriptReference> {
         let mut depth = 1;
-        let mut item = ScriptReference {
-            data_source_name: None,
-            script_name: None,
-        };
+        let mut item = ScriptReference::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

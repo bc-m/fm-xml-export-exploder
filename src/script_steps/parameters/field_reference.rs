@@ -14,12 +14,11 @@ impl FieldReference {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<FieldReference, String> {
         let mut depth = 1;
         let mut item = FieldReference {
-            table_reference: None,
             field_reference: get_attribute(e, "name"),
-            repetition: None,
+            ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

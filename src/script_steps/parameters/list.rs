@@ -14,12 +14,12 @@ impl List {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
         _: &BytesStart,
-        step_id: &u32,
+        step_id: u32,
     ) -> Result<List, String> {
         let mut depth = 1;
-        let mut item = List { name: None };
+        let mut item = List::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -77,9 +77,8 @@ mod tests {
         };
 
         let expected_output = "_Home".to_string();
-        let script_id: u32 = 136;
         assert_eq!(
-            List::from_xml(&mut reader, &element, &script_id)
+            List::from_xml(&mut reader, &element, 136)
                 .unwrap()
                 .display()
                 .unwrap(),

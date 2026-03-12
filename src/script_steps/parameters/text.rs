@@ -16,7 +16,7 @@ impl Text {
             text: get_attribute(e, "value").map(|text| unescape(&text).unwrap().into_owned()),
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

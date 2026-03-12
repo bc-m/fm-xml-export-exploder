@@ -12,11 +12,9 @@ pub struct Related {
 impl Related {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<Related> {
         let mut depth = 1;
-        let mut item = Related {
-            parameters: Vec::new(),
-        };
+        let mut item = Related::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -45,16 +43,12 @@ impl Related {
                             depth -= 1;
                         }
                         b"Options" => {
-                            if let Some(show_related) = get_attribute(&e, "ShowRelated")
-                                && show_related == "True"
-                            {
-                                item.parameters.push("Show related".to_string())
-                            };
-                            if let Some(match_found_set) = get_attribute(&e, "matchFoundSet")
-                                && match_found_set == "True"
-                            {
-                                item.parameters.push("Match found set".to_string())
-                            };
+                            if get_attribute(&e, "ShowRelated").as_deref() == Some("True") {
+                                item.parameters.push("Show related".to_string());
+                            }
+                            if get_attribute(&e, "matchFoundSet").as_deref() == Some("True") {
+                                item.parameters.push("Match found set".to_string());
+                            }
                         }
                         _ => {}
                     }

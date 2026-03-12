@@ -18,18 +18,16 @@ pub struct Boolean {
 impl Boolean {
     pub fn from_xml(
         reader: &mut Reader<&[u8]>,
-        _e: &BytesStart,
-        _step_id: &u32,
+        _: &BytesStart,
+        step_id: u32,
     ) -> Result<Boolean, String> {
         let mut depth = 1;
         let mut item = Boolean {
-            step_id: *_step_id,
-            id: None,
-            name: None,
-            value: None,
+            step_id,
+            ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -70,7 +68,7 @@ impl Boolean {
     }
 
     fn should_hide_bool(&self) -> bool {
-        let step_id = id_to_script_step(&self.step_id);
+        let step_id = id_to_script_step(self.step_id);
         let param_id = self.id.unwrap_or(0);
 
         matches!(
@@ -135,10 +133,8 @@ mod tests {
         };
 
         let expected_output = "Pause: OFF".to_string();
-        let script_id: u32 = 0;
-
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, &script_id)
+            Boolean::from_xml(&mut reader, &element, 0)
                 .unwrap()
                 .display()
                 .unwrap(),
@@ -161,9 +157,8 @@ mod tests {
         };
 
         let expected_output = "OFF".to_string();
-        let script_id: u32 = 0;
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, &script_id)
+            Boolean::from_xml(&mut reader, &element, 0)
                 .unwrap()
                 .display()
                 .unwrap(),

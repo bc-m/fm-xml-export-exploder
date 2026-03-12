@@ -14,7 +14,7 @@ pub struct LayoutReferenceContainer {
 impl LayoutReferenceContainer {
     pub fn parse_label(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<String, String> {
         let mut label = String::new();
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -41,7 +41,7 @@ impl LayoutReferenceContainer {
             ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,

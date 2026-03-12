@@ -47,11 +47,8 @@ pub fn cdata_element_to_string(e: &BytesCData) -> String {
 }
 
 pub fn text_element_to_string(e: &BytesText, escape: bool) -> String {
-    if escape {
-        decode_xml_special_characters(text_to_string(e))
-    } else {
-        text_to_string(e)
-    }
+    let text = text_to_string(e);
+    if escape { decode_xml_special_characters(text) } else { text }
 }
 
 pub fn end_element_to_string(e: &BytesEnd) -> String {
@@ -66,23 +63,15 @@ pub fn end_element_to_string_from_start_element(e: &BytesStart) -> String {
 }
 
 pub fn local_name_to_string(local_name: &[u8]) -> String {
-    std::str::from_utf8(local_name)
-        .map(|text| text.to_string())
-        .unwrap_or_default()
+    String::from_utf8_lossy(local_name).into_owned()
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
-    // In quick-xml 0.39+, entity references are delivered as separate Event::GeneralRef,
-    // so Event::Text no longer contains entities and we just need to decode
-    e.decode()
-        .map(|decoded| decoded.to_string())
-        .unwrap_or_default()
+    e.decode().map(|s| s.into_owned()).unwrap_or_default()
 }
 
 pub fn cdata_to_string(e: &BytesCData) -> String {
-    std::str::from_utf8(e)
-        .map(|text| text.to_string())
-        .unwrap_or_default()
+    String::from_utf8_lossy(e).into_owned()
 }
 
 /// Convert a general entity reference back to its escaped XML form
@@ -132,16 +121,14 @@ fn decode_xml_special_characters(input: String) -> String {
         .replace('\r', "&#13;")
 }
 
-pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &BytesStart) {
+pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _start_tag: &BytesStart) {
     let mut depth = 1;
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
-            Ok(Event::Start(_)) => {
-                depth += 1;
-            }
+            Ok(Event::Start(_)) => depth += 1,
             Ok(Event::End(_)) => {
                 depth -= 1;
                 if depth == 0 {
@@ -156,13 +143,13 @@ pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &Bytes
 
 pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
     reader: &mut Reader<R>,
-    _: &BytesStart,
+    _start_tag: &BytesStart,
     skeleton: &mut Skeleton,
     base_depth: usize,
     flags: &Flags,
 ) {
     let mut depth = 1;
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
@@ -248,7 +235,7 @@ pub fn element_to_string<R: Read + BufRead>(
 ) -> String {
     let mut content = start_element_to_string(start_tag, context.flags);
     let mut depth = 1;
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match context.reader.read_event_into(&mut buf) {
             Err(_) => continue,
@@ -328,15 +315,34 @@ pub fn extract_values_from_xml_paths(
         .collect();
 
     let mut buf = Vec::new();
-    let mut current_path = Vec::new();
+    let mut current_path: Vec<String> = Vec::new();
     let mut results: Vec<Option<String>> = vec![None; parsed_paths.len()];
     let mut resolved_indices = HashSet::new();
+
+    // Returns indices of unresolved text-element paths that match the current path
+    let matching_text_paths = |parsed_paths: &[Vec<&str>],
+                               current_path: &[String],
+                               resolved_indices: &HashSet<usize>|
+     -> Vec<usize> {
+        parsed_paths
+            .iter()
+            .enumerate()
+            .filter(|(i, path)| {
+                !resolved_indices.contains(i)
+                    && path
+                        .last()
+                        .is_some_and(|last| !last.starts_with('@'))
+                    && path.len() == current_path.len()
+                    && path.iter().zip(current_path).all(|(a, b)| *a == b)
+            })
+            .map(|(i, _)| i)
+            .collect()
+    };
 
     loop {
         match reader.read_event_into(&mut buf) {
             Ok(Event::Start(ref e)) => {
-                let tag = String::from_utf8_lossy(e.name().as_ref()).to_string();
-                current_path.push(tag.clone());
+                current_path.push(String::from_utf8_lossy(e.name().as_ref()).into_owned());
 
                 for (i, path) in parsed_paths.iter().enumerate() {
                     if resolved_indices.contains(&i) {
@@ -346,28 +352,27 @@ pub fn extract_values_from_xml_paths(
                     if let Some(last_segment) = path.last()
                         && last_segment.starts_with('@')
                         && path.len() == current_path.len() + 1
-                    {
-                        let attr_name = &last_segment[1..];
-                        if path[..path.len() - 1]
+                        && path[..path.len() - 1]
                             .iter()
                             .copied()
                             .eq(current_path.iter().map(|s| s.as_str()))
-                            && let Some(attr) = e
-                                .attributes()
-                                .flatten()
-                                .find(|a| a.key.as_ref() == attr_name.as_bytes())
+                    {
+                        let attr_name = &last_segment[1..];
+                        if let Some(attr) = e
+                            .attributes()
+                            .flatten()
+                            .find(|a| a.key.as_ref() == attr_name.as_bytes())
                         {
                             let value = attr
                                 .unescape_value()
                                 .map_err(|e| format!("Unescape error: {e}"))?;
-                            if path.starts_with(&["Relationship", "LeftTable"])
+                            results[i] = if path.starts_with(&["Relationship", "LeftTable"])
                                 || path.starts_with(&["Relationship", "RightTable"])
                             {
-                                results[i] = Some(format!("[{value}]"));
+                                Some(format!("[{value}]"))
                             } else {
-                                results[i] = Some(value.to_string());
-                            }
-
+                                Some(value.to_string())
+                            };
                             resolved_indices.insert(i);
                         }
                     }
@@ -375,17 +380,8 @@ pub fn extract_values_from_xml_paths(
             }
 
             Ok(Event::End(_)) => {
-                // Mark paths as resolved if we collected text content for them
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                        && results[i].is_some()
-                    {
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    if results[i].is_some() {
                         resolved_indices.insert(i);
                     }
                 }
@@ -393,64 +389,23 @@ pub fn extract_values_from_xml_paths(
             }
 
             Ok(Event::Text(e)) => {
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                    {
-                        match e.decode() {
-                            Ok(decoded) => {
-                                // Append to existing result or create new one
-                                let entry = results[i].get_or_insert_with(String::new);
-                                entry.push_str(&decoded);
-                            }
-                            Err(err) => {
-                                return Err(format!("Failed to decode text: {err}"));
-                            }
-                        }
-                    }
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    let decoded = e.decode().map_err(|err| format!("Failed to decode text: {err}"))?;
+                    results[i].get_or_insert_with(String::new).push_str(&decoded);
                 }
             }
 
             Ok(Event::GeneralRef(e)) => {
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                    {
-                        // Resolve the entity reference to its character
-                        let resolved = general_ref_to_string(&e, false);
-                        let entry = results[i].get_or_insert_with(String::new);
-                        entry.push_str(&resolved);
-                    }
+                let resolved = general_ref_to_string(&e, false);
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    results[i].get_or_insert_with(String::new).push_str(&resolved);
                 }
             }
 
             Ok(Event::CData(e)) => {
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                    {
-                        let text = String::from_utf8_lossy(e.as_ref()).to_string();
-                        results[i] = Some(text);
-                        resolved_indices.insert(i);
-                    }
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    results[i] = Some(String::from_utf8_lossy(e.as_ref()).into_owned());
+                    resolved_indices.insert(i);
                 }
             }
 

@@ -117,17 +117,16 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 }
             }
             Ok(Event::CData(e)) => {
-                let is_calculation_text = path_stack
-                    .iter()
-                    .rev()
-                    .zip(&[&b"Text"[..], &b"Calculation"[..]])
-                    .all(|(a, b)| a.as_slice() == *b);
+                let len = path_stack.len();
+                let is_calculation_text = len >= 2
+                    && path_stack[len - 1] == b"Text"
+                    && path_stack[len - 2] == b"Calculation";
                 if is_calculation_text {
                     cf_info.text = cdata_to_string(&e);
                     break;
                 }
             }
-            Ok(Event::End(_e)) => {
+            Ok(Event::End(_)) => {
                 path_stack.pop();
                 if path_stack.is_empty() {
                     break;

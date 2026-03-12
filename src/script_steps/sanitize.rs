@@ -5,12 +5,12 @@ use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::parameter_values::ParameterValues;
 use crate::utils::attributes::get_attribute;
 
-pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
+pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     let mut name = String::new();
     let mut parameters: Vec<String> = Vec::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
@@ -73,7 +73,7 @@ mod tests {
 
         let expected_output = Some("Fenster fixieren".to_string());
         let script_id: u32 = 79;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -91,7 +91,7 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -109,7 +109,7 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -127,7 +127,7 @@ mod tests {
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
         let script_id: u32 = 22;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -151,7 +151,7 @@ mod tests {
         let expected_output =
             Some("Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]".to_string());
         let script_id: u32 = 182;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 }
 
@@ -181,7 +181,7 @@ mod commit_tests {
         let expected_output =
             Some("Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -208,7 +208,7 @@ mod commit_tests {
                 .to_string(),
         );
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -232,7 +232,7 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -256,7 +256,7 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: ON ; Schreiben erzwingen ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -298,7 +298,7 @@ mod commit_tests {
         let step_id: u32 = 122;
         let expected_output =
             Some("Neues Fenster [ Style: Dokument ; Layout: <Originallayout> ]".to_string());
-        assert_eq!(from_xml(&step_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -384,6 +384,6 @@ mod commit_tests {
 
         let step_id: u32 = 122;
         let expected_output = Some(r#"Neues Fenster [ Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]"#.to_string());
-        assert_eq!(from_xml(&step_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
     }
 }
