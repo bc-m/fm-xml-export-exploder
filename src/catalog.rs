@@ -14,9 +14,8 @@ use crate::utils::xml_utils::{
 };
 use crate::utils::{
     FolderStructure, build_out_dir_path, create_dir, move_to_subfolder,
-    write_rest_of_element_to_file,
+    push_line_to_skeleton, rename_file_if_necessary, write_rest_of_element_to_file,
 };
-use crate::utils::{push_line_to_skeleton, rename_file_if_necessary};
 use crate::xml_processor::ProcessingContext;
 
 /// Parse and explode a generic catalog, handling both wrapped and unwrapped formats
@@ -219,15 +218,14 @@ fn add_start_tag_to_skeleton<R: Read + BufRead>(
         return;
     }
 
-    // For wrapped catalogs, both depth 2 (ObjectList) and 3 (item) are children;
-    // for unwrapped, only depth 2 (the item itself) is a child
-    let is_child = wrapped_in_object_list || rel_depth == 2;
+    // When should_add is true, the element is always a child of the catalog:
+    // depth 2 is always a child, and depth 3 only passes when wrapped_in_object_list
     push_line_to_skeleton(
         context.skeleton,
         base_depth,
         rel_depth,
         start_tag,
-        is_child,
+        true,
         XmlEventType::Start,
     );
 }
@@ -272,17 +270,16 @@ fn determine_subfolder_path(
     uses_folders: bool,
     current_path: &[String],
 ) -> Option<PathBuf> {
-    // For catalogs with their own folder tracking
-    if folder_structure.is_none() {
+    let Some(folder_structure) = folder_structure else {
+        // For catalogs with their own folder tracking
         return if uses_folders && !current_path.is_empty() {
             Some(out_dir_path_base.join(current_path.join("/")))
         } else {
             None
         };
-    }
+    };
 
     // For dependent catalogs that use a previously-built folder structure
-    let folder_structure = folder_structure?;
     if id_path.is_empty() {
         return None;
     }

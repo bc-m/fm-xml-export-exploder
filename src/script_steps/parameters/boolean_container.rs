@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::utils::xml_utils::{local_name_to_string, text_to_string};
 
 #[derive(Debug, Default)]
@@ -47,10 +48,6 @@ impl BooleanContainer {
         Ok(item)
     }
 
-    fn on_off(value: bool) -> &'static str {
-        if value { "ON" } else { "OFF" }
-    }
-
     pub fn display(self) -> Option<String> {
         if self.name == "DimParentWindow" {
             return None;
@@ -59,7 +56,7 @@ impl BooleanContainer {
         if matches!(
             self.name.as_str(),
             "Close" | "Minimize" | "Maximize" | "Resize" | "MenuBar" | "Toolbar"
-        ) && self.value.unwrap()
+        ) && self.value == Some(true)
         {
             return None;
         }
@@ -68,7 +65,7 @@ impl BooleanContainer {
             format!(
                 "{}: {}",
                 self.name.replace("MenuBar", "Menu"),
-                Self::on_off(v)
+                Boolean::on_off(v)
             )
         })
     }

@@ -16,10 +16,9 @@ use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
 use crate::utils::xml_utils::{XmlEventType, end_element_to_string, start_element_to_string};
 use crate::utils::{
-    FolderStructure, build_out_dir_path, delete_output_directory, version_string_to_number,
-    write_xml_file,
+    FolderStructure, build_out_dir_path, create_dir, delete_output_directory,
+    push_line_to_skeleton, version_string_to_number, write_xml_file,
 };
-use crate::utils::{create_dir, push_line_to_skeleton};
 
 pub enum TopLevelSection {
     Structure,

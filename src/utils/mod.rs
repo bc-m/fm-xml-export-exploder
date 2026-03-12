@@ -4,7 +4,7 @@ use std::io::{BufRead, Read, Write};
 use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
 
-use anyhow::{Error, Result};
+use anyhow::Error;
 use quick_xml::events::{BytesStart, Event};
 use regex::Regex;
 
@@ -337,7 +337,7 @@ pub fn write_text_file(output_file_path: &Path, content: &str) {
 
 fn write_file(output_file_path: &Path, file_content: &str) {
     let result = File::create(output_file_path).and_then(|mut f| {
-        write!(f, "{file_content}")?;
+        f.write_all(file_content.as_bytes())?;
         f.flush()
     });
     if let Err(err) = result {
