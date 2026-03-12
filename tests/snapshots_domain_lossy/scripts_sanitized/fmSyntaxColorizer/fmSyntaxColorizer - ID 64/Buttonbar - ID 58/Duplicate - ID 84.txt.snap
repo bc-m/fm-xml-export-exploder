@@ -18,11 +18,11 @@ Sonst, wenn [ Hole( Fenstermodus ) ≠ 0 ]
 	
 Sonst, wenn [ _IsLayoutTableName ( _Palette::__ID ) ]
 	# Duplicate Palette
-	Script ausführen [ Aus Liste ; "Duplicate Palette" ]
+	Script ausführen [ "Duplicate Palette" ; Specified: Aus Liste ; Parameter: ]
 	
 Sonst, wenn [ _IsLayoutTableName ( _Syntax::__ID ) ]
 	# Duplicate Command
-	Script ausführen [ Aus Liste ; "Duplicate Syntax" ]
+	Script ausführen [ "Duplicate Syntax" ; Specified: Aus Liste ; Parameter: ]
 	
 Sonst
 	# Duplicate record

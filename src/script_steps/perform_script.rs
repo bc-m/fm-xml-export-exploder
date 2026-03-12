@@ -1,5 +1,5 @@
-use quick_xml::Reader;
 use quick_xml::events::Event;
+use quick_xml::Reader;
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::{get_attribute, parse_unescaped_attribute};
@@ -45,30 +45,37 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear();
+        buf.clear()
     }
 
     if name.is_empty() {
         return None;
     }
 
-    let mut parts = vec![script_reference_type];
+    let mut parameters = Vec::new();
 
-    if script_reference_type_id == "2" {
-        parts.push(script_reference);
+    if script_reference_type_id.as_str() == "2" {
+        // By name: "Specified: By name" first, then the expression
+        parameters.push(format!("Specified: {script_reference_type}"));
+        parameters.push(script_reference.to_string());
     } else {
-        parts.push(format!("\"{script_reference}\""));
+        // From list: quoted script name first, then "Specified: From list"
+        parameters.push(format!("\"{script_reference}\""));
+        parameters.push(format!("Specified: {script_reference_type}"));
     }
 
-    if let Some(ds) = data_source_reference {
-        parts.push(format!("File: \"{ds}\""));
+    if let Some(ref data_source_value) = data_source_reference {
+        parameters.push(format!("File: \"{data_source_value}\""));
     }
 
-    if !calculation.is_empty() {
-        parts.push(format!("Parameter: {calculation}"));
+    // Always include Parameter:, even when empty
+    if calculation.is_empty() {
+        parameters.push("Parameter:".to_string());
+    } else {
+        parameters.push(format!("Parameter: {calculation}"));
     }
 
-    Some(format!("{name} [ {} ]", parts.join(" ; ")))
+    Some(format!("{name} [ {} ]", parameters.join(" ; ")))
 }
 
 #[cfg(test)]
@@ -94,7 +101,7 @@ mod tests {
         "#;
 
         let expected_output =
-            Some(r#"Script ausführen [ Aus Liste ; "Do something" ]"#.to_string());
+            Some(r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; Parameter: ]"#.to_string());
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
@@ -128,7 +135,7 @@ mod tests {
             </Step>
         "#;
 
-        let expected_output = Some(r#"Script ausführen [ Aus Liste ; "Do something" ; Parameter: cf_ScriptparameterSetzen ( "CurlId" ; $curl ) ]"#.to_string());
+        let expected_output = Some(r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; Parameter: cf_ScriptparameterSetzen ( "CurlId" ; $curl ) ]"#.to_string());
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
@@ -169,7 +176,7 @@ mod tests {
         "#;
 
         let expected_output =
-            Some(r#"Script ausführen [ Nach Name ; "Do something" ; Parameter: 123 ]"#.to_string());
+            Some(r#"Script ausführen [ Specified: Nach Name ; "Do something" ; Parameter: 123 ]"#.to_string());
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
@@ -202,9 +209,94 @@ mod tests {
         "#;
 
         let expected_output = Some(
-            r#"Script ausführen [ Aus Liste ; "Do something" ; File: "App_Utils" ; Parameter: 123 ]"#
+            r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; File: "App_Utils" ; Parameter: 123 ]"#
                 .to_string(),
         );
+        assert_eq!(sanitize(xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_from_list_no_parameter() {
+        let xml = r#"
+            <Step hash="F103CFD9962DBB42A45BF539369561B8" index="0" id="1" name="Perform Script" enable="True">
+                <Options>64</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="List">
+                        <List name="From list" value="1">
+                            <ScriptReference id="1" name="Perform Script" UUID="12F7E3B3-EDB6-43F7-BDB2-9A83B45CDA2B"></ScriptReference>
+                        </List>
+                    </Parameter>
+                    <Parameter type="Parameter">
+                        <Parameter></Parameter>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output =
+            Some(r#"Perform Script [ "Perform Script" ; Specified: From list ; Parameter: ]"#.to_string());
+        assert_eq!(sanitize(xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_from_list_with_parameter() {
+        let xml = r#"
+            <Step hash="FEB8AED7ED23D45418A2532C4FDC82BB" index="1" id="1" name="Perform Script" enable="True">
+                <Options>16448</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="List">
+                        <List name="From list" value="1">
+                            <ScriptReference id="1" name="Perform Script" UUID="12F7E3B3-EDB6-43F7-BDB2-9A83B45CDA2B"></ScriptReference>
+                        </List>
+                    </Parameter>
+                    <Parameter type="Parameter">
+                        <Parameter>
+                            <Calculation datatype="1" position="0">
+                                <Calculation>
+                                    <Text><![CDATA["parameter"]]></Text>
+                                </Calculation>
+                            </Calculation>
+                        </Parameter>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output =
+            Some(r#"Perform Script [ "Perform Script" ; Specified: From list ; Parameter: "parameter" ]"#.to_string());
+        assert_eq!(sanitize(xml.trim()), expected_output);
+    }
+
+    #[test]
+    fn test_by_name_with_parameter_english() {
+        let xml = r#"
+            <Step hash="89DD98FBBA64206AFA1A3B82F42F0F36" index="2" id="1" name="Perform Script" enable="True">
+                <Options>33572928</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="List">
+                        <List name="By name" value="2">
+                            <Calculation datatype="1" position="2">
+                                <Calculation>
+                                    <Text><![CDATA["script name"]]></Text>
+                                </Calculation>
+                            </Calculation>
+                        </List>
+                    </Parameter>
+                    <Parameter type="Parameter">
+                        <Parameter>
+                            <Calculation datatype="1" position="0">
+                                <Calculation>
+                                    <Text><![CDATA["parameter"]]></Text>
+                                </Calculation>
+                            </Calculation>
+                        </Parameter>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output =
+            Some(r#"Perform Script [ Specified: By name ; "script name" ; Parameter: "parameter" ]"#.to_string());
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }

@@ -25,7 +25,7 @@ Variable setzen [ $$my.token_expires ; FMS__fmserver::token_expires ]
 Wenn [ IstLeer ( $$my.token )
 				ODER
 				Hole ( SystemZeitstempel ) > $$my.token_expires ]
-	Script ausführen [ Aus Liste ; "Request Access Token" ]
+	Script ausführen [ "Request Access Token" ; Specified: Aus Liste ; Parameter: ]
 Ende (wenn)
 
 

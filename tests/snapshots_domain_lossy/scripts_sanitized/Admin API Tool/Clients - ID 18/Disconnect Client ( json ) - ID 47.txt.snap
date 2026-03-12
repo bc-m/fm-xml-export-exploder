@@ -43,7 +43,7 @@ Sonst, wenn [ $_param = "selectMsg" ]
 	Gehe zu Feld [ Auswählen/Ausführen ; FMS__fmserver::zz_msg_g ]
 	
 Sonst, wenn [ $_param = "disconnect" ]
-	Script ausführen [ Aus Liste ; "Set Config" ]
+	Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 	Variable setzen [ $endpoint ; "/clients/" & $$this.id_client & "?messageText=" & LiesAlsURLVerschlüsselt ( FMS__fmserver::zz_msg_g ) & "&graceTime=" & FMS__fmserver::zz_gracetime_g ]
 	Variable setzen [ $curloptions ; " --request DELETE" &
 					" --header \"Authorization: Bearer " & $$my.token & "\"" &
@@ -57,9 +57,9 @@ Sonst, wenn [ $_param = "disconnect" ]
 	#  PROCESS
 	# -------------------------------------------------------------
 	Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-	Script ausführen [ Aus Liste ; "Handle response" ]
+	Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 	# update database listing
-	Script ausführen [ Aus Liste ; "List Clients" ]
+	Script ausführen [ "List Clients" ; Specified: Aus Liste ; Parameter: ]
 	
 Ende (wenn)
 

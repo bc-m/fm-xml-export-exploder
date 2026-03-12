@@ -99,7 +99,7 @@ Feldwert setzen [ _Home::_gHomeScreenInfo ; $actionPastTense & " " & $MBS_Result
 
 Wenn [ $object = "LineNumbers" ]
 	# Make sure color is correctly set
-	Script ausführen [ Aus Liste ; "Set LineNumber Color" ]
+	Script ausführen [ "Set LineNumber Color" ; Specified: Aus Liste ; Parameter: ]
 Ende (wenn)
 
-Script ausführen [ Aus Liste ; "MBS_SetSyntaxColoringEnabledStatus" ]
+Script ausführen [ "MBS_SetSyntaxColoringEnabledStatus" ; Specified: Aus Liste ; Parameter: ]

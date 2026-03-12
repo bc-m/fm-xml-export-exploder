@@ -23,7 +23,7 @@ Wenn [ _Palette::DisableVariableChecking ]
 	# Disable VariableChecking for this palette
 	Variable setzen [ $MBS ; MBS( "SyntaxColoring.CheckVariableDeclaration.Disable" ) ]
 Sonst, wenn [ _Home::_gVariableCheckingEnabled ]
-	Script ausführen [ Aus Liste ; "MBS_SyntaxColoring( Action )" ; Parameter: "CheckVariableDeclaration.Enable" ]
+	Script ausführen [ "MBS_SyntaxColoring( Action )" ; Specified: Aus Liste ; Parameter: "CheckVariableDeclaration.Enable" ]
 Ende (wenn)
 
 
@@ -56,7 +56,7 @@ Gehe zu Layout [ Layout: "Home" ; Animation: Ohne ]
 Ersetze alle Feldwerte [ Home.Syntax_ALL::_ID_Palette ; Durch Berechnung ersetzen: $Palette_ID ]
 
 
-Script ausführen [ Aus Liste ; "Set Home Screen Info to content of ( Object )" ; Parameter: "switchingDarkLight" ]
+Script ausführen [ "Set Home Screen Info to content of ( Object )" ; Specified: Aus Liste ; Parameter: "switchingDarkLight" ]
 
 
 # Return to the original layout

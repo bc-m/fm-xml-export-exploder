@@ -28,7 +28,7 @@ Ende (wenn)
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Script ausführen [ Aus Liste ; "Set Config" ]
+Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $endpoint ; "/schedules/" & $_id ]
 Variable setzen [ $json ; JSONSetElement ( "" ; 
 				  [ "status"; "RUNNING" ; JSONString ]
@@ -40,12 +40,12 @@ Variable setzen [ $curloptions ; " --request PATCH" &
 				" --dump-header $$my.headers" ]
 
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 Variable setzen [ $this.id ; FMS__fmserver::ID ]
 Fenster fixieren
 
-Script ausführen [ Aus Liste ; "List Schedules" ]
+Script ausführen [ "List Schedules" ; Specified: Aus Liste ; Parameter: ]
 
 # -------------------------------------------------------------
 #  CLEAN UP

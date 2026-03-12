@@ -10,23 +10,23 @@ AnwenderAbbruchZulassen setzen [ OFF ]
 Fehleraufzeichnung setzen [ ON ]
 
 # Check MBS
-Script ausführen [ Aus Liste ; "MBS Plugin check" ]
+Script ausführen [ "MBS Plugin check" ; Specified: Aus Liste ; Parameter: ]
 
 # Clean up, Reset colors
-Script ausführen [ Aus Liste ; "MBS_SyntaxColoring( Action )" ; Parameter: "Clear" & "¶" & 1 ]
-Script ausführen [ Aus Liste ; "Set LineNumber Color" ]
-Script ausführen [ Aus Liste ; "MBS_SyntaxColoring( Action )" ; Parameter: "Enable" ]
+Script ausführen [ "MBS_SyntaxColoring( Action )" ; Specified: Aus Liste ; Parameter: "Clear" & "¶" & 1 ]
+Script ausführen [ "Set LineNumber Color" ; Specified: Aus Liste ; Parameter: ]
+Script ausführen [ "MBS_SyntaxColoring( Action )" ; Specified: Aus Liste ; Parameter: "Enable" ]
 
 # Select the necessary entries
-// Script ausführen [ Aus Liste ; "Show All Syntax" ]
-Script ausführen [ Aus Liste ; "Go to Syntax for given FM-Version" ]
+// Script ausführen [ "Show All Syntax" ; Specified: Aus Liste ; Parameter: ]
+Script ausführen [ "Go to Syntax for given FM-Version" ; Specified: Aus Liste ; Parameter: ]
 
 # Apply colors from the current palette
 Wenn [ Syntax.Palette_Active::_k1 = 1 ]
-	Script ausführen [ Aus Liste ; "Change Palette" ]
+	Script ausführen [ "Change Palette" ; Specified: Aus Liste ; Parameter: ]
 Sonst
-	Script ausführen [ Aus Liste ; "Show Default Palette" ]
-	Script ausführen [ Aus Liste ; "Apply Palette" ]
+	Script ausführen [ "Show Default Palette" ; Specified: Aus Liste ; Parameter: ]
+	Script ausführen [ "Apply Palette" ; Specified: Aus Liste ; Parameter: ]
 Ende (wenn)
 
 Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
