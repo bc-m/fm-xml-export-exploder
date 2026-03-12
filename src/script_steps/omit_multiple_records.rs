@@ -18,28 +18,12 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    match get_attribute(&e, "name") {
-                        None => {}
-                        Some(value) => {
-                            name = value.to_string();
-                        }
-                    }
+                    name = get_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
                 b"Boolean" => {
-                    if let Some(name) = get_attribute(&e, "type") {
-                        option_name = name.to_string();
-                    }
-
-                    match get_attribute(&e, "value").unwrap().as_str() {
-                        "True" => {
-                            state = true;
-                        }
-                        "False" => {
-                            state = false;
-                        }
-                        _ => {}
-                    }
+                    option_name = get_attribute(&e, "type").unwrap_or_default();
+                    state = get_attribute(&e, "value").unwrap() == "True";
                     continue;
                 }
                 b"Calculation" => {

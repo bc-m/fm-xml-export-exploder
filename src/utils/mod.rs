@@ -2,6 +2,7 @@ use std::fs;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::path::{Path, PathBuf};
+use std::sync::LazyLock;
 
 use anyhow::{Error, Result};
 use quick_xml::events::{BytesStart, Event};
@@ -46,8 +47,7 @@ pub struct Entity {
 /// Get the second to last element of a path
 /// For example, "CustomFunctionCalc/CustomFunctionReference/@id" -> "CustomFunctionReference"
 pub fn get_second_to_last(path: &str) -> Option<&str> {
-    let parts: Vec<&str> = path.split('/').collect();
-    parts.get(parts.len().saturating_sub(2)).copied()
+    path.rsplit('/').nth(1)
 }
 
 impl Entity {
@@ -139,7 +139,7 @@ impl FolderStructure {
 
     /// Get the folder path for a specific ID
     pub fn get_path_for_id(&self, id: &str) -> &[String] {
-        self.item_paths.get(id).map(|v| v.as_slice()).unwrap_or(&[])
+        self.item_paths.get(id).map_or(&[], |v| v.as_slice())
     }
 }
 
@@ -218,7 +218,7 @@ pub fn build_out_dir_path<R: Read + BufRead>(
                         {
                             "custom_functions".to_string()
                         } else {
-                            catalog_type.get_config().out_folder_name.clone()
+                            catalog_type.get_config().out_folder_name.to_string()
                         }
                     } else {
                         "unknown_catalog".to_string()
@@ -376,10 +376,12 @@ pub fn write_xml_file(
     write_file(output_file_path, &file_content);
 }
 
+static LINE_SPLIT_REGEX: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"\r\n|\n\r|\r|\n").unwrap());
+
 pub fn write_text_file(output_file_path: &Path, content: &str) {
     let mut file_content = String::new();
-    let regex = Regex::new(r"\r\n|\n\r|\r|\n").unwrap();
-    for line in regex.split(content) {
+    for line in LINE_SPLIT_REGEX.split(content) {
         file_content.push_str(line);
         file_content.push('\n');
     }
@@ -421,7 +423,7 @@ pub fn push_line_to_skeleton(
     let indent = "\t".repeat(depth);
     let line = format!("{indent}{str_to_push}");
 
-    if current_event_type == XmlEventType::Start || current_event_type == XmlEventType::Other {
+    if matches!(current_event_type, XmlEventType::Start | XmlEventType::Other) {
         if skeleton.previous_event_type == XmlEventType::Start {
             skeleton.content.push_str(skeleton.previous_line.as_str());
             skeleton.content.push('\n');

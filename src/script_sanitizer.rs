@@ -184,25 +184,22 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
 
                 if depth == 2 && local_name_to_string(e.name().as_ref()) == "Step" {
                     let is_comment = id_to_script_step(&step_info.id) == ScriptStep::Comment;
-                    match sanitize(&step_info.id, &step_info.content) {
-                        None => {}
-                        Some(text) => {
-                            let mut first_line_done = false;
-                            let mut add_indent = 0;
-                            for line in text.split('\r') {
-                                let mut indent =
-                                    "\t".repeat(step_info.indent_level_current + add_indent);
-                                if is_comment && first_line_done {
-                                    indent.push_str(&" ".repeat(2));
-                                }
+                    if let Some(text) = sanitize(&step_info.id, &step_info.content) {
+                        let mut first_line_done = false;
+                        let mut add_indent = 0;
+                        for line in text.split('\r') {
+                            let mut indent =
+                                "\t".repeat(step_info.indent_level_current + add_indent);
+                            if is_comment && first_line_done {
+                                indent.push_str(&" ".repeat(2));
+                            }
 
-                                script_info.text.push_str(&format!("{indent}{line}\n"));
-                                if !first_line_done {
-                                    first_line_done = true;
-                                    if !is_comment {
-                                        add_indent = 4
-                                    };
-                                }
+                            script_info.text.push_str(&format!("{indent}{line}\n"));
+                            if !first_line_done {
+                                first_line_done = true;
+                                if !is_comment {
+                                    add_indent = 4
+                                };
                             }
                         }
                     }

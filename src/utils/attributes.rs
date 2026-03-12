@@ -23,10 +23,11 @@ pub fn get_attributes(e: &BytesStart) -> Vec<(String, String)> {
 }
 
 pub fn get_attribute(element: &BytesStart, attribute_name: &str) -> Option<String> {
-    get_attributes(element)
-        .into_iter()
-        .find(|(key, _)| key == attribute_name)
-        .map(|(_, value)| value)
+    element
+        .attributes()
+        .filter_map(|attr| attr.ok())
+        .find(|attr| attr.key.as_ref() == attribute_name.as_bytes())
+        .map(|attr| value_to_string(attr.value))
 }
 
 #[cfg(test)]

@@ -1,8 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::{get_attribute, get_attributes};
+use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]
 pub struct FieldReference {
@@ -32,35 +31,11 @@ impl FieldReference {
                             item.field_reference = get_attribute(&e, "name");
                         }
                         b"TableOccurrenceReference" => {
-                            for attr in get_attributes(&e) {
-                                if attr.0 == "name" {
-                                    match e.name().as_ref() {
-                                        b"TableOccurrenceReference" => {
-                                            item.table_reference = Option::from(attr.1);
-                                        }
-                                        b"Calculation" => {
-                                            item.field_reference = Option::from(
-                                                Calculation::from_xml(reader, &e)
-                                                    .unwrap()
-                                                    .display()
-                                                    .unwrap(),
-                                            );
-                                            depth -= 1;
-                                        }
-                                        _ => {}
-                                    }
-                                }
-                            }
+                            item.table_reference = get_attribute(&e, "name");
                         }
                         b"repetition" => {
-                            match get_attribute(&e, "value") {
-                                None => {}
-                                Some(repetition) => {
-                                    if let Ok(repetition) = repetition.parse::<i32>() {
-                                        item.repetition = Some(repetition)
-                                    }
-                                }
-                            };
+                            item.repetition = get_attribute(&e, "value")
+                                .and_then(|v| v.parse::<i32>().ok());
                         }
                         _ => {}
                     }
@@ -80,36 +55,20 @@ impl FieldReference {
     }
 
     pub fn display(&self) -> Option<String> {
-        let table_reference: String = match &self.table_reference {
-            None => return Some("🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string()),
-            Some(reference) => reference.clone(),
+        let Some(table_reference) = &self.table_reference else {
+            return Some("🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string());
         };
 
         let field_reference = match &self.field_reference {
-            None => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string(),
-            Some(reference) => {
-                if reference.is_empty() {
-                    "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string()
-                } else {
-                    reference.clone()
-                }
-            }
+            Some(reference) if !reference.is_empty() => reference.as_str(),
+            _ => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨",
         };
 
         let repetition = self.repetition.unwrap_or(1);
         if repetition != 1 {
-            Some(format!(
-                "{}::{}[{}]",
-                table_reference.as_str(),
-                field_reference.as_str(),
-                repetition
-            ))
+            Some(format!("{table_reference}::{field_reference}[{repetition}]"))
         } else {
-            Some(format!(
-                "{}::{}",
-                table_reference.as_str(),
-                field_reference.as_str()
-            ))
+            Some(format!("{table_reference}::{field_reference}"))
         }
     }
 }

@@ -42,20 +42,13 @@ impl ParameterValues {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if depth != 2 {
+                    if depth != 2 || e.name().as_ref() != b"Parameter" {
                         continue;
                     }
 
-                    if e.name().as_ref() != b"Parameter" {
+                    let Some(parameter_type) = get_attribute(&e, "type") else {
                         continue;
-                    }
-
-                    let parameter_type = get_attribute(&e, "type");
-                    if parameter_type.is_none() {
-                        continue;
-                    }
-
-                    let parameter_type = parameter_type.unwrap();
+                    };
                     match parameter_type.as_str() {
                         "Animation" => {
                             if let Ok(param_value) = Animation::from_xml(reader, &e)

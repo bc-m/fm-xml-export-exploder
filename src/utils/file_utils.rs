@@ -20,15 +20,15 @@ pub fn join_scope_id_and_name(scope_id: &str, scope_name: &str) -> String {
 
 /// Escape filename by replacing special characters with underscores
 pub fn escape_filename(filename: &str) -> String {
-    let escaped_filename = filename
+    filename
         .chars()
         .map(|c| match c {
             '/' | '\\' | ':' | '*' | '?' | '"' | '<' | '>' | '|' | '{' => '_',
             _ => c,
         })
-        .collect::<String>();
-
-    escaped_filename.trim().to_string()
+        .collect::<String>()
+        .trim()
+        .to_string()
 }
 
 pub fn should_skip_line(line: &str) -> bool {

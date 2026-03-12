@@ -11,10 +11,7 @@ pub struct DataSourceReference {
 impl DataSourceReference {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Option<DataSourceReference> {
         let mut depth = 1;
-        let mut item = DataSourceReference {
-            id: None,
-            name: None,
-        };
+        let mut item = DataSourceReference::default();
 
         let mut buf: Vec<u8> = Vec::new();
         loop {
@@ -43,14 +40,11 @@ impl DataSourceReference {
     }
 
     pub fn display(&self) -> Option<String> {
-        if let Some(name) = &self.name {
-            if self.id == Some(String::from("0")) {
-                Some(name.clone())
-            } else {
-                Some(format!("\"{name}\""))
-            }
+        let name = self.name.as_ref()?;
+        if self.id.as_deref() == Some("0") {
+            Some(name.clone())
         } else {
-            None
+            Some(format!("\"{name}\""))
         }
     }
 }

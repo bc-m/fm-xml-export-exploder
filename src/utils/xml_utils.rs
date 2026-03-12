@@ -31,14 +31,8 @@ pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     complete_tag.push_str(&local_name_to_string(e.name().as_ref()));
 
     for attr in get_attributes(e) {
-        // de-noise
-        if !flags.lossless {
-            match attr.0.as_str() {
-                "nextvalue" | "UUID" | "index" => {
-                    continue;
-                }
-                _ => {}
-            }
+        if !flags.lossless && matches!(attr.0.as_str(), "nextvalue" | "UUID" | "index") {
+            continue;
         }
         complete_tag.push(' ');
         complete_tag.push_str(&attr.0);
@@ -51,12 +45,7 @@ pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
 }
 
 pub fn cdata_element_to_string(e: &BytesCData) -> String {
-    let mut content = String::new();
-    content.push_str("<![CDATA[");
-    content.push_str(cdata_to_string(e).as_str());
-    content.push_str("]]>");
-
-    content
+    format!("<![CDATA[{}]]>", cdata_to_string(e))
 }
 
 pub fn text_element_to_string(e: &BytesText, escape: bool) -> String {

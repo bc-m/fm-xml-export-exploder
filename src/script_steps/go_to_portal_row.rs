@@ -21,15 +21,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Boolean" => {
                     select_label = get_attribute(&e, "type").unwrap().to_string();
-                    match get_attribute(&e, "value").unwrap().as_str() {
-                        "True" => {
-                            select = true;
-                        }
-                        "False" => {
-                            select = false;
-                        }
-                        _ => {}
-                    };
+                    select = get_attribute(&e, "value").unwrap() == "True";
                 }
                 b"List" => {
                     position = get_attribute(&e, "name").unwrap().to_string();

@@ -84,7 +84,6 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
 
     let mut reader = Reader::from_str(xml_content);
     let mut buf = Vec::new();
-    let mut depth = 0;
     let mut path_stack: Vec<Vec<u8>> = Vec::new();
     let mut saw_custom_function = false;
 
@@ -96,7 +95,6 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
             }
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
-                depth += 1;
                 path_stack.push(e.name().as_ref().to_vec());
 
                 match e.name().as_ref() {
@@ -134,10 +132,8 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 }
             }
             Ok(Event::End(_e)) => {
-                depth -= 1;
                 path_stack.pop();
-
-                if depth == 0 {
+                if path_stack.is_empty() {
                     break;
                 }
             }

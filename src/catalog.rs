@@ -30,7 +30,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
         return Err(anyhow::anyhow!("❌ Catalog type not specified"));
     };
     let catalog_config = catalog_type.get_config();
-    let catalog_item_name = catalog_config.catalog_item_name.clone();
+    let catalog_item_name = catalog_config.catalog_item_name;
     let wrapped_in_object_list = catalog_config.wrapped_in_object_list;
     let uses_folders = catalog_config.uses_folders;
     let id_path = &catalog_config.id_path;
@@ -138,7 +138,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     base_depth + rel_depth - 1,
                     id_path,
                 );
-                rename_file_if_necessary(&file_path, context.path_stack, &catalog_item_name);
+                rename_file_if_necessary(&file_path, context.path_stack, catalog_item_name);
 
                 // Move to subfolder if necessary
                 let subfolder_dir_path = determine_subfolder_path(
