@@ -23,7 +23,7 @@ Sonst
 		
 		Wenn [ $$WindowModePrevious = $C_FIND_MODE UND Hole ( Fenstermodus ) = $C_BROWSE_MODE UND NICHT Hole ( LetzteFehlerNr ) UND Hole ( Sortierstatus ) <> 1 ]
 			# FIND -> BROWSE
-			Script ausführen [ Aus Liste ; "Sort Syntax" ]
+			Script ausführen [ "Sort Syntax" ; Specified: Aus Liste ; Parameter: ]
 		Ende (wenn)
 		
 	Ende (wenn)

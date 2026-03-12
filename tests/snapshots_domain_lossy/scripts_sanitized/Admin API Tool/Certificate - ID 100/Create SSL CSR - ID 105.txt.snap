@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 #  SET-UP
 # -------------------------------------------------------------
-Script ausführen [ Aus Liste ; "Set Config" ]
+Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $endpoint ; "/server/certificate/csr" ]
 Variable setzen [ $json ; JSONSetElement ( ""
 				 ; [ "subject"; Base64EncodeRFC ( "4648" ; FMS__fmserver::ssl_subject ) ; JSONString ]
@@ -32,7 +32,7 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 #  PROCESS
 # -------------------------------------------------------------
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 Variable setzen [ $my.certpath ; JSONGetElement ( $$my.result ; "response.csrFilePath" ) ]
 Wenn [ NICHT IstLeer ( $my.certpath ) UND ZeichenLinks ( $my.certpath ; 1 ) ≠ "?" ]

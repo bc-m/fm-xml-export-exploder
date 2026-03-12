@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 #  SET-UP
 # -------------------------------------------------------------
-Script ausführen [ Aus Liste ; "Set Config" ]
+Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $endpoint ; "/plugins/DbsPlugins" ]
 // Variable setzen [ $json ; JSONSetElement ( ""
 				 ; [ "usePlugins"; FMS__fmserver::usePlugins ; JSONString ]
@@ -37,9 +37,9 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 #  PROCESS
 # -------------------------------------------------------------
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
-Script ausführen [ Aus Liste ; "Get DBS Plug-in Configuration" ]
+Script ausführen [ "Get DBS Plug-in Configuration" ; Specified: Aus Liste ; Parameter: ]
 # -------------------------------------------------------------
 #  CLEAN UP
 # -------------------------------------------------------------

@@ -21,7 +21,7 @@ Variable setzen [ $$Midimised ; "" ]
 
 
 Wenn [ Hole( LayoutName ) <> $homeLayoutName ]
-	Script ausführen [ Aus Liste ; "Go to Home Layout" ]
+	Script ausführen [ "Go to Home Layout" ; Specified: Aus Liste ; Parameter: ]
 Sonst, wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $MasterDBWindowName ) ) ]
 	Fenster aktivieren [ Name: $MasterDBWindowName ]
 	Datei schließen [ Aktuelle Datei ]
@@ -29,6 +29,6 @@ Sonst, wenn [ NICHT IstLeer( FilterElemente( Fensternamen ; $ToolsWindowName ) )
 	Fenster aktivieren [ Name: $ToolsWindowName ]
 	Datei schließen [ Aktuelle Datei ]
 Sonst
-	Script ausführen [ Aus Liste ; "Logo open URL" ]
+	Script ausführen [ "Logo open URL" ; Specified: Aus Liste ; Parameter: ]
 	Datei schließen [ Aktuelle Datei ]
 Ende (wenn)

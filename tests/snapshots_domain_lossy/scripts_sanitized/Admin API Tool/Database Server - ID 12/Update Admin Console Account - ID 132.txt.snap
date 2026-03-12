@@ -52,7 +52,7 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 #  PROCESS
 # -------------------------------------------------------------
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Wenn [ JSONGetElement ( $$my.result ; "messages[0].code" ) = "0" ]

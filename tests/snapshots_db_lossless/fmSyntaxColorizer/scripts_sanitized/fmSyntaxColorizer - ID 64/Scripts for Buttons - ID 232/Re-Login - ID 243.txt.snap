@@ -6,5 +6,5 @@ expression: output_content
 
 Erneut anmelden [ Mit Dialog: ON ; Name: Falls ( Hole ( Kontoname ) = "admin" ; "user" ; "admin" ) ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
 Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
-	Script ausführen [ Aus Liste ; "Install Menus" ]
+	Script ausführen [ "Install Menus" ; Specified: Aus Liste ; Parameter: ]
 Ende (wenn)

@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 #  SET-UP
 # -------------------------------------------------------------
-// Script ausführen [ Aus Liste ; "Set Config FMDAPI" ]
+// Script ausführen [ "Set Config FMDAPI" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $$server ; "https://" & FMS__fmserver::server_address & "/fmi/data/vLatest" ]
 Variable setzen [ $endpoint ; "/databases" ]
 Variable setzen [ $curloptions ; " --request GET" &
