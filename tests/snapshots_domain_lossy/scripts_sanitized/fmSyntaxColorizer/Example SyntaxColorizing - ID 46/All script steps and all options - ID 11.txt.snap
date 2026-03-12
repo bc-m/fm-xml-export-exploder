@@ -89,13 +89,13 @@ Transaktion bestätigen
 Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
 
-Script ausführen [ Aus Liste ; "All script steps" ]
-Script ausführen [ Aus Liste ; "" ]
-Script ausführen [ Aus Liste ; "All script steps" ; Parameter: $ScriptParameter ]
-Script ausführen [ Aus Liste ; "" ; File: "<Unbekannt>" ]
+Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: ]
+Script ausführen [ "" ; Specified: Aus Liste ; Parameter: ]
+Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: $ScriptParameter ]
+Script ausführen [ "" ; Specified: Aus Liste ; File: "<Unbekannt>" ; Parameter: ]
 # Two error cases for fmSyntaxColorizer:
-Script ausführen [ Aus Liste ; "All script steps" ; Parameter: /* commented out */ ]
-Script ausführen [ Aus Liste ; "All script steps" ; Parameter: "/* not only commented out, but also stringified! */" ]
+Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: /* commented out */ ]
+Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: "/* not only commented out, but also stringified! */" ]
 
 Script auf Server ausführen [ Aus Liste ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Auf Beendigung warten: ON ]
 Script auf Server ausführen [ Aus Liste ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Auf Beendigung warten: OFF ]

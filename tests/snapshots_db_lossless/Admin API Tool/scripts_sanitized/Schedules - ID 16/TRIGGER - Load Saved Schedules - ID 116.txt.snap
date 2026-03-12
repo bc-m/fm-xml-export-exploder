@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 #  SET-UP
 # -------------------------------------------------------------
-// Script ausführen [ Aus Liste ; "Set Config" ]
+// Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 // Variable setzen [ $endpoint ; "/schedules" ]
 // Variable setzen [ $curloptions ; " --request GET" &
 				" --header \"Authorization: Bearer " & $$my.token & "\"" &
@@ -25,7 +25,7 @@ Variable setzen [ $error ; 0 ]
 #  PROCESS
 # -------------------------------------------------------------
 // Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-// Script ausführen [ Aus Liste ; "Handle response" ]
+// Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 Variable setzen [ $$my.result ; JSONSetElement ( "" ; "response.schedules" ; FMS_SCHS__schedules_saved_selected::json ; JSONArray ) ]
 

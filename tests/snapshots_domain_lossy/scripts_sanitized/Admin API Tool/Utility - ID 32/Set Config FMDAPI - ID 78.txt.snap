@@ -25,7 +25,7 @@ Variable setzen [ $$my.token_expires ; FMS__fmserver::dapi_token_expires ]
 Wenn [ IstLeer ( $$my.token )
 				ODER
 				Hole ( SystemZeitstempel ) > $$my.token_expires ]
-	Script ausführen [ Aus Liste ; "Request Data API Access Token" ]
+	Script ausführen [ "Request Data API Access Token" ; Specified: Aus Liste ; Parameter: ]
 Ende (wenn)
 
 

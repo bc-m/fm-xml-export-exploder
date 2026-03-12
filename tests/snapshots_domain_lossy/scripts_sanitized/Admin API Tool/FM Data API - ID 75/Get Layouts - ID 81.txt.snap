@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 #  SET-UP
 # -------------------------------------------------------------
-Script ausführen [ Aus Liste ; "Set Config FMDAPI" ]
+Script ausführen [ "Set Config FMDAPI" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $endpoint ; "/databases/" & FMS__fmserver::dapi_filename & "/layouts" ]
 Variable setzen [ $curloptions ; " --request GET" &
 				" --header \"Content-Type: application/json\"" &
@@ -25,7 +25,7 @@ Variable setzen [ $curloptions ; " --request GET" &
 #  PROCESS
 # -------------------------------------------------------------
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response DAPI" ]
+Script ausführen [ "Handle response DAPI" ; Specified: Aus Liste ; Parameter: ]
 
 Wenn [ Hole ( ScriptErgebnis ) = "1" ]
 	Feldwert setzen [ FMS__fmserver::dapi_layouts ; "" ]

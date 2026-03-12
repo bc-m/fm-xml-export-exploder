@@ -10,13 +10,13 @@ expression: output_content
 Variable setzen [ $HardSort ; _IsKeyALT UND _IsKeySHIFT UND _IsKeyCTRL ]
 
 Wenn [ _IsKeyALT ]
-	Script ausführen [ Aus Liste ; "Renumber ALL Syntax" ]
+	Script ausführen [ "Renumber ALL Syntax" ; Specified: Aus Liste ; Parameter: ]
 	
 	Wenn [ $HardSort ]
-		Script ausführen [ Aus Liste ; "Hard sort Syntax" ]
+		Script ausführen [ "Hard sort Syntax" ; Specified: Aus Liste ; Parameter: ]
 	Ende (wenn)
 	
 Sonst
-	Script ausführen [ Aus Liste ; "Sort Syntax" ]
+	Script ausführen [ "Sort Syntax" ; Specified: Aus Liste ; Parameter: ]
 	
 Ende (wenn)

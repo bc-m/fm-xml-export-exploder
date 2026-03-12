@@ -30,7 +30,7 @@ Ende (wenn)
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Script ausführen [ Aus Liste ; "Set Config" ]
+Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $endpoint ; "/plugins/available" ]
 Variable setzen [ $json ; JSONSetElement ( "" 
 				 ; [ "id"; $_id ; JSONString ]
@@ -44,12 +44,12 @@ Variable setzen [ $curloptions ; " --request POST" &
 				" --dump-header $$my.headers" ]
 
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 Variable setzen [ $this.id ; FMS__fmserver::ID ]
 Fenster fixieren
 
-Script ausführen [ Aus Liste ; "Get Plug-in List" ]
+Script ausführen [ "Get Plug-in List" ; Specified: Aus Liste ; Parameter: ]
 
 # -------------------------------------------------------------
 #  CLEAN UP

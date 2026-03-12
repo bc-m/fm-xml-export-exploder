@@ -74,7 +74,7 @@ Wenn [ NICHT _Palette::__ID ]
 Ende (wenn)
 
 # FIXME: This broke after restructuring
-Script ausführen [ Aus Liste ; "" ; File: "<Unbekannt>" ]
+Script ausführen [ "" ; Specified: Aus Liste ; File: "<Unbekannt>" ; Parameter: ]
 
 # # Duplicate Palette
 
@@ -159,11 +159,11 @@ Wenn [ /*NICHT Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest = 1*/ ]
 	Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::IsMarked ; Durch Berechnung ersetzen: /* Import_Fremddatei.Konvertierungen_Abfrage::Kennz Rest */ ]
 Ende (wenn)
 
-Script ausführen [ Aus Liste ; "Apply Palette" ]
+Script ausführen [ "Apply Palette" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $Error ; Hole ( ScriptParameter ) ]
 # Note the wrong get function here ^^^^ (denoted by the 'normal' color)
 
-Script ausführen [ Aus Liste ; "Apply Palette" ]
+Script ausführen [ "Apply Palette" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $Error ; Hole ( ScriptErgebnis ) ]
 # You should see an affirmative color ^^^^, when getting the Script Result
 
