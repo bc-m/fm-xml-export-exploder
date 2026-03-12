@@ -108,9 +108,7 @@ impl Boolean {
             Some(name) => self
                 .value
                 .map(|v| format!("{}: {}", name, Self::bool_to_string(v))),
-            None => self
-                .value
-                .map(|v| Self::bool_to_string(v).to_string()),
+            None => self.value.map(|v| Self::bool_to_string(v).to_string()),
         }
     }
 }

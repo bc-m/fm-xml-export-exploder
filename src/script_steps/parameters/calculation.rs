@@ -49,9 +49,6 @@ impl Calculation {
     }
 
     pub fn display(&self) -> Option<String> {
-        self.calculation
-            .as_ref()
-            .filter(|s| !s.is_empty())
-            .cloned()
+        self.calculation.as_ref().filter(|s| !s.is_empty()).cloned()
     }
 }

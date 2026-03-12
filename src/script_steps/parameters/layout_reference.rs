@@ -50,8 +50,7 @@ impl LayoutReferenceContainer {
                     depth += 1;
                     match e.name().as_ref() {
                         b"LayoutReferenceContainer" => {
-                            item.reference_type =
-                                get_attribute(&e, "value").unwrap_or_default();
+                            item.reference_type = get_attribute(&e, "value").unwrap_or_default();
                         }
                         b"LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name");

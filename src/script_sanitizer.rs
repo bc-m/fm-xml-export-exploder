@@ -175,9 +175,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 }
 
                 if in_step {
-                    step_info
-                        .content
-                        .push_str(&end_element_to_string(&e));
+                    step_info.content.push_str(&end_element_to_string(&e));
                 }
 
                 if depth == 2 && local_name_to_string(e.name().as_ref()) == "Step" {
@@ -206,9 +204,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
             }
             Ok(Event::CData(e)) => {
                 if in_step {
-                    step_info
-                        .content
-                        .push_str(&cdata_element_to_string(&e));
+                    step_info.content.push_str(&cdata_element_to_string(&e));
                 }
             }
             Ok(Event::Comment(e)) | Ok(Event::Text(e)) => {
@@ -220,9 +216,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
             }
             Ok(Event::GeneralRef(e)) => {
                 if in_step {
-                    step_info
-                        .content
-                        .push_str(&general_ref_to_string(&e, true));
+                    step_info.content.push_str(&general_ref_to_string(&e, true));
                 }
             }
             _ => {}

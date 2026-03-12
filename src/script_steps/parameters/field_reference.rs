@@ -34,8 +34,8 @@ impl FieldReference {
                             item.table_reference = get_attribute(&e, "name");
                         }
                         b"repetition" => {
-                            item.repetition = get_attribute(&e, "value")
-                                .and_then(|v| v.parse::<i32>().ok());
+                            item.repetition =
+                                get_attribute(&e, "value").and_then(|v| v.parse::<i32>().ok());
                         }
                         _ => {}
                     }
@@ -66,7 +66,9 @@ impl FieldReference {
 
         let repetition = self.repetition.unwrap_or(1);
         if repetition != 1 {
-            Some(format!("{table_reference}::{field_reference}[{repetition}]"))
+            Some(format!(
+                "{table_reference}::{field_reference}[{repetition}]"
+            ))
         } else {
             Some(format!("{table_reference}::{field_reference}"))
         }

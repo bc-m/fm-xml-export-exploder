@@ -90,7 +90,8 @@ impl Entity {
             return;
         }
 
-        self.content.push_str(&start_element_to_string(start_tag, context.flags));
+        self.content
+            .push_str(&start_element_to_string(start_tag, context.flags));
         let mut buf = Vec::new();
         loop {
             match context.reader.read_event_into(&mut buf) {
@@ -392,7 +393,10 @@ pub fn push_line_to_skeleton(
     let indent = "\t".repeat(depth);
     let line = format!("{indent}{str_to_push}");
 
-    if matches!(current_event_type, XmlEventType::Start | XmlEventType::Other) {
+    if matches!(
+        current_event_type,
+        XmlEventType::Start | XmlEventType::Other
+    ) {
         if skeleton.previous_event_type == XmlEventType::Start {
             skeleton.content.push_str(&skeleton.previous_line);
             skeleton.content.push('\n');
