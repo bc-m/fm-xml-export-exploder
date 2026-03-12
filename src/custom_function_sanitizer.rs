@@ -97,27 +97,23 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
             Ok(Event::Start(e)) => {
                 path_stack.push(e.name().as_ref().to_vec());
 
-                match e.name().as_ref() {
+                let extract_attrs = match e.name().as_ref() {
                     b"CustomFunction" => {
                         saw_custom_function = true;
-                        for attr in crate::utils::attributes::get_attributes(&e) {
-                            match attr.0.as_str() {
-                                "id" => cf_info.id = attr.1,
-                                "name" => cf_info.name = attr.1,
-                                _ => {}
-                            }
+                        true
+                    }
+                    b"CustomFunctionReference" => !saw_custom_function,
+                    _ => false,
+                };
+
+                if extract_attrs {
+                    for attr in crate::utils::attributes::get_attributes(&e) {
+                        match attr.0.as_str() {
+                            "id" => cf_info.id = attr.1,
+                            "name" => cf_info.name = attr.1,
+                            _ => {}
                         }
                     }
-                    b"CustomFunctionReference" if !saw_custom_function => {
-                        for attr in crate::utils::attributes::get_attributes(&e) {
-                            match attr.0.as_str() {
-                                "id" => cf_info.id = attr.1,
-                                "name" => cf_info.name = attr.1,
-                                _ => {}
-                            }
-                        }
-                    }
-                    _ => {}
                 }
             }
             Ok(Event::CData(e)) => {

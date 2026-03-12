@@ -130,9 +130,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
             Ok(Event::Start(e)) => {
                 depth += 1;
 
-                if depth == 1 && e.name().as_ref() == b"Script" {
-                    // Script element - we'll get ID and name from ScriptReference
-                } else if depth == 2 && e.name().as_ref() == b"ScriptReference" {
+                if depth == 2 && e.name().as_ref() == b"ScriptReference" {
                     // Extract script ID and name from ScriptReference
                     for attr in crate::utils::attributes::get_attributes(&e) {
                         match attr.0.as_str() {
@@ -203,7 +201,6 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                             }
                         }
                     }
-                    step_info.indent_level_current = step_info.indent_level_next;
                     step_info.content.clear()
                 }
             }
