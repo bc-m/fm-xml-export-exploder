@@ -247,14 +247,14 @@ fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool, bool)
     for attr in get_attributes(e) {
         match attr.0.as_str() {
             "id" => current_id = attr.1,
-            "name" => current_name = unescape(&attr.1).unwrap().to_string(),
+            "name" => current_name = unescape(&attr.1).unwrap().into_owned(),
             "isFolder" => match attr.1.as_str() {
                 "True" => is_folder = true,
                 "Marker" => is_marker = true,
                 _ => {}
             },
             "isSeparatorItem" => {
-                if attr.1.as_str() == "True" {
+                if attr.1 == "True" {
                     is_separator = true
                 }
             }

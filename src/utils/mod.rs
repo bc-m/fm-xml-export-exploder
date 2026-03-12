@@ -238,26 +238,6 @@ pub fn build_out_dir_path<R: Read + BufRead>(
     Ok(full_path)
 }
 
-/// Initialize (delete if exists, then create) output directory
-pub fn _delete_then_create_dir(out_dir_path: &Path) {
-    if out_dir_path.exists() {
-        fs::remove_dir_all(out_dir_path).unwrap_or_else(|err| {
-            panic!(
-                "Error deleting directory {}: {}",
-                out_dir_path.display(),
-                err
-            )
-        });
-    }
-    fs::create_dir_all(out_dir_path).unwrap_or_else(|err| {
-        panic!(
-            "Error creating directory {}: {}",
-            out_dir_path.display(),
-            err
-        )
-    });
-}
-
 pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) -> Result<(), Error> {
     let db_name = context.db_name.as_ref().unwrap();
 

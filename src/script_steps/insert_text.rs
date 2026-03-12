@@ -33,7 +33,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Parameter" => {
                     let target_type = get_attribute(&e, "type").unwrap();
-                    if target_type.as_str() == "Target" {
+                    if target_type == "Target" {
                         target = Target::from_xml(&mut reader, &e).unwrap().display();
                     }
                 }

@@ -28,7 +28,7 @@ impl Related {
                     match element_name.as_ref() {
                         b"TableOccurrenceReference" => {
                             let table_occurrence = get_attribute(&e, "name")
-                                .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
+                                .unwrap_or_else(|| "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
                             item.parameters.push(format!("Table: {table_occurrence}"));
                         }
                         b"LayoutReferenceContainer" => {

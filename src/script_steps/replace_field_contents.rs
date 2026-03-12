@@ -25,7 +25,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Boolean" => {
-                    if get_attribute(&e, "value").unwrap().as_str() != "True" {
+                    if get_attribute(&e, "value").unwrap() != "True" {
                         continue;
                     }
                     let label = get_attribute(&e, "type").unwrap();
@@ -36,7 +36,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                         .unwrap()
                         .display()
                         .unwrap();
-                    params.push(("".to_string(), field_reference))
+                    params.push((String::new(), field_reference))
                 }
                 b"Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)
@@ -57,10 +57,10 @@ pub fn sanitize(step: &str) -> Option<String> {
 
                     match get_attribute(&e, "value").unwrap_or_default().as_str() {
                         "0" | "1" => {
-                            params.push(("".to_string(), get_attribute(&e, "name").unwrap()))
+                            params.push((String::new(), get_attribute(&e, "name").unwrap()))
                         }
                         "2" => {
-                            params.push(("".to_string(), get_attribute(&e, "name").unwrap()));
+                            params.push((String::new(), get_attribute(&e, "name").unwrap()));
                             list_name_to_input_dialog_label = true;
                         }
                         "3" => calculation_label = get_attribute(&e, "name").unwrap(),

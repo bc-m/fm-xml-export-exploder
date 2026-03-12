@@ -57,7 +57,7 @@ pub struct ProcessingContext<'a, R: Read + BufRead> {
 
 /// Process a single XML file and explode it into individual files
 pub fn explode_xml(
-    fm_export_file_path: &PathBuf,
+    fm_export_file_path: &Path,
     root_out_dir: &Path,
     flags: &Flags,
 ) -> Result<(), Error> {

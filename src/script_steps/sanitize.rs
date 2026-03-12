@@ -18,7 +18,7 @@ pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
                     if let Some(value) = get_attribute(&e, "name") {
-                        name = value.to_string();
+                        name = value;
                     }
                     continue;
                 }

@@ -214,15 +214,12 @@ impl ParameterValues {
                 Some(modified_parameters.join(" ; "))
             }
             ScriptStep::SetErrorLogging => {
-                let mut modified_parameters: Vec<String> = Vec::new();
+                let mut modified_parameters = Vec::new();
 
                 let mut iter = self.parameters.iter();
                 if let Some(first) = iter.next() {
-                    if first.ends_with(": ON") {
-                        modified_parameters.push(String::from("ON"))
-                    } else {
-                        modified_parameters.push(String::from("OFF"))
-                    }
+                    let on_off = if first.ends_with(": ON") { "ON" } else { "OFF" };
+                    modified_parameters.push(on_off.to_string());
                 }
                 if let Some(second) = iter.next() {
                     modified_parameters.push(second.clone());

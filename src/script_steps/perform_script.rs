@@ -25,7 +25,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 b"List" => {
                     script_reference_type_id = get_attribute(&e, "value").unwrap();
                     script_reference_type = get_attribute(&e, "name").unwrap();
-                    if script_reference_type_id.as_str() == "2" {
+                    if script_reference_type_id == "2" {
                         script_reference = Calculation::from_xml(&mut reader, &e)
                             .unwrap()
                             .display()
@@ -37,7 +37,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
                 b"Parameter" => {
-                    if get_attribute(&e, "type").unwrap_or_default().as_str() == "Parameter" {
+                    if get_attribute(&e, "type").unwrap_or_default() == "Parameter" {
                         calculation = Calculation::from_xml(&mut reader, &e)
                             .unwrap()
                             .display()
@@ -53,7 +53,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 
     let mut parameters = vec![script_reference_type];
 
-    if script_reference_type_id.as_str() != "2" {
+    if script_reference_type_id != "2" {
         parameters.push(format!("\"{script_reference}\""));
     } else {
         parameters.push(script_reference);

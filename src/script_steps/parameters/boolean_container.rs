@@ -52,7 +52,7 @@ impl BooleanContainer {
     }
 
     pub fn display(&self) -> Option<String> {
-        if self.name.as_str() == "DimParentWindow" {
+        if self.name == "DimParentWindow" {
             return None;
         }
 

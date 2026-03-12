@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod tests {
     use std::fs;
-    use std::io::Read;
     use std::path::{Path, PathBuf};
 
     use insta::assert_snapshot;
@@ -129,10 +128,7 @@ mod tests {
         assert_eq!(snapshot_file_paths.join("\n"), output_file_paths.join("\n"));
     }
 
-    fn read_file(file_path: &PathBuf) -> Vec<u8> {
-        let mut file = fs::File::open(file_path).expect("Failed to open file");
-        let mut content = Vec::new();
-        file.read_to_end(&mut content).expect("Failed to read file");
-        content
+    fn read_file(file_path: &Path) -> Vec<u8> {
+        fs::read(file_path).expect("Failed to read file")
     }
 }

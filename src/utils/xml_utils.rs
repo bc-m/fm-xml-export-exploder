@@ -66,26 +66,23 @@ pub fn end_element_to_string_from_start_element(e: &BytesStart) -> String {
 }
 
 pub fn local_name_to_string(local_name: &[u8]) -> String {
-    match std::str::from_utf8(local_name) {
-        Ok(text) => text.to_string(),
-        Err(_) => String::new(),
-    }
+    std::str::from_utf8(local_name)
+        .map(|text| text.to_string())
+        .unwrap_or_default()
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
     // In quick-xml 0.39+, entity references are delivered as separate Event::GeneralRef,
     // so Event::Text no longer contains entities and we just need to decode
-    match e.decode() {
-        Ok(decoded) => decoded.to_string(),
-        Err(_) => String::new(),
-    }
+    e.decode()
+        .map(|decoded| decoded.to_string())
+        .unwrap_or_default()
 }
 
 pub fn cdata_to_string(e: &BytesCData) -> String {
-    match std::str::from_utf8(e) {
-        Ok(text) => text.to_string(),
-        Err(_) => String::new(),
-    }
+    std::str::from_utf8(e)
+        .map(|text| text.to_string())
+        .unwrap_or_default()
 }
 
 /// Convert a general entity reference back to its escaped XML form

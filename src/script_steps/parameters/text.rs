@@ -13,7 +13,7 @@ impl Text {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Text, String> {
         let mut depth = 1;
         let item = Text {
-            text: get_attribute(e, "value").map(|text| unescape(&text).unwrap().to_string()),
+            text: get_attribute(e, "value").map(|text| unescape(&text).unwrap().into_owned()),
         };
 
         let mut buf: Vec<u8> = Vec::new();

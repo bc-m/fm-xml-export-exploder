@@ -146,7 +146,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     step_info.indent_level_current = step_info.indent_level_next;
                     step_info.id = get_attribute(&e, "id").unwrap().parse::<u32>().unwrap();
 
-                    if get_attribute(&e, "enable").unwrap_or("True".to_string()) == "True" {
+                    if get_attribute(&e, "enable").is_none_or(|v| v == "True") {
                         match id_to_script_step(&step_info.id) {
                             ScriptStep::IfStart | ScriptStep::LoopStart => {
                                 step_info.indent_level_next += 1

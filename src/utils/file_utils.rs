@@ -1,8 +1,8 @@
 use anyhow::{Error, Result, anyhow};
-use std::path::PathBuf;
+use std::path::Path;
 
 /// Validate that a path exists and is a directory
-pub fn valid_dir_or_throw(dir_path: &PathBuf) -> Result<(), Error> {
+pub fn valid_dir_or_throw(dir_path: &Path) -> Result<(), Error> {
     let metadata = std::fs::metadata(dir_path)
         .map_err(|_| anyhow!("Path '{}' not exists", dir_path.display()))?;
 

@@ -11,7 +11,7 @@ pub fn sanitize(step: &str) -> bool {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) if e.name().as_ref() == b"Step" => {
-                return get_attribute(&e, "enable").unwrap().as_str() != "False";
+                return get_attribute(&e, "enable").unwrap() != "False";
             }
             _ => {}
         }

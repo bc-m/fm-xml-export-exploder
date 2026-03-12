@@ -19,7 +19,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Name" => {
                     only_current_file =
-                        get_attribute(&e, "current").unwrap().as_str() == "True";
+                        get_attribute(&e, "current").unwrap() == "True";
                 }
                 b"Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)

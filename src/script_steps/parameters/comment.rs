@@ -32,6 +32,6 @@ impl Comment {
             buf.clear();
         }
 
-        Ok(unescape(&comment).unwrap().to_string())
+        Ok(unescape(&comment).unwrap().into_owned())
     }
 }
