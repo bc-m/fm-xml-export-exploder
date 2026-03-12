@@ -47,11 +47,8 @@ impl BooleanContainer {
         Ok(item)
     }
 
-    pub fn bool_to_string(bool: bool) -> String {
-        match bool {
-            true => "ON".to_string(),
-            false => "OFF".to_string(),
-        }
+    fn bool_to_string(value: bool) -> &'static str {
+        if value { "ON" } else { "OFF" }
     }
 
     pub fn display(&self) -> Option<String> {
@@ -67,13 +64,12 @@ impl BooleanContainer {
             return None;
         }
 
-        self.value.map(|bool_value| {
-            let formatted_string = format!(
+        self.value.map(|v| {
+            format!(
                 "{}: {}",
                 self.name.replace("MenuBar", "Menu"),
-                Self::bool_to_string(bool_value)
-            );
-            formatted_string
+                Self::bool_to_string(v)
+            )
         })
     }
 }

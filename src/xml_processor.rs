@@ -223,11 +223,8 @@ fn process_catalog_elements<R: Read + BufRead>(
     script_folder_structure: &mut Option<FolderStructure>,
 ) -> Result<bool, Error> {
     // Detect catalog type
-    let catalog_type = match CatalogType::from_bytes(start_tag.name().as_ref()) {
-        Some(catalog_type) => catalog_type,
-        None => {
-            return Ok(false);
-        }
+    let Some(catalog_type) = CatalogType::from_bytes(start_tag.name().as_ref()) else {
+        return Ok(false);
     };
     context.catalog_type = Some(catalog_type);
 
@@ -302,50 +299,26 @@ fn push_start_to_skeleton(
     path_stack: &[Vec<u8>],
     flags: &Flags,
 ) {
-    if flags.lossless {
-        match path_stack.len() {
-            1..=3 => {
-                push_line_to_skeleton(
-                    skeleton,
-                    path_stack.len(),
-                    1,
-                    start_element_to_string(e, flags).as_str(),
-                    true,
-                    XmlEventType::Start,
-                );
-            }
-            4 => {
-                if let Some(last) = path_stack.iter().rev().nth(1) {
-                    let parent = std::str::from_utf8(last).unwrap();
-                    if ["AddAction", "ModifyAction"].contains(&parent) {
-                        push_line_to_skeleton(
-                            skeleton,
-                            path_stack.len(),
-                            1,
-                            start_element_to_string(e, flags).as_str(),
-                            true,
-                            XmlEventType::Start,
-                        );
-                    }
-                }
-            }
-            5 => {
-                if let Some(last) = path_stack.iter().rev().nth(2) {
-                    let grandparent = std::str::from_utf8(last).unwrap();
-                    if ["AddAction", "ModifyAction"].contains(&grandparent) {
-                        push_line_to_skeleton(
-                            skeleton,
-                            path_stack.len(),
-                            1,
-                            start_element_to_string(e, flags).as_str(),
-                            true,
-                            XmlEventType::Start,
-                        );
-                    }
-                }
-            }
-            _ => {}
-        }
+    if !flags.lossless {
+        return;
+    }
+
+    let should_add = match path_stack.len() {
+        1..=3 => true,
+        4 => is_ancestor_action(path_stack, 1),
+        5 => is_ancestor_action(path_stack, 2),
+        _ => false,
+    };
+
+    if should_add {
+        push_line_to_skeleton(
+            skeleton,
+            path_stack.len(),
+            1,
+            start_element_to_string(e, flags).as_str(),
+            true,
+            XmlEventType::Start,
+        );
     }
 }
 
@@ -355,49 +328,34 @@ fn push_end_to_skeleton(
     path_stack: &[Vec<u8>],
     flags: &Flags,
 ) {
-    if flags.lossless {
-        match path_stack.len() {
-            0..=2 => {
-                push_line_to_skeleton(
-                    skeleton,
-                    path_stack.len(),
-                    1,
-                    end_element_to_string(e).as_str(),
-                    false,
-                    XmlEventType::End,
-                );
-            }
-            3 => {
-                if let Some(last) = path_stack.iter().next_back() {
-                    let parent = std::str::from_utf8(last).unwrap();
-                    if ["AddAction", "ModifyAction"].contains(&parent) {
-                        push_line_to_skeleton(
-                            skeleton,
-                            path_stack.len(),
-                            1,
-                            end_element_to_string(e).as_str(),
-                            false,
-                            XmlEventType::End,
-                        );
-                    }
-                }
-            }
-            4 => {
-                if let Some(last) = path_stack.iter().rev().nth(1) {
-                    let grandparent = std::str::from_utf8(last).unwrap();
-                    if ["AddAction", "ModifyAction"].contains(&grandparent) {
-                        push_line_to_skeleton(
-                            skeleton,
-                            path_stack.len(),
-                            1,
-                            end_element_to_string(e).as_str(),
-                            false,
-                            XmlEventType::End,
-                        );
-                    }
-                }
-            }
-            _ => {}
-        }
+    if !flags.lossless {
+        return;
     }
+
+    let should_add = match path_stack.len() {
+        0..=2 => true,
+        3 => is_ancestor_action(path_stack, 0),
+        4 => is_ancestor_action(path_stack, 1),
+        _ => false,
+    };
+
+    if should_add {
+        push_line_to_skeleton(
+            skeleton,
+            path_stack.len(),
+            1,
+            end_element_to_string(e).as_str(),
+            false,
+            XmlEventType::End,
+        );
+    }
+}
+
+fn is_ancestor_action(path_stack: &[Vec<u8>], offset_from_end: usize) -> bool {
+    path_stack
+        .iter()
+        .rev()
+        .nth(offset_from_end)
+        .and_then(|v| std::str::from_utf8(v).ok())
+        .is_some_and(|name| matches!(name, "AddAction" | "ModifyAction"))
 }

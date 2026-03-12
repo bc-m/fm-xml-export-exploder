@@ -76,25 +76,20 @@ fn main() -> Result<()> {
 
     valid_dir_or_throw(&in_dir)?;
 
-    // Read directory contents
     let paths = fs::read_dir(in_dir)?
-        .filter_map(|entry| entry.ok().map(|e| e.path())) // Filter out directories and unwrap results
-        .filter(|path| path.is_file() && path.extension().unwrap_or_default() == "xml") // Filter XML files
-        .collect::<Vec<_>>(); // Collect paths into a vector
+        .filter_map(|entry| entry.ok().map(|e| e.path()))
+        .filter(|path| path.is_file() && path.extension().unwrap_or_default() == "xml")
+        .collect::<Vec<_>>();
 
     migrate_old_custom_functions_if_needed(&out_dir, &flags)?;
 
     println!("Start processing {} files...", paths.len());
 
-    // Process XML files in parallel
     paths.par_iter().for_each(|path| {
-        match explode_xml(path, &out_dir, &flags) {
-            Ok(_) => {}
-            Err(err) => {
-                let file_name = path.file_name().unwrap().to_str().unwrap();
-                eprintln!("Failed to process file '{file_name}': {err}")
-            }
-        };
+        if let Err(err) = explode_xml(path, &out_dir, &flags) {
+            let file_name = path.file_name().unwrap().to_str().unwrap();
+            eprintln!("Failed to process file '{file_name}': {err}");
+        }
     });
 
     let duration = start.elapsed();

@@ -32,7 +32,7 @@ impl FieldReference {
                             item.field_reference = get_attribute(&e, "name");
                         }
                         b"TableOccurrenceReference" => {
-                            for attr in get_attributes(&e).unwrap() {
+                            for attr in get_attributes(&e) {
                                 if attr.0 == "name" {
                                     match e.name().as_ref() {
                                         b"TableOccurrenceReference" => {

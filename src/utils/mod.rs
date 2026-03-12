@@ -60,7 +60,7 @@ impl Entity {
     }
 
     fn parse_xml_attributes(&mut self, e: &BytesStart) {
-        for attr in get_attributes(e).unwrap() {
+        for attr in get_attributes(e) {
             match attr.0.as_str() {
                 "id" => self.id = attr.1.to_string(),
                 "name" => {
@@ -193,13 +193,11 @@ pub fn build_out_dir_path<R: Read + BufRead>(
     context: &ProcessingContext<'_, R>,
     qualifier: Option<Qualifier>,
 ) -> Result<PathBuf, Error> {
-    let db_name = match &context.db_name {
-        Some(db_name) => db_name,
-        None => return Err(anyhow::anyhow!("Missing db name")),
+    let Some(db_name) = &context.db_name else {
+        return Err(anyhow::anyhow!("Missing db name"));
     };
-    let saxml_version = match &context.saxml_version {
-        Some(saxml_version) => saxml_version,
-        None => return Err(anyhow::anyhow!("Missing saxml version")),
+    let Some(saxml_version) = &context.saxml_version else {
+        return Err(anyhow::anyhow!("Missing saxml version"));
     };
 
     let domain = match qualifier {
@@ -208,17 +206,15 @@ pub fn build_out_dir_path<R: Read + BufRead>(
         _ => {
             match context.top_level_section {
                 Some(TopLevelSection::Structure) => {
+                    let ver = version_string_to_number(saxml_version);
                     let mut domain_base = if let Some(catalog_type) = &context.catalog_type {
                         if catalog_type == &CatalogType::ValueList
-                            && version_string_to_number(saxml_version)
-                                >= version_string_to_number("2.2.2.0")
-                            && version_string_to_number(saxml_version)
-                                < version_string_to_number("2.2.3.4")
+                            && ver >= version_string_to_number("2.2.2.0")
+                            && ver < version_string_to_number("2.2.3.4")
                         {
                             "value_list_stubs".to_string()
                         } else if catalog_type == &CatalogType::CustomFunctions
-                            && version_string_to_number(saxml_version)
-                                >= version_string_to_number("2.2.3.4")
+                            && ver >= version_string_to_number("2.2.3.4")
                         {
                             "custom_functions".to_string()
                         } else {
@@ -391,7 +387,7 @@ pub fn write_text_file(output_file_path: &Path, content: &str) {
     write_file(output_file_path, &file_content);
 }
 
-fn write_file(output_file_path: &Path, file_content: &String) {
+fn write_file(output_file_path: &Path, file_content: &str) {
     match File::create(output_file_path) {
         Ok(ref mut output_file) => {
             write!(output_file, "{file_content}").expect("Failed to write to file");
@@ -421,8 +417,8 @@ pub fn push_line_to_skeleton(
         return;
     }
 
-    let indent =
-        "\t".repeat(base_depth + relative_depth - 1 - if is_child_start_tag { 1 } else { 0 });
+    let depth = base_depth + relative_depth - 1 - usize::from(is_child_start_tag);
+    let indent = "\t".repeat(depth);
     let line = format!("{indent}{str_to_push}");
 
     if current_event_type == XmlEventType::Start || current_event_type == XmlEventType::Other {

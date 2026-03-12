@@ -37,9 +37,7 @@ impl LayoutReferenceContainer {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Self, String> {
         let mut depth = 1;
         let mut item = LayoutReferenceContainer {
-            reference_type: get_attribute(e, "value")
-                .unwrap_or("".to_string())
-                .to_string(),
+            reference_type: get_attribute(e, "value").unwrap_or_default(),
             ..Default::default()
         };
 
@@ -52,9 +50,8 @@ impl LayoutReferenceContainer {
                     depth += 1;
                     match e.name().as_ref() {
                         b"LayoutReferenceContainer" => {
-                            item.reference_type = get_attribute(&e, "value")
-                                .unwrap_or("".to_string())
-                                .to_string();
+                            item.reference_type =
+                                get_attribute(&e, "value").unwrap_or_default();
                         }
                         b"LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name");
@@ -89,19 +86,15 @@ impl LayoutReferenceContainer {
     pub fn display(&self) -> Option<String> {
         let layout_reference = self
             .layout_reference
-            .clone()
-            .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
+            .as_deref()
+            .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨");
 
-        if self.reference_type == "1" {
-            Some(format!("Layout: <{layout_reference}>"))
-        } else if self.reference_type == "3" {
-            Some(format!("Layoutname: {layout_reference}"))
-        } else if self.reference_type == "4" {
-            Some(format!("Layoutnr.: {layout_reference}"))
-        } else if self.reference_type == "5" {
-            Some(format!("Layout: \"{layout_reference}\""))
-        } else {
-            None
+        match self.reference_type.as_str() {
+            "1" => Some(format!("Layout: <{layout_reference}>")),
+            "3" => Some(format!("Layoutname: {layout_reference}")),
+            "4" => Some(format!("Layoutnr.: {layout_reference}")),
+            "5" => Some(format!("Layout: \"{layout_reference}\"")),
+            _ => None,
         }
     }
 }

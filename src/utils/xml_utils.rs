@@ -30,7 +30,7 @@ pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     complete_tag.push('<');
     complete_tag.push_str(&local_name_to_string(e.name().as_ref()));
 
-    for attr in get_attributes(e).unwrap() {
+    for attr in get_attributes(e) {
         // de-noise
         if !flags.lossless {
             match attr.0.as_str() {

@@ -37,7 +37,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
                 b"Parameter" => {
-                    if get_attribute(&e, "type").unwrap_or("".to_string()).as_str() == "Parameter" {
+                    if get_attribute(&e, "type").unwrap_or_default().as_str() == "Parameter" {
                         calculation = Calculation::from_xml(&mut reader, &e)
                             .unwrap()
                             .display()
@@ -68,7 +68,6 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        println!("empty primitive");
         None
     } else {
         Some(format!("{name} [ {} ]", parameters.join(" ; ")))

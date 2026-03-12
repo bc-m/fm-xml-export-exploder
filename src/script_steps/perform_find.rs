@@ -30,13 +30,11 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        println!("empty primitive");
         None
+    } else if restore {
+        Some(format!("{name} [ ⚠️ RESTORE ⚠️ ]"))
     } else {
-        match restore {
-            true => Some(format!("{name} [ ⚠️ RESTORE ⚠️ ]")),
-            false => Some(name),
-        }
+        Some(name)
     }
 }
 

@@ -43,34 +43,24 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else if option_type == "5" {
+        return None;
+    }
+
+    let on_off = if boolean_option_value { "ON" } else { "OFF" };
+
+    if option_type == "5" {
         if boolean_option_type.is_empty() {
             Some(format!("{name} [ {calculation} ]"))
         } else {
             Some(format!(
-                "{} [ {}: {} ; {} ]",
-                name,
-                boolean_option_type,
-                match boolean_option_value {
-                    true => "ON".to_string(),
-                    false => "OFF".to_string(),
-                },
-                calculation
+                "{name} [ {boolean_option_type}: {on_off} ; {calculation} ]"
             ))
         }
     } else if boolean_option_type.is_empty() {
         Some(format!("{name} [ {option} ]"))
     } else {
         Some(format!(
-            "{} [ {} ; {}: {} ]",
-            name,
-            option,
-            boolean_option_type,
-            match boolean_option_value {
-                true => "ON".to_string(),
-                false => "OFF".to_string(),
-            }
+            "{name} [ {option} ; {boolean_option_type}: {on_off} ]"
         ))
     }
 }

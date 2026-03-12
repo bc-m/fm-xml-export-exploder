@@ -25,18 +25,11 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
                 b"Boolean" => {
-                    let value = get_attribute(&e, "value").unwrap().as_str() == "True";
-                    if !value {
+                    if get_attribute(&e, "value").unwrap().as_str() != "True" {
                         continue;
-                    };
+                    }
                     let label = get_attribute(&e, "type").unwrap();
-                    params.push((
-                        label,
-                        match value {
-                            true => "ON".to_string(),
-                            false => "OFF".to_string(),
-                        },
-                    ));
+                    params.push((label, "ON".to_string()));
                 }
                 b"FieldReference" => {
                     let field_reference = FieldReference::from_xml(&mut reader, &e)

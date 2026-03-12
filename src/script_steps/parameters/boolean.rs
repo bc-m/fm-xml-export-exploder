@@ -37,7 +37,7 @@ impl Boolean {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if let b"Boolean" = e.name().as_ref() {
-                        for attr in get_attributes(&e).unwrap() {
+                        for attr in get_attributes(&e) {
                             match attr.0.as_str() {
                                 "id" => {
                                     if let Ok(id) = attr.1.parse::<u32>() {
@@ -69,7 +69,7 @@ impl Boolean {
         Ok(item)
     }
 
-    pub fn should_hide_bool(&self) -> bool {
+    fn should_hide_bool(&self) -> bool {
         let step_id = id_to_script_step(&self.step_id);
         let param_id = self.id.unwrap_or(0);
 
@@ -91,27 +91,23 @@ impl Boolean {
         )
     }
 
-    pub fn bool_to_string(bool: bool) -> String {
-        match bool {
-            true => "ON".to_string(),
-            false => "OFF".to_string(),
-        }
+    pub fn bool_to_string(value: bool) -> String {
+        if value { "ON" } else { "OFF" }.to_string()
     }
 
     pub fn display(&self) -> Option<String> {
-        if Self::should_hide_bool(self) {
-            if !self.value.unwrap_or(false) {
-                return None;
+        if self.should_hide_bool() {
+            return if self.value.unwrap_or(false) {
+                self.name.clone()
             } else {
-                return self.name.clone();
-            }
+                None
+            };
         }
 
         match &self.name {
-            Some(name) => self.value.map(|bool_value| {
-                let formatted_string = format!("{}: {}", name, Self::bool_to_string(bool_value));
-                formatted_string
-            }),
+            Some(name) => self
+                .value
+                .map(|v| format!("{}: {}", name, Self::bool_to_string(v))),
             None => self.value.map(Self::bool_to_string),
         }
     }

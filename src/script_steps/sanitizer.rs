@@ -30,9 +30,7 @@ pub fn sanitize(step_id: &u32, step_xml: &str) -> Option<String> {
             println!("Could not parse: {step_xml}");
             None
         }
-        Some(step) => match is_enabled {
-            true => Some(step),
-            false => Some(format!("// {step}")),
-        },
+        Some(step) if is_enabled => Some(step),
+        Some(step) => Some(format!("// {step}")),
     }
 }

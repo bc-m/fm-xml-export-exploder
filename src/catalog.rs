@@ -26,9 +26,8 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
     folder_structure: Option<&FolderStructure>,
     // catalog_config: &CatalogConfig,
 ) -> Result<Option<FolderStructure>, Error> {
-    let catalog_type = match context.catalog_type {
-        Some(catalog_type) => catalog_type,
-        None => return Err(anyhow::anyhow!("❌ Catalog type not specified")),
+    let Some(catalog_type) = context.catalog_type else {
+        return Err(anyhow::anyhow!("❌ Catalog type not specified"));
     };
     let catalog_config = catalog_type.get_config();
     let catalog_item_name = catalog_config.catalog_item_name.clone();
@@ -222,16 +221,17 @@ fn add_start_tag_to_skeleton<R: Read + BufRead>(
         return;
     }
 
+    let is_child = if wrapped_in_object_list {
+        rel_depth >= 2
+    } else {
+        rel_depth == 2
+    };
     push_line_to_skeleton(
         context.skeleton,
         base_depth,
         rel_depth,
         start_tag,
-        if wrapped_in_object_list {
-            rel_depth >= 2
-        } else {
-            rel_depth == 2
-        },
+        is_child,
         XmlEventType::Start,
     );
 }
@@ -244,7 +244,7 @@ fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool, bool)
     let mut is_marker = false;
     let mut is_separator = false;
 
-    for attr in get_attributes(e).unwrap() {
+    for attr in get_attributes(e) {
         match attr.0.as_str() {
             "id" => current_id = attr.1.to_string(),
             "name" => current_name = unescape(attr.1.as_str()).unwrap().to_string(),
@@ -274,16 +274,12 @@ fn determine_subfolder_path(
     uses_folders: bool,
     current_path: &[String],
 ) -> Option<PathBuf> {
-    let folder_structure = match folder_structure {
-        Some(folder_structure) => folder_structure,
-        None => {
-            return if uses_folders && !current_path.is_empty() {
-                // Track folders using current catalog item
-                Some(out_dir_path_base.join(current_path.join("/")))
-            } else {
-                None
-            };
-        }
+    let Some(folder_structure) = folder_structure else {
+        return if uses_folders && !current_path.is_empty() {
+            Some(out_dir_path_base.join(current_path.join("/")))
+        } else {
+            None
+        };
     };
 
     // If a folder structure was provided, use that
@@ -291,8 +287,7 @@ fn determine_subfolder_path(
         return None;
     }
 
-    let paths = vec![id_path];
-    let results = match extract_values_from_xml_paths(file_path, &paths) {
+    let results = match extract_values_from_xml_paths(file_path, &[id_path]) {
         Ok(results) => results,
         Err(_) => return None,
     };

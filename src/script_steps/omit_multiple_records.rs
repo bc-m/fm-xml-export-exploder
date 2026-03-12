@@ -56,28 +56,17 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if option_name.is_empty() && calculation.is_empty() {
-        Some(format!("{name} []"))
-    } else if !calculation.is_empty() {
+        return Some(format!("{name} []"));
+    }
+
+    let on_off = if state { "ON" } else { "OFF" };
+
+    if !calculation.is_empty() {
         Some(format!(
-            "{} [ {}: {} ; {} ]",
-            name,
-            option_name,
-            match state {
-                true => "ON",
-                false => "OFF",
-            },
-            calculation
+            "{name} [ {option_name}: {on_off} ; {calculation} ]"
         ))
     } else {
-        Some(format!(
-            "{} [ {}: {} ]",
-            name,
-            option_name,
-            match state {
-                true => "ON",
-                false => "OFF",
-            }
-        ))
+        Some(format!("{name} [ {option_name}: {on_off} ]"))
     }
 }
 

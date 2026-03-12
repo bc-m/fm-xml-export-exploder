@@ -134,7 +134,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     // Script element - we'll get ID and name from ScriptReference
                 } else if depth == 2 && e.name().as_ref() == b"ScriptReference" {
                     // Extract script ID and name from ScriptReference
-                    for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
+                    for attr in crate::utils::attributes::get_attributes(&e) {
                         match attr.0.as_str() {
                             "id" => script_info.id = attr.1.to_string(),
                             "name" => script_info.name = attr.1.to_string(),

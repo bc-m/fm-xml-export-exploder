@@ -49,15 +49,9 @@ impl Calculation {
     }
 
     pub fn display(&self) -> Option<String> {
-        match &self.calculation {
-            Some(item) => {
-                if item.is_empty() {
-                    None
-                } else {
-                    Some(item.clone())
-                }
-            }
-            None => None,
-        }
+        self.calculation
+            .as_ref()
+            .filter(|s| !s.is_empty())
+            .cloned()
     }
 }
