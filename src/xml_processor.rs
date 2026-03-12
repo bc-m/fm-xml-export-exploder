@@ -196,24 +196,26 @@ fn process_top_level_section<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
 ) -> Result<bool, Error> {
-    let mut was_xml_element_consumed = false;
     match start_tag.name().as_ref() {
         b"Structure" => {
             context.top_level_section = Some(TopLevelSection::Structure);
+            Ok(false)
         }
         b"Metadata" => {
             context.top_level_section = Some(TopLevelSection::Metadata);
             process_supporting_element(context, start_tag, "metadata")?;
-            was_xml_element_consumed = true;
+            Ok(true)
         }
         b"DDR_INFO" => {
             context.top_level_section = Some(TopLevelSection::DdrInfo);
             process_supporting_element(context, start_tag, "ddr_info")?;
-            was_xml_element_consumed = true;
+            Ok(true)
         }
-        _ => context.top_level_section = None,
+        _ => {
+            context.top_level_section = None;
+            Ok(false)
+        }
     }
-    Ok(was_xml_element_consumed)
 }
 
 fn process_catalog_elements<R: Read + BufRead>(

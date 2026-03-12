@@ -24,7 +24,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     _start_tag: &BytesStart,
     folder_structure: Option<&FolderStructure>,
-    // catalog_config: &CatalogConfig,
 ) -> Result<Option<FolderStructure>, Error> {
     let Some(catalog_type) = context.catalog_type else {
         return Err(anyhow::anyhow!("❌ Catalog type not specified"));

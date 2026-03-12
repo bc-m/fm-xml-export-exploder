@@ -1,6 +1,7 @@
-use crate::utils::attributes::parse_unescaped_attribute;
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
+
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct ScriptReference {

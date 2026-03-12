@@ -1,5 +1,6 @@
 use std::io::{BufRead, Read};
 
+use anyhow::Error;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::xml_utils::{
@@ -8,7 +9,6 @@ use crate::utils::xml_utils::{
 };
 use crate::utils::{build_out_dir_path, create_dir, push_line_to_skeleton, write_xml_file};
 use crate::xml_processor::ProcessingContext;
-use anyhow::Error;
 
 /// Extract entire element as is into its own file (don't split it into multiple files)
 /// Text content inside of <Chunk> tags needs special handling (replace tabs with &#09;)

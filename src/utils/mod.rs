@@ -601,13 +601,13 @@ mod tests {
 
 // Some catalog items derive their name differently from the standard method which builds the name using id and name attributes in the catalog item tag
 pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_name: &[u8]) {
-    // Check if path_stack has the required structure: second value should be "Structure" and third should be "AddAction"
-    let has_structure_add_action = path_stack.len() >= 3
-        && path_stack.get(1).is_some_and(|v| v == b"Structure")
-        && path_stack.get(2).is_some_and(|v| v == b"AddAction");
-    let has_structure_modify_action = path_stack.len() >= 3
-        && path_stack.get(1).is_some_and(|v| v == b"Structure")
-        && path_stack.get(2).is_some_and(|v| v == b"ModifyAction");
+    let action = path_stack
+        .get(1)
+        .filter(|v| v.as_slice() == b"Structure")
+        .and_then(|_| path_stack.get(2))
+        .map(|v| v.as_slice());
+    let has_structure_add_action = action == Some(b"AddAction");
+    let has_structure_modify_action = action == Some(b"ModifyAction");
 
     let results = match tag_name {
         b"Account" if has_structure_add_action => {
