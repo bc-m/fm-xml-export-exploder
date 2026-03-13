@@ -1,4 +1,4 @@
-use crate::OutputTree;
+use clap::ValueEnum;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum CatalogType {
@@ -26,7 +26,7 @@ pub enum CatalogType {
 }
 
 impl CatalogType {
-    pub fn from_bytes(bytes: &[u8]) -> Option<Self> {
+    pub const fn from_bytes(bytes: &[u8]) -> Option<Self> {
         match bytes {
             b"AccountsCatalog" => Some(Self::Accounts),
             b"BaseDirectoryCatalog" => Some(Self::BaseDirectory),
@@ -53,7 +53,7 @@ impl CatalogType {
         }
     }
 
-    pub fn get_config(&self) -> CatalogConfig {
+    pub const fn get_config(&self) -> CatalogConfig {
         match self {
             Self::Accounts => CatalogConfig {
                 catalog_item_name: b"Account",
@@ -213,6 +213,18 @@ pub struct CatalogConfig {
     pub wrapped_in_object_list: bool,
     pub uses_folders: bool,
     pub id_path: &'static str,
+}
+
+#[derive(Debug, Clone, ValueEnum)]
+pub enum OutputTree {
+    #[value(
+        name = "domain",
+        help = "Use domain (e.g. catalog name) as the root folder"
+    )]
+    Domain,
+
+    #[value(name = "db", help = "Use database name as the root folder (default)")]
+    Db,
 }
 
 pub struct Flags {

@@ -1,10 +1,10 @@
 use std::{fs, path::PathBuf, time::Instant};
 
 use anyhow::Result;
-use clap::{Parser, ValueEnum};
+use clap::Parser;
 use rayon::prelude::*;
 
-use crate::config::Flags;
+use crate::config::{Flags, OutputTree};
 use crate::utils::file_utils::valid_dir_or_throw;
 use crate::utils::migrate_old_custom_functions_if_needed;
 use crate::utils::xml_utils::XmlEventType;
@@ -19,18 +19,6 @@ mod supporting;
 mod tests;
 mod utils;
 mod xml_processor;
-
-#[derive(Debug, Clone, ValueEnum)]
-enum OutputTree {
-    #[value(
-        name = "domain",
-        help = "Use domain (e.g. catalog name) as the root folder"
-    )]
-    Domain,
-
-    #[value(name = "db", help = "Use database name as the root folder (default)")]
-    Db,
-}
 
 /// Parse all as XML exported FileMaker solutions from source directory and explode them to target directory.
 #[derive(Parser)]
@@ -94,9 +82,9 @@ fn main() -> Result<()> {
 
     let duration = start.elapsed();
     if duration.as_secs() > 9 {
-        println!("Completed in {:?} seconds.", duration.as_secs());
+        println!("Completed in {} seconds.", duration.as_secs());
     } else {
-        println!("Completed in {:?} ms.", duration.as_millis());
+        println!("Completed in {} ms.", duration.as_millis());
     }
 
     Ok(())

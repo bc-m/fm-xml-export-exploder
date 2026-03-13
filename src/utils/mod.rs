@@ -1,36 +1,41 @@
+use std::collections::HashMap;
 use std::fs;
 use std::fs::File;
 use std::io::{BufRead, Read, Write};
 use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
 
-use anyhow::Error;
+use anyhow::{Result, bail};
 use quick_xml::events::{BytesStart, Event};
 use regex::Regex;
 
-use crate::config::{CatalogType, Flags};
+use crate::Skeleton;
+use crate::config::{CatalogType, Flags, OutputTree};
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name, should_skip_line};
 use crate::utils::xml_utils::{
-    XmlEventType, element_to_string, encode_xml_special_characters, end_element_to_string,
-    extract_values_from_xml_paths, general_ref_to_string, local_name_to_string,
-    start_element_to_string, text_element_to_string,
+    XmlEventType, element_to_string, end_element_to_string, extract_values_from_xml_paths,
+    general_ref_to_string, local_name_to_string, start_element_to_string, text_element_to_string,
+    unescape_xml_entities,
 };
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
-use crate::{OutputTree, Skeleton};
+
+/// Version thresholds used for feature-gating catalog behavior.
+pub(crate) const VERSION_2_2_2_0: u64 = version_string_to_number_const(2, 2, 2, 0);
+pub(crate) const VERSION_2_2_3_4: u64 = version_string_to_number_const(2, 2, 3, 4);
 
 pub(crate) mod attributes;
 pub(crate) mod file_utils;
 pub(crate) mod xml_utils;
 
-pub fn rename_file(file_path: &Path, new_name: &str) -> Result<PathBuf, String> {
+pub fn rename_file(file_path: &Path, new_name: &str) -> Result<PathBuf> {
     let parent_dir = file_path
         .parent()
-        .ok_or_else(|| "File path has no parent directory".to_string())?;
+        .ok_or_else(|| anyhow::anyhow!("File path has no parent directory"))?;
 
     let new_path = parent_dir.join(new_name);
 
-    fs::rename(file_path, &new_path).map_err(|e| format!("Failed to rename file: {e}"))?;
+    fs::rename(file_path, &new_path)?;
 
     Ok(new_path)
 }
@@ -51,10 +56,10 @@ impl Entity {
                 "id" => self.id = attr.1,
                 "name" => {
                     if self.name.is_empty() {
-                        self.name = encode_xml_special_characters(attr.1)
+                        self.name = unescape_xml_entities(attr.1)
                     }
                 }
-                "Display" => self.name = encode_xml_special_characters(attr.1),
+                "Display" => self.name = unescape_xml_entities(attr.1),
                 _ => {}
             }
         }
@@ -111,7 +116,7 @@ impl Entity {
 #[derive(Debug, Clone, Default)]
 pub struct FolderStructure {
     /// Maps ID to the folder path where it should be placed
-    pub item_paths: std::collections::HashMap<String, Vec<String>>,
+    pub item_paths: HashMap<String, Vec<String>>,
 }
 
 impl FolderStructure {
@@ -167,33 +172,38 @@ pub fn write_entity_to_file(
     output_file_path
 }
 
+/// Build the output directory path by joining the domain and db_name in the correct order
+/// depending on the output tree mode.
+fn build_tree_path(root: &Path, output_tree: &OutputTree, domain: &str, db_name: &str) -> PathBuf {
+    match output_tree {
+        OutputTree::Db => root.join(db_name).join(domain),
+        OutputTree::Domain => root.join(domain).join(db_name),
+    }
+}
+
 pub fn build_out_dir_path<R: Read + BufRead>(
     context: &ProcessingContext<'_, R>,
     qualifier: Option<Qualifier>,
-) -> Result<PathBuf, Error> {
+) -> Result<PathBuf> {
     let Some(db_name) = &context.db_name else {
-        return Err(anyhow::anyhow!("Missing db name"));
+        bail!("Missing db name");
     };
-    let Some(saxml_version) = &context.saxml_version else {
-        return Err(anyhow::anyhow!("Missing saxml version"));
+    let Some(ver) = context.saxml_version_num else {
+        bail!("Missing saxml version");
     };
 
     let domain = match qualifier {
-        Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
-        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized".to_string(),
+        Some(Qualifier::SanitizedScripts) => "scripts_sanitized",
+        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized",
         None => match context.top_level_section {
             Some(TopLevelSection::Structure) => {
-                let ver = version_string_to_number(saxml_version);
                 let folder_name = match context.catalog_type {
                     Some(CatalogType::ValueList)
-                        if ver >= version_string_to_number("2.2.2.0")
-                            && ver < version_string_to_number("2.2.3.4") =>
+                        if (VERSION_2_2_2_0..VERSION_2_2_3_4).contains(&ver) =>
                     {
                         "value_list_stubs"
                     }
-                    Some(CatalogType::CustomFunctions)
-                        if ver >= version_string_to_number("2.2.3.4") =>
-                    {
+                    Some(CatalogType::CustomFunctions) if ver >= VERSION_2_2_3_4 => {
                         "custom_functions"
                     }
                     Some(catalog_type) => catalog_type.get_config().out_folder_name,
@@ -205,21 +215,30 @@ pub fn build_out_dir_path<R: Read + BufRead>(
                     Some(Action::Replace) => "__replace_action",
                     Some(Action::Delete) => "__delete_action",
                 };
-                format!("{folder_name}{action_suffix}")
+                let domain = format!("{folder_name}{action_suffix}");
+                return Ok(build_tree_path(
+                    context.root_out_dir,
+                    &context.flags.output_tree,
+                    &domain,
+                    db_name,
+                ));
             }
-            _ => "_".to_string(),
+            _ => "_",
         },
     };
 
-    let full_path = context.root_out_dir.join(match context.flags.output_tree {
-        OutputTree::Db => PathBuf::from(db_name).join(domain),
-        OutputTree::Domain => PathBuf::from(domain).join(db_name),
-    });
-    Ok(full_path)
+    Ok(build_tree_path(
+        context.root_out_dir,
+        &context.flags.output_tree,
+        domain,
+        db_name,
+    ))
 }
 
-pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) -> Result<(), Error> {
-    let db_name = context.db_name.as_ref().unwrap();
+pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) -> Result<()> {
+    let Some(db_name) = &context.db_name else {
+        bail!("Missing db name");
+    };
 
     match context.flags.output_tree {
         OutputTree::Db => {
@@ -231,7 +250,7 @@ pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) ->
         }
         OutputTree::Domain => {
             // Delete all directories matching pattern ./*/db_name/
-            if let Ok(entries) = fs::read_dir(&context.root_out_dir) {
+            if let Ok(entries) = fs::read_dir(context.root_out_dir) {
                 for entry in entries.flatten() {
                     let entry_path = entry.path();
                     if entry_path.is_dir() {
@@ -251,7 +270,7 @@ pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) ->
 /// In Domain mode, migrate old-format `custom_functions/` output (pre-2.2.3.4 style)
 /// where it contained `.txt` files directly instead of `.xml` files.
 /// Renames the entire `custom_functions/` → `custom_functions_sanitized/` so git can track the rename.
-pub fn migrate_old_custom_functions_if_needed(out_dir: &Path, flags: &Flags) -> Result<(), Error> {
+pub fn migrate_old_custom_functions_if_needed(out_dir: &Path, flags: &Flags) -> Result<()> {
     if matches!(flags.output_tree, OutputTree::Db) {
         return Ok(());
     }
@@ -267,7 +286,7 @@ pub fn migrate_old_custom_functions_if_needed(out_dir: &Path, flags: &Flags) -> 
     // Check contents recursively: must have .txt files and NO .xml files
     let mut has_txt = false;
     let mut has_xml = false;
-    fn check_dir(dir: &Path, has_txt: &mut bool, has_xml: &mut bool) -> Result<(), Error> {
+    fn check_dir(dir: &Path, has_txt: &mut bool, has_xml: &mut bool) -> Result<()> {
         for entry in fs::read_dir(dir)? {
             let path = entry?.path();
             if path.is_dir() {
@@ -310,7 +329,7 @@ pub fn write_xml_file(
 ) {
     let indent_prefix = "\t".repeat(remove_indent_count);
     let skip_noise = !flags.parse_all_lines && !flags.lossless;
-    let mut file_content = String::new();
+    let mut file_content = String::with_capacity(content.len());
     for line in content.lines() {
         if skip_noise && should_skip_line(line) {
             continue;
@@ -326,7 +345,7 @@ static LINE_SPLIT_REGEX: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"\r\n|\n\r|\r|\n").unwrap());
 
 pub fn write_text_file(output_file_path: &Path, content: &str) {
-    let mut file_content = String::new();
+    let mut file_content = String::with_capacity(content.len());
     for line in LINE_SPLIT_REGEX.split(content) {
         file_content.push_str(line);
         file_content.push('\n');
@@ -341,11 +360,7 @@ fn write_file(output_file_path: &Path, file_content: &str) {
         f.flush()
     });
     if let Err(err) = result {
-        eprintln!(
-            "Error writing file {}: {}",
-            output_file_path.display(),
-            err
-        );
+        eprintln!("Error writing file {}: {}", output_file_path.display(), err);
     }
 }
 
@@ -417,32 +432,30 @@ pub fn version_string_to_number(version: &str) -> u64 {
         .sum()
 }
 
+/// Const-evaluable version of `version_string_to_number` for compile-time constants.
+const fn version_string_to_number_const(major: u64, minor: u64, patch: u64, build: u64) -> u64 {
+    major * 1_000_000_000 + minor * 1_000_000 + patch * 1_000 + build
+}
+
 /// Some catalog items derive their name differently from the standard method
 /// which builds the name using id and name attributes in the catalog item tag.
 pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_name: &[u8]) {
-    let is_structure = path_stack.get(1).is_some_and(|v| v == b"Structure");
-    if !is_structure {
+    if path_stack.get(1).is_none_or(|v| v != b"Structure") {
         return;
     }
     let action = path_stack.get(2).map(|v| v.as_slice());
-    let has_structure_add_action = action == Some(b"AddAction");
-    let has_structure_modify_action = action == Some(b"ModifyAction");
 
-    let paths: &[&str] = match tag_name {
-        b"Account" if has_structure_add_action => {
-            &["Account/Authentication/AccountName", "Account/@id"]
-        }
-        b"Authorization" if has_structure_add_action => {
-            &["Authorization/Display", "Authorization/@id"]
-        }
-        b"BinaryData" if has_structure_add_action => &[
+    let paths: &[&str] = match (action, tag_name) {
+        (Some(b"AddAction"), b"Account") => &["Account/Authentication/AccountName", "Account/@id"],
+        (Some(b"AddAction"), b"Authorization") => &["Authorization/Display", "Authorization/@id"],
+        (Some(b"AddAction"), b"BinaryData") => &[
             "BinaryData/LibraryReference/@key",
             "BinaryData/LibraryReference/@id",
         ],
-        b"Layout" if has_structure_modify_action => {
+        (Some(b"ModifyAction"), b"Layout") => {
             &["Layout/LayoutReference/@name", "Layout/LayoutReference/@id"]
         }
-        b"Relationship" if has_structure_add_action => &[
+        (Some(b"AddAction"), b"Relationship") => &[
             "Relationship/LeftTable/TableOccurrenceReference/@name",
             "Relationship/RightTable/TableOccurrenceReference/@name",
             "Relationship/@id",
@@ -450,44 +463,41 @@ pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_na
         _ => return,
     };
 
-    let results = extract_values_from_xml_paths(file_path, paths);
+    let Ok(results) = extract_values_from_xml_paths(file_path, paths) else {
+        return;
+    };
+    let Some(id) = results.last().and_then(|r| r.as_deref()) else {
+        return;
+    };
 
-    if let Ok(results) = results
-        && let Some(Some(id)) = results.last()
-    {
-        let names: Vec<&str> = results[..results.len() - 1]
-            .iter()
-            .filter_map(|r| r.as_deref())
-            .collect();
+    let names: Vec<&str> = results[..results.len() - 1]
+        .iter()
+        .filter_map(|r| r.as_deref())
+        .collect();
 
-        let name_part = if names.is_empty() {
-            String::new()
-        } else {
-            format!("{} - ", names.join(" - "))
-        };
-
-        let new_name = format!("{name_part}ID {id}.xml");
-        let _ = rename_file(file_path, &new_name);
-    }
+    let new_name = if names.is_empty() {
+        format!("ID {id}.xml")
+    } else {
+        format!("{} - ID {id}.xml", names.join(" - "))
+    };
+    let _ = rename_file(file_path, &new_name);
 }
 
 /// Move a file to a subfolder if the subfolder path is not empty
-pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<PathBuf, String> {
+pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<PathBuf> {
     if subfolder_dir_path.as_os_str().is_empty() {
         return Ok(file_path.to_path_buf());
     }
 
-    fs::create_dir_all(subfolder_dir_path)
-        .map_err(|e| format!("Failed to create subfolder directory: {e}"))?;
+    fs::create_dir_all(subfolder_dir_path)?;
 
     let filename = file_path
         .file_name()
-        .ok_or_else(|| "File path has no filename".to_string())?;
+        .ok_or_else(|| anyhow::anyhow!("File path has no filename"))?;
 
     let new_path = subfolder_dir_path.join(filename);
 
-    fs::rename(file_path, &new_path)
-        .map_err(|e| format!("Failed to move file to subfolder: {e}"))?;
+    fs::rename(file_path, &new_path)?;
 
     Ok(new_path)
 }
@@ -530,7 +540,6 @@ mod tests {
         let nonexistent_file = PathBuf::from("nonexistent_file.txt");
         let result = rename_file(&nonexistent_file, "new_name.txt");
         assert!(result.is_err());
-        assert!(result.unwrap_err().contains("Failed to rename file"));
     }
 
     #[test]
