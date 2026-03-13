@@ -36,79 +36,20 @@ pub fn create_sanitized_scripts(
     scripts_text_out_dir_path: &Path,
     flags: &Flags,
 ) {
-    // Recursively process all XML files in the script_steps directory
-    process_directory_recursively(
+    for_each_xml_file(
         scripts_xml_out_dir_path,
         scripts_xml_out_dir_path,
         scripts_text_out_dir_path,
-        flags,
-    );
-}
-
-fn process_directory_recursively(
-    current_dir: &Path,
-    scripts_xml_out_dir_path: &Path,
-    scripts_text_out_dir_path: &Path,
-    flags: &Flags,
-) {
-    if let Ok(entries) = fs::read_dir(current_dir) {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
-                process_script_xml_file(
-                    &path,
-                    scripts_xml_out_dir_path,
-                    scripts_text_out_dir_path,
-                    flags,
-                );
-            } else if path.is_dir() {
-                // Recursively process subdirectories
-                process_directory_recursively(
-                    &path,
-                    scripts_xml_out_dir_path,
-                    scripts_text_out_dir_path,
-                    flags,
-                );
+        &mut |xml_file_path, output_file_path| {
+            let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
+                eprintln!("Error reading file {}", xml_file_path.display());
+                return;
+            };
+            if let Some(script_info) = parse_script_xml(&xml_content, flags) {
+                write_text_file(output_file_path, &script_info.text);
             }
-        }
-    }
-}
-
-fn process_script_xml_file(
-    xml_file_path: &Path,
-    scripts_xml_out_dir_path: &Path,
-    scripts_text_out_dir_path: &Path,
-    flags: &Flags,
-) {
-    // Read the XML file content
-    let xml_content = match fs::read_to_string(xml_file_path) {
-        Ok(content) => content,
-        Err(e) => {
-            eprintln!("Error reading file {}: {}", xml_file_path.display(), e);
-            return;
-        }
-    };
-
-    // Parse the script and create sanitized text
-    let script_info = parse_script_xml(&xml_content, flags);
-    if let Some(script_info) = script_info {
-        // Determine the relative path from the XML file to maintain folder structure
-        let relative_path = xml_file_path
-            .strip_prefix(scripts_xml_out_dir_path)
-            .unwrap_or(xml_file_path);
-        let output_file_path = scripts_text_out_dir_path.join(relative_path);
-
-        // Ensure the output directory exists
-        if let Some(parent) = output_file_path.parent() {
-            fs::create_dir_all(parent).unwrap_or_else(|err| {
-                panic!("Error creating directory {}: {}", parent.display(), err)
-            });
-        }
-
-        // Change extension to .txt
-        let output_file_path = output_file_path.with_extension("txt");
-        write_text_file(&output_file_path, &script_info.text);
-    }
+        },
+    );
 }
 
 fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {

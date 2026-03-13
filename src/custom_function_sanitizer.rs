@@ -4,79 +4,33 @@ use std::path::Path;
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
+use crate::utils::file_utils::for_each_xml_file;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::cdata_to_string;
 
 #[derive(Debug, Default)]
 struct CfInfo {
     id: String,
-    name: String,
     text: String,
 }
 
 /// Process all XML files in the cf directory and create sanitized text versions
 /// This function mirrors the folder structure of the XML files
 pub fn create_sanitized_custom_functions(cf_xml_out_dir_path: &Path, cf_text_out_dir_path: &Path) {
-    // Recursively process all XML files in the cf directory
-    process_directory_recursively(
+    for_each_xml_file(
         cf_xml_out_dir_path,
         cf_xml_out_dir_path,
         cf_text_out_dir_path,
-    );
-}
-
-fn process_directory_recursively(
-    current_dir: &Path,
-    cf_xml_out_dir_path: &Path,
-    cf_text_out_dir_path: &Path,
-) {
-    if let Ok(entries) = fs::read_dir(current_dir) {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
-                process_cf_xml_file(&path, cf_xml_out_dir_path, cf_text_out_dir_path);
-            } else if path.is_dir() {
-                // Recursively process subdirectories
-                process_directory_recursively(&path, cf_xml_out_dir_path, cf_text_out_dir_path);
+        &mut |xml_file_path, output_file_path| {
+            let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
+                eprintln!("Error reading file {}", xml_file_path.display());
+                return;
+            };
+            if let Some(cf_info) = parse_cf_xml(&xml_content) {
+                write_text_file(output_file_path, &cf_info.text);
             }
-        }
-    }
-}
-
-fn process_cf_xml_file(
-    xml_file_path: &Path,
-    cf_xml_out_dir_path: &Path,
-    cf_text_out_dir_path: &Path,
-) {
-    // Read the XML file content
-    let xml_content = match fs::read_to_string(xml_file_path) {
-        Ok(content) => content,
-        Err(e) => {
-            eprintln!("Error reading file {}: {}", xml_file_path.display(), e);
-            return;
-        }
-    };
-
-    // Parse the script and create sanitized text
-    let cf_info = parse_cf_xml(&xml_content);
-    if let Some(cf_info) = cf_info {
-        // Determine the relative path from the XML file to maintain folder structure
-        let relative_path = xml_file_path
-            .strip_prefix(cf_xml_out_dir_path)
-            .unwrap_or(xml_file_path);
-        let output_file_path = cf_text_out_dir_path.join(relative_path);
-
-        // Ensure the output directory exists
-        if let Some(parent) = output_file_path.parent() {
-            fs::create_dir_all(parent).unwrap_or_else(|err| {
-                panic!("Error creating directory {}: {}", parent.display(), err)
-            });
-        }
-
-        // Change extension to .txt
-        let output_file_path = output_file_path.with_extension("txt");
-        write_text_file(&output_file_path, &cf_info.text);
-    }
+        },
+    );
 }
 
 fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
@@ -113,29 +67,21 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                     _ => false,
                 };
 
-                if extract_attrs {
-                    for attr in crate::utils::attributes::get_attributes(e) {
-                        match attr.0.as_str() {
-                            "id" => cf_info.id = attr.1,
-                            "name" => cf_info.name = attr.1,
-                            _ => {}
-                        }
-                    }
+                if extract_attrs && let Some(id) = get_attribute(&e, "id") {
+                    cf_info.id = id;
                 }
             }
-            Ok(Event::CData(ref e)) => {
+            Ok(Event::CData(e)) => {
                 if in_text && in_calculation {
-                    cf_info.text = cdata_to_string(e);
+                    cf_info.text = cdata_to_string(&e);
                     break;
                 }
             }
-            Ok(Event::End(ref e)) => {
-                match e.name().as_ref() {
-                    b"Calculation" => in_calculation = false,
-                    b"Text" => in_text = false,
-                    _ => {}
-                }
-            }
+            Ok(Event::End(e)) => match e.name().as_ref() {
+                b"Calculation" => in_calculation = false,
+                b"Text" => in_text = false,
+                _ => {}
+            },
             _ => {}
         }
 
@@ -144,7 +90,6 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
 
     if cf_info.id.is_empty() {
         None
-    } else {
-        Some(cf_info)
     }
+    (!cf_info.id.is_empty()).then_some(cf_info)
 }
