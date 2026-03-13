@@ -6,10 +6,11 @@ use std::path::Path;
 use quick_xml::Reader;
 use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, Event};
 
+use crate::Skeleton;
+use crate::config::Flags;
 use crate::utils::attributes::get_attributes;
 use crate::utils::push_line_to_skeleton;
 use crate::xml_processor::ProcessingContext;
-use crate::{Flags, Skeleton};
 
 #[derive(Debug, Default, PartialEq)]
 pub enum XmlEventType {
@@ -48,7 +49,7 @@ pub fn cdata_element_to_string(e: &BytesCData) -> String {
 pub fn text_element_to_string(e: &BytesText, escape: bool) -> String {
     let text = text_to_string(e);
     if escape {
-        decode_xml_special_characters(text)
+        escape_xml_entities(text)
     } else {
         text
     }
@@ -58,12 +59,7 @@ pub fn end_element_to_string(e: &BytesEnd) -> String {
     format_end_tag(e.name().as_ref())
 }
 
-/// Derive end tag from start tag
-pub fn end_element_to_string_from_start_element(e: &BytesStart) -> String {
-    format_end_tag(e.name().as_ref())
-}
-
-fn format_end_tag(name: &[u8]) -> String {
+pub fn format_end_tag(name: &[u8]) -> String {
     let element_name = local_name_to_string(name);
     format!("</{element_name}>")
 }
@@ -108,7 +104,7 @@ pub fn general_ref_to_string(e: &BytesRef, escape: bool) -> String {
     }
 }
 
-pub fn encode_xml_special_characters(input: String) -> String {
+pub fn unescape_xml_entities(input: String) -> String {
     input
         .replace("&amp;", "&")
         .replace("&quot;", "\"")
@@ -117,7 +113,7 @@ pub fn encode_xml_special_characters(input: String) -> String {
         .replace("&apos;", "'")
 }
 
-fn decode_xml_special_characters(input: String) -> String {
+fn escape_xml_entities(input: String) -> String {
     input
         .replace('&', "&amp;")
         .replace('\"', "&quot;")
@@ -311,11 +307,12 @@ pub fn extract_values_from_xml_paths(
     let mut results: Vec<Option<String>> = vec![None; parsed_paths.len()];
     let mut resolved_indices = HashSet::new();
 
-    // Returns indices of unresolved text-element paths that match the current path
-    let matching_text_paths = |parsed_paths: &[Vec<&str>],
-                               current_path: &[String],
-                               resolved_indices: &HashSet<usize>|
-     -> Vec<usize> {
+    /// Returns indices of unresolved text-element paths that match the current path
+    fn matching_text_paths(
+        parsed_paths: &[Vec<&str>],
+        current_path: &[String],
+        resolved_indices: &HashSet<usize>,
+    ) -> Vec<usize> {
         parsed_paths
             .iter()
             .enumerate()
@@ -327,7 +324,7 @@ pub fn extract_values_from_xml_paths(
             })
             .map(|(i, _)| i)
             .collect()
-    };
+    }
 
     loop {
         match reader.read_event_into(&mut buf) {
@@ -421,9 +418,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_decode_xml_special_characters() {
+    fn test_escape_xml_entities() {
         assert_eq!(
-            decode_xml_special_characters("This & that \"test\" <tag>".to_string()),
+            escape_xml_entities("This & that \"test\" <tag>".to_string()),
             "This &amp; that &quot;test&quot; &lt;tag&gt;"
         );
     }

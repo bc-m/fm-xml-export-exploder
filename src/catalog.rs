@@ -1,31 +1,29 @@
 use std::io::{BufRead, Read};
 use std::path::{Path, PathBuf};
 
-use anyhow::Error;
+use anyhow::{Result, bail};
 use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name};
 use crate::utils::xml_utils::{
-    XmlEventType, end_element_to_string, end_element_to_string_from_start_element,
-    extract_values_from_xml_paths, push_rest_of_element_to_skeleton, skip_rest_of_element,
-    start_element_to_string,
+    XmlEventType, end_element_to_string, extract_values_from_xml_paths, format_end_tag,
+    push_rest_of_element_to_skeleton, skip_rest_of_element, start_element_to_string,
 };
 use crate::utils::{
-    FolderStructure, build_out_dir_path, create_dir, move_to_subfolder,
-    push_line_to_skeleton, rename_file_if_necessary, write_rest_of_element_to_file,
+    FolderStructure, build_out_dir_path, create_dir, move_to_subfolder, push_line_to_skeleton,
+    rename_file_if_necessary, write_rest_of_element_to_file,
 };
 use crate::xml_processor::ProcessingContext;
 
 /// Parse and explode a generic catalog, handling both wrapped and unwrapped formats
 pub fn xml_explode_catalog<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
-    _start_tag: &BytesStart,
     folder_structure: Option<&FolderStructure>,
-) -> Result<Option<FolderStructure>, Error> {
+) -> Result<Option<FolderStructure>> {
     let Some(catalog_type) = context.catalog_type else {
-        return Err(anyhow::anyhow!("❌ Catalog type not specified"));
+        bail!("Catalog type not specified");
     };
     let catalog_config = catalog_type.get_config();
     let catalog_item_name = catalog_config.catalog_item_name;
@@ -100,22 +98,23 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 // Handle catalog items (e.g. <BaseDirectory>)
                 // Parse attributes needed for folder tracking
                 if uses_folders {
-                    let (id, name, is_folder, is_marker, is_separator) =
-                        parse_folder_attributes(&e);
-                    current_id = id;
-                    current_name = name;
+                    let attrs = parse_folder_attributes(&e);
+                    current_id = attrs.id;
+                    current_name = attrs.name;
 
-                    if is_folder {
+                    if attrs.is_folder {
                         current_path.push(join_scope_id_and_name(
                             &current_id,
                             &escape_filename(&current_name),
                         ));
                     }
-                    if is_marker {
+                    if attrs.is_marker {
                         current_path.pop();
                     }
 
-                    if (is_folder || is_marker || is_separator) && !context.flags.lossless {
+                    if (attrs.is_folder || attrs.is_marker || attrs.is_separator)
+                        && !context.flags.lossless
+                    {
                         skip_rest_of_element(context.reader);
                         rel_depth -= 1;
                         continue;
@@ -148,7 +147,6 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 );
                 if let Some(subfolder_dir_path) = subfolder_dir_path
                     && subfolder_dir_path != out_dir_path_base
-                    && !subfolder_dir_path.as_os_str().is_empty()
                 {
                     let _ = move_to_subfolder(&file_path, &subfolder_dir_path);
                 }
@@ -158,7 +156,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 // The element will be consumed by now, so we can't rely on catching the end tag in the Ok(Event::End) arm below
                 // Instead, write it out manually here
                 if context.flags.lossless {
-                    let end_tag = end_element_to_string_from_start_element(&e);
+                    let end_tag = format_end_tag(e.name().as_ref());
                     push_line_to_skeleton(
                         context.skeleton,
                         base_depth,
@@ -209,12 +207,8 @@ fn add_start_tag_to_skeleton<R: Read + BufRead>(
     rel_depth: usize,
     wrapped_in_object_list: bool,
 ) {
-    if !context.flags.lossless {
-        return;
-    }
-
     let should_add = rel_depth == 2 || (wrapped_in_object_list && rel_depth == 3);
-    if !should_add {
+    if !context.flags.lossless || !should_add {
         return;
     }
 
@@ -230,33 +224,34 @@ fn add_start_tag_to_skeleton<R: Read + BufRead>(
     );
 }
 
+#[derive(Default)]
+struct FolderAttributes {
+    id: String,
+    name: String,
+    is_folder: bool,
+    is_marker: bool,
+    is_separator: bool,
+}
+
 /// Parse folder-related attributes from a catalog item
-fn parse_folder_attributes(e: &BytesStart) -> (String, String, bool, bool, bool) {
-    let mut current_id = String::new();
-    let mut current_name = String::new();
-    let mut is_folder = false;
-    let mut is_marker = false;
-    let mut is_separator = false;
+fn parse_folder_attributes(e: &BytesStart) -> FolderAttributes {
+    let mut attrs = FolderAttributes::default();
 
     for attr in get_attributes(e) {
         match attr.0.as_str() {
-            "id" => current_id = attr.1,
-            "name" => current_name = unescape(&attr.1).unwrap().into_owned(),
+            "id" => attrs.id = attr.1,
+            "name" => attrs.name = unescape(&attr.1).unwrap().into_owned(),
             "isFolder" => match attr.1.as_str() {
-                "True" => is_folder = true,
-                "Marker" => is_marker = true,
+                "True" => attrs.is_folder = true,
+                "Marker" => attrs.is_marker = true,
                 _ => {}
             },
-            "isSeparatorItem" => {
-                if attr.1 == "True" {
-                    is_separator = true
-                }
-            }
+            "isSeparatorItem" => attrs.is_separator = attr.1 == "True",
             _ => {}
         }
     }
 
-    (current_id, current_name, is_folder, is_marker, is_separator)
+    attrs
 }
 
 /// Determine the subfolder path for a catalog item.
@@ -272,11 +267,10 @@ fn determine_subfolder_path(
 ) -> Option<PathBuf> {
     let Some(folder_structure) = folder_structure else {
         // For catalogs with their own folder tracking
-        return if uses_folders && !current_path.is_empty() {
-            Some(out_dir_path_base.join(current_path.join("/")))
-        } else {
-            None
-        };
+        if uses_folders && !current_path.is_empty() {
+            return Some(out_dir_path_base.join(current_path.join("/")));
+        }
+        return None;
     };
 
     // For dependent catalogs that use a previously-built folder structure
@@ -287,10 +281,7 @@ fn determine_subfolder_path(
     let results = extract_values_from_xml_paths(file_path, &[id_path]).ok()?;
     let id = results.first()?.as_ref()?;
     let path = folder_structure.get_path_for_id(id);
-    if path.is_empty() {
-        return None;
-    }
-    Some(out_dir_path_base.join(path.join("/")))
+    (!path.is_empty()).then(|| out_dir_path_base.join(path.join("/")))
 }
 
 /// Handle ancillary elements like <UUID> and <TagList>

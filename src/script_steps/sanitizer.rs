@@ -8,7 +8,9 @@ pub fn sanitize(step_id: u32, step_xml: &str) -> Option<String> {
         ScriptStep::PerformScript => script_steps::perform_script::sanitize(step_xml),
         ScriptStep::GoToRecordRequestPage => script_steps::go_to_record::sanitize(step_xml),
         ScriptStep::OmitMultipleRecords => script_steps::omit_multiple_records::sanitize(step_xml),
-        ScriptStep::PerformFind => script_steps::perform_find::sanitize(step_xml),
+        ScriptStep::PerformFind | ScriptStep::ConstrainFoundSet | ScriptStep::ExtendFoundSet => {
+            script_steps::perform_find::sanitize(step_xml)
+        }
         ScriptStep::InsertText => script_steps::insert_text::sanitize(step_xml),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),
         ScriptStep::ReplaceFieldContents => {
@@ -17,18 +19,19 @@ pub fn sanitize(step_id: u32, step_xml: &str) -> Option<String> {
         ScriptStep::GoToPortalRow => script_steps::go_to_portal_row::sanitize(step_xml),
         ScriptStep::ExitScript => script_steps::exit_script::sanitize(step_xml),
         ScriptStep::CloseWindow => script_steps::close_window::sanitize(step_xml),
-        ScriptStep::ConstrainFoundSet => script_steps::perform_find::sanitize(step_xml),
-        ScriptStep::ExtendFoundSet => script_steps::perform_find::sanitize(step_xml),
         ScriptStep::SetVariable => script_steps::set_variable::sanitize(step_xml),
         ScriptStep::GoToObject => script_steps::go_to_object::sanitize(step_xml),
         ScriptStep::RefreshObject => script_steps::refresh_object::sanitize(step_xml),
         _ => script_steps::sanitize::from_xml(step_id, step_xml),
     };
 
-    let step = step_sanitized.or_else(|| {
-        eprintln!("Could not parse: {step_xml}");
-        None
-    })?;
+    let step = match step_sanitized {
+        Some(s) => s,
+        None => {
+            eprintln!("Could not parse: {step_xml}");
+            return None;
+        }
+    };
 
     if is_enabled {
         Some(step)

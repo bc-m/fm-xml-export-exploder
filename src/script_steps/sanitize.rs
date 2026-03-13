@@ -17,17 +17,12 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    if let Some(value) = get_attribute(&e, "name") {
-                        name = value;
-                    }
+                    name = get_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
-                b"ParameterValues" => parameters.push(
-                    ParameterValues::from_xml(&mut reader, &e, step_id)
-                        .unwrap()
-                        .display()
-                        .unwrap(),
-                ),
+                b"ParameterValues" => {
+                    parameters.push(ParameterValues::from_xml(&mut reader, &e, step_id).display())
+                }
                 _ => {}
             },
             _ => {}
@@ -36,8 +31,9 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     }
 
     let parameters = parameters.join(" ; ");
+    let script_step = id_to_script_step(step_id);
 
-    if id_to_script_step(step_id) == ScriptStep::Comment {
+    if script_step == ScriptStep::Comment {
         return if parameters.trim().is_empty() {
             Some(String::new())
         } else {
@@ -48,7 +44,7 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     let parameters = parameters.trim();
     if parameters.is_empty() {
         if matches!(
-            id_to_script_step(step_id),
+            script_step,
             ScriptStep::GoToField
                 | ScriptStep::IfStart
                 | ScriptStep::IfElse

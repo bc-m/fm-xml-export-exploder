@@ -4,6 +4,7 @@ use std::path::Path;
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
+use crate::utils::attributes::get_attribute;
 use crate::utils::file_utils::for_each_xml_file;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::cdata_to_string;
@@ -49,7 +50,7 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 break;
             }
             Ok(Event::Eof) => break,
-            Ok(Event::Start(ref e)) => {
+            Ok(Event::Start(e)) => {
                 let extract_attrs = match e.name().as_ref() {
                     b"CustomFunction" => {
                         saw_custom_function = true;
@@ -88,8 +89,5 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
         buf.clear()
     }
 
-    if cf_info.id.is_empty() {
-        None
-    }
     (!cf_info.id.is_empty()).then_some(cf_info)
 }

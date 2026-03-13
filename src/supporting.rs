@@ -1,6 +1,6 @@
 use std::io::{BufRead, Read};
 
-use anyhow::Error;
+use anyhow::Result;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::utils::xml_utils::{
@@ -17,7 +17,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
     out_file_name: &str,
-) -> Result<(), Error> {
+) -> Result<()> {
     let out_dir_path = build_out_dir_path(context, None)?;
     create_dir(&out_dir_path);
     let out_file_path = out_dir_path.join(format!("{out_file_name}.xml"));

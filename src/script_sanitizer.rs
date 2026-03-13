@@ -8,6 +8,7 @@ use crate::config::Flags;
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
+use crate::utils::file_utils::for_each_xml_file;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
@@ -17,7 +18,6 @@ use crate::utils::xml_utils::{
 #[derive(Debug, Default)]
 struct ScriptInfo {
     id: String,
-    name: String,
     text: String,
 }
 
@@ -72,13 +72,8 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 depth += 1;
 
                 if depth == 2 && e.name().as_ref() == b"ScriptReference" {
-                    // Extract script ID and name from ScriptReference
-                    for attr in crate::utils::attributes::get_attributes(&e) {
-                        match attr.0.as_str() {
-                            "id" => script_info.id = attr.1,
-                            "name" => script_info.name = attr.1,
-                            _ => {}
-                        }
+                    if let Some(id) = get_attribute(&e, "id") {
+                        script_info.id = id;
                     }
                 } else if depth == 3 && e.name().as_ref() == b"Step" {
                     in_step = true;
@@ -125,12 +120,13 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     if let Some(text) = sanitize(step_info.id, &step_info.content) {
                         for (i, line) in text.split('\r').enumerate() {
                             let extra_indent = if i > 0 && !is_comment { 4 } else { 0 };
-                            let mut indent =
-                                "\t".repeat(step_info.indent_level_current + extra_indent);
+                            let indent_count = step_info.indent_level_current + extra_indent;
+                            script_info.text.push_str(&"\t".repeat(indent_count));
                             if is_comment && i > 0 {
-                                indent.push_str("  ");
+                                script_info.text.push_str("  ");
                             }
-                            script_info.text.push_str(&format!("{indent}{line}\n"));
+                            script_info.text.push_str(line);
+                            script_info.text.push('\n');
                         }
                     }
                     step_info.content.clear()
@@ -159,9 +155,5 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
         buf.clear()
     }
 
-    if script_info.id.is_empty() {
-        None
-    } else {
-        Some(script_info)
-    }
+    (!script_info.id.is_empty()).then_some(script_info)
 }

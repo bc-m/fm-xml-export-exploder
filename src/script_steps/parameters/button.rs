@@ -8,15 +8,12 @@ use crate::utils::xml_utils::cdata_to_string;
 pub struct Button {
     pub label: Option<String>,
     pub label_from_cdata: bool,
-    #[allow(dead_code)]
-    pub commit: bool,
 }
 
 impl Button {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Button {
         let mut label = get_attribute(e, "value");
         let mut label_from_cdata = false;
-        let mut commit = false;
         let mut in_text = false;
         let mut depth = 1;
 
@@ -27,14 +24,8 @@ impl Button {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(inner)) => {
                     depth += 1;
-                    match inner.name().as_ref() {
-                        b"Text" => in_text = true,
-                        b"Boolean" => {
-                            if let Some(val) = get_attribute(&inner, "value") {
-                                commit = val == "True";
-                            }
-                        }
-                        _ => {}
+                    if inner.name().as_ref() == b"Text" {
+                        in_text = true;
                     }
                 }
                 Ok(Event::CData(cdata)) => {
@@ -63,7 +54,6 @@ impl Button {
         Button {
             label,
             label_from_cdata,
-            commit,
         }
     }
 
@@ -113,7 +103,6 @@ mod tests {
 
         let button = Button::from_xml(&mut reader, &element);
         assert_eq!(button.label, Some(r#""OK""#.to_string()));
-        assert!(!button.commit);
         assert_eq!(
             button.display("Button1"),
             Some(r#"Default Button: "OK""#.to_string())
@@ -136,7 +125,6 @@ mod tests {
 
         let button = Button::from_xml(&mut reader, &element);
         assert_eq!(button.label, Some("Save".to_string()));
-        assert!(button.commit);
         assert_eq!(
             button.display("Button2"),
             Some(r#"Button 2: "Save""#.to_string())
@@ -159,7 +147,6 @@ mod tests {
 
         let button = Button::from_xml(&mut reader, &element);
         assert_eq!(button.label, None);
-        assert!(!button.commit);
         assert_eq!(button.display("Button2"), None);
     }
 
