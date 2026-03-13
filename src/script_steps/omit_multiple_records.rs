@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::get_attribute;
 
@@ -23,14 +24,11 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Boolean" => {
                     option_name = get_attribute(&e, "type").unwrap_or_default();
-                    state = get_attribute(&e, "value").is_some_and(|v| v == "True");
+                    state = get_attribute(&e, "value").as_deref() == Some("True");
                     continue;
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}
             },
@@ -43,12 +41,11 @@ pub fn sanitize(step: &str) -> Option<String> {
         return Some(format!("{name} []"));
     }
 
-    let on_off = if state { "ON" } else { "OFF" };
-    let mut params = format!("{option_name}: {on_off}");
+    let mut parts = vec![format!("{option_name}: {}", Boolean::on_off(state))];
     if !calculation.is_empty() {
-        params.push_str(&format!(" ; {calculation}"));
+        parts.push(calculation);
     }
-    Some(format!("{name} [ {params} ]"))
+    Some(format!("{name} [ {} ]", parts.join(" ; ")))
 }
 
 #[cfg(test)]

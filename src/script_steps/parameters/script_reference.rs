@@ -10,7 +10,7 @@ pub struct ScriptReference {
 }
 
 impl ScriptReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<ScriptReference> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> ScriptReference {
         let mut depth = 1;
         let mut item = ScriptReference::default();
 
@@ -42,23 +42,17 @@ impl ScriptReference {
             buf.clear();
         }
 
-        Some(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {
         let mut parts = Vec::new();
-
-        if let Some(script_name) = self.script_name {
-            parts.push(format!("\"{script_name}\""));
+        if let Some(name) = self.script_name {
+            parts.push(format!("\"{name}\""));
         }
-        if let Some(data_source_name) = self.data_source_name {
-            parts.push(format!("from file \"{data_source_name}\""));
+        if let Some(name) = self.data_source_name {
+            parts.push(format!("from file \"{name}\""));
         }
-
-        if parts.is_empty() {
-            None
-        } else {
-            Some(parts.join(" "))
-        }
+        (!parts.is_empty()).then(|| parts.join(" "))
     }
 }

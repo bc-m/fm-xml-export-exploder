@@ -15,19 +15,17 @@ pub fn sanitize(step: &str) -> Option<String> {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
-            Ok(Event::Start(ref e)) => match e.name().as_ref() {
+            Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(e, "name").unwrap();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"Name" => {
-                    calculation = Calculation::from_xml(&mut reader, e)
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default()
                 }
                 b"repetition" => {
-                    repetition = Calculation::from_xml(&mut reader, e)
-                        .unwrap()
+                    repetition = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default()
                 }

@@ -10,10 +10,7 @@ pub struct VariableReference {
 }
 
 impl VariableReference {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        e: &BytesStart,
-    ) -> Result<VariableReference, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> VariableReference {
         let mut depth = 1;
         let mut item = VariableReference {
             name: get_attribute(e, "value"),
@@ -45,17 +42,13 @@ impl VariableReference {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {
-        self.name.map(|name| {
-            let repetition = self.repetition.unwrap_or(1);
-            if repetition != 1 {
-                format!("{name}[{repetition}]")
-            } else {
-                name
-            }
+        self.name.map(|name| match self.repetition {
+            Some(rep) if rep != 1 => format!("{name}[{rep}]"),
+            _ => name,
         })
     }
 }
@@ -84,7 +77,6 @@ mod tests {
         let expected_output = "$foo".to_string();
         assert_eq!(
             VariableReference::from_xml(&mut reader, &element)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output
@@ -108,7 +100,6 @@ mod tests {
         let expected_output = "$foo[1337]".to_string();
         assert_eq!(
             VariableReference::from_xml(&mut reader, &element)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output

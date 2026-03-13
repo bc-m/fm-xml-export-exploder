@@ -12,7 +12,7 @@ pub struct LayoutReferenceContainer {
 }
 
 impl LayoutReferenceContainer {
-    pub fn parse_label(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<String, String> {
+    fn parse_label(reader: &mut Reader<&[u8]>) -> String {
         let mut label = String::new();
         let mut buf = Vec::new();
         loop {
@@ -31,10 +31,10 @@ impl LayoutReferenceContainer {
             buf.clear();
         }
 
-        Ok(label)
+        label
     }
 
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Self, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Self {
         let mut depth = 1;
         let mut item = LayoutReferenceContainer {
             reference_type: get_attribute(e, "value").unwrap_or_default(),
@@ -56,13 +56,11 @@ impl LayoutReferenceContainer {
                             item.layout_reference = get_attribute(&e, "name");
                         }
                         b"Label" => {
-                            item.layout_reference =
-                                Some(LayoutReferenceContainer::parse_label(reader, &e).unwrap());
+                            item.layout_reference = Some(Self::parse_label(reader));
                             depth -= 1;
                         }
                         b"Calculation" => {
-                            item.layout_reference =
-                                Calculation::from_xml(reader, &e).unwrap().display();
+                            item.layout_reference = Calculation::from_xml(reader, &e).display();
                             depth -= 1;
                         }
                         _ => {}
@@ -79,7 +77,7 @@ impl LayoutReferenceContainer {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {
@@ -118,9 +116,7 @@ mod tests {
 
         let expected_output = Some("Layout: <Originallayout>".to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -141,9 +137,7 @@ mod tests {
 
         let expected_output = Some(r#"Layout: "Aufgabenliste""#.to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -171,9 +165,7 @@ mod tests {
 
         let expected_output = Some(r#"Layoutname: "LAYOUT_NAME_CALCULATION""#.to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -196,9 +188,7 @@ mod tests {
 
         let expected_output = Some(r#"Layout: "Palettes""#.to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }

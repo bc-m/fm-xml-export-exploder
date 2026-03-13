@@ -25,28 +25,24 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Boolean" => {
-                    if get_attribute(&e, "value").unwrap() != "True" {
+                    if get_attribute(&e, "value").as_deref() != Some("True") {
                         continue;
                     }
                     let label = get_attribute(&e, "type").unwrap();
                     params.push((label, "ON".to_string()));
                 }
                 b"FieldReference" => {
-                    let field_reference = FieldReference::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap();
+                    let field_reference = FieldReference::from_xml(&mut reader, &e).display();
                     params.push((String::new(), field_reference))
                 }
                 b"Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }
                 b"List" => {
                     if in_serial_number_section {
-                        if get_attribute(&e, "value").unwrap() == "True"
+                        if get_attribute(&e, "value").as_deref() == Some("True")
                             && let Some(last_param) = params.last_mut()
                         {
                             last_param.0.clone_from(&last_param.1);
@@ -92,7 +88,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     let formatted: Vec<String> = params
-        .iter()
+        .into_iter()
         .map(|(key, value)| {
             if key.is_empty() {
                 value.replace(": ", "")
@@ -102,7 +98,7 @@ pub fn sanitize(step: &str) -> Option<String> {
         })
         .collect();
 
-    Some(format!("{} [ {} ]", name, formatted.join(" ; ")))
+    Some(format!("{name} [ {} ]", formatted.join(" ; ")))
 }
 
 #[cfg(test)]

@@ -7,13 +7,14 @@ use crate::utils::attributes::get_attribute;
 pub struct Comment;
 
 impl Comment {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<String, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> String {
         let mut depth = 1;
         let mut comment = String::new();
         let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
+                Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
 
@@ -32,6 +33,6 @@ impl Comment {
             buf.clear();
         }
 
-        Ok(unescape(&comment).unwrap().into_owned())
+        unescape(&comment).unwrap().into_owned()
     }
 }

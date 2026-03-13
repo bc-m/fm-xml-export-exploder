@@ -9,7 +9,7 @@ pub struct Animation {
 }
 
 impl Animation {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Animation, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Animation {
         let mut depth = 1;
         let mut item = Animation::default();
 
@@ -35,7 +35,7 @@ impl Animation {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {

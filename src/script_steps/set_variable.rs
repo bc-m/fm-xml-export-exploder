@@ -25,13 +25,11 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"value" => {
                     value = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }
                 b"repetition" => {
                     repetition = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }

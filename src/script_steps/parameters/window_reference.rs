@@ -13,16 +13,16 @@ pub struct WindowReference {
     pub parameters: Vec<String>,
 }
 
-pub fn first_char_uppercase(s: &str) -> String {
-    let mut c = s.chars();
-    match c.next() {
+fn capitalize(s: &str) -> String {
+    let mut chars = s.chars();
+    match chars.next() {
         None => String::new(),
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+        Some(first) => format!("{}{}", first.to_uppercase(), chars.as_str()),
     }
 }
 
 impl WindowReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<WindowReference> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> WindowReference {
         let mut depth = 1;
         let mut window_reference = WindowReference::default();
 
@@ -35,52 +35,32 @@ impl WindowReference {
                     depth += 1;
 
                     let element_name = e.name();
-                    match element_name.as_ref() {
-                        b"Style" => {
-                            if let Ok(param_value) = Style::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                window_reference.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
-                        b"LayoutReferenceContainer" => {
-                            window_reference.parameters.push(
-                                LayoutReferenceContainer::from_xml(reader, &e)
-                                    .unwrap()
-                                    .display()
-                                    .unwrap_or_default(),
-                            );
-                            depth -= 1;
-                        }
-                        b"Select" => {
-                            if let Ok(param_value) = Select::from_xml(reader, &e)
-                                && let Some(calc) = param_value.display()
-                            {
-                                window_reference.parameters.push(calc);
-                            }
-                            depth -= 1;
-                        }
+                    let parsed = match element_name.as_ref() {
+                        b"Style" => Style::from_xml(reader, &e).display(),
+                        b"LayoutReferenceContainer" => Some(
+                            LayoutReferenceContainer::from_xml(reader, &e)
+                                .display()
+                                .unwrap_or_default(),
+                        ),
+                        b"Select" => Select::from_xml(reader, &e).display(),
                         b"Name" | b"height" | b"width" | b"top" | b"left" | b"Text" => {
-                            if let Ok(param_value) = Calculation::from_xml(reader, &e)
-                                && let Some(calc) = param_value.display()
-                            {
-                                let name = local_name_to_string(element_name.as_ref());
-                                let name = first_char_uppercase(name.as_str());
-                                window_reference.parameters.push(format!("{name}: {calc}"));
-                            }
-                            depth -= 1;
+                            Calculation::from_xml(reader, &e).display().map(|calc| {
+                                let label =
+                                    capitalize(&local_name_to_string(element_name.as_ref()));
+                                format!("{label}: {calc}")
+                            })
                         }
                         b"Close" | b"Minimize" | b"Maximize" | b"Resize" | b"MenuBar"
                         | b"Toolbar" | b"DimParentWindow" => {
-                            if let Ok(param_value) = BooleanContainer::from_xml(reader, &e)
-                                && let Some(calc) = param_value.display()
-                            {
-                                window_reference.parameters.push(calc);
-                            }
-                            depth -= 1;
+                            BooleanContainer::from_xml(reader, &e).display()
                         }
-                        _ => {}
+                        _ => {
+                            continue;
+                        }
+                    };
+                    depth -= 1;
+                    if let Some(display) = parsed {
+                        window_reference.parameters.push(display);
                     }
                 }
                 Ok(Event::End(_)) => {
@@ -94,11 +74,11 @@ impl WindowReference {
             buf.clear()
         }
 
-        Some(window_reference)
+        window_reference
     }
 
-    pub fn display(self) -> Option<String> {
-        Some(self.parameters.join(" ; "))
+    pub fn display(self) -> String {
+        self.parameters.join(" ; ")
     }
 }
 
@@ -143,11 +123,9 @@ mod tests {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
         };
-        let expected_output = Some("Style: Dokument ; Layout: <Originallayout>".to_string());
+        let expected_output = "Style: Dokument ; Layout: <Originallayout>";
         assert_eq!(
-            WindowReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            WindowReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -231,11 +209,9 @@ mod tests {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
         };
-        let expected_output = Some(r#"Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF"#.to_string());
+        let expected_output = r#"Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF"#;
         assert_eq!(
-            WindowReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            WindowReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -297,13 +273,10 @@ mod tests {
             Ok(Event::Start(e)) => e,
             _ => panic!("Wrong read event"),
         };
-        let expected_output = Some(
-            r#"Height: $$AppWindowHeight ; Width: $$AppWindowWidth ; Top: 0 ; Left: 0"#.to_string(),
-        );
+        let expected_output =
+            r#"Height: $$AppWindowHeight ; Width: $$AppWindowWidth ; Top: 0 ; Left: 0"#;
         assert_eq!(
-            WindowReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            WindowReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }

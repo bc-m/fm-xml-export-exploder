@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::get_attribute;
 
@@ -27,13 +28,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Boolean" => {
                     boolean_option_type = get_attribute(&e, "type").unwrap();
-                    boolean_option_value = get_attribute(&e, "value").unwrap() == "True";
+                    boolean_option_value = get_attribute(&e, "value").as_deref() == Some("True");
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}
             },
@@ -46,18 +44,28 @@ pub fn sanitize(step: &str) -> Option<String> {
         return None;
     }
 
-    let on_off = if boolean_option_value { "ON" } else { "OFF" };
     let is_calculated = option_type == "5";
 
-    let params = if boolean_option_type.is_empty() {
-        if is_calculated { calculation } else { option }
-    } else if is_calculated {
-        format!("{boolean_option_type}: {on_off} ; {calculation}")
+    let mut parts = Vec::new();
+    if is_calculated {
+        if !boolean_option_type.is_empty() {
+            parts.push(format!(
+                "{boolean_option_type}: {}",
+                Boolean::on_off(boolean_option_value)
+            ));
+        }
+        parts.push(calculation);
     } else {
-        format!("{option} ; {boolean_option_type}: {on_off}")
-    };
+        parts.push(option);
+        if !boolean_option_type.is_empty() {
+            parts.push(format!(
+                "{boolean_option_type}: {}",
+                Boolean::on_off(boolean_option_value)
+            ));
+        }
+    }
 
-    Some(format!("{name} [ {params} ]"))
+    Some(format!("{name} [ {} ]", parts.join(" ; ")))
 }
 
 #[cfg(test)]

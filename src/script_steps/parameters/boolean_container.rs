@@ -11,10 +11,7 @@ pub struct BooleanContainer {
 }
 
 impl BooleanContainer {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        e: &BytesStart,
-    ) -> Result<BooleanContainer, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> BooleanContainer {
         let mut depth = 1;
         let mut item = BooleanContainer {
             name: local_name_to_string(e.name().as_ref()),
@@ -26,9 +23,7 @@ impl BooleanContainer {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
-                Ok(Event::Start(_)) => {
-                    depth += 1;
-                }
+                Ok(Event::Start(_)) => depth += 1,
                 Ok(Event::Text(e)) => match text_to_string(&e).as_str() {
                     "True" => item.value = Some(true),
                     "False" => item.value = Some(false),
@@ -45,29 +40,29 @@ impl BooleanContainer {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {
+        // Hide DimParentWindow entirely
         if self.name == "DimParentWindow" {
             return None;
         }
 
-        if matches!(
-            self.name.as_str(),
-            "Close" | "Minimize" | "Maximize" | "Resize" | "MenuBar" | "Toolbar"
-        ) && self.value == Some(true)
+        let value = self.value?;
+
+        // Hide other window options when they are ON (their default)
+        if value
+            && matches!(
+                self.name.as_str(),
+                "Close" | "Minimize" | "Maximize" | "Resize" | "MenuBar" | "Toolbar"
+            )
         {
             return None;
         }
 
-        self.value.map(|v| {
-            format!(
-                "{}: {}",
-                self.name.replace("MenuBar", "Menu"),
-                Boolean::on_off(v)
-            )
-        })
+        let label = self.name.replace("MenuBar", "Menu");
+        Some(format!("{label}: {}", Boolean::on_off(value)))
     }
 }
 
@@ -91,7 +86,6 @@ mod tests {
         let expected_output = "Close: OFF".to_string();
         assert_eq!(
             BooleanContainer::from_xml(&mut reader, &element)
-                .unwrap()
                 .display()
                 .unwrap_or_default(),
             expected_output

@@ -11,7 +11,7 @@ pub struct FieldReference {
 }
 
 impl FieldReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<FieldReference, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> FieldReference {
         let mut depth = 1;
         let mut item = FieldReference {
             field_reference: get_attribute(e, "name"),
@@ -50,12 +50,12 @@ impl FieldReference {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(&self) -> String {
         let Some(table_reference) = &self.table_reference else {
-            return Some("🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string());
+            return "🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string();
         };
 
         let field_reference = match &self.field_reference {
@@ -63,13 +63,9 @@ impl FieldReference {
             _ => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨",
         };
 
-        let repetition = self.repetition.unwrap_or(1);
-        if repetition != 1 {
-            Some(format!(
-                "{table_reference}::{field_reference}[{repetition}]"
-            ))
-        } else {
-            Some(format!("{table_reference}::{field_reference}"))
+        match self.repetition {
+            Some(rep) if rep != 1 => format!("{table_reference}::{field_reference}[{rep}]"),
+            _ => format!("{table_reference}::{field_reference}"),
         }
     }
 }
@@ -96,12 +92,9 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = "Foo::Bar".to_string();
+        let expected_output = "Foo::Bar";
         assert_eq!(
-            FieldReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            FieldReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -121,12 +114,9 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = "Foo::Bar[1337]".to_string();
+        let expected_output = "Foo::Bar[1337]";
         assert_eq!(
-            FieldReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            FieldReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }

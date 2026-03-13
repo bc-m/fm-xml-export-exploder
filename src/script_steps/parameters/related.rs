@@ -10,7 +10,7 @@ pub struct Related {
 }
 
 impl Related {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<Related> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Related {
         let mut depth = 1;
         let mut item = Related::default();
 
@@ -21,9 +21,7 @@ impl Related {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-
-                    let element_name = e.name();
-                    match element_name.as_ref() {
+                    match e.name().as_ref() {
                         b"TableOccurrenceReference" => {
                             let table_occurrence = get_attribute(&e, "name")
                                 .unwrap_or_else(|| "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
@@ -32,7 +30,6 @@ impl Related {
                         b"LayoutReferenceContainer" => {
                             item.parameters.push(
                                 LayoutReferenceContainer::from_xml(reader, &e)
-                                    .unwrap()
                                     .display()
                                     .unwrap_or_default(),
                             );
@@ -64,10 +61,10 @@ impl Related {
             buf.clear()
         }
 
-        Some(item)
+        item
     }
 
-    pub fn display(self) -> Option<String> {
-        Some(self.parameters.join(" ; "))
+    pub fn display(self) -> String {
+        self.parameters.join(" ; ")
     }
 }

@@ -16,11 +16,7 @@ pub struct Boolean {
 }
 
 impl Boolean {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        _: &BytesStart,
-        step_id: u32,
-    ) -> Result<Boolean, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> Boolean {
         let mut depth = 1;
         let mut item = Boolean {
             step_id,
@@ -64,7 +60,7 @@ impl Boolean {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     fn should_hide_bool(&self) -> bool {
@@ -95,7 +91,8 @@ impl Boolean {
 
     pub fn display(self) -> Option<String> {
         if self.should_hide_bool() {
-            return if self.value.unwrap_or(false) {
+            // Hidden booleans only show their name when the value is true
+            return if self.value == Some(true) {
                 self.name
             } else {
                 None
@@ -103,7 +100,7 @@ impl Boolean {
         }
 
         match self.name {
-            Some(name) => self.value.map(|v| format!("{}: {}", name, Self::on_off(v))),
+            Some(name) => self.value.map(|v| format!("{name}: {}", Self::on_off(v))),
             None => self.value.map(|v| Self::on_off(v).to_string()),
         }
     }
@@ -133,7 +130,6 @@ mod tests {
         let expected_output = "Pause: OFF".to_string();
         assert_eq!(
             Boolean::from_xml(&mut reader, &element, 0)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output
@@ -157,7 +153,6 @@ mod tests {
         let expected_output = "OFF".to_string();
         assert_eq!(
             Boolean::from_xml(&mut reader, &element, 0)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output

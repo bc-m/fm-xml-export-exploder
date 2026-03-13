@@ -29,15 +29,12 @@ impl DialogField {
                             if let Some(param_type) = get_attribute(&inner, "type") {
                                 match param_type.as_str() {
                                     "Target" => {
-                                        if let Ok(target) = Target::from_xml(reader, &inner) {
-                                            item.target = target.display();
-                                        }
+                                        item.target = Target::from_xml(reader, &inner).display();
                                         depth -= 1;
                                     }
                                     "Label" => {
-                                        if let Ok(calc) = Calculation::from_xml(reader, &inner) {
-                                            item.label = calc.display();
-                                        }
+                                        item.label =
+                                            Calculation::from_xml(reader, &inner).display();
                                         depth -= 1;
                                     }
                                     _ => {}
@@ -45,12 +42,9 @@ impl DialogField {
                             }
                         }
                         b"Boolean" => {
-                            let is_password =
-                                get_attribute(&inner, "type").as_deref() == Some("Password");
-                            let is_true = get_attribute(&inner, "value").as_deref() == Some("True");
-                            if is_password && is_true {
-                                item.password = true;
-                            }
+                            item.password = get_attribute(&inner, "type").as_deref()
+                                == Some("Password")
+                                && get_attribute(&inner, "value").as_deref() == Some("True");
                         }
                         _ => {}
                     }

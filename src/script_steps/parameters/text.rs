@@ -1,8 +1,9 @@
 use quick_xml::Reader;
 use quick_xml::escape::unescape;
-use quick_xml::events::{BytesStart, Event};
+use quick_xml::events::BytesStart;
 
 use crate::utils::attributes::get_attribute;
+use crate::utils::xml_utils::skip_rest_of_element;
 
 #[derive(Debug, Default)]
 pub struct Text {
@@ -10,32 +11,12 @@ pub struct Text {
 }
 
 impl Text {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Text, String> {
-        let mut depth = 1;
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Text {
         let item = Text {
             text: get_attribute(e, "value").map(|text| unescape(&text).unwrap().into_owned()),
         };
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(_)) => {
-                    depth += 1;
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
-        }
-
-        Ok(item)
+        skip_rest_of_element(reader);
+        item
     }
 
     pub fn display(self) -> Option<String> {
@@ -62,10 +43,7 @@ mod tests {
 
         let expected_output = "a\rb\rc".to_string();
         assert_eq!(
-            Text::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            Text::from_xml(&mut reader, &element).display().unwrap(),
             expected_output
         );
     }

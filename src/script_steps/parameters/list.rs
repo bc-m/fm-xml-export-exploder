@@ -11,11 +11,7 @@ pub struct List {
 }
 
 impl List {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        _: &BytesStart,
-        step_id: u32,
-    ) -> Result<List, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> List {
         let mut depth = 1;
         let mut item = List::default();
 
@@ -47,7 +43,7 @@ impl List {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {
@@ -79,7 +75,6 @@ mod tests {
         let expected_output = "_Home".to_string();
         assert_eq!(
             List::from_xml(&mut reader, &element, 136)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output

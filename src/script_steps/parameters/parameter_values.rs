@@ -24,11 +24,7 @@ pub struct ParameterValues {
 }
 
 impl ParameterValues {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        _: &BytesStart,
-        step_id: u32,
-    ) -> Result<ParameterValues, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> ParameterValues {
         let mut depth = 1;
         let mut item = ParameterValues {
             step_id,
@@ -49,136 +45,50 @@ impl ParameterValues {
                     let Some(parameter_type) = get_attribute(&e, "type") else {
                         continue;
                     };
-                    match parameter_type.as_str() {
-                        "Animation" => {
-                            if let Ok(param_value) = Animation::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
-                        "Boolean" => {
-                            if let Ok(param_value) = Boolean::from_xml(reader, &e, step_id)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
-                        "List" => {
-                            if let Ok(param_value) = List::from_xml(reader, &e, step_id)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
-                        "Target" => {
-                            if let Ok(param_value) = Target::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(format!(
-                                    "{}: {}",
-                                    parameter_type.as_str(),
-                                    display
-                                ));
-                            }
-                            depth -= 1;
-                        }
-                        "Calculation" => {
-                            if let Ok(param_value) = Calculation::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
+                    let parsed = match parameter_type.as_str() {
+                        "Animation" => Animation::from_xml(reader, &e).display(),
+                        "Boolean" => Boolean::from_xml(reader, &e, step_id).display(),
+                        "List" => List::from_xml(reader, &e, step_id).display(),
+                        "Target" => Target::from_xml(reader, &e)
+                            .display()
+                            .map(|d| format!("Target: {d}")),
+                        "Calculation" => Calculation::from_xml(reader, &e).display(),
                         "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo"
-                        | "Title" | "Message" => {
-                            if let Ok(param_value) = Calculation::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(format!(
-                                    "{}: {}",
-                                    parameter_type.as_str(),
-                                    display
-                                ));
-                            }
-                            depth -= 1;
-                        }
+                        | "Title" | "Message" => Calculation::from_xml(reader, &e)
+                            .display()
+                            .map(|d| format!("{parameter_type}: {d}")),
                         "LayoutReferenceContainer" => {
-                            if let Ok(param_value) = LayoutReferenceContainer::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
+                            LayoutReferenceContainer::from_xml(reader, &e).display()
                         }
-                        "FieldReference" => {
-                            if let Ok(param_value) = FieldReference::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
-                        "Comment" => {
-                            if let Ok(param_value) = Comment::from_xml(reader, &e) {
-                                item.parameters.push(param_value);
-                            }
-                            depth -= 1;
-                        }
+                        "FieldReference" => Some(FieldReference::from_xml(reader, &e).display()),
+                        "Comment" => Some(Comment::from_xml(reader, &e)),
                         "WindowReference" => {
-                            if let Some(param_value) = WindowReference::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
+                            let d = WindowReference::from_xml(reader, &e).display();
+                            if d.is_empty() { None } else { Some(d) }
                         }
                         "Related" => {
-                            if let Some(param_value) = Related::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
+                            let d = Related::from_xml(reader, &e).display();
+                            if d.is_empty() { None } else { Some(d) }
                         }
-                        "ScriptReference" => {
-                            if let Some(param_value) = ScriptReference::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
-                        }
+                        "ScriptReference" => ScriptReference::from_xml(reader, &e).display(),
                         "DataSourceReference" => {
-                            if let Some(param_value) = DataSourceReference::from_xml(reader, &e)
-                                && let Some(display) = param_value.display()
-                            {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
+                            DataSourceReference::from_xml(reader, &e).display()
                         }
                         "Button1" | "Button2" | "Button3" => {
-                            let button = Button::from_xml(reader, &e);
-                            if let Some(display) = button.display(parameter_type.as_str()) {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
+                            Button::from_xml(reader, &e).display(&parameter_type)
                         }
                         "Field1" | "Field2" | "Field3" => {
-                            let field = DialogField::from_xml(reader, &e);
-                            if let Some(display) = field.display(parameter_type.as_str()) {
-                                item.parameters.push(display);
-                            }
-                            depth -= 1;
+                            DialogField::from_xml(reader, &e).display(&parameter_type)
                         }
                         _ => {
                             item.parameters
                                 .push(format!(r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#));
+                            continue;
                         }
+                    };
+                    depth -= 1;
+                    if let Some(display) = parsed {
+                        item.parameters.push(display);
                     }
                 }
                 Ok(Event::End(_)) => {
@@ -192,10 +102,10 @@ impl ParameterValues {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(self) -> Option<String> {
+    pub fn display(self) -> String {
         match id_to_script_step(self.step_id) {
             ScriptStep::RevertTransaction => {
                 let mut params: Vec<_> = self
@@ -213,23 +123,19 @@ impl ParameterValues {
                     params.pop();
                 }
 
-                Some(params.join(" ; "))
+                params.join(" ; ")
             }
             ScriptStep::SetErrorLogging => {
-                let mut result = Vec::new();
                 let mut iter = self.parameters.into_iter();
-
-                if let Some(first) = iter.next() {
-                    let on_off = if first.ends_with(": ON") { "ON" } else { "OFF" };
-                    result.push(on_off.to_string());
-                }
-                if let Some(second) = iter.next() {
-                    result.push(second);
-                }
-
-                Some(result.join(" ; "))
+                let on_off = match iter.next() {
+                    Some(first) if first.ends_with(": ON") => "ON",
+                    _ => "OFF",
+                };
+                let mut result = vec![on_off.to_string()];
+                result.extend(iter.next());
+                result.join(" ; ")
             }
-            _ => Some(self.parameters.join(" ; ")),
+            _ => self.parameters.join(" ; "),
         }
     }
 }
@@ -257,12 +163,9 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = "Pause: OFF".to_string();
+        let expected_output = "Pause: OFF";
         assert_eq!(
-            ParameterValues::from_xml(&mut reader, &element, 0)
-                .unwrap()
-                .display()
-                .unwrap(),
+            ParameterValues::from_xml(&mut reader, &element, 0).display(),
             expected_output
         );
     }

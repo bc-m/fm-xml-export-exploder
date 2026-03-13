@@ -18,13 +18,10 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Name" => {
-                    only_current_file = get_attribute(&e, "current").unwrap() == "True";
+                    only_current_file = get_attribute(&e, "current").as_deref() == Some("True");
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}
             },

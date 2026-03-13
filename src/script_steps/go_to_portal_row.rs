@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
@@ -21,7 +22,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"Boolean" => {
                     select_label = get_attribute(&e, "type").unwrap();
-                    select = get_attribute(&e, "value").unwrap() == "True";
+                    select = get_attribute(&e, "value").as_deref() == Some("True");
                 }
                 b"List" => {
                     position = get_attribute(&e, "name").unwrap();
@@ -36,8 +37,10 @@ pub fn sanitize(step: &str) -> Option<String> {
     if name.is_empty() {
         return None;
     }
-    let on_off = if select { "ON" } else { "OFF" };
-    Some(format!("{name} [ {select_label}: {on_off} ; {position} ]"))
+    Some(format!(
+        "{name} [ {select_label}: {} ; {position} ]",
+        Boolean::on_off(select)
+    ))
 }
 
 #[cfg(test)]

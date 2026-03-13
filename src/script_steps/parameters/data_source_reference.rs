@@ -10,7 +10,7 @@ pub struct DataSourceReference {
 }
 
 impl DataSourceReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<DataSourceReference> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> DataSourceReference {
         let mut depth = 1;
         let mut item = DataSourceReference::default();
 
@@ -37,7 +37,7 @@ impl DataSourceReference {
             buf.clear();
         }
 
-        Some(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {

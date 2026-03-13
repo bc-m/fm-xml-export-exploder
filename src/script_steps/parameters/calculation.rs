@@ -9,7 +9,7 @@ pub struct Calculation {
 }
 
 impl Calculation {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Calculation, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Calculation {
         let mut depth = 1;
         let mut in_text = false;
         let mut item = Calculation::default();
@@ -45,7 +45,7 @@ impl Calculation {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
     pub fn display(self) -> Option<String> {
