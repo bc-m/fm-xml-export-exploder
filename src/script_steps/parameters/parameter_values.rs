@@ -128,12 +128,13 @@ impl ParameterValues {
             ScriptStep::SetErrorLogging => {
                 let mut iter = self.parameters.into_iter();
                 let on_off = match iter.next() {
-                    Some(first) if first.ends_with(": ON") => "ON",
-                    _ => "OFF",
+                    Some(first) if first.ends_with(": ON") => "ON".to_string(),
+                    _ => "OFF".to_string(),
                 };
-                let mut result = vec![on_off.to_string()];
-                result.extend(iter.next());
-                result.join(" ; ")
+                match iter.next() {
+                    Some(second) => format!("{on_off} ; {second}"),
+                    None => on_off,
+                }
             }
             _ => self.parameters.join(" ; "),
         }
