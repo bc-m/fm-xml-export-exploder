@@ -32,11 +32,15 @@ pub fn escape_filename(filename: &str) -> String {
         .collect()
 }
 
+const SKIP_PATTERNS: &[&str] = &[
+    "<TagList></TagList>",
+    "<OwnerID></OwnerID>",
+    "<Options>0</Options>",
+    "<Options>1048576</Options>",
+];
+
 pub fn should_skip_line(line: &str) -> bool {
-    line.contains("<TagList></TagList>")
-        || line.contains("<OwnerID></OwnerID>")
-        || line.contains("<Options>0</Options>")
-        || line.contains("<Options>1048576</Options>")
+    SKIP_PATTERNS.iter().any(|p| line.contains(p))
         || (line.contains("<UUID>") && line.contains("</UUID>"))
 }
 
