@@ -83,10 +83,9 @@ fn main() -> Result<()> {
     });
 
     let duration = start.elapsed();
-    if duration.as_secs() > 9 {
-        println!("Completed in {} seconds.", duration.as_secs());
-    } else {
-        println!("Completed in {} ms.", duration.as_millis());
+    match duration.as_secs() {
+        10.. => println!("Completed in {} seconds.", duration.as_secs()),
+        _ => println!("Completed in {} ms.", duration.as_millis()),
     }
 
     Ok(())
