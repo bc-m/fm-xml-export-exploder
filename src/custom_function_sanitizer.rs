@@ -50,28 +50,22 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 break;
             }
             Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => {
-                let extract_attrs = match e.name().as_ref() {
-                    b"CustomFunction" => {
-                        saw_custom_function = true;
-                        true
+            Ok(Event::Start(e)) => match e.name().as_ref() {
+                b"CustomFunction" => {
+                    saw_custom_function = true;
+                    if let Some(id) = get_attribute(&e, "id") {
+                        cf_info.id = id;
                     }
-                    b"CustomFunctionReference" => !saw_custom_function,
-                    b"Calculation" => {
-                        in_calculation = true;
-                        false
-                    }
-                    b"Text" => {
-                        in_text = true;
-                        false
-                    }
-                    _ => false,
-                };
-
-                if extract_attrs && let Some(id) = get_attribute(&e, "id") {
-                    cf_info.id = id;
                 }
-            }
+                b"CustomFunctionReference" if !saw_custom_function => {
+                    if let Some(id) = get_attribute(&e, "id") {
+                        cf_info.id = id;
+                    }
+                }
+                b"Calculation" => in_calculation = true,
+                b"Text" => in_text = true,
+                _ => {}
+            },
             Ok(Event::CData(e)) => {
                 if in_text && in_calculation {
                     cf_info.text = cdata_to_string(&e);
