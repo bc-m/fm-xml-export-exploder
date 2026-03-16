@@ -79,29 +79,26 @@ pub fn cdata_to_string(e: &BytesCData) -> String {
 /// Convert a general entity reference back to its escaped XML form
 /// e.g., BytesRef containing "quot" -> "&quot;", BytesRef containing "#09" -> "&#09;"
 pub fn general_ref_to_string(e: &BytesRef, escape: bool) -> String {
+    let Ok(entity_name) = e.decode() else {
+        return String::new();
+    };
+
     if escape {
         // Keep the reference in its escaped form (e.g., &quot;, &#09;)
-        match e.decode() {
-            Ok(entity_name) => format!("&{entity_name};"),
-            Err(_) => String::new(),
-        }
-    } else {
-        // Resolve the reference to its actual character
-        // First try character references (e.g., &#65; or &#x41;)
-        if let Ok(Some(ch)) = e.resolve_char_ref() {
-            return ch.to_string();
-        }
-        // For named entity references, resolve using unescape
-        match e.decode() {
-            Ok(entity_name) => {
-                let escaped = format!("&{entity_name};");
-                quick_xml::escape::unescape(&escaped)
-                    .map(|s| s.to_string())
-                    .unwrap_or(escaped)
-            }
-            Err(_) => String::new(),
-        }
+        return format!("&{entity_name};");
     }
+
+    // Resolve the reference to its actual character
+    // First try character references (e.g., &#65; or &#x41;)
+    if let Ok(Some(ch)) = e.resolve_char_ref() {
+        return ch.to_string();
+    }
+
+    // For named entity references, resolve using unescape
+    let escaped = format!("&{entity_name};");
+    quick_xml::escape::unescape(&escaped)
+        .map(|s| s.to_string())
+        .unwrap_or(escaped)
 }
 
 pub fn unescape_xml_entities(input: String) -> String {
@@ -160,7 +157,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    start_element_to_string(&e, flags).as_str(),
+                    &start_element_to_string(&e, flags),
                     false,
                     XmlEventType::Start,
                 );
@@ -172,7 +169,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    end_element_to_string(&e).as_str(),
+                    &end_element_to_string(&e),
                     false,
                     XmlEventType::End,
                 );
@@ -185,7 +182,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    cdata_element_to_string(&e).as_str(),
+                    &cdata_element_to_string(&e),
                     false,
                     XmlEventType::CData,
                 );
@@ -209,7 +206,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    general_ref_to_string(&e, true).as_str(),
+                    &general_ref_to_string(&e, true),
                     false,
                     XmlEventType::Text,
                 );
@@ -219,7 +216,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    text_element_to_string(&e, true).as_str(),
+                    &text_element_to_string(&e, true),
                     false,
                     XmlEventType::Comment,
                 );
