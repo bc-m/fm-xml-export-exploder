@@ -192,26 +192,22 @@ fn process_top_level_section<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
 ) -> Result<bool> {
-    match start_tag.name().as_ref() {
+    let (section, out_file_name) = match start_tag.name().as_ref() {
         b"Structure" => {
             context.top_level_section = Some(TopLevelSection::Structure);
-            Ok(false)
+            return Ok(false);
         }
-        b"Metadata" => {
-            context.top_level_section = Some(TopLevelSection::Metadata);
-            process_supporting_element(context, start_tag, "metadata")?;
-            Ok(true)
-        }
-        b"DDR_INFO" => {
-            context.top_level_section = Some(TopLevelSection::DdrInfo);
-            process_supporting_element(context, start_tag, "ddr_info")?;
-            Ok(true)
-        }
+        b"Metadata" => (TopLevelSection::Metadata, "metadata"),
+        b"DDR_INFO" => (TopLevelSection::DdrInfo, "ddr_info"),
         _ => {
             context.top_level_section = None;
-            Ok(false)
+            return Ok(false);
         }
-    }
+    };
+
+    context.top_level_section = Some(section);
+    process_supporting_element(context, start_tag, out_file_name)?;
+    Ok(true)
 }
 
 fn process_catalog_elements<R: Read + BufRead>(
