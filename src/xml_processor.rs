@@ -254,24 +254,21 @@ fn process_catalog_elements<R: Read + BufRead>(
         }
     }
 
-    // Handle post-processing for StepsForScripts
-    if catalog_type == CatalogType::StepsForScripts {
-        let sanitized_scripts_dir_path =
-            build_out_dir_path(context, Some(Qualifier::SanitizedScripts))?;
-        create_sanitized_scripts(
-            &xml_out_dir_path,
-            &sanitized_scripts_dir_path,
-            context.flags,
-        );
-    }
-
-    let needs_sanitized_cf = catalog_type == CatalogType::CalcsForCustomFunctions
-        || (catalog_type == CatalogType::CustomFunctions && ver >= VERSION_2_2_3_4);
-
-    if needs_sanitized_cf {
-        let sanitized_cf_dir_path =
-            build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-        create_sanitized_custom_functions(&xml_out_dir_path, &sanitized_cf_dir_path);
+    // Post-processing: create sanitized (human-readable) versions
+    match catalog_type {
+        CatalogType::StepsForScripts => {
+            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedScripts))?;
+            create_sanitized_scripts(&xml_out_dir_path, &dir, context.flags);
+        }
+        CatalogType::CalcsForCustomFunctions => {
+            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
+            create_sanitized_custom_functions(&xml_out_dir_path, &dir);
+        }
+        CatalogType::CustomFunctions if ver >= VERSION_2_2_3_4 => {
+            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
+            create_sanitized_custom_functions(&xml_out_dir_path, &dir);
+        }
+        _ => {}
     }
     Ok(true) // is_supported_catalog
 }
