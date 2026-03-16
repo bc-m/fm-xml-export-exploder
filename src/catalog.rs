@@ -137,18 +137,15 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 rename_file_if_necessary(&file_path, context.path_stack, catalog_item_name);
 
                 // Move to subfolder if necessary
-                let subfolder_dir_path = determine_subfolder_path(
+                if let Some(subfolder) = determine_subfolder_path(
                     &out_dir_path_base,
                     folder_structure,
                     &file_path,
                     id_path,
                     uses_folders,
                     &current_path,
-                );
-                if let Some(subfolder_dir_path) = subfolder_dir_path
-                    && subfolder_dir_path != out_dir_path_base
-                {
-                    let _ = move_to_subfolder(&file_path, &subfolder_dir_path);
+                ) {
+                    let _ = move_to_subfolder(&file_path, &subfolder);
                 }
 
                 update_folder_structure(&mut folder_structure_result, &current_id, &current_path);
@@ -257,6 +254,8 @@ fn parse_folder_attributes(e: &BytesStart) -> FolderAttributes {
 /// Determine the subfolder path for a catalog item.
 /// Uses `current_path` for catalogs that track their own folder hierarchy (scripts, custom functions, layouts),
 /// or looks up the path via `folder_structure` for dependent catalogs (steps, calcs).
+/// Returns `Some(subfolder)` only when the item should be moved, i.e., the resolved
+/// subfolder differs from `out_dir_path_base`.
 fn determine_subfolder_path(
     out_dir_path_base: &Path,
     folder_structure: Option<&FolderStructure>,
@@ -265,23 +264,30 @@ fn determine_subfolder_path(
     uses_folders: bool,
     current_path: &[String],
 ) -> Option<PathBuf> {
-    let Some(folder_structure) = folder_structure else {
-        // For catalogs with their own folder tracking
-        if uses_folders && !current_path.is_empty() {
-            return Some(out_dir_path_base.join(current_path.join("/")));
+    let subfolder = match folder_structure {
+        Some(fs) => {
+            // For dependent catalogs that use a previously-built folder structure
+            if id_path.is_empty() {
+                return None;
+            }
+            let results = extract_values_from_xml_paths(file_path, &[id_path]).ok()?;
+            let id = results.first()?.as_ref()?;
+            let path = fs.get_path_for_id(id);
+            if path.is_empty() {
+                return None;
+            }
+            out_dir_path_base.join(path.join("/"))
         }
-        return None;
+        None => {
+            // For catalogs with their own folder tracking
+            if !uses_folders || current_path.is_empty() {
+                return None;
+            }
+            out_dir_path_base.join(current_path.join("/"))
+        }
     };
 
-    // For dependent catalogs that use a previously-built folder structure
-    if id_path.is_empty() {
-        return None;
-    }
-
-    let results = extract_values_from_xml_paths(file_path, &[id_path]).ok()?;
-    let id = results.first()?.as_ref()?;
-    let path = folder_structure.get_path_for_id(id);
-    (!path.is_empty()).then(|| out_dir_path_base.join(path.join("/")))
+    (subfolder != out_dir_path_base).then_some(subfolder)
 }
 
 /// Handle ancillary elements like <UUID> and <TagList>
