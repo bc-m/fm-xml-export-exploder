@@ -78,15 +78,15 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 } else if depth == 3 && e.name().as_ref() == b"Step" {
                     in_step = true;
                     step_info.indent_level_current = step_info.indent_level_next;
-                    step_info.id = get_attribute(&e, "id").unwrap().parse::<u32>().unwrap();
+                    step_info.id = get_attribute(&e, "id").unwrap().parse().unwrap();
 
                     if get_attribute(&e, "enable").is_none_or(|v| v == "True") {
                         match id_to_script_step(step_info.id) {
                             ScriptStep::IfStart | ScriptStep::LoopStart => {
-                                step_info.indent_level_next += 1
+                                step_info.indent_level_next += 1;
                             }
                             ScriptStep::IfElse | ScriptStep::Else => {
-                                step_info.indent_level_current -= 1
+                                step_info.indent_level_current -= 1;
                             }
                             ScriptStep::IfEnd | ScriptStep::LoopEnd => {
                                 step_info.indent_level_current -= 1;
@@ -129,7 +129,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                             script_info.text.push('\n');
                         }
                     }
-                    step_info.content.clear()
+                    step_info.content.clear();
                 }
             }
             Ok(Event::CData(e)) => {
@@ -152,7 +152,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
             _ => {}
         }
 
-        buf.clear()
+        buf.clear();
     }
 
     (!script_info.id.is_empty()).then_some(script_info)

@@ -71,7 +71,7 @@ impl WindowReference {
                 }
                 _ => {}
             }
-            buf.clear()
+            buf.clear();
         }
 
         window_reference

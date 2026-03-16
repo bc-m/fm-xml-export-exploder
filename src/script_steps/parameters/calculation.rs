@@ -20,7 +20,7 @@ impl Calculation {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if e.name().as_ref() == b"Text" {
-                        in_text = true
+                        in_text = true;
                     }
                 }
                 Ok(Event::Eof) => break,
@@ -37,7 +37,7 @@ impl Calculation {
                     }
 
                     if e.name().as_ref() == b"Text" {
-                        in_text = false
+                        in_text = false;
                     }
                 }
                 _ => {}

@@ -22,14 +22,14 @@ impl List {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if let b"List" = e.name().as_ref()
+                    if e.name().as_ref() == b"List"
                         && let Some(name) = get_attribute(&e, "name")
-                        && let Ok(name) = unescape(name.as_str())
+                        && let Ok(name) = unescape(&name)
                     {
                         item.name = match id_to_script_step(step_id) {
                             ScriptStep::LoopStart => Some(format!("Flush: {name}")),
                             _ => Some(name.to_string()),
-                        }
+                        };
                     }
                 }
                 Ok(Event::End(_)) => {

@@ -30,14 +30,10 @@ impl Boolean {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if let b"Boolean" = e.name().as_ref() {
+                    if e.name().as_ref() == b"Boolean" {
                         for attr in get_attributes(&e) {
                             match attr.0.as_str() {
-                                "id" => {
-                                    if let Ok(id) = attr.1.parse::<u32>() {
-                                        item.id = Some(id);
-                                    }
-                                }
+                                "id" => item.id = attr.1.parse().ok(),
                                 "type" => item.name = Some(attr.1),
                                 "value" => match attr.1.as_str() {
                                     "True" => item.value = Some(true),

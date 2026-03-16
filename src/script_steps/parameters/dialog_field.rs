@@ -25,22 +25,17 @@ impl DialogField {
                 Ok(Event::Start(inner)) => {
                     depth += 1;
                     match inner.name().as_ref() {
-                        b"Parameter" => {
-                            if let Some(param_type) = get_attribute(&inner, "type") {
-                                match param_type.as_str() {
-                                    "Target" => {
-                                        item.target = Target::from_xml(reader, &inner).display();
-                                        depth -= 1;
-                                    }
-                                    "Label" => {
-                                        item.label =
-                                            Calculation::from_xml(reader, &inner).display();
-                                        depth -= 1;
-                                    }
-                                    _ => {}
-                                }
+                        b"Parameter" => match get_attribute(&inner, "type").as_deref() {
+                            Some("Target") => {
+                                item.target = Target::from_xml(reader, &inner).display();
+                                depth -= 1;
                             }
-                        }
+                            Some("Label") => {
+                                item.label = Calculation::from_xml(reader, &inner).display();
+                                depth -= 1;
+                            }
+                            _ => {}
+                        },
                         b"Boolean" => {
                             item.password = get_attribute(&inner, "type").as_deref()
                                 == Some("Password")

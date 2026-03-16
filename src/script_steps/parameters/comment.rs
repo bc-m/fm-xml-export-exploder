@@ -20,7 +20,7 @@ impl Comment {
 
                     if e.name().as_ref() == b"Comment" {
                         comment = get_attribute(&e, "value").unwrap_or_default();
-                    };
+                    }
                 }
                 Ok(Event::End(_)) => {
                     depth -= 1;

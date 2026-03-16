@@ -23,17 +23,16 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
         return None;
     }
     if calculation.is_empty() {
-        Some(format!("{name} []"))
-    } else {
-        Some(format!("{name} [ {calculation} ]"))
+        return Some(format!("{name} []"));
     }
+    Some(format!("{name} [ {calculation} ]"))
 }
 
 #[cfg(test)]

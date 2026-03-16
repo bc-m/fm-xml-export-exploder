@@ -91,7 +91,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
             _ => {}
         }
 
-        buf.clear()
+        buf.clear();
     }
     Ok(())
 }

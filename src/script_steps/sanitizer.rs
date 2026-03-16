@@ -25,13 +25,10 @@ pub fn sanitize(step_id: u32, step_xml: &str) -> Option<String> {
         _ => script_steps::sanitize::from_xml(step_id, step_xml),
     };
 
-    let step = match step_sanitized {
-        Some(s) => s,
-        None => {
-            eprintln!("Could not parse: {step_xml}");
-            return None;
-        }
-    };
+    let step = step_sanitized.or_else(|| {
+        eprintln!("Could not parse: {step_xml}");
+        None
+    })?;
 
     if is_enabled {
         Some(step)

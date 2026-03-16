@@ -1,24 +1,18 @@
-use std::borrow::Cow;
-
 use quick_xml::events::BytesStart;
-use quick_xml::name::QName;
 
 pub fn parse_unescaped_attribute(e: &BytesStart, attribute: &str) -> Option<String> {
     get_attribute(e, attribute).map(|text| quick_xml::escape::unescape(&text).unwrap().into_owned())
 }
 
-pub fn key_to_string(key: QName) -> String {
-    String::from_utf8_lossy(key.as_ref()).into_owned()
-}
-
-pub fn value_to_string(value: Cow<[u8]>) -> String {
-    String::from_utf8_lossy(&value).into_owned()
-}
-
 pub fn get_attributes(e: &BytesStart) -> Vec<(String, String)> {
     e.attributes()
         .filter_map(|attr| attr.ok())
-        .map(|attr| (key_to_string(attr.key), value_to_string(attr.value)))
+        .map(|attr| {
+            (
+                String::from_utf8_lossy(attr.key.as_ref()).into_owned(),
+                String::from_utf8_lossy(&attr.value).into_owned(),
+            )
+        })
         .collect()
 }
 
@@ -27,7 +21,7 @@ pub fn get_attribute(element: &BytesStart, attribute_name: &str) -> Option<Strin
         .attributes()
         .filter_map(|attr| attr.ok())
         .find(|attr| attr.key.as_ref() == attribute_name.as_bytes())
-        .map(|attr| value_to_string(attr.value))
+        .map(|attr| String::from_utf8_lossy(&attr.value).into_owned())
 }
 
 #[cfg(test)]

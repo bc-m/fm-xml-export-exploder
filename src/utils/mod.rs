@@ -78,8 +78,8 @@ impl Entity {
             let element_string = element_to_string(context, start_tag);
             self.content.push_str(&element_string);
             if !id_path.is_empty() {
-                let second_to_last = id_path.rsplit('/').nth(1).unwrap_or("unknown");
-                if second_to_last == self.tag_name {
+                let parent_element = id_path.rsplit('/').nth(1).unwrap_or("unknown");
+                if parent_element == self.tag_name {
                     self.element_with_id = element_string;
                 }
             }
@@ -106,7 +106,7 @@ impl Entity {
                 }
                 Ok(Event::Eof) => break,
                 _ => {}
-            };
+            }
             buf.clear();
         }
     }
@@ -159,9 +159,7 @@ pub fn write_entity_to_file(
     remove_indent_count: usize,
     flags: &Flags,
 ) -> PathBuf {
-    let filename = join_scope_id_and_name(&entity.id, &entity.name);
-    let filename = escape_filename(&filename);
-
+    let filename = escape_filename(&join_scope_id_and_name(&entity.id, &entity.name));
     let output_file_path = output_dir.join(format!("{filename}.xml"));
     write_xml_file(
         &output_file_path,
@@ -181,6 +179,34 @@ fn build_tree_path(root: &Path, output_tree: &OutputTree, domain: &str, db_name:
     }
 }
 
+/// Resolve the domain folder name for the current processing context.
+fn resolve_structure_domain<R: Read + BufRead>(
+    context: &ProcessingContext<'_, R>,
+    ver: u64,
+) -> String {
+    let Some(TopLevelSection::Structure) = context.top_level_section else {
+        return "_".to_string();
+    };
+
+    let folder_name = match context.catalog_type {
+        Some(CatalogType::ValueList) if (VERSION_2_2_2_0..VERSION_2_2_3_4).contains(&ver) => {
+            "value_list_stubs"
+        }
+        Some(CatalogType::CustomFunctions) if ver >= VERSION_2_2_3_4 => "custom_functions",
+        Some(catalog_type) => catalog_type.get_config().out_folder_name,
+        None => "unknown_catalog",
+    };
+
+    let action_suffix = match &context.action {
+        Some(Action::Add) | None => "",
+        Some(Action::Modify) => "__modify_action",
+        Some(Action::Replace) => "__replace_action",
+        Some(Action::Delete) => "__delete_action",
+    };
+
+    format!("{folder_name}{action_suffix}")
+}
+
 pub fn build_out_dir_path<R: Read + BufRead>(
     context: &ProcessingContext<'_, R>,
     qualifier: Option<Qualifier>,
@@ -193,44 +219,15 @@ pub fn build_out_dir_path<R: Read + BufRead>(
     };
 
     let domain = match qualifier {
-        Some(Qualifier::SanitizedScripts) => "scripts_sanitized",
-        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized",
-        None => match context.top_level_section {
-            Some(TopLevelSection::Structure) => {
-                let folder_name = match context.catalog_type {
-                    Some(CatalogType::ValueList)
-                        if (VERSION_2_2_2_0..VERSION_2_2_3_4).contains(&ver) =>
-                    {
-                        "value_list_stubs"
-                    }
-                    Some(CatalogType::CustomFunctions) if ver >= VERSION_2_2_3_4 => {
-                        "custom_functions"
-                    }
-                    Some(catalog_type) => catalog_type.get_config().out_folder_name,
-                    None => "unknown_catalog",
-                };
-                let action_suffix = match &context.action {
-                    Some(Action::Add) | None => "",
-                    Some(Action::Modify) => "__modify_action",
-                    Some(Action::Replace) => "__replace_action",
-                    Some(Action::Delete) => "__delete_action",
-                };
-                let domain = format!("{folder_name}{action_suffix}");
-                return Ok(build_tree_path(
-                    context.root_out_dir,
-                    &context.flags.output_tree,
-                    &domain,
-                    db_name,
-                ));
-            }
-            _ => "_",
-        },
+        Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
+        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized".to_string(),
+        None => resolve_structure_domain(context, ver),
     };
 
     Ok(build_tree_path(
         context.root_out_dir,
         &context.flags.output_tree,
-        domain,
+        &domain,
         db_name,
     ))
 }
@@ -252,12 +249,9 @@ pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) ->
             // Delete all directories matching pattern ./*/db_name/
             if let Ok(entries) = fs::read_dir(context.root_out_dir) {
                 for entry in entries.flatten() {
-                    let entry_path = entry.path();
-                    if entry_path.is_dir() {
-                        let target_dir = entry_path.join(db_name);
-                        if target_dir.exists() {
-                            fs::remove_dir_all(&target_dir)?;
-                        }
+                    let target_dir = entry.path().join(db_name);
+                    if target_dir.is_dir() {
+                        fs::remove_dir_all(&target_dir)?;
                     }
                 }
             }
@@ -328,10 +322,10 @@ pub fn write_xml_file(
     flags: &Flags,
 ) {
     let indent_prefix = "\t".repeat(remove_indent_count);
-    let skip_noise = !flags.parse_all_lines && !flags.lossless;
+    let filter_noisy_lines = !flags.parse_all_lines && !flags.lossless;
     let mut file_content = String::with_capacity(content.len());
     for line in content.lines() {
-        if skip_noise && should_skip_line(line) {
+        if filter_noisy_lines && should_skip_line(line) {
             continue;
         }
         file_content.push_str(line.strip_prefix(&indent_prefix).unwrap_or(line));
@@ -396,18 +390,20 @@ pub fn push_line_to_skeleton(
         // For non-start events (End, Text, CData, Comment), flush any pending line and
         // determine whether to inline (trim) the current content onto the same line.
         // This enables compact output like `<tag>value</tag>` on a single line.
-        let mut do_trim = current_event_type == XmlEventType::End
-            && skeleton.previous_event_type != XmlEventType::End;
-        if !skeleton.previous_line.is_empty() {
+        let do_trim = if skeleton.previous_line.is_empty() {
+            current_event_type == XmlEventType::End
+                && skeleton.previous_event_type != XmlEventType::End
+        } else {
             skeleton.content.push_str(&skeleton.previous_line);
             skeleton.previous_line.clear();
             // After flushing a pending "Other" line followed by End, emit a newline instead of inlining
-            do_trim = !(current_event_type == XmlEventType::End
+            let can_inline = !(current_event_type == XmlEventType::End
                 && skeleton.previous_event_type == XmlEventType::Other);
-            if !do_trim {
+            if !can_inline {
                 skeleton.content.push('\n');
             }
-        }
+            can_inline
+        };
         if do_trim {
             skeleton.content.push_str(line.trim());
         } else {
@@ -470,15 +466,15 @@ pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_na
         return;
     };
 
-    let names: Vec<&str> = results[..results.len() - 1]
+    let name_parts: Vec<&str> = results[..results.len() - 1]
         .iter()
         .filter_map(|r| r.as_deref())
         .collect();
 
-    let new_name = if names.is_empty() {
+    let new_name = if name_parts.is_empty() {
         format!("ID {id}.xml")
     } else {
-        format!("{} - ID {id}.xml", names.join(" - "))
+        format!("{} - ID {id}.xml", name_parts.join(" - "))
     };
     let _ = rename_file(file_path, &new_name);
 }

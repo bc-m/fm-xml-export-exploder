@@ -1,5 +1,4 @@
 use std::io::{BufRead, BufReader, Read};
-use std::mem;
 use std::path::{Path, PathBuf};
 use std::{fs::File, time::Instant};
 
@@ -146,7 +145,7 @@ pub fn explode_xml(fm_export_file_path: &Path, root_out_dir: &Path, flags: &Flag
             }
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     // Write skeleton file if in lossless mode
@@ -167,9 +166,8 @@ fn process_root_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     e: &BytesStart,
 ) -> Result<()> {
-    match e.name().as_ref() {
-        b"FMDynamicTemplate" | b"FMSaveAsXML" => {}
-        _ => bail!("Unsupported XML-format"),
+    if !matches!(e.name().as_ref(), b"FMDynamicTemplate" | b"FMSaveAsXML") {
+        bail!("Unsupported XML-format");
     }
 
     let file_attr = get_attribute(e, "File")
@@ -187,7 +185,8 @@ fn process_root_element<R: Read + BufRead>(
     Ok(())
 }
 
-/// Process supporting elements (Metadata, DDR_INFO) that are not part of the main structure
+/// Process supporting elements (Metadata, DDR_INFO) that are not part of the main structure.
+/// Returns `true` if the XML element was fully consumed (caller should skip depth tracking).
 fn process_top_level_section<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
@@ -235,11 +234,11 @@ fn process_catalog_elements<R: Read + BufRead>(
     };
 
     let xml_out_dir_path = build_out_dir_path(context, None)?;
-    let base_dir_path = mem::replace(&mut context.current_out_dir, xml_out_dir_path.clone());
+    let saved_out_dir = std::mem::replace(&mut context.current_out_dir, xml_out_dir_path.clone());
 
     let folder_structure_result = xml_explode_catalog(context, folder_structure)?;
 
-    context.current_out_dir = base_dir_path;
+    context.current_out_dir = saved_out_dir;
 
     // Update folder structures for catalogs that return them
     if let Some(folder_structure) = folder_structure_result {

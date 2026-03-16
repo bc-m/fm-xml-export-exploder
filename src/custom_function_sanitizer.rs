@@ -80,7 +80,7 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
             _ => {}
         }
 
-        buf.clear()
+        buf.clear();
     }
 
     (!cf_info.id.is_empty()).then_some(cf_info)

@@ -26,10 +26,10 @@ impl VariableReference {
                     depth += 1;
                     if e.name().as_ref() == b"repetition"
                         && let Some(repetition) = get_attribute(&e, "value")
-                        && let Ok(repetition) = repetition.parse::<i32>()
+                        && let Ok(repetition) = repetition.parse()
                     {
-                        item.repetition = Some(repetition)
-                    };
+                        item.repetition = Some(repetition);
+                    }
                 }
                 Ok(Event::End(_)) => {
                     depth -= 1;

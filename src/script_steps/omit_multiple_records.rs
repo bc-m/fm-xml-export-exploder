@@ -34,7 +34,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if option_name.is_empty() && calculation.is_empty() {

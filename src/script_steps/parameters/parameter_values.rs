@@ -62,13 +62,10 @@ impl ParameterValues {
                         }
                         "FieldReference" => Some(FieldReference::from_xml(reader, &e).display()),
                         "Comment" => Some(Comment::from_xml(reader, &e)),
-                        "WindowReference" => {
-                            let d = WindowReference::from_xml(reader, &e).display();
-                            if d.is_empty() { None } else { Some(d) }
-                        }
+                        "WindowReference" => Some(WindowReference::from_xml(reader, &e).display())
+                            .filter(|d| !d.is_empty()),
                         "Related" => {
-                            let d = Related::from_xml(reader, &e).display();
-                            if d.is_empty() { None } else { Some(d) }
+                            Some(Related::from_xml(reader, &e).display()).filter(|d| !d.is_empty())
                         }
                         "ScriptReference" => ScriptReference::from_xml(reader, &e).display(),
                         "DataSourceReference" => {

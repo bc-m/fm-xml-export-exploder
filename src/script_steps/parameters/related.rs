@@ -58,7 +58,7 @@ impl Related {
                 }
                 _ => {}
             }
-            buf.clear()
+            buf.clear();
         }
 
         item

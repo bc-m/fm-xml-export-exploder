@@ -34,7 +34,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
     let out_dir_path_base = build_out_dir_path(context, None)?;
     create_dir(&out_dir_path_base);
 
-    let mut buf = Vec::new(); // buffer for reading xml events
+    let mut buf = Vec::new();
 
     // Adjust depth based on whether items are wrapped in ObjectList
     let base_depth = context.path_stack.len(); // depth of the catalog start tag, e.g., 4 for BaseDirectoryCatalog, if the path is FMSaveAsXML/Structure/AddAction/BaseDirectoryCatalog
@@ -190,7 +190,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
             _ => {}
         }
 
-        buf.clear()
+        buf.clear();
     }
 
     Ok(folder_structure_result)

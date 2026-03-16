@@ -8,14 +8,8 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
     let mut object_name_calculation = String::new();
     let mut repetition_calculation = String::new();
-
-    #[derive(PartialEq)]
-    enum Section {
-        None,
-        Name,
-        Repetition,
-    }
-    let mut section = Section::None;
+    let mut in_name = false;
+    let mut in_repetition = false;
 
     let mut reader = Reader::from_str(step);
     let mut buf = Vec::new();
@@ -25,41 +19,40 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"Name" => section = Section::Name,
-                b"repetition" => section = Section::Repetition,
+                b"Name" => in_name = true,
+                b"repetition" => in_repetition = true,
                 _ => {}
             },
             Ok(Event::CData(e)) => {
                 let text = xml_utils::cdata_to_string(&e);
-                match section {
-                    Section::Name => object_name_calculation.push_str(&text),
-                    Section::Repetition => repetition_calculation.push_str(&text),
-                    Section::None => {}
+                if in_name {
+                    object_name_calculation.push_str(&text);
+                } else if in_repetition {
+                    repetition_calculation.push_str(&text);
                 }
             }
-            Ok(Event::End(e)) => {
-                if matches!(e.name().as_ref(), b"Name" | b"repetition") {
-                    section = Section::None;
-                }
-            }
+            Ok(Event::End(e)) => match e.name().as_ref() {
+                b"Name" => in_name = false,
+                b"repetition" => in_repetition = false,
+                _ => {}
+            },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
-    let mut params = Vec::new();
+    let mut parts = Vec::new();
     if !object_name_calculation.is_empty() && object_name_calculation != "1" {
-        params.push(format!("Name: {object_name_calculation}"));
+        parts.push(format!("Name: {object_name_calculation}"));
     }
     if !repetition_calculation.is_empty() && repetition_calculation != "1" {
-        params.push(repetition_calculation);
+        parts.push(repetition_calculation);
     }
 
-    let params = params.join(" ; ");
-    if params.is_empty() {
+    if parts.is_empty() {
         Some(format!("{name} []"))
     } else {
-        Some(format!("{name} [ {params} ]"))
+        Some(format!("{name} [ {} ]", parts.join(" ; ")))
     }
 }
 

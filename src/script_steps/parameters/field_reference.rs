@@ -34,7 +34,7 @@ impl FieldReference {
                         }
                         b"repetition" => {
                             item.repetition =
-                                get_attribute(&e, "value").and_then(|v| v.parse::<i32>().ok());
+                                get_attribute(&e, "value").and_then(|v| v.parse().ok());
                         }
                         _ => {}
                     }

@@ -15,6 +15,6 @@ pub fn sanitize(step: &str) -> bool {
             }
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 }

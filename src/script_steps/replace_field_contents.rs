@@ -69,7 +69,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if !calculation.is_empty() {
@@ -91,9 +91,9 @@ pub fn sanitize(step: &str) -> Option<String> {
         .into_iter()
         .map(|(key, value)| {
             if key.is_empty() {
-                value.replace(": ", "")
+                value.trim_end_matches(": ").to_string()
             } else {
-                format!("{}: {}", key.replace(": ", ""), value)
+                format!("{}: {}", key.trim_end_matches(": "), value)
             }
         })
         .collect();
