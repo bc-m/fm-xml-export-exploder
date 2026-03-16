@@ -65,8 +65,10 @@ fn main() -> Result<()> {
     valid_dir_or_throw(&in_dir)?;
 
     let paths = fs::read_dir(in_dir)?
-        .filter_map(|entry| entry.ok().map(|e| e.path()))
-        .filter(|path| path.is_file() && path.extension().unwrap_or_default() == "xml")
+        .filter_map(|entry| {
+            let path = entry.ok()?.path();
+            (path.is_file() && path.extension().is_some_and(|ext| ext == "xml")).then_some(path)
+        })
         .collect::<Vec<_>>();
 
     migrate_old_custom_functions_if_needed(&out_dir, &flags)?;
