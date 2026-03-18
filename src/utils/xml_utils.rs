@@ -34,7 +34,7 @@ pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
         // de-noise
         if !flags.lossless {
             match attr.0.as_str() {
-                "nextvalue" | "UUID" | "index" => {
+                "nextvalue" | "UUID" | "index" | "Collapsed" => {
                     continue;
                 }
                 _ => {}
@@ -298,12 +298,44 @@ pub fn element_to_string<R: Read + BufRead>(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::{Flags, OutputTree};
+    use quick_xml::events::BytesStart;
+
+    fn make_flags(lossless: bool) -> Flags {
+        Flags {
+            lossless,
+            parse_all_lines: false,
+            output_tree: OutputTree::Db,
+        }
+    }
 
     #[test]
     fn test_decode_xml_special_characters() {
         assert_eq!(
             decode_xml_special_characters("This & that \"test\" <tag>".to_string()),
             "This &amp; that &quot;test&quot; &lt;tag&gt;"
+        );
+    }
+
+    #[test]
+    fn test_collapsed_attribute_stripped_in_lossy_mode() {
+        let xml = b"Step enable=\"True\" id=\"68\" name=\"If\" Collapsed=\"False\"";
+        let e = BytesStart::from_content(std::str::from_utf8(xml).unwrap(), 4);
+        let result = start_element_to_string(&e, &make_flags(false));
+        assert!(
+            !result.contains("Collapsed"),
+            "Collapsed attribute should be stripped in lossy mode, got: {result}"
+        );
+    }
+
+    #[test]
+    fn test_collapsed_attribute_preserved_in_lossless_mode() {
+        let xml = b"Step enable=\"True\" id=\"68\" name=\"If\" Collapsed=\"False\"";
+        let e = BytesStart::from_content(std::str::from_utf8(xml).unwrap(), 4);
+        let result = start_element_to_string(&e, &make_flags(true));
+        assert!(
+            result.contains("Collapsed=\"False\""),
+            "Collapsed attribute should be preserved in lossless mode, got: {result}"
         );
     }
 }
