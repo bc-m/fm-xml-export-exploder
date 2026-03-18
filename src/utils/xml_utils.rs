@@ -29,7 +29,12 @@ pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     complete_tag.push_str(&local_name_to_string(e.name().as_ref()));
 
     for attr in get_attributes(e) {
-        if !flags.lossless && matches!(attr.0.as_str(), "nextvalue" | "UUID" | "index") {
+        if !flags.lossless
+            && matches!(
+                attr.0.as_str(),
+                "nextvalue" | "UUID" | "index" | "Collapsed"
+            )
+        {
             continue;
         }
         complete_tag.push(' ');
@@ -413,12 +418,44 @@ pub fn extract_values_from_xml_paths(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::config::{Flags, OutputTree};
+    use quick_xml::events::BytesStart;
+
+    fn make_flags(lossless: bool) -> Flags {
+        Flags {
+            lossless,
+            parse_all_lines: false,
+            output_tree: OutputTree::Db,
+        }
+    }
 
     #[test]
     fn test_escape_xml_entities() {
         assert_eq!(
             escape_xml_entities("This & that \"test\" <tag>".to_string()),
             "This &amp; that &quot;test&quot; &lt;tag&gt;"
+        );
+    }
+
+    #[test]
+    fn test_collapsed_attribute_stripped_in_lossy_mode() {
+        let xml = b"Step enable=\"True\" id=\"68\" name=\"If\" Collapsed=\"False\"";
+        let e = BytesStart::from_content(std::str::from_utf8(xml).unwrap(), 4);
+        let result = start_element_to_string(&e, &make_flags(false));
+        assert!(
+            !result.contains("Collapsed"),
+            "Collapsed attribute should be stripped in lossy mode, got: {result}"
+        );
+    }
+
+    #[test]
+    fn test_collapsed_attribute_preserved_in_lossless_mode() {
+        let xml = b"Step enable=\"True\" id=\"68\" name=\"If\" Collapsed=\"False\"";
+        let e = BytesStart::from_content(std::str::from_utf8(xml).unwrap(), 4);
+        let result = start_element_to_string(&e, &make_flags(true));
+        assert!(
+            result.contains("Collapsed=\"False\""),
+            "Collapsed attribute should be preserved in lossless mode, got: {result}"
         );
     }
 }
