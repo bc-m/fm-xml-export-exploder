@@ -52,18 +52,18 @@ Set Variable [ $message ; "" ]
 Set Variable [ $data ; "{}" ]
 
 # Send script to server via PSoS
-If [ Collapsed: OFF ; PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 // if not already running on fmse ]
+If [ PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 // if not already running on fmse ]
 	# Only try to do this if file is hosted
-	If [ Collapsed: OFF ; Get ( ConnectionState ) ≠ 0 ]
+	If [ Get ( ConnectionState ) ≠ 0 ]
 		Perform Script on Server [ By name ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Wait for completion: ON ]
 		Set Variable [ $errorCode ; Get ( LastError ) ]
 		Set Variable [ $recordId ; JSONGetElement ( Get ( ScriptResult ) ; "data.recordId" ) ]
-		If [ Collapsed: OFF ; $errorCode = 0 and not IsEmpty ( $recordId ) ]
+		If [ $errorCode = 0 and not IsEmpty ( $recordId ) ]
 			Enter Find Mode [ Pause: OFF ]
 			Go to Layout [ Layout: "SaXMLDeliveryExecutionContext" ; Animation: None ]
 			Set Field [ SaXMLDelivery::recordId ; $recordId ]
 			Perform Find
-		Else [ Collapsed: OFF ; Collapsed: OFF ]
+		Else
 			Go to Layout [ Layout: "SaXMLDeliveryExecutionContext" ; Animation: None ]
 			Show All Records
 			Show Omitted Only
@@ -75,7 +75,7 @@ End If
 # Validate privilege set - must be full access or must have access via the Data API
 # ■■■■■■■■■■ CONFIGURATION STEP (optional): Customize restrictions to run this script
 Set Variable [ $allowedPrivilegeSet ; Get ( AccountPrivilegeSetName ) = "[Full Access]" or not IsEmpty ( FilterValues ( Get ( AccountExtendedPrivileges ) ; "fmrest" ) ) ]
-If [ Collapsed: OFF ; not $allowedPrivilegeSet ]
+If [ not $allowedPrivilegeSet ]
 	Exit Script [ JSONSetElement ( "" ; [ "errorCode" ; 9 ; JSONNumber ] ; [ "message" ; "Insufficient privileges" ; JSONString ] ) ]
 End If
 
@@ -112,13 +112,13 @@ Set Error Capture [ ON ]
 # ====================================================================================================
 
 # Set up context
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	Go to Layout [ Layout: "SaXMLDeliveryExecutionContext" ; Animation: None ]
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 End If
 
 # Purge old records
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	# Delete records older than 3 months
 	Set Variable [ $purgeDate[1] ; Let ( 
 	today = Get ( CurrentDate ) ; 
@@ -127,25 +127,25 @@ If [ Collapsed: OFF ; $errorCode = 0 ]
 	Enter Find Mode [ Pause: OFF ]
 	Set Field [ SaXMLDelivery::createTimestamp ; "<" & $purgeDate ]
 	Perform Find
-	If [ Collapsed: OFF ; Get ( FoundCount ) > 0 and Get ( LayoutTableName ) = GetValue ( Substitute ( GetFieldName ( SaXMLDelivery::xmlFile ) ; "::" ; ¶ ) ; 1 ) // belt and suspenders ]
+	If [ Get ( FoundCount ) > 0 and Get ( LayoutTableName ) = GetValue ( Substitute ( GetFieldName ( SaXMLDelivery::xmlFile ) ; "::" ; ¶ ) ; 1 ) // belt and suspenders ]
 		Delete All Records [ With dialog: OFF ]
 	End If
 End If
 
 # Create new record
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	New Record/Request
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 End If
 
 # Create SaXML xml file on file system
 # 2024-10-07 mkos: Added support for $_includeDetailsForAnalysisTools
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	Set Variable [ $xmlPath ; Get ( TemporaryPath ) & Get ( FileName ) & ".xml" ]
 	Set Variable [ $start ; Get ( CurrentTimeUTCMilliseconds ) ]
-	If [ Collapsed: OFF ; $_includeDetailsForAnalysisTools ]
+	If [ $_includeDetailsForAnalysisTools ]
 		Save a Copy as XML [ Get ( WindowName ) ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Include details for analysis tools: ON ; Save each layout object&apos;s binary data under its node: OFF ]
-	Else [ Collapsed: OFF ; Collapsed: OFF ]
+	Else
 		Save a Copy as XML [ Get ( WindowName ) ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Include details for analysis tools: OFF ; Save each layout object&apos;s binary data under its node: OFF ]
 	End If
 	Set Variable [ $errorCode ; Get ( LastError ) ]
@@ -155,13 +155,13 @@ End If
 # Upload xml file to container field
 # Note, we tried using the Read From Data File step, but it's not any faster, and it makes the code more complex, bc you have to read the file in chunks
 # 2024-07-17 mkos: Don't automatically encode url since ConvertFromFileMakerPath will already do that for us
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	Set Variable [ $start ; Get ( CurrentTimeUTCMilliseconds ) ]
 	Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: OFF ; Target: SaXMLDelivery::xmlFile ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 	Set Variable [ $timeToUpload[1] ; GetAsTime ( ( Get ( CurrentTimeUTCMilliseconds ) - $start ) / 1000 ) ]
 End If
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	Set Field [ SaXMLDelivery::timeToCreate ; $timeToCreate ]
 	Set Field [ SaXMLDelivery::timeToUpload ; $timeToUpload ]
 	Set Field [ SaXMLDelivery::sizeInBytes ; GetContainerAttribute ( SaXMLDelivery::xmlFile ; "filesize" ) ]
@@ -171,13 +171,13 @@ If [ Collapsed: OFF ; $errorCode = 0 ]
 End If
 
 # Delete xml file in temp folder
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	Delete File [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 End If
 
 # Handle error
-If [ Collapsed: OFF ; $errorCode > 1 and IsEmpty ( $message ) ]
+If [ $errorCode > 1 and IsEmpty ( $message ) ]
 	Set Variable [ $message[1] ; // We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
 /**
  * @SIGNATURE:
@@ -487,7 +487,7 @@ Let ( [
 	
 ) ]
 End If
-If [ Collapsed: OFF ; not IsEmpty ( $message )
+If [ not IsEmpty ( $message )
 and PatternCount ( Get ( ApplicationVersion ) ; "Data API Engine" ) = 0
 and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 ]
 	Show Custom Dialog [ Message: $message ; Default Button: "OK" ]
@@ -504,8 +504,8 @@ Set Variable [ $data[1] ; JSONSetElement ( $data
 Set Variable [ $result[1] ; JSONSetElement ( "" ; [ "errorCode" ; $errorCode ; JSONNumber ] ; [ "message" ; $message ; JSONString ] ; [ "data" ; $data ; JSONObject ] ) ]
 
 # In case of error, if we were able to get to the layout and create a new record, store $result in the record
-If [ Collapsed: OFF ; $errorCode > 1 ]
-	If [ Collapsed: OFF ; Get ( LayoutTableName ) = GetValue ( Substitute ( GetFieldName ( SaXMLDelivery::xmlFile ) ; "::" ; ¶ ) ; 1 ) and not IsEmpty ( $recordId ) ]
+If [ $errorCode > 1 ]
+	If [ Get ( LayoutTableName ) = GetValue ( Substitute ( GetFieldName ( SaXMLDelivery::xmlFile ) ; "::" ; ¶ ) ; 1 ) and not IsEmpty ( $recordId ) ]
 		Set Field [ SaXMLDelivery::notes ; Get ( ScriptName ) & " script result:¶" & JSONFormatElements ( $result ) ]
 		Commit Records/Requests [ Skip data entry validation ; With dialog: OFF ]
 	End If
@@ -515,9 +515,9 @@ End If
 # END
 # ====================================================================================================
 
-If [ Collapsed: OFF ; $parentScriptErrorCaptureState ]
+If [ $parentScriptErrorCaptureState ]
 	Set Error Capture [ OFF ]
-Else [ Collapsed: OFF ; Collapsed: OFF ]
+Else
 	Set Error Capture [ OFF ]
 End If
 
