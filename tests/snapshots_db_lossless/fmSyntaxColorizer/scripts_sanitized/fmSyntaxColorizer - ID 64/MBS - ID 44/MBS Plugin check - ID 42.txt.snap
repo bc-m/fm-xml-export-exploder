@@ -18,7 +18,7 @@ Variable setzen [ $MBS_VersionMin ; "3.0.0.5" ]
 Variable setzen [ $MBS_VersionAutoUpdateMin ; "03000005" ]
 
 Wenn [ _IsWIN ]
-	Script ausführen [ Aus Liste ; "Set Home Screen Info to content of ( Object )" ; Parameter: "MacOnly" ]
+	Script ausführen [ "Set Home Screen Info to content of ( Object )" ; Specified: Aus Liste ; Parameter: "MacOnly" ]
 	Aktuelles Script verlassen []
 Ende (wenn)
 
@@ -38,7 +38,7 @@ Variable setzen [ $MBS_VersionLevel ; Falls(
 				6) ]
 Variable setzen [ $MBS_SyntaxColorizingLevel ; Falls( _IsWIN ; -1 ; $MBS_VersionLevel ) ]
 Feldwert setzen [ _Home::_gMBSPluginCheck ; $MBS_SyntaxColorizingLevel ]
-Script ausführen [ Aus Liste ; "MBS_SetSyntaxColoringEnabledStatus" ]
+Script ausführen [ "MBS_SetSyntaxColoringEnabledStatus" ; Specified: Aus Liste ; Parameter: ]
 
 Variable setzen [ $Problem ; Falls(
 				

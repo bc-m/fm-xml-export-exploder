@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 #  SET-UP
 # -------------------------------------------------------------
-Script ausführen [ Aus Liste ; "Set Config" ]
+Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $endpoint ; "/plugins/WpeAllowInstallPluginScript" ]
 // Variable setzen [ $json ; JSONSetElement ( ""
 				 ; [ "iwpAllowInstallPlugins"; FMS__fmserver::iwpAllowInstallPlugins ; JSONString ]
@@ -32,9 +32,9 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 #  PROCESS
 # -------------------------------------------------------------
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
-Script ausführen [ Aus Liste ; "Get WPE Plug-in Configuration" ]
+Script ausführen [ "Get WPE Plug-in Configuration" ; Specified: Aus Liste ; Parameter: ]
 # -------------------------------------------------------------
 #  CLEAN UP
 # -------------------------------------------------------------

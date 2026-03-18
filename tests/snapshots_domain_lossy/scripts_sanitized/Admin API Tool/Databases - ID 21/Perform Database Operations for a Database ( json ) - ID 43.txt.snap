@@ -49,7 +49,7 @@ Sonst, wenn [ $_status = "select" ]
 	
 Sonst
 	
-	Script ausführen [ Aus Liste ; "Set Config" ]
+	Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 	Variable setzen [ $endpoint ; "/databases/" & $_id & "" ]
 	Wenn [ $_status = "OPENED" ]
 		Wenn [ FMS_FIL__files::isEncrypted = "1" UND FMS_FIL__files::hasSavedDecryptKey = "0" UND NICHT IstLeer ( FMS__fmserver::zz_msg_g ) ]
@@ -107,9 +107,9 @@ Sonst
 	#  PROCESS
 	# -------------------------------------------------------------
 	Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-	Script ausführen [ Aus Liste ; "Handle response" ]
+	Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 	# update database listing
-	Script ausführen [ Aus Liste ; "List Databases" ]
+	Script ausführen [ "List Databases" ; Specified: Aus Liste ; Parameter: ]
 	
 Ende (wenn)
 

@@ -16,7 +16,7 @@ Variable setzen [ $error ; 0 ]
 # -------------------------------------------------------------
 Fenster fixieren
 Gehe zu Bezugsdatensatz [ Table: SCH_FMS__fmserver ; Layout: "Admin API" ; Show related ]
-Script ausführen [ Aus Liste ; "Set Config" ]
+Script ausführen [ "Set Config" ; Specified: Aus Liste ; Parameter: ]
 Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
 
 Variable setzen [ $json ; JSONSetElement ( ""
@@ -248,10 +248,10 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 Fenster schließen [ Name: "Schedule Detail" ; Current file ]
 
 Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
-Script ausführen [ Aus Liste ; "Handle response" ]
+Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 # list schedules again
-Script ausführen [ Aus Liste ; "List Schedules" ]
+Script ausführen [ "List Schedules" ; Specified: Aus Liste ; Parameter: ]
 
 # -------------------------------------------------------------
 #  CLEAN UP
