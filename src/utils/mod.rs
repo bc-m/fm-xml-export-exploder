@@ -390,21 +390,31 @@ pub fn push_line_to_skeleton(
         // For non-start events (End, Text, CData, Comment), flush any pending line and
         // determine whether to inline (trim) the current content onto the same line.
         // This enables compact output like `<tag>value</tag>` on a single line.
-        let do_trim = if skeleton.previous_line.is_empty() {
-            current_event_type == XmlEventType::End
-                && skeleton.previous_event_type != XmlEventType::End
-        } else {
+        let has_pending = !skeleton.previous_line.is_empty();
+        if has_pending {
             skeleton.content.push_str(&skeleton.previous_line);
             skeleton.previous_line.clear();
-            // After flushing a pending "Other" line followed by End, emit a newline instead of inlining
-            let can_inline = !(current_event_type == XmlEventType::End
-                && skeleton.previous_event_type == XmlEventType::Other);
-            if !can_inline {
+        }
+
+        // Decide whether to inline (trim whitespace) or emit on its own line.
+        // Inline when: continuing a Start tag (e.g., <tag>value</tag>),
+        // but not when an "Other" element precedes an End tag.
+        let is_end_after_other =
+            current_event_type == XmlEventType::End
+                && skeleton.previous_event_type == XmlEventType::Other;
+        let inline = if has_pending {
+            if is_end_after_other {
                 skeleton.content.push('\n');
+                false
+            } else {
+                true
             }
-            can_inline
+        } else {
+            current_event_type == XmlEventType::End
+                && skeleton.previous_event_type != XmlEventType::End
         };
-        if do_trim {
+
+        if inline {
             skeleton.content.push_str(line.trim());
         } else {
             skeleton.content.push_str(&line);

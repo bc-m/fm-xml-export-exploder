@@ -60,13 +60,7 @@ impl DialogField {
 
     pub fn display(self, field_type: &str) -> Option<String> {
         let target = self.target?;
-
-        let number = match field_type {
-            "Field1" => "1",
-            "Field2" => "2",
-            "Field3" => "3",
-            _ => "?",
-        };
+        let number = field_type.strip_prefix("Field").unwrap_or("?");
 
         let mut parts = vec![format!("Input {number}: {target}")];
 

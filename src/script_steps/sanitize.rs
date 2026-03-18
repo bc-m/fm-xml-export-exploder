@@ -34,27 +34,26 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     let script_step = id_to_script_step(step_id);
 
     if script_step == ScriptStep::Comment {
-        return Some(if parameters.trim().is_empty() {
-            String::new()
-        } else {
-            format!("# {parameters}")
-        });
+        if parameters.trim().is_empty() {
+            return Some(String::new());
+        }
+        return Some(format!("# {parameters}"));
     }
 
     let parameters = parameters.trim();
     if parameters.is_empty() {
-        if matches!(
+        let needs_brackets = matches!(
             script_step,
             ScriptStep::GoToField
                 | ScriptStep::IfStart
                 | ScriptStep::IfElse
                 | ScriptStep::ExitLoopIf
-        ) {
+        );
+        if needs_brackets {
             return Some(format!("{name} []"));
         }
-
         return Some(name);
-    };
+    }
 
     Some(format!("{name} [ {parameters} ]"))
 }

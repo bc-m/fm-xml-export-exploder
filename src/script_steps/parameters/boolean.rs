@@ -88,17 +88,15 @@ impl Boolean {
     pub fn display(self) -> Option<String> {
         if self.should_hide_bool() {
             // Hidden booleans only show their name when the value is true
-            return if self.value == Some(true) {
-                self.name
-            } else {
-                None
-            };
+            return self.value.filter(|&v| v).and(self.name);
         }
 
-        match self.name {
-            Some(name) => self.value.map(|v| format!("{name}: {}", Self::on_off(v))),
-            None => self.value.map(|v| Self::on_off(v).to_string()),
-        }
+        let value = self.value?;
+        let on_off = Self::on_off(value);
+        Some(match self.name {
+            Some(name) => format!("{name}: {on_off}"),
+            None => on_off.to_string(),
+        })
     }
 }
 
