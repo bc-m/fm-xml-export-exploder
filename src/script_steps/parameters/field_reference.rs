@@ -1,8 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::{get_attribute, get_attributes};
+use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]
 pub struct FieldReference {
@@ -12,15 +11,14 @@ pub struct FieldReference {
 }
 
 impl FieldReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<FieldReference, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> FieldReference {
         let mut depth = 1;
         let mut item = FieldReference {
-            table_reference: None,
             field_reference: get_attribute(e, "name"),
-            repetition: None,
+            ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -32,35 +30,11 @@ impl FieldReference {
                             item.field_reference = get_attribute(&e, "name");
                         }
                         b"TableOccurrenceReference" => {
-                            for attr in get_attributes(&e).unwrap() {
-                                if attr.0 == "name" {
-                                    match e.name().as_ref() {
-                                        b"TableOccurrenceReference" => {
-                                            item.table_reference = Option::from(attr.1);
-                                        }
-                                        b"Calculation" => {
-                                            item.field_reference = Option::from(
-                                                Calculation::from_xml(reader, &e)
-                                                    .unwrap()
-                                                    .display()
-                                                    .unwrap(),
-                                            );
-                                            depth -= 1;
-                                        }
-                                        _ => {}
-                                    }
-                                }
-                            }
+                            item.table_reference = get_attribute(&e, "name");
                         }
                         b"repetition" => {
-                            match get_attribute(&e, "value") {
-                                None => {}
-                                Some(repetition) => {
-                                    if let Ok(repetition) = repetition.parse::<i32>() {
-                                        item.repetition = Some(repetition)
-                                    }
-                                }
-                            };
+                            item.repetition =
+                                get_attribute(&e, "value").and_then(|v| v.parse().ok());
                         }
                         _ => {}
                     }
@@ -76,40 +50,22 @@ impl FieldReference {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        let table_reference: String = match &self.table_reference {
-            None => return Some("🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string()),
-            Some(reference) => reference.clone(),
+    pub fn display(&self) -> String {
+        let Some(table_reference) = &self.table_reference else {
+            return "🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string();
         };
 
         let field_reference = match &self.field_reference {
-            None => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string(),
-            Some(reference) => {
-                if reference.is_empty() {
-                    "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string()
-                } else {
-                    reference.clone()
-                }
-            }
+            Some(reference) if !reference.is_empty() => reference.as_str(),
+            _ => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨",
         };
 
-        let repetition = self.repetition.unwrap_or(1);
-        if repetition != 1 {
-            Some(format!(
-                "{}::{}[{}]",
-                table_reference.as_str(),
-                field_reference.as_str(),
-                repetition
-            ))
-        } else {
-            Some(format!(
-                "{}::{}",
-                table_reference.as_str(),
-                field_reference.as_str()
-            ))
+        match self.repetition {
+            Some(rep) if rep != 1 => format!("{table_reference}::{field_reference}[{rep}]"),
+            _ => format!("{table_reference}::{field_reference}"),
         }
     }
 }
@@ -136,12 +92,9 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = "Foo::Bar".to_string();
+        let expected_output = "Foo::Bar";
         assert_eq!(
-            FieldReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            FieldReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -161,12 +114,9 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        let expected_output = "Foo::Bar[1337]".to_string();
+        let expected_output = "Foo::Bar[1337]";
         assert_eq!(
-            FieldReference::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            FieldReference::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }

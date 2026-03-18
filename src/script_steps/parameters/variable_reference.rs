@@ -10,17 +10,14 @@ pub struct VariableReference {
 }
 
 impl VariableReference {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        e: &BytesStart,
-    ) -> Result<VariableReference, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> VariableReference {
         let mut depth = 1;
         let mut item = VariableReference {
             name: get_attribute(e, "value"),
-            repetition: None,
+            ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -29,10 +26,10 @@ impl VariableReference {
                     depth += 1;
                     if e.name().as_ref() == b"repetition"
                         && let Some(repetition) = get_attribute(&e, "value")
-                        && let Ok(repetition) = repetition.parse::<i32>()
+                        && let Ok(repetition) = repetition.parse()
                     {
-                        item.repetition = Some(repetition)
-                    };
+                        item.repetition = Some(repetition);
+                    }
                 }
                 Ok(Event::End(_)) => {
                     depth -= 1;
@@ -45,20 +42,14 @@ impl VariableReference {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        if let Some(name) = &self.name {
-            let repetition = self.repetition.unwrap_or(1);
-            if repetition != 1 {
-                Some(format!("{name}[{repetition}]"))
-            } else {
-                Some(name.clone())
-            }
-        } else {
-            None
-        }
+    pub fn display(self) -> Option<String> {
+        self.name.map(|name| match self.repetition {
+            Some(rep) if rep != 1 => format!("{name}[{rep}]"),
+            _ => name,
+        })
     }
 }
 
@@ -86,7 +77,6 @@ mod tests {
         let expected_output = "$foo".to_string();
         assert_eq!(
             VariableReference::from_xml(&mut reader, &element)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output
@@ -110,7 +100,6 @@ mod tests {
         let expected_output = "$foo[1337]".to_string();
         assert_eq!(
             VariableReference::from_xml(&mut reader, &element)
-                .unwrap()
                 .display()
                 .unwrap(),
             expected_output

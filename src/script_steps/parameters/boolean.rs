@@ -3,7 +3,7 @@ use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::constants::{
-    CommitRecordRequestsOptions, GoToFieldOptions, RefreshWindowOptions,
+    commit_record_requests, go_to_field, refresh_window,
 };
 use crate::utils::attributes::get_attributes;
 
@@ -16,34 +16,24 @@ pub struct Boolean {
 }
 
 impl Boolean {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        _e: &BytesStart,
-        _step_id: &u32,
-    ) -> Result<Boolean, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> Boolean {
         let mut depth = 1;
         let mut item = Boolean {
-            step_id: *_step_id,
-            id: None,
-            name: None,
-            value: None,
+            step_id,
+            ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if let b"Boolean" = e.name().as_ref() {
-                        for attr in get_attributes(&e).unwrap() {
+                    if e.name().as_ref() == b"Boolean" {
+                        for attr in get_attributes(&e) {
                             match attr.0.as_str() {
-                                "id" => {
-                                    if let Ok(id) = attr.1.parse::<u32>() {
-                                        item.id = Some(id);
-                                    }
-                                }
+                                "id" => item.id = attr.1.parse().ok(),
                                 "type" => item.name = Some(attr.1),
                                 "value" => match attr.1.as_str() {
                                     "True" => item.value = Some(true),
@@ -66,54 +56,47 @@ impl Boolean {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn should_hide_bool(&self) -> bool {
-        let step_id = id_to_script_step(&self.step_id);
+    fn should_hide_bool(&self) -> bool {
+        let step_id = id_to_script_step(self.step_id);
         let param_id = self.id.unwrap_or(0);
 
         matches!(
             (step_id, param_id),
             (
                 ScriptStep::CommitRecordRequests,
-                CommitRecordRequestsOptions::SKIP_DATA_ENTRY_VALIDATION,
+                commit_record_requests::SKIP_DATA_ENTRY_VALIDATION
             ) | (
                 ScriptStep::CommitRecordRequests,
-                CommitRecordRequestsOptions::OVERRIDE_ESS_LOCKING_CONFLICTS,
+                commit_record_requests::OVERRIDE_ESS_LOCKING_CONFLICTS
             ) | (
                 ScriptStep::RefreshWindow,
-                RefreshWindowOptions::FLUSH_CACHED_JOIN_RESULTS,
+                refresh_window::FLUSH_CACHED_JOIN_RESULTS
             ) | (
                 ScriptStep::RefreshWindow,
-                RefreshWindowOptions::FLUSH_CACHED_EXTERNAL_DATA,
-            ) | (ScriptStep::GoToField, GoToFieldOptions::SELECT_PERFORM,)
+                refresh_window::FLUSH_CACHED_EXTERNAL_DATA
+            ) | (ScriptStep::GoToField, go_to_field::SELECT_PERFORM)
         )
     }
 
-    pub fn bool_to_string(bool: bool) -> String {
-        match bool {
-            true => "ON".to_string(),
-            false => "OFF".to_string(),
-        }
+    pub fn on_off(value: bool) -> &'static str {
+        if value { "ON" } else { "OFF" }
     }
 
-    pub fn display(&self) -> Option<String> {
-        if Self::should_hide_bool(self) {
-            if !self.value.unwrap_or(false) {
-                return None;
-            } else {
-                return self.name.clone();
-            }
+    pub fn display(self) -> Option<String> {
+        if self.should_hide_bool() {
+            // Hidden booleans only show their name when the value is true
+            return self.value.filter(|&v| v).and(self.name);
         }
 
-        match &self.name {
-            Some(name) => self.value.map(|bool_value| {
-                let formatted_string = format!("{}: {}", name, Self::bool_to_string(bool_value));
-                formatted_string
-            }),
-            None => self.value.map(Self::bool_to_string),
-        }
+        let value = self.value?;
+        let on_off = Self::on_off(value);
+        Some(match self.name {
+            Some(name) => format!("{name}: {on_off}"),
+            None => on_off.to_string(),
+        })
     }
 }
 
@@ -139,11 +122,8 @@ mod tests {
         };
 
         let expected_output = "Pause: OFF".to_string();
-        let script_id: u32 = 0;
-
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, &script_id)
-                .unwrap()
+            Boolean::from_xml(&mut reader, &element, 0)
                 .display()
                 .unwrap(),
             expected_output
@@ -165,10 +145,8 @@ mod tests {
         };
 
         let expected_output = "OFF".to_string();
-        let script_id: u32 = 0;
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, &script_id)
-                .unwrap()
+            Boolean::from_xml(&mut reader, &element, 0)
                 .display()
                 .unwrap(),
             expected_output

@@ -1,15 +1,14 @@
 #[cfg(test)]
+#[allow(clippy::module_inception)]
 mod tests {
     use std::fs;
-    use std::io::Read;
     use std::path::{Path, PathBuf};
 
     use insta::assert_snapshot;
     use similar_asserts::assert_eq;
     use walkdir::WalkDir;
 
-    use crate::OutputTree;
-    use crate::config::Flags;
+    use crate::config::{Flags, OutputTree};
     use crate::utils::file_utils::escape_filename;
     use crate::xml_processor::explode_xml;
 
@@ -43,11 +42,8 @@ mod tests {
             OutputTree::Db => "db",
             OutputTree::Domain => "domain",
         };
-        let path_str = if is_lossless {
-            format!("./tests/out_{output_tree_str}_lossless")
-        } else {
-            format!("./tests/out_{output_tree_str}_lossy")
-        };
+        let lossless_str = if is_lossless { "lossless" } else { "lossy" };
+        let path_str = format!("./tests/out_{output_tree_str}_{lossless_str}");
         let output_dir = Path::new(&path_str);
         let flags = Flags {
             parse_all_lines: false,
@@ -55,10 +51,6 @@ mod tests {
             output_tree,
         };
         let _ = fs::remove_dir_all(output_dir);
-
-        let mut settings = insta::Settings::clone_current();
-        settings.set_snapshot_path(snapshot_dir);
-        settings.set_prepend_module_to_snapshot(false);
 
         let paths = fs::read_dir(input_dir)
             .unwrap()
@@ -129,10 +121,7 @@ mod tests {
         assert_eq!(snapshot_file_paths.join("\n"), output_file_paths.join("\n"));
     }
 
-    fn read_file(file_path: &PathBuf) -> Vec<u8> {
-        let mut file = fs::File::open(file_path).expect("Failed to open file");
-        let mut content = Vec::new();
-        file.read_to_end(&mut content).expect("Failed to read file");
-        content
+    fn read_file(file_path: &Path) -> Vec<u8> {
+        fs::read(file_path).expect("Failed to read file")
     }
 }

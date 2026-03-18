@@ -1,12 +1,12 @@
 use strum_macros::{Display, FromRepr};
 
-// Although it has no effect on this application, we track unused script IDs in this constant.
+/// Script step IDs that exist in the XML but are not documented / not used.
 const UNKNOWN_SCRIPT_STEP: [u32; 16] = [
     2, 3, 15, 52, 53, 54, 58, 100, 110, 162, 163, 170, 171, 173, 198, 204,
 ];
 
 // https://help.claris.com/en/pro-help/content/script-steps-reference.html
-#[derive(Debug, FromRepr, PartialEq, Display)]
+#[derive(Debug, Clone, Copy, FromRepr, PartialEq, Display)]
 #[repr(u32)]
 pub enum ScriptStep {
     Unknown = 0,
@@ -100,10 +100,10 @@ pub enum ScriptStep {
     RevertTransaction = 207,
 }
 
-pub fn id_to_script_step(id: &u32) -> ScriptStep {
-    if UNKNOWN_SCRIPT_STEP.contains(id) {
+pub fn id_to_script_step(id: u32) -> ScriptStep {
+    if UNKNOWN_SCRIPT_STEP.contains(&id) {
         ScriptStep::Unknown
     } else {
-        ScriptStep::from_repr(*id).unwrap_or(ScriptStep::Unknown)
+        ScriptStep::from_repr(id).unwrap_or(ScriptStep::Unknown)
     }
 }

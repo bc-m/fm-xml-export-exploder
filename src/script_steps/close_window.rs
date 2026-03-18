@@ -10,46 +10,38 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut only_current_file = false;
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Name" => {
-                    match get_attribute(&e, "current").unwrap().as_str() {
-                        "True" => {
-                            only_current_file = true;
-                        }
-                        "False" => {
-                            only_current_file = false;
-                        }
-                        _ => {}
-                    };
+                    only_current_file = get_attribute(&e, "current").as_deref() == Some("True");
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
-    } else if calculation.is_empty() {
-        Some(name.to_string())
-    } else if only_current_file {
-        Some(format!("{name} [ Name: {calculation} ; Current file ]"))
-    } else {
-        Some(format!("{name} [ Name: {calculation} ]"))
+        return None;
     }
+    if calculation.is_empty() {
+        return Some(name);
+    }
+    let suffix = if only_current_file {
+        " ; Current file"
+    } else {
+        ""
+    };
+    Some(format!("{name} [ Name: {calculation}{suffix} ]"))
 }
 
 #[cfg(test)]

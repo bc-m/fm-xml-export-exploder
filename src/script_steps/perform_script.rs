@@ -13,23 +13,21 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut calculation = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"List" => {
-                    script_reference_type_id = get_attribute(&e, "value").unwrap().to_string();
-                    script_reference_type = get_attribute(&e, "name").unwrap().to_string();
-                    if script_reference_type_id.as_str() == "2" {
-                        script_reference = Calculation::from_xml(&mut reader, &e)
-                            .unwrap()
-                            .display()
-                            .unwrap();
+                    script_reference_type_id = get_attribute(&e, "value").unwrap();
+                    script_reference_type = get_attribute(&e, "name").unwrap();
+                    if script_reference_type_id == "2" {
+                        script_reference =
+                            Calculation::from_xml(&mut reader, &e).display().unwrap();
                     }
                 }
                 b"DataSourceReference" => {
@@ -37,9 +35,8 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 b"ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
                 b"Parameter" => {
-                    if get_attribute(&e, "type").unwrap_or("".to_string()).as_str() == "Parameter" {
+                    if get_attribute(&e, "type").as_deref() == Some("Parameter") {
                         calculation = Calculation::from_xml(&mut reader, &e)
-                            .unwrap()
                             .display()
                             .unwrap_or_default();
                     }
@@ -48,31 +45,30 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
-    }
-
-    let mut parameters = vec![script_reference_type.to_string()];
-
-    if script_reference_type_id.as_str() != "2" {
-        parameters.push(format!("\"{script_reference}\""));
-    } else {
-        parameters.push(script_reference.to_string());
-    }
-
-    if let Some(ref data_source_value) = data_source_reference {
-        parameters.push(format!("File: \"{data_source_value}\""));
-    }
-
-    if !calculation.is_empty() {
-        parameters.push(format!("Parameter: {calculation}"));
+        buf.clear();
     }
 
     if name.is_empty() {
-        println!("empty primitive");
-        None
-    } else {
-        Some(format!("{name} [ {} ]", parameters.join(" ; ")))
+        return None;
     }
+
+    let mut parts = vec![script_reference_type];
+
+    if script_reference_type_id == "2" {
+        parts.push(script_reference);
+    } else {
+        parts.push(format!("\"{script_reference}\""));
+    }
+
+    if let Some(ds) = data_source_reference {
+        parts.push(format!("File: \"{ds}\""));
+    }
+
+    if !calculation.is_empty() {
+        parts.push(format!("Parameter: {calculation}"));
+    }
+
+    Some(format!("{name} [ {} ]", parts.join(" ; ")))
 }
 
 #[cfg(test)]

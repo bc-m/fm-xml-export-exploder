@@ -3,14 +3,14 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Read};
 use std::path::Path;
 
-use anyhow::Result;
 use quick_xml::Reader;
 use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, Event};
 
+use crate::Skeleton;
+use crate::config::Flags;
 use crate::utils::attributes::get_attributes;
-use crate::utils::push_line_to_skeleton;
+use crate::utils::skeleton::push_line_to_skeleton;
 use crate::xml_processor::ProcessingContext;
-use crate::{Flags, Skeleton};
 
 #[derive(Debug, Default, PartialEq)]
 pub enum XmlEventType {
@@ -23,22 +23,14 @@ pub enum XmlEventType {
     CData,
 }
 
-// pub fn event_type_of(event: &Event) -> XmlEventType {
-
 pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     let mut complete_tag = String::with_capacity(128); // Pre-allocate
     complete_tag.push('<');
     complete_tag.push_str(&local_name_to_string(e.name().as_ref()));
 
-    for attr in get_attributes(e).unwrap() {
-        // de-noise
-        if !flags.lossless {
-            match attr.0.as_str() {
-                "nextvalue" | "UUID" | "index" => {
-                    continue;
-                }
-                _ => {}
-            }
+    for attr in get_attributes(e) {
+        if !flags.lossless && matches!(attr.0.as_str(), "nextvalue" | "UUID" | "index") {
+            continue;
         }
         complete_tag.push(' ');
         complete_tag.push_str(&attr.0);
@@ -51,85 +43,65 @@ pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
 }
 
 pub fn cdata_element_to_string(e: &BytesCData) -> String {
-    let mut content = String::new();
-    content.push_str("<![CDATA[");
-    content.push_str(cdata_to_string(e).as_str());
-    content.push_str("]]>");
-
-    content
+    format!("<![CDATA[{}]]>", cdata_to_string(e))
 }
 
 pub fn text_element_to_string(e: &BytesText, escape: bool) -> String {
+    let text = text_to_string(e);
     if escape {
-        decode_xml_special_characters(text_to_string(e))
+        escape_xml_entities(text)
     } else {
-        text_to_string(e)
+        text
     }
 }
 
 pub fn end_element_to_string(e: &BytesEnd) -> String {
-    let element_name = local_name_to_string(e.name().as_ref());
-    format!("</{element_name}>")
+    format_end_tag(e.name().as_ref())
 }
 
-/// Derive end tag from start tag
-pub fn end_element_to_string_from_start_element(e: &BytesStart) -> String {
-    let element_name = local_name_to_string(e.name().as_ref());
+pub fn format_end_tag(name: &[u8]) -> String {
+    let element_name = local_name_to_string(name);
     format!("</{element_name}>")
 }
 
 pub fn local_name_to_string(local_name: &[u8]) -> String {
-    match std::str::from_utf8(local_name) {
-        Ok(text) => text.to_string(),
-        Err(_) => String::new(),
-    }
+    String::from_utf8_lossy(local_name).into_owned()
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
-    // In quick-xml 0.39+, entity references are delivered as separate Event::GeneralRef,
-    // so Event::Text no longer contains entities and we just need to decode
-    match e.decode() {
-        Ok(decoded) => decoded.to_string(),
-        Err(_) => String::new(),
-    }
+    e.decode().map(|s| s.into_owned()).unwrap_or_default()
 }
 
 pub fn cdata_to_string(e: &BytesCData) -> String {
-    match std::str::from_utf8(e) {
-        Ok(text) => text.to_string(),
-        Err(_) => String::new(),
-    }
+    String::from_utf8_lossy(e).into_owned()
 }
 
 /// Convert a general entity reference back to its escaped XML form
 /// e.g., BytesRef containing "quot" -> "&quot;", BytesRef containing "#09" -> "&#09;"
 pub fn general_ref_to_string(e: &BytesRef, escape: bool) -> String {
+    let Ok(entity_name) = e.decode() else {
+        return String::new();
+    };
+
     if escape {
         // Keep the reference in its escaped form (e.g., &quot;, &#09;)
-        match e.decode() {
-            Ok(entity_name) => format!("&{entity_name};"),
-            Err(_) => String::new(),
-        }
-    } else {
-        // Resolve the reference to its actual character
-        // First try character references (e.g., &#65; or &#x41;)
-        if let Ok(Some(ch)) = e.resolve_char_ref() {
-            return ch.to_string();
-        }
-        // For named entity references, resolve using unescape
-        match e.decode() {
-            Ok(entity_name) => {
-                let escaped = format!("&{entity_name};");
-                quick_xml::escape::unescape(&escaped)
-                    .map(|s| s.to_string())
-                    .unwrap_or(escaped)
-            }
-            Err(_) => String::new(),
-        }
+        return format!("&{entity_name};");
     }
+
+    // Resolve the reference to its actual character
+    // First try character references (e.g., &#65; or &#x41;)
+    if let Ok(Some(ch)) = e.resolve_char_ref() {
+        return ch.to_string();
+    }
+
+    // For named entity references, resolve using unescape
+    let escaped = format!("&{entity_name};");
+    quick_xml::escape::unescape(&escaped)
+        .map(|s| s.to_string())
+        .unwrap_or(escaped)
 }
 
-pub fn encode_xml_special_characters(input: String) -> String {
+pub fn unescape_xml_entities(input: String) -> String {
     input
         .replace("&amp;", "&")
         .replace("&quot;", "\"")
@@ -138,7 +110,7 @@ pub fn encode_xml_special_characters(input: String) -> String {
         .replace("&apos;", "'")
 }
 
-fn decode_xml_special_characters(input: String) -> String {
+fn escape_xml_entities(input: String) -> String {
     input
         .replace('&', "&amp;")
         .replace('\"', "&quot;")
@@ -148,16 +120,14 @@ fn decode_xml_special_characters(input: String) -> String {
         .replace('\r', "&#13;")
 }
 
-pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &BytesStart) {
+pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>) {
     let mut depth = 1;
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
-            Ok(Event::Start(_)) => {
-                depth += 1;
-            }
+            Ok(Event::Start(_)) => depth += 1,
             Ok(Event::End(_)) => {
                 depth -= 1;
                 if depth == 0 {
@@ -172,13 +142,12 @@ pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>, _: &Bytes
 
 pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
     reader: &mut Reader<R>,
-    _: &BytesStart,
     skeleton: &mut Skeleton,
     base_depth: usize,
     flags: &Flags,
 ) {
     let mut depth = 1;
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
@@ -188,7 +157,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    start_element_to_string(&e, flags).as_str(),
+                    &start_element_to_string(&e, flags),
                     false,
                     XmlEventType::Start,
                 );
@@ -200,7 +169,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    end_element_to_string(&e).as_str(),
+                    &end_element_to_string(&e),
                     false,
                     XmlEventType::End,
                 );
@@ -213,20 +182,21 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    cdata_element_to_string(&e).as_str(),
+                    &cdata_element_to_string(&e),
                     false,
                     XmlEventType::CData,
                 );
             }
             Ok(Event::Text(e)) => {
-                if text_element_to_string(&e, true).trim().is_empty() {
+                let text = text_element_to_string(&e, true);
+                if text.trim().is_empty() {
                     continue;
                 }
                 push_line_to_skeleton(
                     skeleton,
                     base_depth,
                     depth,
-                    text_element_to_string(&e, true).as_str(),
+                    &text,
                     false,
                     XmlEventType::Text,
                 );
@@ -236,7 +206,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    general_ref_to_string(&e, true).as_str(),
+                    &general_ref_to_string(&e, true),
                     false,
                     XmlEventType::Text,
                 );
@@ -246,7 +216,7 @@ pub fn push_rest_of_element_to_skeleton<R: Read + BufRead>(
                     skeleton,
                     base_depth,
                     depth,
-                    text_element_to_string(&e, true).as_str(),
+                    &text_element_to_string(&e, true),
                     false,
                     XmlEventType::Comment,
                 );
@@ -263,7 +233,7 @@ pub fn element_to_string<R: Read + BufRead>(
 ) -> String {
     let mut content = start_element_to_string(start_tag, context.flags);
     let mut depth = 1;
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match context.reader.read_event_into(&mut buf) {
             Err(_) => continue,
@@ -293,19 +263,6 @@ pub fn element_to_string<R: Read + BufRead>(
         buf.clear();
     }
     content
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_decode_xml_special_characters() {
-        assert_eq!(
-            decode_xml_special_characters("This & that \"test\" <tag>".to_string()),
-            "This &amp; that &quot;test&quot; &lt;tag&gt;"
-        );
-    }
 }
 
 /// Extract content from XML file using multiple XPath-like expressions
@@ -343,15 +300,33 @@ pub fn extract_values_from_xml_paths(
         .collect();
 
     let mut buf = Vec::new();
-    let mut current_path = Vec::new();
+    let mut current_path: Vec<String> = Vec::new();
     let mut results: Vec<Option<String>> = vec![None; parsed_paths.len()];
     let mut resolved_indices = HashSet::new();
+
+    /// Returns indices of unresolved text-element paths that match the current path
+    fn matching_text_paths(
+        parsed_paths: &[Vec<&str>],
+        current_path: &[String],
+        resolved_indices: &HashSet<usize>,
+    ) -> Vec<usize> {
+        parsed_paths
+            .iter()
+            .enumerate()
+            .filter(|(i, path)| {
+                !resolved_indices.contains(i)
+                    && path.last().is_some_and(|last| !last.starts_with('@'))
+                    && path.len() == current_path.len()
+                    && path.iter().zip(current_path).all(|(a, b)| *a == b)
+            })
+            .map(|(i, _)| i)
+            .collect()
+    }
 
     loop {
         match reader.read_event_into(&mut buf) {
             Ok(Event::Start(ref e)) => {
-                let tag = String::from_utf8_lossy(e.name().as_ref()).to_string();
-                current_path.push(tag.clone());
+                current_path.push(String::from_utf8_lossy(e.name().as_ref()).into_owned());
 
                 for (i, path) in parsed_paths.iter().enumerate() {
                     if resolved_indices.contains(&i) {
@@ -361,28 +336,27 @@ pub fn extract_values_from_xml_paths(
                     if let Some(last_segment) = path.last()
                         && last_segment.starts_with('@')
                         && path.len() == current_path.len() + 1
-                    {
-                        let attr_name = &last_segment[1..];
-                        if path[..path.len() - 1]
+                        && path[..path.len() - 1]
                             .iter()
                             .copied()
                             .eq(current_path.iter().map(|s| s.as_str()))
-                            && let Some(attr) = e
-                                .attributes()
-                                .flatten()
-                                .find(|a| a.key.as_ref() == attr_name.as_bytes())
+                    {
+                        let attr_name = &last_segment[1..];
+                        if let Some(attr) = e
+                            .attributes()
+                            .flatten()
+                            .find(|a| a.key.as_ref() == attr_name.as_bytes())
                         {
                             let value = attr
                                 .unescape_value()
                                 .map_err(|e| format!("Unescape error: {e}"))?;
-                            if path.starts_with(&["Relationship", "LeftTable"])
+                            results[i] = if path.starts_with(&["Relationship", "LeftTable"])
                                 || path.starts_with(&["Relationship", "RightTable"])
                             {
-                                results[i] = Some(format!("[{value}]"));
+                                Some(format!("[{value}]"))
                             } else {
-                                results[i] = Some(value.to_string());
-                            }
-
+                                Some(value.to_string())
+                            };
                             resolved_indices.insert(i);
                         }
                     }
@@ -390,17 +364,8 @@ pub fn extract_values_from_xml_paths(
             }
 
             Ok(Event::End(_)) => {
-                // Mark paths as resolved if we collected text content for them
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                        && results[i].is_some()
-                    {
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    if results[i].is_some() {
                         resolved_indices.insert(i);
                     }
                 }
@@ -408,64 +373,29 @@ pub fn extract_values_from_xml_paths(
             }
 
             Ok(Event::Text(e)) => {
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                    {
-                        match e.decode() {
-                            Ok(decoded) => {
-                                // Append to existing result or create new one
-                                let entry = results[i].get_or_insert_with(String::new);
-                                entry.push_str(&decoded);
-                            }
-                            Err(err) => {
-                                return Err(format!("Failed to decode text: {err}"));
-                            }
-                        }
-                    }
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    let decoded = e
+                        .decode()
+                        .map_err(|err| format!("Failed to decode text: {err}"))?;
+                    results[i]
+                        .get_or_insert_with(String::new)
+                        .push_str(&decoded);
                 }
             }
 
             Ok(Event::GeneralRef(e)) => {
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                    {
-                        // Resolve the entity reference to its character
-                        let resolved = general_ref_to_string(&e, false);
-                        let entry = results[i].get_or_insert_with(String::new);
-                        entry.push_str(&resolved);
-                    }
+                let resolved = general_ref_to_string(&e, false);
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    results[i]
+                        .get_or_insert_with(String::new)
+                        .push_str(&resolved);
                 }
             }
 
             Ok(Event::CData(e)) => {
-                for (i, path) in parsed_paths.iter().enumerate() {
-                    if resolved_indices.contains(&i) {
-                        continue;
-                    }
-
-                    if let Some(last_segment) = path.last()
-                        && !last_segment.starts_with('@')
-                        && path.len() == current_path.len()
-                        && path.iter().zip(&current_path).all(|(a, b)| *a == b)
-                    {
-                        let text = String::from_utf8_lossy(e.as_ref()).to_string();
-                        results[i] = Some(text);
-                        resolved_indices.insert(i);
-                    }
+                for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
+                    results[i] = Some(String::from_utf8_lossy(e.as_ref()).into_owned());
+                    resolved_indices.insert(i);
                 }
             }
 
@@ -478,4 +408,17 @@ pub fn extract_values_from_xml_paths(
     }
 
     Ok(results)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_escape_xml_entities() {
+        assert_eq!(
+            escape_xml_entities("This & that \"test\" <tag>".to_string()),
+            "This &amp; that &quot;test&quot; &lt;tag&gt;"
+        );
+    }
 }

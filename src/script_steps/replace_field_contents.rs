@@ -14,61 +14,50 @@ pub fn sanitize(step: &str) -> Option<String> {
 
     let mut auto_increment_initial_value = String::new();
     let mut auto_increment_interval_value = String::new();
-    let mut list_name_to_input_dialog_label = false;
+    let mut in_serial_number_section = false;
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"Boolean" => {
-                    let value = get_attribute(&e, "value").unwrap().as_str() == "True";
-                    if !value {
+                    if get_attribute(&e, "value").as_deref() != Some("True") {
                         continue;
-                    };
+                    }
                     let label = get_attribute(&e, "type").unwrap();
-                    params.push((
-                        label,
-                        match value {
-                            true => "ON".to_string(),
-                            false => "OFF".to_string(),
-                        },
-                    ));
+                    params.push((label, "ON".to_string()));
                 }
                 b"FieldReference" => {
-                    let field_reference = FieldReference::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap();
-                    params.push(("".to_string(), field_reference))
+                    let field_reference = FieldReference::from_xml(&mut reader, &e).display();
+                    params.push((String::new(), field_reference))
                 }
                 b"Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }
                 b"List" => {
-                    if list_name_to_input_dialog_label {
-                        if get_attribute(&e, "value").unwrap() == "True"
+                    if in_serial_number_section {
+                        if get_attribute(&e, "value").as_deref() == Some("True")
                             && let Some(last_param) = params.last_mut()
                         {
                             last_param.0.clone_from(&last_param.1);
-                            last_param.1 = get_attribute(&e, "name").unwrap().to_string();
+                            last_param.1 = get_attribute(&e, "name").unwrap();
                         }
                         continue;
                     }
 
                     match get_attribute(&e, "value").unwrap_or_default().as_str() {
                         "0" | "1" => {
-                            params.push(("".to_string(), get_attribute(&e, "name").unwrap()))
+                            params.push((String::new(), get_attribute(&e, "name").unwrap()))
                         }
                         "2" => {
-                            params.push(("".to_string(), get_attribute(&e, "name").unwrap()));
-                            list_name_to_input_dialog_label = true;
+                            params.push((String::new(), get_attribute(&e, "name").unwrap()));
+                            in_serial_number_section = true;
                         }
                         "3" => calculation_label = get_attribute(&e, "name").unwrap(),
                         _ => {}
@@ -80,7 +69,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if !calculation.is_empty() {
@@ -95,21 +84,21 @@ pub fn sanitize(step: &str) -> Option<String> {
     }
 
     if name.is_empty() {
-        None
-    } else {
-        let formatted_params: Vec<String> = params
-            .iter()
-            .map(|(key, value)| {
-                if key.is_empty() {
-                    value.replace(": ", "").to_string()
-                } else {
-                    format!("{}: {}", key.replace(": ", ""), value)
-                }
-            })
-            .collect();
-
-        Some(format!("{} [ {} ]", name, formatted_params.join(" ; ")))
+        return None;
     }
+
+    let formatted: Vec<String> = params
+        .into_iter()
+        .map(|(key, value)| {
+            if key.is_empty() {
+                value.trim_end_matches(": ").to_string()
+            } else {
+                format!("{}: {}", key.trim_end_matches(": "), value)
+            }
+        })
+        .collect();
+
+    Some(format!("{name} [ {} ]", formatted.join(" ; ")))
 }
 
 #[cfg(test)]

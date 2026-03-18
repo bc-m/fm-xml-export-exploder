@@ -9,11 +9,11 @@ pub struct Select {
 }
 
 impl Select {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Select, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Select {
         let mut depth = 1;
-        let mut item = Select { text: None };
+        let mut item = Select::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -21,9 +21,7 @@ impl Select {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if e.name().as_ref() == b"Calculation" {
-                        if let Ok(param_value) = Calculation::from_xml(reader, &e)
-                            && let Some(display) = param_value.display()
-                        {
+                        if let Some(display) = Calculation::from_xml(reader, &e).display() {
                             item.text = Some(format!("Name: {display}"));
                         }
                         depth -= 1;
@@ -40,11 +38,11 @@ impl Select {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.text.clone()
+    pub fn display(self) -> Option<String> {
+        self.text
     }
 }
 
@@ -65,10 +63,7 @@ mod tests {
             _ => panic!("Wrong read event"),
         };
 
-        assert_eq!(
-            Select::from_xml(&mut reader, &element).unwrap().display(),
-            None
-        );
+        assert_eq!(Select::from_xml(&mut reader, &element).display(), None);
     }
 
     #[test]
@@ -95,7 +90,7 @@ mod tests {
         };
 
         assert_eq!(
-            Select::from_xml(&mut reader, &element).unwrap().display(),
+            Select::from_xml(&mut reader, &element).display(),
             Some("Name: $FensterName".to_string())
         );
     }
