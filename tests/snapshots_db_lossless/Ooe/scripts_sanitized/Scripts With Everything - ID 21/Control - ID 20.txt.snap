@@ -5,7 +5,7 @@ expression: output_content
 
 Allow User Abort [ OFF ]
 
-Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: OFF ]
+Open Transaction [ Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: OFF ]
 Set Revert Transaction on Error [ OFF ]
 Revert Transaction
 Commit Transaction
@@ -14,12 +14,12 @@ Configure Local Notification [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
 Configure NFC Reading [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
 Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ]
 
-If [ Collapsed: OFF ]
-Else If [ Collapsed: OFF ]
-Else [ Collapsed: OFF ; Collapsed: OFF ]
+If []
+Else If []
+Else
 End If
 
-Loop [ Collapsed: OFF ; Flush: Always ]
+Loop [ Flush: Always ]
 	Exit Loop If [ True ]
 End Loop
 

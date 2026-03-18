@@ -44,7 +44,7 @@ Set Variable [ $_silent[1] ; If (
 
 # Validate privilege set - must be full access
 # ■■■■■■■■■■ CONFIGURATION STEP (optional): Customize restrictions to run this script
-If [ Collapsed: OFF ; Get ( AccountPrivilegeSetName ) ≠ "[Full Access]" ]
+If [ Get ( AccountPrivilegeSetName ) ≠ "[Full Access]" ]
 	Exit Script [ JSONSetElement ( "" ; [ "errorCode" ; 9 ; JSONNumber ] ; [ "message" ; "Insufficient privileges" ; JSONString ] ) ]
 End If
 
@@ -82,16 +82,16 @@ Set Variable [ $missingRequired[1] ; List (
 	If ( IsEmpty ( $owner ) ; "git account owner" ) ; 
 	If ( IsEmpty ( FilterValues ( $gitService ; "Bitbucket¶GitHub" ) ) ; "git hosting service" ) ; 
 ) ]
-If [ Collapsed: OFF ; not IsEmpty ( $missingRequired ) ]
+If [ not IsEmpty ( $missingRequired ) ]
 	Set Variable [ $errorCode[1] ; 5 ]
 	Set Variable [ $message[1] ; "Missing config: " & Substitute ( $missingRequired ; ¶ ; ", " ) & "." ]
 End If
 
 # Confirm action
-If [ Collapsed: OFF ; $errorCode = 0 ]
-	If [ Collapsed: OFF ; not $_silent ]
+If [ $errorCode = 0 ]
+	If [ not $_silent ]
 		Show Custom Dialog [ Message: "Run " & $repoName & " pipeline?" ; Default Button: "OK" ; Button 2: "Cancel" ]
-		If [ Collapsed: OFF ; Get ( LastMessageChoice ) ≠ 1 ]
+		If [ Get ( LastMessageChoice ) ≠ 1 ]
 			Set Variable [ $errorCode[1] ; 1 ]
 		End If
 	End If
@@ -99,8 +99,8 @@ End If
 
 # Prep api call
 # 2024-10-07 mkos: @todo add support for an 'includeDetailsForAnalysisTools' parameter by forwarding it to the bitbucket api
-If [ Collapsed: OFF ; $errorCode = 0 ]
-	If [ Collapsed: OFF ; $gitService = "Bitbucket" ]
+If [ $errorCode = 0 ]
+	If [ $gitService = "Bitbucket" ]
 		# ref: https://developer.atlassian.com/cloud/bitbucket/rest/api-group-pipelines/#api-repositories-workspace-repo-slug-pipelines-post
 		Set Variable [ $url[1] ; "https://api.bitbucket.org/2.0/repositories/" & $owner & "/" & $repoName & "/pipelines" ]
 		Set Variable [ $requestBody[1] ; JSONSetElement ( "" 
@@ -116,7 +116,7 @@ If [ Collapsed: OFF ; $errorCode = 0 ]
 & " --header " & Quote ( "Content-Type: application/json" ) 
 & " --data @$requestBody"
 & " --dump-header $responseHeaders" ]
-	Else [ Collapsed: OFF ; Collapsed: OFF ]
+	Else
 		# GitHub
 		Set Variable [ $url[1] ; "https://api.github.com/repos/" & $owner & "/" & $repoName & "/dispatches" ]
 		Set Variable [ $requestBody[1] ; JSONSetElement ( "" 
@@ -133,7 +133,7 @@ If [ Collapsed: OFF ; $errorCode = 0 ]
 End If
 
 # Make api call to trigger pipeline
-If [ Collapsed: OFF ; $errorCode = 0 ]
+If [ $errorCode = 0 ]
 	Insert from URL [ Verify SSL Certificates: ON ; Select: ON ; With dialog: OFF ; Target: $response ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curlOptions ]
 	Set Variable [ $errorCode[1] ; Get ( LastError ) ]
 	Set Variable [ $responseStatusCode[1] ; // We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
@@ -169,7 +169,7 @@ Let ( [
 	GetAsNumber ( code )
 ) ]
 	Set Variable [ $isErrorResponseStatusCode[1] ; not IsEmpty ( $responseStatusCode ) and ( $responseStatusCode < 200 or $responseStatusCode > 299 ) ]
-	If [ Collapsed: OFF ; $gitService = "GitHub" and $errorCode = 10 and not $isErrorResponseStatusCode ]
+	If [ $gitService = "GitHub" and $errorCode = 10 and not $isErrorResponseStatusCode ]
 		# (10) Requested data is missing is expected with GitHub because they do not return a response body
 		Set Variable [ $errorCode[1] ; 0 // reset ]
 	End If
@@ -284,8 +284,8 @@ Let ( [
 End If
 
 # Extract info from success response
-If [ Collapsed: OFF ; $errorCode = 0 and not $isErrorResponseStatusCode ]
-	If [ Collapsed: OFF ; $gitService = "Bitbucket" ]
+If [ $errorCode = 0 and not $isErrorResponseStatusCode ]
+	If [ $gitService = "Bitbucket" ]
 		Set Variable [ $buildNumber[1] ; JSONGetElement ( $response ; "build_number" ) ]
 		Set Variable [ $createdOn[1] ; JSONGetElement ( $response ; "created_on" ) ]
 		Set Variable [ $repoUrl[1] ; JSONGetElement ( $response ; "repository.links.html.href" ) ]
@@ -293,8 +293,8 @@ If [ Collapsed: OFF ; $errorCode = 0 and not $isErrorResponseStatusCode ]
 End If
 
 # Build error $message
-If [ Collapsed: OFF ; IsEmpty ( $message ) ]
-	If [ Collapsed: OFF ; $errorCode > 1 ]
+If [ IsEmpty ( $message ) ]
+	If [ $errorCode > 1 ]
 		Set Variable [ $message[1] ; // We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
 /**
  * @SIGNATURE:
@@ -603,7 +603,7 @@ Let ( [
 	"(" & errorCode & ") " & errorMessage 
 	
 ) ]
-	Else If [ Collapsed: OFF ; $isErrorResponseStatusCode ]
+	Else If [ $isErrorResponseStatusCode ]
 		Set Variable [ $errorCode[1] ; 999 & $responseStatusCode ]
 		Set Variable [ $responseStatusMessage[1] ; "(" & $responseStatusCode & ") " & Let ( 
 
@@ -728,29 +728,29 @@ Let ( [
 End If
 
 # Display $message
-If [ Collapsed: OFF ; not $_silent 
+If [ not $_silent 
 and PatternCount ( Get ( ApplicationVersion ) ; "Data API Engine" ) = 0 
 and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 ]
-	If [ Collapsed: OFF ; $errorCode = 0 ]
-		If [ Collapsed: OFF ; $gitService = "Bitbucket" ]
+	If [ $errorCode = 0 ]
+		If [ $gitService = "Bitbucket" ]
 			Set Variable [ $message[1] ; "The " & Quote ( $repoName ) & " pipeline is running build # " & $buildNumber & ". View in browser?" ]
 			Show Custom Dialog [ Message: $message ; Default Button: "Dismiss" ; Button 2: "View" ]
-			If [ Collapsed: OFF ; Get ( LastMessageChoice ) = 2 ]
+			If [ Get ( LastMessageChoice ) = 2 ]
 				Set Variable [ $pipelineBuildUrl[1] ; $repoUrl & "/pipelines/results/" & $buildNumber ]
 				Open URL [ In external browser: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
 			End If
-		Else [ Collapsed: OFF ; Collapsed: OFF ]
+		Else
 			# GitHub
 			Show Custom Dialog [ Message: "The " & Quote ( $repoName ) & " pipeline is running." ; Default Button: "OK" ]
 		End If
-	Else If [ Collapsed: OFF ; not IsEmpty ( $message ) ]
+	Else If [ not IsEmpty ( $message ) ]
 		Show Custom Dialog [ Title: "Error" ; Message: $message ; Default Button: "OK" ]
 	End If
 End If
 
 # Build $data
-If [ Collapsed: OFF ; $errorCode = 0 ]
-	If [ Collapsed: OFF ; $gitService = "Bitbucket" ]
+If [ $errorCode = 0 ]
+	If [ $gitService = "Bitbucket" ]
 		Set Variable [ $data[1] ; JSONSetElement ( $data 
 	; [ "buildNumber" ; $buildNumber ; JSONString ] 
 	; [ "createdOn" ; $createdOn ; JSONString ] 
@@ -764,9 +764,9 @@ End If
 # END
 # ====================================================================================================
 
-If [ Collapsed: OFF ; $parentScriptErrorCaptureState ]
+If [ $parentScriptErrorCaptureState ]
 	Set Error Capture [ OFF ]
-Else [ Collapsed: OFF ; Collapsed: OFF ]
+Else
 	Set Error Capture [ OFF ]
 End If
 

@@ -51,12 +51,12 @@ Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ;
 Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: 123 ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ]
 Configure Region Monitor Script [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; ⚠️ PARAMETER "Latitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Longitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Radius" NOT PARSED ⚠️ ]
 
-If [ Collapsed: OFF ; 1=0 ]
-Else If [ Collapsed: OFF ; 1=1 ]
-	If [ Collapsed: OFF ]
-	Else If [ Collapsed: OFF ]
+If [ 1=0 ]
+Else If [ 1=1 ]
+	If []
+	Else If []
 	End If
-Else [ Collapsed: OFF ; Collapsed: OFF ]
+Else
 End If
 
 Exit Script []
@@ -68,21 +68,21 @@ Install OnTimer Script
 Install OnTimer Script [ 123 ]
 Install OnTimer Script [ 1+2 ]
 
-Loop [ Collapsed: OFF ; Flush: Always ]
+Loop [ Flush: Always ]
 	Exit Loop If [ 1=1 ]
 End Loop
-Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: OFF ]
+Open Transaction [ Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: OFF ]
 Revert Transaction [ Condition: 1=1 ; ErrorCode: 5000 ; ErrorMessage: "Broken" ]
 Commit Transaction
-Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: ON ; Override ESS locking conflicts: OFF ]
+Open Transaction [ Skip auto-enter options: OFF ; Skip data entry validation: ON ; Override ESS locking conflicts: OFF ]
 Revert Transaction [ Condition: 1=1 ; ErrorCode: 5000 ]
 Revert Transaction [ Condition: 1=1 ; ErrorCode: 5000 ]
 Revert Transaction [ Condition: 1=1 ]
 Commit Transaction
-Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: ON ]
+Open Transaction [ Skip auto-enter options: OFF ; Skip data entry validation: OFF ; Override ESS locking conflicts: ON ]
 Revert Transaction [ ErrorCode: 5000 ; ErrorMessage: "Broken" ]
 Commit Transaction
-Open Transaction [ Collapsed: OFF ; Skip auto-enter options: OFF ; Skip data entry validation: ON ; Override ESS locking conflicts: ON ]
+Open Transaction [ Skip auto-enter options: OFF ; Skip data entry validation: ON ; Override ESS locking conflicts: ON ]
 Revert Transaction [ Condition: 1=1 ; ErrorCode: 1 ; ErrorMessage: "Broken" ]
 Commit Transaction
 
@@ -229,9 +229,9 @@ Select All
 
 Set Selection [ 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "Select" NOT PARSED ⚠️ ]
 
-Undo/Redo [ Collapsed: OFF ; Toggle ]
-Undo/Redo [ Collapsed: OFF ; Undo ]
-Undo/Redo [ Collapsed: OFF ; Redo ]
+Undo/Redo [ Toggle ]
+Undo/Redo [ Undo ]
+Undo/Redo [ Redo ]
 
 # ===========
 # FIELD STEPS

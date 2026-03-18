@@ -86,6 +86,11 @@ impl Boolean {
     }
 
     pub fn display(self) -> Option<String> {
+        // Collapsed is a UI-only flag (Script Workspace visual state) — never shown in output
+        if self.name.as_deref() == Some("Collapsed") {
+            return None;
+        }
+
         if self.should_hide_bool() {
             // Hidden booleans only show their name when the value is true
             return self.value.filter(|&v| v).and(self.name);
@@ -127,6 +132,27 @@ mod tests {
                 .display()
                 .unwrap(),
             expected_output
+        );
+    }
+
+    #[test]
+    fn test_collapsed_returns_none() {
+        let xml = r#"
+            <Parameter type="Boolean">
+                <Boolean type="Collapsed" id="0" value="False"></Boolean>
+            </Parameter>
+        "#;
+
+        let mut reader = Reader::from_str(xml.trim());
+        let element = match reader.read_event() {
+            Ok(Event::Start(e)) => e,
+            _ => panic!("Wrong read event"),
+        };
+
+        assert_eq!(
+            Boolean::from_xml(&mut reader, &element, 0).display(),
+            None,
+            "Collapsed boolean should produce no output"
         );
     }
 
