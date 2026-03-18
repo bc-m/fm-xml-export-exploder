@@ -6,7 +6,7 @@ const UNKNOWN_SCRIPT_STEP: [u32; 16] = [
 ];
 
 // https://help.claris.com/en/pro-help/content/script-steps-reference.html
-#[derive(Debug, FromRepr, PartialEq, Display)]
+#[derive(Debug, Clone, Copy, FromRepr, PartialEq, Display)]
 #[repr(u32)]
 pub enum ScriptStep {
     Unknown = 0,

@@ -38,14 +38,18 @@ pub enum Qualifier {
     SanitizedCustomFunctions,
 }
 
+/// Metadata discovered from the root element of an XML export file
+pub struct DocumentInfo {
+    pub saxml_version_num: u64,
+    pub db_name: String,
+}
+
 /// Context for XML catalog processing
 pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub reader: &'a mut Reader<R>,
     pub path_stack: &'a mut Vec<Vec<u8>>,
     pub root_out_dir: &'a Path,
-    pub saxml_version: Option<String>,
-    pub saxml_version_num: Option<u64>,
-    pub db_name: Option<String>,
+    pub doc_info: Option<DocumentInfo>,
     pub top_level_section: Option<TopLevelSection>,
     pub action: Option<Action>,
     pub catalog_type: Option<CatalogType>,
@@ -74,9 +78,7 @@ pub fn explode_xml(fm_export_file_path: &Path, root_out_dir: &Path, flags: &Flag
         reader: &mut Reader::from_reader(BufReader::new(DecodeReaderBytes::new(file))),
         path_stack: &mut Vec::new(),
         root_out_dir,
-        saxml_version: None,
-        saxml_version_num: None,
-        db_name: None,
+        doc_info: None,
         top_level_section: None,
         action: None,
         catalog_type: None,
@@ -172,16 +174,17 @@ fn process_root_element<R: Read + BufRead>(
 
     let file_attr = get_attribute(e, "File")
         .ok_or_else(|| anyhow!("Missing 'File' attribute on root element"))?;
-    context.db_name = Some(
-        file_attr
-            .strip_suffix(".fmp12")
-            .unwrap_or(&file_attr)
-            .to_string(),
-    );
+    let db_name = file_attr
+        .strip_suffix(".fmp12")
+        .unwrap_or(&file_attr)
+        .to_string();
     let saxml_version = get_attribute(e, "version")
         .ok_or_else(|| anyhow!("Missing 'version' attribute on root element"))?;
-    context.saxml_version_num = Some(version_string_to_number(&saxml_version));
-    context.saxml_version = Some(saxml_version);
+    let saxml_version_num = version_string_to_number(&saxml_version);
+    context.doc_info = Some(DocumentInfo {
+        saxml_version_num,
+        db_name,
+    });
     Ok(())
 }
 
@@ -221,7 +224,7 @@ fn process_catalog_elements<R: Read + BufRead>(
     };
     context.catalog_type = Some(catalog_type);
 
-    let ver = context.saxml_version_num.unwrap_or(0);
+    let ver = context.doc_info.as_ref().map_or(0, |d| d.saxml_version_num);
 
     if catalog_type == CatalogType::OptionsForValueLists && ver >= VERSION_2_2_3_4 {
         return Ok(true);

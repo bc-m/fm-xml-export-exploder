@@ -1,7 +1,6 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::animation::Animation;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::button::Button;
@@ -19,7 +18,6 @@ use crate::script_steps::parameters::window_reference::WindowReference;
 use crate::utils::attributes::get_attribute;
 
 pub struct ParameterValues {
-    pub step_id: u32,
     pub parameters: Vec<String>,
 }
 
@@ -27,7 +25,6 @@ impl ParameterValues {
     pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> ParameterValues {
         let mut depth = 1;
         let mut item = ParameterValues {
-            step_id,
             parameters: Vec::new(),
         };
 
@@ -101,42 +98,6 @@ impl ParameterValues {
 
         item
     }
-
-    pub fn display(self) -> String {
-        match id_to_script_step(self.step_id) {
-            ScriptStep::RevertTransaction => {
-                let mut params: Vec<_> = self
-                    .parameters
-                    .into_iter()
-                    .filter(|p| !p.ends_with(": ON") && !p.ends_with(": OFF"))
-                    .collect();
-
-                // Remove trailing ErrorMessage if not preceded by ErrorCode
-                let len = params.len();
-                if len >= 2
-                    && params[len - 1].starts_with("ErrorMessage")
-                    && !params[len - 2].starts_with("ErrorCode")
-                {
-                    params.pop();
-                }
-
-                params.join(" ; ")
-            }
-            ScriptStep::SetErrorLogging => {
-                let mut iter = self.parameters.into_iter();
-                let on_off = if iter.next().is_some_and(|f| f.ends_with(": ON")) {
-                    "ON"
-                } else {
-                    "OFF"
-                };
-                match iter.next() {
-                    Some(second) => format!("{on_off} ; {second}"),
-                    None => on_off.to_string(),
-                }
-            }
-            _ => self.parameters.join(" ; "),
-        }
-    }
 }
 
 #[cfg(test)]
@@ -163,9 +124,7 @@ mod tests {
         };
 
         let expected_output = "Pause: OFF";
-        assert_eq!(
-            ParameterValues::from_xml(&mut reader, &element, 0).display(),
-            expected_output
-        );
+        let pv = ParameterValues::from_xml(&mut reader, &element, 0);
+        assert_eq!(pv.parameters.join(" ; "), expected_output);
     }
 }

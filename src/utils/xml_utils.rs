@@ -9,7 +9,7 @@ use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, E
 use crate::Skeleton;
 use crate::config::Flags;
 use crate::utils::attributes::get_attributes;
-use crate::utils::push_line_to_skeleton;
+use crate::utils::skeleton::push_line_to_skeleton;
 use crate::xml_processor::ProcessingContext;
 
 #[derive(Debug, Default, PartialEq)]

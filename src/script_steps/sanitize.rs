@@ -7,7 +7,7 @@ use crate::utils::attributes::get_attribute;
 
 pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     let mut name = String::new();
-    let mut parameters: Vec<String> = Vec::new();
+    let mut raw_parameters: Vec<String> = Vec::new();
 
     let mut reader = Reader::from_str(step);
     let mut buf = Vec::new();
@@ -21,7 +21,8 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
                     continue;
                 }
                 b"ParameterValues" => {
-                    parameters.push(ParameterValues::from_xml(&mut reader, &e, step_id).display())
+                    let pv = ParameterValues::from_xml(&mut reader, &e, step_id);
+                    raw_parameters.extend(pv.parameters);
                 }
                 _ => {}
             },
@@ -30,8 +31,8 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
         buf.clear();
     }
 
-    let parameters = parameters.join(" ; ");
     let script_step = id_to_script_step(step_id);
+    let parameters = format_parameters(raw_parameters, script_step);
 
     if script_step == ScriptStep::Comment {
         if parameters.trim().is_empty() {
@@ -56,6 +57,43 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     }
 
     Some(format!("{name} [ {parameters} ]"))
+}
+
+/// Apply step-specific formatting rules to parameters.
+/// Most steps use a simple join, but some need special treatment.
+fn format_parameters(parameters: Vec<String>, script_step: ScriptStep) -> String {
+    match script_step {
+        ScriptStep::RevertTransaction => {
+            let mut params: Vec<_> = parameters
+                .into_iter()
+                .filter(|p| !p.ends_with(": ON") && !p.ends_with(": OFF"))
+                .collect();
+
+            // Remove trailing ErrorMessage if not preceded by ErrorCode
+            let len = params.len();
+            if len >= 2
+                && params[len - 1].starts_with("ErrorMessage")
+                && !params[len - 2].starts_with("ErrorCode")
+            {
+                params.pop();
+            }
+
+            params.join(" ; ")
+        }
+        ScriptStep::SetErrorLogging => {
+            let mut iter = parameters.into_iter();
+            let on_off = if iter.next().is_some_and(|f| f.ends_with(": ON")) {
+                "ON"
+            } else {
+                "OFF"
+            };
+            match iter.next() {
+                Some(second) => format!("{on_off} ; {second}"),
+                None => on_off.to_string(),
+            }
+        }
+        _ => parameters.join(" ; "),
+    }
 }
 
 #[cfg(test)]
