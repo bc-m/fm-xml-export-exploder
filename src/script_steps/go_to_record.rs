@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::get_attribute;
 
@@ -14,65 +15,57 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut calculation = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"List" => {
-                    option = get_attribute(&e, "name").unwrap().to_string();
-                    option_type = get_attribute(&e, "value").unwrap().to_string();
+                    option = get_attribute(&e, "name").unwrap();
+                    option_type = get_attribute(&e, "value").unwrap();
                 }
                 b"Boolean" => {
-                    boolean_option_type = get_attribute(&e, "type").unwrap().to_string();
-                    boolean_option_value = get_attribute(&e, "value").unwrap() == "True";
+                    boolean_option_type = get_attribute(&e, "type").unwrap();
+                    boolean_option_value = get_attribute(&e, "value").as_deref() == Some("True");
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
-    } else if option_type == "5" {
-        if boolean_option_type.is_empty() {
-            Some(format!("{name} [ {calculation} ]"))
-        } else {
-            Some(format!(
-                "{} [ {}: {} ; {} ]",
-                name,
-                boolean_option_type,
-                match boolean_option_value {
-                    true => "ON".to_string(),
-                    false => "OFF".to_string(),
-                },
-                calculation
-            ))
-        }
-    } else if boolean_option_type.is_empty() {
-        Some(format!("{name} [ {option} ]"))
-    } else {
-        Some(format!(
-            "{} [ {} ; {}: {} ]",
-            name,
-            option,
-            boolean_option_type,
-            match boolean_option_value {
-                true => "ON".to_string(),
-                false => "OFF".to_string(),
-            }
-        ))
+        return None;
     }
+
+    let is_calculated = option_type == "5";
+
+    let mut parts = Vec::new();
+    if is_calculated {
+        if !boolean_option_type.is_empty() {
+            parts.push(format!(
+                "{boolean_option_type}: {}",
+                Boolean::on_off(boolean_option_value)
+            ));
+        }
+        parts.push(calculation);
+    } else {
+        parts.push(option);
+        if !boolean_option_type.is_empty() {
+            parts.push(format!(
+                "{boolean_option_type}: {}",
+                Boolean::on_off(boolean_option_value)
+            ));
+        }
+    }
+
+    Some(format!("{name} [ {} ]", parts.join(" ; ")))
 }
 
 #[cfg(test)]

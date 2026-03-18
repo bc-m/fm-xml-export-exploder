@@ -4,79 +4,34 @@ use std::path::Path;
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
+use crate::utils::attributes::get_attribute;
+use crate::utils::file_utils::for_each_xml_file;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::cdata_to_string;
 
 #[derive(Debug, Default)]
 struct CfInfo {
     id: String,
-    name: String,
     text: String,
 }
 
 /// Process all XML files in the cf directory and create sanitized text versions
 /// This function mirrors the folder structure of the XML files
 pub fn create_sanitized_custom_functions(cf_xml_out_dir_path: &Path, cf_text_out_dir_path: &Path) {
-    // Recursively process all XML files in the cf directory
-    process_directory_recursively(
+    for_each_xml_file(
         cf_xml_out_dir_path,
         cf_xml_out_dir_path,
         cf_text_out_dir_path,
-    );
-}
-
-fn process_directory_recursively(
-    current_dir: &Path,
-    cf_xml_out_dir_path: &Path,
-    cf_text_out_dir_path: &Path,
-) {
-    if let Ok(entries) = fs::read_dir(current_dir) {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
-                process_cf_xml_file(&path, cf_xml_out_dir_path, cf_text_out_dir_path);
-            } else if path.is_dir() {
-                // Recursively process subdirectories
-                process_directory_recursively(&path, cf_xml_out_dir_path, cf_text_out_dir_path);
+        &mut |xml_file_path, output_file_path| {
+            let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
+                eprintln!("Error reading file {}", xml_file_path.display());
+                return;
+            };
+            if let Some(cf_info) = parse_cf_xml(&xml_content) {
+                write_text_file(output_file_path, &cf_info.text);
             }
-        }
-    }
-}
-
-fn process_cf_xml_file(
-    xml_file_path: &Path,
-    cf_xml_out_dir_path: &Path,
-    cf_text_out_dir_path: &Path,
-) {
-    // Read the XML file content
-    let xml_content = match fs::read_to_string(xml_file_path) {
-        Ok(content) => content,
-        Err(e) => {
-            eprintln!("Error reading file {}: {}", xml_file_path.display(), e);
-            return;
-        }
-    };
-
-    // Parse the script and create sanitized text
-    let cf_info = parse_cf_xml(&xml_content);
-    if let Some(cf_info) = cf_info {
-        // Determine the relative path from the XML file to maintain folder structure
-        let relative_path = xml_file_path
-            .strip_prefix(cf_xml_out_dir_path)
-            .unwrap_or(xml_file_path);
-        let output_file_path = cf_text_out_dir_path.join(relative_path);
-
-        // Ensure the output directory exists
-        if let Some(parent) = output_file_path.parent() {
-            fs::create_dir_all(parent).unwrap_or_else(|err| {
-                panic!("Error creating directory {}: {}", parent.display(), err)
-            });
-        }
-
-        // Change extension to .txt
-        let output_file_path = output_file_path.with_extension("txt");
-        write_text_file(&output_file_path, &cf_info.text);
-    }
+        },
+    );
 }
 
 fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
@@ -84,9 +39,9 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
 
     let mut reader = Reader::from_str(xml_content);
     let mut buf = Vec::new();
-    let mut depth = 0;
-    let mut path_stack: Vec<Vec<u8>> = Vec::new();
     let mut saw_custom_function = false;
+    let mut in_calculation = false;
+    let mut in_text = false;
 
     loop {
         match reader.read_event_into(&mut buf) {
@@ -95,61 +50,38 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 break;
             }
             Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => {
-                depth += 1;
-                path_stack.push(e.name().as_ref().to_vec());
-
-                match e.name().as_ref() {
-                    b"CustomFunction" => {
-                        saw_custom_function = true;
-                        for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
-                            match attr.0.as_str() {
-                                "id" => cf_info.id = attr.1.to_string(),
-                                "name" => cf_info.name = attr.1.to_string(),
-                                _ => {}
-                            }
-                        }
+            Ok(Event::Start(e)) => match e.name().as_ref() {
+                b"CustomFunction" => {
+                    saw_custom_function = true;
+                    if let Some(id) = get_attribute(&e, "id") {
+                        cf_info.id = id;
                     }
-                    b"CustomFunctionReference" if !saw_custom_function => {
-                        for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
-                            match attr.0.as_str() {
-                                "id" => cf_info.id = attr.1.to_string(),
-                                "name" => cf_info.name = attr.1.to_string(),
-                                _ => {}
-                            }
-                        }
-                    }
-                    _ => {}
                 }
-            }
+                b"CustomFunctionReference" if !saw_custom_function => {
+                    if let Some(id) = get_attribute(&e, "id") {
+                        cf_info.id = id;
+                    }
+                }
+                b"Calculation" => in_calculation = true,
+                b"Text" => in_text = true,
+                _ => {}
+            },
             Ok(Event::CData(e)) => {
-                let is_calculation_text = path_stack
-                    .iter()
-                    .rev()
-                    .zip(&[&b"Text"[..], &b"Calculation"[..]])
-                    .all(|(a, b)| a.as_slice() == *b);
-                if is_calculation_text {
+                if in_text && in_calculation {
                     cf_info.text = cdata_to_string(&e);
                     break;
                 }
             }
-            Ok(Event::End(_e)) => {
-                depth -= 1;
-                path_stack.pop();
-
-                if depth == 0 {
-                    break;
-                }
-            }
+            Ok(Event::End(e)) => match e.name().as_ref() {
+                b"Calculation" => in_calculation = false,
+                b"Text" => in_text = false,
+                _ => {}
+            },
             _ => {}
         }
 
-        buf.clear()
+        buf.clear();
     }
 
-    if cf_info.id.is_empty() {
-        None
-    } else {
-        Some(cf_info)
-    }
+    (!cf_info.id.is_empty()).then_some(cf_info)
 }

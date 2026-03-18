@@ -9,11 +9,11 @@ pub struct Animation {
 }
 
 impl Animation {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<Animation, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Animation {
         let mut depth = 1;
-        let mut item = Animation { value: None };
+        let mut item = Animation::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -35,12 +35,10 @@ impl Animation {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.value
-            .clone()
-            .map(|value| format!("Animation: {value}"))
+    pub fn display(self) -> Option<String> {
+        self.value.map(|value| format!("Animation: {value}"))
     }
 }

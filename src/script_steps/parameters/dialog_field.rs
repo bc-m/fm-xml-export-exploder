@@ -13,11 +13,11 @@ pub struct DialogField {
 }
 
 impl DialogField {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> DialogField {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> DialogField {
         let mut item = DialogField::default();
         let mut depth = 1;
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -25,32 +25,21 @@ impl DialogField {
                 Ok(Event::Start(inner)) => {
                     depth += 1;
                     match inner.name().as_ref() {
-                        b"Parameter" => {
-                            if let Some(param_type) = get_attribute(&inner, "type") {
-                                match param_type.as_str() {
-                                    "Target" => {
-                                        if let Ok(target) = Target::from_xml(reader, &inner) {
-                                            item.target = target.display();
-                                        }
-                                        depth -= 1;
-                                    }
-                                    "Label" => {
-                                        if let Ok(calc) = Calculation::from_xml(reader, &inner) {
-                                            item.label = calc.display();
-                                        }
-                                        depth -= 1;
-                                    }
-                                    _ => {}
-                                }
+                        b"Parameter" => match get_attribute(&inner, "type").as_deref() {
+                            Some("Target") => {
+                                item.target = Target::from_xml(reader, &inner).display();
+                                depth -= 1;
                             }
-                        }
+                            Some("Label") => {
+                                item.label = Calculation::from_xml(reader, &inner).display();
+                                depth -= 1;
+                            }
+                            _ => {}
+                        },
                         b"Boolean" => {
-                            let is_password =
-                                get_attribute(&inner, "type").as_deref() == Some("Password");
-                            let is_true = get_attribute(&inner, "value").as_deref() == Some("True");
-                            if is_password && is_true {
-                                item.password = true;
-                            }
+                            item.password = get_attribute(&inner, "type").as_deref()
+                                == Some("Password")
+                                && get_attribute(&inner, "value").as_deref() == Some("True");
                         }
                         _ => {}
                     }
@@ -69,19 +58,13 @@ impl DialogField {
         item
     }
 
-    pub fn display(&self, field_type: &str) -> Option<String> {
-        let target = self.target.as_ref()?;
-
-        let number = match field_type {
-            "Field1" => "1",
-            "Field2" => "2",
-            "Field3" => "3",
-            _ => "?",
-        };
+    pub fn display(self, field_type: &str) -> Option<String> {
+        let target = self.target?;
+        let number = field_type.strip_prefix("Field").unwrap_or("?");
 
         let mut parts = vec![format!("Input {number}: {target}")];
 
-        if let Some(label) = &self.label
+        if let Some(label) = self.label
             && !label.is_empty()
         {
             parts.push(format!("Label {number}: {label}"));

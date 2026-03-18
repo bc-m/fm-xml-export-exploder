@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
@@ -10,55 +11,36 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut position = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"Boolean" => {
-                    select_label = get_attribute(&e, "type").unwrap().to_string();
-                    match get_attribute(&e, "value").unwrap().as_str() {
-                        "True" => {
-                            select = true;
-                        }
-                        "False" => {
-                            select = false;
-                        }
-                        _ => {}
-                    };
+                    select_label = get_attribute(&e, "type").unwrap();
+                    select = get_attribute(&e, "value").as_deref() == Some("True");
                 }
                 b"List" => {
-                    position = get_attribute(&e, "name").unwrap().to_string();
+                    position = get_attribute(&e, "name").unwrap();
                 }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
-    } else {
-        Some(format!(
-            "{} [ {}: {} ; {} ]",
-            name,
-            select_label,
-            match select {
-                true => {
-                    "ON"
-                }
-                false => {
-                    "OFF"
-                }
-            },
-            position
-        ))
+        return None;
     }
+    Some(format!(
+        "{name} [ {select_label}: {} ; {position} ]",
+        Boolean::on_off(select)
+    ))
 }
 
 #[cfg(test)]

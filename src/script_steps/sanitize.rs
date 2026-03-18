@@ -5,62 +5,95 @@ use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::parameter_values::ParameterValues;
 use crate::utils::attributes::get_attribute;
 
-pub fn from_xml(step_id: &u32, step: &str) -> Option<String> {
+pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     let mut name = String::new();
-    let mut parameters: Vec<String> = Vec::new();
+    let mut raw_parameters: Vec<String> = Vec::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    if let Some(value) = get_attribute(&e, "name") {
-                        name = value.to_string();
-                    }
+                    name = get_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
-                b"ParameterValues" => parameters.push(
-                    ParameterValues::from_xml(&mut reader, &e, step_id)
-                        .unwrap()
-                        .display()
-                        .unwrap(),
-                ),
+                b"ParameterValues" => {
+                    let pv = ParameterValues::from_xml(&mut reader, &e, step_id);
+                    raw_parameters.extend(pv.parameters);
+                }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
-    let parameters = parameters.join(" ; ");
+    let script_step = id_to_script_step(step_id);
+    let parameters = format_parameters(raw_parameters, script_step);
 
-    if id_to_script_step(step_id) == ScriptStep::Comment {
+    if script_step == ScriptStep::Comment {
         if parameters.trim().is_empty() {
-            return Some("".to_string());
-        } else {
-            return Some(format!("# {parameters}"));
+            return Some(String::new());
         }
+        return Some(format!("# {parameters}"));
     }
 
     let parameters = parameters.trim();
     if parameters.is_empty() {
-        if matches!(
-            id_to_script_step(step_id),
+        let needs_brackets = matches!(
+            script_step,
             ScriptStep::GoToField
                 | ScriptStep::IfStart
                 | ScriptStep::IfElse
                 | ScriptStep::ExitLoopIf
-        ) {
+        );
+        if needs_brackets {
             return Some(format!("{name} []"));
         }
-
-        return Some(name.to_string());
-    };
+        return Some(name);
+    }
 
     Some(format!("{name} [ {parameters} ]"))
+}
+
+/// Apply step-specific formatting rules to parameters.
+/// Most steps use a simple join, but some need special treatment.
+fn format_parameters(parameters: Vec<String>, script_step: ScriptStep) -> String {
+    match script_step {
+        ScriptStep::RevertTransaction => {
+            let mut params: Vec<_> = parameters
+                .into_iter()
+                .filter(|p| !p.ends_with(": ON") && !p.ends_with(": OFF"))
+                .collect();
+
+            // Remove trailing ErrorMessage if not preceded by ErrorCode
+            let len = params.len();
+            if len >= 2
+                && params[len - 1].starts_with("ErrorMessage")
+                && !params[len - 2].starts_with("ErrorCode")
+            {
+                params.pop();
+            }
+
+            params.join(" ; ")
+        }
+        ScriptStep::SetErrorLogging => {
+            let mut iter = parameters.into_iter();
+            let on_off = if iter.next().is_some_and(|f| f.ends_with(": ON")) {
+                "ON"
+            } else {
+                "OFF"
+            };
+            match iter.next() {
+                Some(second) => format!("{on_off} ; {second}"),
+                None => on_off.to_string(),
+            }
+        }
+        _ => parameters.join(" ; "),
+    }
 }
 
 #[cfg(test)]
@@ -73,7 +106,7 @@ mod tests {
 
         let expected_output = Some("Fenster fixieren".to_string());
         let script_id: u32 = 79;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -91,7 +124,7 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -109,7 +142,7 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -127,7 +160,7 @@ mod tests {
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
         let script_id: u32 = 22;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -151,7 +184,7 @@ mod tests {
         let expected_output =
             Some("Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]".to_string());
         let script_id: u32 = 182;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 }
 
@@ -181,7 +214,7 @@ mod commit_tests {
         let expected_output =
             Some("Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -208,7 +241,7 @@ mod commit_tests {
                 .to_string(),
         );
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -232,7 +265,7 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -256,7 +289,7 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: ON ; Schreiben erzwingen ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(&script_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -298,7 +331,7 @@ mod commit_tests {
         let step_id: u32 = 122;
         let expected_output =
             Some("Neues Fenster [ Style: Dokument ; Layout: <Originallayout> ]".to_string());
-        assert_eq!(from_xml(&step_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
     }
 
     #[test]
@@ -384,6 +417,6 @@ mod commit_tests {
 
         let step_id: u32 = 122;
         let expected_output = Some(r#"Neues Fenster [ Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]"#.to_string());
-        assert_eq!(from_xml(&step_id, xml.trim()), expected_output);
+        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
     }
 }

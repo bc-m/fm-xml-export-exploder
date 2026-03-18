@@ -6,55 +6,53 @@ use crate::utils::xml_utils;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
-    let mut in_object_name_calculation = false;
-    let mut in_repetition_calculation = false;
     let mut object_name_calculation = String::new();
     let mut repetition_calculation = String::new();
+    let mut in_name = false;
+    let mut in_repetition = false;
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
-                b"Name" => in_object_name_calculation = true,
-                b"repetition" => in_repetition_calculation = true,
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
+                b"Name" => in_name = true,
+                b"repetition" => in_repetition = true,
                 _ => {}
             },
             Ok(Event::CData(e)) => {
-                if in_object_name_calculation {
-                    object_name_calculation.push_str(xml_utils::cdata_to_string(&e).as_str());
-                }
-                if in_repetition_calculation {
-                    repetition_calculation.push_str(xml_utils::cdata_to_string(&e).as_str());
-                }
-            }
-            Ok(Event::End(e)) => {
-                if e.name().as_ref() == b"Calculation" {
-                    in_object_name_calculation = false;
-                    in_repetition_calculation = false;
+                let text = xml_utils::cdata_to_string(&e);
+                if in_name {
+                    object_name_calculation.push_str(&text);
+                } else if in_repetition {
+                    repetition_calculation.push_str(&text);
                 }
             }
+            Ok(Event::End(e)) => match e.name().as_ref() {
+                b"Name" => in_name = false,
+                b"repetition" => in_repetition = false,
+                _ => {}
+            },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
-    let mut params = Vec::new();
+    let mut parts = Vec::new();
     if !object_name_calculation.is_empty() && object_name_calculation != "1" {
-        params.push(format!("Name: {object_name_calculation}"));
+        parts.push(format!("Name: {object_name_calculation}"));
     }
     if !repetition_calculation.is_empty() && repetition_calculation != "1" {
-        params.push(repetition_calculation);
+        parts.push(repetition_calculation);
     }
 
-    let params = params.join(" ; ");
-    if params.is_empty() {
+    if parts.is_empty() {
         Some(format!("{name} []"))
     } else {
-        Some(format!("{name} [ {params} ]"))
+        Some(format!("{name} [ {} ]", parts.join(" ; ")))
     }
 }
 

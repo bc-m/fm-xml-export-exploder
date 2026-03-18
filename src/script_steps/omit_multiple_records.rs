@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
+use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::get_attribute;
 
@@ -11,74 +12,40 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut calculation = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    match get_attribute(&e, "name") {
-                        None => {}
-                        Some(value) => {
-                            name = value.to_string();
-                        }
-                    }
+                    name = get_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
                 b"Boolean" => {
-                    if let Some(name) = get_attribute(&e, "type") {
-                        option_name = name.to_string();
-                    }
-
-                    match get_attribute(&e, "value").unwrap().as_str() {
-                        "True" => {
-                            state = true;
-                        }
-                        "False" => {
-                            state = false;
-                        }
-                        _ => {}
-                    }
+                    option_name = get_attribute(&e, "type").unwrap_or_default();
+                    state = get_attribute(&e, "value").as_deref() == Some("True");
                     continue;
                 }
                 b"Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if option_name.is_empty() && calculation.is_empty() {
-        Some(format!("{name} []"))
-    } else if !calculation.is_empty() {
-        Some(format!(
-            "{} [ {}: {} ; {} ]",
-            name,
-            option_name,
-            match state {
-                true => "ON",
-                false => "OFF",
-            },
-            calculation
-        ))
-    } else {
-        Some(format!(
-            "{} [ {}: {} ]",
-            name,
-            option_name,
-            match state {
-                true => "ON",
-                false => "OFF",
-            }
-        ))
+        return Some(format!("{name} []"));
     }
+
+    let mut parts = vec![format!("{option_name}: {}", Boolean::on_off(state))];
+    if !calculation.is_empty() {
+        parts.push(calculation);
+    }
+    Some(format!("{name} [ {} ]", parts.join(" ; ")))
 }
 
 #[cfg(test)]

@@ -11,22 +11,18 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut calculation = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap().to_string(),
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"FieldReference" => {
-                    field_reference = FieldReference::from_xml(&mut reader, &e)
-                        .unwrap()
-                        .display()
-                        .unwrap()
+                    field_reference = FieldReference::from_xml(&mut reader, &e).display()
                 }
                 b"Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }
@@ -34,14 +30,13 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
-    } else {
-        Some(format!("{name} [ {field_reference} ; {calculation} ]"))
+        return None;
     }
+    Some(format!("{name} [ {field_reference} ; {calculation} ]"))
 }
 
 #[cfg(test)]

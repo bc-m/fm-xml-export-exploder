@@ -10,33 +10,28 @@ pub struct Related {
 }
 
 impl Related {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Option<Related> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Related {
         let mut depth = 1;
-        let mut item = Related {
-            parameters: Vec::new(),
-        };
+        let mut item = Related::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-
-                    let element_name = e.name();
-                    match element_name.as_ref() {
+                    match e.name().as_ref() {
                         b"TableOccurrenceReference" => {
                             let table_occurrence = get_attribute(&e, "name")
-                                .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
+                                .unwrap_or_else(|| "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
                             item.parameters.push(format!("Table: {table_occurrence}"));
                         }
                         b"LayoutReferenceContainer" => {
                             item.parameters.push(
                                 LayoutReferenceContainer::from_xml(reader, &e)
-                                    .unwrap()
                                     .display()
-                                    .unwrap_or("".to_string()),
+                                    .unwrap_or_default(),
                             );
                             depth -= 1;
                         }
@@ -45,16 +40,12 @@ impl Related {
                             depth -= 1;
                         }
                         b"Options" => {
-                            if let Some(show_related) = get_attribute(&e, "ShowRelated")
-                                && show_related == "True"
-                            {
-                                item.parameters.push("Show related".to_string())
-                            };
-                            if let Some(match_found_set) = get_attribute(&e, "matchFoundSet")
-                                && match_found_set == "True"
-                            {
-                                item.parameters.push("Match found set".to_string())
-                            };
+                            if get_attribute(&e, "ShowRelated").as_deref() == Some("True") {
+                                item.parameters.push("Show related".to_string());
+                            }
+                            if get_attribute(&e, "matchFoundSet").as_deref() == Some("True") {
+                                item.parameters.push("Match found set".to_string());
+                            }
                         }
                         _ => {}
                     }
@@ -67,13 +58,13 @@ impl Related {
                 }
                 _ => {}
             }
-            buf.clear()
+            buf.clear();
         }
 
-        Some(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        Some(self.parameters.join(" ; "))
+    pub fn display(self) -> String {
+        self.parameters.join(" ; ")
     }
 }

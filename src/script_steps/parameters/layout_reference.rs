@@ -12,9 +12,9 @@ pub struct LayoutReferenceContainer {
 }
 
 impl LayoutReferenceContainer {
-    pub fn parse_label(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Result<String, String> {
+    fn parse_label(reader: &mut Reader<&[u8]>) -> String {
         let mut label = String::new();
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -31,19 +31,17 @@ impl LayoutReferenceContainer {
             buf.clear();
         }
 
-        Ok(label)
+        label
     }
 
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Self, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Self {
         let mut depth = 1;
         let mut item = LayoutReferenceContainer {
-            reference_type: get_attribute(e, "value")
-                .unwrap_or("".to_string())
-                .to_string(),
+            reference_type: get_attribute(e, "value").unwrap_or_default(),
             ..Default::default()
         };
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -52,21 +50,17 @@ impl LayoutReferenceContainer {
                     depth += 1;
                     match e.name().as_ref() {
                         b"LayoutReferenceContainer" => {
-                            item.reference_type = get_attribute(&e, "value")
-                                .unwrap_or("".to_string())
-                                .to_string();
+                            item.reference_type = get_attribute(&e, "value").unwrap_or_default();
                         }
                         b"LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name");
                         }
                         b"Label" => {
-                            item.layout_reference =
-                                Some(LayoutReferenceContainer::parse_label(reader, &e).unwrap());
+                            item.layout_reference = Some(Self::parse_label(reader));
                             depth -= 1;
                         }
                         b"Calculation" => {
-                            item.layout_reference =
-                                Calculation::from_xml(reader, &e).unwrap().display();
+                            item.layout_reference = Calculation::from_xml(reader, &e).display();
                             depth -= 1;
                         }
                         _ => {}
@@ -83,25 +77,21 @@ impl LayoutReferenceContainer {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
+    pub fn display(self) -> Option<String> {
         let layout_reference = self
             .layout_reference
-            .clone()
-            .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
+            .as_deref()
+            .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨");
 
-        if self.reference_type == "1" {
-            Some(format!("Layout: <{layout_reference}>"))
-        } else if self.reference_type == "3" {
-            Some(format!("Layoutname: {layout_reference}"))
-        } else if self.reference_type == "4" {
-            Some(format!("Layoutnr.: {layout_reference}"))
-        } else if self.reference_type == "5" {
-            Some(format!("Layout: \"{layout_reference}\""))
-        } else {
-            None
+        match self.reference_type.as_str() {
+            "1" => Some(format!("Layout: <{layout_reference}>")),
+            "3" => Some(format!("Layoutname: {layout_reference}")),
+            "4" => Some(format!("Layoutnr.: {layout_reference}")),
+            "5" => Some(format!("Layout: \"{layout_reference}\"")),
+            _ => None,
         }
     }
 }
@@ -126,9 +116,7 @@ mod tests {
 
         let expected_output = Some("Layout: <Originallayout>".to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -149,9 +137,7 @@ mod tests {
 
         let expected_output = Some(r#"Layout: "Aufgabenliste""#.to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -179,9 +165,7 @@ mod tests {
 
         let expected_output = Some(r#"Layoutname: "LAYOUT_NAME_CALCULATION""#.to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }
@@ -204,9 +188,7 @@ mod tests {
 
         let expected_output = Some(r#"Layout: "Palettes""#.to_string());
         assert_eq!(
-            LayoutReferenceContainer::from_xml(&mut reader, &element)
-                .unwrap()
-                .display(),
+            LayoutReferenceContainer::from_xml(&mut reader, &element).display(),
             expected_output
         );
     }

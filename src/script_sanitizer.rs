@@ -8,16 +8,16 @@ use crate::config::Flags;
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
+use crate::utils::file_utils::for_each_xml_file;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
-    cdata_element_to_string, end_element_to_string, general_ref_to_string, local_name_to_string,
-    start_element_to_string, text_element_to_string,
+    cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
+    text_element_to_string,
 };
 
 #[derive(Debug, Default)]
 struct ScriptInfo {
     id: String,
-    name: String,
     text: String,
 }
 
@@ -36,79 +36,20 @@ pub fn create_sanitized_scripts(
     scripts_text_out_dir_path: &Path,
     flags: &Flags,
 ) {
-    // Recursively process all XML files in the script_steps directory
-    process_directory_recursively(
+    for_each_xml_file(
         scripts_xml_out_dir_path,
         scripts_xml_out_dir_path,
         scripts_text_out_dir_path,
-        flags,
-    );
-}
-
-fn process_directory_recursively(
-    current_dir: &Path,
-    scripts_xml_out_dir_path: &Path,
-    scripts_text_out_dir_path: &Path,
-    flags: &Flags,
-) {
-    if let Ok(entries) = fs::read_dir(current_dir) {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
-                process_script_xml_file(
-                    &path,
-                    scripts_xml_out_dir_path,
-                    scripts_text_out_dir_path,
-                    flags,
-                );
-            } else if path.is_dir() {
-                // Recursively process subdirectories
-                process_directory_recursively(
-                    &path,
-                    scripts_xml_out_dir_path,
-                    scripts_text_out_dir_path,
-                    flags,
-                );
+        &mut |xml_file_path, output_file_path| {
+            let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
+                eprintln!("Error reading file {}", xml_file_path.display());
+                return;
+            };
+            if let Some(script_info) = parse_script_xml(&xml_content, flags) {
+                write_text_file(output_file_path, &script_info.text);
             }
-        }
-    }
-}
-
-fn process_script_xml_file(
-    xml_file_path: &Path,
-    scripts_xml_out_dir_path: &Path,
-    scripts_text_out_dir_path: &Path,
-    flags: &Flags,
-) {
-    // Read the XML file content
-    let xml_content = match fs::read_to_string(xml_file_path) {
-        Ok(content) => content,
-        Err(e) => {
-            eprintln!("Error reading file {}: {}", xml_file_path.display(), e);
-            return;
-        }
-    };
-
-    // Parse the script and create sanitized text
-    let script_info = parse_script_xml(&xml_content, flags);
-    if let Some(script_info) = script_info {
-        // Determine the relative path from the XML file to maintain folder structure
-        let relative_path = xml_file_path
-            .strip_prefix(scripts_xml_out_dir_path)
-            .unwrap_or(xml_file_path);
-        let output_file_path = scripts_text_out_dir_path.join(relative_path);
-
-        // Ensure the output directory exists
-        if let Some(parent) = output_file_path.parent() {
-            fs::create_dir_all(parent).unwrap_or_else(|err| {
-                panic!("Error creating directory {}: {}", parent.display(), err)
-            });
-        }
-
-        // Change extension to .txt
-        let output_file_path = output_file_path.with_extension("txt");
-        write_text_file(&output_file_path, &script_info.text);
-    }
+        },
+    );
 }
 
 fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
@@ -130,29 +71,22 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
             Ok(Event::Start(e)) => {
                 depth += 1;
 
-                if depth == 1 && e.name().as_ref() == b"Script" {
-                    // Script element - we'll get ID and name from ScriptReference
-                } else if depth == 2 && e.name().as_ref() == b"ScriptReference" {
-                    // Extract script ID and name from ScriptReference
-                    for attr in crate::utils::attributes::get_attributes(&e).unwrap() {
-                        match attr.0.as_str() {
-                            "id" => script_info.id = attr.1.to_string(),
-                            "name" => script_info.name = attr.1.to_string(),
-                            _ => {}
-                        }
+                if depth == 2 && e.name().as_ref() == b"ScriptReference" {
+                    if let Some(id) = get_attribute(&e, "id") {
+                        script_info.id = id;
                     }
-                } else if depth == 3 && local_name_to_string(e.name().as_ref()) == "Step" {
+                } else if depth == 3 && e.name().as_ref() == b"Step" {
                     in_step = true;
                     step_info.indent_level_current = step_info.indent_level_next;
-                    step_info.id = get_attribute(&e, "id").unwrap().parse::<u32>().unwrap();
+                    step_info.id = get_attribute(&e, "id").unwrap().parse().unwrap();
 
-                    if get_attribute(&e, "enable").unwrap_or("True".to_string()) == "True" {
-                        match id_to_script_step(&step_info.id) {
+                    if get_attribute(&e, "enable").is_none_or(|v| v == "True") {
+                        match id_to_script_step(step_info.id) {
                             ScriptStep::IfStart | ScriptStep::LoopStart => {
-                                step_info.indent_level_next += 1
+                                step_info.indent_level_next += 1;
                             }
                             ScriptStep::IfElse | ScriptStep::Else => {
-                                step_info.indent_level_current -= 1
+                                step_info.indent_level_current -= 1;
                             }
                             ScriptStep::IfEnd | ScriptStep::LoopEnd => {
                                 step_info.indent_level_current -= 1;
@@ -166,7 +100,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 if in_step {
                     step_info
                         .content
-                        .push_str(start_element_to_string(&e, flags).as_str());
+                        .push_str(&start_element_to_string(&e, flags));
                 }
             }
             Ok(Event::End(e)) => {
@@ -177,69 +111,49 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 }
 
                 if in_step {
-                    step_info
-                        .content
-                        .push_str(end_element_to_string(&e).as_str());
+                    step_info.content.push_str(&end_element_to_string(&e));
                 }
 
-                if depth == 2 && local_name_to_string(e.name().as_ref()) == "Step" {
-                    let is_comment = id_to_script_step(&step_info.id) == ScriptStep::Comment;
-                    match sanitize(&step_info.id, &step_info.content) {
-                        None => {}
-                        Some(text) => {
-                            let mut first_line_done = false;
-                            let mut add_indent = 0;
-                            for line in text.split('\r') {
-                                let mut indent =
-                                    "\t".repeat(step_info.indent_level_current + add_indent);
-                                if is_comment && first_line_done {
-                                    indent.push_str(&" ".repeat(2));
-                                }
-
-                                script_info.text.push_str(&format!("{indent}{line}\n"));
-                                if !first_line_done {
-                                    first_line_done = true;
-                                    if !is_comment {
-                                        add_indent = 4
-                                    };
-                                }
+                if depth == 2 && e.name().as_ref() == b"Step" {
+                    in_step = false;
+                    let is_comment = id_to_script_step(step_info.id) == ScriptStep::Comment;
+                    if let Some(text) = sanitize(step_info.id, &step_info.content) {
+                        for (i, line) in text.split('\r').enumerate() {
+                            let extra_indent = if i > 0 && !is_comment { 4 } else { 0 };
+                            let indent_count = step_info.indent_level_current + extra_indent;
+                            script_info.text.push_str(&"\t".repeat(indent_count));
+                            if is_comment && i > 0 {
+                                script_info.text.push_str("  ");
                             }
+                            script_info.text.push_str(line);
+                            script_info.text.push('\n');
                         }
                     }
-                    step_info.indent_level_current = step_info.indent_level_next;
-                    step_info.content.clear()
+                    step_info.content.clear();
                 }
             }
             Ok(Event::CData(e)) => {
                 if in_step {
-                    step_info
-                        .content
-                        .push_str(cdata_element_to_string(&e).as_str());
+                    step_info.content.push_str(&cdata_element_to_string(&e));
                 }
             }
             Ok(Event::Comment(e)) | Ok(Event::Text(e)) => {
                 if in_step {
                     step_info
                         .content
-                        .push_str(text_element_to_string(&e, true).as_str());
+                        .push_str(&text_element_to_string(&e, true));
                 }
             }
             Ok(Event::GeneralRef(e)) => {
                 if in_step {
-                    step_info
-                        .content
-                        .push_str(general_ref_to_string(&e, true).as_str());
+                    step_info.content.push_str(&general_ref_to_string(&e, true));
                 }
             }
             _ => {}
         }
 
-        buf.clear()
+        buf.clear();
     }
 
-    if script_info.id.is_empty() {
-        None
-    } else {
-        Some(script_info)
-    }
+    (!script_info.id.is_empty()).then_some(script_info)
 }

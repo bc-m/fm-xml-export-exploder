@@ -10,21 +10,21 @@ pub struct Target {
 }
 
 impl Target {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Result<Target, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Target {
         let mut depth = 1;
-        let mut item = Target { target: None };
+        let mut item = Target::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => match e.name().as_ref() {
                     b"Variable" => {
-                        item.target = VariableReference::from_xml(reader, &e).unwrap().display();
+                        item.target = VariableReference::from_xml(reader, &e).display();
                     }
                     b"FieldReference" => {
-                        item.target = FieldReference::from_xml(reader, &e).unwrap().display();
+                        item.target = Some(FieldReference::from_xml(reader, &e).display());
                     }
                     _ => {
                         depth += 1;
@@ -41,11 +41,11 @@ impl Target {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.target.clone()
+    pub fn display(self) -> Option<String> {
+        self.target
     }
 }
 
@@ -74,10 +74,7 @@ mod tests {
 
         let expected_output = "$foo".to_string();
         assert_eq!(
-            Target::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            Target::from_xml(&mut reader, &element).display().unwrap(),
             expected_output
         );
     }

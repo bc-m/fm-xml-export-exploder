@@ -1,6 +1,7 @@
-use crate::utils::attributes::parse_unescaped_attribute;
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
+
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct ScriptReference {
@@ -9,14 +10,11 @@ pub struct ScriptReference {
 }
 
 impl ScriptReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Option<ScriptReference> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> ScriptReference {
         let mut depth = 1;
-        let mut item = ScriptReference {
-            data_source_name: None,
-            script_name: None,
-        };
+        let mut item = ScriptReference::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -44,23 +42,17 @@ impl ScriptReference {
             buf.clear();
         }
 
-        Some(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        let mut parameters = vec![];
-
-        if let Some(script_name) = &self.script_name {
-            parameters.push(format!("\"{script_name}\""));
+    pub fn display(self) -> Option<String> {
+        let mut parts = Vec::new();
+        if let Some(name) = self.script_name {
+            parts.push(format!("\"{name}\""));
         }
-        if let Some(data_source_name) = &self.data_source_name {
-            parameters.push(format!("from file \"{data_source_name}\""));
+        if let Some(name) = self.data_source_name {
+            parts.push(format!("from file \"{name}\""));
         }
-
-        if !parameters.is_empty() {
-            Some(parameters.join(" "))
-        } else {
-            None
-        }
+        (!parts.is_empty()).then(|| parts.join(" "))
     }
 }

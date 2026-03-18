@@ -11,27 +11,25 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut repetition = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"Name" => {
-                    variable_name = get_attribute(&e, "value").unwrap().to_string();
+                    variable_name = get_attribute(&e, "value").unwrap();
                 }
                 b"value" => {
                     value = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }
                 b"repetition" => {
                     repetition = Calculation::from_xml(&mut reader, &e)
-                        .unwrap()
                         .display()
                         .unwrap_or_default();
                 }
@@ -39,18 +37,18 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
-    } else if repetition.is_empty() {
-        Some(format!("{name} [ {variable_name} ; {value} ]"))
-    } else {
-        Some(format!(
-            "{name} [ {variable_name}[{repetition}] ; {value} ]"
-        ))
+        return None;
     }
+    let var = if repetition.is_empty() {
+        variable_name
+    } else {
+        format!("{variable_name}[{repetition}]")
+    };
+    Some(format!("{name} [ {var} ; {value} ]"))
 }
 
 #[cfg(test)]

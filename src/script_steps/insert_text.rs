@@ -12,7 +12,7 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut select = false;
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
@@ -22,49 +22,47 @@ pub fn sanitize(step: &str) -> Option<String> {
                     name = get_attribute(&e, "name").unwrap_or_default();
                 }
                 b"Boolean" => {
-                    if get_attribute(&e, "id").unwrap_or_default() == "4096" // Select
-                        && get_attribute(&e, "value").unwrap_or_default() == "True"
+                    if get_attribute(&e, "id").as_deref() == Some("4096")
+                        && get_attribute(&e, "value").as_deref() == Some("True")
                     {
                         select = true;
                     }
                 }
                 b"Text" => {
-                    text = Text::from_xml(&mut reader, &e).unwrap().display();
+                    text = Text::from_xml(&mut reader, &e).display();
                 }
                 b"Parameter" => {
                     let target_type = get_attribute(&e, "type").unwrap();
-                    if target_type.as_str() == "Target" {
-                        target = Target::from_xml(&mut reader, &e).unwrap().display();
+                    if target_type == "Target" {
+                        target = Target::from_xml(&mut reader, &e).display();
                     }
                 }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
+        return None;
+    }
+
+    let mut parts = Vec::with_capacity(3);
+    if select {
+        parts.push("Select".to_string());
+    }
+    if let Some(target) = target {
+        parts.push(format!("Target: {target}"));
+    }
+    if let Some(text) = text {
+        parts.push(format!("\"{text}\""));
+    }
+
+    if parts.is_empty() {
+        Some(format!("{name} []"))
     } else {
-        let mut v = Vec::with_capacity(3);
-        if select {
-            v.push("Select".to_string());
-        }
-        if let Some(target) = target {
-            v.push(format!("Target: {target}"));
-        }
-
-        if let Some(text) = text {
-            v.push(format!("\"{text}\""));
-        }
-
-        let params = v.join(" ; ");
-        if params.is_empty() {
-            Some(format!("{name} []"))
-        } else {
-            Some(format!("{name} [ {params} ]"))
-        }
+        Some(format!("{name} [ {} ]", parts.join(" ; ")))
     }
 }
 

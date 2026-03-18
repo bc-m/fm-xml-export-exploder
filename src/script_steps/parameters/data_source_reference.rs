@@ -1,6 +1,7 @@
-use crate::utils::attributes::parse_unescaped_attribute;
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
+
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct DataSourceReference {
@@ -9,14 +10,11 @@ pub struct DataSourceReference {
 }
 
 impl DataSourceReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _e: &BytesStart) -> Option<DataSourceReference> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> DataSourceReference {
         let mut depth = 1;
-        let mut item = DataSourceReference {
-            id: None,
-            name: None,
-        };
+        let mut item = DataSourceReference::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
@@ -39,18 +37,15 @@ impl DataSourceReference {
             buf.clear();
         }
 
-        Some(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        if let Some(name) = &self.name {
-            if self.id == Some(String::from("0")) {
-                Some(name.clone())
-            } else {
-                Some(format!("\"{name}\""))
-            }
+    pub fn display(self) -> Option<String> {
+        let name = self.name?;
+        if self.id.as_deref() == Some("0") {
+            Some(name)
         } else {
-            None
+            Some(format!("\"{name}\""))
         }
     }
 }

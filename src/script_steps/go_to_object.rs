@@ -10,24 +10,22 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut repetition = String::new();
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
-            Ok(Event::Start(ref e)) => match e.name().as_ref() {
+            Ok(Event::Start(e)) => match e.name().as_ref() {
                 b"Step" => {
-                    name = get_attribute(e, "name").unwrap().to_string();
+                    name = get_attribute(&e, "name").unwrap();
                 }
                 b"Name" => {
-                    calculation = Calculation::from_xml(&mut reader, e)
-                        .unwrap()
+                    calculation = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default()
                 }
                 b"repetition" => {
-                    repetition = Calculation::from_xml(&mut reader, e)
-                        .unwrap()
+                    repetition = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default()
                 }
@@ -35,12 +33,13 @@ pub fn sanitize(step: &str) -> Option<String> {
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        None
-    } else if !calculation.is_empty() && !repetition.is_empty() {
+        return None;
+    }
+    if !calculation.is_empty() && !repetition.is_empty() {
         Some(format!(
             "{name} [ {calculation} ; Repetition: {repetition} ]"
         ))

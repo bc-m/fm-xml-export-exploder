@@ -5,38 +5,34 @@ use crate::utils::attributes::get_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
-
-    let mut restore = false;
+    let mut has_parameters = false;
 
     let mut reader = Reader::from_str(step);
-    let mut buf: Vec<u8> = Vec::new();
+    let mut buf = Vec::new();
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
-                    name = get_attribute(&e, "name").unwrap().to_string();
-                }
+                b"Step" => name = get_attribute(&e, "name").unwrap(),
                 b"ParameterValues" => {
-                    restore = true;
+                    has_parameters = true;
                     break;
                 }
                 _ => {}
             },
             _ => {}
         }
-        buf.clear()
+        buf.clear();
     }
 
     if name.is_empty() {
-        println!("empty primitive");
-        None
+        return None;
+    }
+    if has_parameters {
+        Some(format!("{name} [ ⚠️ RESTORE ⚠️ ]"))
     } else {
-        match restore {
-            true => Some(format!("{name} [ ⚠️ RESTORE ⚠️ ]")),
-            false => Some(name),
-        }
+        Some(name)
     }
 }
 

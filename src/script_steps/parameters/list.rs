@@ -11,29 +11,25 @@ pub struct List {
 }
 
 impl List {
-    pub fn from_xml(
-        reader: &mut Reader<&[u8]>,
-        _: &BytesStart,
-        step_id: &u32,
-    ) -> Result<List, String> {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> List {
         let mut depth = 1;
-        let mut item = List { name: None };
+        let mut item = List::default();
 
-        let mut buf: Vec<u8> = Vec::new();
+        let mut buf = Vec::new();
         loop {
             match reader.read_event_into(&mut buf) {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if let b"List" = e.name().as_ref()
+                    if e.name().as_ref() == b"List"
                         && let Some(name) = get_attribute(&e, "name")
-                        && let Ok(name) = unescape(name.as_str())
+                        && let Ok(name) = unescape(&name)
                     {
                         item.name = match id_to_script_step(step_id) {
                             ScriptStep::LoopStart => Some(format!("Flush: {name}")),
                             _ => Some(name.to_string()),
-                        }
+                        };
                     }
                 }
                 Ok(Event::End(_)) => {
@@ -47,11 +43,11 @@ impl List {
             buf.clear();
         }
 
-        Ok(item)
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        self.name.clone()
+    pub fn display(self) -> Option<String> {
+        self.name
     }
 }
 
@@ -77,10 +73,8 @@ mod tests {
         };
 
         let expected_output = "_Home".to_string();
-        let script_id: u32 = 136;
         assert_eq!(
-            List::from_xml(&mut reader, &element, &script_id)
-                .unwrap()
+            List::from_xml(&mut reader, &element, 136)
                 .display()
                 .unwrap(),
             expected_output

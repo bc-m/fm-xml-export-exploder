@@ -1,7 +1,8 @@
 use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
+use quick_xml::events::BytesStart;
 
 use crate::utils::attributes::get_attribute;
+use crate::utils::xml_utils::skip_rest_of_element;
 
 #[derive(Debug, Default)]
 pub struct Style {
@@ -9,36 +10,16 @@ pub struct Style {
 }
 
 impl Style {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Result<Style, String> {
-        let mut depth = 1;
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Style {
         let item = Style {
             style: get_attribute(e, "name"),
         };
-
-        let mut buf: Vec<u8> = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(_)) => {
-                    depth += 1;
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
-        }
-
-        Ok(item)
+        skip_rest_of_element(reader);
+        item
     }
 
-    pub fn display(&self) -> Option<String> {
-        Some(format!("Style: {}", self.style.clone().unwrap()))
+    pub fn display(self) -> Option<String> {
+        self.style.map(|s| format!("Style: {s}"))
     }
 }
 
@@ -61,10 +42,7 @@ mod tests {
 
         let expected_output = "Style: Dokument".to_string();
         assert_eq!(
-            Style::from_xml(&mut reader, &element)
-                .unwrap()
-                .display()
-                .unwrap(),
+            Style::from_xml(&mut reader, &element).display().unwrap(),
             expected_output
         );
     }
