@@ -1,5 +1,5 @@
-use quick_xml::events::Event;
 use quick_xml::Reader;
+use quick_xml::events::Event;
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::{get_attribute, parse_unescaped_attribute};
@@ -100,8 +100,10 @@ mod tests {
             </Step>
         "#;
 
-        let expected_output =
-            Some(r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; Parameter: ]"#.to_string());
+        let expected_output = Some(
+            r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; Parameter: ]"#
+                .to_string(),
+        );
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
@@ -175,8 +177,10 @@ mod tests {
             </Step>
         "#;
 
-        let expected_output =
-            Some(r#"Script ausführen [ Specified: Nach Name ; "Do something" ; Parameter: 123 ]"#.to_string());
+        let expected_output = Some(
+            r#"Script ausführen [ Specified: Nach Name ; "Do something" ; Parameter: 123 ]"#
+                .to_string(),
+        );
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
@@ -233,8 +237,10 @@ mod tests {
             </Step>
         "#;
 
-        let expected_output =
-            Some(r#"Perform Script [ "Perform Script" ; Specified: From list ; Parameter: ]"#.to_string());
+        let expected_output = Some(
+            r#"Perform Script [ "Perform Script" ; Specified: From list ; Parameter: ]"#
+                .to_string(),
+        );
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 
@@ -295,8 +301,10 @@ mod tests {
             </Step>
         "#;
 
-        let expected_output =
-            Some(r#"Perform Script [ Specified: By name ; "script name" ; Parameter: "parameter" ]"#.to_string());
+        let expected_output = Some(
+            r#"Perform Script [ Specified: By name ; "script name" ; Parameter: "parameter" ]"#
+                .to_string(),
+        );
         assert_eq!(sanitize(xml.trim()), expected_output);
     }
 }
