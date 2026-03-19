@@ -33,7 +33,7 @@ Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ $cancel ]
 	Wenn [ Exakt( _Home::_gInputText2 ; _Home::_gInputText3 ) UND
 					Länge( _Home::_gInputText2 ) > 6 ]
-		Passwort ändern [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; Mit Dialog: OFF ]
+		Passwort ändern [ Old Password: _Home::_gInputText1 ; Password: _Home::_gInputText2 ; With dialog: On ]
 	Ende (wenn)
 	Verlasse Schleife wenn [ NICHT Hole( LetzteFehlerNr ) ]
 Schleife (Ende)

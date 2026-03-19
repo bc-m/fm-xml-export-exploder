@@ -790,21 +790,21 @@ Datei umbenennen
 # ACCOUNT STEPS
 # =============
 
-Konto hinzufügen [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Passwort ändern: ON ]
-Konto hinzufügen [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Passwort ändern: ON ]
-Konto hinzufügen [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Passwort ändern: ON ]
+Konto hinzufügen [ Account Name: $Kontoname ; Password: $Passwort ; Privilege Set: [Nur Dateneingabe] ]
+Konto hinzufügen [ Account Name: $Kontoname ; Password: $Passwort ; Privilege Set: [Nur Lesezugriff] ]
+Konto hinzufügen [ Account Name: $Kontoname ; Password: $Passwort ; Privilege Set: USER ]
 
-Passwort ändern [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; Mit Dialog: ON ]
-Passwort ändern [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; Mit Dialog: OFF ]
+Passwort ändern [ Old Password: $PasswortAlt ; Password: $PasswortNeu ; With dialog: On ]
+Passwort ändern [ Old Password: $PasswortAlt ; Password: $PasswortNeu ; With dialog: On ]
 
-Konto löschen [ $Kontoname ]
+Konto löschen [ Account Name: $Kontoname ]
 
-Konto aktivieren [ $Kontoname ; enable: ON ]
-Konto aktivieren [ $Kontoname ; enable: OFF ]
+Konto aktivieren [ Account Name: $Kontoname ; Activate ]
+Konto aktivieren [ Account Name: $Kontoname ; Deactivate ]
 
-Erneut anmelden [ Mit Dialog: OFF ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
+Erneut anmelden [ Account Name: $Kontoname ; Password: $Passwort ; With dialog: On ]
 
-Kontopasswort zurücksetzen [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; Password: ON ]
+Kontopasswort zurücksetzen [ Account Name: $Kontoname ; Password: $PasswortNeu ; Expire password ]
 
 # ==============
 # SPELLING STEPS

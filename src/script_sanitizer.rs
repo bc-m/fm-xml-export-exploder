@@ -117,7 +117,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                 if depth == 2 && e.name().as_ref() == b"Step" {
                     in_step = false;
                     let is_comment = id_to_script_step(step_info.id) == ScriptStep::Comment;
-                    if let Some(text) = sanitize(step_info.id, &step_info.content) {
+                    if let Some(text) = sanitize(step_info.id, &step_info.content, flags) {
                         for (i, line) in text.split('\r').enumerate() {
                             let extra_indent = if i > 0 && !is_comment { 4 } else { 0 };
                             let indent_count = step_info.indent_level_current + extra_indent;
