@@ -1,8 +1,10 @@
+use crate::config::Flags;
 use crate::script_steps;
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 
-pub fn sanitize(step_id: u32, step_xml: &str) -> Option<String> {
+pub fn sanitize(step_id: u32, step_xml: &str, flags: &Flags) -> Option<String> {
     let is_enabled = script_steps::is_enabled::sanitize(step_xml);
+    let obfuscate = flags.obfuscate_passwords;
 
     let step_sanitized = match id_to_script_step(step_id) {
         ScriptStep::PerformScript => script_steps::perform_script::sanitize(step_xml),
@@ -22,6 +24,16 @@ pub fn sanitize(step_id: u32, step_xml: &str) -> Option<String> {
         ScriptStep::SetVariable => script_steps::set_variable::sanitize(step_xml),
         ScriptStep::GoToObject => script_steps::go_to_object::sanitize(step_xml),
         ScriptStep::RefreshObject => script_steps::refresh_object::sanitize(step_xml),
+        ScriptStep::AddAccount => script_steps::accounts::sanitize_add_account(step_xml, obfuscate),
+        ScriptStep::ChangePassword => {
+            script_steps::accounts::sanitize_change_password(step_xml, obfuscate)
+        }
+        ScriptStep::DeleteAccount => script_steps::accounts::sanitize_delete_account(step_xml),
+        ScriptStep::EnableAccount => script_steps::accounts::sanitize_enable_account(step_xml),
+        ScriptStep::ReLogin => script_steps::accounts::sanitize_re_login(step_xml, obfuscate),
+        ScriptStep::ResetAccountPassword => {
+            script_steps::accounts::sanitize_reset_account_password(step_xml, obfuscate)
+        }
         _ => script_steps::sanitize::from_xml(step_id, step_xml),
     };
 

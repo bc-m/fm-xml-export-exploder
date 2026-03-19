@@ -1,6 +1,7 @@
 pub(crate) mod constants;
 pub(crate) mod sanitizer;
 
+mod accounts;
 mod close_window;
 mod exit_script;
 mod go_to_object;

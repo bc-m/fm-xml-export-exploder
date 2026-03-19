@@ -49,6 +49,7 @@ mod tests {
             parse_all_lines: false,
             lossless: is_lossless,
             output_tree,
+            obfuscate_passwords: false,
         };
         let _ = fs::remove_dir_all(output_dir);
 

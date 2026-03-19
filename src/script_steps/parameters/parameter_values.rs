@@ -11,6 +11,7 @@ use crate::script_steps::parameters::dialog_field::DialogField;
 use crate::script_steps::parameters::field_reference::FieldReference;
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::script_steps::parameters::list::List;
+use crate::script_steps::parameters::privilege_set_reference::PrivilegeSetReference;
 use crate::script_steps::parameters::related::Related;
 use crate::script_steps::parameters::script_reference::ScriptReference;
 use crate::script_steps::parameters::target::Target;
@@ -45,15 +46,17 @@ impl ParameterValues {
                     let parsed = match parameter_type.as_str() {
                         "Animation" => Animation::from_xml(reader, &e).display(),
                         "Boolean" => Boolean::from_xml(reader, &e, step_id).display(),
-                        "List" => List::from_xml(reader, &e, step_id).display(),
+                        "List" | "AccountType" => List::from_xml(reader, &e, step_id).display(),
                         "Target" => Target::from_xml(reader, &e)
                             .display()
                             .map(|d| format!("Target: {d}")),
                         "Calculation" => Calculation::from_xml(reader, &e).display(),
                         "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo"
-                        | "Title" | "Message" => Calculation::from_xml(reader, &e)
-                            .display()
-                            .map(|d| format!("{parameter_type}: {d}")),
+                        | "Title" | "Message" | "Password" | "Old" | "New" => {
+                            Calculation::from_xml(reader, &e)
+                                .display()
+                                .map(|d| format!("{parameter_type}: {d}"))
+                        }
                         "LayoutReferenceContainer" => {
                             LayoutReferenceContainer::from_xml(reader, &e).display()
                         }
@@ -67,6 +70,9 @@ impl ParameterValues {
                         "ScriptReference" => ScriptReference::from_xml(reader, &e).display(),
                         "DataSourceReference" => {
                             DataSourceReference::from_xml(reader, &e).display()
+                        }
+                        "PrivilegeSetReference" => {
+                            PrivilegeSetReference::from_xml(reader, &e).display()
                         }
                         "Button1" | "Button2" | "Button3" => {
                             Button::from_xml(reader, &e).display(&parameter_type)

@@ -41,6 +41,10 @@ struct Args {
     /// Specify the output tree root folder: domain or db (default)
     #[arg(short = 't', long = "output_tree", value_enum, default_value_t = OutputTree::Db)]
     output_tree: OutputTree,
+
+    /// Replace password values in sanitized output with bullet placeholders (••••••••)
+    #[arg(long)]
+    obfuscate_passwords: bool,
 }
 
 #[derive(Debug, Default)]
@@ -60,6 +64,7 @@ fn main() -> Result<()> {
         parse_all_lines: args.all_lines,
         lossless: args.lossless,
         output_tree: args.output_tree,
+        obfuscate_passwords: args.obfuscate_passwords,
     };
 
     valid_dir_or_throw(&in_dir)?;

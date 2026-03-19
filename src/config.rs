@@ -231,4 +231,5 @@ pub struct Flags {
     pub parse_all_lines: bool,
     pub lossless: bool,
     pub output_tree: OutputTree,
+    pub obfuscate_passwords: bool,
 }

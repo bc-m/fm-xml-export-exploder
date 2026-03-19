@@ -4,7 +4,7 @@ expression: output_content
 ---
 
 
-Erneut anmelden [ Mit Dialog: ON ; Name: Falls ( Hole ( Kontoname ) = "admin" ; "user" ; "admin" ) ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
+Erneut anmelden [ Account Name: Falls ( Hole ( Kontoname ) = "admin" ; "user" ; "admin" ) ; Password: Falls ( Hole ( Kontoname ) = "admin" ; "user" ) ; With dialog: On ]
 Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
 	Script ausführen [ "Install Menus" ; Specified: Aus Liste ; Parameter: ]
 Ende (wenn)

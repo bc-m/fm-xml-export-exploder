@@ -11,6 +11,7 @@ pub(crate) mod field_reference;
 pub(crate) mod layout_reference;
 pub(crate) mod list;
 pub(crate) mod parameter_values;
+pub(crate) mod privilege_set_reference;
 pub(crate) mod related;
 pub(crate) mod script_reference;
 pub(crate) mod select;

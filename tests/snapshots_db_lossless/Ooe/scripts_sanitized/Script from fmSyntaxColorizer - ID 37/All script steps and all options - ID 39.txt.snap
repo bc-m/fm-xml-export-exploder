@@ -790,21 +790,21 @@ Rename File
 # ACCOUNT STEPS
 # =============
 
-Add Account [ ⚠️ PARAMETER "AccountType" NOT PARSED ⚠️ ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Expire password: ON ]
-Add Account [ ⚠️ PARAMETER "AccountType" NOT PARSED ⚠️ ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Expire password: ON ]
-Add Account [ ⚠️ PARAMETER "AccountType" NOT PARSED ⚠️ ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PrivilegeSetReference" NOT PARSED ⚠️ ; Expire password: ON ]
+Add Account [ Authenticate via: FileMaker ; Account Name: $Kontoname ; Password: $Passwort ; Privilege Set: [Data Entry Only] ; Expire password ]
+Add Account [ Authenticate via: FileMaker ; Account Name: $Kontoname ; Password: $Passwort ; Privilege Set: [Read-Only Access] ; Expire password ]
+Add Account [ Authenticate via: FileMaker ; Account Name: $Kontoname ; Password: $Passwort ; Privilege Set: <unknown> ; Expire password ]
 
-Change Password [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; With dialog: ON ]
-Change Password [ ⚠️ PARAMETER "Old" NOT PARSED ⚠️ ; ⚠️ PARAMETER "New" NOT PARSED ⚠️ ; With dialog: OFF ]
+Change Password [ Old Password: $PasswortAlt ; Password: $PasswortNeu ; With dialog: On ]
+Change Password [ Old Password: $PasswortAlt ; Password: $PasswortNeu ; With dialog: Off ]
 
-Delete Account [ $Kontoname ]
+Delete Account [ Account Name: $Kontoname ]
 
-Enable Account [ $Kontoname ; enable: ON ]
-Enable Account [ $Kontoname ; enable: OFF ]
+Enable Account [ Account Name: $Kontoname ; Activate ]
+Enable Account [ Account Name: $Kontoname ; Deactivate ]
 
-Re-Login [ Current File ; With dialog: OFF ; Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ]
+Re-Login [ Account Name: $Kontoname ; Password: $Passwort ; With dialog: Off ]
 
-Reset Account Password [ Name: $Kontoname ; ⚠️ PARAMETER "Password" NOT PARSED ⚠️ ; Password: ON ]
+Reset Account Password [ Account Name: $Kontoname ; Password: $PasswortNeu ; Expire password ]
 
 # ==============
 # SPELLING STEPS
