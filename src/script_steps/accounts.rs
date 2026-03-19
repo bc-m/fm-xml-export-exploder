@@ -1,5 +1,5 @@
 use quick_xml::Reader;
-use quick_xml::events::Event;
+use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::{get_attribute, parse_unescaped_attribute};
@@ -20,329 +20,76 @@ fn calc_or_obfuscated(calc: Option<String>, obfuscate: bool) -> Option<String> {
     }
 }
 
-// ── Add Account ───────────────────────────────────────────────────────────────
-
-pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
-    let mut name = String::new();
-    let mut account_type: Option<String> = None;
-    let mut account_name: Option<String> = None;
-    let mut password: Option<String> = None;
-    let mut privilege_set: Option<String> = None;
-    let mut expire_password = false;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap_or_default(),
-                b"List" => {
-                    if account_type.is_none() {
-                        account_type = get_attribute(&e, "name");
-                    }
-                }
-                b"PrivilegeSetReference" => {
-                    privilege_set = parse_unescaped_attribute(&e, "name");
-                }
-                b"Boolean" => {
-                    if get_attribute(&e, "type").as_deref() == Some("Expire password")
-                        && get_attribute(&e, "value").as_deref() == Some("True")
-                    {
-                        expire_password = true;
-                    }
-                }
-                b"Parameter" => match get_attribute(&e, "type").as_deref() {
-                    Some("Name") => {
-                        account_name = Calculation::from_xml(&mut reader, &e).display();
-                    }
-                    Some("Password") => {
-                        let calc = Calculation::from_xml(&mut reader, &e).display();
-                        password = calc_or_obfuscated(calc, obfuscate);
-                    }
-                    _ => {}
-                },
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
-
-    if name.is_empty() {
-        return None;
-    }
-
-    let mut parts: Vec<String> = Vec::new();
-    if let Some(at) = account_type {
-        parts.push(format!("Authenticate via: {at}"));
-    }
-    if let Some(an) = account_name {
-        parts.push(format!("Account Name: {an}"));
-    }
-    if let Some(pw) = password {
-        parts.push(format!("Password: {pw}"));
-    }
-    if let Some(ps) = privilege_set {
-        parts.push(format!("Privilege Set: {ps}"));
-    }
-    if expire_password {
-        parts.push("Expire password".to_string());
-    }
-
-    Some(format!("{name} [ {} ]", parts.join(" ; ")))
-}
-
-// ── Change Password ───────────────────────────────────────────────────────────
-
-pub fn sanitize_change_password(step: &str, obfuscate: bool) -> Option<String> {
-    let mut name = String::new();
-    let mut old_password: Option<String> = None;
-    let mut new_password: Option<String> = None;
-    let mut with_dialog = true;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap_or_default(),
-                b"Boolean" => {
-                    if get_attribute(&e, "type").as_deref() == Some("With dialog") {
-                        with_dialog = get_attribute(&e, "value").as_deref() == Some("True");
-                    }
-                }
-                b"Parameter" => match get_attribute(&e, "type").as_deref() {
-                    Some("Old") => {
-                        let calc = Calculation::from_xml(&mut reader, &e).display();
-                        old_password = calc_or_obfuscated(calc, obfuscate);
-                    }
-                    Some("New") => {
-                        let calc = Calculation::from_xml(&mut reader, &e).display();
-                        new_password = calc_or_obfuscated(calc, obfuscate);
-                    }
-                    _ => {}
-                },
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
-
-    if name.is_empty() {
-        return None;
-    }
-
-    let mut parts: Vec<String> = Vec::new();
-    if let Some(op) = old_password {
-        parts.push(format!("Old Password: {op}"));
-    }
-    if let Some(np) = new_password {
-        parts.push(format!("Password: {np}"));
-    }
-    parts.push(format!("With dialog: {}", on_off(with_dialog)));
-
-    Some(format!("{name} [ {} ]", parts.join(" ; ")))
-}
-
-// ── Delete Account ────────────────────────────────────────────────────────────
-
-pub fn sanitize_delete_account(step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut account_name: Option<String> = None;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap_or_default(),
-                b"Parameter" => {
-                    if get_attribute(&e, "type").as_deref() == Some("Calculation") {
-                        account_name = Calculation::from_xml(&mut reader, &e).display();
-                    }
-                }
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
-
-    if name.is_empty() {
-        return None;
-    }
-
-    match account_name {
-        Some(an) => Some(format!("{name} [ Account Name: {an} ]")),
-        None => Some(name),
+fn set_step_name(name: &mut String, event: &BytesStart<'_>) {
+    if event.name().as_ref() == b"Step" {
+        *name = get_attribute(event, "name").unwrap_or_default();
     }
 }
 
-// ── Enable Account ────────────────────────────────────────────────────────────
-
-pub fn sanitize_enable_account(step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut account_name: Option<String> = None;
-    let mut activate: Option<bool> = None;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap_or_default(),
-                b"Boolean" => {
-                    if get_attribute(&e, "type").as_deref() == Some("enable") {
-                        activate = Some(get_attribute(&e, "value").as_deref() == Some("True"));
-                    }
-                }
-                b"Parameter" => {
-                    if get_attribute(&e, "type").as_deref() == Some("Calculation") {
-                        account_name = Calculation::from_xml(&mut reader, &e).display();
-                    }
-                }
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
-
-    if name.is_empty() {
-        return None;
-    }
-
-    let mut parts: Vec<String> = Vec::new();
-    if let Some(an) = account_name {
-        parts.push(format!("Account Name: {an}"));
-    }
-    if let Some(act) = activate {
-        parts.push(if act {
-            "Activate".to_string()
-        } else {
-            "Deactivate".to_string()
-        });
-    }
-
-    Some(format!("{name} [ {} ]", parts.join(" ; ")))
+fn attribute_matches(event: &BytesStart<'_>, key: &str, expected: &str) -> bool {
+    get_attribute(event, key).as_deref() == Some(expected)
 }
 
-// ── Re-Login ──────────────────────────────────────────────────────────────────
-
-pub fn sanitize_re_login(step: &str, obfuscate: bool) -> Option<String> {
-    let mut name = String::new();
-    let mut account_name: Option<String> = None;
-    let mut password: Option<String> = None;
-    let mut with_dialog = true;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap_or_default(),
-                b"Boolean" => {
-                    if get_attribute(&e, "type").as_deref() == Some("With dialog") {
-                        with_dialog = get_attribute(&e, "value").as_deref() == Some("True");
-                    }
-                }
-                b"Parameter" => match get_attribute(&e, "type").as_deref() {
-                    Some("Name") => {
-                        account_name = Calculation::from_xml(&mut reader, &e).display();
-                    }
-                    Some("Password") => {
-                        let calc = Calculation::from_xml(&mut reader, &e).display();
-                        password = calc_or_obfuscated(calc, obfuscate);
-                    }
-                    _ => {}
-                },
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
-
-    if name.is_empty() {
-        return None;
-    }
-
-    let mut parts: Vec<String> = Vec::new();
-    if let Some(an) = account_name {
-        parts.push(format!("Account Name: {an}"));
-    }
-    if let Some(pw) = password {
-        parts.push(format!("Password: {pw}"));
-    }
-    parts.push(format!("With dialog: {}", on_off(with_dialog)));
-
-    Some(format!("{name} [ {} ]", parts.join(" ; ")))
+fn parse_calculation(reader: &mut Reader<&[u8]>, event: &BytesStart<'_>) -> Option<String> {
+    Calculation::from_xml(reader, event).display()
 }
 
-// ── Reset Account Password ────────────────────────────────────────────────────
+fn parse_secret(
+    reader: &mut Reader<&[u8]>,
+    event: &BytesStart<'_>,
+    obfuscate: bool,
+) -> Option<String> {
+    calc_or_obfuscated(parse_calculation(reader, event), obfuscate)
+}
 
-pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<String> {
-    let mut name = String::new();
-    let mut account_name: Option<String> = None;
-    let mut password: Option<String> = None;
-    let mut expire_password = false;
-
+fn parse_step<T, F>(step: &str, mut state: T, mut handle_event: F) -> T
+where
+    F: FnMut(&mut Reader<&[u8]>, &BytesStart<'_>, &mut T),
+{
     let mut reader = Reader::from_str(step);
     let mut buf = Vec::new();
+
     loop {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap_or_default(),
-                b"Boolean" => {
-                    if get_attribute(&e, "type").as_deref() == Some("Password")
-                        && get_attribute(&e, "value").as_deref() == Some("True")
-                    {
-                        expire_password = true;
-                    }
-                }
-                b"Parameter" => match get_attribute(&e, "type").as_deref() {
-                    Some("Name") => {
-                        account_name = Calculation::from_xml(&mut reader, &e).display();
-                    }
-                    Some("Password") => {
-                        let calc = Calculation::from_xml(&mut reader, &e).display();
-                        password = calc_or_obfuscated(calc, obfuscate);
-                    }
-                    _ => {}
-                },
-                _ => {}
-            },
+            Ok(Event::Start(event)) => handle_event(&mut reader, &event, &mut state),
             _ => {}
         }
+
         buf.clear();
     }
 
+    state
+}
+
+fn push_labeled_part(parts: &mut Vec<String>, label: &str, value: Option<String>) {
+    if let Some(value) = value {
+        parts.push(format!("{label}: {value}"));
+    }
+}
+
+fn push_flag(parts: &mut Vec<String>, enabled: bool, label: &str) {
+    if enabled {
+        parts.push(label.to_string());
+    }
+}
+
+fn format_step(name: String, parts: Vec<String>) -> Option<String> {
     if name.is_empty() {
         return None;
     }
 
-    let mut parts: Vec<String> = Vec::new();
-    if let Some(an) = account_name {
-        parts.push(format!("Account Name: {an}"));
+    if parts.is_empty() {
+        Some(name)
+    } else {
+        Some(format!("{name} [ {} ]", parts.join(" ; ")))
     }
-    if let Some(pw) = password {
-        parts.push(format!("Password: {pw}"));
-    }
-    if expire_password {
-        parts.push("Expire password".to_string());
+}
+
+fn format_step_with_empty_brackets(name: String, parts: Vec<String>) -> Option<String> {
+    if name.is_empty() {
+        return None;
     }
 
     if parts.is_empty() {
@@ -350,6 +97,249 @@ pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<St
     } else {
         Some(format!("{name} [ {} ]", parts.join(" ; ")))
     }
+}
+
+struct AddAccountState {
+    name: String,
+    account_type: Option<String>,
+    account_name: Option<String>,
+    password: Option<String>,
+    privilege_set: Option<String>,
+    expire_password: bool,
+}
+
+struct ChangePasswordState {
+    name: String,
+    old_password: Option<String>,
+    new_password: Option<String>,
+    with_dialog: bool,
+}
+
+struct DeleteAccountState {
+    name: String,
+    account_name: Option<String>,
+}
+
+struct EnableAccountState {
+    name: String,
+    account_name: Option<String>,
+    activate: Option<bool>,
+}
+
+struct ReLoginState {
+    name: String,
+    account_name: Option<String>,
+    password: Option<String>,
+    with_dialog: bool,
+}
+
+struct ResetAccountPasswordState {
+    name: String,
+    account_name: Option<String>,
+    password: Option<String>,
+    expire_password: bool,
+}
+
+pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
+    let state = parse_step(
+        step,
+        AddAccountState {
+            name: String::new(),
+            account_type: None,
+            account_name: None,
+            password: None,
+            privilege_set: None,
+            expire_password: false,
+        },
+        |reader, event, state| match event.name().as_ref() {
+            b"Step" => set_step_name(&mut state.name, event),
+            b"List" => {
+                if state.account_type.is_none() {
+                    state.account_type = get_attribute(event, "name");
+                }
+            }
+            b"PrivilegeSetReference" => {
+                state.privilege_set = parse_unescaped_attribute(event, "name");
+            }
+            b"Boolean" => {
+                if attribute_matches(event, "type", "Expire password")
+                    && attribute_matches(event, "value", "True")
+                {
+                    state.expire_password = true;
+                }
+            }
+            b"Parameter" => match get_attribute(event, "type").as_deref() {
+                Some("Name") => state.account_name = parse_calculation(reader, event),
+                Some("Password") => state.password = parse_secret(reader, event, obfuscate),
+                _ => {}
+            },
+            _ => {}
+        },
+    );
+
+    let mut parts: Vec<String> = Vec::new();
+    push_labeled_part(&mut parts, "Authenticate via", state.account_type);
+    push_labeled_part(&mut parts, "Account Name", state.account_name);
+    push_labeled_part(&mut parts, "Password", state.password);
+    push_labeled_part(&mut parts, "Privilege Set", state.privilege_set);
+    push_flag(&mut parts, state.expire_password, "Expire password");
+
+    format_step(state.name, parts)
+}
+
+pub fn sanitize_change_password(step: &str, obfuscate: bool) -> Option<String> {
+    let state = parse_step(
+        step,
+        ChangePasswordState {
+            name: String::new(),
+            old_password: None,
+            new_password: None,
+            with_dialog: true,
+        },
+        |reader, event, state| match event.name().as_ref() {
+            b"Step" => set_step_name(&mut state.name, event),
+            b"Boolean" => {
+                if attribute_matches(event, "type", "With dialog") {
+                    state.with_dialog = attribute_matches(event, "value", "True");
+                }
+            }
+            b"Parameter" => match get_attribute(event, "type").as_deref() {
+                Some("Old") => state.old_password = parse_secret(reader, event, obfuscate),
+                Some("New") => state.new_password = parse_secret(reader, event, obfuscate),
+                _ => {}
+            },
+            _ => {}
+        },
+    );
+
+    let mut parts: Vec<String> = Vec::new();
+    push_labeled_part(&mut parts, "Old Password", state.old_password);
+    push_labeled_part(&mut parts, "Password", state.new_password);
+    parts.push(format!("With dialog: {}", on_off(state.with_dialog)));
+
+    format_step(state.name, parts)
+}
+
+pub fn sanitize_delete_account(step: &str) -> Option<String> {
+    let state = parse_step(
+        step,
+        DeleteAccountState {
+            name: String::new(),
+            account_name: None,
+        },
+        |reader, event, state| match event.name().as_ref() {
+            b"Step" => set_step_name(&mut state.name, event),
+            b"Parameter" if attribute_matches(event, "type", "Calculation") => {
+                state.account_name = parse_calculation(reader, event);
+            }
+            _ => {}
+        },
+    );
+
+    let mut parts = Vec::new();
+    push_labeled_part(&mut parts, "Account Name", state.account_name);
+    format_step(state.name, parts)
+}
+
+pub fn sanitize_enable_account(step: &str) -> Option<String> {
+    let state = parse_step(
+        step,
+        EnableAccountState {
+            name: String::new(),
+            account_name: None,
+            activate: None,
+        },
+        |reader, event, state| match event.name().as_ref() {
+            b"Step" => set_step_name(&mut state.name, event),
+            b"Boolean" if attribute_matches(event, "type", "enable") => {
+                state.activate = Some(attribute_matches(event, "value", "True"));
+            }
+            b"Parameter" if attribute_matches(event, "type", "Calculation") => {
+                state.account_name = parse_calculation(reader, event);
+            }
+            _ => {}
+        },
+    );
+
+    let mut parts: Vec<String> = Vec::new();
+    push_labeled_part(&mut parts, "Account Name", state.account_name);
+    if let Some(act) = state.activate {
+        parts.push(if act {
+            "Activate".to_string()
+        } else {
+            "Deactivate".to_string()
+        });
+    }
+
+    format_step(state.name, parts)
+}
+
+pub fn sanitize_re_login(step: &str, obfuscate: bool) -> Option<String> {
+    let state = parse_step(
+        step,
+        ReLoginState {
+            name: String::new(),
+            account_name: None,
+            password: None,
+            with_dialog: true,
+        },
+        |reader, event, state| match event.name().as_ref() {
+            b"Step" => set_step_name(&mut state.name, event),
+            b"Boolean" => {
+                if attribute_matches(event, "type", "With dialog") {
+                    state.with_dialog = attribute_matches(event, "value", "True");
+                }
+            }
+            b"Parameter" => match get_attribute(event, "type").as_deref() {
+                Some("Name") => state.account_name = parse_calculation(reader, event),
+                Some("Password") => state.password = parse_secret(reader, event, obfuscate),
+                _ => {}
+            },
+            _ => {}
+        },
+    );
+
+    let mut parts: Vec<String> = Vec::new();
+    push_labeled_part(&mut parts, "Account Name", state.account_name);
+    push_labeled_part(&mut parts, "Password", state.password);
+    parts.push(format!("With dialog: {}", on_off(state.with_dialog)));
+
+    format_step(state.name, parts)
+}
+
+pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<String> {
+    let state = parse_step(
+        step,
+        ResetAccountPasswordState {
+            name: String::new(),
+            account_name: None,
+            password: None,
+            expire_password: false,
+        },
+        |reader, event, state| match event.name().as_ref() {
+            b"Step" => set_step_name(&mut state.name, event),
+            b"Boolean" => {
+                if attribute_matches(event, "type", "Password")
+                    && attribute_matches(event, "value", "True")
+                {
+                    state.expire_password = true;
+                }
+            }
+            b"Parameter" => match get_attribute(event, "type").as_deref() {
+                Some("Name") => state.account_name = parse_calculation(reader, event),
+                Some("Password") => state.password = parse_secret(reader, event, obfuscate),
+                _ => {}
+            },
+            _ => {}
+        },
+    );
+
+    let mut parts: Vec<String> = Vec::new();
+    push_labeled_part(&mut parts, "Account Name", state.account_name);
+    push_labeled_part(&mut parts, "Password", state.password);
+    push_flag(&mut parts, state.expire_password, "Expire password");
+
+    format_step_with_empty_brackets(state.name, parts)
 }
 
 #[cfg(test)]
