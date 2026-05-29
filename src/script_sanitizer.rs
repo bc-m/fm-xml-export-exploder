@@ -132,22 +132,16 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     step_info.content.clear();
                 }
             }
-            Ok(Event::CData(e)) => {
-                if in_step {
-                    step_info.content.push_str(&cdata_element_to_string(&e));
-                }
+            Ok(Event::CData(e)) if in_step => {
+                step_info.content.push_str(&cdata_element_to_string(&e));
             }
-            Ok(Event::Comment(e)) | Ok(Event::Text(e)) => {
-                if in_step {
-                    step_info
-                        .content
-                        .push_str(&text_element_to_string(&e, true));
-                }
+            Ok(Event::Comment(e)) | Ok(Event::Text(e)) if in_step => {
+                step_info
+                    .content
+                    .push_str(&text_element_to_string(&e, true));
             }
-            Ok(Event::GeneralRef(e)) => {
-                if in_step {
-                    step_info.content.push_str(&general_ref_to_string(&e, true));
-                }
+            Ok(Event::GeneralRef(e)) if in_step => {
+                step_info.content.push_str(&general_ref_to_string(&e, true));
             }
             _ => {}
         }

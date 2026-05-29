@@ -34,12 +34,10 @@ pub fn sanitize(step: &str) -> Option<String> {
                     data_source_reference = parse_unescaped_attribute(&e, "name")
                 }
                 b"ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
-                b"Parameter" => {
-                    if get_attribute(&e, "type").as_deref() == Some("Parameter") {
-                        calculation = Calculation::from_xml(&mut reader, &e)
-                            .display()
-                            .unwrap_or_default();
-                    }
+                b"Parameter" if get_attribute(&e, "type").as_deref() == Some("Parameter") => {
+                    calculation = Calculation::from_xml(&mut reader, &e)
+                        .display()
+                        .unwrap_or_default();
                 }
                 _ => {}
             },

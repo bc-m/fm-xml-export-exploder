@@ -27,11 +27,7 @@ impl Entity {
         for attr in get_attributes(e) {
             match attr.0.as_str() {
                 "id" => self.id = attr.1,
-                "name" => {
-                    if self.name.is_empty() {
-                        self.name = unescape_xml_entities(attr.1)
-                    }
-                }
+                "name" if self.name.is_empty() => self.name = unescape_xml_entities(attr.1),
                 "Display" => self.name = unescape_xml_entities(attr.1),
                 _ => {}
             }

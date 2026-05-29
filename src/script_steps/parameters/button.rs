@@ -28,13 +28,11 @@ impl Button {
                         in_text = true;
                     }
                 }
-                Ok(Event::CData(cdata)) => {
-                    if in_text && label.is_none() {
-                        let text = cdata_to_string(&cdata);
-                        if !text.is_empty() {
-                            label = Some(text);
-                            label_from_cdata = true;
-                        }
+                Ok(Event::CData(cdata)) if in_text && label.is_none() => {
+                    let text = cdata_to_string(&cdata);
+                    if !text.is_empty() {
+                        label = Some(text);
+                        label_from_cdata = true;
                     }
                 }
                 Ok(Event::End(end)) => {

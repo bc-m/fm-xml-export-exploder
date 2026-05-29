@@ -66,11 +66,9 @@ fn parse_cf_xml(xml_content: &str) -> Option<CfInfo> {
                 b"Text" => in_text = true,
                 _ => {}
             },
-            Ok(Event::CData(e)) => {
-                if in_text && in_calculation {
-                    cf_info.text = cdata_to_string(&e);
-                    break;
-                }
+            Ok(Event::CData(e)) if in_text && in_calculation => {
+                cf_info.text = cdata_to_string(&e);
+                break;
             }
             Ok(Event::End(e)) => match e.name().as_ref() {
                 b"Calculation" => in_calculation = false,

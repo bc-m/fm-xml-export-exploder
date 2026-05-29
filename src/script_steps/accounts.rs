@@ -153,20 +153,17 @@ pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
         },
         |reader, event, state| match event.name().as_ref() {
             b"Step" => set_step_name(&mut state.name, event),
-            b"List" => {
-                if state.account_type.is_none() {
-                    state.account_type = get_attribute(event, "name");
-                }
+            b"List" if state.account_type.is_none() => {
+                state.account_type = get_attribute(event, "name");
             }
             b"PrivilegeSetReference" => {
                 state.privilege_set = parse_unescaped_attribute(event, "name");
             }
-            b"Boolean" => {
+            b"Boolean"
                 if attribute_matches(event, "type", "Expire password")
-                    && attribute_matches(event, "value", "True")
-                {
-                    state.expire_password = true;
-                }
+                    && attribute_matches(event, "value", "True") =>
+            {
+                state.expire_password = true;
             }
             b"Parameter" => match get_attribute(event, "type").as_deref() {
                 Some("Name") => state.account_name = parse_calculation(reader, event),
@@ -198,10 +195,8 @@ pub fn sanitize_change_password(step: &str, obfuscate: bool) -> Option<String> {
         },
         |reader, event, state| match event.name().as_ref() {
             b"Step" => set_step_name(&mut state.name, event),
-            b"Boolean" => {
-                if attribute_matches(event, "type", "With dialog") {
-                    state.with_dialog = attribute_matches(event, "value", "True");
-                }
+            b"Boolean" if attribute_matches(event, "type", "With dialog") => {
+                state.with_dialog = attribute_matches(event, "value", "True");
             }
             b"Parameter" => match get_attribute(event, "type").as_deref() {
                 Some("Old") => state.old_password = parse_secret(reader, event, obfuscate),
@@ -285,10 +280,8 @@ pub fn sanitize_re_login(step: &str, obfuscate: bool) -> Option<String> {
         },
         |reader, event, state| match event.name().as_ref() {
             b"Step" => set_step_name(&mut state.name, event),
-            b"Boolean" => {
-                if attribute_matches(event, "type", "With dialog") {
-                    state.with_dialog = attribute_matches(event, "value", "True");
-                }
+            b"Boolean" if attribute_matches(event, "type", "With dialog") => {
+                state.with_dialog = attribute_matches(event, "value", "True");
             }
             b"Parameter" => match get_attribute(event, "type").as_deref() {
                 Some("Name") => state.account_name = parse_calculation(reader, event),
@@ -318,12 +311,11 @@ pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<St
         },
         |reader, event, state| match event.name().as_ref() {
             b"Step" => set_step_name(&mut state.name, event),
-            b"Boolean" => {
+            b"Boolean"
                 if attribute_matches(event, "type", "Password")
-                    && attribute_matches(event, "value", "True")
-                {
-                    state.expire_password = true;
-                }
+                    && attribute_matches(event, "value", "True") =>
+            {
+                state.expire_password = true;
             }
             b"Parameter" => match get_attribute(event, "type").as_deref() {
                 Some("Name") => state.account_name = parse_calculation(reader, event),

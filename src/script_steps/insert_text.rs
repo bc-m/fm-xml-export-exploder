@@ -21,12 +21,11 @@ pub fn sanitize(step: &str) -> Option<String> {
                 b"Step" => {
                     name = get_attribute(&e, "name").unwrap_or_default();
                 }
-                b"Boolean" => {
+                b"Boolean"
                     if get_attribute(&e, "id").as_deref() == Some("4096")
-                        && get_attribute(&e, "value").as_deref() == Some("True")
-                    {
-                        select = true;
-                    }
+                        && get_attribute(&e, "value").as_deref() == Some("True") =>
+                {
+                    select = true;
                 }
                 b"Text" => {
                     text = Text::from_xml(&mut reader, &e).display();
