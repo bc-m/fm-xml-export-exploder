@@ -257,7 +257,7 @@ Insert Calculated Result [ Select: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE �
 
 
 
-Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; Target: $WebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Select ; With dialog: ON ; Target: $WebContent ]
 
 Insert Current Date [ Select: OFF ]
 Insert Current Date [ Select: ON ]
@@ -363,25 +363,25 @@ Insert from Index [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
 
 Insert from Last Visited [ Select: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
 
-Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Select ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; URL: $url ]
+Insert from URL [ Select ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; URL: $url ]
+Insert from URL [ Select ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; URL: $url ]
 
-Insert from URL [ Verify SSL Certificates: ON ; Select: ON ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Insert from URL [ Verify SSL Certificates: ON ; Select: OFF ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "-X PUT" ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ Select ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; URL: $URL ; Verify SSL Certificates ; cURL options: $curl_options ]
+Insert from URL [ With dialog: OFF ]
+Insert from URL [ With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; URL: $URL ; Verify SSL Certificates ]
+Insert from URL [ Select ; With dialog: ON ; cURL options: "-X PUT" ]
+Insert from URL [ With dialog: ON ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ]
 
 # ONLY ONE Param => Assume Source Var
 # The following INFREQUENT form has no target -> NEEDS a currently selected layout field
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Insert from URL [ With dialog: OFF ; URL: $URL ]
+Insert from URL [ With dialog: OFF ; Target: $TargetWebContent ; URL: "someurl" ]
+Insert from URL [ With dialog: OFF ; Target: $TargetWebContent ; URL: $SourceURL ]
 # TODO: MBS must interpret first var as Target when 2 Vars between 'With dialog' and 'cURL options': Target Variable + URL Variable
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: ON ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $cURL_Options ]
+Insert from URL [ With dialog: ON ; Target: $TargetWebContent ; URL: $URL ; cURL options: $cURL_Options ]
 # EGIT - in cURL options ist es GEMISCHT: MANCHE Vars sind  Target Vars, manche QUELL Vars
-Insert from URL [ Verify SSL Certificates: OFF ; Select: OFF ; With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "
+Insert from URL [ With dialog: OFF ; Target: 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; URL: "http://www.mrwatson.de" ; cURL options: "
 --trace $TargetDump
 --uploadOrWhatever $SourceFile
 " ]

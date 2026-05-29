@@ -157,7 +157,7 @@ End If
 # 2024-07-17 mkos: Don't automatically encode url since ConvertFromFileMakerPath will already do that for us
 If [ $errorCode = 0 ]
 	Set Variable [ $start ; Get ( CurrentTimeUTCMilliseconds ) ]
-	Insert from URL [ Verify SSL Certificates: OFF ; Select: ON ; With dialog: OFF ; Target: SaXMLDelivery::xmlFile ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+	Insert from URL [ Select ; With dialog: OFF ; Target: SaXMLDelivery::xmlFile ; URL: ConvertFromFileMakerPath ( $xmlPath ; URLPath ) ]
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 	Set Variable [ $timeToUpload[1] ; GetAsTime ( ( Get ( CurrentTimeUTCMilliseconds ) - $start ) / 1000 ) ]
 End If

@@ -47,9 +47,9 @@ Wenn [ Abs ( Hole ( SystemPlattform ) ) = "1" ]
 	Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
 		# get files
 		Variable setzen [ $this.url ; "file://" & $this.file & ".key" ]
-		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::privateKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: PUB__publickeys::privateKey_r ; URL: $this.url ]
 		Variable setzen [ $this.url ; "file://" & $this.file & ".key.pem" ]
-		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::publicKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: PUB__publickeys::publicKey_r ; URL: $this.url ]
 		# get text from files
 		Feldwert setzen [ PUB__publickeys::privateKey ; TextDecode ( PUB__publickeys::privateKey_r ; "utf-8" ) ]
 		Feldwert setzen [ PUB__publickeys::publicKey ; Austauschen ( 
@@ -101,9 +101,9 @@ Sonst, wenn [ Abs ( Hole ( SystemPlattform ) ) = "2" ]
 	Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
 		# get files
 		Variable setzen [ $this.url ; "file:///" & $this.file & ".key" ]
-		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::privateKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: PUB__publickeys::privateKey_r ; URL: $this.url ]
 		Variable setzen [ $this.url ; "file:///" & $this.file & ".key.pem" ]
-		Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: PUB__publickeys::publicKey_r ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+		Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: PUB__publickeys::publicKey_r ; URL: $this.url ]
 		# get text from files
 		Feldwert setzen [ PUB__publickeys::privateKey ; TextDecode ( PUB__publickeys::privateKey_r ; "utf-8" ) ]
 		Feldwert setzen [ PUB__publickeys::publicKey ; TextDecode ( PUB__publickeys::publicKey_r ; "utf-8" ) ]

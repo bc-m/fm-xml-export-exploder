@@ -35,7 +35,7 @@ Variable setzen [ $$API.UPDATE ; "1" ]
 # -------------------------------------------------------------
 #  PROCESS
 # -------------------------------------------------------------
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $$my.result ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curloptions ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: $$my.result ; URL: $$server & $endpoint ; cURL options: $curloptions ]
 Script ausführen [ "Handle response" ; Specified: Aus Liste ; Parameter: ]
 
 Script ausführen [ "Get DBS Plug-in Configuration" ; Specified: Aus Liste ; Parameter: ]
