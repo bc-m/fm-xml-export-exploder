@@ -2011,15 +2011,15 @@ Schleife (Anfang) [ Flush: Immer ]
 				# @var $fmide_target_temp
 				Wenn [ $with_dialog ]
 					Wenn [ $do_not_automatically_encode_url ]
-						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
+						Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $fmide_target_temp ; URL: $url ; cURL options: $curl_options ]
 					Sonst
-						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
+						Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $fmide_target_temp ; URL: $url ; cURL options: $curl_options ]
 					Ende (wenn)
 				Sonst
 					Wenn [ $do_not_automatically_encode_url ]
-						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
+						Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: $fmide_target_temp ; URL: $url ; cURL options: $curl_options ]
 					Sonst
-						Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: $fmide_target_temp ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
+						Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: $fmide_target_temp ; URL: $url ; cURL options: $curl_options ]
 					Ende (wenn)
 				Ende (wenn)
 				Wenn [ ZeichenLinks( $target ; 1 ) ≠ "$" ODER 

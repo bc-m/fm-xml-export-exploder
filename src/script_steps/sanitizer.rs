@@ -14,6 +14,7 @@ pub fn sanitize(step_id: u32, step_xml: &str, flags: &Flags) -> Option<String> {
             script_steps::perform_find::sanitize(step_xml)
         }
         ScriptStep::InsertText => script_steps::insert_text::sanitize(step_xml),
+        ScriptStep::InsertFromURL => script_steps::insert_from_url::sanitize(step_xml),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),
         ScriptStep::ReplaceFieldContents => {
             script_steps::replace_field_contents::sanitize(step_xml)

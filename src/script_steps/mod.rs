@@ -7,6 +7,7 @@ mod exit_script;
 mod go_to_object;
 mod go_to_portal_row;
 mod go_to_record;
+mod insert_from_url;
 mod insert_text;
 mod is_enabled;
 mod omit_multiple_records;

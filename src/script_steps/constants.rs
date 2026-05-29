@@ -93,6 +93,7 @@ pub enum ScriptStep {
     ResetAccountPassword = 136,
     EnableAccount = 137,
     ReLogin = 138,
+    InsertFromURL = 160,
     OpenManageThemes = 165,
     RefreshObject = 167,
     ClosePopover = 169,

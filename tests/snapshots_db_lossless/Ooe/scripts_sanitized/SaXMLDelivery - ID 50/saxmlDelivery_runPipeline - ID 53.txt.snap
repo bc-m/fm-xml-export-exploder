@@ -134,7 +134,7 @@ End If
 
 # Make api call to trigger pipeline
 If [ $errorCode = 0 ]
-	Insert from URL [ Verify SSL Certificates: ON ; Select: ON ; With dialog: OFF ; Target: $response ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curlOptions ]
+	Insert from URL [ Select ; With dialog: OFF ; Target: $response ; URL: $url ; Verify SSL Certificates ; cURL options: $curlOptions ]
 	Set Variable [ $errorCode[1] ; Get ( LastError ) ]
 	Set Variable [ $responseStatusCode[1] ; // We would typically use a custom function here, but we wanted this script to have as few dependencies as possible
 // Signature:

@@ -257,7 +257,7 @@ Berechneten Wert einfügen [ Auswahl: ON ; Target: _Syntax::_k1 ; _Syntax::_kCal
 
 
 
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: $WebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $WebContent ]
 
 Systemdatum einfügen [ Auswahl: OFF ]
 Systemdatum einfügen [ Auswahl: ON ]
@@ -363,25 +363,25 @@ Aus Index einfügen [ Auswahl: ON ; _Home::_gInputText1 ]
 
 Aus zuletzt geöffnetem Satz einfügen [ Auswahl: ON ; _Home::_gInputText1 ]
 
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: _Syntax::_kActivePaletteName ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; Target: _Syntax::_kActivePaletteName ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: OFF ; Target: _Syntax::_kActivePaletteName ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: _Syntax::_kActivePaletteName ; URL: $url ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: _Syntax::_kActivePaletteName ; URL: $url ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: _Syntax::_kActivePaletteName ; URL: $url ]
 
-Aus URL einfügen [ SSL-Zertifikate verifizieren: ON ; Auswahl: ON ; Mit Dialog: OFF ; Target: _Home::_gHomeScreenInfo ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $curl_options ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: ON ; Auswahl: OFF ; Mit Dialog: OFF ; Target: _Home::_gHomeScreenInfo ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: ON ; Mit Dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "-X PUT" ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: ON ; Target: _Home::_gInputText1 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: OFF ; Target: _Home::_gHomeScreenInfo ; URL: $URL ; SSL-Zertifikate verifizieren ; cURL options: $curl_options ]
+Aus URL einfügen [ Mit Dialog: OFF ]
+Aus URL einfügen [ Mit Dialog: OFF ; Target: _Home::_gHomeScreenInfo ; URL: $URL ; SSL-Zertifikate verifizieren ]
+Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; cURL options: "-X PUT" ]
+Aus URL einfügen [ Mit Dialog: ON ; Target: _Home::_gInputText1 ]
 
 # ONLY ONE Param => Assume Source Var
 # The following INFREQUENT form has no target -> NEEDS a currently selected layout field
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: OFF ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: OFF ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+Aus URL einfügen [ Mit Dialog: OFF ; URL: $URL ]
+Aus URL einfügen [ Mit Dialog: OFF ; Target: $TargetWebContent ; URL: "someurl" ]
+Aus URL einfügen [ Mit Dialog: OFF ; Target: $TargetWebContent ; URL: $SourceURL ]
 # TODO: MBS must interpret first var as Target when 2 Vars between 'With dialog' and 'cURL options': Target Variable + URL Variable
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: ON ; Target: $TargetWebContent ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; $cURL_Options ]
+Aus URL einfügen [ Mit Dialog: ON ; Target: $TargetWebContent ; URL: $URL ; cURL options: $cURL_Options ]
 # EGIT - in cURL options ist es GEMISCHT: MANCHE Vars sind  Target Vars, manche QUELL Vars
-Aus URL einfügen [ SSL-Zertifikate verifizieren: OFF ; Auswahl: OFF ; Mit Dialog: OFF ; Target: _Home::_gInputText1 ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ; "
+Aus URL einfügen [ Mit Dialog: OFF ; Target: _Home::_gInputText1 ; URL: "http://www.mrwatson.de" ; cURL options: "
 				--trace $TargetDump
 				--uploadOrWhatever $SourceFile
 				" ]
