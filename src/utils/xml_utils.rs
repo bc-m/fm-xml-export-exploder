@@ -353,7 +353,7 @@ pub fn extract_values_from_xml_paths(
                             .find(|a| a.key.as_ref() == attr_name.as_bytes())
                         {
                             let value = attr
-                                .unescape_value()
+                                .normalized_value(quick_xml::XmlVersion::Implicit1_0)
                                 .map_err(|e| format!("Unescape error: {e}"))?;
                             results[i] = if path.starts_with(&["Relationship", "LeftTable"])
                                 || path.starts_with(&["Relationship", "RightTable"])
