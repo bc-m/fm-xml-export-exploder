@@ -108,14 +108,26 @@ pub fn unescape_xml_entities(input: String) -> String {
         .replace("&apos;", "'")
 }
 
+/// Escapes text for XML output in a single pass; text without special characters
+/// (the common case) is returned without allocating.
 fn escape_xml_entities(input: String) -> String {
-    input
-        .replace('&', "&amp;")
-        .replace('\"', "&quot;")
-        .replace('<', "&lt;")
-        .replace('>', "&gt;")
-        .replace('\'', "&apos;")
-        .replace('\r', "&#13;")
+    const SPECIAL: [char; 6] = ['&', '"', '<', '>', '\'', '\r'];
+    if !input.contains(SPECIAL) {
+        return input;
+    }
+    let mut escaped = String::with_capacity(input.len() + 16);
+    for c in input.chars() {
+        match c {
+            '&' => escaped.push_str("&amp;"),
+            '"' => escaped.push_str("&quot;"),
+            '<' => escaped.push_str("&lt;"),
+            '>' => escaped.push_str("&gt;"),
+            '\'' => escaped.push_str("&apos;"),
+            '\r' => escaped.push_str("&#13;"),
+            c => escaped.push(c),
+        }
+    }
+    escaped
 }
 
 pub fn skip_rest_of_element<R: Read + BufRead>(reader: &mut Reader<R>) {
@@ -413,5 +425,10 @@ mod tests {
             escape_xml_entities("This & that \"test\" <tag>".to_string()),
             "This &amp; that &quot;test&quot; &lt;tag&gt;"
         );
+        assert_eq!(
+            escape_xml_entities("it's\r\n&amp;".to_string()),
+            "it&apos;s&#13;\n&amp;amp;"
+        );
+        assert_eq!(escape_xml_entities("plain text".to_string()), "plain text");
     }
 }
