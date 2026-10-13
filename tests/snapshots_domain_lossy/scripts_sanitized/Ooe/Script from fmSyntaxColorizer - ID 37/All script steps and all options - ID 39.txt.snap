@@ -193,9 +193,9 @@ Go to Record/Request/Page [ With dialog: ON ; /*cf_LayoutNumber + 1*/ ]
 Go to Related Record [ Layout: <original layout> ; Show related ]
 Go to Related Record [ Layout: <original layout> ; Show related ]
 Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Show related ]
-Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
-Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
-Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Document ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Show related ; Match found set ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Document ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Show related ; Match found set ]
+Go to Related Record [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dialog ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Minimize: OFF ; Menu: OFF ; Toolbar: OFF ; Show related ; Match found set ]
 
 # =============
 # EDITING STEPS
@@ -649,8 +649,8 @@ Set Allowed Orientations
 Set Allowed Orientations
 Set Allowed Orientations
 
-Set Window Title
-Set Window Title [ Name: $FensterNameAlt ]
+Set Window Title [ New Title: $FensterNameNeu ]
+Set Window Title [ Name: $FensterNameAlt ; New Title: $FensterNameNeu ]
 
 Set Zoom Level [ Lock: ON ; 25% ]
 Set Zoom Level [ Lock: ON ; 50% ]

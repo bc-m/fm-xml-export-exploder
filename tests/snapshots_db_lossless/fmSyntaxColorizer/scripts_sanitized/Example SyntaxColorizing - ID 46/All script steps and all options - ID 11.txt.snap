@@ -193,9 +193,9 @@ Gehe zu Datens./Abfrage/Seite [ Mit Dialog: ON ; /*cf_LayoutNumber + 1*/ ]
 Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: <Originallayout> ; Show related ]
 Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: <Originallayout> ; Show related ]
 Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Show related ]
-Gehe zu Bezugsdatensatz [ Table: Syntax.GUISyntax ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
-Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
-Gehe zu Bezugsdatensatz [ Table: _Home ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.GUISyntax ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dokument ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Show related ; Match found set ]
+Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dokument ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Show related ; Match found set ]
+Gehe zu Bezugsdatensatz [ Table: _Home ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dialog ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Minimize: OFF ; Menu: OFF ; Toolbar: OFF ; Show related ; Match found set ]
 
 # =============
 # EDITING STEPS
@@ -652,8 +652,8 @@ Zulässige Ausrichtungen festlegen
 Zulässige Ausrichtungen festlegen
 Zulässige Ausrichtungen festlegen
 
-Fenstertitel setzen
-Fenstertitel setzen [ Name: $FensterNameAlt ]
+Fenstertitel setzen [ New Title: $FensterNameNeu ]
+Fenstertitel setzen [ Name: $FensterNameAlt ; New Title: $FensterNameNeu ]
 
 Zoomstufe setzen [ Fixieren: ON ; 25% ]
 Zoomstufe setzen [ Fixieren: ON ; 50% ]
