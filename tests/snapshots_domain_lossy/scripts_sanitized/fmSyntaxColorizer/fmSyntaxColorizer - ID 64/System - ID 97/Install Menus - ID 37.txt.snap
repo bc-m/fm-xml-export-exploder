@@ -11,11 +11,11 @@ AnwenderAbbruchZulassen setzen [ OFF ]
 
 Wenn [ Hole ( KontoBerechtigungenName ) = "[Full Access]" ]
 	# ADMIN Menus
-	Menüset installieren [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
+	Menüset installieren [ "ADMIN Menuset" ; Als Dateistandard verwenden: ON ]
 	
 Sonst
 	# STANDARD Menüs
-	Menüset installieren [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
+	Menüset installieren [ "USER Menuset" ; Als Dateistandard verwenden: ON ]
 	Werkzeugleisten ein-/ausblenden [ Fixieren: ON ; Mit Datensatz-bearbeiten-Werkzeugleiste : OFF ; Ausblenden ]
 	
 Ende (wenn)

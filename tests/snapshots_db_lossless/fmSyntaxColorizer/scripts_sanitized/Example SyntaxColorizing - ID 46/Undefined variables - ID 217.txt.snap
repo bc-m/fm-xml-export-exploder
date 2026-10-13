@@ -75,13 +75,13 @@ Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $TargetVar ; URL: $ThisIs
 Datei einfügen [ Target: $TargetVar ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-Audio/Video einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Audio/Video einfügen [ Nur Verweis speichern: OFF ; "$ThisIsAPathVar" ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-Datei einfügen [ Target: $TargetVar ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Datei einfügen [ Target: $TargetVar ; "$ThisIsAPathVar" ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-PDF einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+PDF einfügen [ Nur Verweis speichern: OFF ; "$ThisIsAPathVar" ]
 
 # FAIL: MBS fails to recognise a path variable here - maybe because it is in quotes?
-Bild einfügen [ Nur Verweis speichern: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Bild einfügen [ Nur Verweis speichern: OFF ; "$ThisIsAPathVar" ]

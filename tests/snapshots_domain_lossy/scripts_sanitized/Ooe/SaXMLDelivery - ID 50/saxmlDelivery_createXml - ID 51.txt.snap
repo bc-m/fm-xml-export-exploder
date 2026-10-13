@@ -55,7 +55,7 @@ Set Variable [ $data ; "{}" ]
 If [ PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 // if not already running on fmse ]
 	# Only try to do this if file is hosted
 	If [ Get ( ConnectionState ) ≠ 0 ]
-		Perform Script on Server [ By name ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Wait for completion: ON ]
+		Perform Script on Server [ By name ; Parameter: Get ( ScriptParameter ) ; Wait for completion: ON ]
 		Set Variable [ $errorCode ; Get ( LastError ) ]
 		Set Variable [ $recordId ; JSONGetElement ( Get ( ScriptResult ) ; "data.recordId" ) ]
 		If [ $errorCode = 0 and not IsEmpty ( $recordId ) ]
@@ -144,9 +144,9 @@ If [ $errorCode = 0 ]
 	Set Variable [ $xmlPath ; Get ( TemporaryPath ) & Get ( FileName ) & ".xml" ]
 	Set Variable [ $start ; Get ( CurrentTimeUTCMilliseconds ) ]
 	If [ $_includeDetailsForAnalysisTools ]
-		Save a Copy as XML [ Get ( WindowName ) ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Include details for analysis tools: ON ; Save each layout object&apos;s binary data under its node: OFF ]
+		Save a Copy as XML [ Get ( WindowName ) ; "$xmlPath" ; Include details for analysis tools: ON ; Save each layout object&apos;s binary data under its node: OFF ]
 	Else
-		Save a Copy as XML [ Get ( WindowName ) ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Include details for analysis tools: OFF ; Save each layout object&apos;s binary data under its node: OFF ]
+		Save a Copy as XML [ Get ( WindowName ) ; "$xmlPath" ; Include details for analysis tools: OFF ; Save each layout object&apos;s binary data under its node: OFF ]
 	End If
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 	Set Variable [ $timeToCreate[1] ; GetAsTime ( ( Get ( CurrentTimeUTCMilliseconds ) - $start ) / 1000 ) ]
@@ -172,7 +172,7 @@ End If
 
 # Delete xml file in temp folder
 If [ $errorCode = 0 ]
-	Delete File [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+	Delete File [ "$xmlPath" ]
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 End If
 

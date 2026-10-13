@@ -15,6 +15,7 @@ use crate::script_steps::parameters::list::List;
 use crate::script_steps::parameters::privilege_set_reference::PrivilegeSetReference;
 use crate::script_steps::parameters::related::Related;
 use crate::script_steps::parameters::script_reference::ScriptReference;
+use crate::script_steps::parameters::structured;
 use crate::script_steps::parameters::target::Target;
 use crate::script_steps::parameters::window_reference::WindowReference;
 use crate::utils::attributes::get_attribute;
@@ -81,8 +82,11 @@ impl ParameterValues {
                         "Field1" | "Field2" | "Field3" => {
                             DialogField::from_xml(reader, &e).display(&parameter_type)
                         }
+                        other if structured::is_structured(other) => {
+                            structured::from_xml(reader, &e, other)
+                        }
                         other => match labeled::label(other, step_id) {
-                            Some(label) => labeled::from_xml(reader, &e, step_id, label),
+                            Some(label) => labeled::from_xml(reader, &e, step_id, other, label),
                             None => {
                                 item.parameters.push(format!(
                                     r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#

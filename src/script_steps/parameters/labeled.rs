@@ -5,6 +5,7 @@ use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::list::List;
+use crate::script_steps::parameters::node::Node;
 use crate::utils::xml_utils::skip_rest_of_element;
 
 /// Returns the label FileMaker shows for parameters that wrap a single
@@ -27,6 +28,12 @@ pub fn label(parameter_type: &str, step_id: u32) -> Option<&'static str> {
         "Volume" => "Volume",
         "Location" => "Default location",
         "FunctionRef" => "Function Name",
+        "Timeout" => "Timeout",
+        "ReadMultiple" => "Continuous",
+        "name" => "Name",
+        "find" => "Find",
+        "replace" => "Replace",
+        "operation" => "Operation",
         "Monitor" => "Monitor",
         "Presentation" => "Presentation",
         "action" => "Action",
@@ -40,18 +47,23 @@ pub fn label(parameter_type: &str, step_id: u32) -> Option<&'static str> {
         "DisableInteraction" => "Disable interaction",
         "DisableExternalControls" => "Disable external controls",
         "PauseInBackground" => "Pause in background",
-        // Booleans whose `type` attribute already holds the display label
-        "Start" | "Wait" | "case" | "whole" => "",
+        "Start" => "Start",
+        "Wait" => "Wait",
+        "case" => "Match case",
+        "whole" => "Match whole words only",
+        // Lists that need no label
+        "Records" => "",
         _ => return None,
     })
 }
 
 /// Parses a parameter whose value is a single wrapped `<Calculation>`, `<Boolean>`
-/// or `<List>` element and displays it as `label: value`.
+/// or `<List>` element (or plain text) and displays it as `label: value`.
 pub fn from_xml(
     reader: &mut Reader<&[u8]>,
     e: &BytesStart,
     step_id: u32,
+    parameter_type: &str,
     label: &str,
 ) -> Option<String> {
     match first_child_name(reader).as_deref() {
@@ -60,18 +72,34 @@ pub fn from_xml(
             .map(|value| format!("{label}: {value}")),
         Some("Boolean") => {
             let mut boolean = Boolean::from_xml(reader, e, step_id);
-            if !label.is_empty() {
+            // Keep descriptive types like "Start immediately", replace internal ones like "DisableInteraction"
+            if boolean
+                .name
+                .as_deref()
+                .is_none_or(|name| name == parameter_type)
+            {
                 boolean.name = Some(label.to_string());
             }
             boolean.display()
         }
         Some("List") => List::from_xml(reader, e, step_id)
             .display()
-            .map(|value| format!("{label}: {value}")),
-        _ => {
+            .map(|value| with_label(label, value)),
+        Some(_) => {
             skip_rest_of_element(reader);
             None
         }
+        None => Some(Node::from_xml(reader, e).text)
+            .filter(|text| !text.is_empty())
+            .map(|text| with_label(label, text)),
+    }
+}
+
+fn with_label(label: &str, value: String) -> String {
+    if label.is_empty() {
+        value
+    } else {
+        format!("{label}: {value}")
     }
 }
 
@@ -105,7 +133,7 @@ mod tests {
         };
         let parameter_type = crate::utils::attributes::get_attribute(&e, "type").unwrap();
         let label = label(&parameter_type, step_id).unwrap();
-        from_xml(&mut reader, &e, step_id, label)
+        from_xml(&mut reader, &e, step_id, &parameter_type, label)
     }
 
     #[test]
@@ -140,13 +168,37 @@ mod tests {
     }
 
     #[test]
+    fn same_type_as_boolean_or_calculation() {
+        let boolean = r#"<Parameter type="Start"><Boolean value="True" type="Start immediately"></Boolean></Parameter>"#;
+        assert_eq!(
+            parse(boolean, 161).as_deref(),
+            Some("Start immediately: ON")
+        );
+
+        let calculation = r#"<Parameter type="Start"><Calculation datatype="2" position="1"><Calculation><Text><![CDATA[1]]></Text></Calculation></Calculation></Parameter>"#;
+        assert_eq!(parse(calculation, 177).as_deref(), Some("Start: 1"));
+    }
+
+    #[test]
+    fn text() {
+        let xml = r#"<Parameter type="operation">uninstall</Parameter>"#;
+        assert_eq!(parse(xml, 202).as_deref(), Some("Operation: uninstall"));
+    }
+
+    #[test]
+    fn list_without_label() {
+        let xml = r#"<Parameter type="Records"><List name="First" value="1"></List></Parameter>"#;
+        assert_eq!(parse(xml, 218).as_deref(), Some("First"));
+    }
+
+    #[test]
     fn empty_parameter() {
         let xml = r#"<Parameter type="find"></Parameter><Parameter type="next"></Parameter>"#;
         let mut reader = Reader::from_str(xml);
         let Ok(Event::Start(e)) = reader.read_event() else {
             panic!("Wrong read event");
         };
-        assert_eq!(from_xml(&mut reader, &e, 128, "Find"), None);
+        assert_eq!(from_xml(&mut reader, &e, 128, "find", "Find"), None);
         // The following sibling must still be readable
         let Ok(Event::Start(next)) = reader.read_event() else {
             panic!("Sibling consumed");

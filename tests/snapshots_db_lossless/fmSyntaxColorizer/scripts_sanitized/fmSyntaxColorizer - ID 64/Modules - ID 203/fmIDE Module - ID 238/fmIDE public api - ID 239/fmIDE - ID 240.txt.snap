@@ -552,7 +552,7 @@ Wenn [ $fmide_debug ODER NICHT IstLeer ( FilterElemente ( $_JSP_Keys ; "fmide_de
 					
 					) ; Default Button: "OK" ; Button 2: "Pause" ; Button 3: "Halt" ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 2 ]
-		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		Scriptpause setzen
 	Sonst, wenn [ Hole ( LetzteMeldungswahl ) = 3 ]
 		Alle Scripts abbrechen
 	Ende (wenn)
@@ -902,7 +902,7 @@ Wenn [ IstLeer ( $continuation ) ]
 Sonst
 	# # Continuation start: read the current execution state back from the continuation
 	// Eigenes Dialogfeld anzeigen
-	// Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	// Scriptpause setzen
 	
 	# First, free up the MBS Schedule used to trigger the continuation call
 	Variable setzen [ $r ; SetzeVar(
@@ -1200,7 +1200,7 @@ Schleife (Anfang) [ Flush: Immer ]
 			Schleife (Anfang) [ Flush: Immer ]
 				Verlasse Schleife wenn [ $i > $times ]
 				Fehlerton
-				Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+				Scriptpause setzen [ Dauer (Sekunden): 1/8 ]
 				Variable setzen [ $i ; $i + 1 ]
 			Schleife (Ende)
 			
@@ -1637,7 +1637,7 @@ Schleife (Anfang) [ Flush: Immer ]
 				# AppleScript?
 				Text einfügen [ Select ; Target: $AppleScriptTemplate ; "go to field {{'$layout_field_name'}} of current record" ]
 				Variable setzen [ $AppleScript ; Austauschen ( $AppleScriptTemplate ; "{{'$layout_field_name'}}" ; Zitat( $layout_field_name ) ) ]
-				AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+				AppleScript ausführen
 				
 				
 				# Go to Object
@@ -1932,7 +1932,7 @@ Schleife (Anfang) [ Flush: Immer ]
 								) ]
 				Wenn [ NICHT IstLeer ( $$fmAutoMate.Search ) ]
 					# Set MBS Search…
-					Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+					Scriptpause setzen [ Dauer (Sekunden): 0 ]
 					Variable setzen [ $r ; MBS( "SyntaxColoring.ScriptSearchBox.SetText"; $$fmAutoMate.Search ) ]
 					Variable setzen [ $r ; SetzeVar(
 									[
@@ -2220,9 +2220,9 @@ Schleife (Anfang) [ Flush: Immer ]
 			
 			Wenn [ NICHT IstLeer ( $url ) ]
 				Wenn [ $with_dialog ]
-					URL öffnen [ Mit Dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+					URL öffnen [ Mit Dialog: ON ; URL: $url ; Automatically encode URL: ON ]
 				Sonst
-					URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+					URL öffnen [ Mit Dialog: OFF ; URL: $url ; Automatically encode URL: ON ]
 				Ende (wenn)
 			Ende (wenn)
 			
@@ -2274,9 +2274,9 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			Sonst
 				# Pause
 				Wenn [ NICHT IstLeer ( $seconds ) UND NICHT $indefinitely ]
-					Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+					Scriptpause setzen [ Dauer (Sekunden): $seconds ]
 				Sonst
-					Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+					Scriptpause setzen
 				Ende (wenn)
 			Ende (wenn)
 			
@@ -2302,7 +2302,7 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			# @see wiki https://github.com/fmIDE/fmIDE/wiki/fmIDE-Actions/#save-a-copy-as-xml
 			# Is this maybe TOO risky?
 			// Variable setzen [ $file_path ; JSONGetElement ( $action ; "file_path" ) ]
-			// Kopie als XML speichern [ "" ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+			// Kopie als XML speichern [ "" ; "$file_path" ]
 			
 			
 		Sonst, wenn [ $action_name = "SelectWindow" ]
@@ -2460,16 +2460,16 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			# First delete the file if it exists
 			
 			# @var $fmide_file_exists
-			Dateiexistenz holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $fmide_file_exists ]
+			Dateiexistenz holen [ "$fmide_file_path" ; Target: $fmide_file_exists ]
 			Wenn [ $fmide_file_exists ]
-				Datei löschen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+				Datei löschen [ "$fmide_file_path" ]
 			Ende (wenn)
 			
 			# Then create the file with text and optional EOL
-			Datendatei erstellen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Ordner erstellen: ON ]
+			Datendatei erstellen [ "$fmide_file_path" ; Ordner erstellen: ON ]
 			
 			# @var $fmide_file_id
-			Datendatei öffnen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $fmide_file_id ]
+			Datendatei öffnen [ "$fmide_file_path" ; Target: $fmide_file_id ]
 			Wenn [ $append_line_feed ]
 				In Datendatei schreiben [ File ID: $fmide_file_id ; Target: $text ; Zeilenumbruch anhängen: ON ]
 			Sonst

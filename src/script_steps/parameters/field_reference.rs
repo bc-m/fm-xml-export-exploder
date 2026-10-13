@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
+use crate::script_steps::parameters::node::Node;
 use crate::utils::attributes::get_attribute;
 
 #[derive(Debug, Default)]
@@ -51,6 +52,23 @@ impl FieldReference {
         }
 
         item
+    }
+
+    pub fn from_node(node: &Node) -> FieldReference {
+        FieldReference {
+            field_reference: node
+                .descendant("FieldReference")
+                .and_then(|n| n.attr("name"))
+                .map(str::to_string),
+            table_reference: node
+                .descendant("TableOccurrenceReference")
+                .and_then(|n| n.attr("name"))
+                .map(str::to_string),
+            repetition: node
+                .descendant("repetition")
+                .and_then(|n| n.attr("value"))
+                .and_then(|v| v.parse().ok()),
+        }
     }
 
     pub fn display(&self) -> String {

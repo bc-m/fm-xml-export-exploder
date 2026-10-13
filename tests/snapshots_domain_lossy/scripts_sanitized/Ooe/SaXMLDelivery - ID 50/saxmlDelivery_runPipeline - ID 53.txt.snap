@@ -737,7 +737,7 @@ and PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 ]
 			Show Custom Dialog [ Message: $message ; Default Button: "Dismiss" ; Button 2: "View" ]
 			If [ Get ( LastMessageChoice ) = 2 ]
 				Set Variable [ $pipelineBuildUrl[1] ; $repoUrl & "/pipelines/results/" & $buildNumber ]
-				Open URL [ In external browser: OFF ; With dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+				Open URL [ In external browser: OFF ; With dialog: OFF ; URL: $pipelineBuildUrl ; Automatically encode URL: ON ]
 			End If
 		Else
 			# GitHub

@@ -63,7 +63,7 @@ Wenn [ $User Name = "MrWatson" ]
 	Eigenes Dialogfeld anzeigen [ Title: Hole( DateiName ) ; Message: "Debug?" ; Default Button: "Continue" ; Button 2: "Pause" ; Input 1: $My Name ; Label 1: "REAL Name" ]
 	Wenn [ Hole ( LetzteMeldungswahl ) = 1 ]
 		# DEBUG
-		Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		Scriptpause setzen
 	Ende (wenn)
 Ende (wenn)
 
@@ -82,7 +82,7 @@ Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
 Suchenmodus aktivieren [ Pause: OFF ]
 Berechneten Wert einfügen [ Auswahl: ON ; Target: _Palette::_gDuplicatePaletteFrom ; _Palette::__ID ]
 Ergebnismenge suchen [ ⚠️ RESTORE ⚠️ ]
-Sortieren [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: ON ; Restore ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
 
 
 # Duplicate with increased name
@@ -167,12 +167,12 @@ Script ausführen [ "Apply Palette" ; Specified: Aus Liste ; Parameter: ]
 Variable setzen [ $Error ; Hole ( ScriptErgebnis ) ]
 # You should see an affirmative color ^^^^, when getting the Script Result
 
-URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+URL öffnen [ Mit Dialog: OFF ]
 # @var $a - this comment defines the variable a
 Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $a ]
 E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
 
-AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+AppleScript ausführen
 
 MBS
 
