@@ -8,15 +8,17 @@ use quick_xml::events::{BytesEnd, BytesStart, Event};
 use quick_xml::reader::Reader;
 
 use crate::Skeleton;
-use crate::catalog::xml_explode_catalog;
+use crate::catalog::{OnWritten, xml_explode_catalog};
 use crate::config::{CatalogType, Flags};
-use crate::custom_function_sanitizer::create_sanitized_custom_functions;
-use crate::script_sanitizer::create_sanitized_scripts;
+use crate::custom_function_sanitizer::sanitized_custom_function_text;
+use crate::script_sanitizer::sanitized_script_text;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
+use crate::utils::file_utils::write_text_version;
+use crate::utils::output_files::OutputFiles;
 use crate::utils::xml_utils::{XmlEventType, end_element_to_string, start_element_to_string};
 use crate::utils::{
-    FolderStructure, VERSION_2_2_3_4, build_out_dir_path, create_dir, delete_output_directory,
+    FolderStructure, VERSION_2_2_3_4, build_out_dir_path, create_dir, output_roots,
     push_line_to_skeleton, version_string_to_number, write_xml_file,
 };
 
@@ -56,6 +58,8 @@ pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub current_out_dir: PathBuf,
     pub skeleton: &'a mut Skeleton,
     pub flags: &'a Flags,
+    /// The files written so far; everything else in the database's output is stale
+    pub output: &'a OutputFiles,
 }
 
 /// Process a single XML file and explode it into individual files.
@@ -78,6 +82,8 @@ pub fn explode_xml(
     let mut script_folder_structure: Option<FolderStructure> = None;
     let mut buf = Vec::new();
 
+    let output = OutputFiles::default();
+
     // Instantiate processing context which will be passed around to various functions
     let mut context = ProcessingContext {
         reader: &mut Reader::from_reader(BufReader::new(DecodeReaderBytes::new(file))),
@@ -90,6 +96,7 @@ pub fn explode_xml(
         current_out_dir: PathBuf::new(),
         skeleton: &mut Skeleton::default(),
         flags,
+        output: &output,
     };
 
     // Iterate over XML events
@@ -114,7 +121,6 @@ pub fn explode_xml(
                     0 => {
                         process_root_element(&mut context, &start_tag)?;
                         create_dir(context.root_out_dir);
-                        delete_output_directory(&context)?;
                     }
                     1 => {
                         let was_xml_element_consumed =
@@ -160,6 +166,13 @@ pub fn explode_xml(
     // Write skeleton file if in lossless mode
     if flags.lossless {
         write_skeleton_file(&context)?;
+    }
+
+    // The output is updated in place: remove what this export no longer contains
+    if let Some(doc_info) = &context.doc_info {
+        for root in output_roots(root_out_dir, &flags.output_tree, &doc_info.db_name) {
+            output.remove_stale(&root)?;
+        }
     }
 
     println!(
@@ -246,7 +259,35 @@ fn process_catalog_elements<R: Read + BufRead>(
     let xml_out_dir_path = build_out_dir_path(context, None)?;
     let saved_out_dir = std::mem::replace(&mut context.current_out_dir, xml_out_dir_path.clone());
 
-    let folder_structure_result = xml_explode_catalog(context, folder_structure)?;
+    // Scripts and custom functions also get sanitized (human-readable) text versions,
+    // created right after each item is written
+    let sanitized_qualifier = match catalog_type {
+        CatalogType::StepsForScripts => Some(Qualifier::SanitizedScripts),
+        CatalogType::CalcsForCustomFunctions => Some(Qualifier::SanitizedCustomFunctions),
+        CatalogType::CustomFunctions if ver >= VERSION_2_2_3_4 => {
+            Some(Qualifier::SanitizedCustomFunctions)
+        }
+        _ => None,
+    };
+    let sanitized_dir = sanitized_qualifier
+        .map(|qualifier| build_out_dir_path(context, Some(qualifier)))
+        .transpose()?;
+    let (flags, output) = (context.flags, context.output);
+    let write_sanitized = sanitized_dir.as_ref().map(|text_dir| {
+        let xml_dir = &xml_out_dir_path;
+        move |path: &Path, content: &str| {
+            let text = match catalog_type {
+                CatalogType::StepsForScripts => sanitized_script_text(content, flags),
+                _ => sanitized_custom_function_text(content),
+            };
+            write_text_version(path, xml_dir, text_dir, output, text);
+        }
+    });
+    let folder_structure_result = xml_explode_catalog(
+        context,
+        folder_structure,
+        write_sanitized.as_ref().map(|write| write as OnWritten),
+    )?;
 
     context.current_out_dir = saved_out_dir;
 
@@ -259,22 +300,6 @@ fn process_catalog_elements<R: Read + BufRead>(
         }
     }
 
-    // Post-processing: create sanitized (human-readable) versions
-    match catalog_type {
-        CatalogType::StepsForScripts => {
-            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedScripts))?;
-            create_sanitized_scripts(&xml_out_dir_path, &dir, context.flags);
-        }
-        CatalogType::CalcsForCustomFunctions => {
-            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-            create_sanitized_custom_functions(&xml_out_dir_path, &dir);
-        }
-        CatalogType::CustomFunctions if ver >= VERSION_2_2_3_4 => {
-            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-            create_sanitized_custom_functions(&xml_out_dir_path, &dir);
-        }
-        _ => {}
-    }
     Ok(true) // is_supported_catalog
 }
 
@@ -282,6 +307,7 @@ fn write_skeleton_file<R: Read + BufRead>(context: &ProcessingContext<'_, R>) ->
     let skeleton_dir_path = build_out_dir_path(context, None)?;
     let skeleton_file_path = skeleton_dir_path.join("skeleton.xml");
     write_xml_file(
+        context.output,
         &skeleton_file_path,
         &context.skeleton.content,
         0,

@@ -12,15 +12,21 @@ use crate::utils::xml_utils::{
     push_rest_of_element_to_skeleton, skip_rest_of_element, start_element_to_string,
 };
 use crate::utils::{
-    FolderStructure, build_out_dir_path, create_dir, move_to_subfolder, push_line_to_skeleton,
-    rename_file_if_necessary, write_rest_of_element_to_file,
+    FolderStructure, build_out_dir_path, create_dir, derived_file_name, prepare_xml_content,
+    push_line_to_skeleton, read_rest_of_element,
 };
 use crate::xml_processor::ProcessingContext;
 
 /// Parse and explode a generic catalog, handling both wrapped and unwrapped formats
+/// Called with the path and content of each written catalog item
+pub type OnWritten<'a> = &'a dyn Fn(&Path, &str);
+
+/// `on_written` is called for each written item, e.g. to create sanitized scripts
+/// without reading them back from disk.
 pub fn xml_explode_catalog<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     folder_structure: Option<&FolderStructure>,
+    on_written: Option<OnWritten>,
 ) -> Result<Option<FolderStructure>> {
     let Some(catalog_type) = context.catalog_type else {
         bail!("Catalog type not specified");
@@ -127,25 +133,43 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
 
                 // Adjust indentation level based on wrapping
                 let indentation_level = if wrapped_in_object_list { 5 } else { 4 };
-                let file_path = write_rest_of_element_to_file(
-                    context,
-                    &e,
-                    indentation_level,
-                    base_depth + rel_depth - 1,
-                    id_path,
-                );
-                rename_file_if_necessary(&file_path, context.path_stack, catalog_item_name);
+                let entity = read_rest_of_element(context, &e, base_depth + rel_depth - 1, id_path);
+                let content =
+                    prepare_xml_content(&entity.content, indentation_level, context.flags);
 
-                // Move to subfolder if necessary
-                if let Some(subfolder) = determine_subfolder_path(
-                    &out_dir_path_base,
-                    folder_structure,
-                    &file_path,
-                    id_path,
-                    uses_folders,
-                    &current_path,
-                ) {
-                    let _ = move_to_subfolder(&file_path, &subfolder);
+                // Some items are named after their content. Such items always stay in the
+                // catalog's base folder, even when the catalog uses folders.
+                let default_name = entity.file_name();
+                let derived_name =
+                    derived_file_name(&content, context.path_stack, catalog_item_name);
+                let renamed = derived_name
+                    .as_ref()
+                    .is_some_and(|name| *name != default_name);
+                let file_name = derived_name.unwrap_or(default_name);
+
+                let subfolder = if renamed {
+                    None
+                } else {
+                    determine_subfolder_path(
+                        &out_dir_path_base,
+                        folder_structure,
+                        &content,
+                        id_path,
+                        uses_folders,
+                        &current_path,
+                    )
+                };
+                let dir = match subfolder {
+                    Some(subfolder) => {
+                        create_dir(&subfolder);
+                        subfolder
+                    }
+                    None => out_dir_path_base.clone(),
+                };
+                let path = dir.join(file_name);
+                context.output.write(&path, &content);
+                if let Some(on_written) = on_written {
+                    on_written(&path, &content);
                 }
 
                 update_folder_structure(&mut folder_structure_result, &current_id, &current_path);
@@ -259,7 +283,7 @@ fn parse_folder_attributes(e: &BytesStart) -> FolderAttributes {
 fn determine_subfolder_path(
     out_dir_path_base: &Path,
     folder_structure: Option<&FolderStructure>,
-    file_path: &Path,
+    content: &str,
     id_path: &str,
     uses_folders: bool,
     current_path: &[String],
@@ -270,7 +294,7 @@ fn determine_subfolder_path(
             if id_path.is_empty() {
                 return None;
             }
-            let results = extract_values_from_xml_paths(file_path, &[id_path]).ok()?;
+            let results = extract_values_from_xml_paths(content, &[id_path]).ok()?;
             let id = results.first()?.as_ref()?;
             let path = fs.get_path_for_id(id);
             if path.is_empty() {

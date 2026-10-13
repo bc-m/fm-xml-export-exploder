@@ -1,9 +1,7 @@
 use std::io::{BufRead, Read};
-use std::path::{Path, PathBuf};
 
 use quick_xml::events::{BytesStart, Event};
 
-use crate::config::Flags;
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name};
 use crate::utils::skeleton::push_line_to_skeleton;
@@ -23,6 +21,14 @@ pub struct Entity {
 }
 
 impl Entity {
+    /// The default file name, built from the id and name of the catalog item
+    pub fn file_name(&self) -> String {
+        format!(
+            "{}.xml",
+            escape_filename(&join_scope_id_and_name(&self.id, &self.name))
+        )
+    }
+
     fn parse_xml_attributes(&mut self, e: &BytesStart) {
         for attr in get_attributes(e) {
             match attr.0.as_str() {
@@ -81,13 +87,13 @@ impl Entity {
     }
 }
 
-pub fn write_rest_of_element_to_file<R: Read + BufRead>(
+/// Reads a catalog item into memory; an element with an id is also added to the skeleton.
+pub fn read_rest_of_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
-    remove_indent_count: usize,
     base_depth: usize,
     id_path: &str,
-) -> PathBuf {
+) -> Entity {
     let mut entity = Entity::default();
     entity.read_xml_element(context, start_tag, id_path);
     if !entity.element_with_id.is_empty() {
@@ -100,27 +106,5 @@ pub fn write_rest_of_element_to_file<R: Read + BufRead>(
             XmlEventType::Other,
         );
     }
-    write_entity_to_file(
-        &context.current_out_dir,
-        &entity,
-        remove_indent_count,
-        context.flags,
-    )
-}
-
-pub fn write_entity_to_file(
-    output_dir: &Path,
-    entity: &Entity,
-    remove_indent_count: usize,
-    flags: &Flags,
-) -> PathBuf {
-    let filename = escape_filename(&join_scope_id_and_name(&entity.id, &entity.name));
-    let output_file_path = output_dir.join(format!("{filename}.xml"));
-    super::write_xml_file(
-        &output_file_path,
-        &entity.content,
-        remove_indent_count,
-        flags,
-    );
-    output_file_path
+    entity
 }

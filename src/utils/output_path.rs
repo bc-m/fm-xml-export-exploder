@@ -89,42 +89,21 @@ fn resolve_structure_domain<R: std::io::Read + BufRead>(
     format!("{folder_name}{action_suffix}")
 }
 
-pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) -> Result<()> {
-    let Some(doc_info) = &context.doc_info else {
-        bail!("Missing document info (db name)");
-    };
-    let db_name = &doc_info.db_name;
-
-    match context.flags.output_tree {
-        OutputTree::Db => {
-            // Keep a git repository in the database folder (see --git)
-            let dir_to_clear = context.root_out_dir.join(db_name);
-            if let Ok(entries) = fs::read_dir(&dir_to_clear) {
-                for path in entries.flatten().map(|entry| entry.path()) {
-                    if path.file_name().is_some_and(|name| name == ".git") {
-                        continue;
-                    }
-                    if path.is_dir() {
-                        fs::remove_dir_all(&path)?;
-                    } else {
-                        fs::remove_file(&path)?;
-                    }
-                }
-            }
-        }
-        OutputTree::Domain => {
-            if let Ok(entries) = fs::read_dir(context.root_out_dir) {
-                for entry in entries.flatten() {
-                    let target_dir = entry.path().join(db_name);
-                    if target_dir.is_dir() {
-                        fs::remove_dir_all(&target_dir)?;
-                    }
-                }
-            }
-        }
+/// The folders that hold a database's output: `<target>/<db>` in db mode, and
+/// `<target>/<domain>/<db>` for every domain in domain mode.
+pub fn output_roots(root_out_dir: &Path, output_tree: &OutputTree, db_name: &str) -> Vec<PathBuf> {
+    match output_tree {
+        OutputTree::Db => vec![root_out_dir.join(db_name)],
+        OutputTree::Domain => fs::read_dir(root_out_dir)
+            .map(|entries| {
+                entries
+                    .flatten()
+                    .map(|entry| entry.path().join(db_name))
+                    .filter(|dir| dir.is_dir())
+                    .collect()
+            })
+            .unwrap_or_default(),
     }
-
-    Ok(())
 }
 
 /// In Domain mode, migrate old-format `custom_functions/` output (pre-2.2.3.4 style)

@@ -1,6 +1,3 @@
-use std::fs;
-use std::path::Path;
-
 use quick_xml::events::Event;
 use quick_xml::reader::Reader;
 
@@ -8,8 +5,6 @@ use crate::config::Flags;
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
-use crate::utils::file_utils::for_each_xml_file;
-use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
     text_element_to_string,
@@ -29,27 +24,9 @@ struct ScriptStepInfo {
     indent_level_next: usize,
 }
 
-/// Process all XML files in the script_steps directory and create sanitized text versions
-/// This function mirrors the folder structure of the XML files
-pub fn create_sanitized_scripts(
-    scripts_xml_out_dir_path: &Path,
-    scripts_text_out_dir_path: &Path,
-    flags: &Flags,
-) {
-    for_each_xml_file(
-        scripts_xml_out_dir_path,
-        scripts_xml_out_dir_path,
-        scripts_text_out_dir_path,
-        &mut |xml_file_path, output_file_path| {
-            let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
-                eprintln!("Error reading file {}", xml_file_path.display());
-                return;
-            };
-            if let Some(script_info) = parse_script_xml(&xml_content, flags) {
-                write_text_file(output_file_path, &script_info.text);
-            }
-        },
-    );
+/// The sanitized, human-readable text of an exploded script
+pub fn sanitized_script_text(xml_content: &str, flags: &Flags) -> Option<String> {
+    parse_script_xml(xml_content, flags).map(|script_info| script_info.text)
 }
 
 fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
