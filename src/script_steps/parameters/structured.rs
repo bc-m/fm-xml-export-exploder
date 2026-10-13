@@ -69,6 +69,62 @@ pub fn from_xml(
     Some(parts.join(" ; ")).filter(|display| !display.is_empty())
 }
 
+/// Insert from Device: the source (e.g. Camera, Barcode, Signature) and its options,
+/// e.g. `Camera ; Camera: Back ; Light mode: Auto ; Resolution: Full`
+pub fn device_source(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Option<String> {
+    let node = Node::from_xml(reader, e);
+    let list = node.child("List")?;
+    let mut parts: Vec<String> = list.attr("name").map(str::to_string).into_iter().collect();
+    for options in list.children_named("Options") {
+        for parameter in options.children_named("Parameter") {
+            parts.extend(device_option(parameter));
+        }
+    }
+    Some(parts.join(" ; ")).filter(|display| !display.is_empty())
+}
+
+fn device_option(parameter: &Node) -> Option<String> {
+    let kind = parameter.attr("type")?;
+    let label = match kind {
+        "LightMode" => "Light mode",
+        "type" => "Barcode types",
+        "FieldReference" => "Barcode types from field",
+        other => other,
+    };
+
+    if kind == "FieldReference" {
+        return Some(format!(
+            "{label}: {}",
+            FieldReference::from_node(parameter).display()
+        ));
+    }
+    if let Some(list) = parameter.child("List") {
+        // Barcode types list one <name> per selected type
+        let names: Vec<&str> = list
+            .children_named("name")
+            .map(|name| name.text.as_str())
+            .collect();
+        let value = if names.is_empty() {
+            list.attr("name")?.to_string()
+        } else {
+            names.join(", ")
+        };
+        return Some(format!("{label}: {value}"));
+    }
+    if let Some(boolean) = parameter.child("Boolean") {
+        let boolean_label = boolean.attr("type").unwrap_or(label);
+        // Max duration carries its value as a calculation next to the Boolean
+        return match parameter.calculation() {
+            Some(value) if boolean.attr_is_true("value") => {
+                Some(format!("{boolean_label}: {value}"))
+            }
+            Some(_) => None,
+            None => Some(format!("{boolean_label}: {}", on_off(boolean, "value"))),
+        };
+    }
+    labeled(label, parameter.calculation())
+}
+
 fn on_off(node: &Node, attribute: &str) -> &'static str {
     Boolean::on_off(node.attr_is_true(attribute))
 }
@@ -727,6 +783,57 @@ mod tests {
             "Records being browsed ; Title: $Title ; Keywords: $Keywords ; Pages: 2 to 5 ; Require password to open document ; Require password to control printing and editing ; Printing: Low Resolution ; Editing: Inserting, deleting and rotating pages ; Enable copying: OFF ; Enable screen reader: ON ; Initial view: Page Only, Single Page, 800%"
         );
         assert!(!display.contains("Password"));
+    }
+
+    fn parse_device(xml: &str) -> Option<String> {
+        let mut reader = Reader::from_str(xml);
+        let Ok(Event::Start(e)) = reader.read_event() else {
+            panic!("Wrong read event");
+        };
+        device_source(&mut reader, &e)
+    }
+
+    #[test]
+    fn device_camera() {
+        let xml = r#"<Parameter type="List"><List name="Camera" value="3"><Options type="Camera"><Parameter type="Camera"><List name="Back" value="1"></List></Parameter><Parameter type="LightMode"><List name="Auto" value="0"></List></Parameter><Parameter type="Resolution"><List name="Medium" value="2"></List></Parameter></Options></List></Parameter>"#;
+        assert_eq!(
+            parse_device(xml).as_deref(),
+            Some("Camera ; Camera: Back ; Light mode: Auto ; Resolution: Medium")
+        );
+    }
+
+    #[test]
+    fn device_microphone() {
+        let xml = r#"<Parameter type="List"><List name="Microphone" value="5"><Options type="Microphone"><Parameter type="Duration"><Boolean value="True" type="Max duration"></Boolean><Calculation datatype="2" position="0"><Calculation><Text><![CDATA[12]]></Text></Calculation></Calculation></Parameter><Parameter type="Start"><Boolean value="True" type="Start immediately"></Boolean></Parameter></Options></List></Parameter>"#;
+        assert_eq!(
+            parse_device(xml).as_deref(),
+            Some("Microphone ; Max duration: 12 ; Start immediately: ON")
+        );
+    }
+
+    #[test]
+    fn device_barcode() {
+        let xml = r#"<Parameter type="List"><List name="Barcode" value="6"><Options type="Barcode"><Parameter type="type"><List value="3"><name>Code 39</name><name>QR Code</name></List></Parameter></Options></List></Parameter>"#;
+        assert_eq!(
+            parse_device(xml).as_deref(),
+            Some("Barcode ; Barcode types: Code 39, QR Code")
+        );
+    }
+
+    #[test]
+    fn device_signature() {
+        let xml = r#"<Parameter type="List"><List name="Signature" value="7"><Options type="Signature"><Parameter type="Title"><Calculation datatype="1" position="0"><Calculation><Text><![CDATA["Title"]]></Text></Calculation></Calculation></Parameter><Parameter type="Prompt"><Calculation datatype="1" position="1"><Calculation><Text><![CDATA["Sign here"]]></Text></Calculation></Calculation></Parameter><Parameter type="Presentation"><List name="Overlay" value="1"></List></Parameter></Options></List></Parameter>"#;
+        assert_eq!(
+            parse_device(xml).as_deref(),
+            Some(r#"Signature ; Title: "Title" ; Prompt: "Sign here" ; Presentation: Overlay"#)
+        );
+    }
+
+    #[test]
+    fn device_without_options() {
+        let xml =
+            r#"<Parameter type="List"><List name="Music Library" value="1"></List></Parameter>"#;
+        assert_eq!(parse_device(xml).as_deref(), Some("Music Library"));
     }
 
     #[test]

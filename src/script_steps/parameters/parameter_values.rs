@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
+use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::animation::Animation;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::button::Button;
@@ -48,6 +49,9 @@ impl ParameterValues {
                     let parsed = match parameter_type.as_str() {
                         "Animation" => Animation::from_xml(reader, &e).display(),
                         "Boolean" => Boolean::from_xml(reader, &e, step_id).display(),
+                        "List" if id_to_script_step(step_id) == ScriptStep::InsertFromDevice => {
+                            structured::device_source(reader, &e)
+                        }
                         "List" | "AccountType" => List::from_xml(reader, &e, step_id).display(),
                         "Target" => Target::from_xml(reader, &e)
                             .display()
