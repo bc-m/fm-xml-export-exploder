@@ -10,9 +10,6 @@ pub fn sanitize(step_id: u32, step_xml: &str, flags: &Flags) -> Option<String> {
         ScriptStep::PerformScript => script_steps::perform_script::sanitize(step_xml),
         ScriptStep::GoToRecordRequestPage => script_steps::go_to_record::sanitize(step_xml),
         ScriptStep::OmitMultipleRecords => script_steps::omit_multiple_records::sanitize(step_xml),
-        ScriptStep::PerformFind | ScriptStep::ConstrainFoundSet | ScriptStep::ExtendFoundSet => {
-            script_steps::perform_find::sanitize(step_xml)
-        }
         ScriptStep::InsertText => script_steps::insert_text::sanitize(step_xml),
         ScriptStep::InsertFromURL => script_steps::insert_from_url::sanitize(step_xml),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step_xml),

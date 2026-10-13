@@ -364,7 +364,7 @@ fn sort_specification(node: &Node) -> Vec<String> {
     parts
 }
 
-/// Enter Find Mode / Perform Find: `Find requests: Find (Table::Field: "criteria"), Omit`
+/// Enter Find Mode / Perform Find: `Restore ; Find requests: Find (Table::Field: "criteria"), Omit`
 fn find_requests(node: &Node) -> Vec<String> {
     let requests: Vec<String> = node
         .descendant("FindRequestSet")
@@ -394,7 +394,10 @@ fn find_requests(node: &Node) -> Vec<String> {
     if requests.is_empty() {
         Vec::new()
     } else {
-        vec![format!("Find requests: {}", requests.join(", "))]
+        vec![
+            "Restore".to_string(),
+            format!("Find requests: {}", requests.join(", ")),
+        ]
     }
 }
 
@@ -708,7 +711,7 @@ mod tests {
         let xml = r#"<Parameter type="FindRequest"><FindRequestSet membercount="2"><FindRequest membercount="1" action="find"><find criteria="abc"><FieldReference id="15" name="Selector"><TableOccurrenceReference id="1" name="_Syntax"></TableOccurrenceReference></FieldReference></find></FindRequest><FindRequest membercount="0" action="omit"></FindRequest></FindRequestSet></Parameter>"#;
         assert_eq!(
             parse(xml).as_deref(),
-            Some(r#"Find requests: Find (_Syntax::Selector: "abc"), Omit"#)
+            Some(r#"Restore ; Find requests: Find (_Syntax::Selector: "abc"), Omit"#)
         );
     }
 

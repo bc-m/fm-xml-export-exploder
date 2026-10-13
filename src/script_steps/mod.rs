@@ -12,7 +12,6 @@ mod insert_text;
 mod is_enabled;
 mod omit_multiple_records;
 mod parameters;
-mod perform_find;
 mod perform_script;
 mod refresh_object;
 mod replace_field_contents;
