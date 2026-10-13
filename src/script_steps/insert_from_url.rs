@@ -4,7 +4,7 @@ use quick_xml::events::Event;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::target::Target;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 const VERIFY_SSL_CERTIFICATES: &str = "268435456";
 const SELECT: &str = "4096";
@@ -28,12 +28,12 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 "Step" => {
-                    name = get_attribute(&e, "name").unwrap_or_default();
+                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
                 }
                 "Boolean" => {
-                    let id = get_attribute(&e, "id").unwrap_or_default();
-                    let label = get_attribute(&e, "type").unwrap_or_default();
-                    let is_on = get_attribute(&e, "value").as_deref() == Some("True");
+                    let id = parse_unescaped_attribute(&e, "id").unwrap_or_default();
+                    let label = parse_unescaped_attribute(&e, "type").unwrap_or_default();
+                    let is_on = parse_unescaped_attribute(&e, "value").as_deref() == Some("True");
                     match id.as_str() {
                         VERIFY_SSL_CERTIFICATES if is_on => verify_ssl = Some(label),
                         SELECT if is_on => select = Some(label),
@@ -43,7 +43,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                         _ => {}
                     }
                 }
-                "Parameter" => match get_attribute(&e, "type").as_deref() {
+                "Parameter" => match parse_unescaped_attribute(&e, "type").as_deref() {
                     Some("Target") => target = Target::from_xml(&mut reader, &e).display(),
                     Some("URL") => {
                         url = Calculation::from_xml(&mut reader, &e)

@@ -1,7 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 use crate::utils::xml_utils::cdata_to_string;
 
 #[derive(Debug, Default)]
@@ -12,7 +12,7 @@ pub struct Button {
 
 impl Button {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Button {
-        let mut label = get_attribute(e, "value");
+        let mut label = parse_unescaped_attribute(e, "value");
         let mut label_from_cdata = false;
         let mut in_text = false;
         let mut depth = 1;

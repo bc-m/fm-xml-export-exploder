@@ -558,7 +558,8 @@ mod tests {
         let Ok(Event::Start(e)) = reader.read_event() else {
             panic!("Wrong read event");
         };
-        let parameter_type = crate::utils::attributes::get_attribute(&e, "type").unwrap();
+        let parameter_type =
+            crate::utils::attributes::parse_unescaped_attribute(&e, "type").unwrap();
         from_xml(&mut reader, &e, &parameter_type)
     }
 

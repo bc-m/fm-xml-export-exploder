@@ -2,7 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct Related {
@@ -23,7 +23,7 @@ impl Related {
                     depth += 1;
                     match e.name().as_ref() {
                         "TableOccurrenceReference" => {
-                            let table_occurrence = get_attribute(&e, "name")
+                            let table_occurrence = parse_unescaped_attribute(&e, "name")
                                 .unwrap_or_else(|| "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
                             item.parameters.push(format!("Table: {table_occurrence}"));
                         }
@@ -40,10 +40,14 @@ impl Related {
                             depth -= 1;
                         }
                         "Options" => {
-                            if get_attribute(&e, "ShowRelated").as_deref() == Some("True") {
+                            if parse_unescaped_attribute(&e, "ShowRelated").as_deref()
+                                == Some("True")
+                            {
                                 item.parameters.push("Show related".to_string());
                             }
-                            if get_attribute(&e, "matchFoundSet").as_deref() == Some("True") {
+                            if parse_unescaped_attribute(&e, "matchFoundSet").as_deref()
+                                == Some("True")
+                            {
                                 item.parameters.push("Match found set".to_string());
                             }
                         }

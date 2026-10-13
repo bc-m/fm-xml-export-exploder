@@ -1,8 +1,7 @@
 use quick_xml::Reader;
-use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::utils::attributes::get_attributes;
+use crate::utils::attributes::{get_attributes, unescape_value};
 use crate::utils::xml_utils::{cdata_to_string, general_ref_to_string, text_to_string};
 
 /// A lightweight in-memory element tree for parameters with deeply nested
@@ -45,10 +44,7 @@ impl Node {
             name: start.name().as_ref().to_owned(),
             attributes: get_attributes(start)
                 .into_iter()
-                .map(|(key, value)| {
-                    let value = unescape(&value).map_or(value.clone(), |v| v.into_owned());
-                    (key, value)
-                })
+                .map(|(key, value)| (key, unescape_value(&value)))
                 .collect(),
             ..Default::default()
         }

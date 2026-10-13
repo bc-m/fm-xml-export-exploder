@@ -2,7 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::{get_attribute, parse_unescaped_attribute};
+use crate::utils::attributes::parse_unescaped_attribute;
 
 const OBFUSCATED: &str = "••••••••";
 
@@ -22,12 +22,12 @@ fn calc_or_obfuscated(calc: Option<String>, obfuscate: bool) -> Option<String> {
 
 fn set_step_name(name: &mut String, event: &BytesStart<'_>) {
     if event.name().as_ref() == "Step" {
-        *name = get_attribute(event, "name").unwrap_or_default();
+        *name = parse_unescaped_attribute(event, "name").unwrap_or_default();
     }
 }
 
 fn attribute_matches(event: &BytesStart<'_>, key: &str, expected: &str) -> bool {
-    get_attribute(event, key).as_deref() == Some(expected)
+    parse_unescaped_attribute(event, key).as_deref() == Some(expected)
 }
 
 fn parse_calculation(reader: &mut Reader<&[u8]>, event: &BytesStart<'_>) -> Option<String> {
@@ -154,7 +154,7 @@ pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
         |reader, event, state| match event.name().as_ref() {
             "Step" => set_step_name(&mut state.name, event),
             "List" if state.account_type.is_none() => {
-                state.account_type = get_attribute(event, "name");
+                state.account_type = parse_unescaped_attribute(event, "name");
             }
             "PrivilegeSetReference" => {
                 state.privilege_set = parse_unescaped_attribute(event, "name");
@@ -165,7 +165,7 @@ pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
             {
                 state.expire_password = true;
             }
-            "Parameter" => match get_attribute(event, "type").as_deref() {
+            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
                 Some("Name") => state.account_name = parse_calculation(reader, event),
                 Some("Password") => state.password = parse_secret(reader, event, obfuscate),
                 _ => {}
@@ -198,7 +198,7 @@ pub fn sanitize_change_password(step: &str, obfuscate: bool) -> Option<String> {
             "Boolean" if attribute_matches(event, "type", "With dialog") => {
                 state.with_dialog = attribute_matches(event, "value", "True");
             }
-            "Parameter" => match get_attribute(event, "type").as_deref() {
+            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
                 Some("Old") => state.old_password = parse_secret(reader, event, obfuscate),
                 Some("New") => state.new_password = parse_secret(reader, event, obfuscate),
                 _ => {}
@@ -283,7 +283,7 @@ pub fn sanitize_re_login(step: &str, obfuscate: bool) -> Option<String> {
             "Boolean" if attribute_matches(event, "type", "With dialog") => {
                 state.with_dialog = attribute_matches(event, "value", "True");
             }
-            "Parameter" => match get_attribute(event, "type").as_deref() {
+            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
                 Some("Name") => state.account_name = parse_calculation(reader, event),
                 Some("Password") => state.password = parse_secret(reader, event, obfuscate),
                 _ => {}
@@ -317,7 +317,7 @@ pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<St
             {
                 state.expire_password = true;
             }
-            "Parameter" => match get_attribute(event, "type").as_deref() {
+            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
                 Some("Name") => state.account_name = parse_calculation(reader, event),
                 Some("Password") => state.password = parse_secret(reader, event, obfuscate),
                 _ => {}

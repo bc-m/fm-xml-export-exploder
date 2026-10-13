@@ -144,9 +144,9 @@ If [ $errorCode = 0 ]
 	Set Variable [ $xmlPath ; Get ( TemporaryPath ) & Get ( FileName ) & ".xml" ]
 	Set Variable [ $start ; Get ( CurrentTimeUTCMilliseconds ) ]
 	If [ $_includeDetailsForAnalysisTools ]
-		Save a Copy as XML [ Get ( WindowName ) ; "$xmlPath" ; Include details for analysis tools: ON ; Save each layout object&apos;s binary data under its node: OFF ]
+		Save a Copy as XML [ Get ( WindowName ) ; "$xmlPath" ; Include details for analysis tools: ON ; Save each layout object's binary data under its node: OFF ]
 	Else
-		Save a Copy as XML [ Get ( WindowName ) ; "$xmlPath" ; Include details for analysis tools: OFF ; Save each layout object&apos;s binary data under its node: OFF ]
+		Save a Copy as XML [ Get ( WindowName ) ; "$xmlPath" ; Include details for analysis tools: OFF ; Save each layout object's binary data under its node: OFF ]
 	End If
 	Set Variable [ $errorCode ; Get ( LastError ) ]
 	Set Variable [ $timeToCreate[1] ; GetAsTime ( ( Get ( CurrentTimeUTCMilliseconds ) - $start ) / 1000 ) ]

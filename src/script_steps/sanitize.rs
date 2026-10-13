@@ -3,7 +3,7 @@ use quick_xml::events::Event;
 
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::parameter_values::ParameterValues;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     let mut name = String::new();
@@ -17,7 +17,7 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 "Step" => {
-                    name = get_attribute(&e, "name").unwrap_or_default();
+                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
                 "ParameterValues" => {

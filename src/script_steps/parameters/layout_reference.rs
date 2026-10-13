@@ -2,7 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 use crate::utils::xml_utils::{general_ref_to_string, text_to_string};
 
 #[derive(Debug, Default)]
@@ -37,7 +37,7 @@ impl LayoutReferenceContainer {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Self {
         let mut depth = 1;
         let mut item = LayoutReferenceContainer {
-            reference_type: get_attribute(e, "value").unwrap_or_default(),
+            reference_type: parse_unescaped_attribute(e, "value").unwrap_or_default(),
             ..Default::default()
         };
 
@@ -50,10 +50,11 @@ impl LayoutReferenceContainer {
                     depth += 1;
                     match e.name().as_ref() {
                         "LayoutReferenceContainer" => {
-                            item.reference_type = get_attribute(&e, "value").unwrap_or_default();
+                            item.reference_type =
+                                parse_unescaped_attribute(&e, "value").unwrap_or_default();
                         }
                         "LayoutReference" => {
-                            item.layout_reference = get_attribute(&e, "name");
+                            item.layout_reference = parse_unescaped_attribute(&e, "name");
                         }
                         "Label" => {
                             item.layout_reference = Some(Self::parse_label(reader));

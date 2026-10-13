@@ -1,9 +1,8 @@
 use quick_xml::Reader;
-use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct List {
@@ -23,12 +22,11 @@ impl List {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if e.name().as_ref() == "List"
-                        && let Some(name) = get_attribute(&e, "name")
-                        && let Ok(name) = unescape(&name)
+                        && let Some(name) = parse_unescaped_attribute(&e, "name")
                     {
                         item.name = match id_to_script_step(step_id) {
                             ScriptStep::LoopStart => Some(format!("Flush: {name}")),
-                            _ => Some(name.to_string()),
+                            _ => Some(name),
                         };
                     }
                 }

@@ -2,7 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::node::Node;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct FieldReference {
@@ -15,7 +15,7 @@ impl FieldReference {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> FieldReference {
         let mut depth = 1;
         let mut item = FieldReference {
-            field_reference: get_attribute(e, "name"),
+            field_reference: parse_unescaped_attribute(e, "name"),
             ..Default::default()
         };
 
@@ -28,14 +28,14 @@ impl FieldReference {
                     depth += 1;
                     match e.name().as_ref() {
                         "FieldReference" => {
-                            item.field_reference = get_attribute(&e, "name");
+                            item.field_reference = parse_unescaped_attribute(&e, "name");
                         }
                         "TableOccurrenceReference" => {
-                            item.table_reference = get_attribute(&e, "name");
+                            item.table_reference = parse_unescaped_attribute(&e, "name");
                         }
                         "repetition" => {
                             item.repetition =
-                                get_attribute(&e, "value").and_then(|v| v.parse().ok());
+                                parse_unescaped_attribute(&e, "value").and_then(|v| v.parse().ok());
                         }
                         _ => {}
                     }

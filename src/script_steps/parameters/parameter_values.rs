@@ -18,7 +18,7 @@ use crate::script_steps::parameters::script_reference::ScriptReference;
 use crate::script_steps::parameters::structured;
 use crate::script_steps::parameters::target::Target;
 use crate::script_steps::parameters::window_reference::WindowReference;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub struct ParameterValues {
     pub parameters: Vec<String>,
@@ -42,7 +42,7 @@ impl ParameterValues {
                         continue;
                     }
 
-                    let Some(parameter_type) = get_attribute(&e, "type") else {
+                    let Some(parameter_type) = parse_unescaped_attribute(&e, "type") else {
                         continue;
                     };
                     let parsed = match parameter_type.as_str() {

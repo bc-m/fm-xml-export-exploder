@@ -3,7 +3,7 @@ use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::target::Target;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct DialogField {
@@ -25,7 +25,7 @@ impl DialogField {
                 Ok(Event::Start(inner)) => {
                     depth += 1;
                     match inner.name().as_ref() {
-                        "Parameter" => match get_attribute(&inner, "type").as_deref() {
+                        "Parameter" => match parse_unescaped_attribute(&inner, "type").as_deref() {
                             Some("Target") => {
                                 item.target = Target::from_xml(reader, &inner).display();
                                 depth -= 1;
@@ -37,9 +37,10 @@ impl DialogField {
                             _ => {}
                         },
                         "Boolean" => {
-                            item.password = get_attribute(&inner, "type").as_deref()
+                            item.password = parse_unescaped_attribute(&inner, "type").as_deref()
                                 == Some("Password")
-                                && get_attribute(&inner, "value").as_deref() == Some("True");
+                                && parse_unescaped_attribute(&inner, "value").as_deref()
+                                    == Some("True");
                         }
                         _ => {}
                     }

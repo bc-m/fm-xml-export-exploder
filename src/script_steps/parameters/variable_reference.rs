@@ -1,7 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct VariableReference {
@@ -13,7 +13,7 @@ impl VariableReference {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> VariableReference {
         let mut depth = 1;
         let mut item = VariableReference {
-            name: get_attribute(e, "value"),
+            name: parse_unescaped_attribute(e, "value"),
             ..Default::default()
         };
 
@@ -25,7 +25,7 @@ impl VariableReference {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     if e.name().as_ref() == "repetition"
-                        && let Some(repetition) = get_attribute(&e, "value")
+                        && let Some(repetition) = parse_unescaped_attribute(&e, "value")
                         && let Ok(repetition) = repetition.parse()
                     {
                         item.repetition = Some(repetition);

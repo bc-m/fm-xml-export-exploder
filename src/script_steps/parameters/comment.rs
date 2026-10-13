@@ -1,8 +1,7 @@
 use quick_xml::Reader;
-use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub struct Comment;
 
@@ -19,7 +18,7 @@ impl Comment {
                     depth += 1;
 
                     if e.name().as_ref() == "Comment" {
-                        comment = get_attribute(&e, "value").unwrap_or_default();
+                        comment = parse_unescaped_attribute(&e, "value").unwrap_or_default();
                     }
                 }
                 Ok(Event::End(_)) => {
@@ -33,6 +32,6 @@ impl Comment {
             buf.clear();
         }
 
-        unescape(&comment).unwrap().into_owned()
+        comment
     }
 }

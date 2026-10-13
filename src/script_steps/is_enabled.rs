@@ -1,7 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn sanitize(step: &str) -> bool {
     let mut reader = Reader::from_str(step);
@@ -11,7 +11,7 @@ pub fn sanitize(step: &str) -> bool {
             Err(_) => continue,
             Ok(Event::Eof) => return true,
             Ok(Event::Start(e)) if e.name().as_ref() == "Step" => {
-                return get_attribute(&e, "enable").is_none_or(|v| v != "False");
+                return parse_unescaped_attribute(&e, "enable").is_none_or(|v| v != "False");
             }
             _ => {}
         }

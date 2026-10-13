@@ -1,8 +1,7 @@
 use quick_xml::Reader;
-use quick_xml::escape::unescape;
 use quick_xml::events::BytesStart;
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 use crate::utils::xml_utils::skip_rest_of_element;
 
 #[derive(Debug, Default)]
@@ -13,7 +12,7 @@ pub struct Text {
 impl Text {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Text {
         let item = Text {
-            text: get_attribute(e, "value").map(|text| unescape(&text).unwrap().into_owned()),
+            text: parse_unescaped_attribute(e, "value"),
         };
         skip_rest_of_element(reader);
         item
