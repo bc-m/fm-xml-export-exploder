@@ -27,6 +27,7 @@ pub fn is_structured(parameter_type: &str) -> bool {
             | "Variable"
             | "Flow"
             | "Export"
+            | "ImportField"
     )
 }
 
@@ -62,6 +63,7 @@ pub fn from_xml(
         .into_iter()
         .collect(),
         "Export" => export(&node),
+        "ImportField" => import_field(&node),
         _ => Vec::new(),
     };
     Some(parts.join(" ; ")).filter(|display| !display.is_empty())
@@ -503,6 +505,44 @@ fn export(node: &Node) -> Vec<String> {
     parts
 }
 
+/// Import Records: `Table: Contacts ; Update ; Add remaining data as new records ; Perform auto-enter options ; UTF-8`
+fn import_field(node: &Node) -> Vec<String> {
+    let Some(import) = node.child("ImportField") else {
+        return Vec::new();
+    };
+    let mut parts = Vec::new();
+    parts.extend(labeled(
+        "Table",
+        import
+            .child("Target")
+            .and_then(|t| t.child("TableOccurrenceReference"))
+            .and_then(|t| t.attr("name"))
+            .map(str::to_string),
+    ));
+    parts.extend(
+        import
+            .child("action")
+            .and_then(|a| a.attr("name"))
+            .map(str::to_string),
+    );
+    if import.attr_is_true("addasnew") {
+        parts.push("Add remaining data as new records".to_string());
+    }
+    if import
+        .child("Options")
+        .is_some_and(|o| o.attr_is_true("doAutoEntry"))
+    {
+        parts.push("Perform auto-enter options".to_string());
+    }
+    parts.extend(
+        import
+            .child("CharacterSet")
+            .and_then(|c| c.attr("name"))
+            .map(str::to_string),
+    );
+    parts
+}
+
 #[cfg(test)]
 mod tests {
     use quick_xml::Reader;
@@ -707,6 +747,17 @@ mod tests {
         assert_eq!(
             parse(xml).as_deref(),
             Some("Unicode (UTF-8) ; Apply current layout's data formatting")
+        );
+    }
+
+    #[test]
+    fn import_field() {
+        let xml = r#"<Parameter type="ImportField"><ImportField addasnew="True" isPredefined="False" delimiter="0" fieldNameRow="0"><Options copyContainersAsIs="False" matchFieldNames="False" doAutoEntry="True" splitRepetitions="False"></Options><Target><TableOccurrenceReference id="1" name="_Color"></TableOccurrenceReference></Target><Field membercount="1"><Map New="False" name="Source field 1 import to " id="0" kind="0" Options="0"><FieldReference id="0" name=""></FieldReference></Map></Field><CharacterSet name="UTF-8" value="5"></CharacterSet><action name="Update" value="2"></action></ImportField></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some(
+                "Table: _Color ; Update ; Add remaining data as new records ; Perform auto-enter options ; UTF-8"
+            )
         );
     }
 

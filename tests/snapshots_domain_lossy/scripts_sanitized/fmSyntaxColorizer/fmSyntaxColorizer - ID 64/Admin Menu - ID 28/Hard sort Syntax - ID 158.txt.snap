@@ -15,12 +15,12 @@ Script ausführen [ "Show All Syntax" ; Specified: Aus Liste ; Parameter: ]
 Gehe zu Layout [ Layout: "I_SyntaxTemp ADMIN" ; Animation: Ohne ]
 Alle Datensätze anzeigen
 Alle Datensätze löschen [ Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: _SyntaxTemp ; Hinzufügen ; UTF-8 ]
 
 # Reimport sorted OVER existing _Syntax
 Gehe zu Layout [ Layout: "Syntax" ; Animation: Ohne ]
 Sortierung aufheben
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: _Syntax ; Ersetzen ; UTF-8 ]
 
 # Tidy up _SyntaxTemp
 Script ausführen [ "Tidy up _SyntaxTemp" ; Specified: Aus Liste ; Parameter: ]

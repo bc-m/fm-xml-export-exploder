@@ -24,7 +24,7 @@ Fenster fixieren
 
 # Import the palette names
 Gehe zu Layout [ Layout: "A Import Palettes" ; Animation: Ohne ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: _Color ; Hinzufügen ; UTF-8 ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	# Error
@@ -115,8 +115,8 @@ Ersetze alle Feldwerte [ _Color::PaletteName ; Durch Berechnung ersetzen: Color.
 
 
 # Import Colors(Match + add, with automatic)
-// Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; ⚠️ PARAMETER "ImportField" NOT PARSED ⚠️ ]
+// Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: _Color ; Aktualisieren ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: _Color ; Aktualisieren ; Add remaining data as new records ; Perform auto-enter options ; UTF-8 ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
