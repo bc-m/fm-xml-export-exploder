@@ -1,84 +1,42 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
+use crate::utils::xml_node::Node;
 
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_utils::cdata_to_string;
-
-#[derive(Debug, Default)]
-pub struct Button {
-    pub label: Option<String>,
-    pub label_from_cdata: bool,
-}
-
-impl Button {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Button {
-        let mut label = parse_unescaped_attribute(e, "value");
-        let mut label_from_cdata = false;
-        let mut in_text = false;
-        let mut depth = 1;
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(inner)) => {
-                    depth += 1;
-                    if inner.name().as_ref() == "Text" {
-                        in_text = true;
-                    }
-                }
-                Ok(Event::CData(cdata)) if in_text && label.is_none() => {
-                    let text = cdata_to_string(&cdata);
-                    if !text.is_empty() {
-                        label = Some(text);
-                        label_from_cdata = true;
-                    }
-                }
-                Ok(Event::End(end)) => {
-                    if end.name().as_ref() == "Text" {
-                        in_text = false;
-                    }
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
-        }
-
-        Button {
-            label,
-            label_from_cdata,
-        }
+/// Show Custom Dialog buttons, e.g. `Default Button: "OK"`
+pub fn display(parameter: &Node, button_type: &str) -> Option<String> {
+    // The label is either a plain attribute (shown quoted) or a calculation (shown as is)
+    let (label, from_calculation) = match parameter.attr("value") {
+        Some(label) => (label.to_string(), false),
+        None => (
+            parameter
+                .text_cdata()
+                .into_iter()
+                .find(|text| !text.is_empty())?
+                .to_string(),
+            true,
+        ),
+    };
+    if label.is_empty() {
+        return None;
     }
 
-    pub fn display(self, button_type: &str) -> Option<String> {
-        let label = self.label.filter(|l| !l.is_empty())?;
+    let name = match button_type {
+        "Button1" => "Default Button",
+        "Button2" => "Button 2",
+        "Button3" => "Button 3",
+        _ => button_type,
+    };
 
-        let name = match button_type {
-            "Button1" => "Default Button",
-            "Button2" => "Button 2",
-            "Button3" => "Button 3",
-            _ => button_type,
-        };
-
-        if self.label_from_cdata {
-            Some(format!("{name}: {label}"))
-        } else {
-            Some(format!("{name}: \"{label}\""))
-        }
+    if from_calculation {
+        Some(format!("{name}: {label}"))
+    } else {
+        Some(format!("{name}: \"{label}\""))
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use super::Button;
+    use crate::script_steps::parameters::button;
 
     #[test]
     fn test_button_with_calculation() {
@@ -93,16 +51,9 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
-
-        let button = Button::from_xml(&mut reader, &element);
-        assert_eq!(button.label, Some(r#""OK""#.to_string()));
+        let element = Node::parse(xml).unwrap();
         assert_eq!(
-            button.display("Button1"),
+            button::display(&element, "Button1"),
             Some(r#"Default Button: "OK""#.to_string())
         );
     }
@@ -115,16 +66,9 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
-
-        let button = Button::from_xml(&mut reader, &element);
-        assert_eq!(button.label, Some("Save".to_string()));
+        let element = Node::parse(xml).unwrap();
         assert_eq!(
-            button.display("Button2"),
+            button::display(&element, "Button2"),
             Some(r#"Button 2: "Save""#.to_string())
         );
     }
@@ -137,15 +81,8 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
-
-        let button = Button::from_xml(&mut reader, &element);
-        assert_eq!(button.label, None);
-        assert_eq!(button.display("Button2"), None);
+        let element = Node::parse(xml).unwrap();
+        assert_eq!(button::display(&element, "Button2"), None);
     }
 
     #[test]
@@ -156,15 +93,9 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
-
-        let button = Button::from_xml(&mut reader, &element);
+        let element = Node::parse(xml).unwrap();
         assert_eq!(
-            button.display("Button3"),
+            button::display(&element, "Button3"),
             Some(r#"Button 3: "Maybe""#.to_string())
         );
     }

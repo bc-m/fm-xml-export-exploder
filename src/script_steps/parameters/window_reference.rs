@@ -1,16 +1,46 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
+use crate::script_steps::parameters::{boolean_container, layout_reference, select, style};
+use crate::utils::xml_node::Node;
 
-use crate::script_steps::parameters::boolean_container::BooleanContainer;
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
-use crate::script_steps::parameters::select::Select;
-use crate::script_steps::parameters::style::Style;
-use crate::utils::xml_utils::local_name_to_string;
+/// e.g. `Style: Document ; Name: $name ; Height: 400 ; Close: OFF`
+pub fn display(parameter: &Node) -> String {
+    let mut parts = Vec::new();
+    visit(parameter, true, &mut parts);
+    parts.join(" ; ")
+}
 
-#[derive(Debug, Default)]
-pub struct WindowReference {
-    pub parameters: Vec<String>,
+/// For the new window of Go to Related Record, whose nested layout only repeats
+/// the step's target layout.
+pub fn display_without_layout(parameter: &Node) -> String {
+    let mut parts = Vec::new();
+    visit(parameter, false, &mut parts);
+    parts.join(" ; ")
+}
+
+fn visit(node: &Node, include_layout: bool, parts: &mut Vec<String>) {
+    for child in &node.children {
+        let parsed = match child.name.as_str() {
+            "Style" => style::display(child),
+            "LayoutReferenceContainer" => {
+                let layout = layout_reference::display(child);
+                include_layout.then(|| layout.unwrap_or_default())
+            }
+            "Select" => select::display(child),
+            // Set Window Title
+            "Rename" => child
+                .calculation()
+                .map(|title| format!("New Title: {title}")),
+            "Name" | "height" | "width" | "top" | "left" | "Text" => child
+                .calculation()
+                .map(|calc| format!("{}: {calc}", capitalize(&child.name))),
+            "Close" | "Minimize" | "Maximize" | "Resize" | "MenuBar" | "Toolbar"
+            | "DimParentWindow" => boolean_container::display(child),
+            _ => {
+                visit(child, include_layout, parts);
+                continue;
+            }
+        };
+        parts.extend(parsed);
+    }
 }
 
 fn capitalize(s: &str) -> String {
@@ -21,84 +51,11 @@ fn capitalize(s: &str) -> String {
     }
 }
 
-impl WindowReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> WindowReference {
-        Self::parse(reader, e, true)
-    }
-
-    /// For the new window of Go to Related Record, whose nested layout only repeats
-    /// the step's target layout.
-    pub fn from_xml_without_layout(reader: &mut Reader<&[u8]>, e: &BytesStart) -> WindowReference {
-        Self::parse(reader, e, false)
-    }
-
-    fn parse(reader: &mut Reader<&[u8]>, _: &BytesStart, include_layout: bool) -> WindowReference {
-        let mut depth = 1;
-        let mut window_reference = WindowReference::default();
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-
-                    let element_name = e.name();
-                    let parsed = match element_name.as_ref() {
-                        "Style" => Style::from_xml(reader, &e).display(),
-                        "LayoutReferenceContainer" => {
-                            let layout = LayoutReferenceContainer::from_xml(reader, &e).display();
-                            include_layout.then(|| layout.unwrap_or_default())
-                        }
-                        "Select" => Select::from_xml(reader, &e).display(),
-                        // Set Window Title
-                        "Rename" => Calculation::from_xml(reader, &e)
-                            .display()
-                            .map(|title| format!("New Title: {title}")),
-                        "Name" | "height" | "width" | "top" | "left" | "Text" => {
-                            Calculation::from_xml(reader, &e).display().map(|calc| {
-                                let label =
-                                    capitalize(&local_name_to_string(element_name.as_ref()));
-                                format!("{label}: {calc}")
-                            })
-                        }
-                        "Close" | "Minimize" | "Maximize" | "Resize" | "MenuBar" | "Toolbar"
-                        | "DimParentWindow" => BooleanContainer::from_xml(reader, &e).display(),
-                        _ => {
-                            continue;
-                        }
-                    };
-                    depth -= 1;
-                    if let Some(display) = parsed {
-                        window_reference.parameters.push(display);
-                    }
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
-        }
-
-        window_reference
-    }
-
-    pub fn display(self) -> String {
-        self.parameters.join(" ; ")
-    }
-}
-
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::window_reference::WindowReference;
+    use crate::script_steps::parameters::window_reference;
 
     #[test]
     fn test() {
@@ -129,16 +86,9 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
         let expected_output = "Style: Dokument ; Layout: <Originallayout>";
-        assert_eq!(
-            WindowReference::from_xml(&mut reader, &element).display(),
-            expected_output
-        );
+        assert_eq!(window_reference::display(&element), expected_output);
     }
 
     #[test]
@@ -215,16 +165,9 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
         let expected_output = r#"Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF"#;
-        assert_eq!(
-            WindowReference::from_xml(&mut reader, &element).display(),
-            expected_output
-        );
+        assert_eq!(window_reference::display(&element), expected_output);
     }
 
     #[test]
@@ -279,28 +222,18 @@ mod tests {
            </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
         let expected_output =
             r#"Height: $$AppWindowHeight ; Width: $$AppWindowWidth ; Top: 0 ; Left: 0"#;
-        assert_eq!(
-            WindowReference::from_xml(&mut reader, &element).display(),
-            expected_output
-        );
+        assert_eq!(window_reference::display(&element), expected_output);
     }
 
     #[test]
     fn test_set_window_title() {
         let xml = r#"<Parameter type="WindowReference"><WindowReference><Select kind="1" type="Calculated"><Name current="True"><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[$old]]></Text></Calculation></Calculation></Name></Select><Rename><Calculation datatype="1" position="1"><Calculation><Text><![CDATA[$new]]></Text></Calculation></Calculation></Rename></WindowReference></Parameter>"#;
-        let mut reader = Reader::from_str(xml);
-        let Ok(Event::Start(e)) = reader.read_event() else {
-            panic!("Wrong read event");
-        };
+        let e = Node::parse(xml).unwrap();
         assert_eq!(
-            WindowReference::from_xml(&mut reader, &e).display(),
+            window_reference::display(&e),
             "Name: $old ; New Title: $new"
         );
     }

@@ -2,9 +2,9 @@ use quick_xml::Reader;
 use quick_xml::events::Event;
 
 use crate::script_steps::parameters::boolean::Boolean;
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::script_steps::parameters::target::Target;
+use crate::script_steps::parameters::target;
 use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::Node;
 
 const VERIFY_SSL_CERTIFICATES: &str = "268435456";
 const SELECT: &str = "4096";
@@ -44,15 +44,15 @@ pub fn sanitize(step: &str) -> Option<String> {
                     }
                 }
                 "Parameter" => match parse_unescaped_attribute(&e, "type").as_deref() {
-                    Some("Target") => target = Target::from_xml(&mut reader, &e).display(),
+                    Some("Target") => target = target::display(&Node::from_xml(&mut reader, &e)),
                     Some("URL") => {
-                        url = Calculation::from_xml(&mut reader, &e)
-                            .display()
+                        url = Node::from_xml(&mut reader, &e)
+                            .calculation()
                             .map(|c| format!("URL: {c}"))
                     }
                     Some("Calculation") => {
-                        curl_options = Calculation::from_xml(&mut reader, &e)
-                            .display()
+                        curl_options = Node::from_xml(&mut reader, &e)
+                            .calculation()
                             .map(|c| format!("cURL options: {c}"))
                     }
                     _ => {}

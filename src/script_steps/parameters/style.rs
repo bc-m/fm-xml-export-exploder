@@ -1,49 +1,23 @@
-use quick_xml::Reader;
-use quick_xml::events::BytesStart;
+use crate::utils::xml_node::Node;
 
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_utils::skip_rest_of_element;
-
-#[derive(Debug, Default)]
-pub struct Style {
-    pub style: Option<String>,
-}
-
-impl Style {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Style {
-        let item = Style {
-            style: parse_unescaped_attribute(e, "name"),
-        };
-        skip_rest_of_element(reader);
-        item
-    }
-
-    pub fn display(self) -> Option<String> {
-        self.style.map(|s| format!("Style: {s}"))
-    }
+/// e.g. `Style: Document`
+pub fn display(style: &Node) -> Option<String> {
+    style.attr("name").map(|name| format!("Style: {name}"))
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::style::Style;
+    use crate::script_steps::parameters::style;
 
     #[test]
     fn test() {
         let xml = r#"<Style name="Dokument" value="3221291010"></Style>"#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "Style: Dokument".to_string();
-        assert_eq!(
-            Style::from_xml(&mut reader, &element).display().unwrap(),
-            expected_output
-        );
+        assert_eq!(style::display(&element).unwrap(), expected_output);
     }
 }

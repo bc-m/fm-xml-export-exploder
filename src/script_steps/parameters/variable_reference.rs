@@ -1,64 +1,26 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
+use crate::utils::xml_node::Node;
 
-use crate::utils::attributes::parse_unescaped_attribute;
-
-#[derive(Debug, Default)]
-pub struct VariableReference {
-    pub name: Option<String>,
-    pub repetition: Option<i32>,
-}
-
-impl VariableReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> VariableReference {
-        let mut depth = 1;
-        let mut item = VariableReference {
-            name: parse_unescaped_attribute(e, "value"),
-            ..Default::default()
-        };
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    if e.name().as_ref() == "repetition"
-                        && let Some(repetition) = parse_unescaped_attribute(&e, "value")
-                        && let Ok(repetition) = repetition.parse()
-                    {
-                        item.repetition = Some(repetition);
-                    }
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
-        }
-
-        item
-    }
-
-    pub fn display(self) -> Option<String> {
-        self.name.map(|name| match self.repetition {
-            Some(rep) if rep != 1 => format!("{name}[{rep}]"),
-            _ => name,
-        })
-    }
+/// e.g. `$var` or `$var[2]`
+pub fn display(variable: &Node) -> Option<String> {
+    let name = variable.attr("value")?;
+    let repetition = variable
+        .descendants()
+        .into_iter()
+        .skip(1)
+        .filter(|n| n.name == "repetition")
+        .filter_map(|n| n.attr("value")?.parse::<i32>().ok())
+        .next_back();
+    Some(match repetition {
+        Some(rep) if rep != 1 => format!("{name}[{rep}]"),
+        _ => name.to_string(),
+    })
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::variable_reference::VariableReference;
+    use crate::script_steps::parameters::variable_reference;
 
     #[test]
     fn test() {
@@ -68,17 +30,11 @@ mod tests {
             </Variable>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "$foo".to_string();
         assert_eq!(
-            VariableReference::from_xml(&mut reader, &element)
-                .display()
-                .unwrap(),
+            variable_reference::display(&element).unwrap(),
             expected_output
         );
     }
@@ -91,17 +47,11 @@ mod tests {
             </Variable>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "$foo[1337]".to_string();
         assert_eq!(
-            VariableReference::from_xml(&mut reader, &element)
-                .display()
-                .unwrap(),
+            variable_reference::display(&element).unwrap(),
             expected_output
         );
     }

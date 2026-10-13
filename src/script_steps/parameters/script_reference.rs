@@ -1,94 +1,49 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
+use crate::utils::xml_node::Node;
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::parse_unescaped_attribute;
-
-#[derive(Debug, Default)]
-pub struct ScriptReference {
-    pub data_source_name: Option<String>,
-    pub script_name: Option<String>,
-    /// Install OnTimer Script stores its script parameter inside the reference
-    pub parameter: Option<String>,
-}
-
-impl ScriptReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> ScriptReference {
-        let mut depth = 1;
-        let mut item = ScriptReference::default();
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    match e.name().as_ref() {
-                        "DataSourceReference" => {
-                            item.data_source_name = parse_unescaped_attribute(&e, "name")
-                        }
-                        "ScriptReference" => {
-                            item.script_name = parse_unescaped_attribute(&e, "name")
-                        }
-                        "repetition" => {
-                            item.parameter = Calculation::from_xml(reader, &e).display();
-                            depth -= 1;
-                        }
-                        _ => {}
-                    }
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
+/// e.g. `"Script" from file "Other File" ; Parameter: $p`
+pub fn display(parameter: &Node) -> Option<String> {
+    let mut script_name = None;
+    let mut data_source_name = None;
+    // Install OnTimer Script stores its script parameter inside the reference
+    let mut script_parameter = None;
+    for child in parameter.descendants().into_iter().skip(1) {
+        match child.name.as_str() {
+            "DataSourceReference" => data_source_name = child.attr("name"),
+            "ScriptReference" => script_name = child.attr("name"),
+            "repetition" => script_parameter = child.calculation(),
+            _ => {}
         }
-
-        item
     }
 
-    pub fn display(self) -> Option<String> {
-        let mut parts = Vec::new();
-        if let Some(name) = self.script_name {
-            parts.push(format!("\"{name}\""));
-        }
-        if let Some(name) = self.data_source_name {
-            parts.push(format!("from file \"{name}\""));
-        }
-        let mut display = parts.join(" ");
-        if let Some(parameter) = self.parameter {
-            if !display.is_empty() {
-                display.push_str(" ; ");
-            }
-            display.push_str(&format!("Parameter: {parameter}"));
-        }
-        (!display.is_empty()).then_some(display)
+    let mut parts = Vec::new();
+    if let Some(name) = script_name {
+        parts.push(format!("\"{name}\""));
     }
+    if let Some(name) = data_source_name {
+        parts.push(format!("from file \"{name}\""));
+    }
+    let mut display = parts.join(" ");
+    if let Some(script_parameter) = script_parameter {
+        if !display.is_empty() {
+            display.push_str(" ; ");
+        }
+        display.push_str(&format!("Parameter: {script_parameter}"));
+    }
+    (!display.is_empty()).then_some(display)
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use super::ScriptReference;
+    use crate::script_steps::parameters::script_reference;
 
     #[test]
     fn script_with_parameter() {
         let xml = r#"<Parameter type="ScriptReference"><ScriptReference id="9" name="All script steps"><repetition><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[$Param]]></Text></Calculation></Calculation></repetition></ScriptReference></Parameter>"#;
-        let mut reader = Reader::from_str(xml);
-        let Ok(Event::Start(e)) = reader.read_event() else {
-            panic!("Wrong read event");
-        };
+        let e = Node::parse(xml).unwrap();
         assert_eq!(
-            ScriptReference::from_xml(&mut reader, &e)
-                .display()
-                .as_deref(),
+            script_reference::display(&e).as_deref(),
             Some(r#""All script steps" ; Parameter: $Param"#)
         );
     }

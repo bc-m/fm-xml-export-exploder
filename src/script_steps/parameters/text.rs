@@ -1,49 +1,22 @@
-use quick_xml::Reader;
-use quick_xml::events::BytesStart;
+use crate::utils::xml_node::Node;
 
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_utils::skip_rest_of_element;
-
-#[derive(Debug, Default)]
-pub struct Text {
-    pub text: Option<String>,
-}
-
-impl Text {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Text {
-        let item = Text {
-            text: parse_unescaped_attribute(e, "value"),
-        };
-        skip_rest_of_element(reader);
-        item
-    }
-
-    pub fn display(self) -> Option<String> {
-        self.text
-    }
+pub fn display(node: &Node) -> Option<String> {
+    node.attr("value").map(str::to_string)
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::text::Text;
+    use crate::script_steps::parameters::text;
 
     #[test]
     fn test() {
         let xml = r#"<Text value="a&#13;b&#13;c"></Text>"#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "a\rb\rc".to_string();
-        assert_eq!(
-            Text::from_xml(&mut reader, &element).display().unwrap(),
-            expected_output
-        );
+        assert_eq!(text::display(&element).unwrap(), expected_output);
     }
 }

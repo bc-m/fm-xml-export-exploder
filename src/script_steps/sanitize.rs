@@ -1,35 +1,16 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
-use crate::script_steps::parameters::parameter_values::ParameterValues;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::script_steps::parameters::parameter_values;
+use crate::utils::xml_node::Node;
 
 pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut raw_parameters: Vec<String> = Vec::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
-                    continue;
-                }
-                "ParameterValues" => {
-                    let pv = ParameterValues::from_xml(&mut reader, &e, step_id);
-                    raw_parameters.extend(pv.parameters);
-                }
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
+    let step = Node::parse(step)?;
+    let name = step.attr("name").unwrap_or_default().to_string();
+    let raw_parameters: Vec<String> = step
+        .descendants()
+        .into_iter()
+        .filter(|node| node.name == "ParameterValues")
+        .flat_map(|parameter_values| parameter_values::display(parameter_values, step_id))
+        .collect();
 
     let script_step = id_to_script_step(step_id);
     let parameters = format_parameters(raw_parameters, script_step);

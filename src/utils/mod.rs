@@ -17,6 +17,7 @@ pub(crate) mod entity;
 pub(crate) mod file_utils;
 pub(crate) mod output_path;
 pub(crate) mod skeleton;
+pub(crate) mod xml_node;
 pub(crate) mod xml_utils;
 
 // Re-exports for backward compatibility

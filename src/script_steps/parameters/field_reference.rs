@@ -1,8 +1,4 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
-
-use crate::script_steps::parameters::node::Node;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::Node;
 
 #[derive(Debug, Default)]
 pub struct FieldReference {
@@ -12,63 +8,24 @@ pub struct FieldReference {
 }
 
 impl FieldReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> FieldReference {
-        let mut depth = 1;
+    /// Reads the field, its table occurrence and repetition at or below `node`;
+    /// when there are several, the last one wins.
+    pub fn from_node(node: &Node) -> FieldReference {
         let mut item = FieldReference {
-            field_reference: parse_unescaped_attribute(e, "name"),
+            field_reference: node.attr("name").map(str::to_string),
             ..Default::default()
         };
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    match e.name().as_ref() {
-                        "FieldReference" => {
-                            item.field_reference = parse_unescaped_attribute(&e, "name");
-                        }
-                        "TableOccurrenceReference" => {
-                            item.table_reference = parse_unescaped_attribute(&e, "name");
-                        }
-                        "repetition" => {
-                            item.repetition =
-                                parse_unescaped_attribute(&e, "value").and_then(|v| v.parse().ok());
-                        }
-                        _ => {}
-                    }
+        for child in node.descendants().into_iter().skip(1) {
+            match child.name.as_str() {
+                "FieldReference" => item.field_reference = child.attr("name").map(str::to_string),
+                "TableOccurrenceReference" => {
+                    item.table_reference = child.attr("name").map(str::to_string);
                 }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
+                "repetition" => item.repetition = child.attr("value").and_then(|v| v.parse().ok()),
                 _ => {}
             }
-            buf.clear();
         }
-
         item
-    }
-
-    pub fn from_node(node: &Node) -> FieldReference {
-        FieldReference {
-            field_reference: node
-                .descendant("FieldReference")
-                .and_then(|n| n.attr("name"))
-                .map(str::to_string),
-            table_reference: node
-                .descendant("TableOccurrenceReference")
-                .and_then(|n| n.attr("name"))
-                .map(str::to_string),
-            repetition: node
-                .descendant("repetition")
-                .and_then(|n| n.attr("value"))
-                .and_then(|v| v.parse().ok()),
-        }
     }
 
     pub fn display(&self) -> String {
@@ -90,8 +47,7 @@ impl FieldReference {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
     use crate::script_steps::parameters::field_reference::FieldReference;
 
@@ -104,15 +60,11 @@ mod tests {
             </FieldReference>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "Foo::Bar";
         assert_eq!(
-            FieldReference::from_xml(&mut reader, &element).display(),
+            FieldReference::from_node(&element).display(),
             expected_output
         );
     }
@@ -126,15 +78,11 @@ mod tests {
             </FieldReference>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "Foo::Bar[1337]";
         assert_eq!(
-            FieldReference::from_xml(&mut reader, &element).display(),
+            FieldReference::from_node(&element).display(),
             expected_output
         );
     }

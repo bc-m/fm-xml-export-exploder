@@ -1,69 +1,23 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
+use crate::utils::xml_node::Node;
 
-use crate::script_steps::parameters::calculation::Calculation;
-
-#[derive(Debug, Default)]
-pub struct Select {
-    pub text: Option<String>,
-}
-
-impl Select {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Select {
-        let mut depth = 1;
-        let mut item = Select::default();
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    if e.name().as_ref() == "Calculation" {
-                        if let Some(display) = Calculation::from_xml(reader, &e).display() {
-                            item.text = Some(format!("Name: {display}"));
-                        }
-                        depth -= 1;
-                    }
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
-        }
-
-        item
-    }
-
-    pub fn display(self) -> Option<String> {
-        self.text
-    }
+/// The window selection of a window reference, e.g. `Name: $window`
+pub fn display(select: &Node) -> Option<String> {
+    select.calculation().map(|name| format!("Name: {name}"))
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::select::Select;
+    use crate::script_steps::parameters::select;
 
     #[test]
     fn test() {
         let xml = r#"<Select kind="0" type="current"></Select>"#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
-        assert_eq!(Select::from_xml(&mut reader, &element).display(), None);
+        assert_eq!(select::display(&element), None);
     }
 
     #[test]
@@ -83,14 +37,10 @@ mod tests {
             </Select>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         assert_eq!(
-            Select::from_xml(&mut reader, &element).display(),
+            select::display(&element),
             Some("Name: $FensterName".to_string())
         );
     }

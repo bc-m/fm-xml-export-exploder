@@ -1,8 +1,8 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
-use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::Node;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -26,8 +26,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                     script_reference_type_id = parse_unescaped_attribute(&e, "value").unwrap();
                     script_reference_type = parse_unescaped_attribute(&e, "name").unwrap();
                     if script_reference_type_id == "2" {
-                        script_reference =
-                            Calculation::from_xml(&mut reader, &e).display().unwrap();
+                        script_reference = Node::from_xml(&mut reader, &e).calculation().unwrap();
                     }
                 }
                 "DataSourceReference" => {
@@ -37,8 +36,8 @@ pub fn sanitize(step: &str) -> Option<String> {
                 "Parameter"
                     if parse_unescaped_attribute(&e, "type").as_deref() == Some("Parameter") =>
                 {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .display()
+                    calculation = Node::from_xml(&mut reader, &e)
+                        .calculation()
                         .unwrap_or_default();
                 }
                 _ => {}

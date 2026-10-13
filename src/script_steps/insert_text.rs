@@ -1,9 +1,10 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
-use crate::script_steps::parameters::target::Target;
-use crate::script_steps::parameters::text::Text;
+use crate::script_steps::parameters::target;
+use crate::script_steps::parameters::text;
 use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::Node;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -28,12 +29,12 @@ pub fn sanitize(step: &str) -> Option<String> {
                     select = true;
                 }
                 "Text" => {
-                    text = Text::from_xml(&mut reader, &e).display();
+                    text = text::display(&Node::from_xml(&mut reader, &e));
                 }
                 "Parameter" => {
                     let target_type = parse_unescaped_attribute(&e, "type").unwrap();
                     if target_type == "Target" {
-                        target = Target::from_xml(&mut reader, &e).display();
+                        target = target::display(&Node::from_xml(&mut reader, &e));
                     }
                 }
                 _ => {}

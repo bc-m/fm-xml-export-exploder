@@ -1,9 +1,6 @@
-use quick_xml::Reader;
-use quick_xml::events::BytesStart;
-
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::script_steps::parameters::node::Node;
+use crate::utils::xml_node::Node;
 
 /// Parameters with nested structures, parsed into a [`Node`] tree first.
 pub fn is_structured(parameter_type: &str) -> bool {
@@ -32,29 +29,24 @@ pub fn is_structured(parameter_type: &str) -> bool {
     )
 }
 
-pub fn from_xml(
-    reader: &mut Reader<&[u8]>,
-    e: &BytesStart,
-    parameter_type: &str,
-) -> Option<String> {
-    let node = Node::from_xml(reader, e);
+pub fn display(node: &Node, parameter_type: &str) -> Option<String> {
     let parts = match parameter_type {
-        "UniversalPathList" => universal_path_list(&node),
-        "Options" => options(&node),
-        "Restore" => restore(&node),
-        "Select" => select(&node),
-        "Object" => object(&node),
-        "Source" => source(&node),
-        "CustomMenuSet" => custom_menu_set(&node),
-        "Parameter" => parameter(&node),
-        "URL" => url(&node),
-        "PageSetup" => page_setup(&node),
-        "Print" => print(&node),
-        "SQL" => sql(&node),
-        "SortSpecification" => sort_specification(&node),
-        "FindRequest" => find_requests(&node),
-        "Email" => email(&node),
-        "Variable" => variable(&node),
+        "UniversalPathList" => universal_path_list(node),
+        "Options" => options(node),
+        "Restore" => restore(node),
+        "Select" => select(node),
+        "Object" => object(node),
+        "Source" => source(node),
+        "CustomMenuSet" => custom_menu_set(node),
+        "Parameter" => parameter(node),
+        "URL" => url(node),
+        "PageSetup" => page_setup(node),
+        "Print" => print(node),
+        "SQL" => sql(node),
+        "SortSpecification" => sort_specification(node),
+        "FindRequest" => find_requests(node),
+        "Email" => email(node),
+        "Variable" => variable(node),
         "Flow" => labeled(
             "Flow",
             node.child("Flow")
@@ -63,9 +55,9 @@ pub fn from_xml(
         )
         .into_iter()
         .collect(),
-        "Export" => export(&node),
-        "ImportField" => import_field(&node),
-        "Voice" => voice(&node),
+        "Export" => export(node),
+        "ImportField" => import_field(node),
+        "Voice" => voice(node),
         _ => Vec::new(),
     };
     Some(parts.join(" ; ")).filter(|display| !display.is_empty())
@@ -73,8 +65,7 @@ pub fn from_xml(
 
 /// Insert from Device: the source (e.g. Camera, Barcode, Signature) and its options,
 /// e.g. `Camera ; Camera: Back ; Light mode: Auto ; Resolution: Full`
-pub fn device_source(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Option<String> {
-    let node = Node::from_xml(reader, e);
+pub fn device_source(node: &Node) -> Option<String> {
     let list = node.child("List")?;
     let mut parts: Vec<String> = list.attr("name").map(str::to_string).into_iter().collect();
     for options in list.children_named("Options") {
@@ -104,7 +95,7 @@ fn device_option(parameter: &Node) -> Option<String> {
         // Barcode types list one <name> per selected type
         let names: Vec<&str> = list
             .children_named("name")
-            .map(|name| name.text.as_str())
+            .map(|name| name.text())
             .collect();
         let value = if names.is_empty() {
             list.attr("name")?.to_string()
@@ -129,8 +120,7 @@ fn device_option(parameter: &Node) -> Option<String> {
 
 /// Send Event: e.g. `Target application: "iCal.app" ; Event: open application ;
 /// Wait for event completion: ON`
-pub fn send_event(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Option<String> {
-    let node = Node::from_xml(reader, e);
+pub fn send_event(node: &Node) -> Option<String> {
     let mut parts = Vec::new();
     if let Some(target) = node.child("Target").and_then(|t| t.attr("value"))
         && !target.is_empty()
@@ -157,7 +147,7 @@ pub fn send_event(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Option<String> 
             Some("Text") => {
                 let text = source.child("Text").and_then(|text| {
                     text.calculation()
-                        .or_else(|| Some(text.text.clone()).filter(|t| !t.is_empty()))
+                        .or_else(|| Some(text.text().to_string()).filter(|t| !t.is_empty()))
                 });
                 parts.extend(labeled("Text", text));
             }
@@ -201,7 +191,7 @@ fn universal_path_list(node: &Node) -> Vec<String> {
         .descendant("ObjectList")
         .into_iter()
         .flat_map(|object_list| object_list.children_named("Location"))
-        .map(|location| location.text.as_str())
+        .map(|location| location.text())
         .collect();
 
     let mut parts = Vec::new();
@@ -233,7 +223,7 @@ fn options(node: &Node) -> Vec<String> {
             }
             // Perform AppleScript
             Some("Text") => parts.extend(
-                Some(options.text.clone())
+                Some(options.text().to_string())
                     .filter(|text| !text.is_empty())
                     .map(|text| format!("Native AppleScript: {text}")),
             ),
@@ -553,7 +543,9 @@ fn sort_specification(node: &Node) -> Vec<String> {
         .into_iter()
         .flat_map(|list| list.children_named("Sort"))
         .map(|sort| {
-            let field = FieldReference::from_node(sort).display();
+            // A sort can also name a summary field; the sort field is the primary one
+            let field =
+                FieldReference::from_node(sort.child("PrimaryField").unwrap_or(sort)).display();
             match sort.attr("type") {
                 Some(order) => format!("{field} ({order})"),
                 None => field,
@@ -778,19 +770,14 @@ fn voice(node: &Node) -> Vec<String> {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
     use super::*;
 
     fn parse(xml: &str) -> Option<String> {
-        let mut reader = Reader::from_str(xml);
-        let Ok(Event::Start(e)) = reader.read_event() else {
-            panic!("Wrong read event");
-        };
-        let parameter_type =
-            crate::utils::attributes::parse_unescaped_attribute(&e, "type").unwrap();
-        from_xml(&mut reader, &e, &parameter_type)
+        let e = Node::parse(xml).unwrap();
+        let parameter_type = e.attr("type").unwrap().to_string();
+        display(&e, &parameter_type)
     }
 
     #[test]
@@ -872,11 +859,8 @@ mod tests {
     }
 
     fn parse_device(xml: &str) -> Option<String> {
-        let mut reader = Reader::from_str(xml);
-        let Ok(Event::Start(e)) = reader.read_event() else {
-            panic!("Wrong read event");
-        };
-        device_source(&mut reader, &e)
+        let e = Node::parse(xml).unwrap();
+        device_source(&e)
     }
 
     #[test]
@@ -943,12 +927,9 @@ mod tests {
     #[test]
     fn send_event() {
         let xml = r#"<Parameter><Target value="TextMate.app" type="TxMt" id="1"></Target><Send name="open document" classString="aevt" idString="odoc" class="1" id="2"></Send><Source type="Document"><Document><UniversalPathList membercount="1"><ObjectList><Location><![CDATA[file:a.xml]]></Location></ObjectList></UniversalPathList></Document></Source><Options Foreground="True" Wait="True" Copy="False"></Options></Parameter>"#;
-        let mut reader = Reader::from_str(xml);
-        let Ok(Event::Start(e)) = reader.read_event() else {
-            panic!("Wrong read event");
-        };
+        let e = Node::parse(xml).unwrap();
         assert_eq!(
-            super::send_event(&mut reader, &e).as_deref(),
+            super::send_event(&e).as_deref(),
             Some(
                 r#"Target application: "TextMate.app" ; Event: open document ; Document: "file:a.xml" ; Bring target application to foreground: ON ; Wait for event completion: ON ; Copy event result: OFF"#
             )

@@ -1,8 +1,8 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::Node;
 
 const OBFUSCATED: &str = "••••••••";
 
@@ -31,7 +31,7 @@ fn attribute_matches(event: &BytesStart<'_>, key: &str, expected: &str) -> bool 
 }
 
 fn parse_calculation(reader: &mut Reader<&[u8]>, event: &BytesStart<'_>) -> Option<String> {
-    Calculation::from_xml(reader, event).display()
+    Node::from_xml(reader, event).calculation()
 }
 
 fn parse_secret(

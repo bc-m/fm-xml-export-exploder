@@ -1,8 +1,8 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
-use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::Node;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -24,13 +24,13 @@ pub fn sanitize(step: &str) -> Option<String> {
                     variable_name = parse_unescaped_attribute(&e, "value").unwrap();
                 }
                 "value" => {
-                    value = Calculation::from_xml(&mut reader, &e)
-                        .display()
+                    value = Node::from_xml(&mut reader, &e)
+                        .calculation()
                         .unwrap_or_default();
                 }
                 "repetition" => {
-                    repetition = Calculation::from_xml(&mut reader, &e)
-                        .display()
+                    repetition = Node::from_xml(&mut reader, &e)
+                        .calculation()
                         .unwrap_or_default();
                 }
                 _ => {}
