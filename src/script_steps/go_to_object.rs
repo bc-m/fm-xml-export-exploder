@@ -1,40 +1,20 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::utils::xml_node::{Node, Visit};
 
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_node::Node;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
     let mut calculation = String::new();
     let mut repetition = String::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap();
-                }
-                "Name" => {
-                    calculation = Node::from_xml(&mut reader, &e)
-                        .calculation()
-                        .unwrap_or_default()
-                }
-                "repetition" => {
-                    repetition = Node::from_xml(&mut reader, &e)
-                        .calculation()
-                        .unwrap_or_default()
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "Name" => {
+            calculation = node.calculation().unwrap_or_default();
+            Visit::Skip
         }
-        buf.clear();
-    }
+        "repetition" => {
+            repetition = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
@@ -55,6 +35,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -81,7 +62,7 @@ mod tests {
         "#;
 
         let expected_output = Some(r#"Gehe zu Objekt [ "Foo Bar" ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -119,6 +100,6 @@ mod tests {
 
         let expected_output =
             Some(r#"Gehe zu Objekt [ "Foo Bar" ; Repetition: $Rep ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

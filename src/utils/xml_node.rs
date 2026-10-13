@@ -4,6 +4,12 @@ use quick_xml::events::{BytesStart, Event};
 use crate::utils::attributes::{get_attributes, unescape_value};
 use crate::utils::xml_utils::{cdata_to_string, general_ref_to_string, text_to_string};
 
+/// Whether [`Node::walk`] continues into a node's children.
+pub enum Visit {
+    Descend,
+    Skip,
+}
+
 /// A lightweight in-memory element tree.
 ///
 /// Script steps are small, so each one is read into a tree once and all formatting
@@ -109,6 +115,16 @@ impl Node {
         nodes
     }
 
+    /// Visits all nodes below this one in document order. Returning [`Visit::Skip`]
+    /// leaves out that node's children, e.g. once a calculation has been read.
+    pub fn walk<'a>(&'a self, visit: &mut impl FnMut(&'a Node) -> Visit) {
+        for child in &self.children {
+            if let Visit::Descend = visit(child) {
+                child.walk(visit);
+            }
+        }
+    }
+
     /// The first node named `name` at or below this node.
     pub fn descendant(&self, name: &str) -> Option<&Node> {
         if self.name == name {
@@ -185,6 +201,22 @@ mod tests {
         let node = Node::parse("<Label> original &amp; layout </Label>").unwrap();
         assert_eq!(node.raw_text, " original & layout ");
         assert_eq!(node.text(), "original & layout");
+    }
+
+    #[test]
+    fn walk_can_skip_children() {
+        let node =
+            Node::parse("<Step><Calculation><Calculation/></Calculation><Name/></Step>").unwrap();
+        let mut visited = Vec::new();
+        node.walk(&mut |n| {
+            visited.push(n.name.clone());
+            if n.name == "Calculation" {
+                Visit::Skip
+            } else {
+                Visit::Descend
+            }
+        });
+        assert_eq!(visited, ["Calculation", "Name"]);
     }
 
     #[test]

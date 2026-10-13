@@ -1,8 +1,4 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
-
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_node::Node;
+use crate::utils::xml_node::{Node, Visit};
 
 const OBFUSCATED: &str = "••••••••";
 
@@ -20,47 +16,24 @@ fn calc_or_obfuscated(calc: Option<String>, obfuscate: bool) -> Option<String> {
     }
 }
 
-fn set_step_name(name: &mut String, event: &BytesStart<'_>) {
-    if event.name().as_ref() == "Step" {
-        *name = parse_unescaped_attribute(event, "name").unwrap_or_default();
-    }
+fn attribute_matches(node: &Node, key: &str, expected: &str) -> bool {
+    node.attr(key) == Some(expected)
 }
 
-fn attribute_matches(event: &BytesStart<'_>, key: &str, expected: &str) -> bool {
-    parse_unescaped_attribute(event, key).as_deref() == Some(expected)
+fn parse_secret(node: &Node, obfuscate: bool) -> Option<String> {
+    calc_or_obfuscated(node.calculation(), obfuscate)
 }
 
-fn parse_calculation(reader: &mut Reader<&[u8]>, event: &BytesStart<'_>) -> Option<String> {
-    Node::from_xml(reader, event).calculation()
-}
-
-fn parse_secret(
-    reader: &mut Reader<&[u8]>,
-    event: &BytesStart<'_>,
-    obfuscate: bool,
-) -> Option<String> {
-    calc_or_obfuscated(parse_calculation(reader, event), obfuscate)
-}
-
-fn parse_step<T, F>(step: &str, mut state: T, mut handle_event: F) -> T
-where
-    F: FnMut(&mut Reader<&[u8]>, &BytesStart<'_>, &mut T),
-{
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(event)) => handle_event(&mut reader, &event, &mut state),
-            _ => {}
-        }
-
-        buf.clear();
-    }
-
+fn parse_step<T>(step: &Node, mut state: T, mut handle_node: impl FnMut(&Node, &mut T)) -> T {
+    step.walk(&mut |node| {
+        handle_node(node, &mut state);
+        Visit::Descend
+    });
     state
+}
+
+fn step_name(step: &Node) -> String {
+    step.attr("name").unwrap_or_default().to_string()
 }
 
 fn push_labeled_part(parts: &mut Vec<String>, label: &str, value: Option<String>) {
@@ -140,34 +113,33 @@ struct ResetAccountPasswordState {
     expire_password: bool,
 }
 
-pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
+pub fn sanitize_add_account(step: &Node, obfuscate: bool) -> Option<String> {
     let state = parse_step(
         step,
         AddAccountState {
-            name: String::new(),
+            name: step_name(step),
             account_type: None,
             account_name: None,
             password: None,
             privilege_set: None,
             expire_password: false,
         },
-        |reader, event, state| match event.name().as_ref() {
-            "Step" => set_step_name(&mut state.name, event),
+        |node, state| match node.name.as_str() {
             "List" if state.account_type.is_none() => {
-                state.account_type = parse_unescaped_attribute(event, "name");
+                state.account_type = node.attr("name").map(str::to_string);
             }
             "PrivilegeSetReference" => {
-                state.privilege_set = parse_unescaped_attribute(event, "name");
+                state.privilege_set = node.attr("name").map(str::to_string);
             }
             "Boolean"
-                if attribute_matches(event, "type", "Expire password")
-                    && attribute_matches(event, "value", "True") =>
+                if attribute_matches(node, "type", "Expire password")
+                    && attribute_matches(node, "value", "True") =>
             {
                 state.expire_password = true;
             }
-            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
-                Some("Name") => state.account_name = parse_calculation(reader, event),
-                Some("Password") => state.password = parse_secret(reader, event, obfuscate),
+            "Parameter" => match node.attr("type") {
+                Some("Name") => state.account_name = node.calculation(),
+                Some("Password") => state.password = parse_secret(node, obfuscate),
                 _ => {}
             },
             _ => {}
@@ -184,23 +156,22 @@ pub fn sanitize_add_account(step: &str, obfuscate: bool) -> Option<String> {
     format_step(state.name, parts)
 }
 
-pub fn sanitize_change_password(step: &str, obfuscate: bool) -> Option<String> {
+pub fn sanitize_change_password(step: &Node, obfuscate: bool) -> Option<String> {
     let state = parse_step(
         step,
         ChangePasswordState {
-            name: String::new(),
+            name: step_name(step),
             old_password: None,
             new_password: None,
             with_dialog: true,
         },
-        |reader, event, state| match event.name().as_ref() {
-            "Step" => set_step_name(&mut state.name, event),
-            "Boolean" if attribute_matches(event, "type", "With dialog") => {
-                state.with_dialog = attribute_matches(event, "value", "True");
+        |node, state| match node.name.as_str() {
+            "Boolean" if attribute_matches(node, "type", "With dialog") => {
+                state.with_dialog = attribute_matches(node, "value", "True");
             }
-            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
-                Some("Old") => state.old_password = parse_secret(reader, event, obfuscate),
-                Some("New") => state.new_password = parse_secret(reader, event, obfuscate),
+            "Parameter" => match node.attr("type") {
+                Some("Old") => state.old_password = parse_secret(node, obfuscate),
+                Some("New") => state.new_password = parse_secret(node, obfuscate),
                 _ => {}
             },
             _ => {}
@@ -215,17 +186,16 @@ pub fn sanitize_change_password(step: &str, obfuscate: bool) -> Option<String> {
     format_step(state.name, parts)
 }
 
-pub fn sanitize_delete_account(step: &str) -> Option<String> {
+pub fn sanitize_delete_account(step: &Node) -> Option<String> {
     let state = parse_step(
         step,
         DeleteAccountState {
-            name: String::new(),
+            name: step_name(step),
             account_name: None,
         },
-        |reader, event, state| match event.name().as_ref() {
-            "Step" => set_step_name(&mut state.name, event),
-            "Parameter" if attribute_matches(event, "type", "Calculation") => {
-                state.account_name = parse_calculation(reader, event);
+        |node, state| match node.name.as_str() {
+            "Parameter" if attribute_matches(node, "type", "Calculation") => {
+                state.account_name = node.calculation();
             }
             _ => {}
         },
@@ -236,21 +206,20 @@ pub fn sanitize_delete_account(step: &str) -> Option<String> {
     format_step(state.name, parts)
 }
 
-pub fn sanitize_enable_account(step: &str) -> Option<String> {
+pub fn sanitize_enable_account(step: &Node) -> Option<String> {
     let state = parse_step(
         step,
         EnableAccountState {
-            name: String::new(),
+            name: step_name(step),
             account_name: None,
             activate: None,
         },
-        |reader, event, state| match event.name().as_ref() {
-            "Step" => set_step_name(&mut state.name, event),
-            "Boolean" if attribute_matches(event, "type", "enable") => {
-                state.activate = Some(attribute_matches(event, "value", "True"));
+        |node, state| match node.name.as_str() {
+            "Boolean" if attribute_matches(node, "type", "enable") => {
+                state.activate = Some(attribute_matches(node, "value", "True"));
             }
-            "Parameter" if attribute_matches(event, "type", "Calculation") => {
-                state.account_name = parse_calculation(reader, event);
+            "Parameter" if attribute_matches(node, "type", "Calculation") => {
+                state.account_name = node.calculation();
             }
             _ => {}
         },
@@ -269,23 +238,22 @@ pub fn sanitize_enable_account(step: &str) -> Option<String> {
     format_step(state.name, parts)
 }
 
-pub fn sanitize_re_login(step: &str, obfuscate: bool) -> Option<String> {
+pub fn sanitize_re_login(step: &Node, obfuscate: bool) -> Option<String> {
     let state = parse_step(
         step,
         ReLoginState {
-            name: String::new(),
+            name: step_name(step),
             account_name: None,
             password: None,
             with_dialog: true,
         },
-        |reader, event, state| match event.name().as_ref() {
-            "Step" => set_step_name(&mut state.name, event),
-            "Boolean" if attribute_matches(event, "type", "With dialog") => {
-                state.with_dialog = attribute_matches(event, "value", "True");
+        |node, state| match node.name.as_str() {
+            "Boolean" if attribute_matches(node, "type", "With dialog") => {
+                state.with_dialog = attribute_matches(node, "value", "True");
             }
-            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
-                Some("Name") => state.account_name = parse_calculation(reader, event),
-                Some("Password") => state.password = parse_secret(reader, event, obfuscate),
+            "Parameter" => match node.attr("type") {
+                Some("Name") => state.account_name = node.calculation(),
+                Some("Password") => state.password = parse_secret(node, obfuscate),
                 _ => {}
             },
             _ => {}
@@ -300,26 +268,25 @@ pub fn sanitize_re_login(step: &str, obfuscate: bool) -> Option<String> {
     format_step(state.name, parts)
 }
 
-pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<String> {
+pub fn sanitize_reset_account_password(step: &Node, obfuscate: bool) -> Option<String> {
     let state = parse_step(
         step,
         ResetAccountPasswordState {
-            name: String::new(),
+            name: step_name(step),
             account_name: None,
             password: None,
             expire_password: false,
         },
-        |reader, event, state| match event.name().as_ref() {
-            "Step" => set_step_name(&mut state.name, event),
+        |node, state| match node.name.as_str() {
             "Boolean"
-                if attribute_matches(event, "type", "Password")
-                    && attribute_matches(event, "value", "True") =>
+                if attribute_matches(node, "type", "Password")
+                    && attribute_matches(node, "value", "True") =>
             {
                 state.expire_password = true;
             }
-            "Parameter" => match parse_unescaped_attribute(event, "type").as_deref() {
-                Some("Name") => state.account_name = parse_calculation(reader, event),
-                Some("Password") => state.password = parse_secret(reader, event, obfuscate),
+            "Parameter" => match node.attr("type") {
+                Some("Name") => state.account_name = node.calculation(),
+                Some("Password") => state.password = parse_secret(node, obfuscate),
                 _ => {}
             },
             _ => {}
@@ -337,6 +304,7 @@ pub fn sanitize_reset_account_password(step: &str, obfuscate: bool) -> Option<St
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     // ── Add Account ───────────────────────────────────────────────────────────
 
@@ -358,7 +326,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_add_account(xml.trim(), false),
+            sanitize_add_account(&Node::parse(xml).unwrap(), false),
             Some(
                 r#"Add Account [ Authenticate via: FileMaker ; Privilege Set: <unknown> ]"#
                     .to_string()
@@ -398,7 +366,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_add_account(xml.trim(), false),
+            sanitize_add_account(&Node::parse(xml).unwrap(), false),
             Some(r#"Add Account [ Authenticate via: FileMaker ; Account Name: $name ; Password: $pw ; Privilege Set: [Data Entry Only] ; Expire password ]"#.to_string())
         );
     }
@@ -435,7 +403,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_add_account(xml.trim(), true),
+            sanitize_add_account(&Node::parse(xml).unwrap(), true),
             Some(r#"Add Account [ Authenticate via: FileMaker ; Account Name: $name ; Password: •••••••• ; Privilege Set: [Data Entry Only] ]"#.to_string())
         );
     }
@@ -454,7 +422,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_change_password(xml.trim(), false),
+            sanitize_change_password(&Node::parse(xml).unwrap(), false),
             Some("Change Password [ With dialog: On ]".to_string())
         );
     }
@@ -485,7 +453,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_change_password(xml.trim(), true),
+            sanitize_change_password(&Node::parse(xml).unwrap(), true),
             Some("Change Password [ Old Password: •••••••• ; Password: •••••••• ; With dialog: Off ]".to_string())
         );
     }
@@ -508,7 +476,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_delete_account(xml.trim()),
+            sanitize_delete_account(&Node::parse(xml).unwrap()),
             Some("Delete Account [ Account Name: $account ]".to_string())
         );
     }
@@ -517,7 +485,7 @@ mod tests {
     fn test_delete_account_empty() {
         let xml = r#"<Step id="135" name="Delete Account" enable="True"></Step>"#;
         assert_eq!(
-            sanitize_delete_account(xml.trim()),
+            sanitize_delete_account(&Node::parse(xml).unwrap()),
             Some("Delete Account".to_string())
         );
     }
@@ -536,7 +504,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_enable_account(xml.trim()),
+            sanitize_enable_account(&Node::parse(xml).unwrap()),
             Some("Enable Account [ Activate ]".to_string())
         );
     }
@@ -560,7 +528,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_enable_account(xml.trim()),
+            sanitize_enable_account(&Node::parse(xml).unwrap()),
             Some("Enable Account [ Account Name: $account ; Deactivate ]".to_string())
         );
     }
@@ -582,7 +550,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_re_login(xml.trim(), false),
+            sanitize_re_login(&Node::parse(xml).unwrap(), false),
             Some("Re-Login [ With dialog: Off ]".to_string())
         );
     }
@@ -616,7 +584,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_re_login(xml.trim(), true),
+            sanitize_re_login(&Node::parse(xml).unwrap(), true),
             Some(
                 "Re-Login [ Account Name: $account ; Password: •••••••• ; With dialog: Off ]"
                     .to_string()
@@ -638,7 +606,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_reset_account_password(xml.trim(), false),
+            sanitize_reset_account_password(&Node::parse(xml).unwrap(), false),
             Some("Reset Account Password []".to_string())
         );
     }
@@ -669,7 +637,7 @@ mod tests {
             </Step>
         "#;
         assert_eq!(
-            sanitize_reset_account_password(xml.trim(), true),
+            sanitize_reset_account_password(&Node::parse(xml).unwrap(), true),
             Some("Reset Account Password [ Account Name: $account ; Password: •••••••• ; Expire password ]".to_string())
         );
     }

@@ -1,69 +1,50 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
 use crate::script_steps::parameters::boolean::Boolean;
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_node::Node;
+use crate::utils::xml_node::{Node, Visit};
 
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
-
-    let mut option = String::new();
-    let mut option_type = String::new();
-    let mut boolean_option_type = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
+    let mut option = "";
+    let mut option_type = "";
+    let mut boolean_option_type = "";
     let mut boolean_option_value = false;
     let mut calculation = String::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
-                "List" => {
-                    option = parse_unescaped_attribute(&e, "name").unwrap();
-                    option_type = parse_unescaped_attribute(&e, "value").unwrap();
-                }
-                "Boolean" => {
-                    boolean_option_type = parse_unescaped_attribute(&e, "type").unwrap();
-                    boolean_option_value =
-                        parse_unescaped_attribute(&e, "value").as_deref() == Some("True");
-                }
-                "Calculation" => {
-                    calculation = Node::from_xml(&mut reader, &e).calculation().unwrap()
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "List" => {
+            option = node.attr("name").unwrap_or_default();
+            option_type = node.attr("value").unwrap_or_default();
+            Visit::Descend
         }
-        buf.clear();
-    }
+        "Boolean" => {
+            boolean_option_type = node.attr("type").unwrap_or_default();
+            boolean_option_value = node.attr_is_true("value");
+            Visit::Descend
+        }
+        "Calculation" => {
+            calculation = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
     }
 
     let is_calculated = option_type == "5";
+    let boolean_option = (!boolean_option_type.is_empty()).then(|| {
+        format!(
+            "{boolean_option_type}: {}",
+            Boolean::on_off(boolean_option_value)
+        )
+    });
 
     let mut parts = Vec::new();
     if is_calculated {
-        if !boolean_option_type.is_empty() {
-            parts.push(format!(
-                "{boolean_option_type}: {}",
-                Boolean::on_off(boolean_option_value)
-            ));
-        }
+        parts.extend(boolean_option);
         parts.push(calculation);
     } else {
-        parts.push(option);
-        if !boolean_option_type.is_empty() {
-            parts.push(format!(
-                "{boolean_option_type}: {}",
-                Boolean::on_off(boolean_option_value)
-            ));
-        }
+        parts.push(option.to_string());
+        parts.extend(boolean_option);
     }
 
     Some(format!("{name} [ {} ]", parts.join(" ; ")))
@@ -72,6 +53,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test_go_to_first() {
@@ -89,7 +71,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Gehe zu Datens./Abfrage/Seite [ Erste(r) ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -108,7 +90,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Gehe zu Datens./Abfrage/Seite [ Letzte(r) ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -131,7 +113,7 @@ mod tests {
         let expected_output = Some(
             "Gehe zu Datens./Abfrage/Seite [ Vorherige(r) ; Nach letztem beenden: ON ]".to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -155,7 +137,7 @@ mod tests {
             "Gehe zu Datens./Abfrage/Seite [ Vorherige(r) ; Nach letztem beenden: OFF ]"
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -178,7 +160,7 @@ mod tests {
         let expected_output = Some(
             "Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: ON ]".to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -201,7 +183,7 @@ mod tests {
         let expected_output = Some(
             "Gehe zu Datens./Abfrage/Seite [ Nächste(r) ; Nach letztem beenden: OFF ]".to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -236,7 +218,7 @@ mod tests {
             "Gehe zu Datens./Abfrage/Seite [ Mit Dialog: OFF ; Hole( LayoutNummer ) + 1 ]"
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -266,6 +248,6 @@ mod tests {
 
         let expected_output =
             Some("Gehe zu Datens./Abfrage/Seite [ Mit Dialog: ON ; $Nr ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

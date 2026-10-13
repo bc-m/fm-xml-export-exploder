@@ -1,12 +1,8 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
 use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_node::Node;
+use crate::utils::xml_node::{Node, Visit};
 
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
 
     let mut params: Vec<(String, String)> = Vec::new();
     let mut calculation = String::new();
@@ -16,73 +12,45 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut auto_increment_interval_value = String::new();
     let mut in_serial_number_section = false;
 
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
-                "Boolean" => {
-                    if parse_unescaped_attribute(&e, "value").as_deref() != Some("True") {
-                        continue;
-                    }
-                    let label = parse_unescaped_attribute(&e, "type").unwrap();
-                    params.push((label, "ON".to_string()));
+    step.walk(&mut |node| {
+        let attr = |key: &str| node.attr(key).unwrap_or_default().to_string();
+        match node.name.as_str() {
+            "Boolean" => {
+                if node.attr_is_true("value") {
+                    params.push((attr("type"), "ON".to_string()));
                 }
-                "FieldReference" => {
-                    let field_reference =
-                        FieldReference::from_node(&Node::from_xml(&mut reader, &e)).display();
-                    params.push((String::new(), field_reference))
+            }
+            "FieldReference" => {
+                params.push((String::new(), FieldReference::from_node(node).display()));
+                return Visit::Skip;
+            }
+            "Calculation" => {
+                calculation = node.calculation().unwrap_or_default();
+                return Visit::Skip;
+            }
+            "List" if in_serial_number_section => {
+                if node.attr_is_true("value")
+                    && let Some(last_param) = params.last_mut()
+                {
+                    last_param.0.clone_from(&last_param.1);
+                    last_param.1 = attr("name");
                 }
-                "Calculation" => {
-                    calculation = Node::from_xml(&mut reader, &e)
-                        .calculation()
-                        .unwrap_or_default();
+            }
+            "List" => match node.attr("value").unwrap_or_default() {
+                "0" | "1" => params.push((String::new(), attr("name"))),
+                "2" => {
+                    params.push((String::new(), attr("name")));
+                    in_serial_number_section = true;
                 }
-                "List" => {
-                    if in_serial_number_section {
-                        if parse_unescaped_attribute(&e, "value").as_deref() == Some("True")
-                            && let Some(last_param) = params.last_mut()
-                        {
-                            last_param.0.clone_from(&last_param.1);
-                            last_param.1 = parse_unescaped_attribute(&e, "name").unwrap();
-                        }
-                        continue;
-                    }
-
-                    match parse_unescaped_attribute(&e, "value")
-                        .unwrap_or_default()
-                        .as_str()
-                    {
-                        "0" | "1" => params.push((
-                            String::new(),
-                            parse_unescaped_attribute(&e, "name").unwrap(),
-                        )),
-                        "2" => {
-                            params.push((
-                                String::new(),
-                                parse_unescaped_attribute(&e, "name").unwrap(),
-                            ));
-                            in_serial_number_section = true;
-                        }
-                        "3" => calculation_label = parse_unescaped_attribute(&e, "name").unwrap(),
-                        _ => {}
-                    }
-                }
-                "Initial" => {
-                    auto_increment_initial_value = parse_unescaped_attribute(&e, "value").unwrap()
-                }
-                "increment" => {
-                    auto_increment_interval_value = parse_unescaped_attribute(&e, "value").unwrap()
-                }
+                "3" => calculation_label = attr("name"),
                 _ => {}
             },
+            "Initial" => auto_increment_initial_value = attr("value"),
+            "increment" => auto_increment_interval_value = attr("value"),
             _ => {}
         }
-        buf.clear();
-    }
+        Visit::Descend
+    });
 
     if !calculation.is_empty() {
         params.push((calculation_label, calculation))
@@ -116,6 +84,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test_broken_reference() {
@@ -139,7 +108,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Ersetze alle Feldwerte [ Mit Dialog: ON ; 🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨 ; Aktueller Inhalt ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -171,7 +140,7 @@ mod tests {
             "Ersetze alle Feldwerte [ Mit Dialog: ON ; Durch Berechnung ersetzen: 123456 ]"
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -200,7 +169,7 @@ mod tests {
             "Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::On ; Aktueller Inhalt ]"
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -229,7 +198,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::On ; Durch fortlaufende Nummern ersetzen: Werte der Eingabeoptionen ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -261,7 +230,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::On ; Durch fortlaufende Nummern ersetzen ; Initial: 1 ; Interval: 1 ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -293,7 +262,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::__ID ; Durch fortlaufende Nummern ersetzen ; Eingabeoptionen aktualisieren: ON ; Initial: 100 ; Interval: 10 ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -325,7 +294,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::__ID ; Durch fortlaufende Nummern ersetzen ; Eingabeoptionen aktualisieren: ON ; Initial: 100 ; Interval: 10 ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -361,6 +330,6 @@ mod tests {
 
         let expected_output =
             Some(r#"Ersetze alle Feldwerte [ Mit Dialog: ON ; _Syntax::On ; Durch Berechnung ersetzen: "Calc" ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

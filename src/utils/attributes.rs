@@ -1,11 +1,6 @@
 use quick_xml::events::BytesStart;
 
-/// Returns the attribute value with XML entities resolved, e.g. `&apos;` becomes `'`.
-/// Values with malformed entities are returned as is.
-pub fn parse_unescaped_attribute(e: &BytesStart, attribute: &str) -> Option<String> {
-    get_attribute(e, attribute).map(|text| unescape_value(&text))
-}
-
+/// Resolves XML entities, e.g. `&apos;` becomes `'`. Malformed entities are kept as is.
 pub fn unescape_value(text: &str) -> String {
     quick_xml::escape::unescape(text).map_or_else(|_| text.to_string(), |v| v.into_owned())
 }

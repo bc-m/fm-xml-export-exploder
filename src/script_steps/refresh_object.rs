@@ -1,45 +1,18 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::utils::xml_node::Node;
 
-use crate::utils::attributes::parse_unescaped_attribute;
-use crate::utils::xml_utils;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut object_name_calculation = String::new();
-    let mut repetition_calculation = String::new();
-    let mut in_name = false;
-    let mut in_repetition = false;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
-                "Name" => in_name = true,
-                "repetition" => in_repetition = true,
-                _ => {}
-            },
-            Ok(Event::CData(e)) => {
-                let text = xml_utils::cdata_to_string(&e);
-                if in_name {
-                    object_name_calculation.push_str(&text);
-                } else if in_repetition {
-                    repetition_calculation.push_str(&text);
-                }
-            }
-            Ok(Event::End(e)) => match e.name().as_ref() {
-                "Name" => in_name = false,
-                "repetition" => in_repetition = false,
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
+    // All CDATA inside <Name> and <repetition>, concatenated
+    let cdata_below = |element: &str| -> String {
+        step.descendants()
+            .into_iter()
+            .filter(|node| node.name == element)
+            .flat_map(|node| node.descendants())
+            .flat_map(|node| node.cdata.iter().map(String::as_str))
+            .collect()
+    };
+    let object_name_calculation = cdata_below("Name");
+    let repetition_calculation = cdata_below("repetition");
 
     let mut parts = Vec::new();
     if !object_name_calculation.is_empty() && object_name_calculation != "1" {
@@ -59,6 +32,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -77,7 +51,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Objekt aktualisieren []".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -115,7 +89,7 @@ mod tests {
         "#;
 
         let expected_output = Some(r#"Objekt aktualisieren [ Name: "Foo" ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -153,6 +127,6 @@ mod tests {
         "#;
 
         let expected_output = Some(r#"Objekt aktualisieren [ Name: "Foo" ; 2 ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

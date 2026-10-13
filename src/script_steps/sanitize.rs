@@ -2,8 +2,7 @@ use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::parameter_values;
 use crate::utils::xml_node::Node;
 
-pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
-    let step = Node::parse(step)?;
+pub fn from_node(step_id: u32, step: &Node) -> Option<String> {
     let name = step.attr("name").unwrap_or_default().to_string();
     let raw_parameters: Vec<String> = step
         .descendants()
@@ -80,6 +79,7 @@ fn format_parameters(parameters: Vec<String>, script_step: ScriptStep) -> String
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -87,7 +87,10 @@ mod tests {
 
         let expected_output = Some("Fenster fixieren".to_string());
         let script_id: u32 = 79;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -105,7 +108,10 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -123,7 +129,10 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -141,7 +150,10 @@ mod tests {
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
         let script_id: u32 = 22;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -165,7 +177,10 @@ mod tests {
         let expected_output =
             Some("Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]".to_string());
         let script_id: u32 = 182;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 }
 
@@ -195,7 +210,10 @@ mod commit_tests {
         let expected_output =
             Some("Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -222,7 +240,10 @@ mod commit_tests {
                 .to_string(),
         );
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -246,7 +267,10 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -270,7 +294,10 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: ON ; Schreiben erzwingen ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -312,7 +339,10 @@ mod commit_tests {
         let step_id: u32 = 122;
         let expected_output =
             Some("Neues Fenster [ Style: Dokument ; Layout: <Originallayout> ]".to_string());
-        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(step_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -398,6 +428,9 @@ mod commit_tests {
 
         let step_id: u32 = 122;
         let expected_output = Some(r#"Neues Fenster [ Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]"#.to_string());
-        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(step_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 }

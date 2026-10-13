@@ -1,20 +1,5 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::utils::xml_node::Node;
 
-use crate::utils::attributes::parse_unescaped_attribute;
-
-pub fn sanitize(step: &str) -> bool {
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => return true,
-            Ok(Event::Start(e)) if e.name().as_ref() == "Step" => {
-                return parse_unescaped_attribute(&e, "enable").is_none_or(|v| v != "False");
-            }
-            _ => {}
-        }
-        buf.clear();
-    }
+pub fn sanitize(step: &Node) -> bool {
+    step.attr("enable") != Some("False")
 }
