@@ -8,6 +8,7 @@ pub(crate) mod constants;
 pub(crate) mod data_source_reference;
 pub(crate) mod dialog_field;
 pub(crate) mod field_reference;
+pub(crate) mod labeled;
 pub(crate) mod layout_reference;
 pub(crate) mod list;
 pub(crate) mod parameter_values;

@@ -9,6 +9,7 @@ use crate::script_steps::parameters::comment::Comment;
 use crate::script_steps::parameters::data_source_reference::DataSourceReference;
 use crate::script_steps::parameters::dialog_field::DialogField;
 use crate::script_steps::parameters::field_reference::FieldReference;
+use crate::script_steps::parameters::labeled;
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::script_steps::parameters::list::List;
 use crate::script_steps::parameters::privilege_set_reference::PrivilegeSetReference;
@@ -80,11 +81,15 @@ impl ParameterValues {
                         "Field1" | "Field2" | "Field3" => {
                             DialogField::from_xml(reader, &e).display(&parameter_type)
                         }
-                        _ => {
-                            item.parameters
-                                .push(format!(r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#));
-                            continue;
-                        }
+                        other => match labeled::label(other, step_id) {
+                            Some(label) => labeled::from_xml(reader, &e, step_id, label),
+                            None => {
+                                item.parameters.push(format!(
+                                    r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#
+                                ));
+                                continue;
+                            }
+                        },
                     };
                     depth -= 1;
                     if let Some(display) = parsed {

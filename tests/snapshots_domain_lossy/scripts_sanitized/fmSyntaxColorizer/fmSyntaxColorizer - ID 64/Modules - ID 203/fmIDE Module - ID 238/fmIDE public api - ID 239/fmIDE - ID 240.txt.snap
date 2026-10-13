@@ -2471,11 +2471,11 @@ MBS( $MBS_RemoteControl.PressCommandOrControlKey ; 0 ) &
 			# @var $fmide_file_id
 			Datendatei öffnen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $fmide_file_id ]
 			Wenn [ $append_line_feed ]
-				In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $text ; Zeilenumbruch anhängen: ON ]
+				In Datendatei schreiben [ File ID: $fmide_file_id ; Target: $text ; Zeilenumbruch anhängen: ON ]
 			Sonst
-				In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $text ; Zeilenumbruch anhängen: OFF ]
+				In Datendatei schreiben [ File ID: $fmide_file_id ; Target: $text ; Zeilenumbruch anhängen: OFF ]
 			Ende (wenn)
-			Datendatei schließen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
+			Datendatei schließen [ File ID: $fmide_file_id ]
 			
 			
 		Sonst

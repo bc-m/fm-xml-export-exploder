@@ -29,8 +29,8 @@ Löschen [ Auswahl: ON ]
 Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; cURL options: "-X PUT" ]
 
 # New Script step:
-Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Major" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Minor" NOT PARSED ⚠️ ]
-Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; ⚠️ PARAMETER "Latitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Longitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Radius" NOT PARSED ⚠️ ]
+Regionsmonitor-Script konfigurieren [ Monitor: iBeacon ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; UUID: $UUID ; Major: $Major ; Minor: $Minor ]
+Regionsmonitor-Script konfigurieren [ Monitor: Geofence ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; Latitude: $Latitude ; Longitude: $Longitude ; Radius: $Radius ]
 
 # Changed: Layout animations
 Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
