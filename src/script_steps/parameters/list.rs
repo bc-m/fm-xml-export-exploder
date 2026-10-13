@@ -2,11 +2,14 @@ use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
+use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct List {
     pub name: Option<String>,
+    /// e.g. the script name calculation of "By name"
+    pub calculation: Option<String>,
 }
 
 impl List {
@@ -21,7 +24,10 @@ impl List {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == "List"
+                    if e.name().as_ref() == "Calculation" {
+                        item.calculation = Calculation::from_xml(reader, &e).display();
+                        depth -= 1;
+                    } else if e.name().as_ref() == "List"
                         && let Some(name) = parse_unescaped_attribute(&e, "name")
                     {
                         item.name = match id_to_script_step(step_id) {
@@ -45,7 +51,10 @@ impl List {
     }
 
     pub fn display(self) -> Option<String> {
-        self.name
+        match (self.name, self.calculation) {
+            (Some(name), Some(calculation)) => Some(format!("{name} ; {calculation}")),
+            (name, calculation) => name.or(calculation),
+        }
     }
 }
 
@@ -76,6 +85,19 @@ mod tests {
                 .display()
                 .unwrap(),
             expected_output
+        );
+    }
+
+    #[test]
+    fn list_with_calculation() {
+        let xml = r#"<Parameter type="List"><List name="By name" value="2"><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[Get ( ScriptName )]]></Text></Calculation></Calculation></List></Parameter>"#;
+        let mut reader = Reader::from_str(xml);
+        let Ok(Event::Start(e)) = reader.read_event() else {
+            panic!("Wrong read event");
+        };
+        assert_eq!(
+            List::from_xml(&mut reader, &e, 164).display().as_deref(),
+            Some("By name ; Get ( ScriptName )")
         );
     }
 }

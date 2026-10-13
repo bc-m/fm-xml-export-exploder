@@ -65,8 +65,8 @@ Exit Script [ $ScriptResult ]
 Halt Script
 
 Install OnTimer Script
-Install OnTimer Script [ 123 ]
-Install OnTimer Script [ 1+2 ]
+Install OnTimer Script [ Interval: 123 ]
+Install OnTimer Script [ Interval: 1+2 ]
 
 Loop [ Flush: Always ]
 	Exit Loop If [ 1=1 ]
@@ -97,8 +97,8 @@ Perform Script [ "" ; Specified: From list ; File: "<unknown>" ; Parameter: ]
 Perform Script [ "" ; Specified: From list ; Parameter: /* commented out */ ]
 Perform Script [ "" ; Specified: From list ; Parameter: "/* not only commented out, but also stringified! */" ]
 
-Perform Script on Server [ From list ; Wait for completion: ON ]
-Perform Script on Server [ From list ; Wait for completion: OFF ]
+Perform Script on Server [ Specified: From list ; Wait for completion: ON ]
+Perform Script on Server [ Specified: From list ; Wait for completion: OFF ]
 
 Set Error Capture [ ON ]
 Set Error Capture [ OFF ]
@@ -979,7 +979,7 @@ Set Web Viewer [ "wv" ; Action: Reset ]
 // Set Web Viewer [ "wv" ; Action: Reload ]
 // Set Web Viewer [ "wv" ; Action: Go Forward ]
 Set Web Viewer [ "wv" ; Action: Go Back ]
-Set Web Viewer [ "wv" ; Action: Go to URL... ]
+Set Web Viewer [ "wv" ; Action: Go to URL... ; "http://www.mapquest.com/maps/map.adp?" & "formtype=address&" & "searchtype=address&" & "cid=filemkr&" & "address=" & "" & "&country=" & "" ]
 
 Show Custom Dialog [ Title: $DlgTitle ; Message: $DlgMessage ; Default Button: "OK" ; Button 2: "Cancel" ; Button 3: "Alternative" ]
 Show Custom Dialog [ Title: $DlgTitle ; Message: "Only Button 1 and 3¶" & 

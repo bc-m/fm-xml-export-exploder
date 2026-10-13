@@ -84,6 +84,7 @@ pub enum ScriptStep {
     OpenFindReplace = 129,
     OpenManageDataSources = 140,
     SetVariable = 141,
+    InstallOnTimerScript = 148,
     GoToObject = 145,
     OpenEditSavedFinds = 149,
     OpenManageLayouts = 151,
@@ -95,6 +96,7 @@ pub enum ScriptStep {
     ReLogin = 138,
     InsertFromURL = 160,
     InsertFromDevice = 161,
+    PerformScriptOnServer = 164,
     OpenManageThemes = 165,
     RefreshObject = 167,
     ClosePopover = 169,
@@ -107,6 +109,7 @@ pub enum ScriptStep {
     OpenTransaction = 205,
     CommitTransaction = 206,
     RevertTransaction = 207,
+    PerformScriptOnServerWithCallback = 210,
 }
 
 pub fn id_to_script_step(id: u32) -> ScriptStep {

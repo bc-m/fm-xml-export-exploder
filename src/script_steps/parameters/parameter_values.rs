@@ -52,11 +52,30 @@ impl ParameterValues {
                         "List" if id_to_script_step(step_id) == ScriptStep::InsertFromDevice => {
                             structured::device_source(reader, &e)
                         }
+                        "List"
+                            if matches!(
+                                id_to_script_step(step_id),
+                                ScriptStep::PerformScriptOnServer
+                                    | ScriptStep::PerformScriptOnServerWithCallback
+                            ) =>
+                        {
+                            List::from_xml(reader, &e, step_id)
+                                .display()
+                                .map(|specified| format!("Specified: {specified}"))
+                        }
                         "List" | "AccountType" => List::from_xml(reader, &e, step_id).display(),
                         "Target" => Target::from_xml(reader, &e)
                             .display()
                             .map(|d| format!("Target: {d}")),
-                        "Calculation" => Calculation::from_xml(reader, &e).display(),
+                        "Calculation" => {
+                            let calculation = Calculation::from_xml(reader, &e).display();
+                            match id_to_script_step(step_id) {
+                                ScriptStep::InstallOnTimerScript => {
+                                    calculation.map(|c| format!("Interval: {c}"))
+                                }
+                                _ => calculation,
+                            }
+                        }
                         "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo"
                         | "Title" | "Message" | "Password" | "Old" | "New" => {
                             Calculation::from_xml(reader, &e)

@@ -1,12 +1,15 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
+use crate::script_steps::parameters::calculation::Calculation;
 use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct ScriptReference {
     pub data_source_name: Option<String>,
     pub script_name: Option<String>,
+    /// Install OnTimer Script stores its script parameter inside the reference
+    pub parameter: Option<String>,
 }
 
 impl ScriptReference {
@@ -27,6 +30,10 @@ impl ScriptReference {
                         }
                         "ScriptReference" => {
                             item.script_name = parse_unescaped_attribute(&e, "name")
+                        }
+                        "repetition" => {
+                            item.parameter = Calculation::from_xml(reader, &e).display();
+                            depth -= 1;
                         }
                         _ => {}
                     }
@@ -53,6 +60,36 @@ impl ScriptReference {
         if let Some(name) = self.data_source_name {
             parts.push(format!("from file \"{name}\""));
         }
-        (!parts.is_empty()).then(|| parts.join(" "))
+        let mut display = parts.join(" ");
+        if let Some(parameter) = self.parameter {
+            if !display.is_empty() {
+                display.push_str(" ; ");
+            }
+            display.push_str(&format!("Parameter: {parameter}"));
+        }
+        (!display.is_empty()).then_some(display)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use quick_xml::Reader;
+    use quick_xml::events::Event;
+
+    use super::ScriptReference;
+
+    #[test]
+    fn script_with_parameter() {
+        let xml = r#"<Parameter type="ScriptReference"><ScriptReference id="9" name="All script steps"><repetition><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[$Param]]></Text></Calculation></Calculation></repetition></ScriptReference></Parameter>"#;
+        let mut reader = Reader::from_str(xml);
+        let Ok(Event::Start(e)) = reader.read_event() else {
+            panic!("Wrong read event");
+        };
+        assert_eq!(
+            ScriptReference::from_xml(&mut reader, &e)
+                .display()
+                .as_deref(),
+            Some(r#""All script steps" ; Parameter: $Param"#)
+        );
     }
 }
