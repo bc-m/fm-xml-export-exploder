@@ -18,9 +18,15 @@ use crate::utils::{
 use crate::xml_processor::ProcessingContext;
 
 /// Parse and explode a generic catalog, handling both wrapped and unwrapped formats
+/// Called with the path and content of each written catalog item
+pub type OnWritten<'a> = &'a dyn Fn(&Path, &str);
+
+/// `on_written` is called for each written item, e.g. to create sanitized scripts
+/// without reading them back from disk.
 pub fn xml_explode_catalog<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     folder_structure: Option<&FolderStructure>,
+    on_written: Option<OnWritten>,
 ) -> Result<Option<FolderStructure>> {
     let Some(catalog_type) = context.catalog_type else {
         bail!("Catalog type not specified");
@@ -160,7 +166,11 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     }
                     None => out_dir_path_base.clone(),
                 };
-                context.output.write(&dir.join(file_name), &content);
+                let path = dir.join(file_name);
+                context.output.write(&path, &content);
+                if let Some(on_written) = on_written {
+                    on_written(&path, &content);
+                }
 
                 update_folder_structure(&mut folder_structure_result, &current_id, &current_path);
 

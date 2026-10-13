@@ -8,12 +8,13 @@ use quick_xml::events::{BytesEnd, BytesStart, Event};
 use quick_xml::reader::Reader;
 
 use crate::Skeleton;
-use crate::catalog::xml_explode_catalog;
+use crate::catalog::{OnWritten, xml_explode_catalog};
 use crate::config::{CatalogType, Flags};
-use crate::custom_function_sanitizer::create_sanitized_custom_functions;
-use crate::script_sanitizer::create_sanitized_scripts;
+use crate::custom_function_sanitizer::sanitized_custom_function_text;
+use crate::script_sanitizer::sanitized_script_text;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
+use crate::utils::file_utils::write_text_version;
 use crate::utils::output_files::OutputFiles;
 use crate::utils::xml_utils::{XmlEventType, end_element_to_string, start_element_to_string};
 use crate::utils::{
@@ -258,7 +259,35 @@ fn process_catalog_elements<R: Read + BufRead>(
     let xml_out_dir_path = build_out_dir_path(context, None)?;
     let saved_out_dir = std::mem::replace(&mut context.current_out_dir, xml_out_dir_path.clone());
 
-    let folder_structure_result = xml_explode_catalog(context, folder_structure)?;
+    // Scripts and custom functions also get sanitized (human-readable) text versions,
+    // created right after each item is written
+    let sanitized_qualifier = match catalog_type {
+        CatalogType::StepsForScripts => Some(Qualifier::SanitizedScripts),
+        CatalogType::CalcsForCustomFunctions => Some(Qualifier::SanitizedCustomFunctions),
+        CatalogType::CustomFunctions if ver >= VERSION_2_2_3_4 => {
+            Some(Qualifier::SanitizedCustomFunctions)
+        }
+        _ => None,
+    };
+    let sanitized_dir = sanitized_qualifier
+        .map(|qualifier| build_out_dir_path(context, Some(qualifier)))
+        .transpose()?;
+    let (flags, output) = (context.flags, context.output);
+    let write_sanitized = sanitized_dir.as_ref().map(|text_dir| {
+        let xml_dir = &xml_out_dir_path;
+        move |path: &Path, content: &str| {
+            let text = match catalog_type {
+                CatalogType::StepsForScripts => sanitized_script_text(content, flags),
+                _ => sanitized_custom_function_text(content),
+            };
+            write_text_version(path, xml_dir, text_dir, output, text);
+        }
+    });
+    let folder_structure_result = xml_explode_catalog(
+        context,
+        folder_structure,
+        write_sanitized.as_ref().map(|write| write as OnWritten),
+    )?;
 
     context.current_out_dir = saved_out_dir;
 
@@ -271,22 +300,6 @@ fn process_catalog_elements<R: Read + BufRead>(
         }
     }
 
-    // Post-processing: create sanitized (human-readable) versions
-    match catalog_type {
-        CatalogType::StepsForScripts => {
-            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedScripts))?;
-            create_sanitized_scripts(&xml_out_dir_path, &dir, context.flags, context.output);
-        }
-        CatalogType::CalcsForCustomFunctions => {
-            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-            create_sanitized_custom_functions(&xml_out_dir_path, &dir, context.output);
-        }
-        CatalogType::CustomFunctions if ver >= VERSION_2_2_3_4 => {
-            let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-            create_sanitized_custom_functions(&xml_out_dir_path, &dir, context.output);
-        }
-        _ => {}
-    }
     Ok(true) // is_supported_catalog
 }
 
