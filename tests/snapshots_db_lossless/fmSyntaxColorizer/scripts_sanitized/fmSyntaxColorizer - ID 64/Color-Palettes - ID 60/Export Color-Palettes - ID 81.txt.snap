@@ -30,11 +30,11 @@ Ende (wenn)
 
 # Set palette names
 Ersetze alle Feldwerte [ _Color::PaletteName ; Durch Berechnung ersetzen: Color.Palette_byID::PaletteName ]
-Sortieren [ Mit Dialog: OFF ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: OFF ; Restore ; Sort order: _Color::PaletteName (Ascending), _Color::PaletteType (Ascending), _Color::ColorName (Ascending) ; Keep records in sorted order ]
 
 # Export Colors
-// Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
-Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+// Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:$FilePath" ; Unicode (UTF-16) ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:$FilePath" ; Unicode (UTF-8) ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]

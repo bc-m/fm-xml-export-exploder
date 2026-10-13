@@ -5,10 +5,10 @@ expression: output_content
 
 # Send Mail via E-Mail Client (MAPI) mit/ohne Dialog
 
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Mit Dialog: ON ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
+E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Ohne Dialogfeld: ON ; Send via SMTP Server ; From name: $User ; From address: $UserMail ; SMTP server: $SMTPServer ; Port: 25 ; Encryption: SSL ; Authentication: Passwort (Klartext) ; User name: $User ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 
 
 # On/Off Optionen jetzt als Toggle direct im Script:
@@ -21,7 +21,7 @@ Seitenansichtsmodus aktivieren [ Pause: OFF ]
 
 # With Dialog On/Off
 
-Suchen/Ersetzen ausführen [ Mit Dialog: OFF ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+Suchen/Ersetzen ausführen [ Mit Dialog: OFF ; Perform: Weitersuchen ; Direction: Vorwärts ; Groß-/Kleinschreibung: OFF ; Nur ganzes Wort suchen: OFF ; Across: Alle Datensätze/Abfragen ; Within: Alle Felder ]
 Gehe zu Datens./Abfrage/Seite [ Mit Dialog: OFF ; 1+1 ]
 Gehe zu Ausschnittreihe [ Mit Dialog: ON ; Nach Formel… ]
 Ersetze alle Feldwerte [ Mit Dialog: ON ; Durch Berechnung ersetzen: 123456 ]
@@ -31,19 +31,19 @@ Alle Datensätze löschen [ Mit Dialog: ON ]
 Verwerfe Änderung Datens./Abfrage [ Mit Dialog: ON ]
 Schreibe Änderung Datens./Abfrage [ Mit Dialog: ON ]
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ]
-Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
-Datensätze als Excel speichern [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Mit Dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
-Datensätze als PDF speichern [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; An vorhandene PDF anhängen: OFF ; Mit Dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:file.txt" ; Automatically open ; Create email with file as attachment ]
+Datensätze als Excel speichern [ Mit Dialog: ON ; Ordner erstellen: OFF ]
+Datensätze als PDF speichern [ An vorhandene PDF anhängen: OFF ; Mit Dialog: ON ; Ordner erstellen: OFF ]
 Mehrere ausschließen [ Mit Dialog: ON ]
-Sortieren [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: ON ]
 Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
-Drucker einrichten [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Mit Dialog: OFF ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
-Drucken [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Drucker einrichten [ Restore ; Mit Dialog: OFF ; Orientation: Hochformat ]
+Drucken [ Mit Dialog: ON ]
 Passwort ändern [ Old Password: $PasswortAlt ; Password: $PasswortNeu ; With dialog: On ]
 Erneut anmelden [ Account Name: $Kontoname ; Password: $Passwort ; With dialog: On ]
 Telefonnummer wählen [ Mit Dialog: ON ; 12345678 ]
-URL öffnen [ Mit Dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
-SQL ausführen [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "SQL" NOT PARSED ⚠️ ]
+URL öffnen [ Mit Dialog: ON ; URL: "http://db.de" ; Automatically encode URL: ON ]
+SQL ausführen [ Mit Dialog: OFF ; Ordner erstellen: OFF ; SQL Text: SELECT * FROM orders ]
 
 # Purpose & data type of Script Result clearer:
 

@@ -1,7 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::BytesStart;
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 use crate::utils::xml_utils::skip_rest_of_element;
 
 #[derive(Debug, Default)]
@@ -12,7 +12,7 @@ pub struct Style {
 impl Style {
     pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Style {
         let item = Style {
-            style: get_attribute(e, "name"),
+            style: parse_unescaped_attribute(e, "name"),
         };
         skip_rest_of_element(reader);
         item

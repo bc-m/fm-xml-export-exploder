@@ -40,10 +40,10 @@ Wenn [ Abs ( Hole ( SystemPlattform ) ) = "1" ]
 	Variable setzen [ $this.file ; $this.path & PUB__publickeys::name ]
 	# generate keys
 	Variable setzen [ $my.applescript ; "do shell script \"" & "ssh-keygen -t rsa -b 4096 -m PEM -f " & $this.file & ".key -N " & "\\\"\\\"" & "\"" ]
-	AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	AppleScript ausführen
 	Variable setzen [ $my.applescript ; "do shell script \"" & "openssl rsa -in " & $this.file & ".key -pubout -outform PEM -out " & $this.file & ".key.pem\"" ]
-	AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
-	Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	AppleScript ausführen
+	Scriptpause setzen [ Dauer (Sekunden): .5 ]
 	Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
 		# get files
 		Variable setzen [ $this.url ; "file://" & $this.file & ".key" ]
@@ -61,11 +61,11 @@ Wenn [ Abs ( Hole ( SystemPlattform ) ) = "1" ]
 		
 		# do cleanup
 		Variable setzen [ $my.applescript ; "do shell script \"" & "rm " & $this.file & ".key\"" ]
-		AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		AppleScript ausführen
 		Variable setzen [ $my.applescript ; "do shell script \"" & "rm " & $this.file & ".key.pub\"" ]
-		AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		AppleScript ausführen
 		Variable setzen [ $my.applescript ; "do shell script \"" & "rm " & $this.file & ".key.pem\"" ]
-		AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+		AppleScript ausführen
 		
 	Ende (wenn)
 	
@@ -94,10 +94,10 @@ Sonst, wenn [ Abs ( Hole ( SystemPlattform ) ) = "2" ]
 	# generate keys
 	Variable setzen [ $my.powershell ; "powershell.exe -Command \"ssh-keygen -t rsa -b 4096 -m PEM -f \"" & $this.file & ".key\" -N " & "'\"\"'" & "\"" ]
 	Event senden
-	Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Scriptpause setzen [ Dauer (Sekunden): 5 ]
 	Variable setzen [ $my.powershell ; "powershell.exe -Command \"openssl rsa -in \"" & $this.file & ".key\" -pubout -outform PEM -out " & $this.file & ".key.pem\"" ]
 	Event senden
-	Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+	Scriptpause setzen [ Dauer (Sekunden): 5 ]
 	Wenn [ Hole ( LetzteFehlerNr ) = 0 ]
 		# get files
 		Variable setzen [ $this.url ; "file:///" & $this.file & ".key" ]

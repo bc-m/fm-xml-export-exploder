@@ -1,7 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct Animation {
@@ -20,7 +20,7 @@ impl Animation {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     if e.name().as_ref() == "Animation" {
-                        item.value = get_attribute(&e, "name");
+                        item.value = parse_unescaped_attribute(&e, "name");
                     }
                     depth += 1;
                 }

@@ -1,6 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
+use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::animation::Animation;
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::button::Button;
@@ -9,14 +10,16 @@ use crate::script_steps::parameters::comment::Comment;
 use crate::script_steps::parameters::data_source_reference::DataSourceReference;
 use crate::script_steps::parameters::dialog_field::DialogField;
 use crate::script_steps::parameters::field_reference::FieldReference;
+use crate::script_steps::parameters::labeled;
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
 use crate::script_steps::parameters::list::List;
 use crate::script_steps::parameters::privilege_set_reference::PrivilegeSetReference;
 use crate::script_steps::parameters::related::Related;
 use crate::script_steps::parameters::script_reference::ScriptReference;
+use crate::script_steps::parameters::structured;
 use crate::script_steps::parameters::target::Target;
 use crate::script_steps::parameters::window_reference::WindowReference;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub struct ParameterValues {
     pub parameters: Vec<String>,
@@ -40,12 +43,15 @@ impl ParameterValues {
                         continue;
                     }
 
-                    let Some(parameter_type) = get_attribute(&e, "type") else {
+                    let Some(parameter_type) = parse_unescaped_attribute(&e, "type") else {
                         continue;
                     };
                     let parsed = match parameter_type.as_str() {
                         "Animation" => Animation::from_xml(reader, &e).display(),
                         "Boolean" => Boolean::from_xml(reader, &e, step_id).display(),
+                        "List" if id_to_script_step(step_id) == ScriptStep::InsertFromDevice => {
+                            structured::device_source(reader, &e)
+                        }
                         "List" | "AccountType" => List::from_xml(reader, &e, step_id).display(),
                         "Target" => Target::from_xml(reader, &e)
                             .display()
@@ -80,11 +86,18 @@ impl ParameterValues {
                         "Field1" | "Field2" | "Field3" => {
                             DialogField::from_xml(reader, &e).display(&parameter_type)
                         }
-                        _ => {
-                            item.parameters
-                                .push(format!(r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#));
-                            continue;
+                        other if structured::is_structured(other) => {
+                            structured::from_xml(reader, &e, other)
                         }
+                        other => match labeled::label(other, step_id) {
+                            Some(label) => labeled::from_xml(reader, &e, step_id, other, label),
+                            None => {
+                                item.parameters.push(format!(
+                                    r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#
+                                ));
+                                continue;
+                            }
+                        },
                     };
                     depth -= 1;
                     if let Some(display) = parsed {

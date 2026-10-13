@@ -14,7 +14,7 @@ Variable setzen [ $error ; 0 ]
 #  SET-UP
 # -------------------------------------------------------------
 Variable setzen [ $$server ; FMS__fmserver::server_address ]
-URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+URL öffnen [ Mit Dialog: OFF ; URL: "https://" & $$server & "/fmi/data/apidoc/" ; Automatically encode URL: ON ]
 
 
 # -------------------------------------------------------------

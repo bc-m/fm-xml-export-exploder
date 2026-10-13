@@ -1,7 +1,13 @@
 use quick_xml::events::BytesStart;
 
+/// Returns the attribute value with XML entities resolved, e.g. `&apos;` becomes `'`.
+/// Values with malformed entities are returned as is.
 pub fn parse_unescaped_attribute(e: &BytesStart, attribute: &str) -> Option<String> {
-    get_attribute(e, attribute).map(|text| quick_xml::escape::unescape(&text).unwrap().into_owned())
+    get_attribute(e, attribute).map(|text| unescape_value(&text))
+}
+
+pub fn unescape_value(text: &str) -> String {
+    quick_xml::escape::unescape(text).map_or_else(|_| text.to_string(), |v| v.into_owned())
 }
 
 pub fn get_attributes(e: &BytesStart) -> Vec<(String, String)> {
@@ -25,6 +31,16 @@ mod tests {
     use quick_xml::events::Event;
 
     use crate::utils;
+
+    #[test]
+    fn test_unescape_value() {
+        assert_eq!(
+            utils::attributes::unescape_value("object&apos;s &lt;Unknown&gt;"),
+            "object's <Unknown>"
+        );
+        // Malformed entities are kept instead of panicking
+        assert_eq!(utils::attributes::unescape_value("A & B"), "A & B");
+    }
 
     #[test]
     fn test_get_name_attribute() {

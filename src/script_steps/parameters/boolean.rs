@@ -5,7 +5,7 @@ use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::constants::{
     commit_record_requests, go_to_field, refresh_window,
 };
-use crate::utils::attributes::get_attributes;
+use crate::utils::attributes::{get_attributes, unescape_value};
 
 #[derive(Debug, Default)]
 pub struct Boolean {
@@ -34,7 +34,7 @@ impl Boolean {
                         for attr in get_attributes(&e) {
                             match attr.0.as_str() {
                                 "id" => item.id = attr.1.parse().ok(),
-                                "type" => item.name = Some(attr.1),
+                                "type" => item.name = Some(unescape_value(&attr.1)),
                                 "value" => match attr.1.as_str() {
                                     "True" => item.value = Some(true),
                                     "False" => item.value = Some(false),

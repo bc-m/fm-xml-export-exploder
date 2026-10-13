@@ -1,7 +1,7 @@
 use quick_xml::Reader;
 use quick_xml::events::Event;
 
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 use crate::utils::xml_utils;
 
 pub fn sanitize(step: &str) -> Option<String> {
@@ -18,7 +18,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
                 "Name" => in_name = true,
                 "repetition" => in_repetition = true,
                 _ => {}

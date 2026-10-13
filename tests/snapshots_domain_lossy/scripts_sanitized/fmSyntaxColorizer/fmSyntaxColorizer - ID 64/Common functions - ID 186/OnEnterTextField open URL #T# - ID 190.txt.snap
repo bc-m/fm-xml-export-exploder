@@ -44,5 +44,5 @@ Variable setzen [ $clickedWord ; ZeichenMitte( $contents ; 1+$clickPos - Länge(
 Wenn [ _BeginsWith ( $clickedWord ; "www" ) ODER 
 				_BeginsWith ( $clickedWord ; "http" ) ]
 	Gehe zu Feld []
-	URL öffnen [ Mit Dialog: OFF ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+	URL öffnen [ Mit Dialog: OFF ; URL: $clickedWord ; Automatically encode URL: ON ]
 Ende (wenn)

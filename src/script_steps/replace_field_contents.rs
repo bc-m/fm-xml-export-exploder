@@ -3,7 +3,7 @@ use quick_xml::events::Event;
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -23,12 +23,12 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
                 "Boolean" => {
-                    if get_attribute(&e, "value").as_deref() != Some("True") {
+                    if parse_unescaped_attribute(&e, "value").as_deref() != Some("True") {
                         continue;
                     }
-                    let label = get_attribute(&e, "type").unwrap();
+                    let label = parse_unescaped_attribute(&e, "type").unwrap();
                     params.push((label, "ON".to_string()));
                 }
                 "FieldReference" => {
@@ -42,29 +42,40 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
                 "List" => {
                     if in_serial_number_section {
-                        if get_attribute(&e, "value").as_deref() == Some("True")
+                        if parse_unescaped_attribute(&e, "value").as_deref() == Some("True")
                             && let Some(last_param) = params.last_mut()
                         {
                             last_param.0.clone_from(&last_param.1);
-                            last_param.1 = get_attribute(&e, "name").unwrap();
+                            last_param.1 = parse_unescaped_attribute(&e, "name").unwrap();
                         }
                         continue;
                     }
 
-                    match get_attribute(&e, "value").unwrap_or_default().as_str() {
-                        "0" | "1" => {
-                            params.push((String::new(), get_attribute(&e, "name").unwrap()))
-                        }
+                    match parse_unescaped_attribute(&e, "value")
+                        .unwrap_or_default()
+                        .as_str()
+                    {
+                        "0" | "1" => params.push((
+                            String::new(),
+                            parse_unescaped_attribute(&e, "name").unwrap(),
+                        )),
                         "2" => {
-                            params.push((String::new(), get_attribute(&e, "name").unwrap()));
+                            params.push((
+                                String::new(),
+                                parse_unescaped_attribute(&e, "name").unwrap(),
+                            ));
                             in_serial_number_section = true;
                         }
-                        "3" => calculation_label = get_attribute(&e, "name").unwrap(),
+                        "3" => calculation_label = parse_unescaped_attribute(&e, "name").unwrap(),
                         _ => {}
                     }
                 }
-                "Initial" => auto_increment_initial_value = get_attribute(&e, "value").unwrap(),
-                "increment" => auto_increment_interval_value = get_attribute(&e, "value").unwrap(),
+                "Initial" => {
+                    auto_increment_initial_value = parse_unescaped_attribute(&e, "value").unwrap()
+                }
+                "increment" => {
+                    auto_increment_interval_value = parse_unescaped_attribute(&e, "value").unwrap()
+                }
                 _ => {}
             },
             _ => {}

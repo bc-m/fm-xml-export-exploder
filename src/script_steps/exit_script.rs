@@ -2,7 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::Event;
 
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -15,7 +15,7 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
                 "Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }

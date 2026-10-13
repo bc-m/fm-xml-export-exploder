@@ -3,7 +3,7 @@ use quick_xml::events::Event;
 
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -19,12 +19,12 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 "Step" => {
-                    name = get_attribute(&e, "name").unwrap_or_default();
+                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
                 "Boolean" => {
-                    option_name = get_attribute(&e, "type").unwrap_or_default();
-                    state = get_attribute(&e, "value").as_deref() == Some("True");
+                    option_name = parse_unescaped_attribute(&e, "type").unwrap_or_default();
+                    state = parse_unescaped_attribute(&e, "value").as_deref() == Some("True");
                     continue;
                 }
                 "Calculation" => {

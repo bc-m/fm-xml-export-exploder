@@ -27,7 +27,7 @@ Feldwert setzen [ _Home::_gInputText2 ; "" ]
 Feldwert setzen [ _Home::_gInputText3 ; "" ]
 
 Schleife (Anfang) [ Flush: Immer ]
-	Eigenes Dialogfeld anzeigen [ Message: "Please input the new password for account " & $Account ; Default Button: "OK" ; Button 2: "Cancel" ; Input 1: _Home::_gInputText1 ; Label 1: "Old Password" ; Input 2: _Home::_gInputText2 ; Label 2: "New Password" ; Input 3: _Home::_gInputText3 ; Label 3: "Repeat" ]
+	Eigenes Dialogfeld anzeigen [ Message: "Please input the new password for account " & $Account ; Default Button: "OK" ; Button 2: "Cancel" ; Input 1: _Home::_gInputText1 ; Label 1: "Old Password" ; Password ; Input 2: _Home::_gInputText2 ; Label 2: "New Password" ; Password ; Input 3: _Home::_gInputText3 ; Label 3: "Repeat" ; Password ]
 	Variable setzen [ $cancel ; Hole( LetzteMeldungswahl ) = 2 ODER
 					IstLeer( _Home::_gInputText1 & _Home::_gInputText2 & _Home::_gInputText3 ) ]
 	Verlasse Schleife wenn [ $cancel ]

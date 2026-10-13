@@ -3,7 +3,7 @@ use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::target::Target;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
 pub struct DialogField {
@@ -25,7 +25,7 @@ impl DialogField {
                 Ok(Event::Start(inner)) => {
                     depth += 1;
                     match inner.name().as_ref() {
-                        "Parameter" => match get_attribute(&inner, "type").as_deref() {
+                        "Parameter" => match parse_unescaped_attribute(&inner, "type").as_deref() {
                             Some("Target") => {
                                 item.target = Target::from_xml(reader, &inner).display();
                                 depth -= 1;
@@ -36,10 +36,11 @@ impl DialogField {
                             }
                             _ => {}
                         },
+                        // The only Boolean of an input field is the password flag. Its type
+                        // is localized ("Password", "Passwort", ...), so only the value counts.
                         "Boolean" => {
-                            item.password = get_attribute(&inner, "type").as_deref()
-                                == Some("Password")
-                                && get_attribute(&inner, "value").as_deref() == Some("True");
+                            item.password = parse_unescaped_attribute(&inner, "value").as_deref()
+                                == Some("True");
                         }
                         _ => {}
                     }
@@ -84,6 +85,23 @@ mod tests {
     use quick_xml::events::Event;
 
     use super::DialogField;
+
+    #[test]
+    fn test_localized_password_flag() {
+        let xml = r#"<Parameter type="Field3"><Parameter type="Target"><Variable value="$pw"><repetition value="1"></repetition></Variable></Parameter><Boolean type="Passwort" value="True"></Boolean><Parameter type="Label"><Calculation datatype="1" position="2"><Calculation><Text><![CDATA["PW"]]></Text></Calculation></Calculation></Parameter></Parameter>"#;
+
+        let mut reader = Reader::from_str(xml);
+        let element = match reader.read_event() {
+            Ok(Event::Start(e)) => e,
+            _ => panic!("Wrong read event"),
+        };
+
+        let field = DialogField::from_xml(&mut reader, &element);
+        assert_eq!(
+            field.display("Field3"),
+            Some(r#"Input 3: $pw ; Label 3: "PW" ; Password"#.to_string())
+        );
+    }
 
     #[test]
     fn test_field_with_variable_and_label() {

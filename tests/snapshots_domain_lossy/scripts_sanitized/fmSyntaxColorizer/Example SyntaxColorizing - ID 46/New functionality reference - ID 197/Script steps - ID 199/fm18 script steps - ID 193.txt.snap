@@ -5,7 +5,7 @@ expression: output_content
 # Renamed
 Auf Host hochladen
 Favoriten öffnen
-Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
+Ordnerpfad holen [ Ordnererstellung zulassen: OFF ]
 
 Variable setzen [ $FileID ; "" ]
 Variable setzen [ $FileExists ; "" ]
@@ -24,31 +24,31 @@ Fehlerprotokollierung setzen [ ON ; CustomDebugInfo: Hole ( ProgrammBenutzername
 
 # FileSteps
 Dateiexistenz holen
-Dateiexistenz holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileExists ]
+Dateiexistenz holen [ "file:abc.fmp12" ; Target: $FileExists ]
 
 Dateigröße holen
-Dateigröße holen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: $FileSize ]
+Dateigröße holen [ "file:abc.fmp12" ; Target: $FileSize ]
 
 Datendatei erstellen [ Ordner erstellen: OFF ]
 Datendatei erstellen [ Ordner erstellen: OFF ]
-Datendatei erstellen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
+Datendatei erstellen [ "file:abc.def" ; Ordner erstellen: OFF ]
 
-Datendatei öffnen [ ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ; Target: _Home::_gInputText1 ]
+Datendatei öffnen [ "file:abc.def" ; Target: _Home::_gInputText1 ]
 
-In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: _Home::_gInputText2 ; Zeilenumbruch anhängen: OFF ]
-In Datendatei schreiben [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $data ; Zeilenumbruch anhängen: ON ]
+In Datendatei schreiben [ File ID: $FileID ; Target: _Home::_gInputText2 ; Zeilenumbruch anhängen: OFF ]
+In Datendatei schreiben [ File ID: $FileID ; Target: $data ; Zeilenumbruch anhängen: ON ]
 
-Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: _Home::_gInputText3 ]
-Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
-Von Datendatei lesen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "size" NOT PARSED ⚠️ ; Target: $target ]
+Von Datendatei lesen [ File ID: $FileID ; Amount (bytes): 123 ; Target: _Home::_gInputText3 ]
+Von Datendatei lesen [ File ID: $FileID ; Amount (bytes): 123 ; Target: $target ]
+Von Datendatei lesen [ File ID: $FileID ; Amount (bytes): 123 ; Target: $target ]
 
-Datendateiposition holen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; Target: $Pos ]
+Datendateiposition holen [ File ID: $FileID ; Target: $Pos ]
 
 Datendateiposition setzen
-Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
-Datendateiposition setzen [ ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
-Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ]
-Datendateiposition setzen [ ⚠️ PARAMETER "id" NOT PARSED ⚠️ ; ⚠️ PARAMETER "position" NOT PARSED ⚠️ ]
+Datendateiposition setzen [ File ID: $FileID ]
+Datendateiposition setzen [ New position: 123 ]
+Datendateiposition setzen [ File ID: $FileID ]
+Datendateiposition setzen [ File ID: $FileID ; New position: $Pos ]
 
 Datendatei schließen
 Datei löschen

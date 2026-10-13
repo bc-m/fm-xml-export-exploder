@@ -2,7 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::Event;
 
 use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::{get_attribute, parse_unescaped_attribute};
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -20,11 +20,11 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 "Step" => {
-                    name = get_attribute(&e, "name").unwrap();
+                    name = parse_unescaped_attribute(&e, "name").unwrap();
                 }
                 "List" => {
-                    script_reference_type_id = get_attribute(&e, "value").unwrap();
-                    script_reference_type = get_attribute(&e, "name").unwrap();
+                    script_reference_type_id = parse_unescaped_attribute(&e, "value").unwrap();
+                    script_reference_type = parse_unescaped_attribute(&e, "name").unwrap();
                     if script_reference_type_id == "2" {
                         script_reference =
                             Calculation::from_xml(&mut reader, &e).display().unwrap();
@@ -34,7 +34,9 @@ pub fn sanitize(step: &str) -> Option<String> {
                     data_source_reference = parse_unescaped_attribute(&e, "name")
                 }
                 "ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
-                "Parameter" if get_attribute(&e, "type").as_deref() == Some("Parameter") => {
+                "Parameter"
+                    if parse_unescaped_attribute(&e, "type").as_deref() == Some("Parameter") =>
+                {
                     calculation = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default();

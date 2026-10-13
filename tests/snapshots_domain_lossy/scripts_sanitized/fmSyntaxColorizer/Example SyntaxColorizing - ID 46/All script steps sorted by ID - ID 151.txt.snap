@@ -40,11 +40,11 @@ Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ]
 Datensätze exportieren [ Mit Dialog: ON ; Ordner erstellen: OFF ]
 Kopie speichern unter [ Kopie der aktuellen Datei ; Ordner erstellen: OFF ]
 Datenbank verwalten
-Sortieren [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: ON ]
 Referenzwerte holen [ Mit Dialog: ON ]
 Seitenansichtsmodus aktivieren [ Pause: OFF ]
-Drucker einrichten [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Mit Dialog: ON ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
-Drucken [ Mit Dialog: ON ; ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Drucker einrichten [ Mit Dialog: ON ]
+Drucken [ Mit Dialog: ON ]
 Programm beenden
 Rückgängig/Wiederholen [ Rückgängig ]
 Ausschneiden [ Auswahl: ON ]
@@ -63,12 +63,12 @@ Event senden
 QuickTime einfügen
 Benutzernamen einfügen [ Auswahl: ON ]
 Text einfügen [ Select ]
-Scriptpause setzen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+Scriptpause setzen
+E-Mail senden [ Mit Dialog: ON ; Send via E-mail Client ]
 DDE Execute senden
 Telefonnummer wählen [ Mit Dialog: ON ]
-Sprechen [ ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Wait" NOT PARSED ⚠️ ]
-AppleScript ausführen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ]
+Sprechen [ Voice: Default ; Wait: ON ]
+AppleScript ausführen
 Wenn []
 Sonst
 Ende (wenn)
@@ -112,7 +112,7 @@ Dateioptionen - Rechtschreibung
 Wörterbücher wählen
 Anwenderwörterbuch bearbeiten
 Wenn [ /* Command ID 110 <unknown> - but command 125, else if, has to be inside an if to be legal*/ ]
-	URL öffnen [ Mit Dialog: ON ; ⚠️ PARAMETER "URL" NOT PARSED ⚠️ ]
+	URL öffnen [ Mit Dialog: ON ]
 	Wertelisten verwalten
 	Sharing - FileMaker Netzwerk
 	Dateioptionen
@@ -129,9 +129,9 @@ Wenn [ /* Command ID 110 <unknown> - but command 125, else if, has to be inside 
 Sonst, wenn []
 	Ergebnismenge einschränken
 	Ergebnismenge erweitern
-	Suchen/Ersetzen ausführen [ Mit Dialog: ON ; ⚠️ PARAMETER "perform" NOT PARSED ⚠️ ; ⚠️ PARAMETER "find" NOT PARSED ⚠️ ; ⚠️ PARAMETER "replace" NOT PARSED ⚠️ ; ⚠️ PARAMETER "direction" NOT PARSED ⚠️ ; ⚠️ PARAMETER "case" NOT PARSED ⚠️ ; ⚠️ PARAMETER "whole" NOT PARSED ⚠️ ; ⚠️ PARAMETER "across" NOT PARSED ⚠️ ; ⚠️ PARAMETER "within" NOT PARSED ⚠️ ]
+	Suchen/Ersetzen ausführen [ Mit Dialog: ON ; Perform: Weitersuchen ; Direction: Vorwärts ; Groß-/Kleinschreibung: OFF ; Nur ganzes Wort suchen: OFF ; Across: Alle Datensätze/Abfragen ; Within: Alle Felder ]
 	Suchen/Ersetzen
-	Auswahl festlegen [ ⚠️ PARAMETER "Select" NOT PARSED ⚠️ ]
+	Auswahl festlegen
 	Datei einfügen
 	Exportiere alle Feldwerte [ Ordner erstellen: OFF ]
 	Datensatz/Abfrage öffnen
@@ -143,18 +143,18 @@ Sonst, wenn []
 	Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
 	Datenquellen verwalten
 	Variable setzen [ $Command ; "whatever" ]
-	Menüset installieren [ ⚠️ PARAMETER "CustomMenuSet" NOT PARSED ⚠️ ]
-	Datensätze als Excel speichern [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; Mit Dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
-	Datensätze als PDF speichern [ ⚠️ PARAMETER "Restore" NOT PARSED ⚠️ ; An vorhandene PDF anhängen: OFF ; Mit Dialog: ON ; ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Ordner erstellen: OFF ]
+	Menüset installieren [ "[Standard-FileMaker-Menüs]" ; Als Dateistandard verwenden: OFF ]
+	Datensätze als Excel speichern [ Mit Dialog: ON ; Ordner erstellen: OFF ]
+	Datensätze als PDF speichern [ An vorhandene PDF anhängen: OFF ; Mit Dialog: ON ; Ordner erstellen: OFF ]
 	Gehe zu Objekt []
-	Web Viewer festlegen [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+	Web Viewer festlegen
 	Feld nach Namen einstellen [ Zielfeld angeben: OFF ]
 	BeiTimer-Script installieren
 	Gespeicherte Suchen bearbeiten
 	Schnellsuche durchführen
 	Layouts verwalten
 	Datensätze als Snapshot-Link speichern [ Alle aufgerufenen Datensätze ; Ordner erstellen: OFF ]
-	&lt;Unbekannt&gt; [153]
+	<Unbekannt> [153]
 	Datensätze nach Feld sortieren [ Aufsteigend ]
 	Übereinst. Datensätze suchen [ Ersetzen ]
 	Container verwalten
@@ -162,33 +162,33 @@ Sonst, wenn []
 	PDF einfügen [ Nur Verweis speichern: OFF ]
 	Audio/Video einfügen [ Nur Verweis speichern: OFF ]
 	Aus URL einfügen [ Auswahl ; Mit Dialog: ON ]
-	Von Gerät einfügen [ Original ]
-	&lt;Unbekannt&gt; [162]
-	&lt;Unbekannt&gt; [163]
-	Script auf Server ausführen [ Aus Liste ; ⚠️ PARAMETER "Parameter" NOT PARSED ⚠️ ; Auf Beendigung warten: ON ]
+	Von Gerät einfügen [ Kamera ; Camera: Hinten ; Resolution: Original ]
+	<Unbekannt> [162]
+	<Unbekannt> [163]
+	Script auf Server ausführen [ Aus Liste ; Auf Beendigung warten: ON ]
 	Designs verwalten
 	Menüleiste ein-/ausblenden [ Umschalten ; Fixieren: OFF ]
 	Objekt aktualisieren []
 	Layoutobjekt-Animation festlegen [ ON ]
 	Popover schließen
-	&lt;Unbekannt&gt; [170]
-	&lt;Unbekannt&gt; [171]
+	<Unbekannt> [170]
+	<Unbekannt> [171]
 	Auf Host hochladen
-	&lt;Unbekannt&gt; [173]
+	<Unbekannt> [173]
 	Touch-Tastatur aktivieren [ Aus ]
 	JavaScript in Web Viewer ausführen
 	Zulässige Ausrichtungen festlegen
-	AVPlayer - Wiedergabe [ ⚠️ PARAMETER "Source" NOT PARSED ⚠️ ]
+	AVPlayer - Wiedergabe
 	AVPlayer-Wiedergabestatus festlegen [ Gestoppt ]
 	AVPlayer - Optionen festlegen
-	Ausschnitt aktualisieren [ ⚠️ PARAMETER "Object" NOT PARSED ⚠️ ]
-	Ordnerpfad holen [ Ordnererstellung zulassen: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
+	Ausschnitt aktualisieren
+	Ordnerpfad holen [ Ordnererstellung zulassen: OFF ]
 	Tabelle leeren [ Mit Dialog: ON ; <Aktuelle Tabelle> ]
 	Favoriten öffnen
 	Open Starter Solution
-	Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ]
+	Regionsmonitor-Script konfigurieren [ Monitor: iBeacon ]
 	MBS [ $Command ; $P1 ; $P2 ; $P3 ; $P4 ; $P5 ; $P6 ; $P7 ; $P8 ; $P9 ]
-	Lokale Benachrichtigung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
+	Lokale Benachrichtigung konfigurieren [ Action: Warteschlange ]
 	Dateiexistenz holen
 	Dateigröße holen
 	Datendatei erstellen [ Ordner erstellen: OFF ]
@@ -200,10 +200,10 @@ Sonst, wenn []
 	Datendatei schließen
 	Datei löschen
 	Datei umbenennen
-	&lt;Unbekannt&gt; [198]
+	<Unbekannt> [198]
 	Fehlerprotokollierung setzen [ OFF ]
-	NFC-Erkennung konfigurieren [ ⚠️ PARAMETER "action" NOT PARSED ⚠️ ]
-	Machine Learning-Modell konfigurieren [ ⚠️ PARAMETER "operation" NOT PARSED ⚠️ ]
+	NFC-Erkennung konfigurieren [ Action: Lesen ]
+	Machine Learning-Modell konfigurieren [ Operation: uninstall ]
 	FileMaker Data API ausführen [ Auswahl: ON ]
 	# [OBSOLETE]  <unknown> [204]
 	  Note:

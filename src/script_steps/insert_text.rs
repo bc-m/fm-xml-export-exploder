@@ -3,7 +3,7 @@ use quick_xml::events::Event;
 
 use crate::script_steps::parameters::target::Target;
 use crate::script_steps::parameters::text::Text;
-use crate::utils::attributes::get_attribute;
+use crate::utils::attributes::parse_unescaped_attribute;
 
 pub fn sanitize(step: &str) -> Option<String> {
     let mut name = String::new();
@@ -19,11 +19,11 @@ pub fn sanitize(step: &str) -> Option<String> {
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
                 "Step" => {
-                    name = get_attribute(&e, "name").unwrap_or_default();
+                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
                 }
                 "Boolean"
-                    if get_attribute(&e, "id").as_deref() == Some("4096")
-                        && get_attribute(&e, "value").as_deref() == Some("True") =>
+                    if parse_unescaped_attribute(&e, "id").as_deref() == Some("4096")
+                        && parse_unescaped_attribute(&e, "value").as_deref() == Some("True") =>
                 {
                     select = true;
                 }
@@ -31,7 +31,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                     text = Text::from_xml(&mut reader, &e).display();
                 }
                 "Parameter" => {
-                    let target_type = get_attribute(&e, "type").unwrap();
+                    let target_type = parse_unescaped_attribute(&e, "type").unwrap();
                     if target_type == "Target" {
                         target = Target::from_xml(&mut reader, &e).display();
                     }

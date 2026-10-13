@@ -10,12 +10,12 @@ Berechneten Wert einfügen [ Auswahl: ON ; Target: $UseSetVariable ; "Value" ]
 Systemdatum einfügen [ Auswahl: ON ; Target: $UseSetVariable ]
 Systemuhrzeit einfügen [ Auswahl: ON ; Target: $UseSetVariable ]
 Benutzernamen einfügen [ Auswahl: ON ; Target: $UseSetVariable ]
-Datei einfügen [ ⚠️ PARAMETER "Options" NOT PARSED ⚠️ ; Target: $FileContents ; ⚠️ PARAMETER "UniversalPathList" NOT PARSED ⚠️ ]
+Datei einfügen [ Storage:  ; Display:  ; Compress:  ; Target: $FileContents ; "file:$filePath" ]
 Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $WebContent ]
 
 # FYI: *NOT* Changed: 
 Audio/Video einfügen [ Nur Verweis speichern: OFF ]
-Von Gerät einfügen [ Original ]
+Von Gerät einfügen [ Kamera ; Camera: Hinten ; Resolution: Original ]
 Aus Index einfügen [ Auswahl: ON ]
 Aus zuletzt geöffnetem Satz einfügen [ Auswahl: OFF ]
 PDF einfügen [ Nur Verweis speichern: OFF ]
@@ -29,8 +29,8 @@ Löschen [ Auswahl: ON ]
 Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; cURL options: "-X PUT" ]
 
 # New Script step:
-Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; ⚠️ PARAMETER "UUID" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Major" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Minor" NOT PARSED ⚠️ ]
-Regionsmonitor-Script konfigurieren [ ⚠️ PARAMETER "Monitor" NOT PARSED ⚠️ ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; ⚠️ PARAMETER "Latitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Longitude" NOT PARSED ⚠️ ; ⚠️ PARAMETER "Radius" NOT PARSED ⚠️ ]
+Regionsmonitor-Script konfigurieren [ Monitor: iBeacon ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; UUID: $UUID ; Major: $Major ; Minor: $Minor ]
+Regionsmonitor-Script konfigurieren [ Monitor: Geofence ; Name: $BeaconName ; "### 20230303 @mrwatson-de v1.13 ###" ; Latitude: $Latitude ; Longitude: $Longitude ; Radius: $Radius ]
 
 # Changed: Layout animations
 Gehe zu Layout [ Layout: <Originallayout> ; Animation: Ohne ]
