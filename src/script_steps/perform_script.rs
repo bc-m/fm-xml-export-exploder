@@ -19,10 +19,10 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
+                "Step" => {
                     name = get_attribute(&e, "name").unwrap();
                 }
-                b"List" => {
+                "List" => {
                     script_reference_type_id = get_attribute(&e, "value").unwrap();
                     script_reference_type = get_attribute(&e, "name").unwrap();
                     if script_reference_type_id == "2" {
@@ -30,11 +30,11 @@ pub fn sanitize(step: &str) -> Option<String> {
                             Calculation::from_xml(&mut reader, &e).display().unwrap();
                     }
                 }
-                b"DataSourceReference" => {
+                "DataSourceReference" => {
                     data_source_reference = parse_unescaped_attribute(&e, "name")
                 }
-                b"ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
-                b"Parameter" if get_attribute(&e, "type").as_deref() == Some("Parameter") => {
+                "ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
+                "Parameter" if get_attribute(&e, "type").as_deref() == Some("Parameter") => {
                     calculation = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default();

@@ -64,29 +64,27 @@ pub fn end_element_to_string(e: &BytesEnd) -> String {
     format_end_tag(e.name().as_ref())
 }
 
-pub fn format_end_tag(name: &[u8]) -> String {
+pub fn format_end_tag(name: &str) -> String {
     let element_name = local_name_to_string(name);
     format!("</{element_name}>")
 }
 
-pub fn local_name_to_string(local_name: &[u8]) -> String {
-    String::from_utf8_lossy(local_name).into_owned()
+pub fn local_name_to_string(local_name: &str) -> String {
+    local_name.to_owned()
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
-    e.decode().map(|s| s.into_owned()).unwrap_or_default()
+    e.to_string()
 }
 
 pub fn cdata_to_string(e: &BytesCData) -> String {
-    String::from_utf8_lossy(e).into_owned()
+    e.to_string()
 }
 
 /// Convert a general entity reference back to its escaped XML form
 /// e.g., BytesRef containing "quot" -> "&quot;", BytesRef containing "#09" -> "&#09;"
 pub fn general_ref_to_string(e: &BytesRef, escape: bool) -> String {
-    let Ok(entity_name) = e.decode() else {
-        return String::new();
-    };
+    let entity_name: &str = e;
 
     if escape {
         // Keep the reference in its escaped form (e.g., &quot;, &#09;)
@@ -331,7 +329,7 @@ pub fn extract_values_from_xml_paths(
     loop {
         match reader.read_event_into(&mut buf) {
             Ok(Event::Start(ref e)) => {
-                current_path.push(String::from_utf8_lossy(e.name().as_ref()).into_owned());
+                current_path.push(e.name().as_ref().to_owned());
 
                 for (i, path) in parsed_paths.iter().enumerate() {
                     if resolved_indices.contains(&i) {
@@ -350,7 +348,7 @@ pub fn extract_values_from_xml_paths(
                         if let Some(attr) = e
                             .attributes()
                             .flatten()
-                            .find(|a| a.key.as_ref() == attr_name.as_bytes())
+                            .find(|a| a.key.as_ref() == attr_name)
                         {
                             let value = attr
                                 .normalized_value(quick_xml::XmlVersion::Implicit1_0)
@@ -379,12 +377,7 @@ pub fn extract_values_from_xml_paths(
 
             Ok(Event::Text(e)) => {
                 for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
-                    let decoded = e
-                        .decode()
-                        .map_err(|err| format!("Failed to decode text: {err}"))?;
-                    results[i]
-                        .get_or_insert_with(String::new)
-                        .push_str(&decoded);
+                    results[i].get_or_insert_with(String::new).push_str(&e);
                 }
             }
 
@@ -399,7 +392,7 @@ pub fn extract_values_from_xml_paths(
 
             Ok(Event::CData(e)) => {
                 for i in matching_text_paths(&parsed_paths, &current_path, &resolved_indices) {
-                    results[i] = Some(String::from_utf8_lossy(e.as_ref()).into_owned());
+                    results[i] = Some(e.to_string());
                     resolved_indices.insert(i);
                 }
             }

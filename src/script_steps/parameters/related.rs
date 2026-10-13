@@ -22,12 +22,12 @@ impl Related {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     match e.name().as_ref() {
-                        b"TableOccurrenceReference" => {
+                        "TableOccurrenceReference" => {
                             let table_occurrence = get_attribute(&e, "name")
                                 .unwrap_or_else(|| "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨".to_string());
                             item.parameters.push(format!("Table: {table_occurrence}"));
                         }
-                        b"LayoutReferenceContainer" => {
+                        "LayoutReferenceContainer" => {
                             item.parameters.push(
                                 LayoutReferenceContainer::from_xml(reader, &e)
                                     .display()
@@ -35,11 +35,11 @@ impl Related {
                             );
                             depth -= 1;
                         }
-                        b"WindowReference" => {
+                        "WindowReference" => {
                             item.parameters.push("New window".to_string());
                             depth -= 1;
                         }
-                        b"Options" => {
+                        "Options" => {
                             if get_attribute(&e, "ShowRelated").as_deref() == Some("True") {
                                 item.parameters.push("Show related".to_string());
                             }

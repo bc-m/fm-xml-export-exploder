@@ -71,11 +71,11 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
             Ok(Event::Start(e)) => {
                 depth += 1;
 
-                if depth == 2 && e.name().as_ref() == b"ScriptReference" {
+                if depth == 2 && e.name().as_ref() == "ScriptReference" {
                     if let Some(id) = get_attribute(&e, "id") {
                         script_info.id = id;
                     }
-                } else if depth == 3 && e.name().as_ref() == b"Step" {
+                } else if depth == 3 && e.name().as_ref() == "Step" {
                     in_step = true;
                     step_info.indent_level_current = step_info.indent_level_next;
                     step_info.id = get_attribute(&e, "id").unwrap().parse().unwrap();
@@ -114,7 +114,7 @@ fn parse_script_xml(xml_content: &str, flags: &Flags) -> Option<ScriptInfo> {
                     step_info.content.push_str(&end_element_to_string(&e));
                 }
 
-                if depth == 2 && e.name().as_ref() == b"Step" {
+                if depth == 2 && e.name().as_ref() == "Step" {
                     in_step = false;
                     let is_comment = id_to_script_step(step_info.id) == ScriptStep::Comment;
                     if let Some(text) = sanitize(step_info.id, &step_info.content, flags) {

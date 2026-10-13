@@ -20,7 +20,7 @@ impl Select {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"Calculation" {
+                    if e.name().as_ref() == "Calculation" {
                         if let Some(display) = Calculation::from_xml(reader, &e).display() {
                             item.text = Some(format!("Name: {display}"));
                         }

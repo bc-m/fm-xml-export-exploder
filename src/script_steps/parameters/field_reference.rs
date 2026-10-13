@@ -26,13 +26,13 @@ impl FieldReference {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     match e.name().as_ref() {
-                        b"FieldReference" => {
+                        "FieldReference" => {
                             item.field_reference = get_attribute(&e, "name");
                         }
-                        b"TableOccurrenceReference" => {
+                        "TableOccurrenceReference" => {
                             item.table_reference = get_attribute(&e, "name");
                         }
-                        b"repetition" => {
+                        "repetition" => {
                             item.repetition =
                                 get_attribute(&e, "value").and_then(|v| v.parse().ok());
                         }

@@ -56,23 +56,23 @@ pub fn rename_file(file_path: &Path, new_name: &str) -> Result<PathBuf> {
 
 /// Some catalog items derive their name differently from the standard method
 /// which builds the name using id and name attributes in the catalog item tag.
-pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[Vec<u8>], tag_name: &[u8]) {
-    if path_stack.get(1).is_none_or(|v| v != b"Structure") {
+pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[String], tag_name: &str) {
+    if path_stack.get(1).is_none_or(|v| v != "Structure") {
         return;
     }
-    let action = path_stack.get(2).map(|v| v.as_slice());
+    let action = path_stack.get(2).map(|v| v.as_str());
 
     let paths: &[&str] = match (action, tag_name) {
-        (Some(b"AddAction"), b"Account") => &["Account/Authentication/AccountName", "Account/@id"],
-        (Some(b"AddAction"), b"Authorization") => &["Authorization/Display", "Authorization/@id"],
-        (Some(b"AddAction"), b"BinaryData") => &[
+        (Some("AddAction"), "Account") => &["Account/Authentication/AccountName", "Account/@id"],
+        (Some("AddAction"), "Authorization") => &["Authorization/Display", "Authorization/@id"],
+        (Some("AddAction"), "BinaryData") => &[
             "BinaryData/LibraryReference/@key",
             "BinaryData/LibraryReference/@id",
         ],
-        (Some(b"ModifyAction"), b"Layout") => {
+        (Some("ModifyAction"), "Layout") => {
             &["Layout/LayoutReference/@name", "Layout/LayoutReference/@id"]
         }
-        (Some(b"AddAction"), b"Relationship") => &[
+        (Some("AddAction"), "Relationship") => &[
             "Relationship/LeftTable/TableOccurrenceReference/@name",
             "Relationship/RightTable/TableOccurrenceReference/@name",
             "Relationship/@id",
@@ -219,11 +219,11 @@ mod tests {
         std::fs::write(&temp_file, xml_content).unwrap();
 
         let path_stack = vec![
-            b"SomeElement".to_vec(),
-            b"Structure".to_vec(),
-            b"AddAction".to_vec(),
+            "SomeElement".to_owned(),
+            "Structure".to_owned(),
+            "AddAction".to_owned(),
         ];
-        rename_file_if_necessary(&temp_file, &path_stack, b"Account");
+        rename_file_if_necessary(&temp_file, &path_stack, "Account");
 
         let renamed_file = PathBuf::from("[Guest] - ID 1.xml");
         assert!(renamed_file.exists());
@@ -244,11 +244,11 @@ mod tests {
         std::fs::write(&temp_file, xml_content).unwrap();
 
         let path_stack = vec![
-            b"SomeElement".to_vec(),
-            b"WrongElement".to_vec(),
-            b"AddAction".to_vec(),
+            "SomeElement".to_owned(),
+            "WrongElement".to_owned(),
+            "AddAction".to_owned(),
         ];
-        rename_file_if_necessary(&temp_file, &path_stack, b"Account");
+        rename_file_if_necessary(&temp_file, &path_stack, "Account");
 
         assert!(temp_file.exists());
 

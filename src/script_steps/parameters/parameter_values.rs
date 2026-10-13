@@ -36,7 +36,7 @@ impl ParameterValues {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if depth != 2 || e.name().as_ref() != b"Parameter" {
+                    if depth != 2 || e.name().as_ref() != "Parameter" {
                         continue;
                     }
 

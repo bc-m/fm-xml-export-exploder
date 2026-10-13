@@ -19,7 +19,7 @@ impl Calculation {
                 Err(_) => continue,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"Text" {
+                    if e.name().as_ref() == "Text" {
                         in_text = true;
                     }
                 }
@@ -36,7 +36,7 @@ impl Calculation {
                         break;
                     }
 
-                    if e.name().as_ref() == b"Text" {
+                    if e.name().as_ref() == "Text" {
                         in_text = false;
                     }
                 }

@@ -16,11 +16,11 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"Name" => {
+                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "Name" => {
                     only_current_file = get_attribute(&e, "current").as_deref() == Some("True");
                 }
-                b"Calculation" => {
+                "Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
                 }
                 _ => {}

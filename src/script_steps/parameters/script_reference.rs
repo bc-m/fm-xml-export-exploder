@@ -22,10 +22,10 @@ impl ScriptReference {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     match e.name().as_ref() {
-                        b"DataSourceReference" => {
+                        "DataSourceReference" => {
                             item.data_source_name = parse_unescaped_attribute(&e, "name")
                         }
-                        b"ScriptReference" => {
+                        "ScriptReference" => {
                             item.script_name = parse_unescaped_attribute(&e, "name")
                         }
                         _ => {}

@@ -25,7 +25,7 @@ impl DialogField {
                 Ok(Event::Start(inner)) => {
                     depth += 1;
                     match inner.name().as_ref() {
-                        b"Parameter" => match get_attribute(&inner, "type").as_deref() {
+                        "Parameter" => match get_attribute(&inner, "type").as_deref() {
                             Some("Target") => {
                                 item.target = Target::from_xml(reader, &inner).display();
                                 depth -= 1;
@@ -36,7 +36,7 @@ impl DialogField {
                             }
                             _ => {}
                         },
-                        b"Boolean" => {
+                        "Boolean" => {
                             item.password = get_attribute(&inner, "type").as_deref()
                                 == Some("Password")
                                 && get_attribute(&inner, "value").as_deref() == Some("True");

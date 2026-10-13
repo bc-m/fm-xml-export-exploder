@@ -36,24 +36,22 @@ impl WindowReference {
 
                     let element_name = e.name();
                     let parsed = match element_name.as_ref() {
-                        b"Style" => Style::from_xml(reader, &e).display(),
-                        b"LayoutReferenceContainer" => Some(
+                        "Style" => Style::from_xml(reader, &e).display(),
+                        "LayoutReferenceContainer" => Some(
                             LayoutReferenceContainer::from_xml(reader, &e)
                                 .display()
                                 .unwrap_or_default(),
                         ),
-                        b"Select" => Select::from_xml(reader, &e).display(),
-                        b"Name" | b"height" | b"width" | b"top" | b"left" | b"Text" => {
+                        "Select" => Select::from_xml(reader, &e).display(),
+                        "Name" | "height" | "width" | "top" | "left" | "Text" => {
                             Calculation::from_xml(reader, &e).display().map(|calc| {
                                 let label =
                                     capitalize(&local_name_to_string(element_name.as_ref()));
                                 format!("{label}: {calc}")
                             })
                         }
-                        b"Close" | b"Minimize" | b"Maximize" | b"Resize" | b"MenuBar"
-                        | b"Toolbar" | b"DimParentWindow" => {
-                            BooleanContainer::from_xml(reader, &e).display()
-                        }
+                        "Close" | "Minimize" | "Maximize" | "Resize" | "MenuBar" | "Toolbar"
+                        | "DimParentWindow" => BooleanContainer::from_xml(reader, &e).display(),
                         _ => {
                             continue;
                         }
