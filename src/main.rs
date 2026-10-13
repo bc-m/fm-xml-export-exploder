@@ -13,6 +13,7 @@ use crate::xml_processor::explode_xml;
 mod catalog;
 mod config;
 mod custom_function_sanitizer;
+mod git;
 mod script_sanitizer;
 mod script_steps;
 mod supporting;
@@ -45,6 +46,11 @@ struct Args {
     /// Replace password values in sanitized output with bullet placeholders (••••••••)
     #[arg(long)]
     obfuscate_passwords: bool,
+
+    /// Commit the output with git: one repository per database folder (-t db) or per
+    /// domain folder (-t domain). Folders inside another git repository are skipped.
+    #[arg(long)]
+    git: bool,
 }
 
 #[derive(Debug, Default)]
@@ -80,12 +86,23 @@ fn main() -> Result<()> {
 
     println!("Start processing {} files...", paths.len());
 
-    paths.par_iter().for_each(|path| {
-        if let Err(err) = explode_xml(path, &out_dir, &flags) {
-            let file_name = path.file_name().unwrap().to_str().unwrap();
-            eprintln!("Failed to process file '{file_name}': {err}");
-        }
-    });
+    let db_names: Vec<String> = paths
+        .par_iter()
+        .filter_map(|path| match explode_xml(path, &out_dir, &flags) {
+            Ok(db_name) => db_name,
+            Err(err) => {
+                let file_name = path.file_name().unwrap().to_str().unwrap();
+                eprintln!("Failed to process file '{file_name}': {err}");
+                None
+            }
+        })
+        .collect();
+
+    // Commit only after all files are written: in domain mode, several databases share
+    // the same repository
+    if args.git {
+        git::commit_output(&git::repositories(&out_dir, &flags.output_tree, &db_names));
+    }
 
     let duration = start.elapsed();
     match duration.as_secs() {

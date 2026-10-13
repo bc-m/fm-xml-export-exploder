@@ -97,9 +97,19 @@ pub fn delete_output_directory(context: &ProcessingContext<'_, impl BufRead>) ->
 
     match context.flags.output_tree {
         OutputTree::Db => {
-            let dir_to_delete = context.root_out_dir.join(db_name);
-            if dir_to_delete.exists() {
-                fs::remove_dir_all(&dir_to_delete)?;
+            // Keep a git repository in the database folder (see --git)
+            let dir_to_clear = context.root_out_dir.join(db_name);
+            if let Ok(entries) = fs::read_dir(&dir_to_clear) {
+                for path in entries.flatten().map(|entry| entry.path()) {
+                    if path.file_name().is_some_and(|name| name == ".git") {
+                        continue;
+                    }
+                    if path.is_dir() {
+                        fs::remove_dir_all(&path)?;
+                    } else {
+                        fs::remove_file(&path)?;
+                    }
+                }
             }
         }
         OutputTree::Domain => {
