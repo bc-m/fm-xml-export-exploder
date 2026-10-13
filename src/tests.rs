@@ -19,6 +19,54 @@ mod tests {
         assert_eq!(escape_filename("file|name.xml"), "file_name.xml");
     }
 
+    /// Modified layouts are named after their layout reference and still placed in
+    /// the folder they belong to.
+    #[test]
+    fn content_named_items_are_placed_in_their_folder() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-folders-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(&dir).unwrap();
+        let input = dir.join("t.xml");
+        fs::write(
+            &input,
+            r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.2.1.0" File="T.fmp12">
+	<Structure>
+		<ModifyAction>
+			<LayoutCatalog membercount="1">
+				<Layout isFolder="True" id="1" name="Folder"></Layout>
+				<Layout>
+					<LayoutReference id="9" name="Home"></LayoutReference>
+				</Layout>
+				<Layout isFolder="Marker" id="1"></Layout>
+			</LayoutCatalog>
+		</ModifyAction>
+	</Structure>
+</FMSaveAsXML>
+"#,
+        )
+        .unwrap();
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: false,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+        };
+
+        let output_dir = dir.join("out");
+        explode_xml(&input, &output_dir, &flags).unwrap();
+
+        assert!(
+            output_dir
+                .join("T/layouts__modify_action/Folder - ID 1/Home - ID 9.xml")
+                .exists()
+        );
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
     #[test]
     fn snapshot_test_lossless() {
         snapshot_test_with_mode(true, OutputTree::Db, "snapshots_db_lossless");

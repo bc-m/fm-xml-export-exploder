@@ -137,28 +137,18 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 let content =
                     prepare_xml_content(&entity.content, indentation_level, context.flags);
 
-                // Some items are named after their content. Such items always stay in the
-                // catalog's base folder, even when the catalog uses folders.
-                let default_name = entity.file_name();
-                let derived_name =
-                    derived_file_name(&content, context.path_stack, catalog_item_name);
-                let renamed = derived_name
-                    .as_ref()
-                    .is_some_and(|name| *name != default_name);
-                let file_name = derived_name.unwrap_or(default_name);
+                // Some items are named after their content instead of their id and name
+                let file_name = derived_file_name(&content, context.path_stack, catalog_item_name)
+                    .unwrap_or_else(|| entity.file_name());
 
-                let subfolder = if renamed {
-                    None
-                } else {
-                    determine_subfolder_path(
-                        &out_dir_path_base,
-                        folder_structure,
-                        &content,
-                        id_path,
-                        uses_folders,
-                        &current_path,
-                    )
-                };
+                let subfolder = determine_subfolder_path(
+                    &out_dir_path_base,
+                    folder_structure,
+                    &content,
+                    id_path,
+                    uses_folders,
+                    &current_path,
+                );
                 let dir = match subfolder {
                     Some(subfolder) => {
                         create_dir(&subfolder);
