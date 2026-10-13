@@ -1,60 +1,29 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
-
 use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::script_steps::parameters::variable_reference::VariableReference;
+use crate::script_steps::parameters::variable_reference;
+use crate::utils::xml_node::Node;
 
-#[derive(Debug, Default)]
-pub struct Target {
-    pub target: Option<String>,
+/// The target variable or field, e.g. `$result` or `Table::Field`
+pub fn display(parameter: &Node) -> Option<String> {
+    let mut target = None;
+    visit(parameter, &mut target);
+    target
 }
 
-impl Target {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> Target {
-        let mut depth = 1;
-        let mut item = Target::default();
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => match e.name().as_ref() {
-                    "Variable" => {
-                        item.target = VariableReference::from_xml(reader, &e).display();
-                    }
-                    "FieldReference" => {
-                        item.target = Some(FieldReference::from_xml(reader, &e).display());
-                    }
-                    _ => {
-                        depth += 1;
-                    }
-                },
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
-            }
-            buf.clear();
+fn visit(node: &Node, target: &mut Option<String>) {
+    for child in &node.children {
+        match child.name.as_str() {
+            "Variable" => *target = variable_reference::display(child),
+            "FieldReference" => *target = Some(FieldReference::from_node(child).display()),
+            _ => visit(child, target),
         }
-
-        item
-    }
-
-    pub fn display(self) -> Option<String> {
-        self.target
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::target::Target;
+    use crate::script_steps::parameters::target;
 
     #[test]
     fn test() {
@@ -66,16 +35,9 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "$foo".to_string();
-        assert_eq!(
-            Target::from_xml(&mut reader, &element).display().unwrap(),
-            expected_output
-        );
+        assert_eq!(target::display(&element).unwrap(), expected_output);
     }
 }

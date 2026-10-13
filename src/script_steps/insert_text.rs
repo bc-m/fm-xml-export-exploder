@@ -1,47 +1,30 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::script_steps::parameters::target;
+use crate::script_steps::{WithoutParameters, format_step};
+use crate::utils::xml_node::{Node, Visit};
 
-use crate::script_steps::parameters::target::Target;
-use crate::script_steps::parameters::text::Text;
-use crate::utils::attributes::parse_unescaped_attribute;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
     let mut text: Option<String> = None;
     let mut target: Option<String> = None;
     let mut select = false;
 
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
-                }
-                "Boolean"
-                    if parse_unescaped_attribute(&e, "id").as_deref() == Some("4096")
-                        && parse_unescaped_attribute(&e, "value").as_deref() == Some("True") =>
-                {
-                    select = true;
-                }
-                "Text" => {
-                    text = Text::from_xml(&mut reader, &e).display();
-                }
-                "Parameter" => {
-                    let target_type = parse_unescaped_attribute(&e, "type").unwrap();
-                    if target_type == "Target" {
-                        target = Target::from_xml(&mut reader, &e).display();
-                    }
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "Boolean" => {
+            if node.attr("id") == Some("4096") && node.attr_is_true("value") {
+                select = true;
+            }
+            Visit::Descend
         }
-        buf.clear();
-    }
+        "Text" => {
+            text = node.attr("value").map(str::to_string);
+            Visit::Skip
+        }
+        "Parameter" if node.attr("type") == Some("Target") => {
+            target = target::display(node);
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
@@ -58,16 +41,13 @@ pub fn sanitize(step: &str) -> Option<String> {
         parts.push(format!("\"{text}\""));
     }
 
-    if parts.is_empty() {
-        Some(format!("{name} []"))
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
+    Some(format_step(name, &parts, WithoutParameters::EmptyBrackets))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn empty() {
@@ -87,7 +67,7 @@ mod tests {
             </Step>
             "#;
         let expected_output = Some("Insert Text []".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -108,7 +88,7 @@ mod tests {
             </Step>
             "#;
         let expected_output = Some("Insert Text [ Select ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -134,7 +114,7 @@ mod tests {
             </Step>
             "#;
         let expected_output = Some("Insert Text [ Select ; Target: $hello ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -161,7 +141,7 @@ mod tests {
             "#;
         let expected_output =
             Some("Insert Text [ Select ; Target: $hello ; \"a\rb\rc\" ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -188,7 +168,7 @@ mod tests {
             "#;
         let expected_output =
             Some("Insert Text [ Select ; Target: $hello[4] ; \"a\rb\rc\" ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -216,7 +196,7 @@ mod tests {
             "#;
         let expected_output =
             Some("Insert Text [ Select ; Target: Foo::id ; \"a\rb\rc\" ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -244,7 +224,7 @@ mod tests {
             "#;
         let expected_output =
             Some("Insert Text [ Select ; Target: Foo::id[5] ; \"a\rb\rc\" ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -272,6 +252,6 @@ mod tests {
 
         let expected_output =
             Some("Text einfügen [ Select ; Target: $idleCalcExpression ; \"\"hello\" & \rList(\"RemoteControl.PressKey\" ; \"l\" ; \"l\" )\" ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

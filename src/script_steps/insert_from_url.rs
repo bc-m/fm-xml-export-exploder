@@ -1,17 +1,14 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
 use crate::script_steps::parameters::boolean::Boolean;
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::script_steps::parameters::target::Target;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::script_steps::parameters::target;
+use crate::script_steps::{WithoutParameters, format_step};
+use crate::utils::xml_node::{Node, Visit};
 
 const VERIFY_SSL_CERTIFICATES: &str = "268435456";
 const SELECT: &str = "4096";
 const WITH_DIALOG: &str = "128";
 
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
     let mut select: Option<String> = None;
     let mut with_dialog: Option<String> = None;
     let mut target: Option<String> = None;
@@ -20,49 +17,35 @@ pub fn sanitize(step: &str) -> Option<String> {
     let mut verify_ssl: Option<String> = None;
     let mut curl_options: Option<String> = None;
 
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
-                }
-                "Boolean" => {
-                    let id = parse_unescaped_attribute(&e, "id").unwrap_or_default();
-                    let label = parse_unescaped_attribute(&e, "type").unwrap_or_default();
-                    let is_on = parse_unescaped_attribute(&e, "value").as_deref() == Some("True");
-                    match id.as_str() {
-                        VERIFY_SSL_CERTIFICATES if is_on => verify_ssl = Some(label),
-                        SELECT if is_on => select = Some(label),
-                        WITH_DIALOG => {
-                            with_dialog = Some(format!("{label}: {}", Boolean::on_off(is_on)))
-                        }
-                        _ => {}
-                    }
-                }
-                "Parameter" => match parse_unescaped_attribute(&e, "type").as_deref() {
-                    Some("Target") => target = Target::from_xml(&mut reader, &e).display(),
-                    Some("URL") => {
-                        url = Calculation::from_xml(&mut reader, &e)
-                            .display()
-                            .map(|c| format!("URL: {c}"))
-                    }
-                    Some("Calculation") => {
-                        curl_options = Calculation::from_xml(&mut reader, &e)
-                            .display()
-                            .map(|c| format!("cURL options: {c}"))
-                    }
-                    _ => {}
-                },
+    step.walk(&mut |node| match node.name.as_str() {
+        "Boolean" => {
+            let label = node.attr("type").unwrap_or_default().to_string();
+            let is_on = node.attr_is_true("value");
+            match node.attr("id").unwrap_or_default() {
+                VERIFY_SSL_CERTIFICATES if is_on => verify_ssl = Some(label),
+                SELECT if is_on => select = Some(label),
+                WITH_DIALOG => with_dialog = Some(format!("{label}: {}", Boolean::on_off(is_on))),
                 _ => {}
-            },
-            _ => {}
+            }
+            Visit::Descend
         }
-        buf.clear();
-    }
+        "Parameter" => match node.attr("type") {
+            Some("Target") => {
+                target = target::display(node);
+                Visit::Skip
+            }
+            Some("URL") => {
+                url = node.calculation().map(|c| format!("URL: {c}"));
+                Visit::Skip
+            }
+            Some("Calculation") => {
+                curl_options = node.calculation().map(|c| format!("cURL options: {c}"));
+                Visit::Skip
+            }
+            _ => Visit::Descend,
+        },
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
@@ -80,16 +63,13 @@ pub fn sanitize(step: &str) -> Option<String> {
     .flatten()
     .collect();
 
-    if parts.is_empty() {
-        Some(name)
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
+    Some(format_step(name, &parts, WithoutParameters::NameOnly))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn empty_url() {
@@ -113,7 +93,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Insert from URL [ Select ; With dialog: OFF ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -156,7 +136,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Insert from URL [ Select ; With dialog: OFF ; Target: $response ; URL: $url ; Verify SSL Certificates ; cURL options: $curl ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -187,6 +167,6 @@ mod tests {
         "#;
 
         let expected_output = Some("Insert from URL [ With dialog: ON ; URL: $url ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

@@ -9,7 +9,7 @@ use crate::utils::file_utils::{escape_filename, join_scope_id_and_name};
 use crate::utils::skeleton::push_line_to_skeleton;
 use crate::utils::xml_utils::{
     XmlEventType, element_to_string, end_element_to_string, general_ref_to_string,
-    local_name_to_string, start_element_to_string, text_element_to_string, unescape_xml_entities,
+    start_element_to_string, text_element_to_string, unescape_xml_entities,
 };
 use crate::xml_processor::ProcessingContext;
 
@@ -41,7 +41,7 @@ impl Entity {
         id_path: &str,
     ) {
         self.parse_xml_attributes(start_tag);
-        self.tag_name = local_name_to_string(start_tag.name().as_ref());
+        self.tag_name = start_tag.name().as_ref().to_owned();
 
         if !self.id.is_empty() {
             let element_string = element_to_string(context, start_tag);

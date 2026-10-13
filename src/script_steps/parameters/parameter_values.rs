@@ -1,154 +1,121 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
-
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
-use crate::script_steps::parameters::animation::Animation;
 use crate::script_steps::parameters::boolean::Boolean;
-use crate::script_steps::parameters::button::Button;
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::script_steps::parameters::comment::Comment;
-use crate::script_steps::parameters::data_source_reference::DataSourceReference;
 use crate::script_steps::parameters::dialog_field::DialogField;
 use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::script_steps::parameters::labeled;
-use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
-use crate::script_steps::parameters::list::List;
-use crate::script_steps::parameters::privilege_set_reference::PrivilegeSetReference;
-use crate::script_steps::parameters::related::Related;
-use crate::script_steps::parameters::script_reference::ScriptReference;
-use crate::script_steps::parameters::structured;
-use crate::script_steps::parameters::target::Target;
-use crate::script_steps::parameters::window_reference::WindowReference;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::script_steps::parameters::format::join;
+use crate::script_steps::parameters::{
+    animation, button, comment, data_source_reference, device, email, files, found_sets, labeled,
+    layout_reference, list, objects, options, printing, privilege_set_reference, related,
+    script_reference, scripting, target, window_reference,
+};
+use crate::utils::xml_node::Node;
 
-pub struct ParameterValues {
-    pub parameters: Vec<String>,
+/// Displays each `<Parameter>` of a step's `<ParameterValues>`, in order.
+pub fn display(parameter_values: &Node, step_id: u32) -> Vec<String> {
+    parameter_values
+        .children_named("Parameter")
+        .filter_map(|parameter| display_parameter(parameter, step_id))
+        .collect()
 }
 
-impl ParameterValues {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> ParameterValues {
-        let mut depth = 1;
-        let mut item = ParameterValues {
-            parameters: Vec::new(),
+/// Displays a single `<Parameter>`; this is the one place that maps parameter types
+/// to their formatters.
+pub(crate) fn display_parameter(parameter: &Node, step_id: u32) -> Option<String> {
+    let step = id_to_script_step(step_id);
+    let Some(parameter_type) = parameter.attr("type") else {
+        // Send Event stores all its options in a single untyped parameter
+        return match step {
+            ScriptStep::SendEvent => scripting::send_event(parameter),
+            _ => None,
         };
+    };
 
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    if depth != 2 || e.name().as_ref() != "Parameter" {
-                        continue;
-                    }
-
-                    let Some(parameter_type) = parse_unescaped_attribute(&e, "type") else {
-                        // Send Event stores all its options in a single untyped parameter
-                        if id_to_script_step(step_id) == ScriptStep::SendEvent {
-                            depth -= 1;
-                            item.parameters.extend(structured::send_event(reader, &e));
-                        }
-                        continue;
-                    };
-                    let parsed = match parameter_type.as_str() {
-                        "Animation" => Animation::from_xml(reader, &e).display(),
-                        "Boolean" => Boolean::from_xml(reader, &e, step_id).display(),
-                        "List" if id_to_script_step(step_id) == ScriptStep::InsertFromDevice => {
-                            structured::device_source(reader, &e)
-                        }
-                        "List"
-                            if matches!(
-                                id_to_script_step(step_id),
-                                ScriptStep::PerformScriptOnServer
-                                    | ScriptStep::PerformScriptOnServerWithCallback
-                            ) =>
-                        {
-                            List::from_xml(reader, &e, step_id)
-                                .display()
-                                .map(|specified| format!("Specified: {specified}"))
-                        }
-                        "List" | "AccountType" => List::from_xml(reader, &e, step_id).display(),
-                        "Target" => Target::from_xml(reader, &e)
-                            .display()
-                            .map(|d| format!("Target: {d}")),
-                        "Calculation" => {
-                            let calculation = Calculation::from_xml(reader, &e).display();
-                            match id_to_script_step(step_id) {
-                                ScriptStep::InstallOnTimerScript => {
-                                    calculation.map(|c| format!("Interval: {c}"))
-                                }
-                                _ => calculation,
-                            }
-                        }
-                        "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo"
-                        | "Title" | "Message" | "Password" | "Old" | "New" => {
-                            Calculation::from_xml(reader, &e)
-                                .display()
-                                .map(|d| format!("{parameter_type}: {d}"))
-                        }
-                        "LayoutReferenceContainer" => {
-                            LayoutReferenceContainer::from_xml(reader, &e).display()
-                        }
-                        "FieldReference" => Some(FieldReference::from_xml(reader, &e).display()),
-                        "Comment" => Some(Comment::from_xml(reader, &e)),
-                        "WindowReference" => Some(WindowReference::from_xml(reader, &e).display())
-                            .filter(|d| !d.is_empty()),
-                        "Related" => {
-                            Some(Related::from_xml(reader, &e).display()).filter(|d| !d.is_empty())
-                        }
-                        "ScriptReference" => ScriptReference::from_xml(reader, &e).display(),
-                        "DataSourceReference" => {
-                            DataSourceReference::from_xml(reader, &e).display()
-                        }
-                        "PrivilegeSetReference" => {
-                            PrivilegeSetReference::from_xml(reader, &e).display()
-                        }
-                        "Button1" | "Button2" | "Button3" => {
-                            Button::from_xml(reader, &e).display(&parameter_type)
-                        }
-                        "Field1" | "Field2" | "Field3" => {
-                            DialogField::from_xml(reader, &e).display(&parameter_type)
-                        }
-                        other if structured::is_structured(other) => {
-                            structured::from_xml(reader, &e, other)
-                        }
-                        other => match labeled::label(other, step_id) {
-                            Some(label) => labeled::from_xml(reader, &e, step_id, other, label),
-                            None => {
-                                item.parameters.push(format!(
-                                    r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#
-                                ));
-                                continue;
-                            }
-                        },
-                    };
-                    depth -= 1;
-                    if let Some(display) = parsed {
-                        item.parameters.push(display);
-                    }
-                }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
+    match parameter_type {
+        // Simple values
+        "Boolean" => Boolean::from_node(parameter, step_id).display(),
+        "Calculation" => {
+            let calculation = parameter.calculation();
+            match step {
+                ScriptStep::InstallOnTimerScript => calculation.map(|c| format!("Interval: {c}")),
+                _ => calculation,
             }
-            buf.clear();
         }
+        "Name" | "Condition" | "ErrorCode" | "ErrorMessage" | "CustomDebugInfo" | "Title"
+        | "Message" | "Password" | "Old" | "New" => parameter
+            .calculation()
+            .map(|d| format!("{parameter_type}: {d}")),
+        "Comment" => Some(comment::display(parameter)),
+        "List" if step == ScriptStep::InsertFromDevice => device::device_source(parameter),
+        "List"
+            if matches!(
+                step,
+                ScriptStep::PerformScriptOnServer | ScriptStep::PerformScriptOnServerWithCallback
+            ) =>
+        {
+            list::display(parameter, step_id).map(|specified| format!("Specified: {specified}"))
+        }
+        "List" | "AccountType" => list::display(parameter, step_id),
 
-        item
+        // References
+        "Target" => target::display(parameter).map(|d| format!("Target: {d}")),
+        "FieldReference" => Some(FieldReference::from_node(parameter).display()),
+        "LayoutReferenceContainer" => layout_reference::display(parameter),
+        "ScriptReference" => script_reference::display(parameter),
+        "DataSourceReference" => data_source_reference::display(parameter),
+        "PrivilegeSetReference" => privilege_set_reference::display(parameter),
+        "Variable" => join(scripting::variable(parameter)),
+
+        // Windows, layouts and layout objects
+        "Animation" => animation::display(parameter),
+        "WindowReference" => Some(window_reference::display(parameter)).filter(|d| !d.is_empty()),
+        "Related" => Some(related::display(parameter)).filter(|d| !d.is_empty()),
+        "Select" => join(objects::select(parameter)),
+        "Object" => join(objects::object(parameter)),
+        "Source" => join(objects::source(parameter)),
+        "CustomMenuSet" => join(objects::custom_menu_set(parameter)),
+
+        // Show Custom Dialog
+        "Button1" | "Button2" | "Button3" => button::display(parameter, parameter_type),
+        "Field1" | "Field2" | "Field3" => DialogField::from_node(parameter).display(parameter_type),
+
+        // Files, records and found sets
+        "UniversalPathList" => join(files::universal_path_list(parameter)),
+        "Export" => join(files::export(parameter)),
+        "ImportField" => join(files::import_field(parameter)),
+        "Options" => join(options::options(parameter)),
+        "Restore" => join(found_sets::restore(parameter)),
+        "SortSpecification" => join(found_sets::sort_specification(parameter)),
+        "FindRequest" => join(found_sets::find_requests(parameter)),
+        "PageSetup" => join(printing::page_setup(parameter)),
+        "Print" => join(printing::print(parameter)),
+
+        // Scripting and external services
+        "Parameter" => join(scripting::parameter(parameter)),
+        "URL" => join(scripting::url(parameter)),
+        "SQL" => join(scripting::sql(parameter)),
+        "Flow" => join(scripting::flow(parameter)),
+        "Email" => join(email::email(parameter)),
+        "Voice" => join(device::voice(parameter)),
+
+        // Parameters that wrap a single Calculation, Boolean or List with a fixed label
+        other => match labeled::label(other, step_id) {
+            Some(label) => labeled::display(parameter, step_id, other, label),
+            None => Some(format!(r#"⚠️ PARAMETER "{parameter_type}" NOT PARSED ⚠️"#)),
+        },
     }
+}
+
+/// Test helper: displays a single `<Parameter>` element.
+#[cfg(test)]
+pub(crate) fn parse(xml: &str, step_id: u32) -> Option<String> {
+    display_parameter(&Node::parse(xml).unwrap(), step_id)
 }
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
-    use crate::script_steps::parameters::parameter_values::ParameterValues;
+    use crate::script_steps::parameters::parameter_values;
 
     #[test]
     fn test() {
@@ -160,14 +127,10 @@ mod tests {
             </ParameterValues>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "Pause: OFF";
-        let pv = ParameterValues::from_xml(&mut reader, &element, 0);
-        assert_eq!(pv.parameters.join(" ; "), expected_output);
+        let parameters = parameter_values::display(&element, 0);
+        assert_eq!(parameters.join(" ; "), expected_output);
     }
 }

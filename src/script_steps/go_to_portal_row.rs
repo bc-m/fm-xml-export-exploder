@@ -1,38 +1,22 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
 use crate::script_steps::parameters::boolean::Boolean;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::{Node, Visit};
 
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut select_label = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
+    let mut select_label = "";
     let mut select = false;
-    let mut position = String::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap();
-                }
-                "Boolean" => {
-                    select_label = parse_unescaped_attribute(&e, "type").unwrap();
-                    select = parse_unescaped_attribute(&e, "value").as_deref() == Some("True");
-                }
-                "List" => {
-                    position = parse_unescaped_attribute(&e, "name").unwrap();
-                }
-                _ => {}
-            },
+    let mut position = "";
+    step.walk(&mut |node| {
+        match node.name.as_str() {
+            "Boolean" => {
+                select_label = node.attr("type").unwrap_or_default();
+                select = node.attr_is_true("value");
+            }
+            "List" => position = node.attr("name").unwrap_or_default(),
             _ => {}
         }
-        buf.clear();
-    }
+        Visit::Descend
+    });
 
     if name.is_empty() {
         return None;
@@ -46,6 +30,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -66,6 +51,6 @@ mod tests {
 
         let expected_output =
             Some("Gehe zu Ausschnittreihe [ Auswahl: ON ; Letzte(r) ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

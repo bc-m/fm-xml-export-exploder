@@ -1,41 +1,26 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::utils::xml_node::{Node, Visit};
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::parse_unescaped_attribute;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
     let mut calculation = String::new();
     let mut only_current_file = false;
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
-                "Name" => {
-                    only_current_file =
-                        parse_unescaped_attribute(&e, "current").as_deref() == Some("True");
-                }
-                "Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "Name" => {
+            only_current_file = node.attr_is_true("current");
+            Visit::Descend
         }
-        buf.clear();
-    }
+        "Calculation" => {
+            calculation = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
     }
     if calculation.is_empty() {
-        return Some(name);
+        return Some(name.to_string());
     }
     let suffix = if only_current_file {
         " ; Current file"
@@ -48,6 +33,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test_close_current() {
@@ -68,7 +54,7 @@ mod tests {
         "#;
 
         let expected_output = Some("Fenster schließen".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -100,7 +86,7 @@ mod tests {
         "#;
 
         let expected_output = Some(r#"Fenster schließen [ Name: "Foo Bar" ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -133,6 +119,6 @@ mod tests {
 
         let expected_output =
             Some(r#"Fenster schließen [ Name: "Foo Bar" ; Current file ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

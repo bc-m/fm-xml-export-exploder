@@ -1,11 +1,8 @@
-use quick_xml::Reader;
-use quick_xml::events::{BytesStart, Event};
-
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::constants::{
     commit_record_requests, go_to_field, refresh_window,
 };
-use crate::utils::attributes::{get_attributes, unescape_value};
+use crate::utils::xml_node::Node;
 
 #[derive(Debug, Default)]
 pub struct Boolean {
@@ -16,46 +13,29 @@ pub struct Boolean {
 }
 
 impl Boolean {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart, step_id: u32) -> Boolean {
-        let mut depth = 1;
+    pub fn from_node(parameter: &Node, step_id: u32) -> Boolean {
         let mut item = Boolean {
             step_id,
             ..Default::default()
         };
-
-        let mut buf = Vec::new();
-        loop {
-            match reader.read_event_into(&mut buf) {
-                Err(_) => continue,
-                Ok(Event::Eof) => break,
-                Ok(Event::Start(e)) => {
-                    depth += 1;
-                    if e.name().as_ref() == "Boolean" {
-                        for attr in get_attributes(&e) {
-                            match attr.0.as_str() {
-                                "id" => item.id = attr.1.parse().ok(),
-                                "type" => item.name = Some(unescape_value(&attr.1)),
-                                "value" => match attr.1.as_str() {
-                                    "True" => item.value = Some(true),
-                                    "False" => item.value = Some(false),
-                                    _ => {}
-                                },
-                                _ => {}
-                            }
-                        }
-                    }
+        for boolean in parameter
+            .descendants()
+            .into_iter()
+            .filter(|n| n.name == "Boolean")
+        {
+            for (key, value) in &boolean.attributes {
+                match key.as_str() {
+                    "id" => item.id = value.parse().ok(),
+                    "type" => item.name = Some(value.clone()),
+                    "value" => match value.as_str() {
+                        "True" => item.value = Some(true),
+                        "False" => item.value = Some(false),
+                        _ => {}
+                    },
+                    _ => {}
                 }
-                Ok(Event::End(_)) => {
-                    depth -= 1;
-                    if depth == 0 {
-                        break;
-                    }
-                }
-                _ => {}
             }
-            buf.clear();
         }
-
         item
     }
 
@@ -107,8 +87,7 @@ impl Boolean {
 
 #[cfg(test)]
 mod tests {
-    use quick_xml::Reader;
-    use quick_xml::events::Event;
+    use crate::utils::xml_node::Node;
 
     use crate::script_steps::parameters::boolean::Boolean;
 
@@ -120,17 +99,11 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "Pause: OFF".to_string();
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, 0)
-                .display()
-                .unwrap(),
+            Boolean::from_node(&element, 0).display().unwrap(),
             expected_output
         );
     }
@@ -143,14 +116,10 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, 0).display(),
+            Boolean::from_node(&element, 0).display(),
             None,
             "Collapsed boolean should produce no output"
         );
@@ -164,17 +133,11 @@ mod tests {
             </Parameter>
         "#;
 
-        let mut reader = Reader::from_str(xml.trim());
-        let element = match reader.read_event() {
-            Ok(Event::Start(e)) => e,
-            _ => panic!("Wrong read event"),
-        };
+        let element = Node::parse(xml).unwrap();
 
         let expected_output = "OFF".to_string();
         assert_eq!(
-            Boolean::from_xml(&mut reader, &element, 0)
-                .display()
-                .unwrap(),
+            Boolean::from_node(&element, 0).display().unwrap(),
             expected_output
         );
     }

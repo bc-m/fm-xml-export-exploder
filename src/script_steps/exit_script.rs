@@ -1,50 +1,38 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::script_steps::{WithoutParameters, format_step};
+use crate::utils::xml_node::{Node, Visit};
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::parse_unescaped_attribute;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
     let mut calculation = String::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
-                "Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e).display().unwrap()
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "Calculation" => {
+            calculation = node.calculation().unwrap_or_default();
+            Visit::Skip
         }
-        buf.clear();
-    }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
     }
-    if calculation.is_empty() {
-        return Some(format!("{name} []"));
-    }
-    Some(format!("{name} [ {calculation} ]"))
+    let parts: Vec<String> = Some(calculation)
+        .filter(|c| !c.is_empty())
+        .into_iter()
+        .collect();
+    Some(format_step(name, &parts, WithoutParameters::EmptyBrackets))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
         let xml = r#"<Step id="103" name="Aktuelles Script verlassen" enable="True"></Step>"#;
 
         let expected_output = Some("Aktuelles Script verlassen []".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -68,6 +56,6 @@ mod tests {
         "#;
 
         let expected_output = Some("Aktuelles Script verlassen [ $Foo ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

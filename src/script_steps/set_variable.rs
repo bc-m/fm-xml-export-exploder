@@ -1,50 +1,31 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::utils::xml_node::{Node, Visit};
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::parse_unescaped_attribute;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut variable_name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
+    let mut variable_name = "";
     let mut value = String::new();
     let mut repetition = String::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap();
-                }
-                "Name" => {
-                    variable_name = parse_unescaped_attribute(&e, "value").unwrap();
-                }
-                "value" => {
-                    value = Calculation::from_xml(&mut reader, &e)
-                        .display()
-                        .unwrap_or_default();
-                }
-                "repetition" => {
-                    repetition = Calculation::from_xml(&mut reader, &e)
-                        .display()
-                        .unwrap_or_default();
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "Name" => {
+            variable_name = node.attr("value").unwrap_or_default();
+            Visit::Descend
         }
-        buf.clear();
-    }
+        "value" => {
+            value = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        "repetition" => {
+            repetition = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
     }
     let var = if repetition.is_empty() {
-        variable_name
+        variable_name.to_string()
     } else {
         format!("{variable_name}[{repetition}]")
     };
@@ -54,6 +35,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -80,7 +62,7 @@ mod tests {
         "#;
 
         let expected_output = Some(r#"Variable setzen [ $Foo ; "Bar" ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -119,6 +101,6 @@ mod tests {
         "#;
 
         let expected_output = Some("Variable setzen [ $Foo[$Rep] ; $Bar ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

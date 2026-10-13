@@ -1,70 +1,61 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
+use crate::script_steps::{WithoutParameters, format_step};
+use crate::utils::xml_node::{Node, Visit};
 
-use crate::script_steps::parameters::calculation::Calculation;
-use crate::utils::attributes::parse_unescaped_attribute;
-
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut data_source_reference: Option<String> = None;
-    let mut script_reference_type = String::new();
-    let mut script_reference_type_id = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
+    let mut data_source_reference: Option<&str> = None;
+    let mut script_reference_type = "";
+    let mut script_reference_type_id = "";
     let mut script_reference = String::new();
+    let mut unnamed_script_reference = false;
     let mut calculation = String::new();
 
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap();
-                }
-                "List" => {
-                    script_reference_type_id = parse_unescaped_attribute(&e, "value").unwrap();
-                    script_reference_type = parse_unescaped_attribute(&e, "name").unwrap();
-                    if script_reference_type_id == "2" {
-                        script_reference =
-                            Calculation::from_xml(&mut reader, &e).display().unwrap();
-                    }
-                }
-                "DataSourceReference" => {
-                    data_source_reference = parse_unescaped_attribute(&e, "name")
-                }
-                "ScriptReference" => script_reference = parse_unescaped_attribute(&e, "name")?,
-                "Parameter"
-                    if parse_unescaped_attribute(&e, "type").as_deref() == Some("Parameter") =>
-                {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .display()
-                        .unwrap_or_default();
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "List" => {
+            script_reference_type_id = node.attr("value").unwrap_or_default();
+            script_reference_type = node.attr("name").unwrap_or_default();
+            if script_reference_type_id == "2" {
+                // By name: the script name is a calculation
+                script_reference = node.calculation().unwrap_or_default();
+                return Visit::Skip;
+            }
+            Visit::Descend
         }
-        buf.clear()
-    }
-
-    if name.is_empty() {
+        "DataSourceReference" => {
+            data_source_reference = node.attr("name");
+            Visit::Descend
+        }
+        "ScriptReference" => {
+            match node.attr("name") {
+                Some(script_name) => script_reference = script_name.to_string(),
+                // A script reference without a name can't be displayed
+                None => unnamed_script_reference = true,
+            }
+            Visit::Descend
+        }
+        "Parameter" if node.attr("type") == Some("Parameter") => {
+            calculation = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
+    if unnamed_script_reference || name.is_empty() {
         return None;
     }
 
     let mut parameters = Vec::new();
 
-    if script_reference_type_id.as_str() == "2" {
+    if script_reference_type_id == "2" {
         // By name: "Specified: By name" first, then the expression
         parameters.push(format!("Specified: {script_reference_type}"));
-        parameters.push(script_reference.to_string());
+        parameters.push(script_reference);
     } else {
         // From list: quoted script name first, then "Specified: From list"
         parameters.push(format!("\"{script_reference}\""));
         parameters.push(format!("Specified: {script_reference_type}"));
     }
 
-    if let Some(ref data_source_value) = data_source_reference {
+    if let Some(data_source_value) = data_source_reference {
         parameters.push(format!("File: \"{data_source_value}\""));
     }
 
@@ -75,12 +66,17 @@ pub fn sanitize(step: &str) -> Option<String> {
         parameters.push(format!("Parameter: {calculation}"));
     }
 
-    Some(format!("{name} [ {} ]", parameters.join(" ; ")))
+    Some(format_step(
+        name,
+        &parameters,
+        WithoutParameters::EmptyBrackets,
+    ))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test_without_parameter() {
@@ -104,7 +100,7 @@ mod tests {
             r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; Parameter: ]"#
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -138,7 +134,7 @@ mod tests {
         "#;
 
         let expected_output = Some(r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; Parameter: cf_ScriptparameterSetzen ( "CurlId" ; $curl ) ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -181,7 +177,7 @@ mod tests {
             r#"Script ausführen [ Specified: Nach Name ; "Do something" ; Parameter: 123 ]"#
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -216,7 +212,7 @@ mod tests {
             r#"Script ausführen [ "Do something" ; Specified: Aus Liste ; File: "App_Utils" ; Parameter: 123 ]"#
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -241,7 +237,7 @@ mod tests {
             r#"Perform Script [ "Perform Script" ; Specified: From list ; Parameter: ]"#
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -270,7 +266,7 @@ mod tests {
 
         let expected_output =
             Some(r#"Perform Script [ "Perform Script" ; Specified: From list ; Parameter: "parameter" ]"#.to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 
     #[test]
@@ -305,6 +301,6 @@ mod tests {
             r#"Perform Script [ Specified: By name ; "script name" ; Parameter: "parameter" ]"#
                 .to_string(),
         );
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

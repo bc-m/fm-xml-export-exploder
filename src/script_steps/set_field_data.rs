@@ -1,37 +1,21 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
-use crate::script_steps::parameters::calculation::Calculation;
 use crate::script_steps::parameters::field_reference::FieldReference;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::utils::xml_node::{Node, Visit};
 
-pub fn sanitize(step: &str) -> Option<String> {
-    let mut name = String::new();
+pub fn sanitize(step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default();
     let mut field_reference = String::new();
     let mut calculation = String::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => name = parse_unescaped_attribute(&e, "name").unwrap(),
-                "FieldReference" => {
-                    field_reference = FieldReference::from_xml(&mut reader, &e).display()
-                }
-                "Calculation" => {
-                    calculation = Calculation::from_xml(&mut reader, &e)
-                        .display()
-                        .unwrap_or_default();
-                }
-                _ => {}
-            },
-            _ => {}
+    step.walk(&mut |node| match node.name.as_str() {
+        "FieldReference" => {
+            field_reference = FieldReference::from_node(node).display();
+            Visit::Skip
         }
-        buf.clear();
-    }
+        "Calculation" => {
+            calculation = node.calculation().unwrap_or_default();
+            Visit::Skip
+        }
+        _ => Visit::Descend,
+    });
 
     if name.is_empty() {
         return None;
@@ -42,6 +26,7 @@ pub fn sanitize(step: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -75,6 +60,6 @@ mod tests {
 
         let expected_output =
             Some("Feldwert setzen [ TableFoo::FieldFoo ; TableBar::FieldBar ]".to_string());
-        assert_eq!(sanitize(xml.trim()), expected_output);
+        assert_eq!(sanitize(&Node::parse(xml).unwrap()), expected_output);
     }
 }

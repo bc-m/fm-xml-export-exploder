@@ -1,35 +1,16 @@
-use quick_xml::Reader;
-use quick_xml::events::Event;
-
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
-use crate::script_steps::parameters::parameter_values::ParameterValues;
-use crate::utils::attributes::parse_unescaped_attribute;
+use crate::script_steps::parameters::parameter_values;
+use crate::script_steps::{WithoutParameters, format_step};
+use crate::utils::xml_node::Node;
 
-pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
-    let mut name = String::new();
-    let mut raw_parameters: Vec<String> = Vec::new();
-
-    let mut reader = Reader::from_str(step);
-    let mut buf = Vec::new();
-    loop {
-        match reader.read_event_into(&mut buf) {
-            Err(_) => continue,
-            Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) => match e.name().as_ref() {
-                "Step" => {
-                    name = parse_unescaped_attribute(&e, "name").unwrap_or_default();
-                    continue;
-                }
-                "ParameterValues" => {
-                    let pv = ParameterValues::from_xml(&mut reader, &e, step_id);
-                    raw_parameters.extend(pv.parameters);
-                }
-                _ => {}
-            },
-            _ => {}
-        }
-        buf.clear();
-    }
+pub fn from_node(step_id: u32, step: &Node) -> Option<String> {
+    let name = step.attr("name").unwrap_or_default().to_string();
+    let raw_parameters: Vec<String> = step
+        .descendants()
+        .into_iter()
+        .filter(|node| node.name == "ParameterValues")
+        .flat_map(|parameter_values| parameter_values::display(parameter_values, step_id))
+        .collect();
 
     let script_step = id_to_script_step(step_id);
     let parameters = format_parameters(raw_parameters, script_step);
@@ -42,21 +23,18 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
     }
 
     let parameters = parameters.trim();
-    if parameters.is_empty() {
-        let needs_brackets = matches!(
-            script_step,
-            ScriptStep::GoToField
-                | ScriptStep::IfStart
-                | ScriptStep::IfElse
-                | ScriptStep::ExitLoopIf
-        );
-        if needs_brackets {
-            return Some(format!("{name} []"));
-        }
-        return Some(name);
-    }
-
-    Some(format!("{name} [ {parameters} ]"))
+    let parts: Vec<String> = Some(parameters.to_string())
+        .filter(|p| !p.is_empty())
+        .into_iter()
+        .collect();
+    let without = match script_step {
+        ScriptStep::GoToField
+        | ScriptStep::IfStart
+        | ScriptStep::IfElse
+        | ScriptStep::ExitLoopIf => WithoutParameters::EmptyBrackets,
+        _ => WithoutParameters::NameOnly,
+    };
+    Some(format_step(&name, &parts, without))
 }
 
 /// Apply step-specific formatting rules to parameters.
@@ -99,6 +77,7 @@ fn format_parameters(parameters: Vec<String>, script_step: ScriptStep) -> String
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::utils::xml_node::Node;
 
     #[test]
     fn test() {
@@ -106,7 +85,10 @@ mod tests {
 
         let expected_output = Some("Fenster fixieren".to_string());
         let script_id: u32 = 79;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -124,7 +106,10 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ ON ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -142,7 +127,10 @@ mod tests {
 
         let expected_output = Some("Fehleraufzeichnung setzen [ OFF ]".to_string());
         let script_id: u32 = 86;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -160,7 +148,10 @@ mod tests {
 
         let expected_output = Some("Suchenmodus aktivieren [ Pause: OFF ]".to_string());
         let script_id: u32 = 22;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -184,7 +175,10 @@ mod tests {
         let expected_output =
             Some("Tabelle leeren [ Mit Dialog: OFF ; <Tabelle nicht vorhanden> ]".to_string());
         let script_id: u32 = 182;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 }
 
@@ -214,7 +208,10 @@ mod commit_tests {
         let expected_output =
             Some("Schreibe Änderung Datens./Abfrage [ Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -241,7 +238,10 @@ mod commit_tests {
                 .to_string(),
         );
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -265,7 +265,10 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: OFF ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -289,7 +292,10 @@ mod commit_tests {
 
         let expected_output = Some("Schreibe Änderung Datens./Abfrage [ Dateneingabeüberprüfung unterdrücken ; Mit Dialog: ON ; Schreiben erzwingen ]".to_string());
         let script_id: u32 = 75;
-        assert_eq!(from_xml(script_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(script_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -331,7 +337,10 @@ mod commit_tests {
         let step_id: u32 = 122;
         let expected_output =
             Some("Neues Fenster [ Style: Dokument ; Layout: <Originallayout> ]".to_string());
-        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(step_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
     }
 
     #[test]
@@ -417,6 +426,52 @@ mod commit_tests {
 
         let step_id: u32 = 122;
         let expected_output = Some(r#"Neues Fenster [ Style: Dokument ; Name: "Foo Bar" ; Layout: <Originallayout> ; Height: 100 ; Width: 200 ; Top: 300 ; Left: 400 ; Minimize: OFF ; Maximize: OFF ; Resize: OFF ; Menu: OFF ; Toolbar: OFF ]"#.to_string());
-        assert_eq!(from_xml(step_id, xml.trim()), expected_output);
+        assert_eq!(
+            from_node(step_id, &Node::parse(xml).unwrap()),
+            expected_output
+        );
+    }
+
+    #[test]
+    fn omit_multiple_records() {
+        let xml = r#"
+            <Step id="26" name="Mehrere ausschließen" enable="True">
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some("Mehrere ausschließen [ Mit Dialog: ON ]".to_string());
+        assert_eq!(from_node(26, &Node::parse(xml).unwrap()), expected_output);
+    }
+
+    #[test]
+    fn omit_multiple_records_with_calculation() {
+        let xml = r#"
+            <Step id="26" name="Mehrere ausschließen" enable="True">
+                <Options>16512</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Calculation">
+                        <Calculation datatype="1" position="0">
+                            <Calculation>
+                                <Text><![CDATA[123]]></Text>
+                                <ChunkList hash="90213DC459B04C5A47C044B9460AEF7B">
+                                    <Chunk type="NoRef">123</Chunk>
+                                </ChunkList>
+                            </Calculation>
+                        </Calculation>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some("Mehrere ausschließen [ Mit Dialog: OFF ; 123 ]".to_string());
+        assert_eq!(from_node(26, &Node::parse(xml).unwrap()), expected_output);
     }
 }
