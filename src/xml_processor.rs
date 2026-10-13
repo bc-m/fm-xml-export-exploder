@@ -58,8 +58,13 @@ pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub flags: &'a Flags,
 }
 
-/// Process a single XML file and explode it into individual files
-pub fn explode_xml(fm_export_file_path: &Path, root_out_dir: &Path, flags: &Flags) -> Result<()> {
+/// Process a single XML file and explode it into individual files.
+/// Returns the name of the exported database.
+pub fn explode_xml(
+    fm_export_file_path: &Path,
+    root_out_dir: &Path,
+    flags: &Flags,
+) -> Result<Option<String>> {
     let start = Instant::now();
     let fm_export_file_name = fm_export_file_path.file_name().unwrap().to_str().unwrap();
 
@@ -163,7 +168,7 @@ pub fn explode_xml(fm_export_file_path: &Path, root_out_dir: &Path, flags: &Flag
         start.elapsed().as_millis()
     );
 
-    Ok(())
+    Ok(context.doc_info.map(|doc_info| doc_info.db_name))
 }
 
 fn process_root_element<R: Read + BufRead>(

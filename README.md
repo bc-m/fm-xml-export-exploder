@@ -28,6 +28,19 @@ Example: From [these](./tests/xml) as XML exported FileMaker solutions you will 
 2. **Output Directory:** Specify the directory where the extracted content will be saved.
 3. **Run the Tool:** Execute the tool by running `fm-xml-export-exploder [INPUT_DIRECTORY] [OUTPUT_DIRECTORY]`.
 
+### Versioning the output with git
+
+Run with `--git` to commit the output after each run:
+
+```bash
+fm-xml-export-exploder --git [INPUT_DIRECTORY] [OUTPUT_DIRECTORY]
+```
+
+- With `-t db` (default) each database folder becomes its own repository, with `-t domain` each domain folder (e.g. `scripts/`, `tables/`).
+- A commit (`Export [FileMaker database name]`) is only created when the output changed.
+- The installed `git` CLI is used, so your git configuration (author, signing, default branch) applies. Without git installed, the output is written but not committed.
+- Folders that are already inside another git repository (e.g. an output directory you version yourself) are left alone.
+
 ## Output Organization
 
 The extracted content is organized into directories based on the context of the XML elements:
