@@ -24,7 +24,7 @@ Schleife (Anfang) [ Flush: Immer ]
 Schleife (Ende)
 Scriptpause setzen
 Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: ]
-Script auf Server ausführen [ Aus Liste ; Auf Beendigung warten: ON ]
+Script auf Server ausführen [ Specified: Aus Liste ; Auf Beendigung warten: ON ]
 Fehleraufzeichnung setzen [ ON ]
 Layoutobjekt-Animation festlegen [ ON ]
 Variable setzen [ $Var ; 1+2 ]
@@ -192,11 +192,11 @@ Ordnerpfad holen [ Ordnererstellung zulassen: OFF ]
 Menüset installieren [ "[Standard-FileMaker-Menüs]" ; Als Dateistandard verwenden: OFF ]
 Plugin-Datei installieren
 URL öffnen [ Mit Dialog: ON ]
-AppleScript ausführen
+AppleScript ausführen [ Native AppleScript: display dialog "Hello world!" ]
 Objekt aktualisieren []
 Ausschnitt aktualisieren
 DDE Execute senden
-Event senden
+Event senden [ Bring target application to foreground: OFF ; Wait for event completion: OFF ; Copy event result: OFF ]
 E-Mail senden [ Mit Dialog: ON ; Send via E-mail Client ]
 Web Viewer festlegen [ Action: Zurücksetzen ]
 Eigenes Dialogfeld anzeigen

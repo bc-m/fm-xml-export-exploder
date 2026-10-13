@@ -65,8 +65,8 @@ Aktuelles Script verlassen [ $ScriptResult ]
 Alle Scripts abbrechen
 
 BeiTimer-Script installieren
-BeiTimer-Script installieren [ 123 ]
-BeiTimer-Script installieren [ "All script steps" ; 1+2 ]
+BeiTimer-Script installieren [ Interval: 123 ]
+BeiTimer-Script installieren [ "All script steps" ; Parameter: $Param ; Interval: 1+2 ]
 
 Schleife (Anfang) [ Flush: Immer ]
 	Verlasse Schleife wenn [ 1=1 ]
@@ -97,8 +97,8 @@ Script ausführen [ "" ; Specified: Aus Liste ; File: "<Unbekannt>" ; Parameter:
 Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: /* commented out */ ]
 Script ausführen [ "All script steps" ; Specified: Aus Liste ; Parameter: "/* not only commented out, but also stringified! */" ]
 
-Script auf Server ausführen [ Aus Liste ; Auf Beendigung warten: ON ]
-Script auf Server ausführen [ Aus Liste ; Auf Beendigung warten: OFF ]
+Script auf Server ausführen [ Specified: Aus Liste ; Auf Beendigung warten: ON ]
+Script auf Server ausführen [ Specified: Aus Liste ; Auf Beendigung warten: OFF ]
 
 Fehleraufzeichnung setzen [ ON ]
 Fehleraufzeichnung setzen [ OFF ]
@@ -193,9 +193,9 @@ Gehe zu Datens./Abfrage/Seite [ Mit Dialog: ON ; /*cf_LayoutNumber + 1*/ ]
 Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: <Originallayout> ; Show related ]
 Gehe zu Bezugsdatensatz [ Table: Syntax.Palette_Active ; Layout: <Originallayout> ; Show related ]
 Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; Show related ]
-Gehe zu Bezugsdatensatz [ Table: Syntax.GUISyntax ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
-Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
-Gehe zu Bezugsdatensatz [ Table: _Home ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ]
+Gehe zu Bezugsdatensatz [ Table: Syntax.GUISyntax ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dokument ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Show related ; Match found set ]
+Gehe zu Bezugsdatensatz [ Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dokument ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Show related ; Match found set ]
+Gehe zu Bezugsdatensatz [ Table: _Home ; Layout: "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨" ; New window ; Style: Dialog ; Name: $Fenstername ; Height: $Hoehe ; Width: $Breite ; Top: $Oben ; Left: $Links ; Minimize: OFF ; Menu: OFF ; Toolbar: OFF ; Show related ; Match found set ]
 
 # =============
 # EDITING STEPS
@@ -516,12 +516,12 @@ Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ; T
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ; Table: _Home ; Aktualisieren ; Chinesisch (Langzeichen, Big-5) ]
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ; Table: _Home ; Aktualisieren ; Koreanisch (EUC-KR) ]
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: "file:xsl.xsl" ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: $PathXSL ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: "http://xslt.com/xsl.xsl" ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "file:xml.xml" ; XSL: "http://xslt.com/xsl.xsl" ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: $PathXML ; XSL: "http://xslt.com/xsl.xsl" ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
 
 Neuer Datensatz/Abfrage
 
@@ -652,8 +652,8 @@ Zulässige Ausrichtungen festlegen
 Zulässige Ausrichtungen festlegen
 Zulässige Ausrichtungen festlegen
 
-Fenstertitel setzen
-Fenstertitel setzen [ Name: $FensterNameAlt ]
+Fenstertitel setzen [ New Title: $FensterNameNeu ]
+Fenstertitel setzen [ Name: $FensterNameAlt ; New Title: $FensterNameNeu ]
 
 Zoomstufe setzen [ Fixieren: ON ; 25% ]
 Zoomstufe setzen [ Fixieren: ON ; 50% ]
@@ -693,8 +693,8 @@ Datei schließen [ "Self" ]
 
 Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
 Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: ON ; Mit Dialog: OFF ]
-Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
-Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: ON ; Mit Dialog: OFF ]
+Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ; XML: "http:xml" ; XSL: "$PathXSLT" ]
+Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: ON ; Mit Dialog: OFF ; XML: "http:xml" ; XSL: 1+2 ]
 
 Neue Datei
 
@@ -954,8 +954,8 @@ URL öffnen [ Mit Dialog: ON ; URL: "http://db.de" ; Automatically encode URL: O
 URL öffnen [ Mit Dialog: OFF ; URL: "http://www.mrwatson.de" ; Automatically encode URL: ON ]
 URL öffnen [ Mit Dialog: OFF ; URL: "http://www.mrwatson.de" ; Automatically encode URL: ON ]
 
-AppleScript ausführen
-AppleScript ausführen
+AppleScript ausführen [ Native AppleScript: display dialog "Hello world!" ]
+AppleScript ausführen [ Calculated AppleScript: "display dialog \"Hello world!\"" ]
 
 JavaScript in Web Viewer ausführen
 JavaScript in Web Viewer ausführen [ Name: "abc" ; Function Name: "def" ; Parameters: $p1 &  Liste( 1;2;3;4) ; $p2 ]
@@ -968,11 +968,11 @@ Ausschnitt aktualisieren [ Object Name: $MoreComplexName ]
 
 DDE Execute senden
 
-Event senden
-Event senden
-Event senden
-Event senden
-Event senden
+Event senden [ Target application: "iCal.app" ; Event: Anwendung öffnen ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "Calendar.app" ; Event: Script ausführen ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "TextMate.app" ; Event: Dokument öffnen ; Document: "file:../../SnipMaker/fmxmlsnippet.xml" ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "AppleScript-Editor.app" ; Event: Script ausführen ; Document: "file:../../../Library/Scripts/ᐳ Applications/FileMaker Pro Advanced/ FMClipboard_Save.scpt" ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "AppleScript-Editor.app" ; Event: Script ausführen ; Text: get name of every field of current layout ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: ON ]
 
 E-Mail senden [ Mit Dialog: ON ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
@@ -982,7 +982,7 @@ Web Viewer festlegen [ "wv" ; Action: Zurücksetzen ]
 // Web Viewer festlegen [ "wv" ; Action: Aktualisieren ]
 // Web Viewer festlegen [ "wv" ; Action: Vorwärts ]
 Web Viewer festlegen [ "wv" ; Action: Zurück ]
-Web Viewer festlegen [ "wv" ; Action: Gehe zu URL... ]
+Web Viewer festlegen [ "wv" ; Action: Gehe zu URL... ; "http://www.mapquest.com/maps/map.adp?" & "formtype=address&" & "searchtype=address&" & "cid=filemkr&" & "address=" & "" & "&country=" & "" ]
 
 Eigenes Dialogfeld anzeigen [ Title: $DlgTitle ; Message: $DlgMessage ; Default Button: "OK" ; Button 2: "Cancel" ; Button 3: "Alternative" ; Input 1: _Home::_gInputText1 ; Label 1: "Egal" ; Input 2: _Home::_gInputText2 ; Label 2: "Karl" ; Input 3: _Home::_gInputText3 ; Label 3: "PW" ; Password ]
 Eigenes Dialogfeld anzeigen [ Title: $DlgTitle ; Message: "Only Button 1 and 3¶" & 

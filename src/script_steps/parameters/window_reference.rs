@@ -22,7 +22,17 @@ fn capitalize(s: &str) -> String {
 }
 
 impl WindowReference {
-    pub fn from_xml(reader: &mut Reader<&[u8]>, _: &BytesStart) -> WindowReference {
+    pub fn from_xml(reader: &mut Reader<&[u8]>, e: &BytesStart) -> WindowReference {
+        Self::parse(reader, e, true)
+    }
+
+    /// For the new window of Go to Related Record, whose nested layout only repeats
+    /// the step's target layout.
+    pub fn from_xml_without_layout(reader: &mut Reader<&[u8]>, e: &BytesStart) -> WindowReference {
+        Self::parse(reader, e, false)
+    }
+
+    fn parse(reader: &mut Reader<&[u8]>, _: &BytesStart, include_layout: bool) -> WindowReference {
         let mut depth = 1;
         let mut window_reference = WindowReference::default();
 
@@ -37,12 +47,15 @@ impl WindowReference {
                     let element_name = e.name();
                     let parsed = match element_name.as_ref() {
                         "Style" => Style::from_xml(reader, &e).display(),
-                        "LayoutReferenceContainer" => Some(
-                            LayoutReferenceContainer::from_xml(reader, &e)
-                                .display()
-                                .unwrap_or_default(),
-                        ),
+                        "LayoutReferenceContainer" => {
+                            let layout = LayoutReferenceContainer::from_xml(reader, &e).display();
+                            include_layout.then(|| layout.unwrap_or_default())
+                        }
                         "Select" => Select::from_xml(reader, &e).display(),
+                        // Set Window Title
+                        "Rename" => Calculation::from_xml(reader, &e)
+                            .display()
+                            .map(|title| format!("New Title: {title}")),
                         "Name" | "height" | "width" | "top" | "left" | "Text" => {
                             Calculation::from_xml(reader, &e).display().map(|calc| {
                                 let label =
@@ -276,6 +289,19 @@ mod tests {
         assert_eq!(
             WindowReference::from_xml(&mut reader, &element).display(),
             expected_output
+        );
+    }
+
+    #[test]
+    fn test_set_window_title() {
+        let xml = r#"<Parameter type="WindowReference"><WindowReference><Select kind="1" type="Calculated"><Name current="True"><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[$old]]></Text></Calculation></Calculation></Name></Select><Rename><Calculation datatype="1" position="1"><Calculation><Text><![CDATA[$new]]></Text></Calculation></Calculation></Rename></WindowReference></Parameter>"#;
+        let mut reader = Reader::from_str(xml);
+        let Ok(Event::Start(e)) = reader.read_event() else {
+            panic!("Wrong read event");
+        };
+        assert_eq!(
+            WindowReference::from_xml(&mut reader, &e).display(),
+            "Name: $old ; New Title: $new"
         );
     }
 }

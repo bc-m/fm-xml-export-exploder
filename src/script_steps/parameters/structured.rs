@@ -127,6 +127,58 @@ fn device_option(parameter: &Node) -> Option<String> {
     labeled(label, parameter.calculation())
 }
 
+/// Send Event: e.g. `Target application: "iCal.app" ; Event: open application ;
+/// Wait for event completion: ON`
+pub fn send_event(reader: &mut Reader<&[u8]>, e: &BytesStart) -> Option<String> {
+    let node = Node::from_xml(reader, e);
+    let mut parts = Vec::new();
+    if let Some(target) = node.child("Target").and_then(|t| t.attr("value"))
+        && !target.is_empty()
+    {
+        parts.push(format!("Target application: {}", quoted(target)));
+    }
+    if let Some(send) = node.child("Send") {
+        let event = send.attr("name").map(str::to_string).or_else(|| {
+            // Events without a name are identified by their class and id codes
+            let class = send.attr("classString").filter(|c| *c != "????")?;
+            let id = send.attr("idString").filter(|i| *i != "????")?;
+            Some(format!("{class}/{id}"))
+        });
+        parts.extend(labeled("Event", event));
+    }
+    if let Some(source) = node.child("Source") {
+        match source.attr("type") {
+            Some("Document") => {
+                let paths = source.child("Document").map(universal_path_list);
+                if let Some(path) = paths.as_ref().and_then(|p| p.first()) {
+                    parts.push(format!("Document: {path}"));
+                }
+            }
+            Some("Text") => {
+                let text = source.child("Text").and_then(|text| {
+                    text.calculation()
+                        .or_else(|| Some(text.text.clone()).filter(|t| !t.is_empty()))
+                });
+                parts.extend(labeled("Text", text));
+            }
+            Some("Calculation") => parts.extend(labeled("Calculation", source.calculation())),
+            _ => {}
+        }
+    }
+    if let Some(options) = node.child("Options") {
+        for (attribute, label) in [
+            ("Foreground", "Bring target application to foreground"),
+            ("Wait", "Wait for event completion"),
+            ("Copy", "Copy event result"),
+        ] {
+            if options.attr(attribute).is_some() {
+                parts.push(format!("{label}: {}", on_off(options, attribute)));
+            }
+        }
+    }
+    Some(parts.join(" ; ")).filter(|display| !display.is_empty())
+}
+
 fn on_off(node: &Node, attribute: &str) -> &'static str {
     Boolean::on_off(node.attr_is_true(attribute))
 }
@@ -178,6 +230,15 @@ fn options(node: &Node) -> Vec<String> {
             Some("Indefinitely") => parts.push("Indefinitely".to_string()),
             Some(label) if label.ends_with(": ") => {
                 parts.extend(labeled(label.trim_end_matches(": "), options.calculation()));
+            }
+            // Perform AppleScript
+            Some("Text") => parts.extend(
+                Some(options.text.clone())
+                    .filter(|text| !text.is_empty())
+                    .map(|text| format!("Native AppleScript: {text}")),
+            ),
+            Some("Calculation") => {
+                parts.extend(labeled("Calculated AppleScript", options.calculation()));
             }
             // Insert File
             Some("Title") => parts.extend(labeled("Dialog title", options.calculation())),
@@ -859,6 +920,39 @@ mod tests {
         let xml =
             r#"<Parameter type="List"><List name="Music Library" value="1"></List></Parameter>"#;
         assert_eq!(parse_device(xml).as_deref(), Some("Music Library"));
+    }
+
+    #[test]
+    fn applescript_options() {
+        let native = r#"<Parameter type="Options"><Options type="Text">display dialog &quot;Hi&quot;</Options></Parameter>"#;
+        assert_eq!(
+            parse(native).as_deref(),
+            Some(r#"Native AppleScript: display dialog "Hi""#)
+        );
+
+        let calculated = r#"<Parameter type="Options"><Options type="Calculation"><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[$script]]></Text></Calculation></Calculation></Options></Parameter>"#;
+        assert_eq!(
+            parse(calculated).as_deref(),
+            Some("Calculated AppleScript: $script")
+        );
+
+        let empty = r#"<Parameter type="Options"><Options type="Text"></Options></Parameter>"#;
+        assert_eq!(parse(empty), None);
+    }
+
+    #[test]
+    fn send_event() {
+        let xml = r#"<Parameter><Target value="TextMate.app" type="TxMt" id="1"></Target><Send name="open document" classString="aevt" idString="odoc" class="1" id="2"></Send><Source type="Document"><Document><UniversalPathList membercount="1"><ObjectList><Location><![CDATA[file:a.xml]]></Location></ObjectList></UniversalPathList></Document></Source><Options Foreground="True" Wait="True" Copy="False"></Options></Parameter>"#;
+        let mut reader = Reader::from_str(xml);
+        let Ok(Event::Start(e)) = reader.read_event() else {
+            panic!("Wrong read event");
+        };
+        assert_eq!(
+            super::send_event(&mut reader, &e).as_deref(),
+            Some(
+                r#"Target application: "TextMate.app" ; Event: open document ; Document: "file:a.xml" ; Bring target application to foreground: ON ; Wait for event completion: ON ; Copy event result: OFF"#
+            )
+        );
     }
 
     #[test]

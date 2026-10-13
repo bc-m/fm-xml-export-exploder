@@ -55,7 +55,7 @@ Set Variable [ $data ; "{}" ]
 If [ PatternCount ( Get ( ApplicationVersion ) ; "Server" ) = 0 // if not already running on fmse ]
 	# Only try to do this if file is hosted
 	If [ Get ( ConnectionState ) ≠ 0 ]
-		Perform Script on Server [ By name ; Parameter: Get ( ScriptParameter ) ; Wait for completion: ON ]
+		Perform Script on Server [ Specified: By name ; Get ( ScriptName ) ; Parameter: Get ( ScriptParameter ) ; Wait for completion: ON ]
 		Set Variable [ $errorCode ; Get ( LastError ) ]
 		Set Variable [ $recordId ; JSONGetElement ( Get ( ScriptResult ) ; "data.recordId" ) ]
 		If [ $errorCode = 0 and not IsEmpty ( $recordId ) ]

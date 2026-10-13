@@ -2,6 +2,7 @@ use quick_xml::Reader;
 use quick_xml::events::{BytesStart, Event};
 
 use crate::script_steps::parameters::layout_reference::LayoutReferenceContainer;
+use crate::script_steps::parameters::window_reference::WindowReference;
 use crate::utils::attributes::parse_unescaped_attribute;
 
 #[derive(Debug, Default)]
@@ -37,6 +38,10 @@ impl Related {
                         }
                         "WindowReference" => {
                             item.parameters.push("New window".to_string());
+                            let window = WindowReference::from_xml_without_layout(reader, &e);
+                            item.parameters.extend(
+                                Some(window.display()).filter(|display| !display.is_empty()),
+                            );
                             depth -= 1;
                         }
                         "Options" => {
@@ -70,5 +75,26 @@ impl Related {
 
     pub fn display(self) -> String {
         self.parameters.join(" ; ")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use quick_xml::Reader;
+    use quick_xml::events::Event;
+
+    use super::Related;
+
+    #[test]
+    fn new_window_does_not_repeat_layout() {
+        let xml = r#"<Parameter type="Related"><TableOccurrenceReference id="1" name="Contacts"></TableOccurrenceReference><LayoutReferenceContainer value="1"><Label>original layout</Label></LayoutReferenceContainer><WindowReference><Style name="Card" value="1"></Style><Name><Calculation datatype="1" position="0"><Calculation><Text><![CDATA["Detail"]]></Text></Calculation></Calculation></Name><LayoutReferenceContainer value="1"><Label>original layout</Label></LayoutReferenceContainer></WindowReference><Options matchFoundSet="True" ShowRelated="True"></Options></Parameter>"#;
+        let mut reader = Reader::from_str(xml);
+        let Ok(Event::Start(e)) = reader.read_event() else {
+            panic!("Wrong read event");
+        };
+        assert_eq!(
+            Related::from_xml(&mut reader, &e).display(),
+            r#"Table: Contacts ; Layout: <original layout> ; New window ; Style: Card ; Name: "Detail" ; Show related ; Match found set"#
+        );
     }
 }

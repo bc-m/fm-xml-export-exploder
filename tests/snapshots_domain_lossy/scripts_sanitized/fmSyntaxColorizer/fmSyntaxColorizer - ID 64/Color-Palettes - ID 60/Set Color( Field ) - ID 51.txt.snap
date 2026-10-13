@@ -3,4 +3,12 @@ source: src/tests.rs
 expression: output_content
 ---
 Gehe zu Feld [ Auswählen/Ausführen ; Syntax.Color::ColorInput ]
-AppleScript ausführen
+AppleScript ausführen [ Native AppleScript: set theFormatMenuName to name of menu 6
+				--display alert 	theFormatMenuName
+					set theColorMenuName to name of menu item 6 of menu theFormatMenuName
+				--display alert 	theColorMenuName
+					set theOtherColorMenuItem to last menu item of menu theColorMenuName
+					set theNameOfTheOtherColorMenuItem to the name of theOtherColorMenuItem
+				--display alert 	theNameOfTheOtherColorMenuItem
+				--ERROR - but why?
+					do menu menu item theNameOfTheOtherColorMenuItem of menu theColorMenuName ]
