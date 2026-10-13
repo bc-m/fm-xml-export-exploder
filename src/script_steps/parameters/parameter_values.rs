@@ -44,6 +44,11 @@ impl ParameterValues {
                     }
 
                     let Some(parameter_type) = parse_unescaped_attribute(&e, "type") else {
+                        // Send Event stores all its options in a single untyped parameter
+                        if id_to_script_step(step_id) == ScriptStep::SendEvent {
+                            depth -= 1;
+                            item.parameters.extend(structured::send_event(reader, &e));
+                        }
                         continue;
                     };
                     let parsed = match parameter_type.as_str() {

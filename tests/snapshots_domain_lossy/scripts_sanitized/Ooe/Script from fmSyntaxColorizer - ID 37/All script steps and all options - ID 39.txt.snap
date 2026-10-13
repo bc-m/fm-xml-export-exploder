@@ -516,12 +516,12 @@ Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; Update ; Simpl
 Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; Update ; Traditional Chinese (Big-5) ]
 Import Records [ Verify SSL Certificates: OFF ; With dialog: ON ; Update ; Korean (EUC-KR) ]
 Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
-Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
-Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
-Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ]
-Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; Replace ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
-Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; Replace ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
-Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; Replace ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; XML: "http://xslt.com/xsl.xml" ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: "file:xsl.xsl" ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: $PathXSL ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: "http://xslt.com/xsl.xsl" ; Replace ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; XML: "file:xml.xml" ; XSL: "http://xslt.com/xsl.xsl" ; Replace ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Import Records [ Verify SSL Certificates: OFF ; With dialog: OFF ; XML: $PathXML ; XSL: "http://xslt.com/xsl.xsl" ; Replace ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
 
 New Record/Request
 
@@ -690,8 +690,8 @@ Close File [ "<unknown>" ]
 
 Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: OFF ; With dialog: ON ]
 Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: ON ; With dialog: OFF ]
-Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: OFF ; With dialog: ON ]
-Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: ON ; With dialog: OFF ]
+Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: OFF ; With dialog: ON ; XML: "http:xml" ; XSL: "$PathXSLT" ]
+Convert File [ Verify SSL Certificates: OFF ; Open File: ON ; Skip Indexes: ON ; With dialog: OFF ; XML: "http:xml" ; XSL: 1+2 ]
 
 New File
 
@@ -951,8 +951,8 @@ Open URL [ In external browser: OFF ; With dialog: ON ; URL: "http://db.de" ; Au
 Open URL [ In external browser: OFF ; With dialog: OFF ; URL: "http://www.mrwatson.de" ; Automatically encode URL: ON ]
 Open URL [ In external browser: OFF ; With dialog: OFF ; URL: "http://www.mrwatson.de" ; Automatically encode URL: ON ]
 
-Perform AppleScript
-Perform AppleScript
+Perform AppleScript [ Native AppleScript: display dialog "Hello world!" ]
+Perform AppleScript [ Calculated AppleScript: "display dialog \"Hello world!\"" ]
 
 Perform JavaScript in Web Viewer
 Perform JavaScript in Web Viewer [ Name: "abc" ; Function Name: "def" ; Parameters: $p1 &  List( 1;2;3;4) ; $p2 ]
@@ -965,11 +965,11 @@ Refresh Portal [ Object Name: $MoreComplexName ]
 
 Send DDE Execute
 
-Send Event
-Send Event
-Send Event
-Send Event
-Send Event
+Send Event [ Target application: "iCal.app" ; Event: open application ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Send Event [ Target application: "Calendar.app" ; Event: do script ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Send Event [ Target application: "TextMate.app" ; Event: open document ; Document: "file:../../SnipMaker/fmxmlsnippet.xml" ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Send Event [ Target application: "AppleScript-Editor.app" ; Event: do script ; Document: "file:../../../Library/Scripts/ᐳ Applications/FileMaker Pro Advanced/ FMClipboard_Save.scpt" ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Send Event [ Target application: "AppleScript-Editor.app" ; Event: do script ; Text: get name of every field of current layout ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: ON ]
 
 Send Mail [ With dialog: ON ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 Send Mail [ With dialog: OFF ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]

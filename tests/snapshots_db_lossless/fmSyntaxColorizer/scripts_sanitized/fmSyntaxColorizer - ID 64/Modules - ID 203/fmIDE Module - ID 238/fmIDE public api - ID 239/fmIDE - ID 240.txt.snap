@@ -1637,7 +1637,7 @@ Schleife (Anfang) [ Flush: Immer ]
 				# AppleScript?
 				Text einfügen [ Select ; Target: $AppleScriptTemplate ; "go to field {{'$layout_field_name'}} of current record" ]
 				Variable setzen [ $AppleScript ; Austauschen ( $AppleScriptTemplate ; "{{'$layout_field_name'}}" ; Zitat( $layout_field_name ) ) ]
-				AppleScript ausführen
+				AppleScript ausführen [ Calculated AppleScript: $AppleScript ]
 				
 				
 				# Go to Object

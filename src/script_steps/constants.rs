@@ -38,6 +38,7 @@ pub enum ScriptStep {
     OpenHelp = 32,
     OpenManageDatabase = 38,
     ExitApplication = 44,
+    SendEvent = 57,
     SelectAll = 50,
     EnterBrowseMode = 55,
     InsertText = 61,

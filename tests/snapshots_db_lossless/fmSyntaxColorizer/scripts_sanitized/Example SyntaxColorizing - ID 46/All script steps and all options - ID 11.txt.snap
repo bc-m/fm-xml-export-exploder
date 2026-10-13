@@ -516,12 +516,12 @@ Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ; T
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ; Table: _Home ; Aktualisieren ; Chinesisch (Langzeichen, Big-5) ]
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: ON ; Table: _Home ; Aktualisieren ; Koreanisch (EUC-KR) ]
 Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
-Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: "file:xsl.xsl" ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: $PathXSL ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "http://xslt.com/xsl.xml" ; XSL: "http://xslt.com/xsl.xsl" ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: "file:xml.xml" ; XSL: "http://xslt.com/xsl.xsl" ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
+Datensätze importieren [ SSL-Zertifikate verifizieren: OFF ; Mit Dialog: OFF ; XML: $PathXML ; XSL: "http://xslt.com/xsl.xsl" ; Table: Home.Syntax_ALL ; Ersetzen ; Add remaining data as new records ; Perform auto-enter options ; Mac Roman ]
 
 Neuer Datensatz/Abfrage
 
@@ -693,8 +693,8 @@ Datei schließen [ "Self" ]
 
 Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
 Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: ON ; Mit Dialog: OFF ]
-Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
-Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: ON ; Mit Dialog: OFF ]
+Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ; XML: "http:xml" ; XSL: "$PathXSLT" ]
+Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: ON ; Mit Dialog: OFF ; XML: "http:xml" ; XSL: 1+2 ]
 
 Neue Datei
 
@@ -954,8 +954,8 @@ URL öffnen [ Mit Dialog: ON ; URL: "http://db.de" ; Automatically encode URL: O
 URL öffnen [ Mit Dialog: OFF ; URL: "http://www.mrwatson.de" ; Automatically encode URL: ON ]
 URL öffnen [ Mit Dialog: OFF ; URL: "http://www.mrwatson.de" ; Automatically encode URL: ON ]
 
-AppleScript ausführen
-AppleScript ausführen
+AppleScript ausführen [ Native AppleScript: display dialog "Hello world!" ]
+AppleScript ausführen [ Calculated AppleScript: "display dialog \"Hello world!\"" ]
 
 JavaScript in Web Viewer ausführen
 JavaScript in Web Viewer ausführen [ Name: "abc" ; Function Name: "def" ; Parameters: $p1 &  Liste( 1;2;3;4) ; $p2 ]
@@ -968,11 +968,11 @@ Ausschnitt aktualisieren [ Object Name: $MoreComplexName ]
 
 DDE Execute senden
 
-Event senden
-Event senden
-Event senden
-Event senden
-Event senden
+Event senden [ Target application: "iCal.app" ; Event: Anwendung öffnen ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "Calendar.app" ; Event: Script ausführen ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "TextMate.app" ; Event: Dokument öffnen ; Document: "file:../../SnipMaker/fmxmlsnippet.xml" ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "AppleScript-Editor.app" ; Event: Script ausführen ; Document: "file:../../../Library/Scripts/ᐳ Applications/FileMaker Pro Advanced/ FMClipboard_Save.scpt" ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: OFF ]
+Event senden [ Target application: "AppleScript-Editor.app" ; Event: Script ausführen ; Text: get name of every field of current layout ; Bring target application to foreground: OFF ; Wait for event completion: ON ; Copy event result: ON ]
 
 E-Mail senden [ Mit Dialog: ON ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
