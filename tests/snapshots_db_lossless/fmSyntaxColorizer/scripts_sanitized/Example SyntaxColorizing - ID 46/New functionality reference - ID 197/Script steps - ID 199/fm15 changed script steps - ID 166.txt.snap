@@ -5,10 +5,10 @@ expression: output_content
 
 # Send Mail via E-Mail Client (MAPI) mit/ohne Dialog
 
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Mit Dialog: ON ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
+E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Ohne Dialogfeld: ON ; Send via SMTP Server ; From name: $User ; From address: $UserMail ; SMTP server: $SMTPServer ; Port: 25 ; Encryption: SSL ; Authentication: Passwort (Klartext) ; User name: $User ; To: $To ; CC: $CC ; BCC: $BCC ; Subject: $Subject ; Message: $Message ; Attachments: "$FilePath" ]
 
 
 # On/Off Optionen jetzt als Toggle direct im Script:
@@ -37,13 +37,13 @@ Datensätze als PDF speichern [ An vorhandene PDF anhängen: OFF ; Mit Dialog: O
 Mehrere ausschließen [ Mit Dialog: ON ]
 Sortieren [ Mit Dialog: ON ]
 Datei konvertieren [ SSL-Zertifikate verifizieren: OFF ; Datei öffnen: ON ; Indizes überspringen: OFF ; Mit Dialog: ON ]
-Drucker einrichten [ Restore ; Mit Dialog: OFF ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
-Drucken [ Mit Dialog: ON ; ⚠️ PARAMETER "Print" NOT PARSED ⚠️ ; ⚠️ PARAMETER "PageSetup" NOT PARSED ⚠️ ]
+Drucker einrichten [ Restore ; Mit Dialog: OFF ; Orientation: Hochformat ]
+Drucken [ Mit Dialog: ON ]
 Passwort ändern [ Old Password: $PasswortAlt ; Password: $PasswortNeu ; With dialog: On ]
 Erneut anmelden [ Account Name: $Kontoname ; Password: $Passwort ; With dialog: On ]
 Telefonnummer wählen [ Mit Dialog: ON ; 12345678 ]
 URL öffnen [ Mit Dialog: ON ; URL: "http://db.de" ; Automatically encode URL: ON ]
-SQL ausführen [ Mit Dialog: OFF ; Ordner erstellen: OFF ; ⚠️ PARAMETER "SQL" NOT PARSED ⚠️ ]
+SQL ausführen [ Mit Dialog: OFF ; Ordner erstellen: OFF ; SQL Text: SELECT * FROM orders ]
 
 # Purpose & data type of Script Result clearer:
 

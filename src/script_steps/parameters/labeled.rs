@@ -51,6 +51,18 @@ pub fn label(parameter_type: &str, step_id: u32) -> Option<&'static str> {
         "Wait" => "Wait",
         "case" => "Match case",
         "whole" => "Match whole words only",
+        "JSONOutput" => "JSON output",
+        "CallbackScriptState" => "Callback script state",
+        "CallbackScriptParameter" => "Callback script parameter",
+        "LLMAction" | "LLMTrainActions" | "RAGAction" => "Action",
+        "TemplateType" => "Template type",
+        "TableOccurrences" => "Tables",
+        "RAGDataSource" | "FineTuneDataSource" => "Data source",
+        "Query" => "Query",
+        "ModelProvider" => "Model provider",
+        "LLMTrainAlgorithm" => "Algorithm",
+        "LLMTablesSelection" => "Tables",
+        "LLMOptionsSelection" => "Options",
         // Lists that need no label
         "Records" => "",
         _ => return None,
@@ -84,6 +96,7 @@ pub fn from_xml(
         }
         Some("List") => List::from_xml(reader, e, step_id)
             .display()
+            .filter(|value| !value.is_empty())
             .map(|value| with_label(label, value)),
         Some(_) => {
             skip_rest_of_element(reader);

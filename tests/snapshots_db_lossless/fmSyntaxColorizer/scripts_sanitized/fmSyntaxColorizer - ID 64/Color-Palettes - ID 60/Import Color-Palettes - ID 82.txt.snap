@@ -35,7 +35,7 @@ Wenn [ $error ]
 Ende (wenn)
 
 # Remove duplicates and initialise the import check box
-Sortieren [ Mit Dialog: OFF ; Restore ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: OFF ; Restore ; Sort order: _Color::PaletteName (Ascending) ; Keep records in sorted order ]
 Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
 Schleife (Anfang) [ Flush: Immer ]
 	Wenn [ Hole( DatensatzPositionInErgebnismenge ) =1 ODER

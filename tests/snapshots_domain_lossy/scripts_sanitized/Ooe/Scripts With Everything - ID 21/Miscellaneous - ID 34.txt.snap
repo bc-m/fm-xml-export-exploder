@@ -14,7 +14,7 @@ Execute FileMaker Data API [ Select: ON ]
 Execute SQL [ With dialog: OFF ; Create folders: OFF ]
 Exit Application
 Flush Cache to Disk
-Get Folder Path [ Allow Folder Creation: OFF ; ⚠️ PARAMETER "Variable" NOT PARSED ⚠️ ]
+Get Folder Path [ Allow Folder Creation: OFF ]
 Install Menu Set [ "[Standard FileMaker Menus]" ; Use as file default: OFF ]
 Install Plug-In File
 Open URL [ In external browser: OFF ; With dialog: OFF ]
@@ -26,11 +26,11 @@ Save a Copy as Add-on Package [ Replace UUIDs: OFF ]
 Send DDE Execute
 Send Event
 
-Send Mail [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
-Send Mail [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
-Send Mail [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+Send Mail [ With dialog: OFF ; Send via E-mail Client ; To: $to ; CC: $cc ; BCC: $bcc ; Subject: $subject ; Message: $message ; Attachments: "$attachmentFilePathList" ]
+Send Mail [ No dialog: ON ; Send via SMTP Server ; From name: $name ; From address: $from ; Reply-to: $replyTo ; SMTP server: $smtp ; Port: 587 ; Encryption: TLS ; Authentication: Plain Password ; User name: $username ; To: $to ; CC: $cc ; BCC: $bcc ; Subject: $subject ; Message: $message ; Attachments: "$attachmentFilePathList" ]
+Send Mail [ No dialog: ON ; Send via OAuth ; From name: $name ; From address: $from ; Reply-to: $replyTo ; OAuth provider: Google ; User ID: $adminUserEmail ; Service account: $serviceAccountEmail ; To: $to ; CC: $cc ; BCC: $bcc ; Subject: $subject ; Message: $message ; Attachments: "$attachmentFilePathList" ]
 
 Set Session Identifier
-Set Web Viewer [ Action: ]
+Set Web Viewer
 Show Custom Dialog
 Speak [ ⚠️ PARAMETER "Voice" NOT PARSED ⚠️ ; Wait: ON ]

@@ -18,6 +18,15 @@ pub fn is_structured(parameter_type: &str) -> bool {
             | "CustomMenuSet"
             | "Parameter"
             | "URL"
+            | "PageSetup"
+            | "Print"
+            | "SQL"
+            | "SortSpecification"
+            | "FindRequest"
+            | "Email"
+            | "Variable"
+            | "Flow"
+            | "Export"
     )
 }
 
@@ -37,6 +46,22 @@ pub fn from_xml(
         "CustomMenuSet" => custom_menu_set(&node),
         "Parameter" => parameter(&node),
         "URL" => url(&node),
+        "PageSetup" => page_setup(&node),
+        "Print" => print(&node),
+        "SQL" => sql(&node),
+        "SortSpecification" => sort_specification(&node),
+        "FindRequest" => find_requests(&node),
+        "Email" => email(&node),
+        "Variable" => variable(&node),
+        "Flow" => labeled(
+            "Flow",
+            node.child("Flow")
+                .and_then(|f| f.attr("value"))
+                .map(str::to_string),
+        )
+        .into_iter()
+        .collect(),
+        "Export" => export(&node),
         _ => Vec::new(),
     };
     Some(parts.join(" ; ")).filter(|display| !display.is_empty())
@@ -237,6 +262,247 @@ fn url(node: &Node) -> Vec<String> {
     ]
 }
 
+/// Print Setup: `Orientation: Portrait ; Paper size: 8.5" x 11"` (sizes are stored in 1/100 inch)
+fn page_setup(node: &Node) -> Vec<String> {
+    let Some(page_setup) = node.child("PageSetup") else {
+        return Vec::new();
+    };
+    let mut parts = Vec::new();
+    parts.extend(labeled(
+        "Orientation",
+        page_setup
+            .child("Orientation")
+            .and_then(|o| o.attr("name"))
+            .map(str::to_string),
+    ));
+    if let Some(size) = page_setup.child("size")
+        && let (Some(width), Some(height)) =
+            (inches(size.attr("width")), inches(size.attr("height")))
+    {
+        parts.push(format!("Paper size: {width}\" x {height}\""));
+    }
+    parts
+}
+
+fn inches(hundredths: Option<&str>) -> Option<String> {
+    let inches = hundredths?.parse::<f64>().ok()? / 100.0;
+    let formatted = format!("{inches:.2}");
+    Some(
+        formatted
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string(),
+    )
+}
+
+/// Print: `Records being browsed ; Pages: 2 to 3 ; Copies: 4`
+fn print(node: &Node) -> Vec<String> {
+    let Some(print) = node.child("Print") else {
+        return Vec::new();
+    };
+    let mut parts: Vec<String> = print.attr("name").map(str::to_string).into_iter().collect();
+    if let Some(pages) = print.child("Pages") {
+        if pages.attr_is_true("All") {
+            parts.push("All pages".to_string());
+        } else if let (Some(from), Some(to)) = (pages.attr("from"), pages.attr("to")) {
+            parts.push(format!("Pages: {from} to {to}"));
+        }
+    }
+    if let Some(copies) = print.child("Copies").and_then(|c| c.attr("value"))
+        && copies != "1"
+    {
+        parts.push(format!("Copies: {copies}"));
+    }
+    if print.attr_is_true("toFile") {
+        parts.push("Print to file".to_string());
+    }
+    parts
+}
+
+/// Execute SQL: `ODBC: dsn ; SQL Text: SELECT ...`
+fn sql(node: &Node) -> Vec<String> {
+    let Some(sql) = node.child("SQL") else {
+        return Vec::new();
+    };
+    let mut parts = Vec::new();
+    if let Some(dsn) = sql.child("DSN").and_then(|d| d.attr("name"))
+        && !dsn.is_empty()
+    {
+        parts.push(format!("ODBC: {dsn}"));
+    }
+    parts.extend(labeled("SQL Text", sql.calculation()));
+    parts
+}
+
+/// Sort Records: `Sort order: Table::Field (Ascending) ; Keep records in sorted order`
+fn sort_specification(node: &Node) -> Vec<String> {
+    let Some(specification) = node.child("SortSpecification") else {
+        return Vec::new();
+    };
+    let sorts: Vec<String> = specification
+        .child("SortList")
+        .into_iter()
+        .flat_map(|list| list.children_named("Sort"))
+        .map(|sort| {
+            let field = FieldReference::from_node(sort).display();
+            match sort.attr("type") {
+                Some(order) => format!("{field} ({order})"),
+                None => field,
+            }
+        })
+        .collect();
+
+    let mut parts = Vec::new();
+    if !sorts.is_empty() {
+        parts.push(format!("Sort order: {}", sorts.join(", ")));
+    }
+    if specification.attr_is_true("maintain") {
+        parts.push("Keep records in sorted order".to_string());
+    }
+    parts
+}
+
+/// Enter Find Mode / Perform Find: `Find requests: Find (Table::Field: "criteria"), Omit`
+fn find_requests(node: &Node) -> Vec<String> {
+    let requests: Vec<String> = node
+        .descendant("FindRequestSet")
+        .into_iter()
+        .flat_map(|set| set.children_named("FindRequest"))
+        .map(|request| {
+            let action = match request.attr("action") {
+                Some("omit") => "Omit",
+                _ => "Find",
+            };
+            let criteria: Vec<String> = request
+                .children_named("find")
+                .map(|find| {
+                    let field = FieldReference::from_node(find).display();
+                    let criteria = find.attr("criteria").unwrap_or_default();
+                    format!("{field}: \"{criteria}\"")
+                })
+                .collect();
+            if criteria.is_empty() {
+                action.to_string()
+            } else {
+                format!("{action} ({})", criteria.join(", "))
+            }
+        })
+        .collect();
+
+    if requests.is_empty() {
+        Vec::new()
+    } else {
+        vec![format!("Find requests: {}", requests.join(", "))]
+    }
+}
+
+/// Send Mail. Passwords and private keys are left out on purpose.
+fn email(node: &Node) -> Vec<String> {
+    let mut parts = Vec::new();
+    for boolean in node.children_named("Boolean") {
+        if let Some(label) = boolean.attr("type") {
+            parts.push(format!("{label}: {}", on_off(boolean, "value")));
+        }
+    }
+
+    let send = node.child("Send");
+    let via = node
+        .child("SMTP")
+        .map(|smtp| ("Send via SMTP Server", smtp))
+        .or_else(|| {
+            node.child("OAuthAuthentication")
+                .map(|oauth| ("Send via OAuth", oauth))
+        });
+    match via {
+        Some((label, account)) => {
+            parts.push(label.to_string());
+            for child in &account.children {
+                let label = match child.name.as_str() {
+                    "Name" => "From name",
+                    "Email" => "From address",
+                    "ReplyTo" => "Reply-to",
+                    "Server" => "SMTP server",
+                    "Port" => "Port",
+                    "UserName" => "User name",
+                    "UserID" => "User ID",
+                    "ServiceAccount" => "Service account",
+                    "Encryption" | "Authentication" | "OAuthProvider" => {
+                        let label = match child.name.as_str() {
+                            "OAuthProvider" => "OAuth provider",
+                            name => name,
+                        };
+                        parts.extend(labeled(label, child.attr("name").map(str::to_string)));
+                        continue;
+                    }
+                    _ => continue,
+                };
+                parts.extend(labeled(label, child.calculation()));
+            }
+        }
+        None if send.is_some() => parts.push("Send via E-mail Client".to_string()),
+        None => {}
+    }
+
+    if let Some(send) = send {
+        if send
+            .child("Multiple")
+            .is_some_and(|m| m.attr_is_true("value"))
+        {
+            parts.push("Multiple emails (one for each record in found set)".to_string());
+        }
+        for (child, label) in [
+            ("To", "To"),
+            ("CC", "CC"),
+            ("BCC", "BCC"),
+            ("Subject", "Subject"),
+            ("Message", "Message"),
+        ] {
+            parts.extend(labeled(
+                label,
+                send.child(child).and_then(Node::calculation),
+            ));
+        }
+    }
+
+    let attachments = universal_path_list(node);
+    if let Some(paths) = attachments.first() {
+        parts.push(format!("Attachments: {paths}"));
+    }
+    parts
+}
+
+/// Target variable, e.g. `Target: $path` or `Target: $path[2]`
+fn variable(node: &Node) -> Vec<String> {
+    let Some(name) = node
+        .child("Name")
+        .and_then(|n| n.attr("value"))
+        .filter(|n| !n.is_empty())
+    else {
+        return Vec::new();
+    };
+    let repetition = node.child("repetition").and_then(Node::calculation);
+    match repetition.as_deref() {
+        Some(rep) if rep != "1" => vec![format!("Target: {name}[{rep}]")],
+        _ => vec![format!("Target: {name}")],
+    }
+}
+
+/// Export Records: `Unicode (UTF-8) ; Apply current layout's data formatting`
+fn export(node: &Node) -> Vec<String> {
+    let Some(options) = node.child("Export").and_then(|e| e.child("Options")) else {
+        return Vec::new();
+    };
+    let mut parts: Vec<String> = options
+        .attr("name")
+        .map(str::to_string)
+        .into_iter()
+        .collect();
+    if options.attr_is_true("Formatting") {
+        parts.push("Apply current layout's data formatting".to_string());
+    }
+    parts
+}
+
 #[cfg(test)]
 mod tests {
     use quick_xml::Reader;
@@ -359,6 +625,89 @@ mod tests {
 
         let multiple = r#"<Parameter type="Parameter"><Calculation datatype="1" position="10"><Calculation><Text><![CDATA[$p1]]></Text></Calculation></Calculation><Calculation datatype="1" position="11"><Calculation><Text><![CDATA[$p2]]></Text></Calculation></Calculation></Parameter>"#;
         assert_eq!(parse(multiple).as_deref(), Some("Parameters: $p1 ; $p2"));
+    }
+
+    #[test]
+    fn page_setup() {
+        let xml = r#"<Parameter type="PageSetup"><PageSetup><Orientation name="Portrait" value="0"></Orientation><size height="1169.44" width="850"></size><scale value="100"></scale></PageSetup></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some(r#"Orientation: Portrait ; Paper size: 8.5" x 11.69""#)
+        );
+    }
+
+    #[test]
+    fn print() {
+        let xml = r#"<Parameter type="Print"><Print name="Records being browsed" type="1" toFile="False"><Pages to="3" from="2" All="False"></Pages><Copies collate="True" value="4"></Copies></Print></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some("Records being browsed ; Pages: 2 to 3 ; Copies: 4")
+        );
+    }
+
+    #[test]
+    fn sql() {
+        let xml = r#"<Parameter type="SQL"><SQL suppress="False" DSN="False"><DSN name="" UserName="" Password=""></DSN><Calculation><Text><![CDATA[SELECT * FROM orders]]></Text></Calculation></SQL></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some("SQL Text: SELECT * FROM orders")
+        );
+    }
+
+    #[test]
+    fn sort_specification() {
+        let xml = r#"<Parameter type="SortSpecification"><SortSpecification value="True" maintain="True"><SortList membercount="1"><Sort type="Descending"><PrimaryField><FieldReference id="1" name="Sort"><TableOccurrenceReference id="1" name="_Syntax"></TableOccurrenceReference></FieldReference></PrimaryField></Sort></SortList></SortSpecification></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some("Sort order: _Syntax::Sort (Descending) ; Keep records in sorted order")
+        );
+    }
+
+    #[test]
+    fn find_requests() {
+        let xml = r#"<Parameter type="FindRequest"><FindRequestSet membercount="2"><FindRequest membercount="1" action="find"><find criteria="abc"><FieldReference id="15" name="Selector"><TableOccurrenceReference id="1" name="_Syntax"></TableOccurrenceReference></FieldReference></find></FindRequest><FindRequest membercount="0" action="omit"></FindRequest></FindRequestSet></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some(r#"Find requests: Find (_Syntax::Selector: "abc"), Omit"#)
+        );
+    }
+
+    #[test]
+    fn email_smtp() {
+        let calc = |text: &str| {
+            format!(
+                r#"<Calculation datatype="1" position="0"><Calculation><Text><![CDATA[{text}]]></Text></Calculation></Calculation>"#
+            )
+        };
+        let xml = format!(
+            r#"<Parameter type="Email"><Boolean type="With dialog" value="False"></Boolean><SMTP><Name>{}</Name><Server>{}</Server><Encryption name="TLS" value="2"></Encryption><Password>{}</Password></SMTP><Send OAuthAuthentication="False" SMTP="True"><Multiple value="False"></Multiple><To><CollectAddresses value="False"></CollectAddresses>{}</To><Subject>{}</Subject></Send><UniversalPathList membercount="1"><ObjectList><Location><![CDATA[$file]]></Location></ObjectList></UniversalPathList></Parameter>"#,
+            calc("$name"),
+            calc("$smtp"),
+            calc("$secret"),
+            calc("$to"),
+            calc("$subject"),
+        );
+        assert_eq!(
+            parse(&xml).as_deref(),
+            Some(
+                r#"With dialog: OFF ; Send via SMTP Server ; From name: $name ; SMTP server: $smtp ; Encryption: TLS ; To: $to ; Subject: $subject ; Attachments: "$file""#
+            )
+        );
+    }
+
+    #[test]
+    fn variable() {
+        let xml = r#"<Parameter type="Variable"><value></value><Name value="$var"></Name><repetition><Calculation datatype="1" position="2"><Calculation><Text><![CDATA[2]]></Text></Calculation></Calculation></repetition></Parameter>"#;
+        assert_eq!(parse(xml).as_deref(), Some("Target: $var[2]"));
+    }
+
+    #[test]
+    fn export() {
+        let xml = r#"<Parameter type="Export"><Export><Options name="Unicode (UTF-8)" value="4" Formatting="True"></Options><Order type="Group"></Order></Export></Parameter>"#;
+        assert_eq!(
+            parse(xml).as_deref(),
+            Some("Unicode (UTF-8) ; Apply current layout's data formatting")
+        );
     }
 
     #[test]

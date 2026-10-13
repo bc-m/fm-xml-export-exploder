@@ -82,7 +82,7 @@ Gehe zu Layout [ Layout: "Palettes" ; Animation: Ohne ]
 Suchenmodus aktivieren [ Pause: OFF ]
 Berechneten Wert einfügen [ Auswahl: ON ; Target: _Palette::_gDuplicatePaletteFrom ; _Palette::__ID ]
 Ergebnismenge suchen [ ⚠️ RESTORE ⚠️ ]
-Sortieren [ Mit Dialog: ON ; Restore ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: ON ; Restore ; Sort order: _Syntax::Sort (Descending) ; Keep records in sorted order ]
 
 
 # Duplicate with increased name
@@ -170,7 +170,7 @@ Variable setzen [ $Error ; Hole ( ScriptErgebnis ) ]
 URL öffnen [ Mit Dialog: OFF ]
 # @var $a - this comment defines the variable a
 Aus URL einfügen [ Auswahl ; Mit Dialog: ON ; Target: $a ]
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: $a ]
 
 AppleScript ausführen
 

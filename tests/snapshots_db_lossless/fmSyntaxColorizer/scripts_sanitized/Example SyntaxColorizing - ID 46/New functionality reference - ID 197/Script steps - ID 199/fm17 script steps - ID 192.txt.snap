@@ -27,9 +27,9 @@ Script ausführen [ Specified: Nach Name ; "Self::Hello::World" ; Parameter: 123
 
 # Create directories
 
-Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:utf16.tab" ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
-Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: ON ; "file:utf16.tab" ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
-Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: ON ; "file:utf16.tab.xml" ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:utf16.tab" ; Unicode (UTF-16) ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: ON ; "file:utf16.tab" ; Unicode (UTF-16) ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: ON ; "file:utf16.tab.xml" ; Unicode (UTF-8) ]
 
 Exportiere alle Feldwerte [ Ordner erstellen: ON ; _Color::__ID ; "$filePath" ]
 Exportiere alle Feldwerte [ Ordner erstellen: ON ]
@@ -48,9 +48,10 @@ Datensätze als Snapshot-Link speichern [ "file:c" ; Alle aufgerufenen Datensät
 
 # Send multiple attachments
 # 1 Attachment
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: "r.watson@guenther-bs.de" ; Subject: "Multiple Attachments!" ; Message: "With FileMaker 17 you can now send multiple attachments! - Hooray!¶¶" ; Attachments: "file:../../../../../Downloads/TestButtonBarDDRBug/TestButtonBarDDRBug.fmp12" ]
 # 2+ Attachments
-E-Mail senden [ ⚠️ PARAMETER "Email" NOT PARSED ⚠️ ]
+E-Mail senden [ Mit Dialog: OFF ; Send via E-mail Client ; To: "r.watson@guenther-bs.de" ; Subject: "Multiple Attachments!" ; Message: "With FileMaker 17 you can now send multiple attachments! - Hooray!¶¶" ; Attachments: "file:../../../../Update_Übernahme Tabellen.pdf
+file:../../../../Simple Sending.fmp12" ]
 
 
 

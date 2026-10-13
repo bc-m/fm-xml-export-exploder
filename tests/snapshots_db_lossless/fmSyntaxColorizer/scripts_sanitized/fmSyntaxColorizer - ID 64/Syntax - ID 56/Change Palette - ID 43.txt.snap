@@ -37,7 +37,7 @@ Wenn [ $CountOfSyntaxToCreate > 0 ]
 	Wenn [ Hole( LetzteMeldungswahl ) = 1 ]
 		Gehe zu Bezugsdatensatz [ Table: Palette.Color_OnlyPaletteSpecificColors ; Layout: "Colors" ; Show related ]
 		# FOR EACH Color
-		Sortieren [ Mit Dialog: OFF ; Restore ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+		Sortieren [ Mit Dialog: OFF ; Restore ; Sort order: _Color::_kHasSpecificSyntax (Ascending) ; Keep records in sorted order ]
 		Gehe zu Datens./Abfrage/Seite [ Erste(r) ]
 		Schleife (Anfang) [ Flush: Immer ]
 			Verlasse Schleife wenn [ Color.Syntax_byCommand::_k1 ]

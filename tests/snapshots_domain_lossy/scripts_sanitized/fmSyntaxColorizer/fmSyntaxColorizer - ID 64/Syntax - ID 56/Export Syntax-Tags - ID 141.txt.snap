@@ -24,10 +24,10 @@ Wenn [ Hole( AnzahlGefundeneDatensätze ) = 0 ]
 	# -->
 Ende (wenn)
 
-Sortieren [ Mit Dialog: OFF ; Restore ; ⚠️ PARAMETER "SortSpecification" NOT PARSED ⚠️ ]
+Sortieren [ Mit Dialog: OFF ; Restore ; Sort order: _Syntax::Sort (Ascending) ; Keep records in sorted order ]
 
 # Export Syntax-Tags
-Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:$FilePath" ; ⚠️ PARAMETER "Export" NOT PARSED ⚠️ ]
+Datensätze exportieren [ Mit Dialog: OFF ; Ordner erstellen: OFF ; "file:$FilePath" ; Unicode (UTF-16) ]
 Variable setzen [ $error ; Hole( LetzteFehlerNr ) ]
 Wenn [ $error ]
 	Eigenes Dialogfeld anzeigen [ Title: Hole( ScriptName ) ; Message: "Error " & $error & " during the export." ; Default Button: "OK" ]
