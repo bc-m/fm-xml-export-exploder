@@ -28,6 +28,7 @@ pub fn is_structured(parameter_type: &str) -> bool {
             | "Flow"
             | "Export"
             | "ImportField"
+            | "Voice"
     )
 }
 
@@ -64,6 +65,7 @@ pub fn from_xml(
         .collect(),
         "Export" => export(&node),
         "ImportField" => import_field(&node),
+        "Voice" => voice(&node),
         _ => Vec::new(),
     };
     Some(parts.join(" ; ")).filter(|display| !display.is_empty())
@@ -690,6 +692,29 @@ fn import_field(node: &Node) -> Vec<String> {
     parts
 }
 
+/// Speak (macOS): the voice is stored as a synthesizer creator code (a FourCC like
+/// `gala`) and a voice id, without the voice name. `0`/`0` is the default voice.
+fn voice(node: &Node) -> Vec<String> {
+    let Some(voice) = node.child("Voice") else {
+        return Vec::new();
+    };
+    let id = voice.attr("id").unwrap_or("0");
+    let creator = voice.attr("value").unwrap_or("0");
+    if id == "0" && creator == "0" {
+        return vec!["Voice: Default".to_string()];
+    }
+    let creator = creator
+        .parse::<u32>()
+        .ok()
+        .map(u32::to_be_bytes)
+        .filter(|bytes| bytes.iter().all(u8::is_ascii_graphic))
+        .map_or_else(
+            || creator.to_string(),
+            |bytes| String::from_utf8_lossy(&bytes).into_owned(),
+        );
+    vec![format!("Voice: {creator} {id}")]
+}
+
 #[cfg(test)]
 mod tests {
     use quick_xml::Reader;
@@ -993,6 +1018,19 @@ mod tests {
                 "Table: _Color ; Update ; Add remaining data as new records ; Perform auto-enter options ; UTF-8"
             )
         );
+    }
+
+    #[test]
+    fn voice() {
+        let default = r#"<Parameter type="Voice"><Voice id="0" value="0"></Voice></Parameter>"#;
+        assert_eq!(parse(default).as_deref(), Some("Voice: Default"));
+
+        let agnes =
+            r#"<Parameter type="Voice"><Voice id="300" value="1734437985"></Voice></Parameter>"#;
+        assert_eq!(parse(agnes).as_deref(), Some("Voice: gala 300"));
+
+        let unprintable = r#"<Parameter type="Voice"><Voice id="7" value="1"></Voice></Parameter>"#;
+        assert_eq!(parse(unprintable).as_deref(), Some("Voice: 1 7"));
     }
 
     #[test]
