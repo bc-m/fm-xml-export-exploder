@@ -1,6 +1,8 @@
 use std::fs;
 use std::path::Path;
 
+use crate::utils::output_files::OutputFiles;
+
 use anyhow::{Result, anyhow, ensure};
 
 /// Validate that a path exists and is a directory
@@ -46,10 +48,13 @@ pub fn should_skip_line(line: &str) -> bool {
 
 /// Recursively find all XML files in a directory and call `process_file` for each,
 /// preserving the relative path structure from `base_dir` into `output_dir`.
+/// Calls `process_file` for each XML file written during this run below `current_dir`,
+/// with the matching `.txt` path below `output_dir`.
 pub fn for_each_xml_file(
     current_dir: &Path,
     base_dir: &Path,
     output_dir: &Path,
+    output: &OutputFiles,
     process_file: &mut impl FnMut(&Path, &Path),
 ) {
     let Ok(entries) = fs::read_dir(current_dir) else {
@@ -58,6 +63,10 @@ pub fn for_each_xml_file(
     for entry in entries.flatten() {
         let path = entry.path();
         if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("xml") {
+            // Leftovers of an earlier run are removed at the end
+            if !output.contains(&path) {
+                continue;
+            }
             let relative_path = path.strip_prefix(base_dir).unwrap_or(&path);
             let output_file_path = output_dir.join(relative_path).with_extension("txt");
             if let Some(parent) = output_file_path.parent() {
@@ -67,7 +76,7 @@ pub fn for_each_xml_file(
             }
             process_file(&path, &output_file_path);
         } else if path.is_dir() {
-            for_each_xml_file(&path, base_dir, output_dir, process_file);
+            for_each_xml_file(&path, base_dir, output_dir, output, process_file);
         }
     }
 }

@@ -134,7 +134,12 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     base_depth + rel_depth - 1,
                     id_path,
                 );
-                rename_file_if_necessary(&file_path, context.path_stack, catalog_item_name);
+                rename_file_if_necessary(
+                    context.output,
+                    &file_path,
+                    context.path_stack,
+                    catalog_item_name,
+                );
 
                 // Move to subfolder if necessary
                 if let Some(subfolder) = determine_subfolder_path(
@@ -145,7 +150,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     uses_folders,
                     &current_path,
                 ) {
-                    let _ = move_to_subfolder(&file_path, &subfolder);
+                    let _ = move_to_subfolder(context.output, &file_path, &subfolder);
                 }
 
                 update_folder_structure(&mut folder_structure_result, &current_id, &current_path);

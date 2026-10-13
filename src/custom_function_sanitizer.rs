@@ -6,6 +6,7 @@ use quick_xml::reader::Reader;
 
 use crate::utils::attributes::get_attribute;
 use crate::utils::file_utils::for_each_xml_file;
+use crate::utils::output_files::OutputFiles;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::cdata_to_string;
 
@@ -17,18 +18,23 @@ struct CfInfo {
 
 /// Process all XML files in the cf directory and create sanitized text versions
 /// This function mirrors the folder structure of the XML files
-pub fn create_sanitized_custom_functions(cf_xml_out_dir_path: &Path, cf_text_out_dir_path: &Path) {
+pub fn create_sanitized_custom_functions(
+    cf_xml_out_dir_path: &Path,
+    cf_text_out_dir_path: &Path,
+    output: &OutputFiles,
+) {
     for_each_xml_file(
         cf_xml_out_dir_path,
         cf_xml_out_dir_path,
         cf_text_out_dir_path,
+        output,
         &mut |xml_file_path, output_file_path| {
             let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
                 eprintln!("Error reading file {}", xml_file_path.display());
                 return;
             };
             if let Some(cf_info) = parse_cf_xml(&xml_content) {
-                write_text_file(output_file_path, &cf_info.text);
+                write_text_file(output, output_file_path, &cf_info.text);
             }
         },
     );

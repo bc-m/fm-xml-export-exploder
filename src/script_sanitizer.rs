@@ -9,6 +9,7 @@ use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::sanitizer::sanitize;
 use crate::utils::attributes::get_attribute;
 use crate::utils::file_utils::for_each_xml_file;
+use crate::utils::output_files::OutputFiles;
 use crate::utils::write_text_file;
 use crate::utils::xml_utils::{
     cdata_element_to_string, end_element_to_string, general_ref_to_string, start_element_to_string,
@@ -35,18 +36,20 @@ pub fn create_sanitized_scripts(
     scripts_xml_out_dir_path: &Path,
     scripts_text_out_dir_path: &Path,
     flags: &Flags,
+    output: &OutputFiles,
 ) {
     for_each_xml_file(
         scripts_xml_out_dir_path,
         scripts_xml_out_dir_path,
         scripts_text_out_dir_path,
+        output,
         &mut |xml_file_path, output_file_path| {
             let Ok(xml_content) = fs::read_to_string(xml_file_path) else {
                 eprintln!("Error reading file {}", xml_file_path.display());
                 return;
             };
             if let Some(script_info) = parse_script_xml(&xml_content, flags) {
-                write_text_file(output_file_path, &script_info.text);
+                write_text_file(output, output_file_path, &script_info.text);
             }
         },
     );

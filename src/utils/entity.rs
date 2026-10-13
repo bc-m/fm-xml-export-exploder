@@ -6,6 +6,7 @@ use quick_xml::events::{BytesStart, Event};
 use crate::config::Flags;
 use crate::utils::attributes::get_attributes;
 use crate::utils::file_utils::{escape_filename, join_scope_id_and_name};
+use crate::utils::output_files::OutputFiles;
 use crate::utils::skeleton::push_line_to_skeleton;
 use crate::utils::xml_utils::{
     XmlEventType, element_to_string, end_element_to_string, general_ref_to_string,
@@ -101,6 +102,7 @@ pub fn write_rest_of_element_to_file<R: Read + BufRead>(
         );
     }
     write_entity_to_file(
+        context.output,
         &context.current_out_dir,
         &entity,
         remove_indent_count,
@@ -109,6 +111,7 @@ pub fn write_rest_of_element_to_file<R: Read + BufRead>(
 }
 
 pub fn write_entity_to_file(
+    output: &OutputFiles,
     output_dir: &Path,
     entity: &Entity,
     remove_indent_count: usize,
@@ -117,6 +120,7 @@ pub fn write_entity_to_file(
     let filename = escape_filename(&join_scope_id_and_name(&entity.id, &entity.name));
     let output_file_path = output_dir.join(format!("{filename}.xml"));
     super::write_xml_file(
+        output,
         &output_file_path,
         &entity.content,
         remove_indent_count,

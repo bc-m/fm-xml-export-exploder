@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 use std::fs;
-use std::fs::File;
-use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::sync::LazyLock;
 
@@ -10,11 +8,13 @@ use regex::Regex;
 
 use crate::config::Flags;
 use crate::utils::file_utils::should_skip_line;
+use crate::utils::output_files::OutputFiles;
 use crate::utils::xml_utils::extract_values_from_xml_paths;
 
 pub(crate) mod attributes;
 pub(crate) mod entity;
 pub(crate) mod file_utils;
+pub(crate) mod output_files;
 pub(crate) mod output_path;
 pub(crate) mod skeleton;
 pub(crate) mod xml_node;
@@ -24,7 +24,7 @@ pub(crate) mod xml_utils;
 pub use entity::write_rest_of_element_to_file;
 pub(crate) use output_path::VERSION_2_2_3_4;
 pub use output_path::{
-    build_out_dir_path, delete_output_directory, migrate_old_custom_functions_if_needed,
+    build_out_dir_path, migrate_old_custom_functions_if_needed, output_roots,
     version_string_to_number,
 };
 pub use skeleton::push_line_to_skeleton;
@@ -43,21 +43,26 @@ impl FolderStructure {
     }
 }
 
-pub fn rename_file(file_path: &Path, new_name: &str) -> Result<PathBuf> {
+pub fn rename_file(output: &OutputFiles, file_path: &Path, new_name: &str) -> Result<PathBuf> {
     let parent_dir = file_path
         .parent()
         .ok_or_else(|| anyhow::anyhow!("File path has no parent directory"))?;
 
     let new_path = parent_dir.join(new_name);
 
-    fs::rename(file_path, &new_path)?;
+    output.rename(file_path, &new_path)?;
 
     Ok(new_path)
 }
 
 /// Some catalog items derive their name differently from the standard method
 /// which builds the name using id and name attributes in the catalog item tag.
-pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[String], tag_name: &str) {
+pub fn rename_file_if_necessary(
+    output: &OutputFiles,
+    file_path: &Path,
+    path_stack: &[String],
+    tag_name: &str,
+) {
     if path_stack.get(1).is_none_or(|v| v != "Structure") {
         return;
     }
@@ -98,11 +103,15 @@ pub fn rename_file_if_necessary(file_path: &Path, path_stack: &[String], tag_nam
     } else {
         format!("{} - ID {id}.xml", name_parts.join(" - "))
     };
-    let _ = rename_file(file_path, &new_name);
+    let _ = rename_file(output, file_path, &new_name);
 }
 
 /// Move a file to a subfolder if the subfolder path is not empty
-pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<PathBuf> {
+pub fn move_to_subfolder(
+    output: &OutputFiles,
+    file_path: &Path,
+    subfolder_dir_path: &Path,
+) -> Result<PathBuf> {
     if subfolder_dir_path.as_os_str().is_empty() {
         return Ok(file_path.to_path_buf());
     }
@@ -115,7 +124,7 @@ pub fn move_to_subfolder(file_path: &Path, subfolder_dir_path: &Path) -> Result<
 
     let new_path = subfolder_dir_path.join(filename);
 
-    fs::rename(file_path, &new_path)?;
+    output.rename(file_path, &new_path)?;
 
     Ok(new_path)
 }
@@ -126,6 +135,7 @@ pub fn create_dir(dir_path: &Path) {
 }
 
 pub fn write_xml_file(
+    output: &OutputFiles,
     output_file_path: &Path,
     content: &str,
     remove_indent_count: usize,
@@ -142,30 +152,20 @@ pub fn write_xml_file(
         file_content.push('\n');
     }
 
-    write_file(output_file_path, &file_content);
+    output.write(output_file_path, &file_content);
 }
 
 static LINE_SPLIT_REGEX: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"\r\n|\n\r|\r|\n").unwrap());
 
-pub fn write_text_file(output_file_path: &Path, content: &str) {
+pub fn write_text_file(output: &OutputFiles, output_file_path: &Path, content: &str) {
     let mut file_content = String::with_capacity(content.len());
     for line in LINE_SPLIT_REGEX.split(content) {
         file_content.push_str(line);
         file_content.push('\n');
     }
 
-    write_file(output_file_path, &file_content);
-}
-
-fn write_file(output_file_path: &Path, file_content: &str) {
-    let result = File::create(output_file_path).and_then(|mut f| {
-        f.write_all(file_content.as_bytes())?;
-        f.flush()
-    });
-    if let Err(err) = result {
-        eprintln!("Error writing file {}: {}", output_file_path.display(), err);
-    }
+    output.write(output_file_path, &file_content);
 }
 
 #[cfg(test)]
@@ -182,7 +182,7 @@ mod tests {
         assert!(temp_file.exists());
 
         let new_name = "test_rename_destination.txt";
-        let result = rename_file(&temp_file, new_name);
+        let result = rename_file(&OutputFiles::default(), &temp_file, new_name);
         assert!(result.is_ok());
 
         let new_path = result.unwrap();
@@ -199,7 +199,7 @@ mod tests {
     #[test]
     fn test_rename_file_nonexistent() {
         let nonexistent_file = PathBuf::from("nonexistent_file.txt");
-        let result = rename_file(&nonexistent_file, "new_name.txt");
+        let result = rename_file(&OutputFiles::default(), &nonexistent_file, "new_name.txt");
         assert!(result.is_err());
     }
 
@@ -224,7 +224,7 @@ mod tests {
             "Structure".to_owned(),
             "AddAction".to_owned(),
         ];
-        rename_file_if_necessary(&temp_file, &path_stack, "Account");
+        rename_file_if_necessary(&OutputFiles::default(), &temp_file, &path_stack, "Account");
 
         let renamed_file = PathBuf::from("[Guest] - ID 1.xml");
         assert!(renamed_file.exists());
@@ -249,7 +249,7 @@ mod tests {
             "WrongElement".to_owned(),
             "AddAction".to_owned(),
         ];
-        rename_file_if_necessary(&temp_file, &path_stack, "Account");
+        rename_file_if_necessary(&OutputFiles::default(), &temp_file, &path_stack, "Account");
 
         assert!(temp_file.exists());
 
@@ -267,7 +267,7 @@ mod tests {
         let subfolder = PathBuf::from("test_subfolder");
         fs::create_dir(&subfolder).unwrap();
 
-        let result = move_to_subfolder(&temp_file, &subfolder);
+        let result = move_to_subfolder(&OutputFiles::default(), &temp_file, &subfolder);
         assert!(result.is_ok());
 
         let new_path = result.unwrap();
@@ -294,7 +294,7 @@ mod tests {
         assert!(temp_file.exists());
 
         let empty_path = PathBuf::from("");
-        let result = move_to_subfolder(&temp_file, &empty_path);
+        let result = move_to_subfolder(&OutputFiles::default(), &temp_file, &empty_path);
         assert!(result.is_ok());
 
         let returned_path = result.unwrap();

@@ -67,7 +67,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
 
                 // Write to file if we're at the end of the catalog
                 if depth == 0 {
-                    write_xml_file(&out_file_path, &result, 1, context.flags);
+                    write_xml_file(context.output, &out_file_path, &result, 1, context.flags);
                     context.path_stack.pop();
                     break;
                 }

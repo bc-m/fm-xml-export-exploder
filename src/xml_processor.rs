@@ -14,9 +14,10 @@ use crate::custom_function_sanitizer::create_sanitized_custom_functions;
 use crate::script_sanitizer::create_sanitized_scripts;
 use crate::supporting::process_supporting_element;
 use crate::utils::attributes::get_attribute;
+use crate::utils::output_files::OutputFiles;
 use crate::utils::xml_utils::{XmlEventType, end_element_to_string, start_element_to_string};
 use crate::utils::{
-    FolderStructure, VERSION_2_2_3_4, build_out_dir_path, create_dir, delete_output_directory,
+    FolderStructure, VERSION_2_2_3_4, build_out_dir_path, create_dir, output_roots,
     push_line_to_skeleton, version_string_to_number, write_xml_file,
 };
 
@@ -56,6 +57,8 @@ pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub current_out_dir: PathBuf,
     pub skeleton: &'a mut Skeleton,
     pub flags: &'a Flags,
+    /// The files written so far; everything else in the database's output is stale
+    pub output: &'a OutputFiles,
 }
 
 /// Process a single XML file and explode it into individual files.
@@ -78,6 +81,8 @@ pub fn explode_xml(
     let mut script_folder_structure: Option<FolderStructure> = None;
     let mut buf = Vec::new();
 
+    let output = OutputFiles::default();
+
     // Instantiate processing context which will be passed around to various functions
     let mut context = ProcessingContext {
         reader: &mut Reader::from_reader(BufReader::new(DecodeReaderBytes::new(file))),
@@ -90,6 +95,7 @@ pub fn explode_xml(
         current_out_dir: PathBuf::new(),
         skeleton: &mut Skeleton::default(),
         flags,
+        output: &output,
     };
 
     // Iterate over XML events
@@ -114,7 +120,6 @@ pub fn explode_xml(
                     0 => {
                         process_root_element(&mut context, &start_tag)?;
                         create_dir(context.root_out_dir);
-                        delete_output_directory(&context)?;
                     }
                     1 => {
                         let was_xml_element_consumed =
@@ -160,6 +165,13 @@ pub fn explode_xml(
     // Write skeleton file if in lossless mode
     if flags.lossless {
         write_skeleton_file(&context)?;
+    }
+
+    // The output is updated in place: remove what this export no longer contains
+    if let Some(doc_info) = &context.doc_info {
+        for root in output_roots(root_out_dir, &flags.output_tree, &doc_info.db_name) {
+            output.remove_stale(&root)?;
+        }
     }
 
     println!(
@@ -263,15 +275,15 @@ fn process_catalog_elements<R: Read + BufRead>(
     match catalog_type {
         CatalogType::StepsForScripts => {
             let dir = build_out_dir_path(context, Some(Qualifier::SanitizedScripts))?;
-            create_sanitized_scripts(&xml_out_dir_path, &dir, context.flags);
+            create_sanitized_scripts(&xml_out_dir_path, &dir, context.flags, context.output);
         }
         CatalogType::CalcsForCustomFunctions => {
             let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-            create_sanitized_custom_functions(&xml_out_dir_path, &dir);
+            create_sanitized_custom_functions(&xml_out_dir_path, &dir, context.output);
         }
         CatalogType::CustomFunctions if ver >= VERSION_2_2_3_4 => {
             let dir = build_out_dir_path(context, Some(Qualifier::SanitizedCustomFunctions))?;
-            create_sanitized_custom_functions(&xml_out_dir_path, &dir);
+            create_sanitized_custom_functions(&xml_out_dir_path, &dir, context.output);
         }
         _ => {}
     }
@@ -282,6 +294,7 @@ fn write_skeleton_file<R: Read + BufRead>(context: &ProcessingContext<'_, R>) ->
     let skeleton_dir_path = build_out_dir_path(context, None)?;
     let skeleton_file_path = skeleton_dir_path.join("skeleton.xml");
     write_xml_file(
+        context.output,
         &skeleton_file_path,
         &context.skeleton.content,
         0,
