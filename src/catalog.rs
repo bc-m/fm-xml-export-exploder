@@ -78,7 +78,7 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                 // Is the current element an ancillary element?
                 // Ancillary elements are elements that are not catalog items or <ObjectList>, e.g., <UUID> or <TagList>
                 let expected_element = if wrapped_in_object_list {
-                    b"ObjectList".as_ref()
+                    "ObjectList"
                 } else {
                     catalog_item_name
                 };

@@ -24,7 +24,7 @@ impl VariableReference {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"repetition"
+                    if e.name().as_ref() == "repetition"
                         && let Some(repetition) = get_attribute(&e, "value")
                         && let Ok(repetition) = repetition.parse()
                     {

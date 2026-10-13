@@ -24,7 +24,7 @@ impl Button {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(inner)) => {
                     depth += 1;
-                    if inner.name().as_ref() == b"Text" {
+                    if inner.name().as_ref() == "Text" {
                         in_text = true;
                     }
                 }
@@ -36,7 +36,7 @@ impl Button {
                     }
                 }
                 Ok(Event::End(end)) => {
-                    if end.name().as_ref() == b"Text" {
+                    if end.name().as_ref() == "Text" {
                         in_text = false;
                     }
                     depth -= 1;

@@ -20,7 +20,7 @@ impl PrivilegeSetReference {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"PrivilegeSetReference" {
+                    if e.name().as_ref() == "PrivilegeSetReference" {
                         item.name = parse_unescaped_attribute(&e, "name");
                     }
                 }

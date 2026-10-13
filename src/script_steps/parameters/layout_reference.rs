@@ -49,17 +49,17 @@ impl LayoutReferenceContainer {
                 Ok(Event::Start(e)) => {
                     depth += 1;
                     match e.name().as_ref() {
-                        b"LayoutReferenceContainer" => {
+                        "LayoutReferenceContainer" => {
                             item.reference_type = get_attribute(&e, "value").unwrap_or_default();
                         }
-                        b"LayoutReference" => {
+                        "LayoutReference" => {
                             item.layout_reference = get_attribute(&e, "name");
                         }
-                        b"Label" => {
+                        "Label" => {
                             item.layout_reference = Some(Self::parse_label(reader));
                             depth -= 1;
                         }
-                        b"Calculation" => {
+                        "Calculation" => {
                             item.layout_reference = Calculation::from_xml(reader, &e).display();
                             depth -= 1;
                         }

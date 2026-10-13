@@ -17,14 +17,14 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
+                "Step" => {
                     name = get_attribute(&e, "name").unwrap();
                 }
-                b"Boolean" => {
+                "Boolean" => {
                     select_label = get_attribute(&e, "type").unwrap();
                     select = get_attribute(&e, "value").as_deref() == Some("True");
                 }
-                b"List" => {
+                "List" => {
                     position = get_attribute(&e, "name").unwrap();
                 }
                 _ => {}

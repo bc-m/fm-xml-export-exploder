@@ -39,7 +39,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
             Ok(Event::Start(e)) => {
                 depth += 1;
                 let start_tag = start_element_to_string(&e, context.flags);
-                if e.name().as_ref() == b"Chunk" {
+                if e.name().as_ref() == "Chunk" {
                     in_chunk = true;
                 }
                 result.push_str(&start_tag);
@@ -61,7 +61,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
 
                 result.push_str(&end_tag);
 
-                if e.name().as_ref() == b"Chunk" {
+                if e.name().as_ref() == "Chunk" {
                     in_chunk = false;
                 }
 

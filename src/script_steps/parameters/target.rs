@@ -20,10 +20,10 @@ impl Target {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => match e.name().as_ref() {
-                    b"Variable" => {
+                    "Variable" => {
                         item.target = VariableReference::from_xml(reader, &e).display();
                     }
-                    b"FieldReference" => {
+                    "FieldReference" => {
                         item.target = Some(FieldReference::from_xml(reader, &e).display());
                     }
                     _ => {

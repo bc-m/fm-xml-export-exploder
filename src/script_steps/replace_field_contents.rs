@@ -23,24 +23,24 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"Boolean" => {
+                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "Boolean" => {
                     if get_attribute(&e, "value").as_deref() != Some("True") {
                         continue;
                     }
                     let label = get_attribute(&e, "type").unwrap();
                     params.push((label, "ON".to_string()));
                 }
-                b"FieldReference" => {
+                "FieldReference" => {
                     let field_reference = FieldReference::from_xml(&mut reader, &e).display();
                     params.push((String::new(), field_reference))
                 }
-                b"Calculation" => {
+                "Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default();
                 }
-                b"List" => {
+                "List" => {
                     if in_serial_number_section {
                         if get_attribute(&e, "value").as_deref() == Some("True")
                             && let Some(last_param) = params.last_mut()
@@ -63,8 +63,8 @@ pub fn sanitize(step: &str) -> Option<String> {
                         _ => {}
                     }
                 }
-                b"Initial" => auto_increment_initial_value = get_attribute(&e, "value").unwrap(),
-                b"increment" => auto_increment_interval_value = get_attribute(&e, "value").unwrap(),
+                "Initial" => auto_increment_initial_value = get_attribute(&e, "value").unwrap(),
+                "increment" => auto_increment_interval_value = get_attribute(&e, "value").unwrap(),
                 _ => {}
             },
             _ => {}

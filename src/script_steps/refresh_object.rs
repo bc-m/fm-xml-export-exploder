@@ -18,9 +18,9 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"Name" => in_name = true,
-                b"repetition" => in_repetition = true,
+                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "Name" => in_name = true,
+                "repetition" => in_repetition = true,
                 _ => {}
             },
             Ok(Event::CData(e)) => {
@@ -32,8 +32,8 @@ pub fn sanitize(step: &str) -> Option<String> {
                 }
             }
             Ok(Event::End(e)) => match e.name().as_ref() {
-                b"Name" => in_name = false,
-                b"repetition" => in_repetition = false,
+                "Name" => in_name = false,
+                "repetition" => in_repetition = false,
                 _ => {}
             },
             _ => {}

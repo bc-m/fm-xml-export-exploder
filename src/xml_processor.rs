@@ -47,7 +47,7 @@ pub struct DocumentInfo {
 /// Context for XML catalog processing
 pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub reader: &'a mut Reader<R>,
-    pub path_stack: &'a mut Vec<Vec<u8>>,
+    pub path_stack: &'a mut Vec<String>,
     pub root_out_dir: &'a Path,
     pub doc_info: Option<DocumentInfo>,
     pub top_level_section: Option<TopLevelSection>,
@@ -96,7 +96,9 @@ pub fn explode_xml(fm_export_file_path: &Path, root_out_dir: &Path, flags: &Flag
             }
             Ok(Event::Eof) => break,
             Ok(Event::Start(start_tag)) => {
-                context.path_stack.push(start_tag.name().as_ref().to_vec());
+                context
+                    .path_stack
+                    .push(start_tag.name().as_ref().to_owned());
                 push_start_to_skeleton(
                     &start_tag,
                     context.skeleton,
@@ -118,10 +120,10 @@ pub fn explode_xml(fm_export_file_path: &Path, root_out_dir: &Path, flags: &Flag
                     }
                     2 => {
                         context.action = match start_tag.name().as_ref() {
-                            b"AddAction" => Some(Action::Add),
-                            b"ModifyAction" => Some(Action::Modify),
-                            b"ReplaceAction" => Some(Action::Replace),
-                            b"DeleteAction" => Some(Action::Delete),
+                            "AddAction" => Some(Action::Add),
+                            "ModifyAction" => Some(Action::Modify),
+                            "ReplaceAction" => Some(Action::Replace),
+                            "DeleteAction" => Some(Action::Delete),
                             _ => None,
                         };
                     }
@@ -168,7 +170,7 @@ fn process_root_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     e: &BytesStart,
 ) -> Result<()> {
-    if !matches!(e.name().as_ref(), b"FMDynamicTemplate" | b"FMSaveAsXML") {
+    if !matches!(e.name().as_ref(), "FMDynamicTemplate" | "FMSaveAsXML") {
         bail!("Unsupported XML-format");
     }
 
@@ -195,12 +197,12 @@ fn process_top_level_section<R: Read + BufRead>(
     start_tag: &BytesStart,
 ) -> Result<bool> {
     let (section, out_file_name) = match start_tag.name().as_ref() {
-        b"Structure" => {
+        "Structure" => {
             context.top_level_section = Some(TopLevelSection::Structure);
             return Ok(false);
         }
-        b"Metadata" => (TopLevelSection::Metadata, "metadata"),
-        b"DDR_INFO" => (TopLevelSection::DdrInfo, "ddr_info"),
+        "Metadata" => (TopLevelSection::Metadata, "metadata"),
+        "DDR_INFO" => (TopLevelSection::DdrInfo, "ddr_info"),
         _ => {
             context.top_level_section = None;
             return Ok(false);
@@ -219,7 +221,7 @@ fn process_catalog_elements<R: Read + BufRead>(
     script_folder_structure: &mut Option<FolderStructure>,
 ) -> Result<bool> {
     // Detect catalog type
-    let Some(catalog_type) = CatalogType::from_bytes(start_tag.name().as_ref()) else {
+    let Some(catalog_type) = CatalogType::from_name(start_tag.name().as_ref()) else {
         return Ok(false);
     };
     context.catalog_type = Some(catalog_type);
@@ -286,7 +288,7 @@ fn write_skeleton_file<R: Read + BufRead>(context: &ProcessingContext<'_, R>) ->
 fn push_start_to_skeleton(
     e: &BytesStart,
     skeleton: &mut Skeleton,
-    path_stack: &[Vec<u8>],
+    path_stack: &[String],
     flags: &Flags,
 ) {
     if !flags.lossless {
@@ -311,7 +313,7 @@ fn push_start_to_skeleton(
 fn push_end_to_skeleton(
     e: &BytesEnd,
     skeleton: &mut Skeleton,
-    path_stack: &[Vec<u8>],
+    path_stack: &[String],
     flags: &Flags,
 ) {
     if !flags.lossless {
@@ -336,7 +338,7 @@ fn push_end_to_skeleton(
 /// Determine whether an element at the given depth should be added to the skeleton.
 /// `base` adjusts the depth thresholds: 1 for start events (1-indexed after push),
 /// 0 for end events (0-indexed after pop).
-fn should_add_to_skeleton(depth: usize, base: usize, path_stack: &[Vec<u8>]) -> bool {
+fn should_add_to_skeleton(depth: usize, base: usize, path_stack: &[String]) -> bool {
     let max_unconditional = 2 + base; // 3 for start, 2 for end
     let max_conditional = 4 + base; // 5 for start, 4 for end
     depth <= max_unconditional || (depth <= max_conditional && is_action_ancestor(path_stack))
@@ -344,8 +346,8 @@ fn should_add_to_skeleton(depth: usize, base: usize, path_stack: &[Vec<u8>]) -> 
 
 /// Check whether the path_stack contains an AddAction or ModifyAction ancestor
 /// at position index 2 (the action level in the XML tree).
-fn is_action_ancestor(path_stack: &[Vec<u8>]) -> bool {
+fn is_action_ancestor(path_stack: &[String]) -> bool {
     path_stack
         .get(2)
-        .is_some_and(|v| matches!(v.as_slice(), b"AddAction" | b"ModifyAction"))
+        .is_some_and(|v| matches!(v.as_str(), "AddAction" | "ModifyAction"))
 }

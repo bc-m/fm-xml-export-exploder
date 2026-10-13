@@ -17,11 +17,11 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"FieldReference" => {
+                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "FieldReference" => {
                     field_reference = FieldReference::from_xml(&mut reader, &e).display()
                 }
-                b"Calculation" => {
+                "Calculation" => {
                     calculation = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default();

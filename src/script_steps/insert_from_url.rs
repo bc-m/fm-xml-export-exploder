@@ -27,10 +27,10 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
+                "Step" => {
                     name = get_attribute(&e, "name").unwrap_or_default();
                 }
-                b"Boolean" => {
+                "Boolean" => {
                     let id = get_attribute(&e, "id").unwrap_or_default();
                     let label = get_attribute(&e, "type").unwrap_or_default();
                     let is_on = get_attribute(&e, "value").as_deref() == Some("True");
@@ -43,7 +43,7 @@ pub fn sanitize(step: &str) -> Option<String> {
                         _ => {}
                     }
                 }
-                b"Parameter" => match get_attribute(&e, "type").as_deref() {
+                "Parameter" => match get_attribute(&e, "type").as_deref() {
                     Some("Target") => target = Target::from_xml(&mut reader, &e).display(),
                     Some("URL") => {
                         url = Calculation::from_xml(&mut reader, &e)

@@ -7,12 +7,7 @@ pub fn parse_unescaped_attribute(e: &BytesStart, attribute: &str) -> Option<Stri
 pub fn get_attributes(e: &BytesStart) -> Vec<(String, String)> {
     e.attributes()
         .filter_map(|attr| attr.ok())
-        .map(|attr| {
-            (
-                String::from_utf8_lossy(attr.key.as_ref()).into_owned(),
-                String::from_utf8_lossy(&attr.value).into_owned(),
-            )
-        })
+        .map(|attr| (attr.key.as_ref().to_owned(), attr.value.into_owned()))
         .collect()
 }
 
@@ -20,8 +15,8 @@ pub fn get_attribute(element: &BytesStart, attribute_name: &str) -> Option<Strin
     element
         .attributes()
         .filter_map(|attr| attr.ok())
-        .find(|attr| attr.key.as_ref() == attribute_name.as_bytes())
-        .map(|attr| String::from_utf8_lossy(&attr.value).into_owned())
+        .find(|attr| attr.key.as_ref() == attribute_name)
+        .map(|attr| attr.value.into_owned())
 }
 
 #[cfg(test)]

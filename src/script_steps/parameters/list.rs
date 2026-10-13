@@ -22,7 +22,7 @@ impl List {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"List"
+                    if e.name().as_ref() == "List"
                         && let Some(name) = get_attribute(&e, "name")
                         && let Ok(name) = unescape(&name)
                     {

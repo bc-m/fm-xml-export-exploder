@@ -16,11 +16,11 @@ pub fn from_xml(step_id: u32, step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
+                "Step" => {
                     name = get_attribute(&e, "name").unwrap_or_default();
                     continue;
                 }
-                b"ParameterValues" => {
+                "ParameterValues" => {
                     let pv = ParameterValues::from_xml(&mut reader, &e, step_id);
                     raw_parameters.extend(pv.parameters);
                 }

@@ -30,7 +30,7 @@ impl Boolean {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"Boolean" {
+                    if e.name().as_ref() == "Boolean" {
                         for attr in get_attributes(&e) {
                             match attr.0.as_str() {
                                 "id" => item.id = attr.1.parse().ok(),

@@ -19,7 +19,7 @@ impl Animation {
                 Err(_) => continue,
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
-                    if e.name().as_ref() == b"Animation" {
+                    if e.name().as_ref() == "Animation" {
                         item.value = get_attribute(&e, "name");
                     }
                     depth += 1;

@@ -18,19 +18,19 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
+                "Step" => {
                     name = get_attribute(&e, "name").unwrap_or_default();
                 }
-                b"Boolean"
+                "Boolean"
                     if get_attribute(&e, "id").as_deref() == Some("4096")
                         && get_attribute(&e, "value").as_deref() == Some("True") =>
                 {
                     select = true;
                 }
-                b"Text" => {
+                "Text" => {
                     text = Text::from_xml(&mut reader, &e).display();
                 }
-                b"Parameter" => {
+                "Parameter" => {
                     let target_type = get_attribute(&e, "type").unwrap();
                     if target_type == "Target" {
                         target = Target::from_xml(&mut reader, &e).display();

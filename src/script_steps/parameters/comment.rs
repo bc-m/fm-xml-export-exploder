@@ -18,7 +18,7 @@ impl Comment {
                 Ok(Event::Start(e)) => {
                     depth += 1;
 
-                    if e.name().as_ref() == b"Comment" {
+                    if e.name().as_ref() == "Comment" {
                         comment = get_attribute(&e, "value").unwrap_or_default();
                     }
                 }

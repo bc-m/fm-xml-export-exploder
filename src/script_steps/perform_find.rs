@@ -14,8 +14,8 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => name = get_attribute(&e, "name").unwrap(),
-                b"ParameterValues" => {
+                "Step" => name = get_attribute(&e, "name").unwrap(),
+                "ParameterValues" => {
                     has_parameters = true;
                     break;
                 }

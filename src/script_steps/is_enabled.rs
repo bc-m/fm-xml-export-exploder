@@ -10,7 +10,7 @@ pub fn sanitize(step: &str) -> bool {
         match reader.read_event_into(&mut buf) {
             Err(_) => continue,
             Ok(Event::Eof) => return true,
-            Ok(Event::Start(e)) if e.name().as_ref() == b"Step" => {
+            Ok(Event::Start(e)) if e.name().as_ref() == "Step" => {
                 return get_attribute(&e, "enable").is_none_or(|v| v != "False");
             }
             _ => {}

@@ -17,18 +17,18 @@ pub fn sanitize(step: &str) -> Option<String> {
             Err(_) => continue,
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => match e.name().as_ref() {
-                b"Step" => {
+                "Step" => {
                     name = get_attribute(&e, "name").unwrap();
                 }
-                b"Name" => {
+                "Name" => {
                     variable_name = get_attribute(&e, "value").unwrap();
                 }
-                b"value" => {
+                "value" => {
                     value = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default();
                 }
-                b"repetition" => {
+                "repetition" => {
                     repetition = Calculation::from_xml(&mut reader, &e)
                         .display()
                         .unwrap_or_default();

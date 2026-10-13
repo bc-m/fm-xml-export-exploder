@@ -21,7 +21,7 @@ impl DataSourceReference {
                 Ok(Event::Eof) => break,
                 Ok(Event::Start(e)) => {
                     depth += 1;
-                    if e.name().as_ref() == b"DataSourceReference" {
+                    if e.name().as_ref() == "DataSourceReference" {
                         item.id = parse_unescaped_attribute(&e, "id");
                         item.name = parse_unescaped_attribute(&e, "name");
                     }
