@@ -25,15 +25,6 @@ impl OutputFiles {
         self.written.borrow_mut().insert(path.to_path_buf());
     }
 
-    /// Renames a written file; `to` is replaced if it exists.
-    pub fn rename(&self, from: &Path, to: &Path) -> io::Result<()> {
-        fs::rename(from, to)?;
-        let mut written = self.written.borrow_mut();
-        written.remove(from);
-        written.insert(to.to_path_buf());
-        Ok(())
-    }
-
     /// Whether `path` was written during this run.
     pub fn contains(&self, path: &Path) -> bool {
         self.written.borrow().contains(path)
@@ -131,18 +122,10 @@ mod tests {
 
         let output = OutputFiles::default();
         output.write(&root.join("scripts/Folder/kept.xml"), "kept");
-        output.write(&root.join("scripts/moved.tmp"), "moved");
-        output
-            .rename(
-                &root.join("scripts/moved.tmp"),
-                &root.join("scripts/moved.xml"),
-            )
-            .unwrap();
 
         output.remove_stale(&root).unwrap();
 
         assert!(root.join("scripts/Folder/kept.xml").exists());
-        assert!(root.join("scripts/moved.xml").exists());
         assert!(root.join(".git/HEAD").exists());
         assert!(!root.join("scripts/stale.xml").exists());
         assert!(!root.join("scripts/Old Folder").exists());

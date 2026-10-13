@@ -1,7 +1,5 @@
 use std::collections::HashSet;
-use std::fs::File;
-use std::io::{BufRead, BufReader, Read};
-use std::path::Path;
+use std::io::{BufRead, Read};
 
 use quick_xml::Reader;
 use quick_xml::events::{BytesCData, BytesEnd, BytesRef, BytesStart, BytesText, Event};
@@ -278,12 +276,12 @@ pub fn element_to_string<R: Read + BufRead>(
 /// Extract content from XML file using multiple XPath-like expressions
 ///
 /// # Arguments
-/// * `file_path` - Path to the XML file
+/// * `xml` - The XML content
 /// * `xml_paths` - Array of XPath-like expressions
 ///
 /// # Returns
 /// * `Ok(Vec<Option<String>>)` - Array of results, one for each path (None if path doesn't exist)
-/// * `Err(String)` - If there's an error reading the file or parsing XML
+/// * `Err(String)` - If there's an error parsing the XML
 ///
 /// # Examples
 /// ```
@@ -291,16 +289,14 @@ pub fn element_to_string<R: Read + BufRead>(
 ///     "Account/Authentication/AccountName",
 ///     "Account/@id"
 /// ];
-/// let results = extract_values_from_xml_paths("file.xml", &paths);
+/// let results = extract_values_from_xml_paths(&xml, &paths);
 /// assert_eq!(results.unwrap(), vec![Some("[Guest]".to_string()), Some("1".to_string())]);
 /// ```
 pub fn extract_values_from_xml_paths(
-    file_path: &Path,
+    xml: &str,
     target_paths: &[&str],
 ) -> Result<Vec<Option<String>>, String> {
-    let file = File::open(file_path).map_err(|e| format!("Failed to open file: {e}"))?;
-    let reader = BufReader::new(file);
-    let mut reader = Reader::from_reader(reader);
+    let mut reader = Reader::from_str(xml);
     reader.config_mut().trim_text(true);
 
     // Preprocess paths: split each path into components
