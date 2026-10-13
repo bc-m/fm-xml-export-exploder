@@ -15,7 +15,6 @@ pub fn sanitize(step_id: u32, step_xml: &str, flags: &Flags) -> Option<String> {
     let step_sanitized = match id_to_script_step(step_id) {
         ScriptStep::PerformScript => script_steps::perform_script::sanitize(step),
         ScriptStep::GoToRecordRequestPage => script_steps::go_to_record::sanitize(step),
-        ScriptStep::OmitMultipleRecords => script_steps::omit_multiple_records::sanitize(step),
         ScriptStep::InsertText => script_steps::insert_text::sanitize(step),
         ScriptStep::InsertFromURL => script_steps::insert_from_url::sanitize(step),
         ScriptStep::SetField => script_steps::set_field_data::sanitize(step),

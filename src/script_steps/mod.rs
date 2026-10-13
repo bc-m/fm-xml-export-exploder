@@ -10,7 +10,6 @@ mod go_to_record;
 mod insert_from_url;
 mod insert_text;
 mod is_enabled;
-mod omit_multiple_records;
 mod parameters;
 mod perform_script;
 mod refresh_object;

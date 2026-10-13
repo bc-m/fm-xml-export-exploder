@@ -433,4 +433,47 @@ mod commit_tests {
             expected_output
         );
     }
+
+    #[test]
+    fn omit_multiple_records() {
+        let xml = r#"
+            <Step id="26" name="Mehrere ausschließen" enable="True">
+                <ParameterValues membercount="1">
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="True"></Boolean>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some("Mehrere ausschließen [ Mit Dialog: ON ]".to_string());
+        assert_eq!(from_node(26, &Node::parse(xml).unwrap()), expected_output);
+    }
+
+    #[test]
+    fn omit_multiple_records_with_calculation() {
+        let xml = r#"
+            <Step id="26" name="Mehrere ausschließen" enable="True">
+                <Options>16512</Options>
+                <ParameterValues membercount="2">
+                    <Parameter type="Boolean">
+                        <Boolean type="Mit Dialog" id="128" value="False"></Boolean>
+                    </Parameter>
+                    <Parameter type="Calculation">
+                        <Calculation datatype="1" position="0">
+                            <Calculation>
+                                <Text><![CDATA[123]]></Text>
+                                <ChunkList hash="90213DC459B04C5A47C044B9460AEF7B">
+                                    <Chunk type="NoRef">123</Chunk>
+                                </ChunkList>
+                            </Calculation>
+                        </Calculation>
+                    </Parameter>
+                </ParameterValues>
+            </Step>
+        "#;
+
+        let expected_output = Some("Mehrere ausschließen [ Mit Dialog: OFF ; 123 ]".to_string());
+        assert_eq!(from_node(26, &Node::parse(xml).unwrap()), expected_output);
+    }
 }
