@@ -1,4 +1,4 @@
-use crate::script_steps::parameters::{boolean_container, layout_reference, select, style};
+use crate::script_steps::parameters::{boolean_container, layout_reference};
 use crate::utils::xml_node::Node;
 
 /// e.g. `Style: Document ; Name: $name ; Height: 400 ; Close: OFF`
@@ -19,12 +19,13 @@ pub fn display_without_layout(parameter: &Node) -> String {
 fn visit(node: &Node, include_layout: bool, parts: &mut Vec<String>) {
     for child in &node.children {
         let parsed = match child.name.as_str() {
-            "Style" => style::display(child),
+            "Style" => child.attr("name").map(|style| format!("Style: {style}")),
             "LayoutReferenceContainer" => {
                 let layout = layout_reference::display(child);
                 include_layout.then(|| layout.unwrap_or_default())
             }
-            "Select" => select::display(child),
+            // The window to act on, e.g. `Name: $window`
+            "Select" => child.calculation().map(|name| format!("Name: {name}")),
             // Set Window Title
             "Rename" => child
                 .calculation()
@@ -56,6 +57,33 @@ mod tests {
     use crate::utils::xml_node::Node;
 
     use crate::script_steps::parameters::window_reference;
+
+    #[test]
+    fn style() {
+        let element = Node::parse(
+            r#"<WindowReference><Style name="Dokument" value="3221291010"></Style></WindowReference>"#,
+        )
+        .unwrap();
+        assert_eq!(window_reference::display(&element), "Style: Dokument");
+    }
+
+    #[test]
+    fn current_window_is_not_shown() {
+        let element = Node::parse(
+            r#"<WindowReference><Select kind="0" type="current"></Select></WindowReference>"#,
+        )
+        .unwrap();
+        assert_eq!(window_reference::display(&element), "");
+    }
+
+    #[test]
+    fn window_by_name() {
+        let element = Node::parse(
+            r#"<WindowReference><Select kind="1" type="Calculated"><Name current="True"><Calculation datatype="1" position="0"><Calculation><Text><![CDATA[$FensterName]]></Text></Calculation></Calculation></Name></Select></WindowReference>"#,
+        )
+        .unwrap();
+        assert_eq!(window_reference::display(&element), "Name: $FensterName");
+    }
 
     #[test]
     fn test() {

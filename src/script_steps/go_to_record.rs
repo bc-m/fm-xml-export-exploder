@@ -1,4 +1,5 @@
 use crate::script_steps::parameters::boolean::Boolean;
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::{Node, Visit};
 
 pub fn sanitize(step: &Node) -> Option<String> {
@@ -47,7 +48,7 @@ pub fn sanitize(step: &Node) -> Option<String> {
         parts.extend(boolean_option);
     }
 
-    Some(format!("{name} [ {} ]", parts.join(" ; ")))
+    Some(format_step(name, &parts, WithoutParameters::EmptyBrackets))
 }
 
 #[cfg(test)]

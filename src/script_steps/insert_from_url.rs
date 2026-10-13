@@ -1,5 +1,6 @@
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::script_steps::parameters::target;
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::{Node, Visit};
 
 const VERIFY_SSL_CERTIFICATES: &str = "268435456";
@@ -62,11 +63,7 @@ pub fn sanitize(step: &Node) -> Option<String> {
     .flatten()
     .collect();
 
-    if parts.is_empty() {
-        Some(name.to_string())
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
+    Some(format_step(name, &parts, WithoutParameters::NameOnly))
 }
 
 #[cfg(test)]

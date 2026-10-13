@@ -197,6 +197,12 @@ mod tests {
     }
 
     #[test]
+    fn attribute_with_character_references() {
+        let node = Node::parse(r#"<Text value="a&#13;b&#13;c"></Text>"#).unwrap();
+        assert_eq!(node.attr("value"), Some("a\rb\rc"));
+    }
+
+    #[test]
     fn text_with_entities() {
         let node = Node::parse("<Label> original &amp; layout </Label>").unwrap();
         assert_eq!(node.raw_text, " original & layout ");

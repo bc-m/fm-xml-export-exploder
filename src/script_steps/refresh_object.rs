@@ -1,3 +1,4 @@
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::Node;
 
 pub fn sanitize(step: &Node) -> Option<String> {
@@ -22,11 +23,7 @@ pub fn sanitize(step: &Node) -> Option<String> {
         parts.push(repetition_calculation);
     }
 
-    if parts.is_empty() {
-        Some(format!("{name} []"))
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
+    Some(format_step(name, &parts, WithoutParameters::EmptyBrackets))
 }
 
 #[cfg(test)]

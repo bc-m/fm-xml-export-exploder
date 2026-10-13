@@ -3,6 +3,11 @@
 use crate::script_steps::parameters::boolean::Boolean;
 use crate::utils::xml_node::Node;
 
+/// Shown instead of a field whose table occurrence is missing
+pub(crate) const BROKEN_REFERENCE: &str = "🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨";
+/// Shown instead of a missing name inside an otherwise valid reference
+pub(crate) const BROKEN_REFERENCE_NAME: &str = "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨";
+
 pub(crate) fn on_off(node: &Node, attribute: &str) -> &'static str {
     Boolean::on_off(node.attr_is_true(attribute))
 }

@@ -1,5 +1,6 @@
 use crate::script_steps::constants::{ScriptStep, id_to_script_step};
 use crate::script_steps::parameters::parameter_values;
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::Node;
 
 pub fn from_node(step_id: u32, step: &Node) -> Option<String> {
@@ -22,21 +23,18 @@ pub fn from_node(step_id: u32, step: &Node) -> Option<String> {
     }
 
     let parameters = parameters.trim();
-    if parameters.is_empty() {
-        let needs_brackets = matches!(
-            script_step,
-            ScriptStep::GoToField
-                | ScriptStep::IfStart
-                | ScriptStep::IfElse
-                | ScriptStep::ExitLoopIf
-        );
-        if needs_brackets {
-            return Some(format!("{name} []"));
-        }
-        return Some(name);
-    }
-
-    Some(format!("{name} [ {parameters} ]"))
+    let parts: Vec<String> = Some(parameters.to_string())
+        .filter(|p| !p.is_empty())
+        .into_iter()
+        .collect();
+    let without = match script_step {
+        ScriptStep::GoToField
+        | ScriptStep::IfStart
+        | ScriptStep::IfElse
+        | ScriptStep::ExitLoopIf => WithoutParameters::EmptyBrackets,
+        _ => WithoutParameters::NameOnly,
+    };
+    Some(format_step(&name, &parts, without))
 }
 
 /// Apply step-specific formatting rules to parameters.

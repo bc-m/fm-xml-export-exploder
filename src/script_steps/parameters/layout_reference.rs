@@ -1,3 +1,4 @@
+use crate::script_steps::parameters::format::BROKEN_REFERENCE_NAME;
 use crate::utils::xml_node::Node;
 
 /// e.g. `Layout: "Invoices"`, `Layout: <original layout>` or `Layoutname: $name`
@@ -14,9 +15,7 @@ pub fn display(container: &Node) -> Option<String> {
         }
     }
 
-    let layout_reference = layout_reference
-        .as_deref()
-        .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨");
+    let layout_reference = layout_reference.as_deref().unwrap_or(BROKEN_REFERENCE_NAME);
 
     match reference_type {
         "1" => Some(format!("Layout: <{layout_reference}>")),

@@ -1,4 +1,5 @@
-use crate::script_steps::parameters::{target, text};
+use crate::script_steps::parameters::target;
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::{Node, Visit};
 
 pub fn sanitize(step: &Node) -> Option<String> {
@@ -15,7 +16,7 @@ pub fn sanitize(step: &Node) -> Option<String> {
             Visit::Descend
         }
         "Text" => {
-            text = text::display(node);
+            text = node.attr("value").map(str::to_string);
             Visit::Skip
         }
         "Parameter" if node.attr("type") == Some("Target") => {
@@ -40,11 +41,7 @@ pub fn sanitize(step: &Node) -> Option<String> {
         parts.push(format!("\"{text}\""));
     }
 
-    if parts.is_empty() {
-        Some(format!("{name} []"))
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
+    Some(format_step(name, &parts, WithoutParameters::EmptyBrackets))
 }
 
 #[cfg(test)]

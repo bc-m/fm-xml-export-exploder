@@ -1,3 +1,4 @@
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::{Node, Visit};
 
 pub fn sanitize(step: &Node) -> Option<String> {
@@ -65,7 +66,11 @@ pub fn sanitize(step: &Node) -> Option<String> {
         parameters.push(format!("Parameter: {calculation}"));
     }
 
-    Some(format!("{name} [ {} ]", parameters.join(" ; ")))
+    Some(format_step(
+        name,
+        &parameters,
+        WithoutParameters::EmptyBrackets,
+    ))
 }
 
 #[cfg(test)]

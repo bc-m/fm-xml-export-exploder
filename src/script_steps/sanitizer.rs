@@ -9,7 +9,7 @@ pub fn sanitize(step_id: u32, step_xml: &str, flags: &Flags) -> Option<String> {
         return None;
     };
     let step = &step_node;
-    let is_enabled = script_steps::is_enabled::sanitize(step);
+    let is_enabled = step.attr("enable") != Some("False");
     let obfuscate = flags.obfuscate_passwords;
 
     let step_sanitized = match id_to_script_step(step_id) {

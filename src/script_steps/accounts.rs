@@ -1,3 +1,4 @@
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::{Node, Visit};
 
 const OBFUSCATED: &str = "••••••••";
@@ -48,28 +49,12 @@ fn push_flag(parts: &mut Vec<String>, enabled: bool, label: &str) {
     }
 }
 
-fn format_step(name: String, parts: Vec<String>) -> Option<String> {
-    if name.is_empty() {
-        return None;
-    }
-
-    if parts.is_empty() {
-        Some(name)
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
-}
-
-fn format_step_with_empty_brackets(name: String, parts: Vec<String>) -> Option<String> {
-    if name.is_empty() {
-        return None;
-    }
-
-    if parts.is_empty() {
-        Some(format!("{name} []"))
-    } else {
-        Some(format!("{name} [ {} ]", parts.join(" ; ")))
-    }
+fn format_account_step(
+    name: String,
+    parts: Vec<String>,
+    without: WithoutParameters,
+) -> Option<String> {
+    (!name.is_empty()).then(|| format_step(&name, &parts, without))
 }
 
 struct AddAccountState {
@@ -153,7 +138,7 @@ pub fn sanitize_add_account(step: &Node, obfuscate: bool) -> Option<String> {
     push_labeled_part(&mut parts, "Privilege Set", state.privilege_set);
     push_flag(&mut parts, state.expire_password, "Expire password");
 
-    format_step(state.name, parts)
+    format_account_step(state.name, parts, WithoutParameters::NameOnly)
 }
 
 pub fn sanitize_change_password(step: &Node, obfuscate: bool) -> Option<String> {
@@ -183,7 +168,7 @@ pub fn sanitize_change_password(step: &Node, obfuscate: bool) -> Option<String> 
     push_labeled_part(&mut parts, "Password", state.new_password);
     parts.push(format!("With dialog: {}", on_off(state.with_dialog)));
 
-    format_step(state.name, parts)
+    format_account_step(state.name, parts, WithoutParameters::NameOnly)
 }
 
 pub fn sanitize_delete_account(step: &Node) -> Option<String> {
@@ -203,7 +188,7 @@ pub fn sanitize_delete_account(step: &Node) -> Option<String> {
 
     let mut parts = Vec::new();
     push_labeled_part(&mut parts, "Account Name", state.account_name);
-    format_step(state.name, parts)
+    format_account_step(state.name, parts, WithoutParameters::NameOnly)
 }
 
 pub fn sanitize_enable_account(step: &Node) -> Option<String> {
@@ -235,7 +220,7 @@ pub fn sanitize_enable_account(step: &Node) -> Option<String> {
         });
     }
 
-    format_step(state.name, parts)
+    format_account_step(state.name, parts, WithoutParameters::NameOnly)
 }
 
 pub fn sanitize_re_login(step: &Node, obfuscate: bool) -> Option<String> {
@@ -265,7 +250,7 @@ pub fn sanitize_re_login(step: &Node, obfuscate: bool) -> Option<String> {
     push_labeled_part(&mut parts, "Password", state.password);
     parts.push(format!("With dialog: {}", on_off(state.with_dialog)));
 
-    format_step(state.name, parts)
+    format_account_step(state.name, parts, WithoutParameters::NameOnly)
 }
 
 pub fn sanitize_reset_account_password(step: &Node, obfuscate: bool) -> Option<String> {
@@ -298,7 +283,7 @@ pub fn sanitize_reset_account_password(step: &Node, obfuscate: bool) -> Option<S
     push_labeled_part(&mut parts, "Password", state.password);
     push_flag(&mut parts, state.expire_password, "Expire password");
 
-    format_step_with_empty_brackets(state.name, parts)
+    format_account_step(state.name, parts, WithoutParameters::EmptyBrackets)
 }
 
 #[cfg(test)]

@@ -1,3 +1,4 @@
+use crate::script_steps::{WithoutParameters, format_step};
 use crate::utils::xml_node::{Node, Visit};
 
 pub fn sanitize(step: &Node) -> Option<String> {
@@ -14,10 +15,11 @@ pub fn sanitize(step: &Node) -> Option<String> {
     if name.is_empty() {
         return None;
     }
-    if calculation.is_empty() {
-        return Some(format!("{name} []"));
-    }
-    Some(format!("{name} [ {calculation} ]"))
+    let parts: Vec<String> = Some(calculation)
+        .filter(|c| !c.is_empty())
+        .into_iter()
+        .collect();
+    Some(format_step(name, &parts, WithoutParameters::EmptyBrackets))
 }
 
 #[cfg(test)]

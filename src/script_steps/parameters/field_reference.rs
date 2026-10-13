@@ -1,3 +1,4 @@
+use crate::script_steps::parameters::format::{BROKEN_REFERENCE, BROKEN_REFERENCE_NAME};
 use crate::utils::xml_node::Node;
 
 #[derive(Debug, Default)]
@@ -30,12 +31,12 @@ impl FieldReference {
 
     pub fn display(&self) -> String {
         let Some(table_reference) = &self.table_reference else {
-            return "🚨🚨🚨 BROKEN REFERENCE 🚨🚨🚨".to_string();
+            return BROKEN_REFERENCE.to_string();
         };
 
         let field_reference = match &self.field_reference {
             Some(reference) if !reference.is_empty() => reference.as_str(),
-            _ => "🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨",
+            _ => BROKEN_REFERENCE_NAME,
         };
 
         match self.repetition {

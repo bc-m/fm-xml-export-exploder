@@ -1,3 +1,4 @@
+use crate::script_steps::parameters::format::BROKEN_REFERENCE_NAME;
 use crate::script_steps::parameters::layout_reference;
 use crate::script_steps::parameters::window_reference;
 use crate::utils::xml_node::Node;
@@ -14,9 +15,7 @@ fn visit(node: &Node, parts: &mut Vec<String>) {
     for child in &node.children {
         match child.name.as_str() {
             "TableOccurrenceReference" => {
-                let table_occurrence = child
-                    .attr("name")
-                    .unwrap_or("🚨🚨🚨 <BROKEN REFERENCE> 🚨🚨🚨");
+                let table_occurrence = child.attr("name").unwrap_or(BROKEN_REFERENCE_NAME);
                 parts.push(format!("Table: {table_occurrence}"));
             }
             "LayoutReferenceContainer" => {

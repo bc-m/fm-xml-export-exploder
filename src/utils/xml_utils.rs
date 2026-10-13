@@ -26,7 +26,7 @@ pub enum XmlEventType {
 pub fn start_element_to_string(e: &BytesStart, flags: &Flags) -> String {
     let mut complete_tag = String::with_capacity(128); // Pre-allocate
     complete_tag.push('<');
-    complete_tag.push_str(&local_name_to_string(e.name().as_ref()));
+    complete_tag.push_str(e.name().as_ref());
 
     for attr in get_attributes(e) {
         if !flags.lossless
@@ -65,12 +65,7 @@ pub fn end_element_to_string(e: &BytesEnd) -> String {
 }
 
 pub fn format_end_tag(name: &str) -> String {
-    let element_name = local_name_to_string(name);
-    format!("</{element_name}>")
-}
-
-pub fn local_name_to_string(local_name: &str) -> String {
-    local_name.to_owned()
+    format!("</{name}>")
 }
 
 pub fn text_to_string(e: &BytesText) -> String {
