@@ -31,11 +31,30 @@ fm-xml-export-exploder [OPTIONS] <SOURCE> <TARGET>
 
 | Option | Description |
 |---|---|
-| `-t`, `--output_tree <db\|domain>` | Organize the output by database (`db`, default) or by domain (`domain`), see [Output](#output) |
+| `-t`, `--output-tree <db\|domain>` | Organize the output by database (`db`, default) or by domain (`domain`), see [Output](#output). `--output_tree` still works. |
+| `-c`, `--config <file>` | Read options from a config file, see [Config file](#config-file) |
 | `--git` | Commit the output with git, see below |
 | `--obfuscate-passwords` | Replace passwords in readable scripts with `••••••••` |
+| `--script-extension <ext>` | File extension of the readable scripts in `scripts_sanitized` (default `txt`), e.g. `fmscript` for syntax highlighting in your editor |
 | `-a`, `--all-lines` | Keep lines that are skipped by default to reduce noise |
 | `-l`, `--lossless` | Keep all information of the XML, including less important catalogs and attributes |
+
+### Config file
+
+Instead of passing options every time, put them into a `fm-xml-export-exploder.toml`. It is used automatically when it is in the current directory, or explicitly with `--config <file>`. Then `fm-xml-export-exploder` runs without arguments:
+
+```toml
+source = "./xml"         # folder with the XML export
+target = "./repos"       # folder for the output
+output_tree = "domain"   # "db" or "domain"
+git = true
+script_extension = "txt"
+obfuscate_passwords = true
+all_lines = false
+lossless = false
+```
+
+All entries are optional. Options on the command line override the config file, and relative paths are relative to the folder of the config file. The [install script](#automated-exports-on-macos) creates a config file with a comment for every option.
 
 ### Versioning the output with git
 
@@ -71,11 +90,12 @@ The folder then contains:
 ├── xml/                    the XML export
 ├── repos/                  the output, one git repository per domain
 ├── log/                    output of the daily export
+├── fm-xml-export-exploder.toml   the options, with a comment for each
 ├── run.bash                export, explode, commit, and push repositories that have a remote
 └── com.fm-xml-export-exploder.plist   the daily export (installed with --service)
 ```
 
-Run `run.bash` to export manually. To update, run the install script again with the same folder: it replaces the binary, `run.bash` and the service file (a changed `run.bash` or service file is kept as `.bak`) and leaves `xml/`, `repos/`, `log/` and `Run_XML_Export.fmp12` alone. A daily export set up earlier is updated as well.
+Change the options in `fm-xml-export-exploder.toml` and run `run.bash` to export manually. To update, run the install script again with the same folder: it replaces the binary, `run.bash` and the service file (a changed `run.bash` or service file is kept as `.bak`) and leaves the config, `xml/`, `repos/`, `log/` and `Run_XML_Export.fmp12` alone. A daily export set up earlier is updated as well.
 
 ## Output
 

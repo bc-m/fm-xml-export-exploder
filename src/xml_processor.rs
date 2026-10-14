@@ -276,11 +276,14 @@ fn process_catalog_elements<R: Read + BufRead>(
     let write_sanitized = sanitized_dir.as_ref().map(|text_dir| {
         let xml_dir = &xml_out_dir_path;
         move |path: &Path, content: &str| {
-            let text = match catalog_type {
-                CatalogType::StepsForScripts => sanitized_script_text(content, flags),
-                _ => sanitized_custom_function_text(content),
+            let (text, extension) = match catalog_type {
+                CatalogType::StepsForScripts => (
+                    sanitized_script_text(content, flags),
+                    flags.script_extension.as_str(),
+                ),
+                _ => (sanitized_custom_function_text(content), "txt"),
             };
-            write_text_version(path, xml_dir, text_dir, output, text);
+            write_text_version(path, xml_dir, text_dir, extension, output, text);
         }
     });
     let folder_structure_result = xml_explode_catalog(

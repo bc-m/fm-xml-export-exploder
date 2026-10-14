@@ -1,10 +1,10 @@
-use std::{fs, path::PathBuf, time::Instant};
+use std::{fs, time::Instant};
 
 use anyhow::Result;
 use clap::Parser;
 use rayon::prelude::*;
 
-use crate::config::{Flags, OutputTree};
+use crate::settings::{Args, Settings};
 use crate::utils::file_utils::valid_dir_or_throw;
 use crate::utils::migrate_old_custom_functions_if_needed;
 use crate::utils::xml_utils::XmlEventType;
@@ -16,42 +16,11 @@ mod custom_function_sanitizer;
 mod git;
 mod script_sanitizer;
 mod script_steps;
+mod settings;
 mod supporting;
 mod tests;
 mod utils;
 mod xml_processor;
-
-/// Parse all as XML exported FileMaker solutions from source directory and explode them to target directory.
-#[derive(Parser)]
-#[command(version, about, long_about = None)]
-struct Args {
-    /// The source directory to read input
-    source: PathBuf,
-
-    /// The target directory to write output
-    target: PathBuf,
-
-    /// Parse all lines (or skip less important ones to reduce noise)
-    #[arg(short, long)]
-    all_lines: bool,
-
-    /// Retain all information from the main xml (or skip less important catalogs and attributes)
-    #[arg(short, long)]
-    lossless: bool,
-
-    /// Specify the output tree root folder: domain or db (default)
-    #[arg(short = 't', long = "output_tree", value_enum, default_value_t = OutputTree::Db)]
-    output_tree: OutputTree,
-
-    /// Replace password values in sanitized output with bullet placeholders (••••••••)
-    #[arg(long)]
-    obfuscate_passwords: bool,
-
-    /// Commit the output with git: one repository per database folder (-t db) or per
-    /// domain folder (-t domain). Folders inside another git repository are skipped.
-    #[arg(long)]
-    git: bool,
-}
 
 #[derive(Debug, Default)]
 pub struct Skeleton {
@@ -63,15 +32,13 @@ pub struct Skeleton {
 fn main() -> Result<()> {
     let start = Instant::now();
 
-    let args = Args::parse();
-    let in_dir = args.source;
-    let out_dir = args.target;
-    let flags = Flags {
-        parse_all_lines: args.all_lines,
-        lossless: args.lossless,
-        output_tree: args.output_tree,
-        obfuscate_passwords: args.obfuscate_passwords,
-    };
+    let settings = Settings::from_args(Args::parse(), &std::env::current_dir()?)?;
+    if let Some(config_path) = &settings.config_path {
+        println!("Using config {}", config_path.display());
+    }
+    let in_dir = settings.source;
+    let out_dir = settings.target;
+    let flags = settings.flags;
 
     valid_dir_or_throw(&in_dir)?;
 
@@ -100,7 +67,7 @@ fn main() -> Result<()> {
 
     // Commit only after all files are written: in domain mode, several databases share
     // the same repository
-    if args.git {
+    if settings.git {
         git::commit_output(&git::repositories(&out_dir, &flags.output_tree, &db_names));
     }
 

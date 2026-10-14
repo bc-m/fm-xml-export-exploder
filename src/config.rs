@@ -215,7 +215,8 @@ pub struct CatalogConfig {
     pub id_path: &'static str,
 }
 
-#[derive(Debug, Clone, ValueEnum)]
+#[derive(Debug, Clone, ValueEnum, serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum OutputTree {
     #[value(
         name = "domain",
@@ -232,4 +233,6 @@ pub struct Flags {
     pub lossless: bool,
     pub output_tree: OutputTree,
     pub obfuscate_passwords: bool,
+    /// File extension of the readable scripts, without a leading dot
+    pub script_extension: String,
 }
