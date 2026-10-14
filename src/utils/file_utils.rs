@@ -47,8 +47,6 @@ pub fn should_skip_line(line: &str) -> bool {
         || (line.contains("<UUID>") && line.contains("</UUID>"))
 }
 
-/// Recursively find all XML files in a directory and call `process_file` for each,
-/// preserving the relative path structure from `base_dir` into `output_dir`.
 /// Writes the `.txt` version of an exploded file, mirroring its path below `xml_dir`
 /// into `text_dir`. No text file is written when `text` is `None`.
 pub fn write_text_version(
