@@ -56,7 +56,7 @@ The install script sets up a folder that exports your solution, explodes it and 
 curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash
 ```
 
-It asks where to install, suggesting the current directory. To skip the question or to also schedule a daily export at 7:00, pass options:
+It asks where to install, suggesting a new folder `fm-xml-export-exploder` in the current directory. To skip the question or to also schedule a daily export at 7:00, pass options:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash -s -- --service ~/fm-export
@@ -75,7 +75,7 @@ The folder then contains:
 └── com.fm-xml-export-exploder.plist   the daily export (installed with --service)
 ```
 
-Run `run.bash` to export manually. Running the install script again updates the binary; your `run.bash` and service file are kept, so local changes survive updates.
+Run `run.bash` to export manually. To update, run the install script again with the same folder: it replaces the binary, `run.bash` and the service file (a changed `run.bash` or service file is kept as `.bak`) and leaves `xml/`, `repos/`, `log/` and `Run_XML_Export.fmp12` alone. A daily export set up earlier is updated as well.
 
 ## Output
 

@@ -5,13 +5,14 @@
 #
 #   curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash
 #
-# It asks where to install (default: the current directory). Options can be passed
+# It asks where to install (default: ./fm-xml-export-exploder). Options can be passed
 # with `| bash -s -- [OPTIONS] [DIRECTORY]`:
 #   DIRECTORY   Where to install, without asking
 #   --service   Also run the export every day at 7:00 (launchd)
 #
-# Running it again updates the binary; an existing run.bash and service file are kept,
-# so local changes survive updates.
+# Installing into an existing folder updates it: the binary, run.bash and the service
+# file are replaced (changed files are kept as .bak), the data in xml/, repos/ and log/
+# and Run_XML_Export.fmp12 are left alone.
 
 set -euo pipefail
 
@@ -26,7 +27,7 @@ for arg in "$@"; do
         --service) install_service=true ;;
         -h | --help)
             echo "Usage: install.sh [--service] [DIRECTORY]"
-            echo "  DIRECTORY   Where to install (default: ask, suggesting the current directory)"
+            echo "  DIRECTORY   Where to install (default: ask, suggesting ./$BINARY)"
             echo "  --service   Also run the export every day at 7:00 (launchd)"
             exit 0
             ;;
@@ -45,9 +46,9 @@ if [ "$(uname -s)" != "Darwin" ]; then
 fi
 
 if [ -z "$dir" ]; then
-    dir="$PWD"
+    dir="$PWD/$BINARY"
     # stdin is the script itself with `curl | bash`, so ask on the terminal. Without
-    # one (e.g. in automation) the current directory is used.
+    # one (e.g. in automation) the default is used.
     if { exec 3< /dev/tty; } 2> /dev/null; then
         read -r -u 3 -p "Install to [$dir]: " answer || true
         exec 3<&-
@@ -57,16 +58,35 @@ if [ -z "$dir" ]; then
     fi
 fi
 
+if [ -d "$dir" ]; then
+    echo "Updating the existing installation in $dir"
+fi
 mkdir -p "$dir"/{bin,xml,repos,log}
 dir="$(cd "$dir" && pwd)"
+
+# Writes stdin to a file; an existing file with other content is kept as .bak
+install_file() {
+    local target="$1" new
+    new="$(mktemp)"
+    cat > "$new"
+    if [ ! -e "$target" ]; then
+        echo "Created $target"
+    elif cmp -s "$new" "$target"; then
+        rm "$new"
+        return
+    else
+        cp "$target" "$target.bak"
+        echo "Updated $target (previous version kept as $target.bak)"
+    fi
+    mv "$new" "$target"
+}
 
 echo "Downloading the latest $BINARY..."
 curl -fsSL "https://github.com/$REPO/releases/latest/download/$BINARY-universal-apple-darwin.tar.gz" |
     tar -xz -C "$dir/bin"
 echo "Installed $("$dir/bin/$BINARY" --version) to $dir/bin"
 
-if [ ! -e "$dir/run.bash" ]; then
-    cat > "$dir/run.bash" << 'EOF'
+install_file "$dir/run.bash" << 'EOF'
 #!/bin/bash
 #
 # Exports the FileMaker solution as XML, explodes it and commits the result with git.
@@ -96,13 +116,10 @@ done
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') Done."
 EOF
-    chmod +x "$dir/run.bash"
-    echo "Created $dir/run.bash"
-fi
+chmod +x "$dir/run.bash"
 
 service_file="$dir/$SERVICE_LABEL.plist"
-if [ ! -e "$service_file" ]; then
-    cat > "$service_file" << EOF
+install_file "$service_file" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -130,11 +147,14 @@ if [ ! -e "$service_file" ]; then
 </dict>
 </plist>
 EOF
-    echo "Created $service_file"
+
+# A daily export set up earlier for this folder is updated as well
+agent="$HOME/Library/LaunchAgents/$SERVICE_LABEL.plist"
+if [ -e "$agent" ] && grep -qF "<string>$dir/run.bash</string>" "$agent"; then
+    install_service=true
 fi
 
 if [ "$install_service" = true ]; then
-    agent="$HOME/Library/LaunchAgents/$SERVICE_LABEL.plist"
     mkdir -p "$(dirname "$agent")"
     cp "$service_file" "$agent"
     # Replace a previously loaded version
@@ -143,13 +163,13 @@ if [ "$install_service" = true ]; then
     echo "Installed the daily export (7:00) as $agent"
 fi
 
-cat << EOF
-
-Next steps:
-  1. Create $dir/Run_XML_Export.fmp12: a FileMaker file whose OnFirstWindowOpen script
-     saves your solution as XML into $dir/xml and quits FileMaker.
-  2. Run $dir/run.bash to export, explode and commit.
-EOF
+echo
+echo "Next steps:"
+if [ ! -e "$dir/Run_XML_Export.fmp12" ]; then
+    echo "  - Create $dir/Run_XML_Export.fmp12: a FileMaker file whose OnFirstWindowOpen"
+    echo "    script saves your solution as XML into $dir/xml and quits FileMaker."
+fi
+echo "  - Run $dir/run.bash to export, explode and commit."
 if [ "$install_service" = false ]; then
-    echo "  3. Optional: run the installer again with --service for a daily export."
+    echo "  - Optional: run the installer again with --service for a daily export."
 fi
