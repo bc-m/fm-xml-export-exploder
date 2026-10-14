@@ -10,8 +10,10 @@ FM-Export-Exploder and commit the results to git repositories.
    solution file(s) as XML using
    the [Save Copy as XML command](https://help.claris.com/en/pro-help/content/save-a-copy-as-xml.html). __Tip:__ You can
    apply the command to any opened FileMaker file that is open with full access by window name.
-3. Run `init_repos.bash` once to initialize the git repositories for the exploded XML export.
-4. Run `run.bash` to perform an export, explode and git commit.
+3. Run `run.bash` to perform an export, explode it and commit the result. The first run creates one git repository per
+   domain folder in `repos` (e.g. `repos/scripts`, `repos/tables`).
+4. Optional: to push the results, add a remote to the repositories, e.g.
+   `git -C repos/scripts remote add origin <url>`. `run.bash` pushes every repository that has a remote.
 
 ## Install service
 
