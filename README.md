@@ -56,7 +56,7 @@ The install script sets up a folder that exports your solution, explodes it and 
 curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash
 ```
 
-It installs into `~/fm-xml-export-exploder`. To choose another folder or to also schedule a daily export at 7:00, pass options:
+It asks where to install, suggesting the current directory. To skip the question or to also schedule a daily export at 7:00, pass options:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash -s -- --service ~/fm-export

@@ -5,8 +5,9 @@
 #
 #   curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash
 #
-# Options (pass them with `| bash -s -- [OPTIONS] [DIRECTORY]`):
-#   DIRECTORY   Where to install (default: ~/fm-xml-export-exploder)
+# It asks where to install (default: the current directory). Options can be passed
+# with `| bash -s -- [OPTIONS] [DIRECTORY]`:
+#   DIRECTORY   Where to install, without asking
 #   --service   Also run the export every day at 7:00 (launchd)
 #
 # Running it again updates the binary; an existing run.bash and service file are kept,
@@ -18,14 +19,14 @@ REPO="bc-m/fm-xml-export-exploder"
 BINARY="fm-xml-export-exploder"
 SERVICE_LABEL="com.fm-xml-export-exploder"
 
-dir="$HOME/fm-xml-export-exploder"
+dir=""
 install_service=false
 for arg in "$@"; do
     case "$arg" in
         --service) install_service=true ;;
         -h | --help)
             echo "Usage: install.sh [--service] [DIRECTORY]"
-            echo "  DIRECTORY   Where to install (default: ~/fm-xml-export-exploder)"
+            echo "  DIRECTORY   Where to install (default: ask, suggesting the current directory)"
             echo "  --service   Also run the export every day at 7:00 (launchd)"
             exit 0
             ;;
@@ -41,6 +42,19 @@ if [ "$(uname -s)" != "Darwin" ]; then
     echo "This setup uses FileMaker Pro and launchd and is for macOS only." >&2
     echo "On other systems, download the binary from https://github.com/$REPO/releases/latest" >&2
     exit 1
+fi
+
+if [ -z "$dir" ]; then
+    dir="$PWD"
+    # stdin is the script itself with `curl | bash`, so ask on the terminal. Without
+    # one (e.g. in automation) the current directory is used.
+    if { exec 3< /dev/tty; } 2> /dev/null; then
+        read -r -u 3 -p "Install to [$dir]: " answer || true
+        exec 3<&-
+        if [ -n "${answer:-}" ]; then
+            dir="${answer/#\~/$HOME}"
+        fi
+    fi
 fi
 
 mkdir -p "$dir"/{bin,xml,repos,log}
