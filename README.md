@@ -1,140 +1,148 @@
-# FileMaker XML-Export File Exploder
+# FileMaker XML Export Exploder
 
-FileMaker XML-Export File Exploder is a fast Rust tool designed to parse XML files exported from FileMaker databases and extract relevant content into separate files. It efficiently processes a directory of new FileMaker XML report files, splitting the content by its purpose (such as scripts, layouts, custom functions, and table definitions), and applies the directory structure from FileMaker scripts and layouts.
+Turns FileMaker solutions saved as XML into a folder of small, readable files: one file per script, layout, table, custom function, value list and so on, organized like the folders in FileMaker. Scripts are additionally written as plain text, the way they appear in the FileMaker Script Workspace. Together with git, you get a reviewable history of every change to your solution.
 
-## TL;DR:
-
-Do you want to extract your FileMaker solution into text files (including scripts in a human-readable format like the FileMaker Script Workspace)? This tool does it for you!
-
-Example: From [these](./tests/xml) as XML exported FileMaker solutions you will get [this](./tests/snapshots_db_lossless). Scripts can easily be read like [here](./tests/snapshots_db_lossless/fmSyntaxColorizer/scripts_sanitized/Example%20SyntaxColorizing%20-%20ID%2046/All%20script%20steps%20and%20all%20options%20-%20ID%2011.txt.snap).
+Example: from [these XML exports](./tests/xml) you get [this output](./tests/snapshots_db_lossless), with scripts as readable as [this one](./tests/snapshots_db_lossless/fmSyntaxColorizer/scripts_sanitized/Example%20SyntaxColorizing%20-%20ID%2046/All%20script%20steps%20and%20all%20options%20-%20ID%2011.txt.snap).
 
 ## Features
 
-- **Fast Processing:** Built in Rust for high performance and efficiency.
-- **Parallel Processing:** Utilizes parallel processing for efficient extraction, thanks to the Rayon crate.
-- **Content Extraction:** Parses XML files and extracts relevant content into separate files and organizes them into directories mirroring the structure in FileMaker databases.
-- **Noise Reduction:** Removes unnecessary noise from XML to support efficient Git versioning and prevent unnecessary changes.
-- **Human-Readable Format:** Parses scripts and custom functions into a human-readable format for easy comprehension.
-- **Optional Output Tree:** Select between organize output by filemaker database name or by domain (eg. layouts, scripts, tables).
+- **Readable scripts and custom functions** in `scripts_sanitized` and `custom_functions_sanitized`, formatted like the FileMaker Script Workspace, including all script step parameters.
+- **One file per item**, in folders mirroring the folders of your scripts, layouts and custom functions.
+- **Built for git:** noise like UUIDs and timestamps is removed, unchanged files are not rewritten, and `--git` commits the output for you.
+- **Fast:** written in Rust and processing files in parallel. On a current Mac, a 950 MB export of 76 files takes about 5 seconds, re-runs about 3 seconds.
+- **Two layouts:** organize the output by database (default) or by domain (`scripts/`, `tables/`, …).
 
 ## Installation
 
-1. **Download Executable:** Download the latest executable for your operating system from the [releases page](https://github.com/bc-m/fm-xml-export-exploder/releases/latest).
-2. __Allow execution (macOS only):__ To allow execution in Terminal, right-click on the executable and choose "Open" to bypass the security warning. After this, you can run the CLI in Terminal or Bash scripts.
+**Automated exports on macOS:** the [install script](#automated-exports-on-macos) downloads the latest version and sets everything up.
+
+**Manual:** download the binary for your system from the [releases page](https://github.com/bc-m/fm-xml-export-exploder/releases/latest) (macOS, Linux and Windows, Intel and ARM). On macOS, the first start of a downloaded binary is blocked by Gatekeeper: right-click it in Finder and choose "Open" once.
 
 ## Usage
 
-1. **Input Directory:** Provide the path to the directory containing the new FileMaker XML report files.
-2. **Output Directory:** Specify the directory where the extracted content will be saved.
-3. **Run the Tool:** Execute the tool by running `fm-xml-export-exploder [INPUT_DIRECTORY] [OUTPUT_DIRECTORY]`.
+1. Save your FileMaker solution as XML with [Save a Copy as XML](https://help.claris.com/en/pro-help/content/save-a-copy-as-xml.html) into a folder.
+2. Run:
+
+```bash
+fm-xml-export-exploder [OPTIONS] <SOURCE> <TARGET>
+```
+
+`SOURCE` is the folder with the XML files, `TARGET` the folder for the output. Each run updates the output in place: changed files are rewritten, unchanged files are left alone, and files of items that no longer exist are removed.
+
+| Option | Description |
+|---|---|
+| `-t`, `--output_tree <db\|domain>` | Organize the output by database (`db`, default) or by domain (`domain`), see [Output](#output) |
+| `--git` | Commit the output with git, see below |
+| `--obfuscate-passwords` | Replace passwords in readable scripts with `••••••••` |
+| `-a`, `--all-lines` | Keep lines that are skipped by default to reduce noise |
+| `-l`, `--lossless` | Keep all information of the XML, including less important catalogs and attributes |
 
 ### Versioning the output with git
 
-Run with `--git` to commit the output after each run:
-
-```bash
-fm-xml-export-exploder --git [INPUT_DIRECTORY] [OUTPUT_DIRECTORY]
-```
+With `--git`, the output is committed after each run:
 
 - With `-t db` (default) each database folder becomes its own repository, with `-t domain` each domain folder (e.g. `scripts/`, `tables/`).
-- A commit (`Export [FileMaker database name]`) is only created when the output changed.
-- The installed `git` CLI is used, so your git configuration (author, signing, default branch) applies. Without git installed, the output is written but not committed.
-- Folders that are already inside another git repository (e.g. an output directory you version yourself) are left alone.
+- A commit (`Export <database>`) is only created when the output changed.
+- The installed `git` is used, so your git configuration (author, signing, default branch) applies. Without git, the output is written but not committed.
+- Folders that are already inside another git repository (e.g. an output folder you version yourself) are left alone.
 
-## Output Organization
+To share the history, add a remote to a repository once (`git -C <repository> remote add origin <url>`) and push as usual.
 
-The extracted content is organized into directories based on the context of the XML elements:
+## Automated exports on macOS
 
-### Option 1: Starting with FileMaker database filename (default)
-
-Running with `-t db`.
+The install script sets up a folder that exports your solution, explodes it and commits the result, optionally every day:
 
 ```bash
-├── [FileMaker database name]/
-    └── [...]
-    └── scripts/
-        └── [Directory name] - ID [Directory ID]
-            └── [Script name] - ID [Script ID].xml
-    └── scripts_sanitized/
-        └── [Directory name] - ID [Directory ID]
-            └── [Script name] - ID [Script ID].txt
-    └── tables/
-        └── [Table name] - ID [Table ID].xml
-    └── table_occurrences/
-        └── [TO name] - ID [TO ID].xml
-    └── themes/
-        └── [Theme name] - ID [Theme ID].xml
-    └── value_lists/
-        └── [Value list name] - ID [Value list ID].xml
-    └── [...]
+curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash
 ```
 
-### Option 2: Starting with domain (catalog name)
-
-Running with `-t domain`.
+It asks where to install, suggesting a new folder `fm-xml-export-exploder` in the current directory. To skip the question or to also schedule a daily export at 7:00, pass options:
 
 ```bash
-├── [...]
+curl -fsSL https://raw.githubusercontent.com/bc-m/fm-xml-export-exploder/main/install.sh | bash -s -- --service ~/fm-export
+```
+
+Then create `Run_XML_Export.fmp12` in that folder: a FileMaker file whose `OnFirstWindowOpen` script saves your solution as XML into the `xml` folder and quits FileMaker. Tip: [Save a Copy as XML](https://help.claris.com/en/pro-help/content/save-a-copy-as-xml.html) works on any file that is open with full access, addressed by its window name.
+
+The folder then contains:
+
+```
+├── bin/                    the exploder
+├── xml/                    the XML export
+├── repos/                  the output, one git repository per domain
+├── log/                    output of the daily export
+├── run.bash                export, explode, commit, and push repositories that have a remote
+└── com.fm-xml-export-exploder.plist   the daily export (installed with --service)
+```
+
+Run `run.bash` to export manually. To update, run the install script again with the same folder: it replaces the binary, `run.bash` and the service file (a changed `run.bash` or service file is kept as `.bak`) and leaves `xml/`, `repos/`, `log/` and `Run_XML_Export.fmp12` alone. A daily export set up earlier is updated as well.
+
+## Output
+
+### By database (default, `-t db`)
+
+```
+└── <database>/
+    ├── scripts/
+    │   └── <folder> - ID <folder id>/
+    │       └── <script> - ID <script id>.xml
+    ├── scripts_sanitized/
+    │   └── <folder> - ID <folder id>/
+    │       └── <script> - ID <script id>.txt
+    ├── tables/
+    │   └── <table> - ID <table id>.xml
+    ├── table_occurrences/
+    │   └── <table occurrence> - ID <table occurrence id>.xml
+    ├── themes/
+    │   └── <theme> - ID <theme id>.xml
+    ├── value_lists/
+    │   └── <value list> - ID <value list id>.xml
+    └── …
+```
+
+### By domain (`-t domain`)
+
+```
 ├── scripts/
-│   └── [FileMaker database name]/
-│       └── [Directory name] - ID [Directory ID]/
-│           └── [Script name] - ID [Script ID].xml
+│   └── <database>/
+│       └── <folder> - ID <folder id>/
+│           └── <script> - ID <script id>.xml
 ├── scripts_sanitized/
-│   └── [FileMaker database name]/
-│       └── [Directory name] - ID [Directory ID]/
-│           └── [Script name] - ID [Script ID].txt
+│   └── <database>/
+│       └── <folder> - ID <folder id>/
+│           └── <script> - ID <script id>.txt
 ├── tables/
-│   └── [FileMaker database name]/
-│       └── [Table name] - ID [Table ID].xml
-├── table_occurrences/
-│   └── [FileMaker database name]/
-│       └── [TO name] - ID [TO ID].xml
-├── themes/
-│   └── [FileMaker database name]/
-│       └── [Theme name] - ID [Theme ID].xml
-└── value_lists/
-    └── [FileMaker database name]/
-        └── [Value list name] - ID [Value list ID].xml
-└── [...]
+│   └── <database>/
+│       └── <table> - ID <table id>.xml
+└── …
 ```
 
-_For multi-file solutions it can be helpful to create a separate Git repository for each of these directories (
-`custom_functions`, `layouts`, `scripts`, `tables` and so on) to manage version control and collaboration effectively._
+### Why this structure?
 
-## Why this structure?
+Git does not work well with large files or a large *number* of files. The domain layout lets you keep a separate repository per domain, e.g. only `scripts_sanitized` to review script changes in a readable format. For small solutions, one repository per database works just as well.
 
-Well, git does not work very well with large files or large *number* of files. In our case, we mainly need to track changes in scripts, so we decided to use this structure to better review script changes in `scripts_sanitized` in a more human-readable format like scripts displayed in FileMaker. If you have a small solution with a small number of FileMaker files, you can also push all the files to a git repository.
+## Development
 
-## Best practise
+```bash
+cargo test
+```
 
-- Create a FileMaker script to automatically export your solution file(s) as XML using the [Save Copy as XML command](https://help.claris.com/en/pro-help/content/save-a-copy-as-xml.html). __Tip:__ You can apply the command to any opened FileMaker file that is open with full access by window name.
-- Initialize a git repository for each [directory](#output-organization) created.
-- Extend your FileMaker script to run `git add --all`, `git commit -m "COMMIT MESSAGE HERE"` and `git push`.
+The snapshot tests explode the solutions in [`tests/xml`](./tests/xml) and compare the result with [`tests/snapshots_*`](./tests). After an intended output change, update the snapshots with `INSTA_UPDATE=always cargo test` (or `cargo insta review`) and review the diff.
 
-Congratulations, now your FileMaker changes are versioned using git!
+Publishing a GitHub release builds and attaches the binaries for all platforms.
 
-## Imported FileMaker solutions
+### Test data
 
-The following open source FileMaker solutions were saved as XML and used for snapshot tests.
+These open source FileMaker solutions are used for the snapshot tests:
 
-- [FM-Admin-API-Tool](https://github.com/SoliantMike/FM-Admin-API-Tool): A FileMaker tool for administering FileMaker Server using the Admin API.
-- [fmSyntaxColorizer](https://github.com/mrwatson-de/fmSyntaxColorizer): A FileMaker tool for customizing syntax highlighting for FileMaker scripts and calculations.
-- [ooe-fm](https://github.com/mislavkos/ooe-fm/): ooe-fm provies a sample FileMaker file with One Of Everything (Ooe).
-
-## Dependencies
-
-- [anyhow](https://crates.io/crates/anyhow): Rust crate for flexible error handling.
-- [clap](https://crates.io/crates/clap): Rust crate for command-line argument parsing.
-- [encoding_rs_io](https://crates.io/crates/encoding_rs_io): Rust crate for character encoding support.
-- [quick-xml](https://crates.io/crates/quick-xml): Rust crate for high-performance XML parsing.
-- [rayon](https://crates.io/crates/rayon): Rust crate for parallelism.
-- [regex](https://crates.io/crates/regex): Rust crate for regular expressions.
-- [strum](https://crates.io/crates/strum): Rust crate for easier management of enums and strings.
-
-## License
-
-This tool is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+- [FM-Admin-API-Tool](https://github.com/SoliantMike/FM-Admin-API-Tool): a FileMaker tool for administering FileMaker Server using the Admin API.
+- [fmSyntaxColorizer](https://github.com/mrwatson-de/fmSyntaxColorizer): a FileMaker tool for customizing syntax highlighting for FileMaker scripts and calculations.
+- [ooe-fm](https://github.com/mislavkos/ooe-fm/): a sample FileMaker file with One Of Everything (Ooe).
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or pull requests on the [GitHub repository](https://github.com/BC-M/fm-xml-export-exploder).
+Contributions are welcome! Feel free to open issues or pull requests on [GitHub](https://github.com/bc-m/fm-xml-export-exploder).
+
+## License
+
+MIT, see [LICENSE](LICENSE).
