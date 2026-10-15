@@ -11,8 +11,8 @@
 #   --service   Also run the export every day at 7:00 (launchd)
 #
 # Installing into an existing folder updates it: the binary, run.bash and the service
-# file are replaced (changed files are kept as .bak), the data in xml/, repos/ and log/
-# and Run_XML_Export.fmp12 are left alone.
+# file are replaced (changed files are kept as .bak); the config, the data in xml/,
+# repos/ and log/ and Run_XML_Export.fmp12 are left alone.
 
 set -euo pipefail
 
@@ -91,6 +91,7 @@ install_file "$dir/run.bash" << 'EOF'
 #
 # Exports the FileMaker solution as XML, explodes it and commits the result with git.
 # Run_XML_Export.fmp12 has to save the solution as XML into ./xml and quit FileMaker.
+# The options are in fm-xml-export-exploder.toml.
 
 set -e
 cd "$(dirname "$0")"
@@ -104,12 +105,13 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') Exporting the FileMaker solution as XML..."
 # -W waits until FileMaker quits
 open -W -a "FileMaker Pro" Run_XML_Export.fmp12
 
-# One git repository per domain folder (scripts, tables, ...)
-./bin/fm-xml-export-exploder --git -t domain ./xml ./repos
+# Uses ./fm-xml-export-exploder.toml
+./bin/fm-xml-export-exploder
 
-# Push every repository that has a remote
-for repo in ./repos/*/; do
-    if [ -n "$(git -C "$repo" remote)" ]; then
+# Push every repository in the target folder that has a remote
+target="$(sed -n 's/^target *= *"\(.*\)".*/\1/p' fm-xml-export-exploder.toml)"
+for repo in "${target:-./repos}"/*/; do
+    if [ -n "$(git -C "$repo" remote 2> /dev/null)" ]; then
         git -C "$repo" push
     fi
 done
@@ -117,6 +119,53 @@ done
 echo "$(date '+%Y-%m-%d %H:%M:%S') Done."
 EOF
 chmod +x "$dir/run.bash"
+
+# The config is never replaced, so changed options survive updates
+config_file="$dir/fm-xml-export-exploder.toml"
+if [ ! -e "$config_file" ]; then
+    cat > "$config_file" << 'CONFIG'
+# fm-xml-export-exploder configuration
+#
+# Used automatically when this file (fm-xml-export-exploder.toml) is in the current
+# directory, or explicitly with `fm-xml-export-exploder --config <file>`.
+# Options on the command line override the values in this file.
+# Relative paths are resolved relative to the folder of this file.
+
+# Folder with the XML files exported from FileMaker ("Save a Copy as XML").
+source = "./xml"
+
+# Folder for the exploded output. Each run updates it in place: changed files are
+# rewritten, unchanged files are left alone, removed items are deleted.
+target = "./repos"
+
+# How the output is organized:
+#   "db"     - one folder per database, e.g. <target>/<database>/scripts/...
+#   "domain" - one folder per domain,   e.g. <target>/scripts/<database>/...
+output_tree = "domain"
+
+# Commit the output with git after each run (true / false). Creates one repository
+# per database folder ("db") or per domain folder ("domain") and only commits when
+# something changed. Folders inside another git repository are left alone.
+git = true
+
+# File extension of the readable scripts in scripts_sanitized, e.g. "txt" or
+# "fmscript" for syntax highlighting in your editor.
+script_extension = "txt"
+
+# Replace passwords in readable scripts with •••••••• (true / false). Recommended
+# when the output is committed or pushed, so passwords don't end up in the history.
+obfuscate_passwords = true
+
+# Keep lines that are skipped by default to reduce noise, such as UUIDs and empty
+# tags (true / false).
+all_lines = false
+
+# Keep all information of the XML, including less important catalogs and attributes
+# (true / false). Produces more files and more changes between exports.
+lossless = false
+CONFIG
+    echo "Created $config_file"
+fi
 
 service_file="$dir/$SERVICE_LABEL.plist"
 install_file "$service_file" << EOF
@@ -169,6 +218,7 @@ if [ ! -e "$dir/Run_XML_Export.fmp12" ]; then
     echo "  - Create $dir/Run_XML_Export.fmp12: a FileMaker file whose OnFirstWindowOpen"
     echo "    script saves your solution as XML into $dir/xml and quits FileMaker."
 fi
+echo "  - Adjust the options in $config_file if needed."
 echo "  - Run $dir/run.bash to export, explode and commit."
 if [ "$install_service" = false ]; then
     echo "  - Optional: run the installer again with --service for a daily export."

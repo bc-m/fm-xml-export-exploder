@@ -13,13 +13,14 @@ use crate::xml_processor::ProcessingContext;
 /// Extract entire element as is into its own file (don't split it into multiple files)
 /// Text content inside of <Chunk> tags needs special handling (replace tabs with &#09;)
 /// Also generates skeleton XML if lossless mode is enabled
+/// Empty elements aren't written: every file of a split export has a DDR_INFO element,
+/// but most of them are empty
 pub fn process_supporting_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
     out_file_name: &str,
 ) -> Result<()> {
     let out_dir_path = build_out_dir_path(context, None)?;
-    create_dir(&out_dir_path);
     let out_file_path = out_dir_path.join(format!("{out_file_name}.xml"));
 
     let mut result = String::new();
@@ -29,6 +30,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
     let base_depth = context.path_stack.len();
     let mut buf = Vec::new();
     let mut in_chunk = false;
+    let mut is_empty = true;
     loop {
         match context.reader.read_event_into(&mut buf) {
             Err(e) => {
@@ -38,6 +40,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
             Ok(Event::Eof) => break,
             Ok(Event::Start(e)) => {
                 depth += 1;
+                is_empty = false;
                 let start_tag = start_element_to_string(&e, context.flags);
                 if e.name().as_ref() == "Chunk" {
                     in_chunk = true;
@@ -67,16 +70,21 @@ pub fn process_supporting_element<R: Read + BufRead>(
 
                 // Write to file if we're at the end of the catalog
                 if depth == 0 {
-                    write_xml_file(context.output, &out_file_path, &result, 1, context.flags);
+                    if !is_empty {
+                        create_dir(&out_dir_path);
+                        write_xml_file(context.output, &out_file_path, &result, 1, context.flags);
+                    }
                     context.path_stack.pop();
                     break;
                 }
             }
             Ok(Event::CData(e)) => {
+                is_empty = false;
                 result.push_str(&cdata_element_to_string(&e));
             }
             Ok(Event::Text(e)) => {
                 let mut text_string = text_element_to_string(&e, true);
+                is_empty &= text_string.trim().is_empty();
                 if in_chunk && !text_string.trim().is_empty() {
                     text_string = text_string.replace('\t', "&#09;");
                 }

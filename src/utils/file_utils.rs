@@ -47,17 +47,18 @@ pub fn should_skip_line(line: &str) -> bool {
         || (line.contains("<UUID>") && line.contains("</UUID>"))
 }
 
-/// Writes the `.txt` version of an exploded file, mirroring its path below `xml_dir`
-/// into `text_dir`. No text file is written when `text` is `None`.
+/// Writes the text version of an exploded file with the given extension, mirroring its
+/// path below `xml_dir` into `text_dir`. No text file is written when `text` is `None`.
 pub fn write_text_version(
     xml_path: &Path,
     xml_dir: &Path,
     text_dir: &Path,
+    extension: &str,
     output: &OutputFiles,
     text: Option<String>,
 ) {
     let relative_path = xml_path.strip_prefix(xml_dir).unwrap_or(xml_path);
-    let text_path = text_dir.join(relative_path).with_extension("txt");
+    let text_path = text_dir.join(relative_path).with_extension(extension);
     if let Some(parent) = text_path.parent() {
         fs::create_dir_all(parent)
             .unwrap_or_else(|err| panic!("Error creating directory {}: {}", parent.display(), err));

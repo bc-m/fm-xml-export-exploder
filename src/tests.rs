@@ -54,6 +54,7 @@ mod tests {
             lossless: false,
             output_tree: OutputTree::Db,
             obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
         };
 
         let output_dir = dir.join("out");
@@ -64,6 +65,45 @@ mod tests {
                 .join("T/layouts__modify_action/Folder - ID 1/Home - ID 9.xml")
                 .exists()
         );
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Readable scripts get the configured extension, custom functions keep `.txt`, and
+    /// scripts written with the previous extension are removed on the next run.
+    #[test]
+    fn script_extension() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-extension-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        let input = PathBuf::from("tests/xml/Ooe - saxml_v_2_2_3_4.xml");
+        let flags = |script_extension: &str| Flags {
+            parse_all_lines: false,
+            lossless: false,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: script_extension.to_string(),
+        };
+        let extensions_in = |folder: &str| -> Vec<String> {
+            let mut extensions: Vec<String> = WalkDir::new(dir.join("Ooe").join(folder))
+                .into_iter()
+                .filter_map(|entry| entry.ok())
+                .filter(|entry| entry.file_type().is_file())
+                .filter_map(|entry| Some(entry.path().extension()?.to_str()?.to_string()))
+                .collect();
+            extensions.sort();
+            extensions.dedup();
+            extensions
+        };
+
+        explode_xml(&input, &dir, &flags("txt")).unwrap();
+        assert_eq!(extensions_in("scripts_sanitized"), ["txt"]);
+
+        explode_xml(&input, &dir, &flags("fmscript")).unwrap();
+        assert_eq!(extensions_in("scripts_sanitized"), ["fmscript"]);
+        assert_eq!(extensions_in("custom_functions_sanitized"), ["txt"]);
+
         fs::remove_dir_all(&dir).unwrap();
     }
 
@@ -98,6 +138,7 @@ mod tests {
             lossless: is_lossless,
             output_tree,
             obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
         };
         let _ = fs::remove_dir_all(output_dir);
 
