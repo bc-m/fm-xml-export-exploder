@@ -29,6 +29,8 @@ fm-xml-export-exploder [OPTIONS] <SOURCE> <TARGET>
 
 `SOURCE` is the folder with the XML files, `TARGET` the folder for the output. Each run updates the output in place: changed files are rewritten, unchanged files are left alone, and files of items that no longer exist are removed.
 
+Exports split into one file per catalog (FileMaker 2026) work as well: put the summary file (e.g. `Datenbankbericht.xml`) and the folder it refers to in `SOURCE`. The catalog files in that folder are exploded together as one database. Since every catalog file has its own DDR_INFO, the files in `_` are named after the catalog, e.g. `ddr_info_ScriptCatalog.xml` (and `skeleton_ScriptCatalog.xml` with `--lossless`).
+
 | Option | Description |
 |---|---|
 | `-t`, `--output-tree <db\|domain>` | Organize the output by database (`db`, default) or by domain (`domain`), see [Output](#output). `--output_tree` still works. |

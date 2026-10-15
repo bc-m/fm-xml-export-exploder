@@ -1,19 +1,23 @@
-use std::{fs, time::Instant};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::time::Instant;
 
 use anyhow::Result;
 use clap::Parser;
 use rayon::prelude::*;
 
+use crate::input::input_files;
 use crate::settings::{Args, Settings};
 use crate::utils::file_utils::valid_dir_or_throw;
 use crate::utils::migrate_old_custom_functions_if_needed;
+use crate::utils::output_files::OutputFiles;
 use crate::utils::xml_utils::XmlEventType;
-use crate::xml_processor::explode_xml;
+use crate::xml_processor::{explode_file, remove_stale_output};
 
 mod catalog;
 mod config;
 mod custom_function_sanitizer;
 mod git;
+mod input;
 mod script_sanitizer;
 mod script_steps;
 mod settings;
@@ -42,28 +46,40 @@ fn main() -> Result<()> {
 
     valid_dir_or_throw(&in_dir)?;
 
-    let paths = fs::read_dir(in_dir)?
-        .filter_map(|entry| {
-            let path = entry.ok()?.path();
-            (path.is_file() && path.extension().is_some_and(|ext| ext == "xml")).then_some(path)
-        })
-        .collect::<Vec<_>>();
+    let paths = input_files(&in_dir)?;
 
     migrate_old_custom_functions_if_needed(&out_dir, &flags)?;
 
     println!("Start processing {} files...", paths.len());
 
-    let db_names: Vec<String> = paths
+    // Shared by all files: a database split into one file per catalog is written by
+    // several files
+    let output = OutputFiles::default();
+    let any_failed = AtomicBool::new(false);
+    let mut db_names: Vec<String> = paths
         .par_iter()
-        .filter_map(|path| match explode_xml(path, &out_dir, &flags) {
+        .filter_map(|path| match explode_file(path, &out_dir, &flags, &output) {
             Ok(db_name) => db_name,
             Err(err) => {
                 let file_name = path.file_name().unwrap().to_str().unwrap();
                 eprintln!("Failed to process file '{file_name}': {err}");
+                any_failed.store(true, Ordering::Relaxed);
                 None
             }
         })
         .collect();
+    db_names.sort();
+    db_names.dedup();
+
+    // The output is updated in place: remove what the exports no longer contain. A failed
+    // file may belong to any database, so nothing is removed then.
+    if any_failed.load(Ordering::Relaxed) {
+        eprintln!("Some files failed, so outdated output files were not removed.");
+    } else {
+        for db_name in &db_names {
+            remove_stale_output(&out_dir, &flags, db_name, &output)?;
+        }
+    }
 
     // Commit only after all files are written: in domain mode, several databases share
     // the same repository

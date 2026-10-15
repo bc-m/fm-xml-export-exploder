@@ -2,17 +2,17 @@
 //! unchanged files are left alone and only files that are no longer part of the
 //! export are removed afterwards.
 
-use std::cell::RefCell;
 use std::collections::HashSet;
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
+use std::sync::Mutex;
 
-/// The files written while exploding one database. A database is processed on a
-/// single thread, so no locking is needed.
+/// The files written during a run. Shared by all input files, because the catalogs
+/// of a database can be split across several files that are processed in parallel.
 #[derive(Debug, Default)]
 pub struct OutputFiles {
-    written: RefCell<HashSet<PathBuf>>,
+    written: Mutex<HashSet<PathBuf>>,
 }
 
 impl OutputFiles {
@@ -22,12 +22,12 @@ impl OutputFiles {
         if !unchanged && let Err(err) = fs::write(path, content) {
             eprintln!("Error writing file {}: {}", path.display(), err);
         }
-        self.written.borrow_mut().insert(path.to_path_buf());
+        self.written.lock().unwrap().insert(path.to_path_buf());
     }
 
     /// Whether `path` was written during this run.
     pub fn contains(&self, path: &Path) -> bool {
-        self.written.borrow().contains(path)
+        self.written.lock().unwrap().contains(path)
     }
 
     /// Removes everything below `root` that wasn't written during this run, except

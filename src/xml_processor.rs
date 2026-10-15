@@ -44,6 +44,20 @@ pub enum Qualifier {
 pub struct DocumentInfo {
     pub saxml_version_num: u64,
     pub db_name: String,
+    /// The catalog part (e.g. `ScriptCatalog`) when the export is split into one file per
+    /// catalog. Output that every file can contain (DDR_INFO, skeleton) is named after it.
+    pub split_part: Option<String>,
+}
+
+impl DocumentInfo {
+    /// Appends the split part to a file name stem, so that the files of a split export
+    /// don't overwrite each other.
+    pub fn part_file_name(&self, stem: &str) -> String {
+        match &self.split_part {
+            Some(part) => format!("{stem}_{part}"),
+            None => stem.to_string(),
+        }
+    }
 }
 
 /// Context for XML catalog processing
@@ -62,12 +76,43 @@ pub struct ProcessingContext<'a, R: Read + BufRead> {
     pub output: &'a OutputFiles,
 }
 
-/// Process a single XML file and explode it into individual files.
-/// Returns the name of the exported database.
+/// Explode a single XML file that holds a complete database and remove the output
+/// this export no longer contains. Returns the name of the exported database.
+#[cfg(test)]
 pub fn explode_xml(
     fm_export_file_path: &Path,
     root_out_dir: &Path,
     flags: &Flags,
+) -> Result<Option<String>> {
+    let output = OutputFiles::default();
+    let db_name = explode_file(fm_export_file_path, root_out_dir, flags, &output)?;
+    if let Some(db_name) = &db_name {
+        remove_stale_output(root_out_dir, flags, db_name, &output)?;
+    }
+    Ok(db_name)
+}
+
+/// The output is updated in place: remove what the export no longer contains
+pub fn remove_stale_output(
+    root_out_dir: &Path,
+    flags: &Flags,
+    db_name: &str,
+    output: &OutputFiles,
+) -> Result<()> {
+    for root in output_roots(root_out_dir, &flags.output_tree, db_name) {
+        output.remove_stale(&root)?;
+    }
+    Ok(())
+}
+
+/// Process a single XML file and explode it into individual files, recording them in
+/// `output`. Stale files are not removed, because a database can be split across
+/// several files. Returns the name of the exported database.
+pub fn explode_file(
+    fm_export_file_path: &Path,
+    root_out_dir: &Path,
+    flags: &Flags,
+    output: &OutputFiles,
 ) -> Result<Option<String>> {
     let start = Instant::now();
     let fm_export_file_name = fm_export_file_path.file_name().unwrap().to_str().unwrap();
@@ -82,8 +127,6 @@ pub fn explode_xml(
     let mut script_folder_structure: Option<FolderStructure> = None;
     let mut buf = Vec::new();
 
-    let output = OutputFiles::default();
-
     // Instantiate processing context which will be passed around to various functions
     let mut context = ProcessingContext {
         reader: &mut Reader::from_reader(BufReader::new(DecodeReaderBytes::new(file))),
@@ -96,7 +139,7 @@ pub fn explode_xml(
         current_out_dir: PathBuf::new(),
         skeleton: &mut Skeleton::default(),
         flags,
-        output: &output,
+        output,
     };
 
     // Iterate over XML events
@@ -119,7 +162,7 @@ pub fn explode_xml(
                 );
                 match depth {
                     0 => {
-                        process_root_element(&mut context, &start_tag)?;
+                        process_root_element(&mut context, &start_tag, fm_export_file_path)?;
                         create_dir(context.root_out_dir);
                     }
                     1 => {
@@ -168,13 +211,6 @@ pub fn explode_xml(
         write_skeleton_file(&context)?;
     }
 
-    // The output is updated in place: remove what this export no longer contains
-    if let Some(doc_info) = &context.doc_info {
-        for root in output_roots(root_out_dir, &flags.output_tree, &doc_info.db_name) {
-            output.remove_stale(&root)?;
-        }
-    }
-
     println!(
         "→ {} finished in {} ms.",
         fm_export_file_name,
@@ -187,6 +223,7 @@ pub fn explode_xml(
 fn process_root_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     e: &BytesStart,
+    fm_export_file_path: &Path,
 ) -> Result<()> {
     if !matches!(e.name().as_ref(), "FMDynamicTemplate" | "FMSaveAsXML") {
         bail!("Unsupported XML-format");
@@ -201,11 +238,26 @@ fn process_root_element<R: Read + BufRead>(
     let saxml_version = get_attribute(e, "version")
         .ok_or_else(|| anyhow!("Missing 'version' attribute on root element"))?;
     let saxml_version_num = version_string_to_number(&saxml_version);
+    let split_part = (get_attribute(e, "split_catalogs").as_deref() == Some("True"))
+        .then(|| split_part_name(fm_export_file_path, &db_name));
     context.doc_info = Some(DocumentInfo {
         saxml_version_num,
         db_name,
+        split_part,
     });
     Ok(())
+}
+
+/// The catalog part of a split export file, e.g. `ScriptCatalog` for
+/// `MikelOffice_ScriptCatalog.xml`, or the whole file stem if it has another name.
+fn split_part_name(fm_export_file_path: &Path, db_name: &str) -> String {
+    let stem = fm_export_file_path
+        .file_stem()
+        .map(|stem| stem.to_string_lossy())
+        .unwrap_or_default();
+    stem.strip_prefix(&format!("{db_name}_"))
+        .unwrap_or(&stem)
+        .to_string()
 }
 
 /// Process supporting elements (Metadata, DDR_INFO) that are not part of the main structure.
@@ -214,13 +266,19 @@ fn process_top_level_section<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
 ) -> Result<bool> {
+    let doc_info = context.doc_info.as_ref();
     let (section, out_file_name) = match start_tag.name().as_ref() {
         "Structure" => {
             context.top_level_section = Some(TopLevelSection::Structure);
             return Ok(false);
         }
-        "Metadata" => (TopLevelSection::Metadata, "metadata"),
-        "DDR_INFO" => (TopLevelSection::DdrInfo, "ddr_info"),
+        "Metadata" => (TopLevelSection::Metadata, "metadata".to_string()),
+        "DDR_INFO" => (
+            TopLevelSection::DdrInfo,
+            doc_info.map_or("ddr_info".to_string(), |info| {
+                info.part_file_name("ddr_info")
+            }),
+        ),
         _ => {
             context.top_level_section = None;
             return Ok(false);
@@ -228,7 +286,7 @@ fn process_top_level_section<R: Read + BufRead>(
     };
 
     context.top_level_section = Some(section);
-    process_supporting_element(context, start_tag, out_file_name)?;
+    process_supporting_element(context, start_tag, &out_file_name)?;
     Ok(true)
 }
 
@@ -308,7 +366,14 @@ fn process_catalog_elements<R: Read + BufRead>(
 
 fn write_skeleton_file<R: Read + BufRead>(context: &ProcessingContext<'_, R>) -> Result<()> {
     let skeleton_dir_path = build_out_dir_path(context, None)?;
-    let skeleton_file_path = skeleton_dir_path.join("skeleton.xml");
+    create_dir(&skeleton_dir_path);
+    let stem = context
+        .doc_info
+        .as_ref()
+        .map_or("skeleton".to_string(), |info| {
+            info.part_file_name("skeleton")
+        });
+    let skeleton_file_path = skeleton_dir_path.join(format!("{stem}.xml"));
     write_xml_file(
         context.output,
         &skeleton_file_path,
