@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="28" name="_kColorNameActive" repetition="1" UUID="D78CBA54-3CE0-433E-91FC-76FAEF0788D4">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA[_Default ( Syntax.Color_InActivePaletteByCommand::ColorName ; ColorName )]]></Text>
+					<ChunkList hash="39ED858100C609C993C85F336B19CC96">
+						<Chunk type="CustomFunctionRef">_Default</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+								<TableOccurrenceReference id="1065140" name="Syntax.Color_InActivePaletteByCommand" UUID="1AF1DFBE-D2C1-462E-8393-69C7CE00CD40"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

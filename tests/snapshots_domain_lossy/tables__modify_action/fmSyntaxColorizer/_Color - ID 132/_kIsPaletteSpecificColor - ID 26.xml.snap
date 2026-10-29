@@ -1,0 +1,38 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="26" name="_kIsPaletteSpecificColor" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+					<Text><![CDATA[ZeichenLinks( ColorName ; 1 ) = "{" UND ZeichenRechts( ColorName ; 1 ) = "}"]]></Text>
+					<ChunkList hash="56B71FFE365AAB5134F9A0A486A9063D">
+						<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) = &quot;{&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) = &quot;}&quot;</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,27 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="37" name="_kAppCopyright" repetition="1" UUID="B30AEB99-4ED0-4E36-99DB-458BE433950D">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					<Text><![CDATA["© " & Jahreszahl( Hole( SystemDatum ) ) & " MrWatson, russell@mrwatson.de"]]></Text>
+					<ChunkList hash="5D28F3734D1528E3DF70033F4DF8508F">
+						<Chunk type="NoRef">&quot;© &quot; &amp; </Chunk>
+						<Chunk type="FunctionRef">Jahreszahl</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">SystemDatum</Chunk>
+						<Chunk type="NoRef"> ) ) &amp; &quot; MrWatson, russell@mrwatson.de&quot;</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

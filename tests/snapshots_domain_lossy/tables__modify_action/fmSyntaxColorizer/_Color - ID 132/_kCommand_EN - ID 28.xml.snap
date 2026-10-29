@@ -1,0 +1,44 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="28" name="_kCommand_EN" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( _kIsPaletteSpecificColor ; ZeichenMitte( ColorName ; 2 ; Länge( ColorName ) - 2 ) )]]></Text>
+					<ChunkList hash="7F97E8437C8BBBCD6C3B3C7BA8A9ED16">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="26" name="_kIsPaletteSpecificColor" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FunctionRef">ZeichenMitte</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 2 ; </Chunk>
+						<Chunk type="FunctionRef">Länge</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) - 2 ) )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,46 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="21" name="Selector" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+					<Text><![CDATA[Falls(PaletteType = "Script" ; "ScriptStep" ;NICHT IstLeer( _kFormulaChars ) ; "Formula" ;ZeichenLinks( ColorName ; 1 ) ="$" ; "Variable" ;"Function")]]></Text>
+					<ChunkList hash="ACF22A656D5F56FDD6C175244C4137EF">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="14" name="PaletteType" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = &quot;Script&quot; ; &quot;ScriptStep&quot; ;&#13;</Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="13" name="_kFormulaChars" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ; &quot;Formula&quot; ;&#13;</Chunk>
+						<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) =&quot;$&quot; ; &quot;Variable&quot; ;&#13;&quot;Function&quot;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

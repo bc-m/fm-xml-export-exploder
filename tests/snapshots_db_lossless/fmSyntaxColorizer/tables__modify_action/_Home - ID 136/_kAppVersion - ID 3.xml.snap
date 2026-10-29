@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="3" name="_kAppVersion" repetition="1" UUID="E6CFD073-2856-44F7-A3E5-43FCB0D1C2A9">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					<Text><![CDATA[WörterRechts( HoleWert( ScriptNamen ( Hole( DateiName ) ) ; 1 ) ; 1 )]]></Text>
+					<ChunkList hash="82D2D926A1DF9EFF22FC4AE03B3E4326">
+						<Chunk type="FunctionRef">WörterRechts</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">HoleWert</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">ScriptNamen</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">DateiName</Chunk>
+						<Chunk type="NoRef"> ) ) ; 1 ) ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

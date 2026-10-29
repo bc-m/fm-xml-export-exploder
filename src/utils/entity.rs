@@ -97,14 +97,49 @@ pub fn read_rest_of_element<R: Read + BufRead>(
     let mut entity = Entity::default();
     entity.read_xml_element(context, start_tag, id_path);
     if !entity.element_with_id.is_empty() {
+        let mut placeholder = entity.element_with_id.clone();
+        // Modified fields share their table reference, so the skeleton also names the field
+        if start_tag.name().as_ref() == "FieldCatalog"
+            && context
+                .path_stack
+                .get(2)
+                .is_some_and(|v| v == "ModifyAction")
+        {
+            placeholder.push_str(&modified_field_outline(&entity.content, base_depth));
+        }
         push_line_to_skeleton(
             context.skeleton,
             base_depth,
             1,
-            &entity.element_with_id,
+            &placeholder,
             false,
             XmlEventType::Other,
         );
     }
     entity
+}
+
+/// The lines that lead from a modified field catalog to its field, e.g.
+/// `<ObjectList>`, `<Field>` and `<FieldReference>` without the field's content
+fn modified_field_outline(content: &str, depth: usize) -> String {
+    let start_tag = |name: &str| {
+        content
+            .lines()
+            .map(str::trim)
+            .find(|line| line.starts_with(name))
+    };
+    let (Some(object_list), Some(field), Some(field_reference)) = (
+        start_tag("<ObjectList"),
+        start_tag("<Field>"),
+        start_tag("<FieldReference "),
+    ) else {
+        return String::new();
+    };
+    let field_reference = field_reference
+        .strip_suffix("</FieldReference>")
+        .unwrap_or(field_reference);
+    let indent = "\t".repeat(depth);
+    format!(
+        "\n{indent}{object_list}\n{indent}\t{field}\n{indent}\t\t{field_reference}</FieldReference>\n{indent}\t</Field>\n{indent}</ObjectList>"
+    )
 }

@@ -1,0 +1,40 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="12" name="_kStatus" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( _kUnavailable ; "needs " & MBSVersionMin ; Status )]]></Text>
+					<ChunkList hash="DC45C4A9DDAD50E2FE738CC0A857F1E7">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="10" name="_kUnavailable" repetition="1">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;needs &quot; &amp; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="MBSVersionMin" repetition="1">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="7" name="Status" repetition="1">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

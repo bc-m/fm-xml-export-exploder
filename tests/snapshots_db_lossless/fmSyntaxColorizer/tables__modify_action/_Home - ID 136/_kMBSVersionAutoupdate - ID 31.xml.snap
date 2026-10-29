@@ -1,0 +1,22 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="31" name="_kMBSVersionAutoupdate" repetition="1" UUID="5007A3D7-4F6C-401C-8340-B902F9C7EB54">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					<Text><![CDATA[MBS( "VersionAutoUpdate" )]]></Text>
+					<ChunkList hash="7D71CCD68DFBEE2EEF532CFF12357824">
+						<Chunk type="FunctionRef">MBS</Chunk>
+						<Chunk type="NoRef">( &quot;VersionAutoUpdate&quot; )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

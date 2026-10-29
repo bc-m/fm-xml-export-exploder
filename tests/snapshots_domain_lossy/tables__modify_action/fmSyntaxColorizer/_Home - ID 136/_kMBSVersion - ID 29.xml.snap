@@ -1,0 +1,22 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="29" name="_kMBSVersion" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					<Text><![CDATA[MBS( "Version" )]]></Text>
+					<ChunkList hash="520F43275759CBB7937FD5B6D2A85E9C">
+						<Chunk type="FunctionRef">MBS</Chunk>
+						<Chunk type="NoRef">( &quot;Version&quot; )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

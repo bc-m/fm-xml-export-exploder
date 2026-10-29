@@ -1,0 +1,40 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="12" name="_kStatus" repetition="1" UUID="2FB3A928-A150-4D12-A2D5-9D7D6BECFCE1">
+				<Calculation>
+					<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( _kUnavailable ; "needs " & MBSVersionMin ; Status )]]></Text>
+					<ChunkList hash="DC45C4A9DDAD50E2FE738CC0A857F1E7">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="10" name="_kUnavailable" repetition="1" UUID="B74B80C6-7AB1-47C2-A559-BBF982460866">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;needs &quot; &amp; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="MBSVersionMin" repetition="1" UUID="61EA0B37-9E97-4241-8125-B5959211DC6C">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="7" name="Status" repetition="1" UUID="292B529B-7DA7-40F1-B079-A2D5FC67C115">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

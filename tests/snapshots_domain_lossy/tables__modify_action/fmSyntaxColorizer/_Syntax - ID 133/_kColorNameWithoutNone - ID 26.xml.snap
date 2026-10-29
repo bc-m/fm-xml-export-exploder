@@ -1,0 +1,42 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="26" name="_kColorNameWithoutNone" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( ColorName ≠ "--None--" UND ColorName ≠ "++New++" ; ColorName )]]></Text>
+					<ChunkList hash="23E80E2A416B340D9D6F5FB78B177679">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ &quot;--None--&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ &quot;++New++&quot; ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

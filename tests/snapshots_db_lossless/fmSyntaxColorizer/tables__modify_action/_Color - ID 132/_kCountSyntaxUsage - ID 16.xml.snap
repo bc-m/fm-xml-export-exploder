@@ -1,0 +1,36 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="16" name="_kCountSyntaxUsage" repetition="1" UUID="B86FD4CB-70C9-4E40-9B93-1DD57EB3B9A0">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[Anzahl( Color.Syntax::_k1 ) + Anzahl( Color.Syntax_byCommand::_k1 )]]></Text>
+					<ChunkList hash="0CC1528453DDA4BBEE26BD42A62B8DCD">
+						<Chunk type="FunctionRef">Anzahl</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="17" name="_k1" repetition="1" UUID="70571E8A-BB3C-42AF-8C79-E91C39A7AF8E">
+								<TableOccurrenceReference id="1065134" name="Color.Syntax" UUID="8717976F-51BF-401C-8696-A038B9D3BCD5"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) + </Chunk>
+						<Chunk type="FunctionRef">Anzahl</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="17" name="_k1" repetition="1" UUID="70571E8A-BB3C-42AF-8C79-E91C39A7AF8E">
+								<TableOccurrenceReference id="1065142" name="Color.Syntax_byCommand" UUID="BE72C346-53E1-4564-A24D-28B26E65D521"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

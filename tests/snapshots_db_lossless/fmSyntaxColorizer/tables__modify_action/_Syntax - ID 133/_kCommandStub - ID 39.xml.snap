@@ -1,0 +1,48 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="39" name="_kCommandStub" repetition="1" UUID="A1F7DF82-4E3E-4C0F-A3B0-E27DF7D8D094">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar([vCommand = Command_EN ;vCommand = Trimme( _TextBetween ( vCommand & "[" ; "" ; "[" )) ;vCommand = Trimme( _TextBetween ( vCommand & "(" ; "" ; "(" ))];vCommand)]]></Text>
+					<ChunkList hash="BBB374D39C87411322CB3C8DA5079807">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">(&#13;[&#13;</Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ;&#13;</Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Trimme</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="CustomFunctionRef">_TextBetween</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> &amp; &quot;[&quot; ; &quot;&quot; ; &quot;[&quot; )) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Trimme</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="CustomFunctionRef">_TextBetween</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> &amp; &quot;(&quot; ; &quot;&quot; ; &quot;(&quot; ))&#13;];&#13;</Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef">&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="7" name="_kListScriptColors" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					<Text><![CDATA[Austauschen( Liste( Palette.Color_Script::ColorInput ) ; "¶" ; " " )]]></Text>
+					<ChunkList hash="1E9A1269A90E639C1952EE6133B75753">
+						<Chunk type="FunctionRef">Austauschen</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="5" name="ColorInput" repetition="1">
+								<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ; &quot;¶&quot; ; &quot; &quot; )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,60 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="3" name="_kColorR_G_B" repetition="1" UUID="D67E9827-41A0-4C10-836E-6D7444997922">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar([ vHex = _kColorHex ;vRR = ZeichenMitte( vHex ; 2 ; 2 ) ;vGG = ZeichenMitte( vHex ; 4 ; 2 ) ;vBB = ZeichenMitte( vHex ; 6 ; 2 )];_0x ( vRR ) & " ; " & _0x ( vGG ) & " ; " & _0x ( vBB ))]]></Text>
+					<ChunkList hash="54AB970C74C047EA729C397E90ED7DEB">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">([ &#13;</Chunk>
+						<Chunk type="VariableReference">vHex</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="_kColorHex" repetition="1" UUID="D61AAB61-B5AB-4C22-9C0F-8BCF3D8538DA">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ;&#13;</Chunk>
+						<Chunk type="VariableReference">vRR</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">ZeichenMitte</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vHex</Chunk>
+						<Chunk type="NoRef"> ; 2 ; 2 ) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vGG</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">ZeichenMitte</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vHex</Chunk>
+						<Chunk type="NoRef"> ; 4 ; 2 ) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vBB</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">ZeichenMitte</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vHex</Chunk>
+						<Chunk type="NoRef"> ; 6 ; 2 )&#13;];&#13;</Chunk>
+						<Chunk type="CustomFunctionRef">_0x</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vRR</Chunk>
+						<Chunk type="NoRef"> ) &amp; &quot; ; &quot; &amp; </Chunk>
+						<Chunk type="CustomFunctionRef">_0x</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vGG</Chunk>
+						<Chunk type="NoRef"> ) &amp; &quot; ; &quot; &amp; </Chunk>
+						<Chunk type="CustomFunctionRef">_0x</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vBB</Chunk>
+						<Chunk type="NoRef"> )&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

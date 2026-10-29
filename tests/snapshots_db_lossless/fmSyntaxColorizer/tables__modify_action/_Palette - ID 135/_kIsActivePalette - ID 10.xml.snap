@@ -1,0 +1,55 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="10" name="_kIsActivePalette" repetition="1" UUID="586E3116-A880-4FA7-98B8-0D2FCAAAB699">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+					<Text><![CDATA[NICHT IstLeer( __ID ) UND NICHT IstLeer( _Syntax::_gID_ActivePalette ) UND __ID = _Syntax::_gID_ActivePalette]]></Text>
+					<ChunkList hash="B86F1F4F9C62CB6AA9A570DA0198A4EF">
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+								<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="1" name="__ID" repetition="1" UUID="EE515269-07CC-4FDD-A7F4-E75DE2E0AD09">
+								<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_gID_ActivePalette" repetition="1" UUID="B73731A1-AAF9-4B35-96E4-32974E94D0C1">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

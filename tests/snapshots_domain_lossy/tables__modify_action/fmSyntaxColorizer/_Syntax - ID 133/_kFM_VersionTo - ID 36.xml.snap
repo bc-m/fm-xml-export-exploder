@@ -1,0 +1,48 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="36" name="_kFM_VersionTo" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					<Text><![CDATA[_Default ( Falls(Position(  FM_Version ; "..." ; 1 ; 1 ) ;HoleWert( Austauschen( FM_Version ; "..." ; "¶" ) ; 2 ) ;FM_Version); 99 )]]></Text>
+					<ChunkList hash="75B75F79F977601E650DC36DED73DEC3">
+						<Chunk type="CustomFunctionRef">_Default</Chunk>
+						<Chunk type="NoRef"> ( &#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FunctionRef">Position</Chunk>
+						<Chunk type="NoRef">(  </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="FM_Version" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;...&quot; ; 1 ; 1 ) ;&#13;</Chunk>
+						<Chunk type="FunctionRef">HoleWert</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Austauschen</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="FM_Version" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;...&quot; ; &quot;¶&quot; ) ; 2 ) ;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="FM_Version" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef">&#13;)&#13;&#13;; 99 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

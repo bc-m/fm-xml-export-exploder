@@ -1,0 +1,58 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="24" name="_kGUI_PaletteImportMergeWarning" repetition="1" UUID="7491EA68-F2C5-498F-BEB1-65CDA2BBDBB8">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[Falls(NICHT Color.Palette_byName::_k1 ; "A new palette :-)" ;Temp ≠ 1 UND Color.Palette_byName::_k1 ; "This palette already exists in fmSyntaxColorizer and will not be imported." ;Temp = 1 UND Color.Palette_byName::_k1 ; "This palette will be merged together with the existing palette.")]]></Text>
+					<ChunkList hash="E8B053D7B4695A84FEB9746ACD4C6176">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_k1" repetition="1" UUID="2E431D93-9D8F-40FB-8019-25961F597C37">
+								<TableOccurrenceReference id="1065130" name="Color.Palette_byName" UUID="AFAB3B10-E04D-4F13-A069-F74D3CA92D39"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;A new palette :-)&quot; ;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="23" name="Temp" repetition="1" UUID="5335F64B-0ADD-4F3E-B1E8-0B1F8F4C387D">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ 1 </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_k1" repetition="1" UUID="2E431D93-9D8F-40FB-8019-25961F597C37">
+								<TableOccurrenceReference id="1065130" name="Color.Palette_byName" UUID="AFAB3B10-E04D-4F13-A069-F74D3CA92D39"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;This palette already exists in fmSyntaxColorizer and will not be imported.&quot; ;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="23" name="Temp" repetition="1" UUID="5335F64B-0ADD-4F3E-B1E8-0B1F8F4C387D">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = 1 </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_k1" repetition="1" UUID="2E431D93-9D8F-40FB-8019-25961F597C37">
+								<TableOccurrenceReference id="1065130" name="Color.Palette_byName" UUID="AFAB3B10-E04D-4F13-A069-F74D3CA92D39"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;This palette will be merged together with the existing palette.&quot;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

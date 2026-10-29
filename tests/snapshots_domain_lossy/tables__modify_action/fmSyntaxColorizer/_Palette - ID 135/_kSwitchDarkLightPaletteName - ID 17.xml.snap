@@ -1,0 +1,64 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="17" name="_kSwitchDarkLightPaletteName" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar([vSuffix = " (Dark)"];Falls( _EndsWith ( PaletteName ; vSuffix ) ;ZeichenLinks ( PaletteName ; Länge ( PaletteName ) - Länge ( vSuffix ) ) ;PaletteName & vSuffix))]]></Text>
+					<ChunkList hash="ACD6347A9B887E580F82DB264962FC99">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">(&#13;[&#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vSuffix</Chunk>
+						<Chunk type="NoRef"> = &quot; (Dark)&quot;&#13;&#13;];&#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="CustomFunctionRef">_EndsWith</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="PaletteName" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="VariableReference">vSuffix</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;</Chunk>
+						<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="PaletteName" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FunctionRef">Länge</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="PaletteName" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) - </Chunk>
+						<Chunk type="FunctionRef">Länge</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vSuffix</Chunk>
+						<Chunk type="NoRef"> ) ) ;&#13;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="PaletteName" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> &amp; </Chunk>
+						<Chunk type="VariableReference">vSuffix</Chunk>
+						<Chunk type="NoRef">&#13;&#13;)&#13;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>
