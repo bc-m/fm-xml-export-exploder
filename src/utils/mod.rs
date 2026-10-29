@@ -139,20 +139,20 @@ pub fn prepare_xml_content(content: &str, remove_indent_count: usize, flags: &Fl
 /// Where a line of XML starts or ends: between tags, inside a text value or inside a
 /// CDATA section
 #[derive(Clone, Copy, PartialEq)]
-enum LineState {
+pub(crate) enum LineState {
     Markup,
     Text,
     CData,
 }
 
 /// Whether a line starting in `state` is indented markup rather than content
-fn is_markup_line(line: &str, state: LineState) -> bool {
+pub(crate) fn is_markup_line(line: &str, state: LineState) -> bool {
     let trimmed = line.trim_start();
     state == LineState::Markup && trimmed.starts_with('<') && !trimmed.starts_with("<![CDATA[")
 }
 
 /// The state at the end of a line that starts in `state`
-fn state_after_line(line: &str, mut state: LineState) -> LineState {
+pub(crate) fn state_after_line(line: &str, mut state: LineState) -> LineState {
     let mut rest = line;
     loop {
         if state == LineState::CData {
