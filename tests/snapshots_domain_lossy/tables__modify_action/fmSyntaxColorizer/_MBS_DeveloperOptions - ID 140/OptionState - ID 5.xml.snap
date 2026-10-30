@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="5" name="OptionState" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+					<Text><![CDATA[Berechne( EnabledCommand ; Status )]]></Text>
+					<ChunkList hash="527441C9A2E179BE60DADD856D0A9120">
+						<Chunk type="FunctionRef">Berechne</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="EnabledCommand" repetition="1">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="7" name="Status" repetition="1">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

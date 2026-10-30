@@ -1,0 +1,38 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="21" name="_kIsWildcard" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					<Text><![CDATA[ZeichenLinks( Command_EN ; 1 ) = "*" UND ZeichenRechts( Command_EN ; 1 ) = "*"]]></Text>
+					<ChunkList hash="C2310A14B1EE59A69D77491BE5447ED2">
+						<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) = &quot;*&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">ZeichenRechts</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) = &quot;*&quot;</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

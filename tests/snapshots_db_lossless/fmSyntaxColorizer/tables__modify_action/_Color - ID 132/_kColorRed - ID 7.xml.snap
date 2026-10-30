@@ -1,0 +1,28 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="7" name="_kColorRed" repetition="1" UUID="1EC3AEB7-7EB3-4D92-80E7-06A0A80CF420">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[WörterMitte( _kColorR_G_B ; 1 ; 1 )]]></Text>
+					<ChunkList hash="280F8F7AA845E0EA3D5255F1B242DCE9">
+						<Chunk type="FunctionRef">WörterMitte</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="_kColorR_G_B" repetition="1" UUID="D67E9827-41A0-4C10-836E-6D7444997922">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

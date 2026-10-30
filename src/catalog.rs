@@ -157,6 +157,11 @@ pub fn xml_explode_catalog<R: Read + BufRead>(
                     None => out_dir_path_base.clone(),
                 };
                 let path = dir.join(file_name);
+                if let Some(parent) = path.parent()
+                    && parent != dir
+                {
+                    create_dir(parent);
+                }
                 context.output.write(&path, &content);
                 if let Some(on_written) = on_written {
                     on_written(&path, &content);

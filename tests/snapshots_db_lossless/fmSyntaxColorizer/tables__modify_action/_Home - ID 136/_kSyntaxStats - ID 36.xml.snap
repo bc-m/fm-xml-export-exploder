@@ -1,0 +1,176 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="36" name="_kSyntaxStats" repetition="1" UUID="9200DA59-F839-46AC-88A3-478B3858935B">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home" UUID="DED63781-79A4-481F-93A7-15FB9149DCD6"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar([vN = Summe( Home.Syntax_ALL::_k1 ) ;vTitles = Summe( Home.Syntax_ALL::_kIsGroupTitle ) ;vKeywords = Summe( Home.Syntax_ALL::_kIsWildcard ) ;vFunctions = Summe( Home.Syntax_ALL::_kIsFunction ) ;vFormula = Summe( Home.Syntax_ALL::_kIsFormula ) ;vVars = Summe( Home.Syntax_ALL::_kIsVariable ) ;vCalculations = vFunctions + vFormula + vVars ;vScriptSteps =  Summe( Home.Syntax_ALL::_kIsScriptStep ) - vTitles ;vCommands =  vScriptSteps - vKeywords;vSyntax = vN - vTitles ;vOn =  Summe( Home.Syntax_ALL::On ) ;vOff = vSyntax - vOn ; vGUISyntax = Summe( Home.Syntax_ALL.GUISyntax::_kDifferent )];Liste( Falls( vOff ; vOn & " / " )  & vSyntax & " fmSyntaxColorizer syntax definitions:";"  " & vScriptSteps & " script steps ( " & vCommands & " commands and " & vKeywords & " *keywords* )" ; "  " & vCalculations & " calculations ( " & vFormula & " symbols, " & vFunctions & " functions, " & vVars & " variables )" ; Falls( vGUISyntax ; "Plus " & vGUISyntax & " definitions in " & Home.Syntax_ALL::_gLanguage )))]]></Text>
+					<ChunkList hash="677B72A4E3384F55F39317B8F5649921">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">([&#13;</Chunk>
+						<Chunk type="VariableReference">vN</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="17" name="_k1" repetition="1" UUID="70571E8A-BB3C-42AF-8C79-E91C39A7AF8E">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vTitles</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="8" name="_kIsGroupTitle" repetition="1" UUID="6238CFF2-CBA4-4859-8544-207CFA3AF843">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vKeywords</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="21" name="_kIsWildcard" repetition="1" UUID="527A4D55-F770-4378-927C-EAEC6E5384B1">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vFunctions</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="32" name="_kIsFunction" repetition="1" UUID="6F0D2854-55B6-4E5C-988B-77B677D9099A">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vFormula</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="33" name="_kIsFormula" repetition="1" UUID="7003BF9A-ABFA-473D-A5BE-48A50801F1F1">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vVars</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="34" name="_kIsVariable" repetition="1" UUID="0E554CEB-7F3F-45CD-B10E-9B16957CCE84">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vCalculations</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="VariableReference">vFunctions</Chunk>
+						<Chunk type="NoRef"> + </Chunk>
+						<Chunk type="VariableReference">vFormula</Chunk>
+						<Chunk type="NoRef"> + </Chunk>
+						<Chunk type="VariableReference">vVars</Chunk>
+						<Chunk type="NoRef"> ;&#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vScriptSteps</Chunk>
+						<Chunk type="NoRef"> =  </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="31" name="_kIsScriptStep" repetition="1" UUID="28F2D7D3-D724-4B45-8C21-72EF808E0443">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) - </Chunk>
+						<Chunk type="VariableReference">vTitles</Chunk>
+						<Chunk type="NoRef"> ;&#13;</Chunk>
+						<Chunk type="VariableReference">vCommands</Chunk>
+						<Chunk type="NoRef"> =  </Chunk>
+						<Chunk type="VariableReference">vScriptSteps</Chunk>
+						<Chunk type="NoRef"> - </Chunk>
+						<Chunk type="VariableReference">vKeywords</Chunk>
+						<Chunk type="NoRef">;&#13;</Chunk>
+						<Chunk type="VariableReference">vSyntax</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="VariableReference">vN</Chunk>
+						<Chunk type="NoRef"> - </Chunk>
+						<Chunk type="VariableReference">vTitles</Chunk>
+						<Chunk type="NoRef"> ;&#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vOn</Chunk>
+						<Chunk type="NoRef"> =  </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="On" repetition="1" UUID="E291E88D-75CB-4CE9-92E8-C58C91F07F4C">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ;&#13;</Chunk>
+						<Chunk type="VariableReference">vOff</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="VariableReference">vSyntax</Chunk>
+						<Chunk type="NoRef"> - </Chunk>
+						<Chunk type="VariableReference">vOn</Chunk>
+						<Chunk type="NoRef"> ; &#13;</Chunk>
+						<Chunk type="VariableReference">vGUISyntax</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="10" name="_kDifferent" repetition="1" UUID="EAF7555B-8A18-4244-BA29-E327E3816057">
+								<TableOccurrenceReference id="1065147" name="Home.Syntax_ALL.GUISyntax" UUID="E0D8C79D-E5F6-46F0-8465-E9A2CA6BD397"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )&#13;&#13;];&#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( &#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vOff</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="VariableReference">vOn</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; / &quot; )  &amp; </Chunk>
+						<Chunk type="VariableReference">vSyntax</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; fmSyntaxColorizer syntax definitions:&quot;;&#13;&quot;  &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vScriptSteps</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; script steps ( &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vCommands</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; commands and &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vKeywords</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; *keywords* )&quot; ; &#13;&quot;  &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vCalculations</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; calculations ( &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vFormula</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; symbols, &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vFunctions</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; functions, &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vVars</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; variables )&quot; ; &#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vGUISyntax</Chunk>
+						<Chunk type="NoRef"> ; &quot;Plus &quot; &amp; </Chunk>
+						<Chunk type="VariableReference">vGUISyntax</Chunk>
+						<Chunk type="NoRef"> &amp; &quot; definitions in &quot; &amp; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="5" name="_gLanguage" repetition="1" UUID="E87D0A07-30F7-4681-A0FD-95A189B1C144">
+								<TableOccurrenceReference id="1065133" name="Home.Syntax_ALL" UUID="FA0BC357-26F2-4130-9E11-4B121DFC70DB"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )&#13;)&#13;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home" UUID="C012F95A-8FC4-41A9-B354-2F21FE641437"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

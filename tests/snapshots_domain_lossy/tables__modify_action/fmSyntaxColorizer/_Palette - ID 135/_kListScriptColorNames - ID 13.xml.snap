@@ -1,0 +1,28 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="13" name="_kListScriptColorNames" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					<Text><![CDATA[Liste( Palette.Color_Script::ColorName )]]></Text>
+					<ChunkList hash="94040BF13D8410CDDB363658F6F1186D">
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065126" name="Palette.Color_Script"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

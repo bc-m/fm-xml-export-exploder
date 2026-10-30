@@ -1,0 +1,58 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="24" name="_kGUI_PaletteImportMergeWarning" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+					<Text><![CDATA[Falls(NICHT Color.Palette_byName::_k1 ; "A new palette :-)" ;Temp ≠ 1 UND Color.Palette_byName::_k1 ; "This palette already exists in fmSyntaxColorizer and will not be imported." ;Temp = 1 UND Color.Palette_byName::_k1 ; "This palette will be merged together with the existing palette.")]]></Text>
+					<ChunkList hash="E8B053D7B4695A84FEB9746ACD4C6176">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_k1" repetition="1">
+								<TableOccurrenceReference id="1065130" name="Color.Palette_byName"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;A new palette :-)&quot; ;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="23" name="Temp" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ 1 </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_k1" repetition="1">
+								<TableOccurrenceReference id="1065130" name="Color.Palette_byName"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;This palette already exists in fmSyntaxColorizer and will not be imported.&quot; ;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="23" name="Temp" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = 1 </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_k1" repetition="1">
+								<TableOccurrenceReference id="1065130" name="Color.Palette_byName"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;This palette will be merged together with the existing palette.&quot;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

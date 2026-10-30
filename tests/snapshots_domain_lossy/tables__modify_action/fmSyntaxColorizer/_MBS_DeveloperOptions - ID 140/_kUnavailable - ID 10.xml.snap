@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="10" name="_kUnavailable" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+					<Text><![CDATA[Wenn( _Home::_kMBSVersionAutoupdate < MBSVersionAutoUpdateMin ; 1 )]]></Text>
+					<ChunkList hash="A24DC30BBFED64C44EC67F73C7859D0A">
+						<Chunk type="FunctionRef">Wenn</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="31" name="_kMBSVersionAutoupdate" repetition="1">
+								<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> &lt; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="9" name="MBSVersionAutoUpdateMin" repetition="1">
+								<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="140" name="_MBS_DeveloperOptions"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

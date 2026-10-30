@@ -1,0 +1,58 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="8" name="_kIsGroupTitle" repetition="1" UUID="6238CFF2-CBA4-4859-8544-207CFA3AF843">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( ZeichenLinks( Command_EN ; 1 ) ="#" UND Länge( Command_EN ) > 1 UND ColorName = "--None--" UND NICHT On ; 1 )]]></Text>
+					<ChunkList hash="256F44A12DC75F38BF3440331D10C0FC">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) =&quot;#&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">Länge</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) &gt; 1 </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = &quot;--None--&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="On" repetition="1" UUID="E291E88D-75CB-4CE9-92E8-C58C91F07F4C">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,28 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="13" name="_kListScriptColorNames" repetition="1" UUID="16D1686C-B5C4-47F2-BD33-5B962B3073A1">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+					<Text><![CDATA[Liste( Palette.Color_Script::ColorName )]]></Text>
+					<ChunkList hash="94040BF13D8410CDDB363658F6F1186D">
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+								<TableOccurrenceReference id="1065126" name="Palette.Color_Script" UUID="A58E69FB-714B-4862-995A-C8AE925C1B75"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

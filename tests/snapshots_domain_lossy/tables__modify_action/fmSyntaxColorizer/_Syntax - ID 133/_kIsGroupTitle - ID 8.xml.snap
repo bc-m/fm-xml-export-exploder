@@ -1,0 +1,58 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="8" name="_kIsGroupTitle" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					<Text><![CDATA[Falls( ZeichenLinks( Command_EN ; 1 ) ="#" UND Länge( Command_EN ) > 1 UND ColorName = "--None--" UND NICHT On ; 1 )]]></Text>
+					<ChunkList hash="256F44A12DC75F38BF3440331D10C0FC">
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">ZeichenLinks</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 ) =&quot;#&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">Länge</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) &gt; 1 </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = &quot;--None--&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="On" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

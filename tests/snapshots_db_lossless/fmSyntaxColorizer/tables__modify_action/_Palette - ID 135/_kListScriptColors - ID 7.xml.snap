@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="7" name="_kListScriptColors" repetition="1" UUID="8B6ACE27-2B42-4806-8AC1-B45CF1C4309B">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette" UUID="A56D88DF-16D4-4643-9FF2-7065EAF0A2E4"></TableOccurrenceReference>
+					<Text><![CDATA[Austauschen( Liste( Palette.Color_Script::ColorInput ) ; "¶" ; " " )]]></Text>
+					<ChunkList hash="1E9A1269A90E639C1952EE6133B75753">
+						<Chunk type="FunctionRef">Austauschen</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="5" name="ColorInput" repetition="1" UUID="C1A3D2D5-5D85-4CCF-8B20-53C576673AB7">
+								<TableOccurrenceReference id="1065126" name="Palette.Color_Script" UUID="A58E69FB-714B-4862-995A-C8AE925C1B75"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ; &quot;¶&quot; ; &quot; &quot; )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette" UUID="C945A753-1E6B-4977-BCE2-7FFFDF180013"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

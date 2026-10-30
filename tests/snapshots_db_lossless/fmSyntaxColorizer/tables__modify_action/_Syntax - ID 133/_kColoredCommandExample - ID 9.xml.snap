@@ -1,0 +1,76 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="9" name="_kColoredCommandExample" repetition="1" UUID="62C4F0B0-638C-4ED2-89A7-B18309E6B8C2">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar( vCommand = HoleWert( Liste( _kCalculationChar ; Syntax.GUISyntax::Command ; Command_EN ) ; 1 ) ; Falls(IstLeer ( ColorName ) ODER ColorName ="--None--" ; vCommand ;TextFarbe ( vCommand ; Syntax.Color_active::_kColorRGB )))]]></Text>
+					<ChunkList hash="44C510C4FF259DC42F76DD01079E6EDA">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">HoleWert</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="20" name="_kCalculationChar" repetition="1" UUID="D0DBE329-186C-4277-9C3A-8D4BB08802DB">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command" repetition="1" UUID="B373644E-0DD0-47E5-BDD6-18162D8AA773">
+								<TableOccurrenceReference id="1065117" name="Syntax.GUISyntax" UUID="D6FA15E6-E89D-4561-8675-9E173161D4D0"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ; 1 ) ; &#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) </Chunk>
+						<Chunk type="FunctionRef">ODER</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1" UUID="00BC94EB-C8CE-4FC7-AEF7-F4A5BA2BB77D">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> =&quot;--None--&quot; ; </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> ;&#13;</Chunk>
+						<Chunk type="FunctionRef">TextFarbe</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="_kColorRGB" repetition="1" UUID="9A78DE3F-088F-4AD1-9EF4-7B48E554590F">
+								<TableOccurrenceReference id="1065141" name="Syntax.Color_active" UUID="11129895-EF11-435D-B1CA-4343E5DA5AF2"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )&#13;)&#13;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

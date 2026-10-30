@@ -1,0 +1,102 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="20" name="_kCalculationChar" repetition="1" UUID="D0DBE329-186C-4277-9C3A-8D4BB08802DB">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar( vName = Command_EN ;Falls( vName = "and color" ; "∧";vName = "and sign color" ; "&" ;vName = "bigger equal sign color" ; "≥" ;vName = "bigger sign color" ; ">" ;vName = "caret sign color" ; "^" ;vName = "cent variable color" ; "¢" ;vName = "comment color" ; "/*" ;vName = "curly bracket color" ; "{}" ;vName = "equal sign color" ; "=" ;vName = "field color" ; "::" ;vName = "function color" ; "fn" ;vName = "global variable color" ; "$$" ;vName = "minus sign color" ; "-" ;vName = "not color" ; "¬";vName = "not equal sign color" ; "≠" ;vName = "number color" ; "8" ;vName = "or color" ; "∨";vName = "paragraph sign color" ; "\¶" ;vName = "plus sign color" ; "+" ;vName = "round bracket color" ; "()" ;vName = "slash sign color" ; "/" ;vName = "smaller bigger sign color" ; "<>" ;vName = "smaller equal sign color" ; "≤" ;vName = "smaller sign color" ; "<" ;vName = "square bracket color" ; "[]" ;vName = "star sign color" ; "*" ;vName = "text color" ; "\"\"" ;vName = "tilde variable color" ; "~" ;vName = "underscore variable color" ; "_" ;vName = "variable color" ; "$" ;vName = "xor color" ; "⊻";Ersetzen( vName ; 2 ; Länge ( vName ) - 4 ; "" )="**()" ; "**"))]]></Text>
+					<ChunkList hash="F53F120E67430F3CF7A533D5CD5BE4E7">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ;&#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">( &#13;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;and color&quot; ; &quot;∧&quot;;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;and sign color&quot; ; &quot;&amp;&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;bigger equal sign color&quot; ; &quot;≥&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;bigger sign color&quot; ; &quot;&gt;&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;caret sign color&quot; ; &quot;^&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;cent variable color&quot; ; &quot;¢&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;comment color&quot; ; &quot;/*&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;curly bracket color&quot; ; &quot;{}&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;equal sign color&quot; ; &quot;=&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;field color&quot; ; &quot;::&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;function color&quot; ; &quot;fn&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;global variable color&quot; ; &quot;$$&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;minus sign color&quot; ; &quot;-&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;not color&quot; ; &quot;¬&quot;;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;not equal sign color&quot; ; &quot;≠&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;number color&quot; ; &quot;8&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;or color&quot; ; &quot;∨&quot;;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;paragraph sign color&quot; ; &quot;\¶&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;plus sign color&quot; ; &quot;+&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;round bracket color&quot; ; &quot;()&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;slash sign color&quot; ; &quot;/&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;smaller bigger sign color&quot; ; &quot;&lt;&gt;&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;smaller equal sign color&quot; ; &quot;≤&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;smaller sign color&quot; ; &quot;&lt;&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;square bracket color&quot; ; &quot;[]&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;star sign color&quot; ; &quot;*&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;text color&quot; ; &quot;\&quot;\&quot;&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;tilde variable color&quot; ; &quot;~&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;underscore variable color&quot; ; &quot;_&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;variable color&quot; ; &quot;$&quot; ;&#13;</Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> = &quot;xor color&quot; ; &quot;⊻&quot;;&#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Ersetzen</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> ; 2 ; </Chunk>
+						<Chunk type="FunctionRef">Länge</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vName</Chunk>
+						<Chunk type="NoRef"> ) - 4 ; &quot;&quot; )=&quot;**()&quot; ; &quot;**&quot;&#13;))</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

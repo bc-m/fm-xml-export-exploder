@@ -1,0 +1,28 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="25" name="_kColorRGB" repetition="1" UUID="9A78DE3F-088F-4AD1-9EF4-7B48E554590F">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[_0x ( _kColorHex )]]></Text>
+					<ChunkList hash="905B24294BAA0540ACC76E7874700B19">
+						<Chunk type="CustomFunctionRef">_0x</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="_kColorHex" repetition="1" UUID="D61AAB61-B5AB-4C22-9C0F-8BCF3D8538DA">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -68,6 +68,54 @@ mod tests {
         fs::remove_dir_all(&dir).unwrap();
     }
 
+    /// Persistent stores (FileMaker 2026) get a file each, with their value
+    #[test]
+    fn persistent_stores() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-persistent-stores-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(&dir).unwrap();
+        let input = dir.join("t.xml");
+        fs::write(
+            &input,
+            r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<AddAction>
+			<PersistentStoreCatalog membercount="1">
+				<PersistentStore name="pi" instanceID="precision_17_digits" id="1">
+					<Value type="Number">
+						<StyledText>
+							<Data><![CDATA[3.1415926535897932]]></Data>
+						</StyledText>
+					</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</AddAction>
+	</Structure>
+</FMSaveAsXML>
+"#,
+        )
+        .unwrap();
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: false,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
+        };
+
+        let output_dir = dir.join("out");
+        explode_xml(&input, &output_dir, &flags).unwrap();
+
+        let store =
+            fs::read_to_string(output_dir.join("T/persistent_stores/pi - ID 1.xml")).unwrap();
+        assert!(store.contains("<Data><![CDATA[3.1415926535897932]]></Data>"));
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
     /// Readable scripts get the configured extension, custom functions keep `.txt`, and
     /// scripts written with the previous extension are removed on the next run.
     #[test]

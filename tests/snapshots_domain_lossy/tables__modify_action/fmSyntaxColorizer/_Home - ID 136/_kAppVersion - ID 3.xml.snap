@@ -1,0 +1,30 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="3" name="_kAppVersion" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					<Text><![CDATA[WörterRechts( HoleWert( ScriptNamen ( Hole( DateiName ) ) ; 1 ) ; 1 )]]></Text>
+					<ChunkList hash="82D2D926A1DF9EFF22FC4AE03B3E4326">
+						<Chunk type="FunctionRef">WörterRechts</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">HoleWert</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">ScriptNamen</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FunctionRef">Hole</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">DateiName</Chunk>
+						<Chunk type="NoRef"> ) ) ; 1 ) ; 1 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

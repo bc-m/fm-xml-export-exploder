@@ -1,0 +1,48 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="4" name="_kColorExample" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+					<Text><![CDATA[TextFarbe ( ColorName ; RGB (_kColorRed ; _kColorGreen ; _kColorBlue) )]]></Text>
+					<ChunkList hash="0F2166EFB1003E18168C5663EF94D29B">
+						<Chunk type="FunctionRef">TextFarbe</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FunctionRef">RGB</Chunk>
+						<Chunk type="NoRef"> (</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="7" name="_kColorRed" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="8" name="_kColorGreen" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="9" name="_kColorBlue" repetition="1">
+								<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef">) )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

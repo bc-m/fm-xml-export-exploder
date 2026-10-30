@@ -1,0 +1,76 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="9" name="_kColoredCommandExample" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+					<Text><![CDATA[SetzeVar( vCommand = HoleWert( Liste( _kCalculationChar ; Syntax.GUISyntax::Command ; Command_EN ) ; 1 ) ; Falls(IstLeer ( ColorName ) ODER ColorName ="--None--" ; vCommand ;TextFarbe ( vCommand ; Syntax.Color_active::_kColorRGB )))]]></Text>
+					<ChunkList hash="44C510C4FF259DC42F76DD01079E6EDA">
+						<Chunk type="FunctionRef">SetzeVar</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FunctionRef">HoleWert</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Liste</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="20" name="_kCalculationChar" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command" repetition="1">
+								<TableOccurrenceReference id="1065117" name="Syntax.GUISyntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) ; 1 ) ; &#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) </Chunk>
+						<Chunk type="FunctionRef">ODER</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="ColorName" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> =&quot;--None--&quot; ; </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> ;&#13;</Chunk>
+						<Chunk type="FunctionRef">TextFarbe</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="VariableReference">vCommand</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="_kColorRGB" repetition="1">
+								<TableOccurrenceReference id="1065141" name="Syntax.Color_active"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )&#13;)&#13;&#13;)</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

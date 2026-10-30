@@ -1,0 +1,36 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="136" name="_Home"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="39" name="_kAllMbsDeveloperOptions" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065123" name="_Home"></TableOccurrenceReference>
+					<Text><![CDATA[Summe( Home.MBS_DeveloperOptions::On ) = Summe( Home.MBS_DeveloperOptions::_k1 )]]></Text>
+					<ChunkList hash="F0070E9CDAC3E24C0B85B427FDAFEAD8">
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="On" repetition="1">
+								<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) = </Chunk>
+						<Chunk type="FunctionRef">Summe</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="8" name="_k1" repetition="1">
+								<TableOccurrenceReference id="1065153" name="Home.MBS_DeveloperOptions"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="136" name="_Home"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

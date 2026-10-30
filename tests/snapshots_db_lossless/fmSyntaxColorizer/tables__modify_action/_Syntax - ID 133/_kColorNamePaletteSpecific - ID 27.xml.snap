@@ -1,0 +1,27 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="27" name="_kColorNamePaletteSpecific" repetition="1" UUID="14C3BEAE-C20A-4D45-93E9-5F63848E82E5">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA["{" & Command_EN & "}"]]></Text>
+					<ChunkList hash="D9B81AFBF2BFA7EFFE46049901E3A03E">
+						<Chunk type="NoRef">&quot;{&quot; &amp; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="Command_EN" repetition="1" UUID="4EF69D84-69AA-42DC-A5B2-EDEE802D3F5E">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> &amp; &quot;}&quot;</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="5" name="OptionState" repetition="1" UUID="AF1A4AE4-03A8-46A6-8854-3C1E23BFEBF5">
+				<Calculation>
+					<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+					<Text><![CDATA[Berechne( EnabledCommand ; Status )]]></Text>
+					<ChunkList hash="527441C9A2E179BE60DADD856D0A9120">
+						<Chunk type="FunctionRef">Berechne</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="3" name="EnabledCommand" repetition="1" UUID="FA583DA3-863C-4B4A-AFF8-1265490DC216">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="7" name="Status" repetition="1" UUID="292B529B-7DA7-40F1-B079-A2D5FC67C115">
+								<TableOccurrenceReference id="1065152" name="_MBS_DeveloperOptions" UUID="CAA554C7-745C-406A-86DF-E0DA0476CE18"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="140" name="_MBS_DeveloperOptions" UUID="736E1495-2194-4880-A871-8C53C49B1FB9"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

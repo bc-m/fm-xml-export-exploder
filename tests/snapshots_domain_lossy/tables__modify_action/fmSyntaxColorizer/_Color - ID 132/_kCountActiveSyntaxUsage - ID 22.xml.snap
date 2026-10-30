@@ -1,0 +1,28 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="22" name="_kCountActiveSyntaxUsage" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color"></TableOccurrenceReference>
+					<Text><![CDATA[Anzahl( Color.Syntax::On )]]></Text>
+					<ChunkList hash="5690E1C0A37AB7B6773F30870F1E5589">
+						<Chunk type="FunctionRef">Anzahl</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="6" name="On" repetition="1">
+								<TableOccurrenceReference id="1065134" name="Color.Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

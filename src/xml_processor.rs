@@ -201,6 +201,11 @@ pub fn explode_file(
                 push_end_to_skeleton(&e, context.skeleton, context.path_stack, context.flags);
                 depth -= 1;
             }
+            // The declaration differs between FileMaker versions, so keep it for rebuilding
+            Ok(Event::Decl(decl)) if flags.lossless => {
+                let decl: &str = decl.as_ref();
+                context.skeleton.content.push_str(&format!("<?{decl}?>\n"));
+            }
             _ => {}
         }
         buf.clear();

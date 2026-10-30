@@ -1,0 +1,55 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="10" name="_kIsActivePalette" repetition="1">
+				<Calculation>
+					<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+					<Text><![CDATA[NICHT IstLeer( __ID ) UND NICHT IstLeer( _Syntax::_gID_ActivePalette ) UND __ID = _Syntax::_gID_ActivePalette]]></Text>
+					<ChunkList hash="B86F1F4F9C62CB6AA9A570DA0198A4EF">
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="1" name="__ID" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">NICHT</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FunctionRef">IstLeer</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_gID_ActivePalette" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ) </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="1" name="__ID" repetition="1">
+								<TableOccurrenceReference id="1065115" name="_Palette"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> = </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="11" name="_gID_ActivePalette" repetition="1">
+								<TableOccurrenceReference id="1065113" name="_Syntax"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="135" name="_Palette"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

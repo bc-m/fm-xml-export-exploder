@@ -1,0 +1,48 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="4" name="_kColorExample" repetition="1" UUID="64D9C4A3-4BF3-4B13-8CA6-F6AAF6141B4A">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[TextFarbe ( ColorName ; RGB (_kColorRed ; _kColorGreen ; _kColorBlue) )]]></Text>
+					<ChunkList hash="0F2166EFB1003E18168C5663EF94D29B">
+						<Chunk type="FunctionRef">TextFarbe</Chunk>
+						<Chunk type="NoRef"> ( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FunctionRef">RGB</Chunk>
+						<Chunk type="NoRef"> (</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="7" name="_kColorRed" repetition="1" UUID="1EC3AEB7-7EB3-4D92-80E7-06A0A80CF420">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="8" name="_kColorGreen" repetition="1" UUID="4E150CEB-7E95-495D-8876-59A0C066C502">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="9" name="_kColorBlue" repetition="1" UUID="19A7C587-88AE-4514-A2AF-A14A83F86429">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef">) )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

@@ -1,0 +1,34 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="20" name="_kIsColor" repetition="1" UUID="B653B8CE-EF6B-4FBC-817F-14700F5954C2">
+				<Calculation>
+					<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+					<Text><![CDATA[ColorName ≠ "++New++" UND ColorName ≠ "--None--"]]></Text>
+					<ChunkList hash="3BB3DF331D686107A369C1714016A936">
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ &quot;++New++&quot; </Chunk>
+						<Chunk type="FunctionRef">UND</Chunk>
+						<Chunk type="NoRef"> &#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="2" name="ColorName" repetition="1" UUID="8FC76B3A-7EF0-4407-83C9-105FC77E4592">
+								<TableOccurrenceReference id="1065112" name="_Color" UUID="23B6D95D-F37E-4E21-A3C9-2DE12699CBF9"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ≠ &quot;--None--&quot;</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="132" name="_Color" UUID="4D865309-287A-407F-8A58-8C2FB281EF05"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>

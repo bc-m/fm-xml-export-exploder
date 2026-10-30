@@ -1,0 +1,48 @@
+---
+source: src/tests.rs
+expression: output_content
+---
+<FieldCatalog>
+	<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+	<ObjectList membercount="1">
+		<Field>
+			<FieldReference id="35" name="_kFM_VersionFrom" repetition="1" UUID="ECB6450F-C21B-42AE-9D86-7F5D46BE851F">
+				<Calculation>
+					<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+					<Text><![CDATA[_Default ( Falls(Position(  FM_Version ; "..." ; 1 ; 1 ) ;HoleWert( Austauschen( FM_Version ; "..." ; "¶" ) ; 1 ) ;FM_Version); 0 )]]></Text>
+					<ChunkList hash="764BA57E8929C8FAC674F7B4259D9391">
+						<Chunk type="CustomFunctionRef">_Default</Chunk>
+						<Chunk type="NoRef"> ( &#13;&#13;</Chunk>
+						<Chunk type="FunctionRef">Falls</Chunk>
+						<Chunk type="NoRef">(&#13;</Chunk>
+						<Chunk type="FunctionRef">Position</Chunk>
+						<Chunk type="NoRef">(  </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;...&quot; ; 1 ; 1 ) ;&#13;</Chunk>
+						<Chunk type="FunctionRef">HoleWert</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FunctionRef">Austauschen</Chunk>
+						<Chunk type="NoRef">( </Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef"> ; &quot;...&quot; ; &quot;¶&quot; ) ; 1 ) ;&#13;</Chunk>
+						<Chunk type="FieldRef">
+							<FieldReference id="25" name="FM_Version" repetition="1" UUID="6920B760-BFB8-4FC9-A50B-25A993BE3FE3">
+								<TableOccurrenceReference id="1065113" name="_Syntax" UUID="2F73E4BF-801D-4854-8CB1-0B02B9B99906"></TableOccurrenceReference>
+							</FieldReference>
+						</Chunk>
+						<Chunk type="NoRef">&#13;)&#13;&#13;; 0 )</Chunk>
+					</ChunkList>
+				</Calculation>
+				<BaseTableReference id="133" name="_Syntax" UUID="CB651CC6-B3D6-4B68-9E07-42874AFD375B"></BaseTableReference>
+			</FieldReference>
+		</Field>
+	</ObjectList>
+</FieldCatalog>
