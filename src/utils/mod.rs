@@ -136,23 +136,30 @@ pub fn prepare_xml_content(content: &str, remove_indent_count: usize, flags: &Fl
     file_content
 }
 
-/// Where a line of XML starts or ends: between tags, inside a text value or inside a
-/// CDATA section
+/// Where a line of XML starts or ends: between tags, after a start tag that ended the
+/// line, inside a text value or inside a CDATA section
 #[derive(Clone, Copy, PartialEq)]
-enum LineState {
+pub(crate) enum LineState {
     Markup,
+    Open,
     Text,
     CData,
 }
 
 /// Whether a line starting in `state` is indented markup rather than content
-fn is_markup_line(line: &str, state: LineState) -> bool {
+pub(crate) fn is_markup_line(line: &str, state: LineState) -> bool {
     let trimmed = line.trim_start();
-    state == LineState::Markup && trimmed.starts_with('<') && !trimmed.starts_with("<![CDATA[")
+    let is_tag = trimmed.starts_with('<') && !trimmed.starts_with("<![CDATA[");
+    match state {
+        LineState::Markup => is_tag,
+        // An end tag right after its start tag closes a text value of line breaks
+        LineState::Open => is_tag && !trimmed.starts_with("</"),
+        LineState::Text | LineState::CData => false,
+    }
 }
 
 /// The state at the end of a line that starts in `state`
-fn state_after_line(line: &str, mut state: LineState) -> LineState {
+pub(crate) fn state_after_line(line: &str, mut state: LineState) -> LineState {
     let mut rest = line;
     loop {
         if state == LineState::CData {
@@ -165,7 +172,7 @@ fn state_after_line(line: &str, mut state: LineState) -> LineState {
         }
         let Some(start) = rest.find('<') else {
             // Text without a tag on its own line continues a text value
-            return if state == LineState::Text || !rest.trim().is_empty() {
+            return if state != LineState::Markup || !rest.trim().is_empty() {
                 LineState::Text
             } else {
                 LineState::Markup
@@ -185,9 +192,10 @@ fn state_after_line(line: &str, mut state: LineState) -> LineState {
             && !rest.starts_with("<!")
             && !rest[..end].ends_with('/');
         rest = &rest[end + 1..];
-        // A start tag at the end of a line is followed by indented children
+        // A start tag at the end of a line is followed by indented children, or by the
+        // rest of a text value that starts with a line break
         if is_start_tag && rest.trim().is_empty() {
-            return LineState::Markup;
+            return LineState::Open;
         }
         state = if is_start_tag {
             LineState::Text
@@ -328,6 +336,15 @@ mod tests {
         assert_eq!(
             prepare_xml_content(xml, 2, &lossless()),
             "<Calculation>\n\t<Text><![CDATA[Let ( [\n\t\t\t\tx = 1\n] ; x )]]></Text>\n\t<Chunk>a\n\t\t\t\tb</Chunk>\n</Calculation>\n"
+        );
+    }
+
+    #[test]
+    fn text_values_of_line_breaks_are_content() {
+        let xml = "\t\t<Value>\n\t\t\t<Data>\n</Data>\n\t\t\t<Data>\n\t\n\t</Data>\n\t\t</Value>\n";
+        assert_eq!(
+            prepare_xml_content(xml, 2, &lossless()),
+            "<Value>\n\t<Data>\n</Data>\n\t<Data>\n\t\n\t</Data>\n</Value>\n"
         );
     }
 
