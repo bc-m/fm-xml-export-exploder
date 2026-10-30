@@ -164,6 +164,58 @@ mod tests {
         }
     }
 
+    /// Text values that start with a line break keep the indentation of their end tag
+    #[test]
+    fn reassembled_text_values_of_line_breaks() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-line-breaks-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(dir.join("in")).unwrap();
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<AddAction>
+			<PersistentStoreCatalog membercount="2">
+				<PersistentStore name="a" id="1">
+					<Value type="Text">
+						<StyledText>
+							<Data>
+</Data>
+						</StyledText>
+					</Value>
+				</PersistentStore>
+				<PersistentStore name="b" id="2">
+					<Value type="Text">
+						<StyledText>
+							<Data>
+	</Data>
+						</StyledText>
+					</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>
+"#;
+        fs::write(dir.join("in/T.xml"), export).unwrap();
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: true,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
+        };
+        explode_xml(&dir.join("in/T.xml"), &dir.join("out"), &flags).unwrap();
+
+        reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+
+        assert_eq!(fs::read_to_string(dir.join("xml/T.xml")).unwrap(), export);
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
     /// Without the skeletons of lossless output, nothing can be reassembled
     #[test]
     fn reassembling_needs_lossless_output() {
