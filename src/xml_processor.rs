@@ -261,7 +261,7 @@ fn process_root_element<R: Read + BufRead>(
 }
 
 /// The catalog part of a split export file, e.g. `ScriptCatalog` for
-/// `MikelOffice_ScriptCatalog.xml`, or the whole file stem if it has another name.
+/// `Invoices_ScriptCatalog.xml`, or the whole file stem if it has another name.
 fn split_part_name(fm_export_file_path: &Path, db_name: &str) -> String {
     let stem = fm_export_file_path
         .file_stem()
