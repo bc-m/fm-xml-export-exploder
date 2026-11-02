@@ -69,22 +69,27 @@ pub fn reassemble(source: &Path, target: &Path) -> Result<Vec<PathBuf>> {
 
 /// The catalog folders of a database, whether a skeleton refers to them or not
 fn catalog_folders(source: &Path, output_tree: &OutputTree, db_name: &str) -> Result<Vec<PathBuf>> {
+    let is_catalog = |domain_dir: Option<&Path>| {
+        domain_dir
+            .and_then(Path::file_name)
+            .is_some_and(|name| is_catalog_domain(&name.to_string_lossy()))
+    };
     let mut folders = Vec::new();
     for root in output_roots(source, output_tree, db_name) {
-        // `<db>/<domain>` in db mode, `<domain>/<db>` in domain mode
-        let domain_dirs = match output_tree {
-            OutputTree::Db => subdirectories(&root)?,
-            OutputTree::Domain => vec![root],
-        };
-        folders.extend(domain_dirs.into_iter().filter(|dir| {
-            let domain_dir = match output_tree {
-                OutputTree::Db => Some(dir.as_path()),
-                OutputTree::Domain => dir.parent(),
-            };
-            domain_dir
-                .and_then(Path::file_name)
-                .is_some_and(|name| is_catalog_domain(&name.to_string_lossy()))
-        }));
+        match output_tree {
+            // `<db>/<domain>`
+            OutputTree::Db => folders.extend(
+                subdirectories(&root)?
+                    .into_iter()
+                    .filter(|dir| is_catalog(Some(dir))),
+            ),
+            // `<domain>/<db>`
+            OutputTree::Domain => {
+                if is_catalog(root.parent()) {
+                    folders.push(root);
+                }
+            }
+        }
     }
     folders.sort();
     Ok(folders)
@@ -186,7 +191,7 @@ fn reassemble_file(skeleton: &str, file: &DatabaseFiles, items: &mut Items) -> R
         match depth {
             1 if !is_end && matches!(tag, "Metadata" | "DDR_INFO") => {
                 let name = match tag {
-                    "Metadata" => "metadata.xml".to_string(),
+                    "Metadata" => format!("metadata{}.xml", file.part),
                     _ => format!("ddr_info{}.xml", file.part),
                 };
                 // Lossless output has a file also for empty elements
@@ -199,14 +204,13 @@ fn reassemble_file(skeleton: &str, file: &DatabaseFiles, items: &mut Items) -> R
             2 if !is_end => action = Action::from_name(tag),
             3 if is_end => catalog = None,
             3 => {
+                let catalog_type = CatalogType::from_name(tag)
+                    .filter(|catalog_type| catalog_type.is_exploded(ver));
                 // The skeleton keeps only the outline of catalogs that aren't exploded
-                if action.is_some()
-                    && CatalogType::from_name(tag).is_none()
-                    && !is_single_line_element(line, tag)
-                {
+                if action.is_some() && catalog_type.is_none() && !is_whole_element(line) {
                     bail!("Unsupported catalog {tag}: its content is not in the output");
                 }
-                catalog = CatalogType::from_name(tag).map(|catalog_type| {
+                catalog = catalog_type.map(|catalog_type| {
                     let config = catalog_type.get_config();
                     let folder_name =
                         structure_folder_name(Some(catalog_type), ver, action.as_ref());
@@ -239,14 +243,16 @@ fn reassemble_file(skeleton: &str, file: &DatabaseFiles, items: &mut Items) -> R
         };
 
         // The placeholder is one line, or the item's reference lines up to its end tag
-        let end_tag = format!("</{tag}>");
         let mut placeholder = line.trim_start().to_string();
-        if !line.ends_with(&end_tag) {
-            let closing = format!("{}{end_tag}", &line[..depth]);
+        if !is_whole_element(line) {
+            let closing = format!("{}</{tag}>", &line[..depth]);
             while i < lines.len() && lines[i] != closing {
                 placeholder.push('\n');
                 placeholder.push_str(lines[i].trim_start());
                 i += 1;
+            }
+            if i == lines.len() {
+                bail!("No end tag for {}", line.trim_start());
             }
             i += 1;
             // The consumed lines end with the item's end tag
@@ -273,8 +279,9 @@ fn push_line(out: &mut String, line: &str) {
 }
 
 /// Whether the line holds the whole element, e.g. `<Catalog membercount="0"></Catalog>`
-fn is_single_line_element(line: &str, tag: &str) -> bool {
-    line.ends_with("/>") || line.ends_with(&format!("</{tag}>"))
+fn is_whole_element(line: &str) -> bool {
+    let line = line.trim_start();
+    line.ends_with("/>") || strip_end_tag(line).len() < line.len()
 }
 
 /// Adds the content of an exploded file, indenting the lines the exploder unindented
@@ -345,8 +352,10 @@ impl Items {
         let Some(files) = self.folders.get_mut(folder).unwrap().get_mut(key) else {
             return Ok(None);
         };
-        // An id names one item, so more files would make the choice arbitrary
-        if files.len() > 1 && attribute(key, "id").is_some() {
+        // An id names one item, so more files would make the choice arbitrary. Items
+        // without an id have it only in the reference lines after their start tag.
+        let start_tag = key.lines().next().unwrap_or_default();
+        if files.len() > 1 && attribute(start_tag, "id").is_some() {
             let paths: Vec<String> = files
                 .iter()
                 .map(|(path, _)| path.display().to_string())
@@ -409,4 +418,72 @@ fn attribute(line: &str, name: &str) -> Option<String> {
     let start = line.find(&format!(" {name}=\""))? + name.len() + 3;
     let len = line[start..].find('"')?;
     Some(line[start..start + len].to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn temp_dir(name: &str) -> PathBuf {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-unit-{name}-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(&dir).unwrap();
+        dir
+    }
+
+    /// Items without an id that share their reference are still taken one by one,
+    /// although the reference has an id
+    #[test]
+    fn items_without_id_may_share_their_key() {
+        let dir = temp_dir("shared-key");
+        let item =
+            "<Script>\n\t<ScriptReference id=\"5\" name=\"s\"></ScriptReference>\n</Script>\n";
+        for sub in ["a", "b"] {
+            fs::create_dir_all(dir.join(sub)).unwrap();
+            fs::write(dir.join(sub).join("s.xml"), item).unwrap();
+        }
+        let config = KeyConfig {
+            reference_tag: "ScriptReference",
+            with_field: false,
+        };
+        let key = item_key(item, &config);
+
+        let mut items = Items::default();
+        assert!(items.take(&dir, &config, &key).unwrap().is_some());
+        assert!(items.take(&dir, &config, &key).unwrap().is_some());
+        assert!(items.take(&dir, &config, &key).unwrap().is_none());
+
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// A placeholder whose end tag is missing doesn't consume the rest of the skeleton
+    #[test]
+    fn placeholders_without_end_tag_are_an_error() {
+        let dir = temp_dir("no-end-tag");
+        let skeleton = "<FMSaveAsXML version=\"2.3.0.0\" File=\"T.fmp12\">\n\
+            \t<Structure>\n\
+            \t\t<AddAction>\n\
+            \t\t\t<StepsForScripts membercount=\"1\">\n\
+            \t\t\t\t<Script>\n\
+            \t\t\t\t\t<ScriptReference id=\"5\" name=\"s\"></ScriptReference>\n\
+            \t\t\t</StepsForScripts>\n\
+            \t\t</AddAction>\n\
+            \t</Structure>\n\
+            </FMSaveAsXML>\n";
+        let file = DatabaseFiles {
+            source: &dir,
+            output_tree: &OutputTree::Db,
+            db_name: "T",
+            support_dir: &dir.join("T/_"),
+            part: "",
+        };
+
+        let err = reassemble_file(skeleton, &file, &mut Items::default()).unwrap_err();
+
+        assert!(err.to_string().contains("No end tag for <Script>"), "{err}");
+        fs::remove_dir_all(&dir).unwrap();
+    }
 }

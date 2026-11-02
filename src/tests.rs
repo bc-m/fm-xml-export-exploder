@@ -13,7 +13,8 @@ mod tests {
     use crate::config::{Flags, OutputTree};
     use crate::reassemble::reassemble;
     use crate::utils::file_utils::escape_filename;
-    use crate::xml_processor::explode_xml;
+    use crate::utils::output_files::OutputFiles;
+    use crate::xml_processor::{explode_file, explode_xml};
 
     #[test]
     fn test_escape_filename() {
@@ -231,6 +232,80 @@ mod tests {
             script_extension: "txt".to_string(),
         };
         explode_xml(&dir.join("in/T.xml"), &dir.join("out"), &flags).unwrap();
+    }
+
+    /// Each file of an export split into catalogs is reassembled with its own metadata
+    /// and DDR_INFO, also when only one of them has content
+    #[test]
+    fn reassembled_split_exports() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-split-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(dir.join("in")).unwrap();
+        let parts = [
+            (
+                "T_PersistentStoreCatalog.xml",
+                r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12" split_catalogs="True">
+	<Structure>
+		<AddAction>
+			<PersistentStoreCatalog membercount="1">
+				<PersistentStore name="a" id="1">
+					<Value type="Text">a</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+	<DDR_INFO></DDR_INFO>
+</FMSaveAsXML>
+"#,
+            ),
+            (
+                "T_Metadata.xml",
+                r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12" split_catalogs="True">
+	<Metadata membercount="1">
+		<Note>a</Note>
+	</Metadata>
+	<DDR_INFO>
+		<Note>b</Note>
+	</DDR_INFO>
+</FMSaveAsXML>
+"#,
+            ),
+        ];
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: true,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
+        };
+        let output = OutputFiles::default();
+        for (name, export) in parts {
+            fs::write(dir.join("in").join(name), export).unwrap();
+            explode_file(
+                &dir.join("in").join(name),
+                &dir.join("out"),
+                &flags,
+                &output,
+            )
+            .unwrap();
+        }
+
+        let unused = reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+
+        for (name, export) in parts {
+            assert_eq!(
+                fs::read_to_string(dir.join("xml").join(name)).unwrap(),
+                export
+            );
+        }
+        assert!(unused.is_empty(), "{unused:?}");
+        fs::remove_dir_all(&dir).unwrap();
     }
 
     /// Catalogs of all actions are reassembled, not only those of AddAction and

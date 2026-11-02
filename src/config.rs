@@ -1,5 +1,7 @@
 use clap::ValueEnum;
 
+use crate::utils::VERSION_2_2_3_4;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum CatalogType {
     Accounts,
@@ -27,6 +29,12 @@ pub enum CatalogType {
 }
 
 impl CatalogType {
+    /// Whether catalogs of this type are exploded into item files in exports of version
+    /// `ver`: the value list options of 2.2.3.4 and later are part of the value lists
+    pub fn is_exploded(self, ver: u64) -> bool {
+        !(self == Self::OptionsForValueLists && ver >= VERSION_2_2_3_4)
+    }
+
     pub fn from_name(name: &str) -> Option<Self> {
         match name {
             "AccountsCatalog" => Some(Self::Accounts),

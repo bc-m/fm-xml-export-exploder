@@ -2,30 +2,43 @@
 //! unchanged files are left alone and only files that are no longer part of the
 //! export are removed afterwards.
 
-use std::collections::HashSet;
+use std::collections::HashMap;
+use std::collections::hash_map::{DefaultHasher, Entry};
 use std::fs;
+use std::hash::{Hash, Hasher};
 use std::io;
 use std::path::{Path, PathBuf};
 use std::sync::Mutex;
 
-/// The files written during a run. Shared by all input files, because the catalogs
-/// of a database can be split across several files that are processed in parallel.
+/// The files written during a run, with a hash of their content. Shared by all input
+/// files, because the catalogs of a database can be split across several files that
+/// are processed in parallel.
 #[derive(Debug, Default)]
 pub struct OutputFiles {
-    written: Mutex<HashSet<PathBuf>>,
+    written: Mutex<HashMap<PathBuf, u64>>,
 }
 
 impl OutputFiles {
     /// Writes `content` unless the file already has exactly this content. A file that
-    /// was already written during this run is kept, with a warning, so that the content
-    /// written first isn't lost.
+    /// was already written during this run is kept, so that the content written first
+    /// isn't lost, with a warning if the new content differs.
     pub fn write(&self, path: &Path, content: &str) {
-        if !self.written.lock().unwrap().insert(path.to_path_buf()) {
-            eprintln!(
-                "Warning: {} was written more than once, kept the first content",
-                path.display()
-            );
-            return;
+        let mut hasher = DefaultHasher::new();
+        content.hash(&mut hasher);
+        let hash = hasher.finish();
+        match self.written.lock().unwrap().entry(path.to_path_buf()) {
+            Entry::Occupied(written) => {
+                if *written.get() != hash {
+                    eprintln!(
+                        "Warning: {} was written more than once with different content, kept the first",
+                        path.display()
+                    );
+                }
+                return;
+            }
+            Entry::Vacant(entry) => {
+                entry.insert(hash);
+            }
         }
         let unchanged = fs::read(path).is_ok_and(|existing| existing == content.as_bytes());
         if !unchanged && let Err(err) = fs::write(path, content) {
@@ -35,7 +48,7 @@ impl OutputFiles {
 
     /// Whether `path` was written during this run.
     pub fn contains(&self, path: &Path) -> bool {
-        self.written.lock().unwrap().contains(path)
+        self.written.lock().unwrap().contains_key(path)
     }
 
     /// Removes everything below `root` that wasn't written during this run, except
@@ -115,6 +128,20 @@ mod tests {
         next_run.write(&file, "Halt Script\n");
         assert_eq!(fs::read_to_string(&file).unwrap(), "Halt Script\n");
         assert!(next_run.contains(&file));
+
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Writing a file a second time in one run keeps the content written first
+    #[test]
+    fn files_written_twice_keep_the_first_content() {
+        let dir = temp_dir("twice");
+        let file = dir.join("script.txt");
+
+        let output = OutputFiles::default();
+        output.write(&file, "Beep\n");
+        output.write(&file, "Halt Script\n");
+        assert_eq!(fs::read_to_string(&file).unwrap(), "Beep\n");
 
         fs::remove_dir_all(&dir).unwrap();
     }
