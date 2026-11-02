@@ -16,15 +16,20 @@ pub struct OutputFiles {
 }
 
 impl OutputFiles {
-    /// Writes `content` unless the file already has exactly this content. Warns when
-    /// the file was already written during this run, because its content is lost.
+    /// Writes `content` unless the file already has exactly this content. A file that
+    /// was already written during this run is kept, with a warning, so that the content
+    /// written first isn't lost.
     pub fn write(&self, path: &Path, content: &str) {
+        if !self.written.lock().unwrap().insert(path.to_path_buf()) {
+            eprintln!(
+                "Warning: {} was written more than once, kept the first content",
+                path.display()
+            );
+            return;
+        }
         let unchanged = fs::read(path).is_ok_and(|existing| existing == content.as_bytes());
         if !unchanged && let Err(err) = fs::write(path, content) {
             eprintln!("Error writing file {}: {}", path.display(), err);
-        }
-        if !self.written.lock().unwrap().insert(path.to_path_buf()) {
-            eprintln!("Warning: {} was written more than once", path.display());
         }
     }
 

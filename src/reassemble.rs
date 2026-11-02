@@ -5,16 +5,17 @@
 //! that names them. Each placeholder is replaced by the item's file, with the
 //! indentation the exploder removed added back.
 
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap, VecDeque};
 use std::fs;
-use std::io;
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result, bail};
 
 use crate::config::{CatalogType, OutputTree};
 use crate::utils::file_utils::valid_dir_or_throw;
-use crate::utils::output_path::{build_tree_path, structure_folder_name};
+use crate::utils::output_path::{
+    SUPPORT_DOMAIN, build_tree_path, is_catalog_domain, output_roots, structure_folder_name,
+};
 use crate::utils::{
     LineState, create_dir, is_markup_line, state_after_line, version_string_to_number,
 };
@@ -39,7 +40,7 @@ pub fn reassemble(source: &Path, target: &Path) -> Result<Vec<PathBuf>> {
 
     let mut unused = Vec::new();
     for (db_name, output_tree) in &databases {
-        let support_dir = build_tree_path(source, output_tree, "_", db_name);
+        let support_dir = build_tree_path(source, output_tree, SUPPORT_DOMAIN, db_name);
         let mut items = Items::default();
         for skeleton_path in skeleton_files(&support_dir)? {
             let stem = skeleton_path.file_stem().unwrap().to_string_lossy();
@@ -61,31 +62,32 @@ pub fn reassemble(source: &Path, target: &Path) -> Result<Vec<PathBuf>> {
                 .with_context(|| format!("Cannot write {}", out_path.display()))?;
             println!("→ {}", out_path.display());
         }
-        unused.extend(items.unused(&catalog_files(source, output_tree, db_name)?));
+        unused.extend(items.unused(&catalog_folders(source, output_tree, db_name)?)?);
     }
     Ok(unused)
 }
 
-/// The item files of all catalog folders of a database, whether a skeleton uses them
-/// or not
-fn catalog_files(source: &Path, output_tree: &OutputTree, db_name: &str) -> Result<Vec<PathBuf>> {
-    let domain_root = match output_tree {
-        OutputTree::Db => source.join(db_name),
-        OutputTree::Domain => source.to_path_buf(),
-    };
-    let mut files = Vec::new();
-    for domain_dir in subdirectories(&domain_root)? {
-        let domain = domain_dir.file_name().unwrap().to_string_lossy();
-        if domain != "_" {
-            files.extend(xml_files_below(&build_tree_path(
-                source,
-                output_tree,
-                &domain,
-                db_name,
-            ))?);
-        }
+/// The catalog folders of a database, whether a skeleton refers to them or not
+fn catalog_folders(source: &Path, output_tree: &OutputTree, db_name: &str) -> Result<Vec<PathBuf>> {
+    let mut folders = Vec::new();
+    for root in output_roots(source, output_tree, db_name) {
+        // `<db>/<domain>` in db mode, `<domain>/<db>` in domain mode
+        let domain_dirs = match output_tree {
+            OutputTree::Db => subdirectories(&root)?,
+            OutputTree::Domain => vec![root],
+        };
+        folders.extend(domain_dirs.into_iter().filter(|dir| {
+            let domain_dir = match output_tree {
+                OutputTree::Db => Some(dir.as_path()),
+                OutputTree::Domain => dir.parent(),
+            };
+            domain_dir
+                .and_then(Path::file_name)
+                .is_some_and(|name| is_catalog_domain(&name.to_string_lossy()))
+        }));
     }
-    Ok(files)
+    folders.sort();
+    Ok(folders)
 }
 
 /// Where the exploded files of one database are
@@ -104,14 +106,14 @@ fn databases(source: &Path) -> Result<Vec<(String, OutputTree)>> {
     let mut databases = Vec::new();
     for dir in subdirectories(source)? {
         let name = dir.file_name().unwrap().to_string_lossy().to_string();
-        if name == "_" {
+        if name == SUPPORT_DOMAIN {
             for db_dir in subdirectories(&dir)? {
                 if !skeleton_files(&db_dir)?.is_empty() {
                     let db_name = db_dir.file_name().unwrap().to_string_lossy().to_string();
                     databases.push((db_name, OutputTree::Domain));
                 }
             }
-        } else if !skeleton_files(&dir.join("_"))?.is_empty() {
+        } else if !skeleton_files(&dir.join(SUPPORT_DOMAIN))?.is_empty() {
             databases.push((name, OutputTree::Db));
         }
     }
@@ -187,20 +189,23 @@ fn reassemble_file(skeleton: &str, file: &DatabaseFiles, items: &mut Items) -> R
                     "Metadata" => "metadata.xml".to_string(),
                     _ => format!("ddr_info{}.xml", file.part),
                 };
-                // Empty elements were not written to a file
+                // Lossless output has a file also for empty elements
                 let path = file.support_dir.join(name);
-                match fs::read_to_string(&path) {
-                    Ok(content) => push_indented(&mut out, "\t", &content),
-                    Err(err) if err.kind() == io::ErrorKind::NotFound => push_line(&mut out, line),
-                    Err(err) => {
-                        return Err(err).with_context(|| format!("Cannot read {}", path.display()));
-                    }
-                }
+                let content = fs::read_to_string(&path)
+                    .with_context(|| format!("Cannot read {}", path.display()))?;
+                push_indented(&mut out, "\t", &content);
                 continue;
             }
             2 if !is_end => action = Action::from_name(tag),
             3 if is_end => catalog = None,
             3 => {
+                // The skeleton keeps only the outline of catalogs that aren't exploded
+                if action.is_some()
+                    && CatalogType::from_name(tag).is_none()
+                    && !is_single_line_element(line, tag)
+                {
+                    bail!("Unsupported catalog {tag}: its content is not in the output");
+                }
                 catalog = CatalogType::from_name(tag).map(|catalog_type| {
                     let config = catalog_type.get_config();
                     let folder_name =
@@ -267,6 +272,11 @@ fn push_line(out: &mut String, line: &str) {
     out.push('\n');
 }
 
+/// Whether the line holds the whole element, e.g. `<Catalog membercount="0"></Catalog>`
+fn is_single_line_element(line: &str, tag: &str) -> bool {
+    line.ends_with("/>") || line.ends_with(&format!("</{tag}>"))
+}
+
 /// Adds the content of an exploded file, indenting the lines the exploder unindented
 fn push_indented(out: &mut String, indent: &str, content: &str) {
     let mut state = LineState::Markup;
@@ -316,7 +326,6 @@ fn item_key(xml: &str, config: &KeyConfig) -> String {
 #[derive(Default)]
 struct Items {
     folders: HashMap<PathBuf, HashMap<String, VecDeque<(PathBuf, String)>>>,
-    taken: HashSet<PathBuf>,
 }
 
 impl Items {
@@ -333,26 +342,36 @@ impl Items {
             }
             self.folders.insert(folder.to_path_buf(), files);
         }
-        let item = self
-            .folders
-            .get_mut(folder)
-            .unwrap()
-            .get_mut(key)
-            .and_then(VecDeque::pop_front);
-        Ok(item.map(|(path, content)| {
-            self.taken.insert(path);
-            content
-        }))
+        let Some(files) = self.folders.get_mut(folder).unwrap().get_mut(key) else {
+            return Ok(None);
+        };
+        // An id names one item, so more files would make the choice arbitrary
+        if files.len() > 1 && attribute(key, "id").is_some() {
+            let paths: Vec<String> = files
+                .iter()
+                .map(|(path, _)| path.display().to_string())
+                .collect();
+            bail!(
+                "{} matches several files: {}",
+                key.replace('\n', " "),
+                paths.join(", ")
+            );
+        }
+        Ok(files.pop_front().map(|(_, content)| content))
     }
 
-    /// The files of `files` no placeholder asked for, e.g. leftovers of an older
-    /// exploder version or catalog folders no skeleton refers to
-    fn unused(&self, files: &[PathBuf]) -> Vec<PathBuf> {
-        files
-            .iter()
-            .filter(|path| !self.taken.contains(*path))
-            .cloned()
-            .collect()
+    /// The files in `folders` no placeholder asked for, e.g. leftovers of an older
+    /// exploder version or the items of a catalog no skeleton refers to
+    fn unused(&self, folders: &[PathBuf]) -> Result<Vec<PathBuf>> {
+        let mut paths = Vec::new();
+        for folder in folders {
+            match self.folders.get(folder) {
+                Some(files) => paths.extend(files.values().flatten().map(|(path, _)| path.clone())),
+                None => paths.extend(xml_files_below(folder)?),
+            }
+        }
+        paths.sort();
+        Ok(paths)
     }
 }
 

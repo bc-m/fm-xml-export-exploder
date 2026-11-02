@@ -7,6 +7,23 @@ use anyhow::{Result, bail};
 use crate::config::{CatalogType, Flags, OutputTree};
 use crate::xml_processor::{Action, ProcessingContext, Qualifier, TopLevelSection};
 
+/// The folder of the skeletons, metadata and DDR_INFO
+pub(crate) const SUPPORT_DOMAIN: &str = "_";
+const SANITIZED_SCRIPTS_DOMAIN: &str = "scripts_sanitized";
+const SANITIZED_CUSTOM_FUNCTIONS_DOMAIN: &str = "custom_functions_sanitized";
+
+/// Whether the output folder `domain` holds the items of a catalog, not the support
+/// files or the readable copies of scripts and custom functions
+pub(crate) fn is_catalog_domain(domain: &str) -> bool {
+    !domain.starts_with('.')
+        && ![
+            SUPPORT_DOMAIN,
+            SANITIZED_SCRIPTS_DOMAIN,
+            SANITIZED_CUSTOM_FUNCTIONS_DOMAIN,
+        ]
+        .contains(&domain)
+}
+
 /// Version thresholds used for feature-gating catalog behavior.
 pub(crate) const VERSION_2_2_2_0: u64 = version_string_to_number_const(2, 2, 2, 0);
 pub(crate) const VERSION_2_2_3_4: u64 = version_string_to_number_const(2, 2, 3, 4);
@@ -39,8 +56,8 @@ pub fn build_out_dir_path<R: std::io::Read + BufRead>(
     let ver = doc_info.saxml_version_num;
 
     let domain = match qualifier {
-        Some(Qualifier::SanitizedScripts) => "scripts_sanitized".to_string(),
-        Some(Qualifier::SanitizedCustomFunctions) => "custom_functions_sanitized".to_string(),
+        Some(Qualifier::SanitizedScripts) => SANITIZED_SCRIPTS_DOMAIN.to_string(),
+        Some(Qualifier::SanitizedCustomFunctions) => SANITIZED_CUSTOM_FUNCTIONS_DOMAIN.to_string(),
         None => resolve_structure_domain(context, ver),
     };
 
@@ -72,7 +89,7 @@ fn resolve_structure_domain<R: std::io::Read + BufRead>(
     ver: u64,
 ) -> String {
     let Some(TopLevelSection::Structure) = context.top_level_section else {
-        return "_".to_string();
+        return SUPPORT_DOMAIN.to_string();
     };
     structure_folder_name(context.catalog_type, ver, context.action.as_ref())
 }
@@ -128,7 +145,7 @@ pub fn migrate_old_custom_functions_if_needed(out_dir: &Path, flags: &Flags) -> 
     }
 
     let cf_dir = out_dir.join("custom_functions");
-    let cf_sanitized_dir = out_dir.join("custom_functions_sanitized");
+    let cf_sanitized_dir = out_dir.join(SANITIZED_CUSTOM_FUNCTIONS_DOMAIN);
 
     if !cf_dir.exists() || cf_sanitized_dir.exists() {
         return Ok(());

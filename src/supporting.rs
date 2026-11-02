@@ -13,8 +13,9 @@ use crate::xml_processor::ProcessingContext;
 /// Extract entire element as is into its own file (don't split it into multiple files)
 /// Text content inside of <Chunk> tags needs special handling (replace tabs with &#09;)
 /// Also generates skeleton XML if lossless mode is enabled
-/// Empty elements aren't written: every file of a split export has a DDR_INFO element,
-/// but most of them are empty
+/// Empty elements aren't written, except in lossless mode, where a missing file must
+/// mean that it was lost: every file of a split export has a DDR_INFO element, but
+/// most of them are empty
 pub fn process_supporting_element<R: Read + BufRead>(
     context: &mut ProcessingContext<'_, R>,
     start_tag: &BytesStart,
@@ -70,7 +71,7 @@ pub fn process_supporting_element<R: Read + BufRead>(
 
                 // Write to file if we're at the end of the catalog
                 if depth == 0 {
-                    if !is_empty {
+                    if !is_empty || context.flags.lossless {
                         create_dir(&out_dir_path);
                         write_xml_file(context.output, &out_file_path, &result, 1, context.flags);
                     }

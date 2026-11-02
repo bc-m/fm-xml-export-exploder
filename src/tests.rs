@@ -133,7 +133,8 @@ mod tests {
                 lossless: true,
                 output_tree,
                 obfuscate_passwords: false,
-                script_extension: "txt".to_string(),
+                // Readable scripts named like item files aren't taken for items
+                script_extension: "xml".to_string(),
             };
             let mut exports = Vec::new();
             for entry in fs::read_dir("tests/xml").unwrap() {
@@ -313,10 +314,10 @@ mod tests {
         fs::remove_dir_all(&dir).unwrap();
     }
 
-    /// A metadata or DDR_INFO file that exists but can't be read is an error, not an
+    /// A metadata or DDR_INFO file that is missing or can't be read is an error, not an
     /// empty element
     #[test]
-    fn reassembling_fails_on_unreadable_metadata() {
+    fn reassembling_fails_on_missing_or_unreadable_metadata() {
         let dir = std::env::temp_dir().join(format!(
             "fm-xml-export-exploder-reassemble-metadata-{}",
             std::process::id()
@@ -334,8 +335,82 @@ mod tests {
         fs::write(&metadata, [0xff, 0xfe, 0x00]).unwrap();
 
         let err = reassemble(&dir.join("out"), &dir.join("xml")).unwrap_err();
-
         assert!(format!("{err:#}").contains("metadata.xml"), "{err:#}");
+
+        fs::remove_file(&metadata).unwrap();
+        let err = reassemble(&dir.join("out"), &dir.join("xml")).unwrap_err();
+        assert!(format!("{err:#}").contains("metadata.xml"), "{err:#}");
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// The content of catalogs that aren't exploded is not in the output, so they
+    /// can't be reassembled
+    #[test]
+    fn reassembling_fails_on_unsupported_catalogs() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-unsupported-{}",
+            std::process::id()
+        ));
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<AddAction>
+			<FooCatalog membercount="0"></FooCatalog>
+			<BarCatalog membercount="1">
+				<Bar id="1">
+					<Baz>
+						<Qux>t</Qux>
+					</Baz>
+				</Bar>
+			</BarCatalog>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>
+"#;
+        explode_lossless(&dir, export);
+
+        let err = reassemble(&dir.join("out"), &dir.join("xml")).unwrap_err();
+
+        assert!(
+            format!("{err:#}").contains("Unsupported catalog BarCatalog"),
+            "{err:#}"
+        );
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Two files for the same id leave it open which one is the item
+    #[test]
+    fn reassembling_fails_on_several_files_for_an_id() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-ambiguous-{}",
+            std::process::id()
+        ));
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<AddAction>
+			<PersistentStoreCatalog membercount="1">
+				<PersistentStore name="a" id="1">
+					<Value type="Text">a</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>
+"#;
+        explode_lossless(&dir, export);
+        let copy = dir.join("out/T/persistent_stores/old/a - ID 1.xml");
+        fs::create_dir_all(copy.parent().unwrap()).unwrap();
+        fs::copy(dir.join("out/T/persistent_stores/a - ID 1.xml"), &copy).unwrap();
+
+        let err = reassemble(&dir.join("out"), &dir.join("xml")).unwrap_err();
+
+        assert!(
+            format!("{err:#}").contains("matches several files"),
+            "{err:#}"
+        );
         fs::remove_dir_all(&dir).unwrap();
     }
 
