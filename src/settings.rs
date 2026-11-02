@@ -16,8 +16,17 @@ pub const CONFIG_FILE_NAME: &str = "fm-xml-export-exploder.toml";
 
 /// Parse all as XML exported FileMaker solutions from source directory and explode them to target directory.
 #[derive(Parser)]
-#[command(version, about, long_about = None)]
+#[command(
+    version,
+    about,
+    long_about = None,
+    args_conflicts_with_subcommands = true,
+    disable_help_subcommand = true
+)]
 pub struct Args {
+    #[command(subcommand)]
+    pub command: Option<Command>,
+
     /// The source directory to read input (or `source` in the config file)
     source: Option<PathBuf>,
 
@@ -53,6 +62,17 @@ pub struct Args {
     /// domain folder (-t domain). Folders inside another git repository are skipped.
     #[arg(long)]
     git: bool,
+}
+
+#[derive(clap::Subcommand)]
+pub enum Command {
+    /// Reassemble the XML files of an export from output exploded with --lossless
+    Reassemble {
+        /// The exploded output, organized by database or by domain
+        source: PathBuf,
+        /// The directory to write the XML files to
+        target: PathBuf,
+    },
 }
 
 /// The options of a config file; all of them are optional.
@@ -193,6 +213,19 @@ mod tests {
 
     fn parse_config(toml: &str) -> ConfigFile {
         ConfigFile::parse(toml, Path::new("/install")).unwrap()
+    }
+
+    #[test]
+    fn reassemble_is_a_subcommand() {
+        let parsed = args(&["reassemble", "XMLSplit", "SaXML"]).unwrap();
+        assert!(matches!(
+            parsed.command,
+            Some(Command::Reassemble { source, target })
+                if source == Path::new("XMLSplit") && target == Path::new("SaXML")
+        ));
+        // Explode options belong to exploding
+        assert!(args(&["reassemble", "--lossless", "a", "b"]).is_err());
+        assert!(args(&["source", "target"]).unwrap().command.is_none());
     }
 
     #[test]

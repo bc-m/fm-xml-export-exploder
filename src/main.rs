@@ -6,7 +6,7 @@ use clap::Parser;
 use rayon::prelude::*;
 
 use crate::input::input_files;
-use crate::settings::{Args, Settings};
+use crate::settings::{Args, Command, Settings};
 use crate::utils::file_utils::valid_dir_or_throw;
 use crate::utils::migrate_old_custom_functions_if_needed;
 use crate::utils::output_files::OutputFiles;
@@ -18,6 +18,7 @@ mod config;
 mod custom_function_sanitizer;
 mod git;
 mod input;
+mod reassemble;
 mod script_sanitizer;
 mod script_steps;
 mod settings;
@@ -36,7 +37,11 @@ pub struct Skeleton {
 fn main() -> Result<()> {
     let start = Instant::now();
 
-    let settings = Settings::from_args(Args::parse(), &std::env::current_dir()?)?;
+    let args = Args::parse();
+    if let Some(Command::Reassemble { source, target }) = &args.command {
+        return reassemble::reassemble(source, target);
+    }
+    let settings = Settings::from_args(args, &std::env::current_dir()?)?;
     if let Some(config_path) = &settings.config_path {
         println!("Using config {}", config_path.display());
     }

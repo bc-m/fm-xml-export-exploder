@@ -54,7 +54,12 @@ pub fn build_out_dir_path<R: std::io::Read + BufRead>(
 
 /// Build the output directory path by joining the domain and db_name in the correct order
 /// depending on the output tree mode.
-fn build_tree_path(root: &Path, output_tree: &OutputTree, domain: &str, db_name: &str) -> PathBuf {
+pub(crate) fn build_tree_path(
+    root: &Path,
+    output_tree: &OutputTree,
+    domain: &str,
+    db_name: &str,
+) -> PathBuf {
     match output_tree {
         OutputTree::Db => root.join(db_name).join(domain),
         OutputTree::Domain => root.join(domain).join(db_name),
@@ -69,8 +74,16 @@ fn resolve_structure_domain<R: std::io::Read + BufRead>(
     let Some(TopLevelSection::Structure) = context.top_level_section else {
         return "_".to_string();
     };
+    structure_folder_name(context.catalog_type, ver, context.action.as_ref())
+}
 
-    let folder_name = match context.catalog_type {
+/// The folder of a catalog in the structure section, e.g. `tables__modify_action`
+pub(crate) fn structure_folder_name(
+    catalog_type: Option<CatalogType>,
+    ver: u64,
+    action: Option<&Action>,
+) -> String {
+    let folder_name = match catalog_type {
         Some(CatalogType::ValueList) if (VERSION_2_2_2_0..VERSION_2_2_3_4).contains(&ver) => {
             "value_list_stubs"
         }
@@ -79,7 +92,7 @@ fn resolve_structure_domain<R: std::io::Read + BufRead>(
         None => "unknown_catalog",
     };
 
-    let action_suffix = match &context.action {
+    let action_suffix = match action {
         Some(Action::Add) | None => "",
         Some(Action::Modify) => "__modify_action",
         Some(Action::Replace) => "__replace_action",

@@ -35,6 +35,18 @@ pub enum Action {
     Delete,
 }
 
+impl Action {
+    pub fn from_name(name: &str) -> Option<Self> {
+        match name {
+            "AddAction" => Some(Action::Add),
+            "ModifyAction" => Some(Action::Modify),
+            "ReplaceAction" => Some(Action::Replace),
+            "DeleteAction" => Some(Action::Delete),
+            _ => None,
+        }
+    }
+}
+
 pub enum Qualifier {
     SanitizedScripts,
     SanitizedCustomFunctions,
@@ -173,13 +185,7 @@ pub fn explode_file(
                         }
                     }
                     2 => {
-                        context.action = match start_tag.name().as_ref() {
-                            "AddAction" => Some(Action::Add),
-                            "ModifyAction" => Some(Action::Modify),
-                            "ReplaceAction" => Some(Action::Replace),
-                            "DeleteAction" => Some(Action::Delete),
-                            _ => None,
-                        };
+                        context.action = Action::from_name(start_tag.name().as_ref());
                     }
                     3 => {
                         let is_supported_catalog = process_catalog_elements(

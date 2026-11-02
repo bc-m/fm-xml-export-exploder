@@ -2,13 +2,16 @@
 #[allow(clippy::module_inception)]
 mod tests {
     use std::fs;
+    use std::io::Read;
     use std::path::{Path, PathBuf};
 
+    use encoding_rs_io::DecodeReaderBytes;
     use insta::assert_snapshot;
     use similar_asserts::assert_eq;
     use walkdir::WalkDir;
 
     use crate::config::{Flags, OutputTree};
+    use crate::reassemble::reassemble;
     use crate::utils::file_utils::escape_filename;
     use crate::xml_processor::explode_xml;
 
@@ -113,6 +116,127 @@ mod tests {
         let store =
             fs::read_to_string(output_dir.join("T/persistent_stores/pi - ID 1.xml")).unwrap();
         assert!(store.contains("<Data><![CDATA[3.1415926535897932]]></Data>"));
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Reassembling lossless output gives back the exported files, in both output trees
+    #[test]
+    fn reassembled_exports_equal_the_originals() {
+        for (output_tree, name) in [(OutputTree::Db, "db"), (OutputTree::Domain, "domain")] {
+            let dir = std::env::temp_dir().join(format!(
+                "fm-xml-export-exploder-reassemble-{name}-{}",
+                std::process::id()
+            ));
+            let _ = fs::remove_dir_all(&dir);
+            let flags = Flags {
+                parse_all_lines: false,
+                lossless: true,
+                output_tree,
+                obfuscate_passwords: false,
+                script_extension: "txt".to_string(),
+            };
+            let mut exports = Vec::new();
+            for entry in fs::read_dir("tests/xml").unwrap() {
+                let path = entry.unwrap().path();
+                let db_name = explode_xml(&path, &dir.join("out"), &flags)
+                    .unwrap()
+                    .unwrap();
+                exports.push((db_name, path));
+            }
+
+            reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+
+            for (db_name, original) in exports {
+                let mut expected = String::new();
+                DecodeReaderBytes::new(fs::File::open(&original).unwrap())
+                    .read_to_string(&mut expected)
+                    .unwrap();
+                let actual =
+                    fs::read_to_string(dir.join("xml").join(format!("{db_name}.xml"))).unwrap();
+                // A plain assert: a diff of these files would be too large to read
+                assert!(
+                    expected.trim_start_matches('\u{feff}') == actual,
+                    "{} ({name}) differs after reassembling",
+                    original.display()
+                );
+            }
+            fs::remove_dir_all(&dir).unwrap();
+        }
+    }
+
+    /// Text values that start with a line break keep the indentation of their end tag
+    #[test]
+    fn reassembled_text_values_of_line_breaks() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-line-breaks-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(dir.join("in")).unwrap();
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<AddAction>
+			<PersistentStoreCatalog membercount="2">
+				<PersistentStore name="a" id="1">
+					<Value type="Text">
+						<StyledText>
+							<Data>
+</Data>
+						</StyledText>
+					</Value>
+				</PersistentStore>
+				<PersistentStore name="b" id="2">
+					<Value type="Text">
+						<StyledText>
+							<Data>
+	</Data>
+						</StyledText>
+					</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>
+"#;
+        fs::write(dir.join("in/T.xml"), export).unwrap();
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: true,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
+        };
+        explode_xml(&dir.join("in/T.xml"), &dir.join("out"), &flags).unwrap();
+
+        reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+
+        assert_eq!(fs::read_to_string(dir.join("xml/T.xml")).unwrap(), export);
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Without the skeletons of lossless output, nothing can be reassembled
+    #[test]
+    fn reassembling_needs_lossless_output() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-lossy-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&dir);
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: false,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
+        };
+        let input = PathBuf::from("tests/xml/Ooe - saxml_v_2_2_3_4.xml");
+        explode_xml(&input, &dir.join("out"), &flags).unwrap();
+
+        let err = reassemble(&dir.join("out"), &dir.join("xml")).unwrap_err();
+        assert!(err.to_string().contains("--lossless"), "{err}");
+        assert!(!dir.join("xml").exists());
         fs::remove_dir_all(&dir).unwrap();
     }
 

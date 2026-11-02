@@ -39,7 +39,7 @@ Exports split into one file per catalog (FileMaker 2026) work as well: put the s
 | `--obfuscate-passwords` | Replace passwords in readable scripts with `••••••••` |
 | `--script-extension <ext>` | File extension of the readable scripts in `scripts_sanitized` (default `txt`), e.g. `fmscript` for syntax highlighting in your editor |
 | `-a`, `--all-lines` | Keep lines that are skipped by default to reduce noise |
-| `-l`, `--lossless` | Keep all information of the XML, including less important catalogs and attributes |
+| `-l`, `--lossless` | Keep all information of the XML, including less important catalogs and attributes, so the export can be [reassembled](#reassembling-an-export) |
 
 ### Config file
 
@@ -68,6 +68,18 @@ With `--git`, the output is committed after each run:
 - Folders that are already inside another git repository (e.g. an output folder you version yourself) are left alone.
 
 To share the history, add a remote to a repository once (`git -C <repository> remote add origin <url>`) and push as usual.
+
+### Reassembling an export
+
+Output exploded with `--lossless` can be put back together into the XML files it came from:
+
+```bash
+fm-xml-export-exploder reassemble <SOURCE> <TARGET>
+```
+
+`SOURCE` is the output folder of the explode run, organized by database or by domain, `TARGET` the folder for the XML files. Each database becomes `<database>.xml`, and an export split into catalogs becomes one `<database>_<catalog>.xml` per catalog file (the summary file is not recreated). The reassembled files are identical to the exported ones, written as UTF-8 without BOM: FileMaker 22 and earlier export UTF-16, so for those files the content is identical, not the bytes.
+
+Output exploded without `--lossless` has no skeletons and can't be reassembled. If you keep the output in git, make sure git doesn't convert line endings (e.g. `* -text` in `.gitattributes`), or the reassembled files differ from the export.
 
 ## Automated exports on macOS
 
