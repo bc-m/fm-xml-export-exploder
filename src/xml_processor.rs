@@ -57,7 +57,8 @@ pub struct DocumentInfo {
     pub saxml_version_num: u64,
     pub db_name: String,
     /// The catalog part (e.g. `ScriptCatalog`) when the export is split into one file per
-    /// catalog. Output that every file can contain (DDR_INFO, skeleton) is named after it.
+    /// catalog. Output that every file can contain (metadata, DDR_INFO, skeleton) is
+    /// named after it.
     pub split_part: Option<String>,
 }
 
@@ -260,7 +261,7 @@ fn process_root_element<R: Read + BufRead>(
 }
 
 /// The catalog part of a split export file, e.g. `ScriptCatalog` for
-/// `MikelOffice_ScriptCatalog.xml`, or the whole file stem if it has another name.
+/// `Invoices_ScriptCatalog.xml`, or the whole file stem if it has another name.
 fn split_part_name(fm_export_file_path: &Path, db_name: &str) -> String {
     let stem = fm_export_file_path
         .file_stem()
@@ -283,7 +284,12 @@ fn process_top_level_section<R: Read + BufRead>(
             context.top_level_section = Some(TopLevelSection::Structure);
             return Ok(false);
         }
-        "Metadata" => (TopLevelSection::Metadata, "metadata".to_string()),
+        "Metadata" => (
+            TopLevelSection::Metadata,
+            doc_info.map_or("metadata".to_string(), |info| {
+                info.part_file_name("metadata")
+            }),
+        ),
         "DDR_INFO" => (
             TopLevelSection::DdrInfo,
             doc_info.map_or("ddr_info".to_string(), |info| {
@@ -315,7 +321,7 @@ fn process_catalog_elements<R: Read + BufRead>(
 
     let ver = context.doc_info.as_ref().map_or(0, |d| d.saxml_version_num);
 
-    if catalog_type == CatalogType::OptionsForValueLists && ver >= VERSION_2_2_3_4 {
+    if !catalog_type.is_exploded(ver) {
         return Ok(true);
     }
     // Handle special cases that need folder structures
@@ -407,7 +413,7 @@ fn push_start_to_skeleton(
 
     // After pushing, path_stack.len() is depth+1 (1-indexed).
     // We want skeleton entries for depths 1-3 unconditionally,
-    // and depths 4-5 only under an AddAction/ModifyAction ancestor.
+    // and depths 4-5 only under an action ancestor (e.g. AddAction).
     if should_add_to_skeleton(path_stack.len(), 1, path_stack) {
         push_line_to_skeleton(
             skeleton,
@@ -432,7 +438,7 @@ fn push_end_to_skeleton(
 
     // After popping, path_stack.len() is depth (0-indexed from root).
     // We want skeleton entries for depths 0-2 unconditionally,
-    // and depths 3-4 only under an AddAction/ModifyAction ancestor.
+    // and depths 3-4 only under an action ancestor (e.g. AddAction).
     if should_add_to_skeleton(path_stack.len(), 0, path_stack) {
         push_line_to_skeleton(
             skeleton,
@@ -454,10 +460,10 @@ fn should_add_to_skeleton(depth: usize, base: usize, path_stack: &[String]) -> b
     depth <= max_unconditional || (depth <= max_conditional && is_action_ancestor(path_stack))
 }
 
-/// Check whether the path_stack contains an AddAction or ModifyAction ancestor
+/// Check whether the path_stack contains an action ancestor (e.g. AddAction)
 /// at position index 2 (the action level in the XML tree).
 fn is_action_ancestor(path_stack: &[String]) -> bool {
     path_stack
         .get(2)
-        .is_some_and(|v| matches!(v.as_str(), "AddAction" | "ModifyAction"))
+        .is_some_and(|v| Action::from_name(v).is_some())
 }
