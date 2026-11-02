@@ -407,7 +407,7 @@ fn push_start_to_skeleton(
 
     // After pushing, path_stack.len() is depth+1 (1-indexed).
     // We want skeleton entries for depths 1-3 unconditionally,
-    // and depths 4-5 only under an AddAction/ModifyAction ancestor.
+    // and depths 4-5 only under an action ancestor (e.g. AddAction).
     if should_add_to_skeleton(path_stack.len(), 1, path_stack) {
         push_line_to_skeleton(
             skeleton,
@@ -432,7 +432,7 @@ fn push_end_to_skeleton(
 
     // After popping, path_stack.len() is depth (0-indexed from root).
     // We want skeleton entries for depths 0-2 unconditionally,
-    // and depths 3-4 only under an AddAction/ModifyAction ancestor.
+    // and depths 3-4 only under an action ancestor (e.g. AddAction).
     if should_add_to_skeleton(path_stack.len(), 0, path_stack) {
         push_line_to_skeleton(
             skeleton,
@@ -454,10 +454,10 @@ fn should_add_to_skeleton(depth: usize, base: usize, path_stack: &[String]) -> b
     depth <= max_unconditional || (depth <= max_conditional && is_action_ancestor(path_stack))
 }
 
-/// Check whether the path_stack contains an AddAction or ModifyAction ancestor
+/// Check whether the path_stack contains an action ancestor (e.g. AddAction)
 /// at position index 2 (the action level in the XML tree).
 fn is_action_ancestor(path_stack: &[String]) -> bool {
     path_stack
         .get(2)
-        .is_some_and(|v| matches!(v.as_str(), "AddAction" | "ModifyAction"))
+        .is_some_and(|v| Action::from_name(v).is_some())
 }

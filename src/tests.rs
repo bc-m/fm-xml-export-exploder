@@ -144,7 +144,8 @@ mod tests {
                 exports.push((db_name, path));
             }
 
-            reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+            let unused = reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+            assert!(unused.is_empty(), "{unused:?} ({name})");
 
             for (db_name, original) in exports {
                 let mut expected = String::new();
@@ -213,6 +214,128 @@ mod tests {
         reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
 
         assert_eq!(fs::read_to_string(dir.join("xml/T.xml")).unwrap(), export);
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Explodes `export` losslessly as `T.xml` into `dir/out`
+    fn explode_lossless(dir: &Path, export: &str) {
+        let _ = fs::remove_dir_all(dir);
+        fs::create_dir_all(dir.join("in")).unwrap();
+        fs::write(dir.join("in/T.xml"), export).unwrap();
+        let flags = Flags {
+            parse_all_lines: false,
+            lossless: true,
+            output_tree: OutputTree::Db,
+            obfuscate_passwords: false,
+            script_extension: "txt".to_string(),
+        };
+        explode_xml(&dir.join("in/T.xml"), &dir.join("out"), &flags).unwrap();
+    }
+
+    /// Catalogs of all actions are reassembled, not only those of AddAction and
+    /// ModifyAction
+    #[test]
+    fn reassembled_replace_and_delete_actions() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-actions-{}",
+            std::process::id()
+        ));
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<ReplaceAction>
+			<PersistentStoreCatalog membercount="1">
+				<PersistentStore name="a" id="1">
+					<Value type="Text">a</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</ReplaceAction>
+		<DeleteAction>
+			<PersistentStoreCatalog membercount="1">
+				<PersistentStore name="b" id="2">
+					<Value type="Text">b</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</DeleteAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>
+"#;
+        explode_lossless(&dir, export);
+
+        let unused = reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+
+        assert_eq!(fs::read_to_string(dir.join("xml/T.xml")).unwrap(), export);
+        assert!(unused.is_empty(), "{unused:?}");
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// Item files that no skeleton refers to are reported, also in folders of catalogs
+    /// the skeleton doesn't contain
+    #[test]
+    fn reassembling_reports_files_of_unknown_catalogs() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-unused-{}",
+            std::process::id()
+        ));
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Structure>
+		<AddAction>
+			<PersistentStoreCatalog membercount="1">
+				<PersistentStore name="a" id="1">
+					<Value type="Text">a</Value>
+				</PersistentStore>
+			</PersistentStoreCatalog>
+		</AddAction>
+	</Structure>
+	<Metadata membercount="1"></Metadata>
+</FMSaveAsXML>
+"#;
+        explode_lossless(&dir, export);
+        let stale = dir.join("out/T/persistent_stores/b - ID 2.xml");
+        let unknown = dir.join("out/T/persistent_stores__replace_action/c - ID 3.xml");
+        fs::create_dir_all(unknown.parent().unwrap()).unwrap();
+        fs::write(
+            &stale,
+            "<PersistentStore name=\"b\" id=\"2\">\n</PersistentStore>\n",
+        )
+        .unwrap();
+        fs::write(
+            &unknown,
+            "<PersistentStore name=\"c\" id=\"3\">\n</PersistentStore>\n",
+        )
+        .unwrap();
+
+        let unused = reassemble(&dir.join("out"), &dir.join("xml")).unwrap();
+
+        assert_eq!(unused, vec![stale, unknown]);
+        fs::remove_dir_all(&dir).unwrap();
+    }
+
+    /// A metadata or DDR_INFO file that exists but can't be read is an error, not an
+    /// empty element
+    #[test]
+    fn reassembling_fails_on_unreadable_metadata() {
+        let dir = std::env::temp_dir().join(format!(
+            "fm-xml-export-exploder-reassemble-metadata-{}",
+            std::process::id()
+        ));
+        let export = r#"<?xml version="1.0" encoding="UTF-8"?>
+<FMSaveAsXML version="2.3.0.0" File="T.fmp12">
+	<Metadata membercount="1">
+		<Note>a</Note>
+	</Metadata>
+</FMSaveAsXML>
+"#;
+        explode_lossless(&dir, export);
+        let metadata = dir.join("out/T/_/metadata.xml");
+        assert!(metadata.exists());
+        fs::write(&metadata, [0xff, 0xfe, 0x00]).unwrap();
+
+        let err = reassemble(&dir.join("out"), &dir.join("xml")).unwrap_err();
+
+        assert!(format!("{err:#}").contains("metadata.xml"), "{err:#}");
         fs::remove_dir_all(&dir).unwrap();
     }
 

@@ -39,7 +39,10 @@ fn main() -> Result<()> {
 
     let args = Args::parse();
     if let Some(Command::Reassemble { source, target }) = &args.command {
-        return reassemble::reassemble(source, target);
+        for path in reassemble::reassemble(source, target)? {
+            eprintln!("Not part of any skeleton: {}", path.display());
+        }
+        return Ok(());
     }
     let settings = Settings::from_args(args, &std::env::current_dir()?)?;
     if let Some(config_path) = &settings.config_path {

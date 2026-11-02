@@ -5,8 +5,9 @@
 //! that names them. Each placeholder is replaced by the item's file, with the
 //! indentation the exploder removed added back.
 
-use std::collections::{HashMap, VecDeque};
+use std::collections::{HashMap, HashSet, VecDeque};
 use std::fs;
+use std::io;
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result, bail};
@@ -21,7 +22,8 @@ use crate::xml_processor::Action;
 
 /// Reassembles every database in `source` into `target`, as `<database>.xml`, or as
 /// `<database>_<catalog>.xml` for each file of an export split into catalogs.
-pub fn reassemble(source: &Path, target: &Path) -> Result<()> {
+/// Returns the item files that are not part of any skeleton.
+pub fn reassemble(source: &Path, target: &Path) -> Result<Vec<PathBuf>> {
     valid_dir_or_throw(source)?;
     if std::path::absolute(target)?.starts_with(std::path::absolute(source)?) {
         bail!("The target directory must not be inside the source directory");
@@ -35,6 +37,7 @@ pub fn reassemble(source: &Path, target: &Path) -> Result<()> {
     }
     create_dir(target);
 
+    let mut unused = Vec::new();
     for (db_name, output_tree) in &databases {
         let support_dir = build_tree_path(source, output_tree, "_", db_name);
         let mut items = Items::default();
@@ -58,11 +61,31 @@ pub fn reassemble(source: &Path, target: &Path) -> Result<()> {
                 .with_context(|| format!("Cannot write {}", out_path.display()))?;
             println!("→ {}", out_path.display());
         }
-        for path in items.unused() {
-            eprintln!("Not part of any skeleton: {}", path.display());
+        unused.extend(items.unused(&catalog_files(source, output_tree, db_name)?));
+    }
+    Ok(unused)
+}
+
+/// The item files of all catalog folders of a database, whether a skeleton uses them
+/// or not
+fn catalog_files(source: &Path, output_tree: &OutputTree, db_name: &str) -> Result<Vec<PathBuf>> {
+    let domain_root = match output_tree {
+        OutputTree::Db => source.join(db_name),
+        OutputTree::Domain => source.to_path_buf(),
+    };
+    let mut files = Vec::new();
+    for domain_dir in subdirectories(&domain_root)? {
+        let domain = domain_dir.file_name().unwrap().to_string_lossy();
+        if domain != "_" {
+            files.extend(xml_files_below(&build_tree_path(
+                source,
+                output_tree,
+                &domain,
+                db_name,
+            ))?);
         }
     }
-    Ok(())
+    Ok(files)
 }
 
 /// Where the exploded files of one database are
@@ -165,9 +188,13 @@ fn reassemble_file(skeleton: &str, file: &DatabaseFiles, items: &mut Items) -> R
                     _ => format!("ddr_info{}.xml", file.part),
                 };
                 // Empty elements were not written to a file
-                match fs::read_to_string(file.support_dir.join(name)) {
+                let path = file.support_dir.join(name);
+                match fs::read_to_string(&path) {
                     Ok(content) => push_indented(&mut out, "\t", &content),
-                    Err(_) => push_line(&mut out, line),
+                    Err(err) if err.kind() == io::ErrorKind::NotFound => push_line(&mut out, line),
+                    Err(err) => {
+                        return Err(err).with_context(|| format!("Cannot read {}", path.display()));
+                    }
                 }
                 continue;
             }
@@ -217,6 +244,8 @@ fn reassemble_file(skeleton: &str, file: &DatabaseFiles, items: &mut Items) -> R
                 i += 1;
             }
             i += 1;
+            // The consumed lines end with the item's end tag
+            state = LineState::Markup;
         }
         let key = item_key(&placeholder, &catalog.key);
         let content = items
@@ -287,6 +316,7 @@ fn item_key(xml: &str, config: &KeyConfig) -> String {
 #[derive(Default)]
 struct Items {
     folders: HashMap<PathBuf, HashMap<String, VecDeque<(PathBuf, String)>>>,
+    taken: HashSet<PathBuf>,
 }
 
 impl Items {
@@ -303,25 +333,26 @@ impl Items {
             }
             self.folders.insert(folder.to_path_buf(), files);
         }
-        Ok(self
+        let item = self
             .folders
             .get_mut(folder)
             .unwrap()
             .get_mut(key)
-            .and_then(VecDeque::pop_front)
-            .map(|(_, content)| content))
+            .and_then(VecDeque::pop_front);
+        Ok(item.map(|(path, content)| {
+            self.taken.insert(path);
+            content
+        }))
     }
 
-    /// Item files no placeholder asked for, e.g. leftovers of an older exploder version
-    fn unused(&self) -> Vec<&Path> {
-        let mut paths: Vec<&Path> = self
-            .folders
-            .values()
-            .flat_map(|files| files.values().flatten())
-            .map(|(path, _)| path.as_path())
-            .collect();
-        paths.sort();
-        paths
+    /// The files of `files` no placeholder asked for, e.g. leftovers of an older
+    /// exploder version or catalog folders no skeleton refers to
+    fn unused(&self, files: &[PathBuf]) -> Vec<PathBuf> {
+        files
+            .iter()
+            .filter(|path| !self.taken.contains(*path))
+            .cloned()
+            .collect()
     }
 }
 

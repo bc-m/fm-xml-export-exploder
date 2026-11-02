@@ -16,13 +16,16 @@ pub struct OutputFiles {
 }
 
 impl OutputFiles {
-    /// Writes `content` unless the file already has exactly this content.
+    /// Writes `content` unless the file already has exactly this content. Warns when
+    /// the file was already written during this run, because its content is lost.
     pub fn write(&self, path: &Path, content: &str) {
         let unchanged = fs::read(path).is_ok_and(|existing| existing == content.as_bytes());
         if !unchanged && let Err(err) = fs::write(path, content) {
             eprintln!("Error writing file {}: {}", path.display(), err);
         }
-        self.written.lock().unwrap().insert(path.to_path_buf());
+        if !self.written.lock().unwrap().insert(path.to_path_buf()) {
+            eprintln!("Warning: {} was written more than once", path.display());
+        }
     }
 
     /// Whether `path` was written during this run.
@@ -103,9 +106,10 @@ mod tests {
         output.write(&file, "Beep\n");
         assert_eq!(fs::metadata(&file).unwrap().modified().unwrap(), old);
 
-        output.write(&file, "Halt Script\n");
+        let next_run = OutputFiles::default();
+        next_run.write(&file, "Halt Script\n");
         assert_eq!(fs::read_to_string(&file).unwrap(), "Halt Script\n");
-        assert!(output.contains(&file));
+        assert!(next_run.contains(&file));
 
         fs::remove_dir_all(&dir).unwrap();
     }
